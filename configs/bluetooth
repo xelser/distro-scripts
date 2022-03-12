@@ -1,0 +1,4 @@
+[General]
+DiscoverableTimeout = 0
+[Policy]
+AutoEnable=true

@@ -1,0 +1,39 @@
+export QT_QPA_PLATFORMTHEME="qt5ct"
+export WINEPREFIX="/media/Games/.wine/"
+
+# Check whether if the windowing system is Xorg or Wayland
+echo $XDG_SESSION_TYPE | grep -q wayland
+if [ $? -eq 0 ]; then
+	export QT_QPA_PLATFORM="xcb"
+fi
+
+## Check themes ##
+
+# GTK #
+ls /usr/share/themes/ | grep -q "Orchis-dark-compact"
+if [ $? -ne 0 ]; then
+	gsettings set org.gnome.terminal.legacy theme-variant "system"
+	gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
+else
+	export GTK_THEME="Orchis-dark-compact"
+fi
+
+# Icon #
+ls /usr/share/icons/ | grep -q "Tela-circle-dark"
+if [ $? -ne 0 ]; then
+	gsettings set org.gnome.desktop.interface icon-theme "Adwaita"
+fi
+
+# Cursor #
+ls /usr/share/icons/ | grep -q "Bibata-Modern-Classic"
+if [ $? -ne 0 ]; then
+	gsettings set org.gnome.desktop.interface cursor-theme "Adwaita"
+fi
+
+# Fonts #
+fc-list | grep -q "Roboto"
+if [ $? -ne 0 ]; then
+	gsettings set org.gnome.desktop.interface font-name "Cantarell 10"
+	gsettings set org.gnome.desktop.interface document-font-name "Cantarell 10"
+	gsettings set org.gnome.desktop.interface monospace-font-name "Source Code Pro 10"
+fi
