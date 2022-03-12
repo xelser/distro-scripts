@@ -23,9 +23,6 @@ read -p "Install Bluetooth? [y/N]: " select_bluetooth
 read -p "Install Redshift (Night light)? [y/N]: " select_redshift
 echo && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
 
-# Installing yay
-clear && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sirc --noconfirm && rm -rf $HOME/yay-bin
-
 # Official Packages
 sudo pacman -S --needed --noconfirm --disable-download-timeout \
   xorg numlockx openbox obconf picom lightdm-gtk-greeter-settings alsa-{utils,plugins} pulseaudio-{alsa,equalizer-ladspa} pavucontrol \
@@ -35,12 +32,12 @@ sudo pacman -S --needed --noconfirm --disable-download-timeout \
   firefox discord bitwarden transmission-gtk gparted gnome-disk-utility warpinator geany screengrab catfish parole
   
 # AUR Packages
+git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sirc --noconfirm && rm -rf $HOME/yay-bin
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
   obmenu-generator xfce-polkit thunar-shares-plugin mugshot ventoy-bin adapta-gtk-theme-colorpack-joshaby-git papirus-folders kvantum-theme-adapta
 
 clear
 ################################## Config ##################################
-
 
 # lightdm
 echo "
@@ -68,19 +65,13 @@ indicators = ~host;~spacer;~clock;~power" | sudo tee -a /etc/lightdm/lightdm-gtk
 # Fix openbox's grey screen when logging in
 sudo sed -i /usr/lib/openbox/openbox-autostart -re '3,13d'
 
-# qt5ct
-echo "QT_QPA_PLATFORMTHEME=qt5ct" | sudo tee -a /etc/environment
-
-# Xorg Font Rendering
-xrdb -merge $HOME/.Xresources && sudo fc-cache -fv
-
 # dotfiles
 case $cp_dotfiles in
    n)	;;
- *|Y)	# Remove old .config files
-        git clone https://github.com/xelser/dotfiles
- 	rm -rf $HOME{.config,.gtkrc-2.0}
- 	cp -rf $HOME/dotfiles/arch-openbox/{.config,.gtkrc-2.0} $HOME/;;
+   *)	# Remove old .config files
+ 	rm -rf $HOME{.config,.gtkrc-2.0} && git clone https://github.com/xelser/dotfiles
+ 	cp -rf $HOME/dotfiles/arch-openbox/{.config,.gtkrc-2.0} $HOME/
+        ;;
 esac
 
 # Hide apps
@@ -105,7 +96,7 @@ case $select_laptop in
    y)	yay -S --noconfirm --needed --cleanafter --removemake --noredownload --norebuild --batchinstall \
    	tlp tlp-rdw tlpui cbatticon
    	sudo systemctl enable tlp;;
- *|N)	;;
+   *)	;;
 esac
 
 # bluetooth
@@ -113,13 +104,13 @@ case $select_bluetooth in
    y)	sudo pacman -S --noconfirm --needed bluez bluez-utils pulseaudio-bluetooth blueman
    	echo "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/config/bluetooth)" | sudo tee -a /etc/bluetooth/main.conf
    	sudo systemctl enable bluetooth;;
- *|N)	;;
+   *)	;;
 esac
 
 # redshift
 case $select_redshift in
    y)	sudo pacman -S --noconfirm --needed redshift;;
- *|N)	;;
+   *)	;;
 esac
 
 clear
@@ -129,5 +120,5 @@ clear
 clear && echo && read -p "Reboot? (Y/n): " end
 case $end in
    n)	echo "Reboot Cancelled";;
- *|Y)	echo "Rebooting... " && sudo rm -rf $HOME/arch-post-install.sh && reboot;;
+   *)	echo "Rebooting... " && sudo rm -rf $HOME/arch-post-install.sh && reboot;;
 esac

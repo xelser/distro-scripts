@@ -113,7 +113,7 @@ echo "----------------------------"
 echo && read -p "Proceed? (Y/n): " confirmation && echo
 case $confirmation in
    n)	exit 1;;
- *|Y)	# Format and Mount
+   *)	# Format and Mount
  	case $partitioning in
  	  1)	mkfs.ext4 -F -L Arch /dev/${device}${root} && mount /dev/${device}${root} /mnt
  	  	# Check if its a UEFI system
