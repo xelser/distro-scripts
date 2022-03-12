@@ -45,8 +45,9 @@ clear
 echo "
 [Seat:*]
 greeter-setup-script=/usr/bin/numlockx on
-autologin-user=$USER" | tee -a /etc/lightdm/lightdm.conf
-groupadd -r autologin && gpasswd -a $USER autologin && systemctl enable lightdm
+autologin-user=$USER" | sudo tee -a /etc/lightdm/lightdm.conf
+sudo groupadd -r autologin && sudo gpasswd -a $USER autologin
+sudo systemctl enable lightdm
 
 # lightdm-gtk-greeter
 echo "
@@ -61,22 +62,22 @@ xft-hintstyle = hintslight
 background = /usr/share/backgrounds/Viktor Forgacs.jpg
 hide-user-image = true
 clock-format = %a, %I:%M %p
-indicators = ~host;~spacer;~clock;~power" | tee -a /etc/lightdm/lightdm-gtk-greeter.conf
+indicators = ~host;~spacer;~clock;~power" | sudo tee -a /etc/lightdm/lightdm-gtk-greeter.conf
 
 # Fix openbox's grey screen when logging in
-sed -i /usr/lib/openbox/openbox-autostart -re '3,13d'
+sudo sed -i /usr/lib/openbox/openbox-autostart -re '3,13d'
 
 # qt5ct
-echo "QT_QPA_PLATFORMTHEME=qt5ct" | tee -a /etc/environment
+echo "QT_QPA_PLATFORMTHEME=qt5ct" | sudo tee -a /etc/environment
+
+# Xorg Font Rendering
+xrdb -merge $HOME/.Xresources && sudo fc-cache -fv
 
 # Hide apps
 mkdir $HOME/.local/share/applications/ && rm -rf $HOME/.local/share/applications/*
 cp /usr/share/applications/{volumeicon,qv4l2,qvidcap,avahi-discover,bssh,bvnc,compton,picom,lstopo,electron16}.desktop $HOME/.local/share/applications/
 cp /usr/share/applications/xfce4-{about,mail-reader,file-manager,web-browser,terminal-emulator}.desktop $HOME/.local/share/applications/
 echo "Hidden=True" | tee -a $HOME/.local/share/applications/*.desktop && clear
-
-# Xorg Font Rendering
-xrdb -merge $HOME/.Xresources && sudo fc-cache -fv
 
 # refind
 sudo dmesg | grep -q "EFI v"
