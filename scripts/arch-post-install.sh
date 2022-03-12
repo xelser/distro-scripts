@@ -12,8 +12,6 @@ else
 fi
 
 # Prompt Optional Packages
-read -p "Install Laptop Utilities? (tlp, power managers, battery indicators, etc.) [y/N]: " select_laptop
-read -p "Install Bluetooth? [y/N]: " select_bluetooth
 read -p "Install Redshift (Night light)? [y/N]: " select_redshift
 echo && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
 
@@ -69,9 +67,8 @@ sudo sed -i /usr/lib/openbox/openbox-autostart -re '3,13d'
 case $cp_dotfiles in
    n)	;;
    *)	# Remove old .config files
- 	rm -rf $HOME{.config,.gtkrc-2.0} && git clone https://github.com/xelser/dotfiles
- 	cp -rf $HOME/dotfiles/arch-openbox/{.config,.gtkrc-2.0} $HOME/
- 	;;
+   	rm -rf $HOME/{.config,.gtkrc-2.0} && git clone https://github.com/xelser/dotfiles
+   	cp -rf $HOME/dotfiles/arch-openbox/{.config,.gtkrc-2.0} $HOME/;;
 esac
 
 # Hide apps
@@ -80,32 +77,32 @@ cp /usr/share/applications/{volumeicon,qv4l2,qvidcap,avahi-discover,bssh,bvnc,co
 cp /usr/share/applications/xfce4-{about,mail-reader,file-manager,web-browser,terminal-emulator}.desktop $HOME/.local/share/applications/
 echo "Hidden=True" | tee -a $HOME/.local/share/applications/*.desktop && clear
 
+clear
+################################ Optionals ###############################
+
 # refind
-sudo dmesg | grep -q "EFI v"
+dmesg | grep -q "EFI v"
 if [ $? -eq 0 ]; then
 	sudo pacman -S --needed --noconfirm refind
 	sudo refind-install
 	sudo sed -i 's/ro /rw quiet splash /g' /boot/refind_linux.conf
 fi
 
-clear
-################################ Optionals ###############################
-
 # laptop
-case $select_laptop in
-   y)	yay -S --noconfirm --needed --cleanafter --removemake --noredownload --norebuild --batchinstall \
-   	tlp tlp-rdw tlpui cbatticon
-   	sudo systemctl enable tlp;;
-   *)	;;
-esac
+upower -e | grep BAT
+if [ $? -eq 0 ]; then
+	yay -S --noconfirm --needed --cleanafter --removemake --noredownload --norebuild --batchinstall tlp tlp-rdw tlpui cbatticon
+	echo "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/configs/openbox-laptop-module)" | tee -a $HOME/.config/openbox/autostart
+	sudo systemctl enable tlp
+fi
 
 # bluetooth
-case $select_bluetooth in
-   y)	sudo pacman -S --noconfirm --needed bluez bluez-utils pulseaudio-bluetooth blueman
-   	echo "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/config/bluetooth)" | sudo tee -a /etc/bluetooth/main.conf
-   	sudo systemctl enable bluetooth;;
-   *)	;;
-esac
+dmesg | grep -q -i blue
+if [ $? -eq 0 ]; then
+	sudo pacman -S --noconfirm --needed bluez bluez-utils pulseaudio-bluetooth blueman
+	echo "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/configs/bluetooth)" | sudo tee -a /etc/bluetooth/main.conf
+	sudo systemctl enable bluetooth
+fi
 
 # redshift
 case $select_redshift in
