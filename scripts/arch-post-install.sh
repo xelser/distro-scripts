@@ -11,17 +11,17 @@ else
 	sudo nmtui && sudo timedatectl set-ntp true
 fi
 
-# Set ownership
-sudo chown -R $USER $HOME
-
-clear
-############################### Installation ##############################
-
 # Prompt Optional Packages
 read -p "Install Laptop Utilities? (tlp, power managers, battery indicators, etc.) [y/N]: " select_laptop
 read -p "Install Bluetooth? [y/N]: " select_bluetooth
 read -p "Install Redshift (Night light)? [y/N]: " select_redshift
 echo && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
+
+# Set ownership
+sudo chown -R $USER $HOME
+
+clear
+############################### Installation ##############################
 
 # Official Packages
 sudo pacman -S --needed --noconfirm --disable-download-timeout \

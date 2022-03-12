@@ -239,7 +239,7 @@ sed -i 's/PS1/#PS1/g' /mnt/home/${user}/.bashrc
 cat $HOME/distro-scripts/configs/bash/arch_bashrc >> /mnt/home/${user}/.bashrc
 
 # Post install script
-cp -rf $HOME/distro-scripts/scripts/arch-post-install.sh /mnt/home/${user}/
+cp -rf $HOME/distro-scripts/scripts/arch-{final,post-install}.sh /mnt/home/${user}/
 
 clear
 ############################## Transfer Files #############################
