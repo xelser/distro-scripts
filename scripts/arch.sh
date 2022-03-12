@@ -252,6 +252,7 @@ case $wm_de in
 
         # qt5ct
         echo "QT_QPA_PLATFORMTHEME=qt5ct" | tee -a /etc/environment
+        ;;
 esac
 EOF
 clear
