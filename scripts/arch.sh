@@ -186,12 +186,12 @@ pacman -S --needed --noconfirm --disable-download-timeout \
   nano htop neofetch zip unzip p7zip unrar xdg-user-dirs git curl wget
 
 case $wm_de in
- *|1)	pacman -S --needed --noconfirm --disable-download-timeout \
-  xorg numlockx openbox obconf picom lightdm-gtk-greeter-settings alsa-{utils,plugins} pulseaudio-{alsa,equalizer-ladspa} pavucontrol \
-  xfce4-{settings,terminal,notifyd,power-manager} lx{task,appearance}-gtk3 qt5ct kvantum-qt5 tint2 network-manager-applet volumeicon \
-  thunar-{archive-plugin,media-tags-plugin,volman} gvfs-{afc,goa,google,gphoto2,mtp,nfs,smb} sshfs tumbler ffmpegthumbnailer poppler-glib \
-  gtk-engine-murrine adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers nitrogen xreader xarchiver leafpad gpicview \
-  firefox discord bitwarden transmission-gtk gparted gnome-disk-utility warpinator geany screengrab catfish parole;;
+   1)	pacman -S --needed --noconfirm --disable-download-timeout \
+   xorg numlockx openbox obconf picom lightdm-gtk-greeter-settings alsa-{utils,plugins} pulseaudio-{alsa,equalizer-ladspa} pavucontrol \
+   xfce4-{settings,terminal,notifyd,power-manager} lx{task,appearance}-gtk3 qt5ct kvantum-qt5 tint2 network-manager-applet volumeicon \
+   thunar-{archive-plugin,media-tags-plugin,volman} gvfs-{afc,goa,google,gphoto2,mtp,nfs,smb} sshfs tumbler ffmpegthumbnailer poppler-glib \
+   gtk-engine-murrine adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers nitrogen xreader xarchiver leafpad gpicview \
+   firefox discord bitwarden transmission-gtk gparted gnome-disk-utility warpinator geany screengrab catfish parole;;
 esac
 
 clear
@@ -240,7 +240,7 @@ mkdir /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=${firm} --recheck
 
 case $wm_de in
- *|1)   # lightdm
+   1)   # lightdm
         echo "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/configs/lightdm)" | tee -a /etc/lightdm/lightdm.conf
         groupadd -r autologin && gpasswd -a ${user} autologin && systemctl enable lightdm
 
