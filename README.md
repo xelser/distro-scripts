@@ -33,4 +33,3 @@ sed -i 's/enableWaylandShare=false/enableWaylandShare=true/g' $HOME/.var/app/us.
 - Latte Spacer
 - Better Inline Clock
 - Shutdown or Switch
-# distro-scripts
