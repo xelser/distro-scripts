@@ -71,7 +71,7 @@ case $cp_dotfiles in
    *)	# Remove old .config files
  	rm -rf $HOME{.config,.gtkrc-2.0} && git clone https://github.com/xelser/dotfiles
  	cp -rf $HOME/dotfiles/arch-openbox/{.config,.gtkrc-2.0} $HOME/
-        ;;
+ 	;;
 esac
 
 # Hide apps
