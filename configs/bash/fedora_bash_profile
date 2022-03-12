@@ -5,6 +5,7 @@ export WINEPREFIX="/media/Games/.wine/"
 echo $XDG_SESSION_TYPE | grep -q wayland
 if [ $? -eq 0 ]; then
 	export QT_QPA_PLATFORM="xcb"
+	export OBS_USE_EGL=1
 fi
 
 ## Check themes ##
