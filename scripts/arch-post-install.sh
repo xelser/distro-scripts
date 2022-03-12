@@ -25,12 +25,49 @@ read -p "Install Redshift (Night light)? [y/N]: " select_redshift
 # Installing yay
 clear && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sirc --noconfirm && rm -rf $HOME/yay-bin
 
+# Official Packages
+sudo pacman -S --needed --noconfirm --disable-download-timeout \
+  xorg numlockx openbox obconf picom lightdm-gtk-greeter-settings alsa-{utils,plugins} pulseaudio-{alsa,equalizer-ladspa} pavucontrol \
+  xfce4-{settings,terminal,notifyd,power-manager} lx{task,appearance}-gtk3 qt5ct kvantum-qt5 tint2 network-manager-applet volumeicon \
+  thunar-{archive-plugin,media-tags-plugin,volman} gvfs-{afc,goa,google,gphoto2,mtp,nfs,smb} sshfs tumbler ffmpegthumbnailer poppler-glib \
+  gtk-engine-murrine adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers nitrogen xreader xarchiver leafpad gpicview \
+  firefox discord bitwarden transmission-gtk gparted gnome-disk-utility warpinator geany screengrab catfish parole
+  
 # AUR Packages
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
   obmenu-generator xfce-polkit thunar-shares-plugin mugshot ventoy-bin adapta-gtk-theme-colorpack-joshaby-git papirus-folders kvantum-theme-adapta
 
 clear
 ################################## Config ##################################
+
+
+# lightdm
+echo "
+[Seat:*]
+greeter-setup-script=/usr/bin/numlockx on
+autologin-user=$USER" | tee -a /etc/lightdm/lightdm.conf
+groupadd -r autologin && gpasswd -a $USER autologin && systemctl enable lightdm
+
+# lightdm-gtk-greeter
+echo "
+[greeter]
+theme-name = Adapta-Cyan-Nokto-Eta
+icon-theme-name = Papirus-Dark
+font-name = Fira Sans 10
+xft-antialias = true
+xft-dpi = 96
+xft-rgba = rgb
+xft-hintstyle = hintslight
+background = /usr/share/backgrounds/Viktor Forgacs.jpg
+hide-user-image = true
+clock-format = %a, %I:%M %p
+indicators = ~host;~spacer;~clock;~power" | tee -a /etc/lightdm/lightdm-gtk-greeter.conf
+
+# Fix openbox's grey screen when logging in
+sed -i /usr/lib/openbox/openbox-autostart -re '3,13d'
+
+# qt5ct
+echo "QT_QPA_PLATFORMTHEME=qt5ct" | tee -a /etc/environment
 
 # Hide apps
 mkdir $HOME/.local/share/applications/ && rm -rf $HOME/.local/share/applications/*

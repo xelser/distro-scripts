@@ -1,4 +1,0 @@
-
-[Seat:*]
-greeter-setup-script=/usr/bin/numlockx on
-autologin-user=${user}

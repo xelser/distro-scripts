@@ -1,13 +1,17 @@
 
 # Custom PS1
-
 PS1="\[\033[1;36m\]\u@\h \[\033[0;37m\][\[\033[1;33m\]\W\[\033[0;37m\]] \[\033[0;37m\]$ "
 
 # user aliases
 alias post="sh arch-post-install.sh"
-alias update="yay -Syyu --noconfirm --needed --disable-download-timeout && yay -Rnsu $(yay -Qtdq) --noconfirm"
-alias fontrendering="xrdb -merge ~/.Xresources && sudo fc-cache -fv"
 alias clear="clear && history -c"
+
+sudo pacman -Qm | grep -q yay
+if [ $? -eq 0 ]; then
+        alias update="yay -Syyu --noconfirm --disable-download-timeout && yay -Rnsu $(yay -Qtdq) --noconfirm"
+else
+        alias update="sudo pacman -Syyu --noconfirm --disable-download-timeout && sudo pacman -Rnsu $(sudo pacman -Qtdq) --noconfirm"
+fi
 
 # cli aliases
 alias rm="rm -rf"
