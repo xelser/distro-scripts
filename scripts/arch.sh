@@ -13,9 +13,6 @@ hostname="arch"
 echo && read -p "Username: " user
 read -s -p "Password: " password
 
-# Prompt | dotfiles
-echo && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
-
 clear
 ########################## Create/Modify Partitions ########################
 
@@ -243,15 +240,6 @@ cat $HOME/distro-scripts/configs/bash/arch_bashrc >> /mnt/home/${user}/.bashrc
 
 # Post install script
 cp -rf $HOME/distro-scripts/scripts/arch-post-install.sh /mnt/home/${user}/
-
-# dotfiles
-case $cp_dotfiles in
-   n)	;;
- *|Y)	# Remove old .config files
-        git clone https://github.com/xelser/dotfiles
- 	rm -rf /mnt/home/${user}/{.config,.gtkrc-2.0}
- 	cp -rf $HOME/dotfiles/arch-openbox/{.config,.gtkrc-2.0} /mnt/home/${user}/;;
-esac
 
 clear
 ############################## Transfer Files #############################

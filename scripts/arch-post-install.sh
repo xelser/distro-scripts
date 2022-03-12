@@ -21,6 +21,7 @@ clear
 read -p "Install Laptop Utilities? (tlp, power managers, battery indicators, etc.) [y/N]: " select_laptop
 read -p "Install Bluetooth? [y/N]: " select_bluetooth
 read -p "Install Redshift (Night light)? [y/N]: " select_redshift
+echo && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
 
 # Installing yay
 clear && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sirc --noconfirm && rm -rf $HOME/yay-bin
@@ -72,6 +73,15 @@ echo "QT_QPA_PLATFORMTHEME=qt5ct" | sudo tee -a /etc/environment
 
 # Xorg Font Rendering
 xrdb -merge $HOME/.Xresources && sudo fc-cache -fv
+
+# dotfiles
+case $cp_dotfiles in
+   n)	;;
+ *|Y)	# Remove old .config files
+        git clone https://github.com/xelser/dotfiles
+ 	rm -rf $HOME{.config,.gtkrc-2.0}
+ 	cp -rf $HOME/dotfiles/arch-openbox/{.config,.gtkrc-2.0} $HOME/;;
+esac
 
 # Hide apps
 mkdir $HOME/.local/share/applications/ && rm -rf $HOME/.local/share/applications/*
