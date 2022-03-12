@@ -89,7 +89,7 @@ if [ $? -eq 0 ]; then
 fi
 
 # laptop
-sudo upower -e | grep BAT
+sudo upower -e | grep -q BAT
 if [ $? -eq 0 ]; then
 	yay -S --noconfirm --needed --cleanafter --removemake --noredownload --norebuild --batchinstall tlp tlp-rdw tlpui cbatticon
 	echo "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/configs/openbox-laptop-module)" | tee -a $HOME/.config/openbox/autostart
