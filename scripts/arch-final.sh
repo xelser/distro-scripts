@@ -18,4 +18,3 @@ if [ $? -ne 0 ]; then
 else
 	notify-send -i process-error-symbolic -u critical "Failed to initialized" "Run the post-install script first"
 fi
-
