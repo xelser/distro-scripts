@@ -82,9 +82,9 @@ cat $HOME/distro-scripts/configs/bash/fedora_bash_profile >> $HOME/.bash_profile
 # dotfiles
 case $cp_dotfiles in
    y)	# Remove old .config files
-   	rm -rf $HOME/{.config,.local,.var}
+   	rm -rf $HOME/{.config,.local}
    	cd /tmp/ && git clone https://github.com/xelser/dotfiles
-   	cp -rf /tmp/dotfiles/fedora-workstation/{.config,.local,.var} $HOME/;;
+   	cp -rf /tmp/dotfiles/fedora-workstation/{.config,.local} $HOME/;;
  *|N)	;;
 esac
 
@@ -120,6 +120,35 @@ sudo tar -xf $HOME/Downloads/Bibata*.tar.gz
 cd /tmp/ && rm -rf stylepak
 git clone https://github.com/refi64/stylepak.git
 cd stylepak && ./stylepak install-system Orchis-dark-compact
+
+clear
+############################ dconf/gsettings #############################
+
+# General Settings
+gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
+gsettings set org.gnome.desktop.interface enable-hot-corners "false"
+
+# Clock
+gsettings set org.gnome.desktop.interface clock-format "12h"
+gsettings set org.gnome.desktop.interface clock-show-date "false"
+gsettings set org.gnome.desktop.datetime automatic-timezone "true"
+
+# GTK | Icons | Cursors
+gsettings set org.gnome.desktop.interface gtk-theme "Orchis-dark-compact"
+gsettings set org.gnome.desktop.interface icon-theme "Tela-circle-dark"
+gsettings set org.gnome.desktop.interface cursor-theme "Bibata-Modern-Classic"
+
+# Fonts
+gsettings set org.gnome.desktop.interface font-name "Roboto 10"
+gsettings set org.gnome.desktop.interface document-font-name "Roboto Slab 10"
+gsettings set org.gnome.desktop.interface monospace-font-name "Roboto Mono 10"
+gsettings set org.gnome.desktop.wm.preferences titlebar-font "Roboto Bold 10"
+gsettings set org.gnome.desktop.interface font-antialiasing "rgba"
+gsettings set org.gnome.desktop.interface font-hinting "slight"
+
+# Updates
+gsettings set org.gnome.software download-updates "false"
+gsettings set org.gnome.software download-updates-notify "false"
 
 clear
 ############################## Housekeeping ##############################
