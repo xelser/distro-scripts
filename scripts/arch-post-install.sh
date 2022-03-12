@@ -81,7 +81,7 @@ clear
 ################################ Optionals ###############################
 
 # refind
-dmesg | grep -q "EFI v"
+sudo dmesg | grep -q "EFI v"
 if [ $? -eq 0 ]; then
 	sudo pacman -S --needed --noconfirm refind
 	sudo refind-install
@@ -97,7 +97,7 @@ if [ $? -eq 0 ]; then
 fi
 
 # bluetooth
-dmesg | grep -q -i blue
+sudo dmesg | grep -q -i blue
 if [ $? -eq 0 ]; then
 	sudo pacman -S --noconfirm --needed bluez bluez-utils pulseaudio-bluetooth blueman
 	echo "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/configs/bluetooth)" | sudo tee -a /etc/bluetooth/main.conf
