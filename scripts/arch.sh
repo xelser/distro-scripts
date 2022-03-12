@@ -16,9 +16,9 @@ read -s -p "Password: " password
 # Prompt | dotfiles
 echo && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
 
-# Prompt |
-clear && echo "1. Openbox"
-echo && read -p "Select a DE/WM: " wm_de
+# Prompt | WM or DE
+clear && echo && echo "1. Openbox"
+echo && read -p "Select a DE/WM (#): " wm_de
 
 clear
 ########################## Create/Modify Partitions ########################
@@ -186,7 +186,12 @@ pacman -S --needed --noconfirm --disable-download-timeout \
   nano htop neofetch zip unzip p7zip unrar xdg-user-dirs git curl wget
 
 case $wm_de in
- *|1)	pacman -S --needed --noconfirm --disable-download-timeout openbox obconf;;
+ *|1)	pacman -S --needed --noconfirm --disable-download-timeout \
+  xorg numlockx openbox obconf picom lightdm-gtk-greeter-settings alsa-{utils,plugins} pulseaudio-{alsa,equalizer-ladspa} pavucontrol \
+  xfce4-{settings,terminal,notifyd,power-manager} lx{task,appearance}-gtk3 qt5ct kvantum-qt5 tint2 network-manager-applet volumeicon \
+  thunar-{archive-plugin,media-tags-plugin,volman} gvfs-{afc,goa,google,gphoto2,mtp,nfs,smb} sshfs tumbler ffmpegthumbnailer poppler-glib \
+  gtk-engine-murrine adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers nitrogen xreader xarchiver leafpad gpicview \
+  firefox discord bitwarden transmission-gtk gparted gnome-disk-utility warpinator geany screengrab catfish parole;;
 esac
 
 clear
@@ -234,6 +239,20 @@ sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
 mkdir /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=${firm} --recheck
 
+case $wm_de in
+ *|1)   # lightdm
+        echo "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/configs/lightdm)" | tee -a /etc/lightdm/lightdm.conf
+        groupadd -r autologin && gpasswd -a ${user} autologin && systemctl enable lightdm
+
+        # lightdm-gtk-greeter
+        echo "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/configs/lightdm-gtk-greeter)" | tee -a /etc/lightdm/lightdm-gtk-greeter.conf
+
+        # Fix openbox's grey screen when logging in
+        sed -i /usr/lib/openbox/openbox-autostart -re '3,13d'
+
+        # qt5ct
+        echo "QT_QPA_PLATFORMTHEME=qt5ct" | tee -a /etc/environment
+esac
 EOF
 clear
 ############################## Transfer Files #############################
