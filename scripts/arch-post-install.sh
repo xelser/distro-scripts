@@ -21,17 +21,16 @@ sudo chown -R $USER $HOME
 clear
 ############################### Installation ##############################
 
-# Official Packages
-sudo pacman -S --needed --noconfirm --disable-download-timeout \
+# Installing yay
+git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sirc --noconfirm && rm -rf $HOME/yay-bin
+
+# Installing Packages
+yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
   xorg numlockx openbox obconf picom lightdm-gtk-greeter-settings alsa-{utils,plugins} pulseaudio-{alsa,equalizer-ladspa} pavucontrol \
   xfce4-{settings,terminal,notifyd,power-manager} lx{task,appearance}-gtk3 qt5ct kvantum-qt5 tint2 network-manager-applet volumeicon \
   thunar-{archive-plugin,media-tags-plugin,volman} gvfs-{afc,goa,google,gphoto2,mtp,nfs,smb} sshfs tumbler ffmpegthumbnailer poppler-glib \
   gtk-engine-murrine adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers nitrogen xreader xarchiver leafpad gpicview \
-  firefox discord bitwarden transmission-gtk gparted gnome-disk-utility warpinator geany screengrab catfish parole
-  
-# AUR Packages
-git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sirc --noconfirm && rm -rf $HOME/yay-bin
-yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
+  firefox discord bitwarden transmission-gtk gparted gnome-disk-utility warpinator geany screengrab catfish parole \
   obmenu-generator xfce-polkit thunar-shares-plugin mugshot ventoy-bin adapta-gtk-theme-colorpack-joshaby-git papirus-folders kvantum-theme-adapta
 
 clear
@@ -62,6 +61,9 @@ indicators = ~host;~spacer;~clock;~power" | sudo tee -a /etc/lightdm/lightdm-gtk
 
 # Fix openbox's grey screen when logging in
 sudo sed -i /usr/lib/openbox/openbox-autostart -re '3,13d'
+
+clear
+################################ Userspace ###############################
 
 # dotfiles
 case $cp_dotfiles in
