@@ -12,7 +12,7 @@ else
 fi
 
 # Prompt Optional Packages
-read -p "Install Redshift (Night light)? [y/N]: " select_redshift
+clear && read -p "Install Redshift (Night light)? [y/N]: " select_redshift
 echo && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
 
 # Set ownership
@@ -73,9 +73,9 @@ case $cp_dotfiles in
 esac
 
 # Hide apps
-mkdir $HOME/.local/share/applications/ && rm -rf $HOME/.local/share/applications/*
-cp /usr/share/applications/{volumeicon,qv4l2,qvidcap,avahi-discover,bssh,bvnc,compton,picom,lstopo,electron16}.desktop $HOME/.local/share/applications/
-cp /usr/share/applications/xfce4-{about,mail-reader,file-manager,web-browser,terminal-emulator}.desktop $HOME/.local/share/applications/
+mkdir -p $HOME/.local/share/applications/ && rm -rf $HOME/.local/share/applications/*
+cp -rf /usr/share/applications/{volumeicon,qv4l2,qvidcap,avahi-discover,bssh,bvnc,compton,picom,lstopo,electron16}.desktop $HOME/.local/share/applications/
+cp -rf /usr/share/applications/xfce4-{about,mail-reader,file-manager,web-browser,terminal-emulator}.desktop $HOME/.local/share/applications/
 echo "Hidden=True" | tee -a $HOME/.local/share/applications/*.desktop && clear
 
 clear
