@@ -43,8 +43,9 @@ yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake
   xfce4-{settings,terminal,notifyd,power-manager} lx{task,appearance}-gtk3 qt5ct kvantum-qt5 tint2 network-manager-applet volumeicon \
   thunar-{archive-plugin,media-tags-plugin,volman} gvfs-{afc,goa,google,gphoto2,mtp,nfs,smb} sshfs tumbler ffmpegthumbnailer poppler-glib \
   gtk-engine-murrine adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers nitrogen xreader xarchiver leafpad gpicview \
-  firefox discord bitwarden transmission-gtk gparted gnome-disk-utility warpinator geany screengrab catfish parole redshift \
+  firefox discord bitwarden transmission-gtk gparted gnome-disk-utility gnome-builder gnome-boxes warpinator screengrab catfish parole redshift \
   obmenu-generator xfce-polkit thunar-shares-plugin mugshot ventoy-bin adapta-gtk-theme-colorpack-joshaby-git papirus-folders kvantum-theme-adapta
+  # geany
 
 clear
 ################################## Config ##################################
@@ -76,9 +77,10 @@ indicators = ~host;~spacer;~clock;~power" | sudo tee -a /etc/lightdm/lightdm-gtk
 sudo sed -i /usr/lib/openbox/openbox-autostart -re '3,13d'
 
 # Hide apps
-mkdir -p $HOME/.local/share/applications/ && rm -rf $HOME/.local/share/applications/*
-cp -rf /usr/share/applications/{volumeicon,qv4l2,qvidcap,avahi-discover,bssh,bvnc,compton,picom,lstopo,electron16}.desktop $HOME/.local/share/applications/
-cp -rf /usr/share/applications/xfce4-{about,mail-reader,file-manager,web-browser,terminal-emulator}.desktop $HOME/.local/share/applications/
+mkdir -p $HOME/.local/share/applications/ && cd /usr/share/applications/ && rm -rf $HOME/.local/share/applications/*
+cp -rf {volumeicon,qv4l2,qvidcap,avahi-discover,bssh,bvnc,compton,picom,lstopo,electron16}.desktop $HOME/.local/share/applications/
+cp -rf xfce4-{about,mail-reader,file-manager,web-browser,terminal-emulator}.desktop $HOME/.local/share/applications/
+cp -rf org.gnome.{Devhelp,Glade,Sysprof3}.desktop $HOME/.local/share/applications/
 echo "Hidden=True" | tee -a $HOME/.local/share/applications/*.desktop && clear
 
 clear
