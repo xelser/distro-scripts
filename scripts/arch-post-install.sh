@@ -12,7 +12,6 @@ else
 fi
 
 # Prompt Optional Packages
-clear && read -p "Install Redshift (Night light)? [y/N]: " select_redshift
 echo && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
 
 # Set ownership
@@ -30,7 +29,7 @@ yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake
   xfce4-{settings,terminal,notifyd,power-manager} lx{task,appearance}-gtk3 qt5ct kvantum-qt5 tint2 network-manager-applet volumeicon \
   thunar-{archive-plugin,media-tags-plugin,volman} gvfs-{afc,goa,google,gphoto2,mtp,nfs,smb} sshfs tumbler ffmpegthumbnailer poppler-glib \
   gtk-engine-murrine adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers nitrogen xreader xarchiver leafpad gpicview \
-  firefox discord bitwarden transmission-gtk gparted gnome-disk-utility warpinator geany screengrab catfish parole \
+  firefox discord bitwarden transmission-gtk gparted gnome-disk-utility warpinator geany screengrab catfish parole redshift \
   obmenu-generator xfce-polkit thunar-shares-plugin mugshot ventoy-bin adapta-gtk-theme-colorpack-joshaby-git papirus-folders kvantum-theme-adapta
 
 clear
@@ -92,7 +91,7 @@ if [ $? -eq 0 ]; then
 fi
 
 # laptop
-sudo upower -e | grep -q BAT
+sudo upower -e | grep -q "BAT"
 if [ $? -eq 0 ]; then
 	yay -S --noconfirm --needed --cleanafter --removemake --noredownload --norebuild --batchinstall tlp tlp-rdw tlpui cbatticon
 	echo "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/configs/openbox-laptop-module)" | tee -a $HOME/.config/openbox/autostart
@@ -100,18 +99,12 @@ if [ $? -eq 0 ]; then
 fi
 
 # bluetooth
-sudo dmesg | grep -q -i blue
+sudo dmesg | grep -q "Bluetooth"
 if [ $? -eq 0 ]; then
 	sudo pacman -S --noconfirm --needed bluez bluez-utils pulseaudio-bluetooth blueman
 	echo "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/configs/bluetooth)" | sudo tee -a /etc/bluetooth/main.conf
 	sudo systemctl enable bluetooth
 fi
-
-# redshift
-case $select_redshift in
-   y)	sudo pacman -S --noconfirm --needed redshift;;
-   *)	;;
-esac
 
 clear
 ############################## Housekeeping ##############################
