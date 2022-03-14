@@ -13,6 +13,10 @@ fi
 
 # Prompt Optional Packages
 clear && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
+echo && sudo dmesg | grep -q "EFI v"
+if [ $? -eq 0 ]; then
+        read -p "Install refind? (y/N): " refind_install
+fi
 
 # Set ownership
 sudo chown -R $USER $HOME
@@ -86,9 +90,12 @@ clear
 # refind
 sudo dmesg | grep -q "EFI v"
 if [ $? -eq 0 ]; then
-	sudo pacman -S --needed --noconfirm refind
-	sudo refind-install
-	sudo sed -i 's/ro /rw quiet splash /g' /boot/refind_linux.conf
+        case $refind_install in
+           y)   sudo pacman -S --needed --noconfirm refind
+                sudo refind-install
+                sudo sed -i 's/ro /rw quiet splash /g' /boot/refind_linux.conf;;
+           *)   ;;
+        esac
 fi
 
 # laptop
