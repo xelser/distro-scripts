@@ -11,8 +11,18 @@ else
 	sudo nmtui && sudo timedatectl set-ntp true
 fi
 
-# Prompt Optional Packages
+# dotfiles
 clear && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
+case $cp_dotfiles in
+   n)	;;
+   *)	# Remove old .config files
+   	rm -rf $HOME/{.config,.gtkrc-2.0}
+   	cd $HOME/ && git clone https://github.com/xelser/dotfiles
+   	cp -rf $HOME/dotfiles/arch-openbox/{.config,.gtkrc-2.0} $HOME/
+   	rm -rf $HOME/dotfiles/;;
+esac
+
+# refind
 echo && sudo dmesg | grep -q "EFI v"
 if [ $? -eq 0 ]; then
 	read -p "Install refind? (y/N): " refind_install
@@ -64,19 +74,6 @@ indicators = ~host;~spacer;~clock;~power" | sudo tee -a /etc/lightdm/lightdm-gtk
 
 # Fix openbox's grey screen when logging in
 sudo sed -i /usr/lib/openbox/openbox-autostart -re '3,13d'
-
-clear
-################################ Userspace ###############################
-
-# dotfiles
-case $cp_dotfiles in
-   n)	;;
-   *)	# Remove old .config files
-   	rm -rf $HOME/{.config,.gtkrc-2.0}
-   	cd $HOME/ && git clone https://github.com/xelser/dotfiles
-   	cp -rf $HOME/dotfiles/arch-openbox/{.config,.gtkrc-2.0} $HOME/
-   	rm -rf $HOME/dotfiles/;;
-esac
 
 # Hide apps
 mkdir -p $HOME/.local/share/applications/ && rm -rf $HOME/.local/share/applications/*
