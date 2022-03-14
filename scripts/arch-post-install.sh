@@ -15,7 +15,7 @@ fi
 clear && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
 echo && sudo dmesg | grep -q "EFI v"
 if [ $? -eq 0 ]; then
-        read -p "Install refind? (y/N): " refind_install
+	read -p "Install refind? (y/N): " refind_install
 fi
 
 # Set ownership
@@ -90,18 +90,17 @@ clear
 # refind
 sudo dmesg | grep -q "EFI v"
 if [ $? -eq 0 ]; then
-        case $refind_install in
-           y)   sudo pacman -S --needed --noconfirm refind
-                sudo refind-install
-                sudo sed -i 's/ro /rw quiet splash /g' /boot/refind_linux.conf;;
-           *)   ;;
-        esac
+	case $refind_install in
+	   y)	yay -S --noconfirm --needed refind refind-theme-regular-git && sudo refind-install
+	   	sudo sed -i 's/ro /rw quiet splash /g' /boot/refind_linux.conf;;
+	   *)	;;
+	esac
 fi
 
 # laptop
 sudo upower -e | grep -q "BAT"
 if [ $? -eq 0 ]; then
-	yay -S --noconfirm --needed --cleanafter --removemake --noredownload --norebuild --batchinstall tlp tlp-rdw tlpui cbatticon
+	yay -S --noconfirm --needed tlp tlp-rdw tlpui cbatticon
 	echo "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/configs/openbox-laptop-module)" | tee -a $HOME/.config/openbox/autostart
 	sudo systemctl enable tlp
 fi
@@ -109,7 +108,7 @@ fi
 # bluetooth
 sudo dmesg | grep -q "Bluetooth"
 if [ $? -eq 0 ]; then
-	sudo pacman -S --noconfirm --needed bluez bluez-utils pulseaudio-bluetooth blueman
+	yay -S --noconfirm --needed bluez bluez-utils pulseaudio-bluetooth blueman
 	echo "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/configs/bluetooth)" | sudo tee -a /etc/bluetooth/main.conf
 	sudo systemctl enable bluetooth
 fi
