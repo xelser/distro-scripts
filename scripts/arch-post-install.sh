@@ -12,7 +12,7 @@ else
 fi
 
 # Prompt Optional Packages
-echo && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
+clear && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
 
 # Set ownership
 sudo chown -R $USER $HOME
