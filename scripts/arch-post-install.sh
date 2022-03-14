@@ -11,6 +11,12 @@ else
 	sudo nmtui && sudo timedatectl set-ntp true
 fi
 
+# refind
+echo && sudo dmesg | grep -q "EFI v"
+if [ $? -eq 0 ]; then
+	read -p "Install refind? (y/N): " refind_install
+fi
+
 # dotfiles
 clear && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
 case $cp_dotfiles in
@@ -21,12 +27,6 @@ case $cp_dotfiles in
    	cp -rf $HOME/dotfiles/arch-openbox/{.config,.gtkrc-2.0} $HOME/
    	rm -rf $HOME/dotfiles/;;
 esac
-
-# refind
-echo && sudo dmesg | grep -q "EFI v"
-if [ $? -eq 0 ]; then
-	read -p "Install refind? (y/N): " refind_install
-fi
 
 # Set ownership
 sudo chown -R $USER $HOME
