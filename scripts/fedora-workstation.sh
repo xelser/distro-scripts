@@ -125,30 +125,30 @@ clear
 ############################ dconf/gsettings #############################
 
 # General Settings
-gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
-gsettings set org.gnome.desktop.interface enable-hot-corners "false"
+#gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
+#gsettings set org.gnome.desktop.interface enable-hot-corners "false"
 
 # Clock
-gsettings set org.gnome.desktop.interface clock-format "12h"
-gsettings set org.gnome.desktop.interface clock-show-date "false"
-gsettings set org.gnome.desktop.datetime automatic-timezone "true"
+#gsettings set org.gnome.desktop.interface clock-format "12h"
+#gsettings set org.gnome.desktop.interface clock-show-date "false"
+#gsettings set org.gnome.desktop.datetime automatic-timezone "true"
 
 # GTK | Icons | Cursors
-gsettings set org.gnome.desktop.interface gtk-theme "Orchis-dark-compact"
-gsettings set org.gnome.desktop.interface icon-theme "Tela-circle-dark"
-gsettings set org.gnome.desktop.interface cursor-theme "Bibata-Modern-Classic"
+#gsettings set org.gnome.desktop.interface gtk-theme "Orchis-dark-compact"
+#gsettings set org.gnome.desktop.interface icon-theme "Tela-circle-dark"
+#gsettings set org.gnome.desktop.interface cursor-theme "Bibata-Modern-Classic"
 
 # Fonts
-gsettings set org.gnome.desktop.interface font-name "Roboto 10"
-gsettings set org.gnome.desktop.interface document-font-name "Roboto Slab 10"
-gsettings set org.gnome.desktop.interface monospace-font-name "Roboto Mono 10"
-gsettings set org.gnome.desktop.wm.preferences titlebar-font "Roboto Bold 10"
-gsettings set org.gnome.desktop.interface font-antialiasing "rgba"
-gsettings set org.gnome.desktop.interface font-hinting "slight"
+#gsettings set org.gnome.desktop.interface font-name "Roboto 10"
+#gsettings set org.gnome.desktop.interface document-font-name "Roboto Slab 10"
+#gsettings set org.gnome.desktop.interface monospace-font-name "Roboto Mono 10"
+#gsettings set org.gnome.desktop.wm.preferences titlebar-font "Roboto Bold 10"
+#gsettings set org.gnome.desktop.interface font-antialiasing "rgba"
+#gsettings set org.gnome.desktop.interface font-hinting "slight"
 
 # Updates
-gsettings set org.gnome.software download-updates "false"
-gsettings set org.gnome.software download-updates-notify "false"
+#gsettings set org.gnome.software download-updates "false"
+#gsettings set org.gnome.software download-updates-notify "false"
 
 clear
 ############################## Housekeeping ##############################
