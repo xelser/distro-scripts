@@ -23,9 +23,8 @@ case $cp_dotfiles in
    n)	;;
    *)	# Remove old .config files
    	rm -rf $HOME/{.config,.gtkrc-2.0}
-   	cd $HOME/ && git clone https://github.com/xelser/dotfiles
-   	cp -rf $HOME/dotfiles/arch-openbox/{.config,.gtkrc-2.0} $HOME/
-   	rm -rf $HOME/dotfiles/;;
+   	cd /tmp/ && git clone https://github.com/xelser/dotfiles
+   	cp -rf /tmp/dotfiles/arch-openbox/{.config,.gtkrc-2.0} $HOME/;;
 esac
 
 # Set ownership
