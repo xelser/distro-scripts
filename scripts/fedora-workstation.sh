@@ -40,9 +40,10 @@ sudo dnf groupupdate core sound-and-video multimedia --exclude=PackageKit-gstrea
 sudo dnf upgrade && sudo dnf distro-sync
 
 # INSTALL: Flapak | Fedora | RPM Fusion
-sudo dnf install gnome-shell-extension-{pop-shell,dash-to-dock,appindicator,caffeine,gamemode,gsconnect} google-noto-{cjk,emoji-color}-fonts \
-  gnome-{tweaks,extensions-app,multi-writer,builder} google-roboto-* kvantum qt5ct gparted variety transmission file-roller dconf-editor \
-  inkscape easyeffects htop neofetch vim cmatrix unrar akmod-nvidia wine wine-mono lutris steam gamescope gamemode mangohud goverlay \
+sudo dnf install gnome-shell-extension-{pop-shell,dash-to-dock,appindicator,caffeine,gamemode,gsconnect,sound-output-device-chooser} \
+  gnome-{tweaks,extensions-app,multi-writer,builder} google-noto-{cjk,emoji-color}-fonts google-roboto-* file-roller dconf-editor \
+  kvantum qt5ct gparted variety transmission inkscape easyeffects htop neofetch vim cmatrix unrar \
+  akmod-nvidia wine wine-mono lutris steam gamescope gamemode mangohud goverlay \
   mesa-libGLU gtk-murrine-engine sassc ostree libappstream-glib $HOME/Downloads/*.rpm # google-chrome-stable chromium
 
 flatpak install -y flathub com.github.tchx84.Flatseal com.bitwarden.desktop org.x.Warpinator com.discordapp.Discord \
