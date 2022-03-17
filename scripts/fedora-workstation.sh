@@ -47,7 +47,7 @@ sudo dnf install gnome-shell-extension-{pop-shell,dash-to-dock,appindicator,caff
   mesa-libGLU gtk-murrine-engine sassc ostree libappstream-glib $HOME/Downloads/*.rpm # google-chrome-stable chromium
 
 flatpak install -y flathub com.github.tchx84.Flatseal com.bitwarden.desktop org.x.Warpinator com.discordapp.Discord \
-  com.skype.Client us.zoom.Zoom com.obsproject.Studio com.obsproject.Studio.Plugin.{OBSVkCapture,NVFBC,Gstreamer}
+  com.skype.Client us.zoom.Zoom com.obsproject.Studio
 
 clear
 ################################# Config ##################################
