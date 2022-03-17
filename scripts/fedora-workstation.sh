@@ -31,8 +31,8 @@ sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-releas
 # DEBLOAT
 sudo dnf groupremove 'LibreOffice' 'Container Management' 'Guest Desktop Agents'
 sudo dnf autoremove gnome-shell-extension-{background-logo,window-list} --exclude=gnome-shell-extension-{apps,places}-menu \
-  gnome-{boxes,characters,clocks,connections,contacts,font-viewer,photos,tour,weather} \
-  fedora-bookmarks libreoffice-core mediawriter rhythmbox cheese simple-scan # ,calendar,logs,maps
+  fedora-bookmarks libreoffice-core mediawriter rhythmbox cheese simple-scan \
+  gnome-{boxes,characters,connections,contacts,font-viewer,photos,tour} # ,calendar,logs,maps,clocks,weather
 sudo dnf mark install gnome-shell-extension-{apps,places}-menu
 
 # UPDATE
@@ -85,7 +85,7 @@ case $cp_dotfiles in
    	rm -rf $HOME/{.config,.local}
    	cd /tmp/ && git clone https://github.com/xelser/dotfiles
    	cp -rf /tmp/dotfiles/fedora-workstation/{.config,.local} $HOME/;;
- *|N)	;;
+   *)	;;
 esac
 
 # Hide some .desktop files
