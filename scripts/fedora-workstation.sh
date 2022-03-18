@@ -126,6 +126,8 @@ clear
 ############################ dconf/gsettings #############################
 
 # Compile gsettings schemas
+#mkdir -p $HOME/.local/share/glib-2.0/schemas/
+#cd $HOME/.local/share/gnome-shell/extensions/
 glib-compile-schemas $HOME/.local/share/glib-2.0/schemas/
 
 # General Settings
