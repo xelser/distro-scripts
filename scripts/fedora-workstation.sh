@@ -125,6 +125,9 @@ cd stylepak && ./stylepak install-system Orchis-dark-compact
 clear
 ############################ dconf/gsettings #############################
 
+# Compile gsettings schemas
+glib-compile-schemas $HOME/.local/share/glib-2.0/schemas/
+
 # General Settings
 gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
 gsettings set org.gnome.desktop.interface enable-hot-corners "false"
@@ -146,6 +149,16 @@ gsettings set org.gnome.software download-updates "false"
 gsettings set org.gnome.software download-updates-notify "false"
 
 # Extensions
+gsettings set org.gnome.shell.extensions.blur-my-shell blur-appfolders "false"
+gsettings set org.gnome.shell.extensions.blur-my-shell blur-dash "false"
+gsettings set org.gnome.shell.extensions.blur-my-shell blur-panel "false"
+gsettings set org.gnome.shell.extensions.blur-my-shell blur-window-list "false"
+gsettings set org.gnome.shell.extensions.blur-my-shell brightness "0.4"
+gsettings set org.gnome.shell.extensions.blur-my-shell sigma "20"
+gsettings set org.gnome.shell.extensions.espresso show-notifications "false"
+gsettings set org.gnome.shell.extensions.espresso enable-docked "true"
+gsettings set org.gnome.shell.extensions.gnome-ui-tune always-show-thumbnails "false"
+gsettings set org.gnome.shell.extensions.middleclickclose close-button "right"
 gsettings set org.gnome.shell.extensions.dash-to-dock autohide-in-fullscreen "true"
 gsettings set org.gnome.shell.extensions.dash-to-dock intellihide-mode 'ALL_WINDOWS'
 gsettings set org.gnome.shell.extensions.dash-to-dock require-pressure-to-show "false"
@@ -160,7 +173,7 @@ gsettings set org.gnome.shell.extensions.sound-output-device-chooser hide-on-sin
 gsettings set org.gnome.shell.extensions.user-theme name "Orchis-dark-compact"
 
 # Others
-gsettings set org.gnome.shell enabled-extensions ['appindicatorsupport@rgcjonas.gmail.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'caffeine@patapon.info', 'dash-to-dock@micxgx.gmail.com', 'gamemode@christian.kellner.me', 'gsconnect@andyholmes.github.io', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'pop-shell@system76.com', 'sound-output-device-chooser@kgshank.net', 'user-theme@gnome-shell-extensions.gcampax.github.com']
+gsettings set org.gnome.shell enabled-extensions ['AlphabeticalAppGrid@stuarthayhurst', 'blur-my-shell@aunetx', 'espresso@coadmunkee.github.com', 'gnome-ui-tune@itstime.tech', 'middleclickclose@paolo.tranquilli.gmail.com', 'scroll-workspaces@gfxmonk.net', 'windowIsReady_Remover@nunofarruca@gmail.com', 'appindicatorsupport@rgcjonas.gmail.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com', 'gamemode@christian.kellner.me', 'gsconnect@andyholmes.github.io', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'pop-shell@system76.com', 'sound-output-device-chooser@kgshank.net', 'user-theme@gnome-shell-extensions.gcampax.github.com']
 gsettings set org.gnome.shell favorite-apps ['org.gnome.Terminal.desktop', 'gnome-system-monitor.desktop', 'org.gnome.Builder.desktop', 'firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.x.Warpinator.desktop', 'org.gnome.Extensions.desktop', 'org.gnome.Screenshot.desktop']
 
 clear
