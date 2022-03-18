@@ -136,6 +136,9 @@ gsettings set org.gnome.desktop.interface enable-hot-corners "false"
 gsettings set org.gnome.desktop.interface clock-format "12h"
 gsettings set org.gnome.desktop.interface clock-show-date "false"
 gsettings set org.gnome.desktop.datetime automatic-timezone "true"
+gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled "true"
+gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature "4700"
+gsettings set org.gnome.system.location enabled "true"
 
 # GTK | Icons | Cursors | Fonts
 gsettings set org.gnome.desktop.interface gtk-theme "Orchis-dark-compact"
