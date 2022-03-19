@@ -22,8 +22,8 @@ clear && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
 case $cp_dotfiles in
    n)	;;
    *)	# Remove old .config files
-   	rm -rf $HOME/{.config,.gtkrc-2.0}
-   	cd /tmp/ && git clone https://github.com/xelser/dotfiles
+   	rm -rf $HOME/{.config,.gtkrc-2.0} && cd /tmp/
+   	rm -rf dotfiles && git clone https://github.com/xelser/dotfiles
    	cp -rf /tmp/dotfiles/arch-openbox/{.config,.gtkrc-2.0} $HOME/;;
 esac
 
