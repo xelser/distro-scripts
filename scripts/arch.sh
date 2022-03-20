@@ -176,7 +176,7 @@ Color" | tee -a /etc/pacman.conf
 pacman -S --needed --noconfirm --disable-download-timeout \
   grub {amd,intel}-ucode efibootmgr os-prober base base-devel linux linux-firmware networkmanager \
   gst-libav gst-plugins-{bad,base,good,ugly} noto-{fonts,fonts-cjk,fonts-emoji} ntfs{-3g,progs} \
-  nano vim htop neofetch zip unzip p7zip unrar xdg-user-dirs git curl wget
+  nano vim htop neofetch zip unzip p7zip unrar xdg-user-dirs git curl wget reflector
   
 clear
 ############################### Localization ###############################
