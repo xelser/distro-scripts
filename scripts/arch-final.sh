@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 ls $HOME | grep -q arch-post-install.sh
 if [ $? -ne 0 ]; then
