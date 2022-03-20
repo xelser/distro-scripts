@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 clear
 cd ~/distro-scripts/scripts
 chmod +x *
@@ -20,8 +21,16 @@ case $var in
 esac
 
 # Reboot
-echo && read -p "Reboot? (Y/n): " end
-case $end in
-   n)	echo "Reboot Cancelled";;
- *|Y)	echo "Rebooting... " && rm -rf ~/distro-scripts && reboot;;
-esac
+if [ $? -eq 0 ]; then
+	echo "Rebooting... "
+	rm -rf ~/distro-scripts
+	reboot
+else
+	echo "Error Detected. Reboot Cancelled"
+fi
+
+#echo && read -p "Reboot? (Y/n): " end
+#case $end in
+#   n)	echo "Reboot Cancelled";;
+# *|Y)	echo "Rebooting... " && rm -rf ~/distro-scripts && reboot;;
+#esac

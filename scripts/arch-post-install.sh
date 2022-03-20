@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 clear
 
 ############################## Preparations ###############################
@@ -115,8 +116,16 @@ clear
 ############################## Housekeeping ##############################
 
 # Reboot
-clear && echo && read -p "Reboot? (Y/n): " end
-case $end in
-   n)	echo "Reboot Cancelled";;
-   *)	echo "Rebooting... " && sudo rm -rf $HOME/arch-post-install.sh && reboot;;
-esac
+if [ $? -eq 0 ]; then
+	echo "Rebooting... "
+	rm -rf $HOME/arch-post-install.sh
+	reboot
+else
+	echo "Error Detected. Reboot Cancelled"
+fi
+
+#clear && echo && read -p "Reboot? (Y/n): " end
+#case $end in
+#   n)	echo "Reboot Cancelled";;
+#   *)	echo "Rebooting... " && sudo rm -rf $HOME/arch-post-install.sh && reboot;;
+#esac
