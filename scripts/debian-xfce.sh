@@ -26,13 +26,17 @@ apt autoremove --purge -y libreoffice*
 apt update && apt upgrade -y && apt full-upgrade -y
 
 # Install
-apt install -y htop neofetch gparted transmission gnome-{disk-utility,builder} plank \
-  lightdm-gtk-greeter-settings gvfs-{backends,fuse} fonts-noto \
-  wget curl numlockx flatpak mtools
+apt install -y lightdm-gtk-greeter-settings gvfs-{backends,fuse} unrar zip \
+  htop neofetch wget curl numlockx flatpak fonts-noto mtools exfatprogs \
+  gparted transmission gnome-{disk-utility,builder} plank pulseeffects
 
 # Flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install flathub -y com.github.tchx84.Flatseal com.bitwarden.desktop com.discordapp.Discord
+
+# Build
+#cd /tmp/ && git clone https://github.com/pulseaudio-equalizer-ladspa/equalizer.git
+#cd equalizer && meson build && cd build && ninja && ninja install
 
 clear
 ################################ Configs #################################
@@ -52,8 +56,8 @@ cp /etc/skel/{.profile,.bashrc} /home/${user}/
 cat $HOME/distro-scripts/configs/bash/debian_bashrc >> /home/${user}/.bashrc
 
 # Font rendering
-cp $HOME/distro-scripts/configs/x11-font-rendering/local.conf /etc/fonts/
-cp $HOME/distro-scripts/configs/x11-font-rendering/.Xresources /home/${user}/
+cp -rf $HOME/distro-scripts/configs/x11-font-rendering/local.conf /etc/fonts/
+cp -rf $HOME/distro-scripts/configs/x11-font-rendering/.Xresources /home/${user}/
 xrdb -merge /home/${user}/.Xresources
 ln -sf /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
 ln -sf /usr/share/fontconfig/conf.avail/10-hinting-slight.conf /etc/fonts/conf.d/

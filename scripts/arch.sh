@@ -229,8 +229,8 @@ clear
 
 # font rendering
 mkdir -p /mnt/etc/fonts/
-cat $HOME/distro-scripts/configs/x11-font-rendering/local.conf > /mnt/etc/fonts/local.conf
-cat $HOME/distro-scripts/configs/x11-font-rendering/.Xresources > /mnt/home/${user}/.Xresources
+cp -rf $HOME/distro-scripts/configs/x11-font-rendering/local.conf /mnt/etc/fonts/
+cp -rf $HOME/distro-scripts/configs/x11-font-rendering/.Xresources /mnt/home/${user}/
 
 # bash configs
 rm -rf /mnt/home/${user}/.bashrc
