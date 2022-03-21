@@ -19,22 +19,21 @@ esac
 
 ################################ Packages ################################
 
+# Debloat
+apt autoremove --purge -y libreoffice*
+
 # Update
 apt update && apt upgrade -y && apt full-upgrade -y
 
-# Apt-Get
-apt autoremove --purge -y \
-  libreoffice*
-
-apt install -y \
-  htop neofetch gparted gnome-disk-utility transmission timeshift \
+# Install
+apt install -y htop neofetch gparted gnome-disk-utility transmission timeshift \
   lightdm-gtk-greeter-settings gvfs-backends gvfs-fuse \
   wget curl numlockx flatpak mtools \
   plank 
 
 # Flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub com.discordapp.Discord
+flatpak install flathub -y com.github.tchx84.Flatseal com.bitwarden.desktop com.discordapp.Discord
 
 clear
 ################################ Configs #################################

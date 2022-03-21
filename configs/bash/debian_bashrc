@@ -1,3 +1,4 @@
+
 # user aliases
 alias update="sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y && sudo apt autoremove --purge -y && sudo apt autoclean && flatpak update -y && flatpak uninstall --unused -y"
 alias clear="clear && history -c"
