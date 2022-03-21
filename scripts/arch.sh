@@ -66,6 +66,7 @@ case $partitioning in
   	firm="i386-pc /dev/${device}"
   	root="2"
   	swap="5"
+  	home="6"
   	;;
   4)	# Aspire E5-476G default partitioning
   	device="sda"
@@ -105,7 +106,7 @@ fi
 echo "Root Partition: /dev/${device}${root}"
 echo "Swap Partition: /dev/${device}${swap}"
 case $partitioning in
- 3|4)	;;
+   4)	;;
    *)	echo "Home Partition: /dev/${device}${home}";;
 esac
 echo "----------------------------"
@@ -128,6 +129,7 @@ case $confirmation in
  	  	mkswap -f -L Swap /dev/${device}${swap} && swapon /dev/${device}${swap}
  	  	;;
  	  3)	mkfs.ext4 -F -L Arch /dev/${device}${root} && mount /dev/${device}${root} /mnt
+ 	  	mkdir /mnt/home && mount /dev/${device}${home} /mnt/home
  	  	swapon /dev/${device}${swap}
  	  	;;
  	  4)	mkfs.ext4 -F -L Arch /dev/${device}${root} && mount /dev/${device}${root} /mnt
