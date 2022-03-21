@@ -26,7 +26,7 @@ apt autoremove --purge -y libreoffice*
 apt update && apt upgrade -y && apt full-upgrade -y
 
 # Install
-apt install -y htop neofetch gparted gnome-disk-utility transmission timeshift \
+apt install -y htop neofetch gparted gnome-{disk-utility,builder} transmission \
   lightdm-gtk-greeter-settings gvfs-backends gvfs-fuse \
   wget curl numlockx flatpak mtools \
   plank 
