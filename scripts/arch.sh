@@ -66,7 +66,6 @@ case $partitioning in
   	firm="i386-pc /dev/${device}"
   	root="2"
   	swap="5"
-  	home="6"
   	;;
   4)	# Aspire E5-476G default partitioning
   	device="sda"
@@ -129,7 +128,6 @@ case $confirmation in
  	  	mkswap -f -L Swap /dev/${device}${swap} && swapon /dev/${device}${swap}
  	  	;;
  	  3)	mkfs.ext4 -F -L Arch /dev/${device}${root} && mount /dev/${device}${root} /mnt
- 	  	mkdir /mnt/home && mount /dev/${device}${home} /mnt/home
  	  	swapon /dev/${device}${swap}
  	  	;;
  	  4)	mkfs.ext4 -F -L Arch /dev/${device}${root} && mount /dev/${device}${root} /mnt
@@ -174,9 +172,9 @@ Color" | tee -a /etc/pacman.conf
 
 # Install Packages
 pacman -S --needed --noconfirm --disable-download-timeout \
-  grub {amd,intel}-ucode efibootmgr os-prober base base-devel linux linux-firmware networkmanager \
-  gst-libav gst-plugins-{bad,base,good,ugly} noto-{fonts,fonts-cjk,fonts-emoji} ntfs{-3g,progs} \
-  nano vim htop neofetch zip unzip p7zip unrar xdg-user-dirs git curl wget reflector
+  grub {amd,intel}-ucode efibootmgr os-prober base base-devel linux linux-firmware networkmanager xdg-user-dirs \
+  gst-libav gst-plugins-{bad,base,good,ugly} noto-{fonts,fonts-cjk,fonts-emoji} ntfs{-3g,progs} exfatprogs \
+  nano vim htop neofetch zip unzip p7zip unrar git curl wget reflector
   
 clear
 ############################### Localization ###############################
