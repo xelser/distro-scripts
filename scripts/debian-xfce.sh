@@ -9,21 +9,17 @@ apt update && apt upgrade -y && apt full-upgrade -y
 
 # Install
 apt install -y \
-  htop neofetch gparted gnome-disk-utility timeshift \
+  htop neofetch gparted gnome-disk-utility transmission timeshift \
   lightdm-gtk-greeter-settings gvfs-backends gvfs-fuse \
-  wget curl numlockx mtools \
+  wget curl numlockx flatpak mtools \
   plank 
-  
-  # variety        
-  
+
+# Flatpak
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak install flathub com.discordapp.Discord
+
 clear
 ################################ Configs #################################
-
-# fstab
-#echo "
-## additional mounts
-#/dev/sda7   /media/Files   ext4    defaults   0   0
-#" | tee -a /etc/fstab
 
 # Lightdm
 echo "
@@ -37,6 +33,7 @@ usermod -aG sudo ${user}
 # Bash configs
 rm -rf /home/${user}/{.profile,.bashrc}
 cp /etc/skel/{.profile,.bashrc} /home/${user}/
+cat $HOME/distro-scripts/configs/bash/debian_bashrc >> /home/${user}/.bashrc
 
 # Font rendering
 #cp ~/distro-scripts/font-rendering/local.conf /etc/fonts/
@@ -77,6 +74,7 @@ clear
 
 # Clean packages
 apt autoremove --purge -y && apt autoclean
+flatpak uninstall --unused -y
 
 # Change owner
 chown -R ${user} /home/${user}

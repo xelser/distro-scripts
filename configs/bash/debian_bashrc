@@ -1,0 +1,13 @@
+# user aliases
+alias update="sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y && sudo apt autoremove --purge -y && sudo apt autoclean && flatpak update -y && flatpak uninstall --unused -y"
+alias clear="clear && history -c"
+
+# cli aliases
+alias rm="rm -rf"
+alias cp="cp -rf"
+alias ln="ln -sf"
+alias mkdir="mkdir -p"
+
+# git aliases
+alias gitclone="cd $HOME/Downloads && git clone"
+alias gitcommit="git fetch && git pull && git add . && git commit -m 'Updated @ debian' && git push"
