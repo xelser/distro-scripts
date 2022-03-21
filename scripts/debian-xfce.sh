@@ -1,20 +1,17 @@
 #!/bin/bash
-set -e
 clear
-user="axel"
+user="xelser"
 
 ################################ Packages #################################
 
 # Update
-apt update
-apt upgrade -y
-apt full-upgrade -y
+apt update && apt upgrade -y && apt full-upgrade -y
 
 # Install
 apt install -y \
   htop neofetch gparted gnome-disk-utility timeshift \
   lightdm-gtk-greeter-settings gvfs-backends gvfs-fuse \
-  wget numlockx xfsprogs xfsdump mtools \
+  wget curl numlockx mtools \
   plank 
   
   # variety        
@@ -38,13 +35,13 @@ autologin-user=${user}" | tee -a /etc/lightdm/lightdm.conf
 usermod -aG sudo ${user}
 
 # Font rendering
-cp ~/distro-scripts/font-rendering/local.conf /etc/fonts/
-cp ~/distro-scripts/font-rendering/.Xresources /home/${user}/
-xrdb -merge /home/${user}/.Xresources
-ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
-rm /etc/fonts/conf.d/11-lcdfilter-default.conf
-ln -s /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
-fc-cache -fv
+#cp ~/distro-scripts/font-rendering/local.conf /etc/fonts/
+#cp ~/distro-scripts/font-rendering/.Xresources /home/${user}/
+#xrdb -merge /home/${user}/.Xresources
+#ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
+#rm /etc/fonts/conf.d/11-lcdfilter-default.conf
+#ln -s /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
+#fc-cache -fv
 
 # Autostart
 mkdir -p /home/${user}/.config/autostart
@@ -54,11 +51,8 @@ clear
 ################################## Theme ##################################
 
 # GTK
-mkdir -p /home/${user}/Downloads
-cd /home/${user}/Downloads
-git clone https://github.com/vinceliuice/Matcha-gtk-theme.git
-cd Matcha-gtk-theme
-./install.sh -c dark -t aliz
+cd /tmp/ && git clone https://github.com/vinceliuice/Matcha-gtk-theme.git
+./Matcha-gtk-theme/install.sh -c dark -t aliz
 
 # Icons
 wget -qO- https://git.io/papirus-icon-theme-install | sh
@@ -72,14 +66,13 @@ clear
 ################################ dotfiles #################################
 
 # config files
-cp -rf ~/distro-scripts/dotfiles/debian-xfce/.config /home/${user}/
+#cp -rf ~/distro-scripts/dotfiles/debian-xfce/.config /home/${user}/
 
 clear
 ############################## Housekeeping ###############################
 
 # Clean packages
-apt autoremove --purge -y
-apt autoclean
+apt autoremove --purge -y && apt autoclean
 
 # Change owner
 chown -R ${user} /home/${user}

@@ -64,7 +64,7 @@ case $partitioning in
   3)	# G41T-R3 default partitioning
   	device="sda"
   	firm="i386-pc /dev/${device}"
-  	root="1"
+  	root="2"
   	swap="5"
   	home="6"
   	;;
