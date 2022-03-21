@@ -26,10 +26,9 @@ apt autoremove --purge -y libreoffice*
 apt update && apt upgrade -y && apt full-upgrade -y
 
 # Install
-apt install -y htop neofetch gparted gnome-{disk-utility,builder} transmission \
-  lightdm-gtk-greeter-settings gvfs-backends gvfs-fuse \
-  wget curl numlockx flatpak mtools \
-  plank 
+apt install -y htop neofetch gparted transmission gnome-{disk-utility,builder} plank \
+  lightdm-gtk-greeter-settings gvfs-{backends,fuse} fonts-noto \
+  wget curl numlockx flatpak mtools
 
 # Flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -53,13 +52,11 @@ cp /etc/skel/{.profile,.bashrc} /home/${user}/
 cat $HOME/distro-scripts/configs/bash/debian_bashrc >> /home/${user}/.bashrc
 
 # Font rendering
-#cp ~/distro-scripts/font-rendering/local.conf /etc/fonts/
-#cp ~/distro-scripts/font-rendering/.Xresources /home/${user}/
-#xrdb -merge /home/${user}/.Xresources
-#ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
-#rm /etc/fonts/conf.d/11-lcdfilter-default.conf
-#ln -s /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
-#fc-cache -fv
+cp $HOME/distro-scripts/configs/x11-font-rendering/local.conf /etc/fonts/
+cp $HOME/distro-scripts/configs/x11-font-rendering/.Xresources /home/${user}/
+xrdb -merge /home/${user}/.Xresources
+ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
+fc-cache -fv
 
 clear
 ################################# Themes #################################
