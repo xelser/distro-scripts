@@ -105,8 +105,8 @@ fi
 echo "Root Partition: /dev/${device}${root}"
 echo "Swap Partition: /dev/${device}${swap}"
 case $partitioning in
-  4)	;;
-  *)	echo "Home Partition: /dev/${device}${home}";;
+ 3|4)	;;
+   *)	echo "Home Partition: /dev/${device}${home}";;
 esac
 echo "----------------------------"
 echo && read -p "Proceed? (Y/n): " confirmation && echo

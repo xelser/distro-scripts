@@ -117,7 +117,7 @@ clear
 if [ $? -eq 0 ]; then
 	echo "Rebooting... "
 	rm -rf $HOME/arch-post-install.sh
-	reboot
+	sudo reboot
 else
 	echo "Error Detected. Reboot Cancelled"
 fi
