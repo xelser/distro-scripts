@@ -1,19 +1,19 @@
 #!/bin/bash
 clear
 
-
 ############################### Preparation ##############################
 
 # user var
 user="xelser"
+home="/home/${user}"
 
 # dotfiles
 echo && read -p "Copy (xelser's) dotfiles? (y/N): " cp_dotfiles
 case $cp_dotfiles in
    y)	# Remove old .config files
-   	rm -rf /home/${user}/.config
+   	rm -rf ${home}/.config
    	cd /tmp/ && git clone https://github.com/xelser/dotfiles
-   	cp -rf /tmp/dotfiles/fedora-workstation/.config /home/${user}/;;
+   	cp -rf /tmp/dotfiles/fedora-workstation/.config ${home};;
    *)	;;
 esac
 
@@ -49,14 +49,14 @@ autologin-user=${user}" | tee -a /etc/lightdm/lightdm.conf
 usermod -aG sudo ${user}
 
 # Bash configs
-rm -rf /home/${user}/{.profile,.bashrc}
-cp /etc/skel/{.profile,.bashrc} /home/${user}/
-cat $HOME/distro-scripts/configs/bash/debian_bashrc >> /home/${user}/.bashrc
+rm -rf ${home}/{.profile,.bashrc}
+cp /etc/skel/{.profile,.bashrc} ${home}/
+cat $HOME/distro-scripts/configs/bash/debian_bashrc >> ${home}/.bashrc
 
 # Font rendering
 cp -rf $HOME/distro-scripts/configs/x11-font-rendering/local.conf /etc/fonts/
-cp -rf $HOME/distro-scripts/configs/x11-font-rendering/.Xresources /home/${user}/
-xrdb -merge /home/${user}/.Xresources
+cp -rf $HOME/distro-scripts/configs/x11-font-rendering/.Xresources ${home}/
+xrdb -merge ${home}/.Xresources
 ln -sf /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
 ln -sf /usr/share/fontconfig/conf.avail/10-hinting-slight.conf /etc/fonts/conf.d/
 ln -sf /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
@@ -85,4 +85,4 @@ apt autoremove --purge -y && apt autoclean
 flatpak uninstall --unused -y
 
 # Change owner
-chown -R ${user} /home/${user}
+chown -R ${user} ${home}
