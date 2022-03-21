@@ -5,8 +5,11 @@ clear
 
 # Add user to sudo
 if [ $UID -eq 1000 ]; then
-	echo "Run this command: 'usermod -aG sudo $USER'"
-	su -l root
+	sudo -v > /dev/null 2>&1
+	if [ $? -ne 0 ]; then
+		echo "Run this command: 'usermod -aG sudo $USER'"
+		su -l root
+	fi
 else
 	echo "DONT RUN THIS WITH ROOT"
 	exit 1
@@ -59,7 +62,7 @@ font-name = Noto Sans 10
 xft-dpi = 96
 hide-user-image = true
 clock-format = %a, %I:%M %p
-indicators = ~host;~spacer;~clock;~spacer;~power" | sudo tee -a /etc/lightdm/lightdm-gtk-greeter.conf
+indicators = ~host;~spacer;~clock;~spacer;~power" | sudo tee /etc/lightdm/lightdm-gtk-greeter.conf
 
 # Bash configs
 rm -rf $HOME/{.profile,.bashrc}
