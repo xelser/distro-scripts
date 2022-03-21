@@ -35,13 +35,14 @@ sudo apt autoremove --purge -y libreoffice* xterm
 sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y
 
 # Install
-sudo apt install -y lightdm-gtk-greeter-settings gvfs-{backends,fuse} unrar zip wget curl numlockx \
+sudo apt install -y lightdm-gtk-greeter-settings mugshot gvfs-{backends,fuse} unrar zip wget curl numlockx \
   htop neofetch gparted transmission gnome-{disk-utility,builder} plank pulseeffects \
   flatpak gtk2-engines-murrine gtk2-engines-pixbuf fonts-noto mtools exfatprogs
 
 # Flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install flathub -y com.github.tchx84.Flatseal com.bitwarden.desktop com.discordapp.Discord
+flatpak install flathub -y com.github.tchx84.Flatseal com.bitwarden.desktop com.discordapp.Discord org.x.Warpinator \
+  com.skype.Client us.zoom.Zoom
 
 clear
 ################################ Configs #################################
