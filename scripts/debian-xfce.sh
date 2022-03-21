@@ -1,13 +1,31 @@
 #!/bin/bash
 clear
+
+
+############################### Preparation ##############################
+
+# user var
 user="xelser"
+
+# dotfiles
+echo && read -p "Copy (xelser's) dotfiles? (y/N): " cp_dotfiles
+case $cp_dotfiles in
+   y)	# Remove old .config files
+   	rm -rf /home/${user}/.config
+   	cd /tmp/ && git clone https://github.com/xelser/dotfiles
+   	cp -rf /tmp/dotfiles/fedora-workstation/.config /home/${user}/;;
+   *)	;;
+esac
 
 ################################ Packages ################################
 
 # Update
 apt update && apt upgrade -y && apt full-upgrade -y
 
-# Install
+# Apt-Get
+apt autoremove --purge -y \
+  libreoffice*
+
 apt install -y \
   htop neofetch gparted gnome-disk-utility transmission timeshift \
   lightdm-gtk-greeter-settings gvfs-backends gvfs-fuse \
@@ -44,10 +62,6 @@ cat $HOME/distro-scripts/configs/bash/debian_bashrc >> /home/${user}/.bashrc
 #ln -s /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
 #fc-cache -fv
 
-# Autostart
-mkdir -p /home/${user}/.config/autostart
-cp /usr/share/applications/plank.desktop /home/${user}/.config/autostart/
-
 clear
 ################################# Themes #################################
 
@@ -62,12 +76,6 @@ papirus-folders -C red --theme Papirus-Dark
 
 # Cursor
 apt install -y breeze-cursor-theme
-
-clear
-################################ dotfiles ################################
-
-# config files
-#cp -rf ~/distro-scripts/dotfiles/debian-xfce/.config /home/${user}/
 
 clear
 ############################## Housekeeping ##############################
