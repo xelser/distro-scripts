@@ -36,10 +36,6 @@ su - ${user} << EOF
 flatpak install flathub -y com.github.tchx84.Flatseal com.bitwarden.desktop com.discordapp.Discord
 EOF
 
-# Build
-#cd /tmp/ && git clone https://github.com/pulseaudio-equalizer-ladspa/equalizer.git
-#cd equalizer && meson build && cd build && ninja && ninja install
-
 clear
 ################################ Configs #################################
 
