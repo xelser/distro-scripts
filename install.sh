@@ -2,7 +2,7 @@
 clear
 
 # Initialize
-cd ~/distro-scripts/scripts
+cd $HOME/distro-scripts/scripts
 chmod +x *
 
 # Menu
@@ -26,7 +26,7 @@ esac
 # Reboot
 if [ $? -eq 0 ]; then
 	echo "Rebooting... "
-	rm -rf ~/distro-scripts
+	rm -rf $HOME/distro-scripts
 	reboot
 else
 	echo "Error Detected. Reboot Cancelled"
