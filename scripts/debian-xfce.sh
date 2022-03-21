@@ -2,7 +2,7 @@
 clear
 user="xelser"
 
-################################ Packages #################################
+################################ Packages ################################
 
 # Update
 apt update && apt upgrade -y && apt full-upgrade -y
@@ -17,7 +17,7 @@ apt install -y \
   # variety        
   
 clear
-################################# Config ##################################
+################################ Configs #################################
 
 # fstab
 #echo "
@@ -34,6 +34,10 @@ autologin-user=${user}" | tee -a /etc/lightdm/lightdm.conf
 # Add user to sudo
 usermod -aG sudo ${user}
 
+# Bash configs
+rm -rf /home/${user}/{.bash_profile,.bashrc}
+cp /etc/skel/{.bash_profile,.bashrc} /home/${user}/
+
 # Font rendering
 #cp ~/distro-scripts/font-rendering/local.conf /etc/fonts/
 #cp ~/distro-scripts/font-rendering/.Xresources /home/${user}/
@@ -48,7 +52,7 @@ mkdir -p /home/${user}/.config/autostart
 cp /usr/share/applications/plank.desktop /home/${user}/.config/autostart/
 
 clear
-################################## Theme ##################################
+################################# Themes #################################
 
 # GTK
 cd /tmp/ && git clone https://github.com/vinceliuice/Matcha-gtk-theme.git
@@ -63,13 +67,13 @@ papirus-folders -C red --theme Papirus-Dark
 apt install -y breeze-cursor-theme
 
 clear
-################################ dotfiles #################################
+################################ dotfiles ################################
 
 # config files
 #cp -rf ~/distro-scripts/dotfiles/debian-xfce/.config /home/${user}/
 
 clear
-############################## Housekeeping ###############################
+############################## Housekeeping ##############################
 
 # Clean packages
 apt autoremove --purge -y && apt autoclean
