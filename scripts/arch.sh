@@ -217,7 +217,6 @@ clear
 systemctl enable NetworkManager
 
 # grub
-sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
 mkdir /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=${firm} --recheck
 
