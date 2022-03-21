@@ -35,8 +35,8 @@ autologin-user=${user}" | tee -a /etc/lightdm/lightdm.conf
 usermod -aG sudo ${user}
 
 # Bash configs
-rm -rf /home/${user}/{.bash_profile,.bashrc}
-cp /etc/skel/{.bash_profile,.bashrc} /home/${user}/
+rm -rf /home/${user}/{.profile,.bashrc}
+cp /etc/skel/{.profile,.bashrc} /home/${user}/
 
 # Font rendering
 #cp ~/distro-scripts/font-rendering/local.conf /etc/fonts/
