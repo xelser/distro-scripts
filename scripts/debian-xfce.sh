@@ -55,7 +55,9 @@ cat $HOME/distro-scripts/configs/bash/debian_bashrc >> /home/${user}/.bashrc
 cp $HOME/distro-scripts/configs/x11-font-rendering/local.conf /etc/fonts/
 cp $HOME/distro-scripts/configs/x11-font-rendering/.Xresources /home/${user}/
 xrdb -merge /home/${user}/.Xresources
-ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
+ln -sf /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
+ln -sf /usr/share/fontconfig/conf.avail/10-hinting-slight.conf /etc/fonts/conf.d/
+ln -sf /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
 fc-cache -fv
 
 clear
