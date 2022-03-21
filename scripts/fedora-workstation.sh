@@ -21,8 +21,7 @@ color=always" | sudo tee -a /etc/dnf/dnf.conf
 clear
 ################################# Install #################################
 
-# ADD REPO: Flatpak | RPM Fusion
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+# ADD REPO: RPM Fusion
 # sudo dnf config-manager --set-enabled google-chrome rpmfusion-nonfree-steam rpmfusion-nonfree-nvidia-driver
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
   https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
@@ -38,13 +37,15 @@ sudo dnf mark install gnome-shell-extension-{apps,places}-menu
 sudo dnf groupupdate core sound-and-video multimedia --exclude=PackageKit-gstreamer-plugin
 sudo dnf upgrade && sudo dnf distro-sync
 
-# INSTALL: Flapak | Fedora | RPM Fusion
+# INSTALL
 sudo dnf install gnome-shell-extension-{pop-shell,dash-to-dock,appindicator,caffeine,gamemode,gsconnect,sound-output-device-chooser} \
   gnome-{tweaks,extensions-app,multi-writer,builder} google-noto-{cjk,emoji-color}-fonts google-roboto-* file-roller dconf-editor \
   kvantum qt5ct gparted variety transmission inkscape easyeffects htop neofetch vim cmatrix unrar \
   akmod-nvidia wine wine-mono lutris steam gamescope gamemode mangohud goverlay \
   mesa-libGLU gtk-murrine-engine sassc ostree libappstream-glib $HOME/Downloads/*.rpm # google-chrome-stable chromium
 
+# Flatpak
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install -y flathub com.github.tchx84.Flatseal com.bitwarden.desktop org.x.Warpinator com.discordapp.Discord \
   com.skype.Client us.zoom.Zoom com.obsproject.Studio
 
