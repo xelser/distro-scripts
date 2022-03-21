@@ -26,13 +26,15 @@ apt autoremove --purge -y libreoffice*
 apt update && apt upgrade -y && apt full-upgrade -y
 
 # Install
-apt install -y lightdm-gtk-greeter-settings gvfs-{backends,fuse} unrar zip \
-  htop neofetch wget curl numlockx flatpak fonts-noto mtools exfatprogs \
-  gparted transmission gnome-{disk-utility,builder} plank pulseeffects
+apt install -y lightdm-gtk-greeter-settings gvfs-{backends,fuse} unrar zip wget curl numlockx \
+  htop neofetch gparted transmission gnome-{disk-utility,builder} plank pulseeffects \
+  flatpak gtk2-engines-murrine gtk2-engines-pixbuf fonts-noto mtools exfatprogs
 
 # Flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+su - ${user} << EOF
 flatpak install flathub -y com.github.tchx84.Flatseal com.bitwarden.desktop com.discordapp.Discord
+EOF
 
 # Build
 #cd /tmp/ && git clone https://github.com/pulseaudio-equalizer-ladspa/equalizer.git
