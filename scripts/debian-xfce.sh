@@ -52,7 +52,7 @@ echo "
 theme-name = Matcha-dark-aliz
 xft-hintstyle = hintslight
 icon-theme-name = Papirus-Dark
-font-name = Noto Sans 10
+font-name = Ubuntu 10.5
 xft-dpi = 96
 hide-user-image = true
 clock-format = %a, %I:%M %p
