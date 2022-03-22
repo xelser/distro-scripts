@@ -24,3 +24,4 @@ alias themeup="orchisup && telaup && orchisupkvantum"
 # git aliases
 alias gitclone="cd $HOME/Github && git clone"
 alias gitcommit="git fetch && git pull && git add . && git commit -m 'Updated @ fedora' && git push"
+alias gitupdate="cd $HOME/Github/distro-scripts && gitcommit"

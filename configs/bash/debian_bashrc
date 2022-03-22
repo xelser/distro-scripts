@@ -15,3 +15,4 @@ alias mkdir="mkdir -p"
 # git aliases
 alias gitclone="cd $HOME/Downloads && git clone"
 alias gitcommit="git fetch && git pull && git add . && git commit -m 'Updated @ debian' && git push"
+alias gitupdate="cd $HOME/Downloads/distro-scripts && gitcommit"
