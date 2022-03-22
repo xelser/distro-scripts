@@ -37,7 +37,6 @@ apt install -y htop neofetch lightdm-gtk-greeter-settings mugshot gvfs-{backends
 # Flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
-
 clear
 ################################ Configs #################################
 

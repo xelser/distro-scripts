@@ -7,6 +7,7 @@ if [ $? -ne 0 ]; then
 
 	# Flatpak
 	flatpak install flathub -y \
+	org.gtk.Gtk3theme.Matcha-dark-aliz \
 	com.github.tchx84.Flatseal \
 	com.bitwarden.desktop \
 	com.discordapp.Discord \
