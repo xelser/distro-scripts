@@ -12,6 +12,10 @@ alias cp="cp -rf"
 alias ln="ln -sf"
 alias mkdir="mkdir -p"
 
+# theme
+alias gtkup="cd /tmp/ && rm -rf Matcha* && rm -rf /usr/share/themes/Matcha* && git clone https://github.com/vinceliuice/Matcha-gtk-theme.git && sudo ./Matcha-gtk-theme/install.sh -c dark -t aliz"
+alias iconup="$(wget -qO- https://git.io/papirus-icon-theme-install | sh) && $(wget -qO- https://git.io/papirus-folders-install | sh)"
+
 # git aliases
 alias gitclone="cd $HOME/Downloads && git clone"
 alias gitcommit="git fetch && git pull && git add . && git commit -m 'Updated @ debian' && git push"
