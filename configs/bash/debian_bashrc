@@ -14,8 +14,8 @@ alias mkdir="mkdir -p"
 
 # theme
 alias gtkup="cd /tmp/ && rm -rf Matcha* && rm -rf /usr/share/themes/Matcha* && git clone https://github.com/vinceliuice/Matcha-gtk-theme.git && sudo ./Matcha-gtk-theme/install.sh -c dark -t aliz && cd $HOME"
-alias iconup="$(wget -qO- https://git.io/papirus-icon-theme-install | sh) && $(wget -qO- https://git.io/papirus-folders-install | sh) && cd $HOME"
-alias themeup="gtkup && iconup"
+#alias iconup="$(wget -qO- https://git.io/papirus-icon-theme-install | sh) && $(wget -qO- https://git.io/papirus-folders-install | sh) && cd $HOME"
+#alias themeup="gtkup && iconup"
 
 # git aliases
 alias gitclone="cd $HOME/Downloads && git clone"
