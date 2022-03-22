@@ -80,10 +80,9 @@ cd /tmp/ && git clone https://github.com/vinceliuice/Matcha-gtk-theme.git
 ./Matcha-gtk-theme/install.sh -c dark -t aliz
 
 # Icons
-sudo sh -c "echo 'deb http://ppa.launchpad.net/papirus/papirus/ubuntu focal main' > /etc/apt/sources.list.d/papirus-ppa.list"
-sudo apt-get install dirmngr
-sudo gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/papirus.gpg --keyserver keyserver.ubuntu.com --recv E58A9D36647CAE7F
-sudo chmod 644 /etc/apt/trusted.gpg.d/papirus.gpg && sudo apt-get update && sudo apt-get install papirus-icon-theme
+sh -c "echo 'deb http://ppa.launchpad.net/papirus/papirus/ubuntu focal main' > /etc/apt/sources.list.d/papirus-ppa.list" && apt-get install dirmngr
+gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/papirus.gpg --keyserver keyserver.ubuntu.com --recv E58A9D36647CAE7F
+chmod 644 /etc/apt/trusted.gpg.d/papirus.gpg && apt-get update && apt-get install papirus-icon-theme
 wget -qO- https://git.io/papirus-folders-install | sh
 papirus-folders -C red --theme Papirus-Dark
 
