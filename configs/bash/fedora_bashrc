@@ -19,7 +19,7 @@ alias mkdir="mkdir -p"
 alias gtkup="cd /tmp/ && rm Orchis* && sudo rm -rf /usr/share/themes/Orchis* && git clone https://github.com/vinceliuice/Orchis-theme.git && sudo ./Orchis-theme/install.sh && cd $HOME"
 alias iconup="cd /tmp/ && rm Tela* && sudo rm -rf /usr/share/icons/Tela* && git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git && sudo ./Tela-circle-icon-theme/install.sh && cd $HOME"
 alias kdeup="cd /tmp/ && rm Orchis-kde && git clone https://github.com/vinceliuice/Orchis-kde.git && rm -rf ~/.local/share/{aurorae,color-schemes,plasma} && ./Orchis-kde/install.sh && cd $HOME"
-alias themeup="orchisup && telaup && orchisupkvantum"
+alias themeup="gtkup && iconup && kdeup"
 
 # git aliases
 alias gitclone="cd $HOME/Github && git clone"
