@@ -30,9 +30,9 @@ apt autoremove --purge -y libreoffice* xterm
 apt update && apt upgrade -y && apt full-upgrade -y
 
 # Install
-apt install -y lightdm-gtk-greeter-settings mugshot gvfs-{backends,fuse} unrar zip wget curl numlockx \
-  htop neofetch gparted transmission gnome-{disk-utility,builder} plank pulseeffects \
-  flatpak gtk2-engines-murrine gtk2-engines-pixbuf fonts-noto mtools exfatprogs
+apt install -y htop neofetch lightdm-gtk-greeter-settings mugshot gvfs-{backends,fuse} unrar zip wget curl numlockx \
+  flatpak gparted transmission gnome-{boxes,disk-utility,builder} redshift-gtk plank pulseeffects \
+  gtk2-engines-murrine gtk2-engines-pixbuf fonts-noto mtools exfatprogs
 
 # Flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -57,7 +57,7 @@ font-name = Noto Sans 10
 xft-dpi = 96
 hide-user-image = true
 clock-format = %a, %I:%M %p
-indicators = ~host;~spacer;~clock;~spacer;~power" | tee /etc/lightdm/lightdm-gtk-greeter.conf
+indicators = ~host;~spacer;~clock;~power" | tee /etc/lightdm/lightdm-gtk-greeter.conf
 
 # Bash configs
 rm -rf ${home}/{.profile,.bashrc}
