@@ -115,9 +115,11 @@ clear
 
 # Reboot
 if [ $? -eq 0 ]; then
-	echo "Rebooting... "
-	rm -rf $HOME/arch-post-install.sh
-	sudo reboot
+	read -p "Reboot? (Y/n): " end
+	case $end in
+	   n)	echo "Reboot Cancelled";;
+	   *)	echo "Rebooting... " && rm -rf $HOME/distro-scripts && reboot;;
+	esac
 else
 	echo "Error Detected. Reboot Cancelled"
 fi
