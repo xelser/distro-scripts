@@ -32,7 +32,7 @@ apt update && apt upgrade -y && apt full-upgrade -y
 # Install
 apt install -y htop neofetch lightdm-gtk-greeter-settings mugshot gvfs-{backends,fuse} unrar zip wget curl numlockx \
   flatpak gparted transmission gnome-{boxes,disk-utility,builder} redshift-gtk plank pulseeffects \
-  gtk2-engines-murrine gtk2-engines-pixbuf fonts-noto mtools exfatprogs
+  gnome-backgrounds gtk2-engines-murrine gtk2-engines-pixbuf fonts-noto mtools exfatprogs
 
 # Flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -49,6 +49,7 @@ autologin-user=${user}" | tee -a /etc/lightdm/lightdm.conf
 # lightdm-gtk-greeter
 echo "
 [greeter]
+background = /usr/share/backgrounds/gnome/adwaita-night.jpg
 theme-name = Matcha-dark-aliz
 xft-hintstyle = hintslight
 icon-theme-name = Papirus-Dark
