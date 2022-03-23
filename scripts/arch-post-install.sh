@@ -39,12 +39,12 @@ git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sirc -
 # Installing Packages
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
   xorg numlockx openbox obconf picom lightdm-gtk-greeter-settings alsa-{utils,plugins} pulseaudio-{alsa,equalizer-ladspa} pavucontrol \
-  xfce4-{settings,terminal,notifyd,power-manager} lx{task,appearance}-gtk3 qt5ct kvantum-qt5 tint2 network-manager-applet volumeicon \
-  thunar-{archive-plugin,media-tags-plugin,volman} gvfs-{afc,goa,google,gphoto2,mtp,nfs,smb} sshfs tumbler ffmpegthumbnailer poppler-glib \
+  lx{appearance,hotkey,input,randr,session,task}-gtk3 lxterminal pcmanfm qt5ct kvantum-qt5 lxqt-{notificationd,powermanagement} \
+  tint2 network-manager-applet volumeicon gvfs-{afc,goa,google,gphoto2,mtp,nfs,smb} sshfs tumbler ffmpegthumbnailer poppler-glib \
   gtk-engine-murrine adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers nitrogen xreader xarchiver leafpad gpicview \
   firefox discord bitwarden transmission-gtk gparted gnome-disk-utility gnome-boxes warpinator screengrab catfish parole redshift geany \
-  obmenu-generator xfce-polkit thunar-shares-plugin mugshot ventoy-bin adapta-gtk-theme-colorpack-joshaby-git papirus-folders kvantum-theme-adapta
-
+  obmenu-generator thunar-shares-plugin mugshot ventoy-bin adapta-gtk-theme-colorpack-joshaby-git papirus-folders kvantum-theme-adapta
+	# xfce4-{settings,terminal,notifyd,power-manager} xfce-polkit thunar-{archive-plugin,media-tags-plugin,volman}
 clear
 ################################## Config ##################################
 
