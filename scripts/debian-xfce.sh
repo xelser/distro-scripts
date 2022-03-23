@@ -52,7 +52,7 @@ echo "
 theme-name = Matcha-dark-aliz
 xft-hintstyle = hintslight
 icon-theme-name = Papirus-Dark
-font-name = Ubuntu 10.5
+font-name = Ubuntu 11
 xft-dpi = 96
 hide-user-image = true
 clock-format = %a, %I:%M %p
@@ -83,6 +83,8 @@ cd /tmp/ && git clone https://github.com/vinceliuice/Matcha-gtk-theme.git
 sh -c "echo 'deb http://ppa.launchpad.net/papirus/papirus/ubuntu focal main' > /etc/apt/sources.list.d/papirus-ppa.list" && apt-get install dirmngr
 gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/papirus.gpg --keyserver keyserver.ubuntu.com --recv E58A9D36647CAE7F
 chmod 644 /etc/apt/trusted.gpg.d/papirus.gpg && apt-get update && apt-get install papirus-icon-theme
+
+## Icons: folders
 wget -qO- https://git.io/papirus-folders-install | sh
 papirus-folders -C red --theme Papirus-Dark
 
