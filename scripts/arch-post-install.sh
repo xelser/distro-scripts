@@ -39,12 +39,12 @@ git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sirc -
 # Installing Packages
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
   xorg numlockx openbox obconf picom lightdm-gtk-greeter-settings alsa-{utils,plugins} pulseaudio-{alsa,equalizer-ladspa} pavucontrol \
-  lx{appearance,hotkey,input,randr,session,task}-gtk3 lxterminal pcmanfm qt5ct kvantum-qt5 lxqt-{notificationd,powermanagement} \
-  tint2 network-manager-applet volumeicon gvfs-{afc,goa,google,gphoto2,mtp,nfs,smb} sshfs tumbler ffmpegthumbnailer poppler-glib \
-  gtk-engine-murrine adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers nitrogen xreader xarchiver leafpad gpicview \
-  firefox discord bitwarden transmission-gtk gparted gnome-disk-utility gnome-boxes warpinator screengrab catfish parole redshift geany \
+  tint2 network-manager-applet volumeicon lx{appearance,hotkey,input,randr,session,task}-gtk3 lxqt-{notificationd,powermanagement} \
+  lxterminal pcmanfm xarchiver leafpad gpicview nitrogen xreader gvfs-* sshfs tumbler ffmpegthumbnailer poppler-glib \
+  qt5ct kvantum-qt5 gtk-engine-murrine adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers \
+  firefox discord bitwarden transmission-gtk gparted gnome-disk-utility gnome-boxes warpinator screengrab redshift geany \
   obmenu-generator thunar-shares-plugin mugshot ventoy-bin adapta-gtk-theme-colorpack-joshaby-git papirus-folders kvantum-theme-adapta
-	# xfce4-{settings,terminal,notifyd,power-manager} xfce-polkit thunar-{archive-plugin,media-tags-plugin,volman}
+	# xfce4-{settings,terminal,notifyd,power-manager} xfce-polkit thunar-{archive-plugin,media-tags-plugin,volman} catfish parole
 clear
 ################################## Config ##################################
 
