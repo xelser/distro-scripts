@@ -91,9 +91,8 @@ esac
 
 # Hide some .desktop files
 mkdir $HOME/.local/share/applications/ && rm -rf $HOME/.local/share/applications/*
-cp /usr/share/applications/{calf,wine*}.desktop $HOME/.local/share/applications/
-rm -rf $HOME/.local/share/applications/wine-winecfg.desktop
-echo "NotShowIn=GNOME" | tee -a $HOME/.local/share/applications/{calf,wine*}.desktop
+cp /usr/share/applications/calf.desktop $HOME/.local/share/applications/
+echo "NotShowIn=GNOME" | tee -a $HOME/.local/share/applications/calf.desktop
 
 clear
 ################################# Themes ##################################
