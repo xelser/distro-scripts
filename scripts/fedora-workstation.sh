@@ -40,7 +40,7 @@ sudo dnf upgrade && sudo dnf distro-sync
 # INSTALL
 sudo dnf install gnome-shell-extension-{pop-shell,dash-to-dock,appindicator,caffeine,gamemode,gsconnect,sound-output-device-chooser} \
   gnome-{tweaks,extensions-app,multi-writer,builder} google-noto-{cjk,emoji-color}-fonts google-roboto-* file-roller dconf-editor \
-  kvantum qt5ct gparted variety transmission inkscape easyeffects htop neofetch vim cmatrix unrar \
+  kvantum qt5ct mozilla-ublock-origin gparted variety transmission inkscape easyeffects htop neofetch vim cmatrix unrar \
   akmod-nvidia wine wine-mono lutris steam gamescope gamemode mangohud goverlay \
   mesa-libGLU gtk-murrine-engine sassc ostree libappstream-glib $HOME/Downloads/*.rpm # google-chrome-stable chromium
 
