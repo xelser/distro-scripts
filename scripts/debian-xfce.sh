@@ -32,7 +32,7 @@ apt update && apt upgrade -y && apt full-upgrade -y
 # Install
 apt install -y htop neofetch unrar zip wget curl numlockx flatpak lightdm-gtk-greeter-settings mugshot \
   gnome-backgrounds gtk2-engines-murrine gtk2-engines-pixbuf fonts-noto mtools exfat* ntfs* gvfs-* \
-  gparted transmission gnome-{boxes,disk-utility,builder} redshift-gtk plank pulseeffects
+  webext-ublock-origin-firefox gparted transmission gnome-{boxes,disk-utility,builder} redshift-gtk plank pulseeffects
 
 # Flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
