@@ -56,7 +56,7 @@ clear
 sudo sed -i 's/ro /ro quiet splash /g' /boot/refind_linux.conf
 
 # fstab
-echo "LABEL=Games /media/Games ext4 defaults 0 2" | sudo tee -a /etc/fstab
+#echo "LABEL=Games /media/Games ext4 defaults 0 2" | sudo tee -a /etc/fstab
 
 # gdm autologin using script
 echo "[daemon]
