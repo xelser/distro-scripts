@@ -228,14 +228,14 @@ clear
 
 # font rendering
 mkdir -p /mnt/etc/fonts/
-cp -rf $HOME/distro-scripts/configs/x11-font-rendering/local.conf /mnt/etc/fonts/
-cp -rf $HOME/distro-scripts/configs/x11-font-rendering/.Xresources /mnt/home/${user}/
+cp -rf $HOME/distro-scripts/x11-font-rendering/local.conf /mnt/etc/fonts/
+cp -rf $HOME/distro-scripts/x11-font-rendering/.Xresources /mnt/home/${user}/
 
 # bash configs
 rm -rf /mnt/home/${user}/.bashrc
 cp /mnt/etc/skel/.bashrc /mnt/home/${user}/
 sed -i 's/PS1/#PS1/g' /mnt/home/${user}/.bashrc
-cat $HOME/distro-scripts/configs/bash/arch_bashrc >> /mnt/home/${user}/.bashrc
+cat $HOME/distro-scripts/bash-configs/arch_bashrc >> /mnt/home/${user}/.bashrc
 
 # Post install script
 cp -rf $HOME/distro-scripts/scripts/arch-{final,post-install}.sh /mnt/home/${user}/

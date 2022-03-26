@@ -77,8 +77,8 @@ clear
 # bash configs
 rm -rf $HOME/{.bash_profile,.bashrc}
 cp /etc/skel/{.bash_profile,.bashrc} $HOME/
-cat $HOME/distro-scripts/configs/bash/fedora_bashrc >> $HOME/.bashrc
-cat $HOME/distro-scripts/configs/bash/fedora_bash_profile >> $HOME/.bash_profile
+cat $HOME/distro-scripts/bash-configs/fedora_bashrc >> $HOME/.bashrc
+cat $HOME/distro-scripts/bash-configs/fedora_bash_profile >> $HOME/.bash_profile
 
 # dotfiles
 case $cp_dotfiles in

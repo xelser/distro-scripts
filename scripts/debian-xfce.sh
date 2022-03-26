@@ -62,11 +62,11 @@ indicators = ~host;~spacer;~clock;~power" | tee /etc/lightdm/lightdm-gtk-greeter
 # Bash configs
 rm -rf ${home}/{.profile,.bashrc}
 cp /etc/skel/{.profile,.bashrc} ${home}/
-cat $HOME/distro-scripts/configs/bash/debian_bashrc >> ${home}/.bashrc
+cat $HOME/distro-scripts/bash-configs/debian_bashrc >> ${home}/.bashrc
 
 # Font rendering
-cp -rf $HOME/distro-scripts/configs/x11-font-rendering/local.conf /etc/fonts/
-cp -rf $HOME/distro-scripts/configs/x11-font-rendering/.Xresources ${home}/
+cp -rf $HOME/distro-scripts/x11-font-rendering/local.conf /etc/fonts/
+cp -rf $HOME/distro-scripts/x11-font-rendering/.Xresources ${home}/
 xrdb -merge ${home}/.Xresources
 ln -sf /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
 ln -sf /usr/share/fontconfig/conf.avail/10-hinting-slight.conf /etc/fonts/conf.d/
