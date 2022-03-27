@@ -80,7 +80,7 @@ cat $HOME/distro-scripts/bash-configs/fedora_bash_profile >> $HOME/.bash_profile
 # dotfiles
 case $cp_dotfiles in
    y)	# Remove old .config files
-   	rm -rf $HOME/{.config,.local}
+   	rm -rf $HOME/.config
    	cd /tmp/ && git clone https://github.com/xelser/dotfiles
    	cp -rf /tmp/dotfiles/fedora-workstation/{.config,.local} $HOME/;;
    *)	;;
