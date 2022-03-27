@@ -72,7 +72,7 @@ case $partitioning in
   	device="sda"
   	firm="x86_64-efi --bootloader-id=Arch --efi-directory=/boot/efi"
   	efi="1"
-  	root="10"
+  	root="9"
   	swap="6"
   	;;
   5)	# Aspire E5-473 default partitioning
