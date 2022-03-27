@@ -12,9 +12,9 @@ else
 fi
 
 # refind
-echo && sudo dmesg | grep -q "EFI v"
+clear && sudo dmesg | grep -q "EFI v"
 if [ $? -eq 0 ]; then
-	read -p "Install refind? (y/N): " refind_install
+	echo && read -p "Install refind? (y/N): " refind_install
 fi
 
 # dotfiles

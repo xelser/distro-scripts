@@ -10,8 +10,11 @@ home="/home/${user}"
 # Add user to sudo
 usermod -aG sudo ${user}
 
+# No password for user
+echo "${user} ALL=(ALL) NOPASSWD: ALL" | tee -a /etc/sudoers
+
 # dotfiles
-echo && read -p "Copy (xelser's) dotfiles? (y/N): " cp_dotfiles
+clear && echo && read -p "Copy (xelser's) dotfiles? (y/N): " cp_dotfiles
 case $cp_dotfiles in
    y)	# Remove old .config files
    	rm -rf ${home}/.config
