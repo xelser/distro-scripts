@@ -119,65 +119,6 @@ git clone https://github.com/refi64/stylepak.git
 cd stylepak && ./stylepak install-system Orchis-dark-compact
 
 clear
-############################ dconf/gsettings #############################
-
-# Compile gsettings schemas
-#mkdir -p $HOME/.local/share/glib-2.0/schemas/
-#cd $HOME/.local/share/gnome-shell/extensions/
-glib-compile-schemas $HOME/.local/share/glib-2.0/schemas/
-
-# General Settings
-gsettings set org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'
-gsettings set org.gnome.desktop.interface enable-hot-corners "false"
-gsettings set org.gnome.desktop.interface clock-format "12h"
-gsettings set org.gnome.desktop.interface clock-show-date "false"
-gsettings set org.gnome.desktop.datetime automatic-timezone "true"
-gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled "true"
-gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature "4700"
-gsettings set org.gnome.system.location enabled "true"
-
-# GTK | Icons | Cursors | Fonts
-gsettings set org.gnome.desktop.interface gtk-theme "Orchis-dark-compact"
-gsettings set org.gnome.desktop.interface icon-theme "Tela-circle-dark"
-gsettings set org.gnome.desktop.interface cursor-theme "Bibata-Modern-Classic"
-gsettings set org.gnome.desktop.interface font-name "Roboto 10"
-gsettings set org.gnome.desktop.interface document-font-name "Roboto Slab 10"
-gsettings set org.gnome.desktop.interface monospace-font-name "Roboto Mono 10"
-gsettings set org.gnome.desktop.wm.preferences titlebar-font "Roboto Bold 10"
-
-# GNOME Software - Updates
-gsettings set org.gnome.software download-updates "false"
-gsettings set org.gnome.software download-updates-notify "false"
-
-# Extensions
-gsettings set org.gnome.shell.extensions.blur-my-shell blur-appfolders "false"
-gsettings set org.gnome.shell.extensions.blur-my-shell blur-dash "false"
-gsettings set org.gnome.shell.extensions.blur-my-shell blur-panel "false"
-gsettings set org.gnome.shell.extensions.blur-my-shell blur-window-list "false"
-gsettings set org.gnome.shell.extensions.blur-my-shell brightness "0.4"
-gsettings set org.gnome.shell.extensions.blur-my-shell sigma "20"
-gsettings set org.gnome.shell.extensions.espresso show-notifications "false"
-gsettings set org.gnome.shell.extensions.espresso enable-docked "true"
-gsettings set org.gnome.shell.extensions.gnome-ui-tune always-show-thumbnails "false"
-gsettings set org.gnome.shell.extensions.middleclickclose close-button "right"
-gsettings set org.gnome.shell.extensions.dash-to-dock autohide-in-fullscreen "true"
-gsettings set org.gnome.shell.extensions.dash-to-dock intellihide-mode 'ALL_WINDOWS'
-gsettings set org.gnome.shell.extensions.dash-to-dock require-pressure-to-show "false"
-gsettings set org.gnome.shell.extensions.dash-to-dock dash-max-icon-size "38"
-gsettings set org.gnome.shell.extensions.dash-to-dock preview-size-scale "0.2"
-gsettings set org.gnome.shell.extensions.dash-to-dock show-mounts "false"
-gsettings set org.gnome.shell.extensions.dash-to-dock show-trash "false"
-gsettings set org.gnome.shell.extensions.gamemode emit-notifications "false"
-gsettings set org.gnome.shell.extensions.pop-shell gap-inner "1"
-gsettings set org.gnome.shell.extensions.pop-shell gap-outer "1"
-gsettings set org.gnome.shell.extensions.sound-output-device-chooser hide-on-single-device "true"
-gsettings set org.gnome.shell.extensions.user-theme name "Orchis-dark-compact"
-
-# Others
-gsettings set org.gnome.shell enabled-extensions ['AlphabeticalAppGrid@stuarthayhurst', 'blur-my-shell@aunetx', 'espresso@coadmunkee.github.com', 'gnome-ui-tune@itstime.tech', 'middleclickclose@paolo.tranquilli.gmail.com', 'scroll-workspaces@gfxmonk.net', 'windowIsReady_Remover@nunofarruca@gmail.com', 'appindicatorsupport@rgcjonas.gmail.com', 'apps-menu@gnome-shell-extensions.gcampax.github.com', 'dash-to-dock@micxgx.gmail.com', 'gamemode@christian.kellner.me', 'gsconnect@andyholmes.github.io', 'places-menu@gnome-shell-extensions.gcampax.github.com', 'pop-shell@system76.com', 'sound-output-device-chooser@kgshank.net', 'user-theme@gnome-shell-extensions.gcampax.github.com']
-gsettings set org.gnome.shell favorite-apps ['org.gnome.Terminal.desktop', 'gnome-system-monitor.desktop', 'org.gnome.Builder.desktop', 'firefox.desktop', 'org.gnome.Nautilus.desktop', 'org.x.Warpinator.desktop', 'org.gnome.Extensions.desktop', 'org.gnome.Screenshot.desktop']
-
-clear
 ############################## Housekeeping ##############################
 
 # Clean Packages
