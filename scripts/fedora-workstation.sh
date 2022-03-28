@@ -60,7 +60,7 @@ AutomaticLoginEnable=True
 AutomaticLogin=$USER" | sudo tee -a /etc/gdm/custom.conf
 
 # Swapiness
-echo "vm.swappiness=80" | sudo tee -a /etc/sysctl.conf
+#echo "vm.swappiness=80" | sudo tee -a /etc/sysctl.conf
 
 # Gaming
 #sudo dnf install akmod-nvidia wine wine-mono lutris steam gamescope gamemode mangohud goverlay mesa-libGLU.{x86_64,i686} gnome-shell-extension-gamemode
