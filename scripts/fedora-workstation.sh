@@ -59,6 +59,9 @@ echo "[daemon]
 AutomaticLoginEnable=True
 AutomaticLogin=$USER" | sudo tee -a /etc/gdm/custom.conf
 
+# fstab
+echo "LABEL=Games /media/Games ext4 0 0" | sudo tee -a /etc/fstab
+
 # Swapiness
 #echo "vm.swappiness=80" | sudo tee -a /etc/sysctl.conf
 
@@ -80,7 +83,7 @@ cat $HOME/distro-scripts/bash-configs/fedora_bash_profile >> $HOME/.bash_profile
 # dotfiles
 case $cp_dotfiles in
    y)	# Remove old .config files
-   	rm -rf $HOME/.config
+   	rm -rf $HOME/{.config,.local}
    	cd /tmp/ && git clone https://github.com/xelser/dotfiles
    	cp -rf /tmp/dotfiles/fedora-workstation/{.config,.local} $HOME/;;
    *)	;;
