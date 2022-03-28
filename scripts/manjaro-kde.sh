@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 clear
 
 ############################## Preparation ###############################
@@ -15,24 +14,26 @@ clear
 
 # Pacman
 echo "[options]
-ParallelDownloads = 20
-Color" | sudo tee -a /etc/pacman.conf && clear
+ParallelDownloads = 10
+Color" | sudo tee -a /etc/pacman.conf
 
 # Remove bloat
 sudo pacman -Rnsu --noconfirm tlp yakuake okular partitionmanager timeshift timeshift-autosnap-manjaro \
-  manjaro-{documentation-en,browser-settings,zsh-config,hello} 2>/dev/null
+  manjaro-{documentation-en,browser-settings,zsh-config,hello}
+
+# Refresh Mirrors and Install AUR
+sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed yay base-devel
 
 # Install
-sudo pacman-mirrors --geoip 2>/dev/null && sudo pacman -Syyu --noconfirm --needed yay base-devel htop neofetch refind lxappearance-gtk3 kvantum-qt5 \
-  gnome-disk-utility gparted bitwarden pulseaudio-equalizer-ladspa latte-dock elisa vlc ktorrent ttf-roboto ttf-roboto-{mono,slab} \
-  appmenu-gtk-module lib32-libdbusmenu-glib lib32-libdbusmenu-gtk2 lib32-libdbusmenu-gtk3 libdbusmenu-glib libdbusmenu-gtk2 libdbusmenu-gtk3
-
-# AUR
-yes | yay -S --noconfirm --needed plasma5-applets-virtual-desktop-bar-git plasma5-applets-panon \
-  zoom skypeforlinux-stable-bin firefox-appmenu-bin
+yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
+  htop neofetch refind lxappearance-gtk3 kvantum-qt5 gnome-disk-utility gparted bitwarden pulseaudio-equalizer-ladspa \
+  latte-dock elisa vlc ktorrent ttf-roboto ttf-roboto-{mono,slab} appmenu-gtk-module lib32-libdbusmenu-glib lib32-libdbusmenu-gtk2 \
+  lib32-libdbusmenu-gtk3 libdbusmenu-glib libdbusmenu-gtk2 libdbusmenu-gtk3 \
+  plasma5-applets-virtual-desktop-bar-git plasma5-applets-panon zoom skypeforlinux-stable-bin firefox-appmenu-bin
 
 # Gaming
-yay -S --noconfirm --needed steam gamemode lib32-gamemode mangohud lib32-mangohud goverlay-bin optimus-manager optimus-manager-qt \
+yay -S --needed --noconfirm --disable-download-timeout \
+  steam gamemode lib32-gamemode mangohud lib32-mangohud goverlay-bin optimus-manager optimus-manager-qt \
   lutris wine-mono wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
   mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse libgpg-error \
   lib32-libgpg-error alsa-plugins lib32-alsa-plugins alsa-lib lib32-alsa-lib libjpeg-turbo lib32-libjpeg-turbo \
@@ -46,40 +47,39 @@ sudo pacman -S --asdeps --noconfirm sassc
 clear
 ################################# Config ##################################
 
-# Font rendering
-sudo cp -rf ~/distro-scripts/font-rendering/local.conf /etc/fonts/
-cp -rf ~/distro-scripts/font-rendering/.Xresources $HOME/
-xrdb -merge ~/.Xresources
-sudo ln -s /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
-sudo ln -s /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
-sudo fc-cache -fv 2>/dev/null
-
 # Optimus manager
 sudo sed -i 's/DisplayCommand/#DisplayCommand/g' /etc/sddm.conf
 sudo sed -i 's/DisplayStopCommand/#DisplayStopCommand/g' /etc/sddm.conf
 
 # Install Refind
-sudo refind-install 2>/dev/null
+sudo refind-install
 sudo sed -i 's/ro /rw quiet splash /g' /boot/refind_linux.conf
 
-# dotfiles
-cp -rf $HOME/distro-scripts/dotfiles/manjaro-kde/{.config,.local} $HOME/
-
 # fstab
-echo "# Additional Mounts
-LABEL=Files /media/Files ext4 defaults 0 2
-LABEL=Games /media/Games ext4 defaults 0 2" | sudo tee -a /etc/fstab
+echo "LABEL=Games /media/Games ext4 defaults 0 2" | sudo tee -a /etc/fstab
+
+# Font rendering
+cp -rf $HOME/distro-scripts/x11-font-rendering/local.conf /etc/fonts/
+cp -rf $HOME/distro-scripts/x11-font-rendering/.Xresources ${home}/
+xrdb -merge ${home}/.Xresources
+ln -sf /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
+ln -sf /usr/share/fontconfig/conf.avail/10-hinting-slight.conf /etc/fonts/conf.d/
+ln -sf /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
+fc-cache -fv
+
+# dotfiles
+#cp -rf $HOME/distro-scripts/dotfiles/manjaro-kde/{.config,.local} $HOME/
 
 clear
 ################################# Theme ##################################
 
 # cd to tmp and remove old files
-cd /tmp/ && rm -rf Qogir* 2>/dev/null
+cd /tmp/ && rm -rf Qogir*
 
 # Download and install
-git clone https://github.com/vinceliuice/Qogir-kde.git && ./Qogir-kde/install.sh 2>/dev/null && sudo ./Qogir-kde/sddm/install.sh 2>/dev/null
-git clone https://github.com/vinceliuice/Qogir-theme.git && sudo ./Qogir-theme/install.sh -t all 2>/dev/null
-git clone https://github.com/vinceliuice/Qogir-icon-theme.git && sudo ./Qogir-icon-theme/install.sh 2>/dev/null
+git clone https://github.com/vinceliuice/Qogir-kde.git && ./Qogir-kde/install.sh && sudo ./Qogir-kde/sddm/install.sh
+git clone https://github.com/vinceliuice/Qogir-theme.git && sudo ./Qogir-theme/install.sh -t all
+git clone https://github.com/vinceliuice/Qogir-icon-theme.git && sudo ./Qogir-icon-theme/install.sh
 
 # Change Cursor
 sudo sed -i 's/xcursor-breeze/Qogir-white-cursors/g' /usr/share/icons/default/index.theme
@@ -89,4 +89,4 @@ clear
 
 # Clean packages
 yay -Qtdq | yay -Rnsu - --noconfirm
-yay -Sc --noconfirm
+Y | yay -Scc --noconfirm
