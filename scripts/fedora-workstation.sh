@@ -60,7 +60,7 @@ AutomaticLoginEnable=True
 AutomaticLogin=$USER" | sudo tee -a /etc/gdm/custom.conf
 
 # fstab
-echo "LABEL=Games /media/Games ext4 0 0" | sudo tee -a /etc/fstab
+#echo "LABEL=Games /media/Games ext4 0 2" | sudo tee -a /etc/fstab
 
 # Swapiness
 #echo "vm.swappiness=80" | sudo tee -a /etc/sysctl.conf
