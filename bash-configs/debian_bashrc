@@ -5,7 +5,7 @@ PS1="\[\e[1;31m\]\u@\h \[\e[0;37m\]± \[\e[0;37m\][\[\e[1;34m\]\W\[\e[0;37m\]] \
 # package manager aliases
 alias aptin="sudo apt install -y"
 alias aptre="sudo apt autoremove --purge -y"
-alias aptup="sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y && aptre && sudo apt autoclean"
+alias aptup="sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y && aptre"
 alias flatpakup="flatpak update -y && flatpak uninstall --unused -y"
 
 # user aliases

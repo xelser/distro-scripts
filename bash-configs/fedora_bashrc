@@ -8,7 +8,7 @@ PS1="\[\e[1;34m\]\u@\h \[\e[0;37m\][\[\e[1;33m\]\W\[\e[0;37m\]] \[\e[0;37m\]± \
 # package manager aliases
 alias dnfin="sudo dnf install"
 alias dnfre="sudo dnf autoremove"
-alias dnfup="sudo dnf upgrade && sudo dnf distro-sync && dnfre && sudo dnf clean all"
+alias dnfup="sudo dnf upgrade && sudo dnf distro-sync && dnfre"
 alias flatpakup="flatpak update -y && flatpak uninstall --unused -y"
 
 # user aliases
