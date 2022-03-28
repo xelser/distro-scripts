@@ -38,11 +38,10 @@ sudo dnf groupupdate core sound-and-video multimedia --exclude=PackageKit-gstrea
 sudo dnf upgrade && sudo dnf distro-sync
 
 # INSTALL
-sudo dnf install gnome-shell-extension-{pop-shell,dash-to-dock,appindicator,gamemode,gsconnect,sound-output-device-chooser} \
+sudo dnf install gnome-shell-extension-{pop-shell,dash-to-dock,appindicator,gsconnect,sound-output-device-chooser} \
   gnome-{tweaks,extensions-app,multi-writer,builder} google-noto-{cjk,emoji-color}-fonts google-roboto-* file-roller dconf-editor \
   kvantum qt5ct mozilla-ublock-origin gparted variety transmission inkscape easyeffects htop neofetch vim cmatrix unrar \
-  akmod-nvidia wine wine-mono lutris steam gamescope gamemode mangohud goverlay \
-  mesa-libGLU gtk-murrine-engine sassc ostree libappstream-glib $HOME/Downloads/*.rpm # google-chrome-stable chromium
+  gtk-murrine-engine sassc ostree libappstream-glib $HOME/Downloads/*.rpm # google-chrome-stable chromium
 
 # Flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -64,6 +63,7 @@ AutomaticLogin=$USER" | sudo tee -a /etc/gdm/custom.conf
 echo "vm.swappiness=80" | sudo tee -a /etc/sysctl.conf
 
 # Gaming
+#sudo dnf install akmod-nvidia wine wine-mono lutris steam gamescope gamemode mangohud goverlay mesa-libGLU.{x86_64,i686} gnome-shell-extension-gamemode
 #echo "blacklist nouveau
 #options nouveau modeset=0" | sudo tee /usr/lib/modprobe.d/blacklist-nouveau.conf
 #sudo dracut --force
