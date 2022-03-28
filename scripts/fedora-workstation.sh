@@ -30,7 +30,7 @@ sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-releas
 sudo dnf groupremove 'LibreOffice' 'Container Management' 'Guest Desktop Agents'
 sudo dnf autoremove gnome-shell-extension-{background-logo,window-list} --exclude=gnome-shell-extension-{apps,places}-menu \
   fedora-bookmarks libreoffice-core mediawriter rhythmbox cheese simple-scan \
-  gnome-{boxes,connections,contacts,photos,font-viewer,characters,tour,maps,clocks,weather} # ,calendar,logs
+  gnome-{connections,contacts,photos,font-viewer,characters,tour,maps,clocks,weather} # calendar,logs,boxes,
 sudo dnf mark install gnome-shell-extension-{apps,places}-menu
 
 # UPDATE
