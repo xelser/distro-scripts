@@ -28,7 +28,7 @@ sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed yay base-d
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
   htop neofetch refind lxappearance-gtk3 kvantum-qt5 gnome-disk-utility gparted bitwarden pulseaudio-equalizer-ladspa \
   latte-dock elisa vlc ktorrent ttf-roboto ttf-roboto-{mono,slab} appmenu-gtk-module lib32-libdbusmenu-glib lib32-libdbusmenu-gtk2 \
-  lib32-libdbusmenu-gtk3 libdbusmenu-glib libdbusmenu-gtk2 libdbusmenu-gtk3 \
+  lib32-libdbusmenu-gtk3 libdbusmenu-glib libdbusmenu-gtk2 libdbusmenu-gtk3 gtk-engine-murrine gtk-engines \
   plasma5-applets-virtual-desktop-bar-git plasma5-applets-panon zoom skypeforlinux-stable-bin firefox-appmenu-bin
 
 # Gaming
