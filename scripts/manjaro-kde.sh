@@ -18,11 +18,11 @@ ParallelDownloads = 10
 Color" | sudo tee -a /etc/pacman.conf
 
 # Remove bloat
-sudo pacman -Rnsu --noconfirm tlp yakuake okular partitionmanager timeshift timeshift-autosnap-manjaro \
+sudo pacman -Rnsu --noconfirm yakuake okular partitionmanager timeshift timeshift-autosnap-manjaro \
   manjaro-{documentation-en,browser-settings,zsh-config,hello}
 
 # Refresh Mirrors and Install AUR
-sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed yay base-devel
+sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-download-timeout yay base-devel
 
 # Install
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
@@ -59,13 +59,13 @@ sudo sed -i 's/ro /rw quiet splash /g' /boot/refind_linux.conf
 echo "LABEL=Games /media/Games ext4 defaults 0 2" | sudo tee -a /etc/fstab
 
 # Font rendering
-cp -rf $HOME/distro-scripts/x11-font-rendering/local.conf /etc/fonts/
-cp -rf $HOME/distro-scripts/x11-font-rendering/.Xresources ${home}/
-xrdb -merge ${home}/.Xresources
-ln -sf /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
-ln -sf /usr/share/fontconfig/conf.avail/10-hinting-slight.conf /etc/fonts/conf.d/
-ln -sf /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
-fc-cache -fv
+sudo cp -rf $HOME/distro-scripts/x11-font-rendering/local.conf /etc/fonts/
+cp -rf $HOME/distro-scripts/x11-font-rendering/.Xresources $HOME/
+xrdb -merge $HOME/.Xresources
+sudo ln -sf /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
+sudo ln -sf /usr/share/fontconfig/conf.avail/10-hinting-slight.conf /etc/fonts/conf.d/
+sudo ln -sf /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
+sudo fc-cache -fv
 
 # dotfiles
 #cp -rf $HOME/distro-scripts/dotfiles/manjaro-kde/{.config,.local} $HOME/
@@ -89,4 +89,4 @@ clear
 
 # Clean packages
 yay -Qtdq | yay -Rnsu - --noconfirm
-Y | yay -Scc --noconfirm
+yay -Sc --noconfirm
