@@ -33,7 +33,7 @@ apt autoremove --purge -y libreoffice* xterm
 apt update && apt upgrade -y && apt full-upgrade -y
 
 # Install
-apt install -y webext-ublock-origin-firefox xserver-xorg-video-intel gtk2-engines-murrine gtk2-engines-pixbuf fonts-noto mtools exfat* ntfs* gvfs-* \
+apt install -y webext-ublock-origin-firefox gtk2-engines-{murrine,pixbuf} fonts-noto mtools exfat* ntfs* gvfs-* \
   lightdm-gtk-greeter-settings mugshot gparted transmission gnome-{boxes,disk-utility} redshift-gtk plank pulseeffects \
   htop neofetch unrar zip wget curl numlockx flatpak plymouth plymouth-themes gnome-backgrounds
 
