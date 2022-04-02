@@ -44,11 +44,13 @@ case $partitioning in
   		read -p "Root Partition (#): " root
   		read -p "Swap Partition (#): " swap
   		read -p "Home Partition (#): " home
+  		read -p "Install Grub? (Y/n): " grub_select
   	else
   		echo && firm="i386-pc /dev/${device}" && echo "Installing in a BIOS system"
   		read -p "Root Partition (#): " root
   		read -p "Swap Partition (#): " swap
   		read -p "Home Partition (#): " home
+  		read -p "Install Grub? (Y/n): " grub_select
   	fi
   	;;
   2)	# VM quick setup
@@ -57,6 +59,7 @@ case $partitioning in
   	root="1"
   	swap="5"
   	home="6"
+  	read -p "Install Grub? (Y/n): " grub_select
 
   	# sfdisk partition layout preset
   	echo -e ",10GiB,,*\n,,05\n,1GiB,82,\n,,,\nwrite" | sfdisk /dev/${device}
@@ -67,6 +70,7 @@ case $partitioning in
   	root="2"
   	swap="5"
   	home="6"
+  	read -p "Install Grub? (Y/n): " grub_select
   	;;
   4)	# Aspire E5-476G default partitioning
   	device="sda"
@@ -74,6 +78,7 @@ case $partitioning in
   	efi="1"
   	root="9"
   	swap="6"
+  	read -p "Install Grub? (Y/n): " grub_select
   	;;
   5)	# Aspire E5-473 default partitioning
   	device="sda"
@@ -82,6 +87,7 @@ case $partitioning in
   	root="3"
   	swap="2"
   	home="4"
+  	read -p "Install Grub? (Y/n): " grub_select
   	;;
 esac
 
@@ -174,7 +180,7 @@ Color" | tee -a /etc/pacman.conf
 
 # Install Packages
 pacman -S --needed --noconfirm --disable-download-timeout \
-  grub {amd,intel}-ucode efibootmgr os-prober base base-devel linux linux-firmware networkmanager xdg-user-dirs \
+  {amd,intel}-ucode efibootmgr os-prober base base-devel linux linux-firmware networkmanager xdg-user-dirs \
   gst-libav gst-plugins-{bad,base,good,ugly} noto-{fonts,fonts-cjk,fonts-emoji} ntfs{-3g,progs} exfatprogs \
   nano vim htop neofetch zip unzip p7zip unrar git curl wget reflector
   
@@ -219,8 +225,13 @@ clear
 systemctl enable NetworkManager
 
 # grub
-mkdir /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
-grub-install --target=${firm} --recheck
+case $grub_select in
+   n)	;;
+   *)	pacman -S --needed --noconfirm --disable-download-timeout grub
+   	mkdir /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
+   	grub-install --target=${firm} --recheck
+   	;;
+esac
 
 EOF
 clear
