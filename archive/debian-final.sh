@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 ls $HOME | grep -q distro-scripts
 if [ $? -ne 0 ]; then

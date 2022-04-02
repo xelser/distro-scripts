@@ -45,6 +45,8 @@ apt install -y lightdm-gtk-greeter-settings mugshot htop neofetch wget curl numl
 
 # Flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo -u ${user} flatpak install flathub -y org.gtk.Gtk3theme.Matcha-dark-aliz com.github.tchx84.Flatseal \
+  com.bitwarden.desktop com.discordapp.Discord org.x.Warpinator com.skype.Client us.zoom.Zoom
 
 clear
 ################################ Configs #################################
@@ -89,7 +91,7 @@ ln -sf /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/con
 fc-cache -fv
 
 # Debian post script
-cp -rf $HOME/distro-scripts/scripts/debian-final.sh ${home}
+#cp -rf $HOME/distro-scripts/scripts/debian-final.sh ${home}
 
 clear
 ################################# Themes #################################
@@ -104,6 +106,7 @@ chmod 644 /etc/apt/trusted.gpg.d/papirus.gpg && apt update && apt install papiru
 
 # Geany Themes
 mkdir -p ${home}/.config/geany/colorschemes/ && cd /tmp/ && git clone https://github.com/geany/geany-themes.git && cd geany-themes && ./install.sh
+ln -sf $HOME/.config/geany/colorschemes/ ${home}/.config/geany/
 
 clear
 ############################## Housekeeping ##############################
