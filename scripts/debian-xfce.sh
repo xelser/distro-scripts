@@ -82,6 +82,9 @@ ln -sf /usr/share/fontconfig/conf.avail/10-hinting-slight.conf /etc/fonts/conf.d
 ln -sf /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
 fc-cache -fv
 
+# Debian post script
+cp -rf $HOME/distro-scripts/scripts/debian-final.sh ${home}
+
 clear
 ################################# Themes #################################
 
