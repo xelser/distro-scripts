@@ -5,7 +5,7 @@ clear
 
 # Check Whether if its root or user
 if [ $UID -ne 0 ]; then
-	exit 1 && echo "Run the script as Root. Please Log in as root."
+	exit 1 && echo "Run the script as root. Please Log in as root."
 fi
 
 # user var
@@ -38,9 +38,10 @@ apt autoremove --purge -y libreoffice* xterm
 apt update && apt upgrade -y && apt full-upgrade -y
 
 # Install
-apt install -y webext-ublock-origin-firefox gtk2-engines-{murrine,pixbuf} dirmngr fonts-noto mtools exfat* ntfs* gvfs-* \
-  lightdm-gtk-greeter-settings mugshot gparted transmission gnome-{boxes,disk-utility} redshift-gtk geany plank pulseeffects \
-  htop neofetch unrar zip wget curl numlockx flatpak plymouth plymouth-themes gnome-backgrounds
+apt install -y lightdm-gtk-greeter-settings mugshot htop neofetch wget curl numlockx flatpak \
+  gparted transmission gnome-{boxes,disk-utility} redshift-gtk geany plank pulseeffects \
+  plymouth plymouth-themes gnome-backgrounds gtk2-engines-{murrine,pixbuf} fonts-{noto,ubuntu} \
+  mtools gvfs-{fuse,backends} unar rar zip webext-ublock-origin-firefox
 
 # Flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
