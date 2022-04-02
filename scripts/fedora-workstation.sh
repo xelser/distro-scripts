@@ -14,7 +14,6 @@ echo "keepcache=True
 fastestmirror=True
 assumeyes=True
 install_weak_deps=False
-installonly_limit=2
 max_parallel_downloads=10
 color=always" | sudo tee -a /etc/dnf/dnf.conf
 
@@ -40,13 +39,13 @@ sudo dnf upgrade && sudo dnf distro-sync
 # INSTALL
 sudo dnf install gnome-shell-extension-{pop-shell,dash-to-dock,appindicator,gsconnect,sound-output-device-chooser} \
   gnome-{tweaks,extensions-app,multi-writer,builder} google-noto-{cjk,emoji-color}-fonts google-roboto-* file-roller dconf-editor \
-  kvantum qt5ct mozilla-ublock-origin gparted variety transmission inkscape easyeffects htop neofetch vim cmatrix unrar \
-  gtk-murrine-engine sassc ostree libappstream-glib $HOME/Downloads/*.rpm # google-chrome-stable chromium
+  mozilla-ublock-origin gparted variety transmission inkscape easyeffects htop neofetch vim cmatrix unrar \
+  gtk-murrine-engine sassc ostree libappstream-glib $HOME/Downloads/*.rpm # google-chrome-stable chromium kvantum qt5ct
 
 # Flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install -y flathub com.github.tchx84.Flatseal com.bitwarden.desktop org.x.Warpinator com.discordapp.Discord \
-  com.skype.Client us.zoom.Zoom com.obsproject.Studio
+flatpak install -y flathub com.github.tchx84.Flatseal com.mattjakeman.ExtensionManager org.x.Warpinator \
+  com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom com.obsproject.Studio
 
 clear
 ################################# Config ##################################
