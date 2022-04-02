@@ -3,6 +3,11 @@ clear
 
 ############################### Preparation ##############################
 
+# Check Whether if its root or user
+if [ $UID -ne 0 ]; then
+	exit 1 && echo "Run the script as Root. Please Log in as root."
+fi
+
 # user var
 user="xelser"
 home="/home/${user}"
