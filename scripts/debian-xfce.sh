@@ -33,9 +33,9 @@ apt autoremove --purge -y libreoffice* xterm
 apt update && apt upgrade -y && apt full-upgrade -y
 
 # Install
-apt install -y webext-ublock-origin-firefox gparted transmission gnome-{boxes,disk-utility,builder} redshift-gtk plank pulseeffects \
-  htop neofetch unrar zip wget curl numlockx flatpak plymouth plymouth-themes gnome-backgrounds lightdm-gtk-greeter-settings mugshot \
-  xserver-xorg-video-intel gtk2-engines-murrine gtk2-engines-pixbuf fonts-noto mtools exfat* ntfs* gvfs-* \
+apt install -y webext-ublock-origin-firefox xserver-xorg-video-intel gtk2-engines-murrine gtk2-engines-pixbuf fonts-noto mtools exfat* ntfs* gvfs-* \
+  lightdm-gtk-greeter-settings mugshot gparted transmission gnome-{boxes,disk-utility} redshift-gtk plank pulseeffects \
+  htop neofetch unrar zip wget curl numlockx flatpak plymouth plymouth-themes gnome-backgrounds
 
 # Flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
