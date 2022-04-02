@@ -35,7 +35,7 @@ apt update && apt upgrade -y && apt full-upgrade -y
 # Install
 apt install -y webext-ublock-origin-firefox gparted transmission gnome-{boxes,disk-utility,builder} redshift-gtk plank pulseeffects \
   htop neofetch unrar zip wget curl numlockx flatpak plymouth plymouth-themes gnome-backgrounds lightdm-gtk-greeter-settings mugshot \
-  gtk2-engines-murrine gtk2-engines-pixbuf fonts-noto mtools exfat* ntfs* gvfs-* \
+  xserver-xorg-video-intel gtk2-engines-murrine gtk2-engines-pixbuf fonts-noto mtools exfat* ntfs* gvfs-* \
 
 # Flatpak
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -62,6 +62,12 @@ hide-user-image = true
 clock-format = %a, %I:%M %p
 indicators = ~host;~spacer;~clock;~power" | tee /etc/lightdm/lightdm-gtk-greeter.conf
 
+# Plymouth
+sed -i 's/#GRUB_GFXMODE=640x480/GRUB_GFXMODE=1366x768x32/g' /etc/default/grub
+sed -i 's/quiet/quiet splash/g' /etc/default/grub
+plymouth-set-default-theme -R homeworld
+update-grub2
+
 # Bash configs
 rm -rf ${home}/{.profile,.bashrc}
 cp /etc/skel/{.profile,.bashrc} ${home}/
@@ -80,8 +86,7 @@ clear
 ################################# Themes #################################
 
 # GTK
-cd /tmp/ && git clone https://github.com/vinceliuice/Matcha-gtk-theme.git
-./Matcha-gtk-theme/install.sh -c dark -t aliz
+cd /tmp/ && git clone https://github.com/vinceliuice/Matcha-gtk-theme.git && ./Matcha-gtk-theme/install.sh -c dark -t aliz
 
 # Icons
 sh -c "echo 'deb http://ppa.launchpad.net/papirus/papirus/ubuntu focal main' > /etc/apt/sources.list.d/papirus-ppa.list" && apt-get install dirmngr
@@ -94,6 +99,9 @@ papirus-folders -C red --theme Papirus-Dark
 
 # Cursor
 apt install -y breeze-cursor-theme
+
+# Geany Themes
+mkdir -p ${home}/.config/geany/colorschemes/ && cd /tmp/ && git clone https://github.com/geany/geany-themes.git && cd geany-themes && ./install.sh
 
 clear
 ############################## Housekeeping ##############################
