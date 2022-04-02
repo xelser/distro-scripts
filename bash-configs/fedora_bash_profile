@@ -16,7 +16,7 @@ if [ $? -ne 0 ]; then
 	gsettings set org.gnome.terminal.legacy theme-variant "system"
 	gsettings set org.gnome.desktop.interface gtk-theme "Adwaita-dark"
 else
-	export GTK_THEME="Orchis-dark-compact"
+	#export GTK_THEME="Orchis-dark-compact"
 fi
 
 # Icon #
