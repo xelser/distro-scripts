@@ -24,7 +24,7 @@ case $cp_dotfiles in
    y)	# Remove old .config files
    	rm -rf ${home}/.config
    	cd /tmp/ && git clone https://github.com/xelser/dotfiles
-   	cp -rf /tmp/dotfiles/fedora-workstation/.config ${home};;
+   	cp -rf /tmp/dotfiles/debian-xfce/.config ${home};;
    *)	;;
 esac
 
