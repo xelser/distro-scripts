@@ -11,7 +11,7 @@ home="/home/${user}"
 usermod -aG sudo ${user}
 
 # No password for user
-echo "${user} ALL=(ALL) NOPASSWD: ALL" | tee -a /etc/sudoers
+#echo "${user} ALL=(ALL) NOPASSWD: ALL" | tee -a /etc/sudoers
 
 # dotfiles
 clear && echo && read -p "Copy (xelser's) dotfiles? (y/N): " cp_dotfiles
