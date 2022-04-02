@@ -33,8 +33,8 @@ apt autoremove --purge -y libreoffice* xterm
 apt update && apt upgrade -y && apt full-upgrade -y
 
 # Install
-apt install -y webext-ublock-origin-firefox gtk2-engines-{murrine,pixbuf} fonts-noto mtools exfat* ntfs* gvfs-* \
-  lightdm-gtk-greeter-settings mugshot gparted transmission gnome-{boxes,disk-utility} redshift-gtk plank pulseeffects \
+apt install -y webext-ublock-origin-firefox gtk2-engines-{murrine,pixbuf} dirmngr fonts-noto mtools exfat* ntfs* gvfs-* \
+  lightdm-gtk-greeter-settings mugshot gparted transmission gnome-{boxes,disk-utility} redshift-gtk geany plank pulseeffects \
   htop neofetch unrar zip wget curl numlockx flatpak plymouth plymouth-themes gnome-backgrounds
 
 # Flatpak
@@ -89,16 +89,9 @@ clear
 cd /tmp/ && git clone https://github.com/vinceliuice/Matcha-gtk-theme.git && ./Matcha-gtk-theme/install.sh -c dark -t aliz
 
 # Icons
-sh -c "echo 'deb http://ppa.launchpad.net/papirus/papirus/ubuntu focal main' > /etc/apt/sources.list.d/papirus-ppa.list" && apt-get install dirmngr
+sh -c "echo 'deb http://ppa.launchpad.net/papirus/papirus/ubuntu focal main' > /etc/apt/sources.list.d/papirus-ppa.list"
 gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/papirus.gpg --keyserver keyserver.ubuntu.com --recv E58A9D36647CAE7F
-chmod 644 /etc/apt/trusted.gpg.d/papirus.gpg && apt-get update && apt-get install papirus-icon-theme
-
-## Icons: folders
-wget -qO- https://git.io/papirus-folders-install | sh
-papirus-folders -C red --theme Papirus-Dark
-
-# Cursor
-apt install -y breeze-cursor-theme
+chmod 644 /etc/apt/trusted.gpg.d/papirus.gpg && apt update && apt install papirus-{icon-theme,folders} && papirus-folders -C red --theme Papirus-Dark
 
 # Geany Themes
 mkdir -p ${home}/.config/geany/colorschemes/ && cd /tmp/ && git clone https://github.com/geany/geany-themes.git && cd geany-themes && ./install.sh
