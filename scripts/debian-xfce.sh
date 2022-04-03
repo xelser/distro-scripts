@@ -16,7 +16,7 @@ home="/home/${user}"
 usermod -aG sudo ${user}
 
 # No password for user
-#echo "${user} ALL=(ALL) NOPASSWD: ALL" | tee -a /etc/sudoers
+echo "${user} ALL=(ALL) NOPASSWD: ALL" | tee -a /etc/sudoers
 
 # dotfiles
 clear && echo && read -p "Copy (xelser's) dotfiles? (y/N): " cp_dotfiles
@@ -42,11 +42,6 @@ apt install -y lightdm-gtk-greeter-settings mugshot htop neofetch wget curl numl
   gparted transmission gnome-{boxes,disk-utility} redshift-gtk geany plank pulseeffects \
   plymouth plymouth-themes gnome-backgrounds gtk2-engines-{murrine,pixbuf} fonts-{noto,ubuntu} \
   mtools gvfs-{fuse,backends} unar rar zip webext-ublock-origin-firefox
-
-# Flatpak
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-sudo -u ${user} flatpak install flathub -y org.gtk.Gtk3theme.Matcha-dark-aliz com.github.tchx84.Flatseal \
-  com.bitwarden.desktop com.discordapp.Discord org.x.Warpinator com.skype.Client us.zoom.Zoom
 
 clear
 ################################ Configs #################################
@@ -84,14 +79,12 @@ cat $HOME/distro-scripts/bash-configs/debian_bashrc >> ${home}/.bashrc
 # Font rendering
 cp -rf $HOME/distro-scripts/x11-font-rendering/local.conf /etc/fonts/
 cp -rf $HOME/distro-scripts/x11-font-rendering/.Xresources ${home}/
-xrdb -merge ${home}/.Xresources
 ln -sf /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
 ln -sf /usr/share/fontconfig/conf.avail/10-hinting-slight.conf /etc/fonts/conf.d/
 ln -sf /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
-fc-cache -fv
 
 # Debian post script
-#cp -rf $HOME/distro-scripts/scripts/debian-final.sh ${home}
+cp -rf $HOME/distro-scripts/scripts/debian-final.sh ${home}/
 
 clear
 ################################# Themes #################################
@@ -104,16 +97,11 @@ sh -c "echo 'deb http://ppa.launchpad.net/papirus/papirus/ubuntu focal main' > /
 gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/papirus.gpg --keyserver keyserver.ubuntu.com --recv E58A9D36647CAE7F
 chmod 644 /etc/apt/trusted.gpg.d/papirus.gpg && apt update && apt install papirus-{icon-theme,folders} && papirus-folders -C red --theme Papirus-Dark
 
-# Geany Themes
-mkdir -p ${home}/.config/geany/colorschemes/ && cd /tmp/ && git clone https://github.com/geany/geany-themes.git && cd geany-themes && ./install.sh
-ln -sf $HOME/.config/geany/colorschemes/ ${home}/.config/geany/
-
 clear
 ############################## Housekeeping ##############################
 
 # Clean packages
 apt autoremove --purge -y && apt autoclean
-flatpak uninstall --unused -y
 
 # Change owner
 chown -R ${user} ${home}
