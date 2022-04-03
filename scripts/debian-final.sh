@@ -28,8 +28,9 @@ clear
 ################################# Others #################################
 
 # Geany Themes
-mkdir -p $HOME/.config/geany/colorschemes/ && cd /tmp/
-git clone https://github.com/geany/geany-themes.git
+rm -rf $HOME/.config/geany/colorschemes/ 
+mkdir -p $HOME/.config/geany/colorschemes/
+cd /tmp/ && git clone https://github.com/geany/geany-themes.git
 cd geany-themes && ./install.sh
 
 # Font rendering
