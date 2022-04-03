@@ -9,7 +9,7 @@ if [ $UID -eq 0 ]; then
 fi
 
 # Notification
-notify-send "Finalizing Installation" "Please be patient, this may take a while" -i process-working-symbolic -u critical
+notify-send "Finalizing Installation" "Please be patient, this may take a while" -i process-working-symbolic
 
 clear
 ################################ Packages ################################
@@ -38,6 +38,7 @@ cd geany-themes && ./install.sh
 xrdb -merge $HOME/.Xresources
 sudo fc-cache -fv
 
+clear
 ############################## Housekeeping ##############################
 
 # Delete the script
