@@ -30,7 +30,8 @@ clear
 # Geany Themes
 rm -rf $HOME/.config/geany/colorschemes/ 
 mkdir -p $HOME/.config/geany/colorschemes/
-cd /tmp/ && git clone https://github.com/geany/geany-themes.git
+cd /tmp/ && rm -rf geany-themes
+git clone https://github.com/geany/geany-themes.git
 cd geany-themes && ./install.sh
 
 # Font rendering
@@ -45,5 +46,4 @@ rm -rf $HOME/debian-final.sh
 # Notification
 if [ $? -eq 0 ]; then
 	notify-send "Ready to Use" "All updates and install processes have been successful" -i process-completed-symbolic -u critical
-else
-	notify-send "Script Failed" "Check the script to fix it" -i process-error-symbolic -u critical
+fi
