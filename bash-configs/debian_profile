@@ -1,6 +1,6 @@
 
 # Post-Install Script
-if [ -xf $HOME/debian-final.sh ]; then
+if [ -f $HOME/debian-final.sh ]; then
 	sh -c "$HOME/debian-final.sh"
 fi
 
