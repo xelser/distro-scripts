@@ -80,6 +80,7 @@ update-grub2
 rm -rf ${home}/{.profile,.bashrc}
 cp /etc/skel/{.profile,.bashrc} ${home}/
 cat $HOME/distro-scripts/bash-configs/debian_bashrc >> ${home}/.bashrc
+cat $HOME/distro-scripts/bash-configs/debian_profile >> ${home}/.profile
 
 # Font rendering
 cp -rf $HOME/distro-scripts/x11-font-rendering/local.conf /etc/fonts/
