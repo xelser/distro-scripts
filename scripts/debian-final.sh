@@ -14,9 +14,6 @@ notify-send "Finalizing Installation" "Please be patient, this may take a while"
 clear
 ################################ Packages ################################
 
-# Flatpak: Add Repo
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
 # Flatpak: Install
 flatpak install flathub -y org.gtk.Gtk3theme.Matcha-dark-aliz com.github.tchx84.Flatseal \
   com.bitwarden.desktop com.discordapp.Discord org.x.Warpinator com.skype.Client us.zoom.Zoom

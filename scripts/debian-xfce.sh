@@ -43,6 +43,9 @@ apt install -y lightdm-gtk-greeter-settings mugshot htop neofetch wget curl numl
   plymouth plymouth-themes gnome-backgrounds gtk2-engines-{murrine,pixbuf} fonts-{noto,ubuntu} \
   mtools gvfs-{fuse,backends} unar rar zip webext-ublock-origin-firefox
 
+# Add Flatpak repo
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+
 clear
 ################################ Configs #################################
 
