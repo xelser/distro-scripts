@@ -36,6 +36,7 @@ clear
 apt autoremove --purge -y libreoffice* xterm
 
 # Update
+sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list
 apt update && apt upgrade -y && apt full-upgrade -y
 
 # Install
