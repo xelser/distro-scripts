@@ -52,8 +52,7 @@ clear
 ################################# Config ##################################
 
 # rEFInd
-cd $HOME/Downloads/ && ls | grep -q refind*.rpm
-if [ $? -eq 0 ]; then
+if [ -f $HOME/Downloads/refind*.rpm ]; then
 	sudo dnf install $HOME/Downloads/refind*.rpm
 	sudo sed -i 's/ro /ro quiet splash /g' /boot/refind_linux.conf
 fi
@@ -117,8 +116,7 @@ git clone https://github.com/vinceliuice/Orchis-kde.git
 cd Orchis-kde && ./install.sh
 
 # Cursor
-cd $HOME/Downloads/ && ls | grep -q Bibata*.tar.gz
-if [ $? -eq 0 ]; then
+if [ -f $HOME/Downloads/Bibata*.tar.gz ]; then
 	cd /usr/share/icons/ && sudo rm -rf Bibata*
 	sudo tar -xf $HOME/Downloads/Bibata*.tar.gz
 fi
