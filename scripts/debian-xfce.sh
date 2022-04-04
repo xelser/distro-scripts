@@ -17,7 +17,7 @@ home="/home/${user}"
 usermod -aG sudo ${user}
 
 # No password for user
-echo "${user} ALL=(ALL) NOPASSWD: ALL" | tee -a /etc/sudoers
+#echo "${user} ALL=(ALL) NOPASSWD: ALL" | tee -a /etc/sudoers
 
 # dotfiles
 clear && echo && read -p "Copy (xelser's) dotfiles? (y/N): " cp_dotfiles
@@ -87,6 +87,7 @@ cp -rf $HOME/distro-scripts/x11-font-rendering/.Xresources ${home}/
 ln -sf /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
 ln -sf /usr/share/fontconfig/conf.avail/10-hinting-slight.conf /etc/fonts/conf.d/
 ln -sf /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
+fc-cache -fv
 
 # Debian post script
 cp -rf $HOME/distro-scripts/scripts/debian-final.sh ${home}/
@@ -96,6 +97,7 @@ clear
 
 # GTK
 cd /tmp/ && git clone https://github.com/vinceliuice/Matcha-gtk-theme.git && ./Matcha-gtk-theme/install.sh -c dark -t aliz
+flatpak install flathub -y org.gtk.Gtk3theme.Matcha-dark-aliz
 
 # Icons
 sh -c "echo 'deb http://ppa.launchpad.net/papirus/papirus/ubuntu focal main' > /etc/apt/sources.list.d/papirus-ppa.list"

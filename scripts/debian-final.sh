@@ -16,8 +16,7 @@ clear
 ################################ Packages ################################
 
 # Flatpak: Install
-flatpak install flathub -y org.gtk.Gtk3theme.Matcha-dark-aliz com.github.tchx84.Flatseal \
-  com.bitwarden.desktop com.discordapp.Discord org.x.Warpinator com.skype.Client us.zoom.Zoom
+flatpak install flathub -y com.github.tchx84.Flatseal org.x.Warpinator com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom
   
 # Flatpak: Clean
 flatpak uninstall --unused -y
@@ -34,7 +33,6 @@ cd geany-themes && ./install.sh
 
 # Font rendering
 xrdb -merge $HOME/.Xresources
-sudo fc-cache -fv
 
 clear
 ############################## Housekeeping ##############################
