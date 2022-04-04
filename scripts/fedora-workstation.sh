@@ -41,7 +41,7 @@ sudo dnf upgrade && sudo dnf distro-sync
 sudo dnf install gnome-shell-extension-{pop-shell,dash-to-dock,appindicator,gsconnect,sound-output-device-chooser} \
   gnome-{tweaks,extensions-app,multi-writer,builder} google-noto-{cjk,emoji-color}-fonts google-roboto-* file-roller dconf-editor \
   mozilla-ublock-origin gparted variety transmission inkscape easyeffects htop neofetch vim cmatrix unrar \
-  gtk-murrine-engine sassc ostree libappstream-glib $HOME/Downloads/*.rpm # google-chrome-stable chromium kvantum qt5ct
+  gtk-murrine-engine sassc ostree libappstream-glib # google-chrome-stable chromium kvantum qt5ct
 
 # Flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -52,7 +52,11 @@ clear
 ################################# Config ##################################
 
 # rEFInd
-sudo sed -i 's/ro /ro quiet splash /g' /boot/refind_linux.conf
+cd $HOME/Downloads/ && ls | grep -q refind*.rpm
+if [ $? -eq 0 ]; then
+	sudo dnf install $HOME/Downloads/refind*.rpm
+	sudo sed -i 's/ro /ro quiet splash /g' /boot/refind_linux.conf
+fi
 
 # gdm autologin using script
 echo "[daemon]
@@ -113,8 +117,11 @@ git clone https://github.com/vinceliuice/Orchis-kde.git
 cd Orchis-kde && ./install.sh
 
 # Cursor
-cd /usr/share/icons/ && sudo rm -rf Bibata*
-sudo tar -xf $HOME/Downloads/Bibata*.tar.gz
+cd $HOME/Downloads/ && ls | grep -q Bibata*.tar.gz
+if [ $? -eq 0 ]; then
+	cd /usr/share/icons/ && sudo rm -rf Bibata*
+	sudo tar -xf $HOME/Downloads/Bibata*.tar.gz
+fi
 
 # Flatpak theme
 cd /tmp/ && rm -rf stylepak
