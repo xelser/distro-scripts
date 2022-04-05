@@ -1,7 +1,0 @@
-
-# Startup Commands
-echo $XDG_SESSION_TYPE | grep -q x11
-if [ $? -eq 0 ]; then
-	numlockx on
-	xset led 3
-fi

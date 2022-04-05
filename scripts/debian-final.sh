@@ -1,28 +1,27 @@
 #!/bin/bash
 set -e
-clear
 
-############################### Preparation ##############################
+################################ Flatpaks ################################
 
-# Notification
-notify-send "Finalizing Installation" "Please be patient, this may take a while" -i process-working-symbolic
-
-clear
-################################ Packages ################################
-
-# Flatpak: Install
+# Install
 flatpak install flathub -y com.github.tchx84.Flatseal org.x.Warpinator com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom
-  
-# Flatpak: Clean
+
+# Clean Packages
 flatpak uninstall --unused -y
 
-clear
-################################# Themes #################################
+# Flatpak: Permissions
+#flatpak --user override com.github.tchx84.Flatseal --filesystem=/usr/share/icons/:ro
+#flatpak --user override org.x.Warpinator --filesystem=/usr/share/icons/:ro
+#flatpak --user override com.bitwarden.desktop --filesystem=/usr/share/icons/:ro
+#flatpak --user override com.discordapp.Discord --filesystem=/usr/share/icons/:ro
+#flatpak --user override com.skype.Client --filesystem=/usr/share/icons/:ro
+#flatpak --user override us.zoom.Zoom --filesystem=/usr/share/icons/:ro
 
-# Flatpak GTK Theme
-#cd /tmp/ && rm -rf stylepak
-#git clone https://github.com/refi64/stylepak.git
-#cd stylepak && ./stylepak install-system Matcha-dark-aliz
+clear
+################################# Others #################################
+
+# Font rendering
+xrdb -merge $HOME/.Xresources
 
 # Geany Themes
 rm -rf $HOME/.config/geany/colorschemes/ 
@@ -32,18 +31,7 @@ git clone https://github.com/geany/geany-themes.git
 cd geany-themes && ./install.sh
 
 clear
-################################# Configs #################################
-
-# Font rendering
-xrdb -merge $HOME/.Xresources
-
-clear
 ############################## Housekeeping ##############################
 
 # Delete the script
 rm -rf $HOME/debian-final.sh
-
-# Notification
-if [ $? -eq 0 ]; then
-	notify-send "Ready to Use" "All updates and install processes have been successful" -i process-completed-symbolic -u critical
-fi
