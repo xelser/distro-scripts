@@ -35,15 +35,13 @@ clear
 # Debloat
 apt autoremove --purge -y libreoffice* xterm
 
-# Check Repos
-cat /etc/apt/sources.list | grep -q "non-free"
-if [ $? -ne 0 ]; then
-	sed -i 's/main/main non-free/g' /etc/apt/sources.list
-fi
-cat /etc/apt/sources.list | grep -q "contrib"
-if [ $? -ne 0 ]; then
-	sed -i 's/main/main contrib/g' /etc/apt/sources.list
-fi
+# Edit APT Repos
+echo "deb http://mirror.rise.ph/debian/ $(lsb_release -cs) main non-free contrib
+deb-src http://mirror.rise.ph/debian/ $(lsb_release -cs) main non-free contrib
+deb http://security.debian.org/debian-security $(lsb_release -cs)-security main contrib non-free
+deb-src http://security.debian.org/debian-security $(lsb_release -cs)-security main contrib non-free
+deb http://mirror.rise.ph/debian/ $(lsb_release -cs)-updates main contrib non-free
+deb-src http://mirror.rise.ph/debian/ $(lsb_release -cs)-updates main contrib non-free" | tee /etc/apt/sources.list
 
 # Update
 apt update && apt upgrade -y && apt full-upgrade -y
