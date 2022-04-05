@@ -4,11 +4,6 @@ clear
 
 ############################### Preparation ##############################
 
-# Check user
-if [ $UID -eq 0 ]; then
-	exit 1 && echo "Please DO NOT run the script as root."
-fi
-
 # Notification
 notify-send "Finalizing Installation" "Please be patient, this may take a while" -i process-working-symbolic
 
