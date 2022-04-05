@@ -9,6 +9,7 @@ alias aptup="sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y 
 alias flatpakup="flatpak update -y && flatpak uninstall --unused -y"
 
 # user aliases
+alias post="sh $HOME/debian-final.sh"
 alias update="aptup && flatpakup"
 alias clear="clear && history -c"
 
