@@ -1,9 +1,4 @@
 
-# Post-Install Script
-if [ -f $HOME/debian-final.sh ]; then
-	sh $HOME/debian-final.sh
-fi
-
 # Startup Commands
 echo $XDG_SESSION_TYPE | grep -q x11
 if [ $? -eq 0 ]; then

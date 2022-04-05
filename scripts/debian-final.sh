@@ -20,9 +20,9 @@ clear
 ################################# Themes #################################
 
 # Flatpak GTK Theme
-cd /tmp/ && rm -rf stylepak
-git clone https://github.com/refi64/stylepak.git
-cd stylepak && ./stylepak install-system Matcha-dark-aliz
+#cd /tmp/ && rm -rf stylepak
+#git clone https://github.com/refi64/stylepak.git
+#cd stylepak && ./stylepak install-system Matcha-dark-aliz
 
 # Geany Themes
 rm -rf $HOME/.config/geany/colorschemes/ 
