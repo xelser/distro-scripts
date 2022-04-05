@@ -36,8 +36,8 @@ clear
 apt autoremove --purge -y libreoffice* xterm
 
 # Edit APT Repos
-echo "deb http://mirror.rise.ph/debian/ $(lsb_release -cs) main non-free contrib
-deb-src http://mirror.rise.ph/debian/ $(lsb_release -cs) main non-free contrib
+echo "deb http://mirror.rise.ph/debian/ $(lsb_release -cs) main contrib non-free 
+deb-src http://mirror.rise.ph/debian/ $(lsb_release -cs) main contrib non-free 
 deb http://security.debian.org/debian-security $(lsb_release -cs)-security main contrib non-free
 deb-src http://security.debian.org/debian-security $(lsb_release -cs)-security main contrib non-free
 deb http://mirror.rise.ph/debian/ $(lsb_release -cs)-updates main contrib non-free
