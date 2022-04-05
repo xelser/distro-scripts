@@ -20,13 +20,13 @@ usermod -aG sudo ${user}
 #echo "${user} ALL=(ALL) NOPASSWD: ALL" | tee -a /etc/sudoers
 
 # dotfiles
-clear && echo && read -p "Copy (xelser's) dotfiles? (y/N): " cp_dotfiles
+clear && echo && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
 case $cp_dotfiles in
-   y)	# Remove old .config files
+   n)	;;
+   *)	# Remove old .config files
    	rm -rf ${home}/.config
    	cd /tmp/ && git clone https://github.com/xelser/dotfiles
    	cp -rf /tmp/dotfiles/debian-xfce/.config ${home};;
-   *)	;;
 esac
 
 clear
@@ -98,7 +98,6 @@ clear
 
 # GTK
 cd /tmp/ && git clone https://github.com/vinceliuice/Matcha-gtk-theme.git && ./Matcha-gtk-theme/install.sh -c dark -t aliz
-flatpak install flathub -y org.gtk.Gtk3theme.Matcha-dark-aliz
 
 # Icons
 sh -c "echo 'deb http://ppa.launchpad.net/papirus/papirus/ubuntu focal main' > /etc/apt/sources.list.d/papirus-ppa.list"
