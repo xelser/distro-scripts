@@ -35,8 +35,16 @@ clear
 # Debloat
 apt autoremove --purge -y libreoffice* xterm
 
+# Check Repos
+cat /etc/apt/sources.list | grep -q "non-free"
+if [ $? -ne 0 ]; then
+	sed -i 's/main/main non-free/g' /etc/apt/sources.list
+	cat /etc/apt/sources.list | grep -q "contrib"
+elif [ $? -ne 0 ]; then
+	sed -i 's/main/main contrib/g' /etc/apt/sources.list
+fi
+
 # Update
-sed -i 's/main/main contrib non-free/g' /etc/apt/sources.list
 apt update && apt upgrade -y && apt full-upgrade -y
 
 # Install
