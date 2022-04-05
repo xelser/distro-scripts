@@ -16,6 +16,11 @@ flatpak install flathub -y com.github.tchx84.Flatseal org.x.Warpinator com.bitwa
 # Flatpak: Clean
 flatpak uninstall --unused -y
 
+# Flatpak: GTK Theme
+cd /tmp/ && rm -rf stylepak
+git clone https://github.com/refi64/stylepak.git
+cd stylepak && ./stylepak install-system Matcha-dark-aliz
+
 clear
 ################################# Others #################################
 
@@ -38,4 +43,5 @@ rm -rf $HOME/debian-final.sh
 # Notification
 if [ $? -eq 0 ]; then
 	notify-send "Ready to Use" "All updates and install processes have been successful" -i process-completed-symbolic -u critical
+	sudo reboot
 fi
