@@ -54,6 +54,7 @@ apt install -y lightdm-gtk-greeter-settings mugshot htop neofetch wget curl numl
 
 # Add Flatpak repo
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+flatpak override --system --filesystem=/usr/share/icons/:ro
 
 clear
 ################################ Configs #################################
