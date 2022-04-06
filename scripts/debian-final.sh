@@ -1,6 +1,9 @@
 #!/bin/bash
 set -e
 
+# Notify Start
+notify-send "Finalizing Installation" "Please be patient, this may take a while. DONT TURN OFF THE SYSTEM" -i process-working-symbolic
+
 ################################ Flatpaks ################################
 
 # Install
@@ -35,3 +38,6 @@ clear
 
 # Delete the script
 rm -rf $HOME/debian-final.sh
+
+# Notify End
+notify-send "Ready to Use" "All updates and install processes have been successful" -i process-completed-symbolic -u critical
