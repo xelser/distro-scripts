@@ -54,6 +54,19 @@ apt install -y lightdm-gtk-greeter-settings mugshot htop neofetch wget curl numl
 
 # Add Flatpak repo
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo -u ${user} flatpak install flathub -y \
+com.github.tchx84.Flatseal org.x.Warpinator com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom
+
+# Clean Packages
+flatpak uninstall --unused -y
+
+# Flatpak: Permissions
+#flatpak --user override com.github.tchx84.Flatseal --filesystem=/usr/share/icons/:ro
+#flatpak --user override org.x.Warpinator --filesystem=/usr/share/icons/:ro
+#flatpak --user override com.bitwarden.desktop --filesystem=/usr/share/icons/:ro
+#flatpak --user override com.discordapp.Discord --filesystem=/usr/share/icons/:ro
+#flatpak --user override com.skype.Client --filesystem=/usr/share/icons/:ro
+#flatpak --user override us.zoom.Zoom --filesystem=/usr/share/icons/:ro
 
 clear
 ################################ Configs #################################
@@ -98,7 +111,7 @@ ln -sf /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/con
 fc-cache -fv
 
 # Debian post script
-cp -rf $HOME/distro-scripts/scripts/debian-final.sh ${home}/
+#cp -rf $HOME/distro-scripts/scripts/debian-final.sh ${home}/
 
 clear
 ################################# Themes #################################
@@ -110,6 +123,11 @@ cd /tmp/ && git clone https://github.com/vinceliuice/Matcha-gtk-theme.git && ./M
 sh -c "echo 'deb http://ppa.launchpad.net/papirus/papirus/ubuntu focal main' > /etc/apt/sources.list.d/papirus-ppa.list"
 gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/papirus.gpg --keyserver keyserver.ubuntu.com --recv E58A9D36647CAE7F
 chmod 644 /etc/apt/trusted.gpg.d/papirus.gpg && apt update && apt install papirus-{icon-theme,folders} && papirus-folders -C red --theme Papirus-Dark
+
+# Geany Themes
+cd /tmp/ && rm -rf geany-themes
+git clone https://github.com/xelser/geany-themes.git
+cd geany-themes && ./install.sh
 
 clear
 ############################## Housekeeping ##############################

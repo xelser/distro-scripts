@@ -21,19 +21,6 @@ flatpak uninstall --unused -y
 #flatpak --user override us.zoom.Zoom --filesystem=/usr/share/icons/:ro
 
 clear
-################################# Others #################################
-
-# Font rendering
-xrdb -merge $HOME/.Xresources
-
-# Geany Themes
-rm -rf $HOME/.config/geany/colorschemes/ 
-mkdir -p $HOME/.config/geany/colorschemes/
-cd /tmp/ && rm -rf geany-themes
-git clone https://github.com/geany/geany-themes.git
-cd geany-themes && ./install.sh
-
-clear
 ############################## Housekeeping ##############################
 
 # Delete the script
