@@ -54,19 +54,6 @@ apt install -y lightdm-gtk-greeter-settings mugshot htop neofetch wget curl numl
 
 # Add Flatpak repo
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-sudo -Eu ${user} flatpak install flathub -y \
-  com.github.tchx84.Flatseal org.x.Warpinator com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom
-
-# Clean Packages
-flatpak uninstall --unused -y
-
-# Flatpak: Permissions
-#flatpak --user override com.github.tchx84.Flatseal --filesystem=/usr/share/icons/:ro
-#flatpak --user override org.x.Warpinator --filesystem=/usr/share/icons/:ro
-#flatpak --user override com.bitwarden.desktop --filesystem=/usr/share/icons/:ro
-#flatpak --user override com.discordapp.Discord --filesystem=/usr/share/icons/:ro
-#flatpak --user override com.skype.Client --filesystem=/usr/share/icons/:ro
-#flatpak --user override us.zoom.Zoom --filesystem=/usr/share/icons/:ro
 
 clear
 ################################ Configs #################################
@@ -110,6 +97,9 @@ ln -sf /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
 ln -sf /usr/share/fontconfig/conf.avail/10-hinting-slight.conf /etc/fonts/conf.d/
 ln -sf /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
 fc-cache -fv
+
+# Debian Post Scripts
+cp -rf $HOME/distro-scripts/scripts/debian-final.sh ${home}/
 
 clear
 ################################# Themes #################################
