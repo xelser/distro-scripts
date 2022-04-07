@@ -21,7 +21,8 @@ clear
 ############################## Housekeeping ##############################
 
 # Delete the script
-rm -rf $HOME/debian-final.sh
+rm -rf $HOME/debian-final.sh 
 
 # Notify End
-notify-send "Ready to Use" "All updates and install processes have been successful" -i process-completed-symbolic -u critical
+notify-send "Ready to Use. All processes have been successful" "LOGGING OUT IN 30 Secs. Save your work." -i process-completed-symbolic -u critical
+$(sleep 30 && xfce4-session-logout --logout)
