@@ -47,7 +47,7 @@ deb-src http://mirror.rise.ph/debian/ $(lsb_release -cs)-updates main contrib no
 apt update && apt upgrade -y && apt full-upgrade -y
 
 # Install
-apt install -y lightdm-gtk-greeter-settings mugshot htop neofetch wget curl numlockx flatpak \
+apt install -y lightdm-gtk-greeter-settings mugshot htop neofetch wget curl build-essential numlockx flatpak \
   gparted transmission gnome-{boxes,disk-utility} redshift-gtk geany plank pulseeffects dconf-editor \
   plymouth plymouth-themes gnome-backgrounds gtk2-engines-{murrine,pixbuf} fonts-{noto,ubuntu} \
   mtools gvfs-{fuse,backends} unar rar zip webext-ublock-origin-firefox # ostree appstream-util
@@ -104,12 +104,12 @@ clear
 ################################# Themes #################################
 
 # GTK
-cd /tmp/ && git clone https://github.com/vinceliuice/Matcha-gtk-theme.git && ./Matcha-gtk-theme/install.sh -c dark -t aliz
+cd /tmp/ && git clone https://github.com/vinceliuice/Matcha-gtk-theme.git && ./Matcha-gtk-theme/install.sh
 
 # Icons
 sh -c "echo 'deb http://ppa.launchpad.net/papirus/papirus/ubuntu focal main' > /etc/apt/sources.list.d/papirus-ppa.list"
 gpg --no-default-keyring --keyring gnupg-ring:/etc/apt/trusted.gpg.d/papirus.gpg --keyserver keyserver.ubuntu.com --recv E58A9D36647CAE7F
-chmod 644 /etc/apt/trusted.gpg.d/papirus.gpg && apt update && apt install papirus-{icon-theme,folders} && papirus-folders -C red --theme Papirus-Dark
+chmod 644 /etc/apt/trusted.gpg.d/papirus.gpg && apt update && apt install papirus-{icon-theme,folders} && papirus-folders -C red -t Papirus-Dark
 
 # Geany Themes
 cd /tmp/ && rm -rf geany-themes
