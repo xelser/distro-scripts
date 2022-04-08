@@ -111,9 +111,9 @@ git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git
 cd Tela-circle-icon-theme && sudo ./install.sh
 
 # Kvantum
-cd /tmp/ && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
-git clone https://github.com/vinceliuice/Orchis-kde.git
-cd Orchis-kde && ./install.sh
+#cd /tmp/ && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
+#git clone https://github.com/vinceliuice/Orchis-kde.git
+#cd Orchis-kde && ./install.sh
 
 # Cursor
 if [ -f $HOME/Downloads/Bibata*.tar.gz ]; then
