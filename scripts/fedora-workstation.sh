@@ -5,7 +5,7 @@ clear
 ############################### Preparation ##############################
 
 # dotfiles prompt
-echo && read -p "Copy (xelser's) dotfiles? (y/N): " cp_dotfiles
+echo && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
 
 # No password for user
 echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
@@ -46,7 +46,7 @@ sudo dnf install gnome-shell-extension-{pop-shell,dash-to-dock,appindicator,gsco
 # Flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak install -y flathub com.github.tchx84.Flatseal com.mattjakeman.ExtensionManager org.x.Warpinator \
-  com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom com.obsproject.Studio
+  com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom
 
 clear
 ################################# Config ##################################
@@ -85,11 +85,11 @@ cat $HOME/distro-scripts/bash-configs/fedora_bash_profile >> $HOME/.bash_profile
 
 # dotfiles
 case $cp_dotfiles in
-   y)	# Remove old .config files
+   n)	;;
+   *)	# Remove old .config files
    	rm -rf $HOME/{.config,.local}
    	cd /tmp/ && git clone https://github.com/xelser/dotfiles
    	cp -rf /tmp/dotfiles/fedora-workstation/{.config,.local} $HOME/;;
-   *)	;;
 esac
 
 # Hide some .desktop files
