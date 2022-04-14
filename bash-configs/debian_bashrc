@@ -13,12 +13,6 @@ alias post="sh $HOME/debian-final.sh"
 alias update="aptup && flatpakup"
 alias clear="clear && history -c"
 
-# cli aliases
-alias rm="rm -rf"
-alias cp="cp -rf"
-alias ln="ln -sf"
-alias mkdir="mkdir -p"
-
 # theme
 alias gtkup="cd /tmp/ && rm -rf Matcha* && sudo rm -rf /usr/share/themes/Matcha* && git clone https://github.com/vinceliuice/Matcha-gtk-theme.git && sudo ./Matcha-gtk-theme/install.sh -c dark -t aliz && cd $HOME"
 
