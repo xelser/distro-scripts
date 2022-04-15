@@ -38,6 +38,7 @@ sudo dnf groupupdate core sound-and-video multimedia --exclude=PackageKit-gstrea
 sudo dnf upgrade && sudo dnf distro-sync
 
 # INSTALL
+sudo dnf groupinstall "Development Tools" "Development Libraries"
 sudo dnf install gnome-shell-extension-{pop-shell,dash-to-dock,appindicator,gsconnect,sound-output-device-chooser} \
   gnome-{tweaks,extensions-app,multi-writer,builder} google-noto-{cjk,emoji-color}-fonts google-roboto-* file-roller dconf-editor \
   mozilla-ublock-origin gparted variety transmission inkscape easyeffects htop neofetch vim cmatrix unrar \
