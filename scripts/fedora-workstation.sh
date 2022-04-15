@@ -63,12 +63,6 @@ echo "[daemon]
 AutomaticLoginEnable=True
 AutomaticLogin=$USER" | sudo tee -a /etc/gdm/custom.conf
 
-# fstab
-#echo "LABEL=Games /media/Games ext4 0 2" | sudo tee -a /etc/fstab
-
-# Swapiness
-#echo "vm.swappiness=80" | sudo tee -a /etc/sysctl.conf
-
 # Gaming
 #sudo dnf install akmod-nvidia wine wine-mono lutris steam gamescope gamemode mangohud goverlay mesa-libGLU.{x86_64,i686} gnome-shell-extension-gamemode
 #echo "blacklist nouveau
@@ -110,11 +104,6 @@ cd Orchis-theme && sudo ./install.sh
 cd /tmp/ && rm -rf Tela* && sudo rm -rf /usr/share/icons/Tela*
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git 
 cd Tela-circle-icon-theme && sudo ./install.sh
-
-# Kvantum
-#cd /tmp/ && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
-#git clone https://github.com/vinceliuice/Orchis-kde.git
-#cd Orchis-kde && ./install.sh
 
 # Cursor
 if [ -f $HOME/Downloads/Bibata*.tar.gz ]; then
