@@ -41,8 +41,8 @@ sudo dnf upgrade && sudo dnf distro-sync
 sudo dnf groupinstall "Development Tools" "Development Libraries"
 sudo dnf install gnome-shell-extension-{pop-shell,dash-to-dock,appindicator,gsconnect,sound-output-device-chooser} \
   gnome-{tweaks,extensions-app,multi-writer,builder} google-noto-{cjk,emoji-color}-fonts google-roboto-* file-roller dconf-editor \
-  mozilla-ublock-origin gparted variety transmission inkscape easyeffects htop neofetch vim cmatrix unrar \
-  gtk-murrine-engine sassc ostree libappstream-glib # google-chrome-stable chromium kvantum qt5ct
+  mozilla-ublock-origin gparted variety transmission inkscape easyeffects kvantum qt5ct htop neofetch unrar \
+  gtk-murrine-engine sassc ostree libappstream-glib # google-chrome-stable chromium
 
 # Flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -104,6 +104,11 @@ cd Orchis-theme && sudo ./install.sh
 cd /tmp/ && rm -rf Tela* && sudo rm -rf /usr/share/icons/Tela*
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git 
 cd Tela-circle-icon-theme && sudo ./install.sh
+
+# KDE
+cd /tmp/ && rm -rf Orchis* && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
+git clone https://github.com/vinceliuice/Orchis-kde.git
+cd Orchis-kde && ./install.sh
 
 # Cursor
 if [ -f $HOME/Downloads/Bibata*.tar.gz ]; then
