@@ -1,6 +1,8 @@
+export QT_QPA_PLATFORMTHEME="qt5ct"
 
 # Check whether if the windowing system is Xorg or Wayland
 echo $XDG_SESSION_TYPE | grep -q wayland
 if [ $? -eq 0 ]; then
+	export QT_QPA_PLATFORM="xcb"
 	export OBS_USE_EGL=1
 fi
