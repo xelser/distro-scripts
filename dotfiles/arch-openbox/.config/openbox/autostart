@@ -1,0 +1,33 @@
+# ---------------------------------------------- #
+
+## XFCE ##
+exec /usr/lib/xfce-polkit/xfce-polkit &
+exec /usr/lib/xfce4/notifyd/xfce4-notifyd &
+xfce4-power-manager &
+xfsettingsd &
+
+## OPENBOX ##
+/bin/bash ~/arch-final.sh &
+picom --config ~/.config/picom/picom.conf &
+nitrogen --restore &
+tint2 &
+volumeicon &
+nm-applet &
+xset led 3 &
+
+# ---------------------------------------------- #
+
+## Updates ##
+sudo timedatectl set-ntp true &
+# xfce4-terminal -e 'yay -Syyu --noconfirm' &
+
+## Redshift (night light) ##
+# exec /usr/lib/geoclue-2.0/demos/agent &
+# exec /usr/lib/geoclue-2.0/demos/where-am-i &
+# redshift-gtk &
+
+## Applications ##
+# discord --start-minimized &
+transmission-gtk -m &
+# warpinator &
+# firefox &

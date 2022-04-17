@@ -1,0 +1,12 @@
+[Default Applications]
+x-scheme-handler/http=xfce4-web-browser.desktop
+x-scheme-handler/https=xfce4-web-browser.desktop
+
+[Added Associations]
+x-scheme-handler/http=xfce4-web-browser.desktop;
+x-scheme-handler/https=xfce4-web-browser.desktop;
+application/x-desktop=mousepad.desktop;
+image/jpeg=ristretto.desktop;
+application/x-shellscript=geany.desktop;mousepad.desktop;
+text/plain=geany.desktop;mousepad.desktop;
+application/xml=geany.desktop;mousepad.desktop;

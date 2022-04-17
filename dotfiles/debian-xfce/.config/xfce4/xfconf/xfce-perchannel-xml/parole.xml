@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<channel name="parole" version="1.0">
+  <property name="subtitles" type="empty">
+    <property name="font" type="string" value="Ubuntu Mono Bold 14"/>
+  </property>
+  <property name="window" type="empty">
+    <property name="maximized" type="bool" value="true"/>
+    <property name="width" type="int" value="1346"/>
+    <property name="height" type="int" value="692"/>
+  </property>
+  <property name="audio" type="empty">
+    <property name="volume" type="int" value="100"/>
+  </property>
+  <property name="folders" type="empty">
+    <property name="last-used-media" type="string" value="/home/xelser/Downloads/Peaky.Blinders.S06E06.Lock.and.Key.1080p.iP.WEBRip.AAC2.0.x264-FLUX[rartv]"/>
+  </property>
+</channel>
