@@ -83,8 +83,7 @@ case $cp_dotfiles in
    n)	;;
    *)	# Remove old .config files
    	rm -rf $HOME/{.config,.local}
-   	cd /tmp/ && git clone https://github.com/xelser/dotfiles
-   	cp -rf /tmp/dotfiles/fedora-workstation/{.config,.local} $HOME/;;
+   	cp -rf $HOME/distro-scripts/dotfiles/fedora-workstation/{.config,.local} $HOME/;;
 esac
 
 # Hide some .desktop files

@@ -25,8 +25,7 @@ case $cp_dotfiles in
    n)	;;
    *)	# Remove old .config files
    	rm -rf ${home}/.config
-   	cd /tmp/ && git clone https://github.com/xelser/dotfiles
-   	cp -rf /tmp/dotfiles/debian-xfce/.config ${home};;
+   	cp -rf $HOME/distro-scripts/dotfiles/debian-xfce/.config ${home};;
 esac
 
 clear
