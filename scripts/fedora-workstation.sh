@@ -11,12 +11,7 @@ echo && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
 echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
 
 # Configure DNF
-echo "keepcache=True
-fastestmirror=True
-assumeyes=True
-install_weak_deps=False
-max_parallel_downloads=10
-color=always" | sudo tee -a /etc/dnf/dnf.conf
+echo -e "keepcache=True\nfastestmirror=True\nassumeyes=True\ninstall_weak_deps=False\nmax_parallel_downloads=10\ncolor=always" | sudo tee -a /etc/dnf/dnf.conf
 
 clear
 ################################# Install #################################
@@ -39,7 +34,7 @@ sudo dnf upgrade && sudo dnf distro-sync
 
 # INSTALL
 sudo dnf groupinstall "Development Tools" "Development Libraries"
-sudo dnf install gnome-shell-extension-{pop-shell,dash-to-dock,appindicator,gsconnect,sound-output-device-chooser} \
+sudo dnf install gnome-shell-extension-{appindicator,dash-to-dock,gsconnect,pop-shell,sound-output-device-chooser,user-theme} \
   gnome-{tweaks,extensions-app,multi-writer,builder} google-noto-{cjk,emoji-color}-fonts google-roboto-* file-roller dconf-editor \
   mozilla-ublock-origin gparted variety transmission inkscape easyeffects kvantum qt5ct htop neofetch unrar \
   gtk-murrine-engine sassc ostree libappstream-glib # google-chrome-stable chromium
