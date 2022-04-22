@@ -54,15 +54,12 @@ if [ -f $HOME/Downloads/refind*.rpm ]; then
 fi
 
 # gdm autologin using script
-echo "[daemon]
-AutomaticLoginEnable=True
-AutomaticLogin=$USER" | sudo tee -a /etc/gdm/custom.conf
+echo -e "[daemon]\nAutomaticLoginEnable=True\nAutomaticLogin=$USER" | sudo tee -a /etc/gdm/custom.conf
 
 # Gaming
-#sudo dnf install akmod-nvidia wine wine-mono lutris steam gamescope gamemode mangohud goverlay mesa-libGLU.{x86_64,i686} gnome-shell-extension-gamemode
-#echo "blacklist nouveau
-#options nouveau modeset=0" | sudo tee /usr/lib/modprobe.d/blacklist-nouveau.conf
-#sudo dracut --force
+sudo dnf install akmod-nvidia wine wine-mono lutris steam gamescope gamemode mangohud goverlay mesa-libGLU.{x86_64,i686} gnome-shell-extension-gamemode
+echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /usr/lib/modprobe.d/blacklist-nouveau.conf
+sudo dracut --force
 
 clear
 ############################## Transfer Files ############################
