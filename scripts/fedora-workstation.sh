@@ -36,7 +36,7 @@ sudo dnf upgrade && sudo dnf distro-sync
 sudo dnf groupinstall "Development Tools" "Development Libraries"
 sudo dnf install gnome-shell-extension-{appindicator,dash-to-dock,gsconnect,pop-shell,sound-output-device-chooser,user-theme} \
   gnome-{tweaks,extensions-app,multi-writer,builder} google-noto-{cjk,emoji-color}-fonts google-roboto-* file-roller dconf-editor \
-  mozilla-ublock-origin gparted variety transmission inkscape easyeffects kvantum qt5ct htop neofetch unrar \
+  mozilla-ublock-origin gparted variety transmission inkscape easyeffects kvantum qt5ct flatpak htop neofetch unrar \
   gtk-murrine-engine sassc ostree libappstream-glib # google-chrome-stable chromium
 
 # Flatpak
