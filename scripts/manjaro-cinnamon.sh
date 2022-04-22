@@ -19,7 +19,7 @@ sudo pacman-mirrors --geoip && sudo pacman -Syy --needed --noconfirm --disable-d
 
 # Install
 yay -Syu --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
-
+  firefox firefox-ublock-origin transmission-gtk gparted gnome-disk-utility warpinator
 
 clear
 ################################# Themes ##################################
