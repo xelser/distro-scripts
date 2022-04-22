@@ -27,12 +27,12 @@ clear
 # GTK
 cd /tmp/ && rm -rf Orchis* && sudo rm -rf /usr/share/themes/Orchis*
 git clone https://github.com/vinceliuice/Orchis-theme.git
-cd Orchis-theme && sudo ./install.sh
+cd Orchis-theme && sudo ./install.sh -t green
 
 # Icons
 cd /tmp/ && rm -rf Tela* && sudo rm -rf /usr/share/icons/Tela*
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git
-cd Tela-circle-icon-theme && sudo ./install.sh
+cd Tela-circle-icon-theme && sudo ./install.sh manjaro
 
 # KDE
 cd /tmp/ && rm -rf Orchis* && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
