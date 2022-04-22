@@ -13,9 +13,13 @@ echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
 clear
 ################################ Packages #################################
 
-# Pacman
+# Package Manger (Pacman and YAY)
 echo -e "[options]\nParallelDownloads = 10\nColor" | sudo tee -a /etc/pacman.conf
-sudo pacman-mirrors --geoip
+sudo pacman-mirrors --geoip && sudo pacman -Syy --needed --noconfirm --disable-download-timeout yay
+
+# Install
+yay -Syu --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
+
 
 clear
 ################################# Themes ##################################
