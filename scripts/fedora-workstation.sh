@@ -87,14 +87,14 @@ clear
 ################################# Themes ##################################
 
 # GTK (for legacy apps)
-cd /tmp/ && rm -rf adw-gtk3 # && sudo rm -rf
+cd /tmp/ && rm -rf adw-gtk3 && sudo rm -rf adw-gtk3
 git clone https://github.com/lassekongo83/adw-gtk3.git
 cd adw-gtk3 && meson build && sudo ninja -C build install
 
 # GTK
-#cd /tmp/ && rm -rf Orchis* && sudo rm -rf /usr/share/themes/Orchis*
-#git clone https://github.com/vinceliuice/Orchis-theme.git
-#cd Orchis-theme && sudo ./install.sh
+cd /tmp/ && rm -rf Orchis* && sudo rm -rf /usr/share/themes/Orchis*
+git clone https://github.com/vinceliuice/Orchis-theme.git
+cd Orchis-theme && sudo ./install.sh
 
 # Icons
 #cd /tmp/ && rm -rf Tela* && sudo rm -rf /usr/share/icons/Tela*
