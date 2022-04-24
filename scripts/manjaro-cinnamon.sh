@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 clear
 
 ############################## Preparation ###############################
@@ -22,26 +21,8 @@ yay -Syu --needed --noconfirm --disable-download-timeout --cleanafter --removema
   firefox transmission-gtk gparted gnome-disk-utility warpinator \
   firefox-ublock-origin gtk-engine-murrine
 
-clear
-################################# Themes ##################################
-
-# GTK
-#cd /tmp/ && rm -rf Orchis* && sudo rm -rf /usr/share/themes/Orchis*
-#git clone https://github.com/vinceliuice/Orchis-theme.git
-#cd Orchis-theme && sudo ./install.sh -t green
-
-# Icons
-#cd /tmp/ && rm -rf Tela* && sudo rm -rf /usr/share/icons/Tela*
-#git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git
-#cd Tela-circle-icon-theme && sudo ./install.sh manjaro
-
-# KDE
-#cd /tmp/ && rm -rf Orchis* && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
-#git clone https://github.com/vinceliuice/Orchis-kde.git
-#cd Orchis-kde && ./install.sh
-
-# AUR (Cursor)
-yay -S --needed --noconfirm --disable-download-timeout orchis-theme-git tela-circle-icon-theme-git orchis-kde-theme-git bibata-cursor-theme-bin
+# Themes
+yay -S --needed --noconfirm --disable-download-timeout orchis-theme-git tela-circle-icon-theme-git orchis-kde-theme-git
 
 clear
 ############################## Housekeeping ###############################

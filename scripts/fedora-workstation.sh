@@ -37,7 +37,7 @@ sudo dnf groupinstall "Development Tools" "Development Libraries"
 sudo dnf install gnome-shell-extension-{appindicator,dash-to-dock,gsconnect,pop-shell,sound-output-device-chooser,user-theme} \
   gnome-{tweaks,extensions-app,multi-writer,builder} google-noto-{cjk,emoji-color}-fonts google-roboto-* file-roller dconf-editor \
   mozilla-ublock-origin gparted variety transmission inkscape easyeffects kvantum qt5ct flatpak htop neofetch unrar \
-  gtk-murrine-engine sassc ostree libappstream-glib # google-chrome-stable chromium
+  gtk-murrine-engine sassc ostree libappstream-glib ninja-build meson # google-chrome-stable chromium
 
 # Flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -86,33 +86,38 @@ echo "NotShowIn=GNOME" | tee -a $HOME/.local/share/applications/calf.desktop
 clear
 ################################# Themes ##################################
 
+# GTK (for legacy apps)
+cd /tmp/ && rm -rf adw-gtk3 # && sudo rm -rf
+git clone https://github.com/lassekongo83/adw-gtk3.git
+cd adw-gtk3 && meson build && sudo ninja -C build install
+
 # GTK
-cd /tmp/ && rm -rf Orchis* && sudo rm -rf /usr/share/themes/Orchis*
-git clone https://github.com/vinceliuice/Orchis-theme.git
-cd Orchis-theme && sudo ./install.sh
+#cd /tmp/ && rm -rf Orchis* && sudo rm -rf /usr/share/themes/Orchis*
+#git clone https://github.com/vinceliuice/Orchis-theme.git
+#cd Orchis-theme && sudo ./install.sh
 
 # Icons
-cd /tmp/ && rm -rf Tela* && sudo rm -rf /usr/share/icons/Tela*
-git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git 
-cd Tela-circle-icon-theme && sudo ./install.sh
+#cd /tmp/ && rm -rf Tela* && sudo rm -rf /usr/share/icons/Tela*
+#git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git
+#cd Tela-circle-icon-theme && sudo ./install.sh
 
 # KDE
-cd /tmp/ && rm -rf Orchis* && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
-git clone https://github.com/vinceliuice/Orchis-kde.git
-cd Orchis-kde && ./install.sh
+#cd /tmp/ && rm -rf Orchis* && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
+#git clone https://github.com/vinceliuice/Orchis-kde.git
+#cd Orchis-kde && ./install.sh
 
 # Cursor
-if [ -f $HOME/Downloads/Bibata*.tar.gz ]; then
-	cd /usr/share/icons/ && sudo rm -rf Bibata*
-	sudo tar -xf $HOME/Downloads/Bibata*.tar.gz
-fi
+#if [ -f $HOME/Downloads/Bibata*.tar.gz ]; then
+#	cd /usr/share/icons/ && sudo rm -rf Bibata*
+#	sudo tar -xf $HOME/Downloads/Bibata*.tar.gz
+#fi
 
 # Flatpak theme
-cd /tmp/ && rm -rf stylepak
-git clone https://github.com/refi64/stylepak.git
-cd stylepak && ./stylepak install-system Orchis-dark-compact
+#cd /tmp/ && rm -rf stylepak
+#git clone https://github.com/refi64/stylepak.git
+#cd stylepak && ./stylepak install-system Orchis-dark-compact
 
-clear
+#clear
 ############################## Housekeeping ##############################
 
 # Clean Packages
