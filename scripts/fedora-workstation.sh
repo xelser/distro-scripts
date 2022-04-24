@@ -87,7 +87,7 @@ clear
 ################################# Themes ##################################
 
 # GTK (for legacy apps)
-cd /tmp/ && rm -rf adw-gtk3 && sudo rm -rf adw-gtk3
+cd /tmp/ && rm -rf adw-gtk3 && sudo rm -rf /usr/share/themes/adw-gtk3
 git clone https://github.com/lassekongo83/adw-gtk3.git
 cd adw-gtk3 && meson build && sudo ninja -C build install
 
