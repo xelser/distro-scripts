@@ -86,11 +86,6 @@ echo "NotShowIn=GNOME" | tee -a $HOME/.local/share/applications/calf.desktop
 clear
 ################################# Themes ##################################
 
-# GTK (for legacy apps)
-cd /tmp/ && rm -rf adw-gtk3 && sudo rm -rf /usr/share/themes/adw-gtk3
-git clone https://github.com/lassekongo83/adw-gtk3.git
-cd adw-gtk3 && meson build && sudo ninja -C build install
-
 # GTK
 cd /tmp/ && rm -rf Orchis* && sudo rm -rf /usr/share/themes/Orchis*
 git clone https://github.com/vinceliuice/Orchis-theme.git
@@ -117,7 +112,20 @@ cd /tmp/ && rm -rf stylepak
 git clone https://github.com/refi64/stylepak.git
 cd stylepak && ./stylepak install-system Orchis-dark-compact
 
-#clear
+clear
+###################### GNOME 42 (libadwaita Update) ######################
+
+# gdm-settings
+cd /tmp/ && rm -rf gdm-settings
+git clone --depth=1 https://github.com/realmazharhussain/gdm-settings
+cd gdm-settings && meson build && meson install -C build
+
+# GTK (libadwaita)
+cd /tmp/ && rm -rf adw-gtk3 && sudo rm -rf /usr/share/themes/adw-gtk3
+git clone https://github.com/lassekongo83/adw-gtk3.git
+cd adw-gtk3 && meson build && sudo ninja -C build install
+
+clear
 ############################## Housekeeping ##############################
 
 # Clean Packages
