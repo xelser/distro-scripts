@@ -113,7 +113,17 @@ git clone https://github.com/refi64/stylepak.git
 cd stylepak && ./stylepak install-system Orchis-dark-compact
 
 clear
-###################### GNOME 42 (libadwaita Update) ######################
+############################## Housekeeping ##############################
+
+# Clean Packages
+sudo dnf autoremove && sudo dnf clean all
+flatpak uninstall --unused -y
+
+# Set ownership
+sudo chown -R $USER $HOME
+
+clear
+############################### Tests/Beta ###############################
 
 # gdm-settings
 cd /tmp/ && rm -rf gdm-settings
@@ -124,13 +134,3 @@ cd gdm-settings && meson build && meson install -C build
 cd /tmp/ && rm -rf adw-gtk3 && sudo rm -rf /usr/share/themes/adw-gtk3
 git clone https://github.com/lassekongo83/adw-gtk3.git
 cd adw-gtk3 && meson build && sudo ninja -C build install
-
-clear
-############################## Housekeeping ##############################
-
-# Clean Packages
-sudo dnf autoremove && sudo dnf clean all
-flatpak uninstall --unused -y
-
-# Set ownership
-sudo chown -R $USER $HOME
