@@ -97,25 +97,25 @@ git clone https://github.com/vinceliuice/Orchis-theme.git
 cd Orchis-theme && sudo ./install.sh
 
 # Icons
-#cd /tmp/ && rm -rf Tela* && sudo rm -rf /usr/share/icons/Tela*
-#git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git
-#cd Tela-circle-icon-theme && sudo ./install.sh
+cd /tmp/ && rm -rf Tela* && sudo rm -rf /usr/share/icons/Tela*
+git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git
+cd Tela-circle-icon-theme && sudo ./install.sh
 
 # KDE
-#cd /tmp/ && rm -rf Orchis* && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
-#git clone https://github.com/vinceliuice/Orchis-kde.git
-#cd Orchis-kde && ./install.sh
+cd /tmp/ && rm -rf Orchis* && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
+git clone https://github.com/vinceliuice/Orchis-kde.git
+cd Orchis-kde && ./install.sh
 
 # Cursor
-#if [ -f $HOME/Downloads/Bibata*.tar.gz ]; then
-#	cd /usr/share/icons/ && sudo rm -rf Bibata*
-#	sudo tar -xf $HOME/Downloads/Bibata*.tar.gz
-#fi
+if [ -f $HOME/Downloads/Bibata*.tar.gz ]; then
+	cd /usr/share/icons/ && sudo rm -rf Bibata*
+	sudo tar -xf $HOME/Downloads/Bibata*.tar.gz
+fi
 
 # Flatpak theme
-#cd /tmp/ && rm -rf stylepak
-#git clone https://github.com/refi64/stylepak.git
-#cd stylepak && ./stylepak install-system Orchis-dark-compact
+cd /tmp/ && rm -rf stylepak
+git clone https://github.com/refi64/stylepak.git
+cd stylepak && ./stylepak install-system Orchis-dark-compact
 
 #clear
 ############################## Housekeeping ##############################
