@@ -22,6 +22,7 @@ case $var in
    4)	systemd-inhibit ./manjaro-cinnamon.sh;;
    *)	echo "invalid option";;
 esac
+echo
 
 # Reboot
 if [ $? -eq 0 ]; then
