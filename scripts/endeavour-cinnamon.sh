@@ -28,7 +28,7 @@ clear
 ################################ Configs #################################
 
 # rEFInd
-sudo sed -i 's/ro /ro quiet splash /g' /boot/refind_linux.conf
+sudo sed -i 's/ro /rw quiet splash /g' /boot/refind_linux.conf
 
 # Lightdm
 echo "[Seat:*]
