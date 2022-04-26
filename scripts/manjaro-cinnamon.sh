@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 clear
 
 ############################## Preparation ###############################
@@ -18,15 +19,16 @@ sudo pacman-mirrors --geoip && sudo pacman -Syy --needed --noconfirm --disable-d
 
 # Install
 yay -Syu --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
-  firefox transmission-gtk gparted gnome-disk-utility warpinator \
+  firefox transmission-gtk gparted gnome-disk-utility warpinator kvantum qt5ct \
   firefox-ublock-origin gtk-engine-murrine
 
 # Themes
-yay -S --needed --noconfirm --disable-download-timeout orchis-theme-git tela-circle-icon-theme-git orchis-kde-theme-git
+yay -S --needed --noconfirm --disable-download-timeout orchis-theme-git orchis-kde-theme-git tela-circle-icon-theme-git \
+  vimix-gtk-themes vimix-icon-theme vimix-cursors vimix-theme-kde-git
 
 clear
 ############################## Housekeeping ###############################
 
 # Clean packages
-yay -Rnsu $(yay -Qtdq) --noconfirm
+yay -Qtdq | yay -Rnsu - --noconfirm
 yay -Sc --noconfirm

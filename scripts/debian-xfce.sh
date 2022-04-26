@@ -58,14 +58,12 @@ clear
 ################################ Configs #################################
 
 # Lightdm
-echo "
-[Seat:*]
+echo "[Seat:*]
 greeter-setup-script=/usr/bin/numlockx on
 autologin-user=${user}" | tee -a /etc/lightdm/lightdm.conf
 
 # lightdm-gtk-greeter
-echo "
-[greeter]
+echo "[greeter]
 background = /usr/share/backgrounds/gnome/adwaita-night.jpg
 theme-name = Matcha-dark-aliz
 xft-hintstyle = hintslight
