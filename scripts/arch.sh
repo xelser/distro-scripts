@@ -221,6 +221,7 @@ systemctl enable NetworkManager
 # grub
 mkdir /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=${firm} --recheck
+EOF
 
 clear
 ############################## Transfer Files #############################
