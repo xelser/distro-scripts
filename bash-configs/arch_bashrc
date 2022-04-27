@@ -3,7 +3,7 @@
 PS1="\[\033[1;36m\]\u@\h \[\033[0;37m\][\[\033[1;33m\]\W\[\033[0;37m\]] \[\033[0;37m\]$ "
 
 # package manager aliases
-alias update="sudo pacman -Syyu --noconfirm --disable-download-timeout && sudo pacman -Rnsu $(sudo pacman -Qtdq) --noconfirm"
+alias update="sudo pacman -Syyu --noconfirm --disable-download-timeout && sudo pacman -Rnsu $(sudo pacman -Qtdq) --noconfirm && sudo pacman -Sc --noconfirm"
 
 # user aliases
 alias post="sh arch-post-install.sh"
