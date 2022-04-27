@@ -8,7 +8,7 @@ wget -q --spider http://google.com
 if [ $? -eq 0 ]; then
 	sudo timedatectl set-ntp true
 else
-	sudo nmtui && sudo timedatectl set-ntp true
+	sudo nmtui && sudo timedatectl set-ntp true && clear
 fi
 
 # refind
@@ -43,8 +43,8 @@ yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake
   lxterminal pcmanfm xarchiver leafpad gpicview nitrogen xreader gvfs-* sshfs tumbler ffmpegthumbnailer poppler-glib \
   qt5ct kvantum-qt5 gtk-engine-murrine adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers \
   firefox discord bitwarden transmission-gtk gparted screengrab \
-  obmenu-generator thunar-shares-plugin mugshot ventoy-bin adapta-gtk-theme-colorpack-joshaby-git papirus-folders kvantum-theme-adapta
-	# xfce4-{settings,terminal,notifyd,power-manager} xfce-polkit thunar-{archive-plugin,media-tags-plugin,volman} catfish parole
+  obmenu-generator adapta-gtk-theme-colorpack-joshaby-git papirus-folders kvantum-theme-adapta
+
 clear
 ################################## Config ##################################
 
