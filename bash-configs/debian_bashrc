@@ -7,10 +7,10 @@ alias aptin="sudo apt install -y"
 alias aptre="sudo apt autoremove --purge -y"
 alias aptup="sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y && aptre"
 alias flatpakup="flatpak update -y && flatpak uninstall --unused -y"
+alias update="aptup && flatpakup"
 
 # user aliases
 alias post="sh $HOME/debian-final.sh"
-alias update="aptup && flatpakup"
 alias clear="clear && history -c"
 
 # theme

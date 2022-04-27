@@ -49,16 +49,14 @@ clear
 ################################## Config ##################################
 
 # lightdm
-echo "
-[Seat:*]
+echo "[Seat:*]
 greeter-setup-script=/usr/bin/numlockx on
 autologin-user=$USER" | sudo tee -a /etc/lightdm/lightdm.conf
 sudo groupadd -r autologin && sudo gpasswd -a $USER autologin
 sudo systemctl enable lightdm
 
 # lightdm-gtk-greeter
-echo "
-[greeter]
+echo "[greeter]
 theme-name = Adapta-Cyan-Nokto-Eta
 icon-theme-name = Papirus-Dark
 font-name = Fira Sans 10

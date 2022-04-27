@@ -10,9 +10,9 @@ alias dnfin="sudo dnf install"
 alias dnfre="sudo dnf autoremove"
 alias dnfup="sudo dnf upgrade && sudo dnf distro-sync && dnfre"
 alias flatpakup="flatpak update -y && flatpak uninstall --unused -y"
+alias update="dnfup && flatpakup"
 
 # user aliases
-alias update="dnfup && flatpakup"
 alias clear="clear && history -c"
 
 # theme aliases

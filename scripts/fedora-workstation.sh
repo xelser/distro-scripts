@@ -25,7 +25,7 @@ sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-releas
 sudo dnf groupremove 'LibreOffice' 'Container Management' 'Guest Desktop Agents'
 sudo dnf autoremove gnome-shell-extension-{background-logo,window-list} --exclude=gnome-shell-extension-{apps,places}-menu \
   fedora-bookmarks libreoffice-core mediawriter rhythmbox cheese simple-scan \
-  gnome-{connections,contacts,photos,font-viewer,characters,tour,maps,clocks,weather} # calendar,logs,boxes,
+  gnome-{contacts,photos,font-viewer,characters,tour,maps,clocks,weather} # calendar,logs,boxes,connections,
 sudo dnf mark install gnome-shell-extension-{apps,places}-menu
 
 # UPDATE
@@ -34,8 +34,8 @@ sudo dnf upgrade && sudo dnf distro-sync
 
 # INSTALL
 sudo dnf install gnome-shell-extension-{appindicator,dash-to-dock,gsconnect,pop-shell,sound-output-device-chooser,user-theme} \
-  gnome-{tweaks,extensions-app,multi-writer,builder} google-noto-{cjk,emoji-color}-fonts google-roboto-* file-roller dconf-editor \
-  gparted variety transmission inkscape easyeffects kvantum qt5ct flatpak htop neofetch unrar \
+  gnome-{tweaks,extensions-app,multi-writer,builder} google-noto-{cjk,emoji-color}-fonts google-roboto-* htop neofetch unrar flatpak \
+  deja-dup file-roller drawing dconf-editor lollypop seahorse gparted variety transmission timeshift inkscape easyeffects kvantum qt5ct \
   mozilla-ublock-origin gtk-murrine-engine # google-chrome-stable chromium
 
 # Flatpak
@@ -127,8 +127,7 @@ clear
 
 # gdm-settings
 sudo dnf install libadwaita-devel glib2-devel pygobject3-devel gettext meson gobject-introspection
-cd /tmp/ && rm -rf gdm-settings
-git clone --depth=1 https://github.com/realmazharhussain/gdm-settings
+cd /tmp/ && rm -rf gdm-settings && git clone --depth=1 https://github.com/realmazharhussain/gdm-settings
 cd gdm-settings && meson build && meson install -C build
 
 # GTK (libadwaita)
