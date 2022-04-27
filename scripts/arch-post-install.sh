@@ -42,7 +42,7 @@ yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake
   tint2 network-manager-applet volumeicon lx{appearance,hotkey,input,randr,session,task}-gtk3 lxqt-{notificationd,powermanagement} \
   lxterminal pcmanfm xarchiver leafpad gpicview nitrogen xreader gvfs-* sshfs tumbler ffmpegthumbnailer poppler-glib \
   qt5ct kvantum-qt5 gtk-engine-murrine adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers \
-  firefox discord bitwarden transmission-gtk gparted gnome-disk-utility gnome-boxes warpinator screengrab redshift geany \
+  firefox discord bitwarden transmission-gtk gparted screengrab \
   obmenu-generator thunar-shares-plugin mugshot ventoy-bin adapta-gtk-theme-colorpack-joshaby-git papirus-folders kvantum-theme-adapta
 	# xfce4-{settings,terminal,notifyd,power-manager} xfce-polkit thunar-{archive-plugin,media-tags-plugin,volman} catfish parole
 clear
