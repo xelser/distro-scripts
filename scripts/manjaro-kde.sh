@@ -13,9 +13,7 @@ clear
 ################################ Packages #################################
 
 # Pacman
-echo "[options]
-ParallelDownloads = 10
-Color" | sudo tee -a /etc/pacman.conf
+echo -e "[options]\nParallelDownloads = 10\nColor" | sudo tee -a /etc/pacman.conf
 
 # Remove bloat
 sudo pacman -Rnsu --noconfirm yakuake okular partitionmanager timeshift timeshift-autosnap-manjaro \
@@ -88,5 +86,5 @@ clear
 ############################## Housekeeping ###############################
 
 # Clean packages
-yay -Qtdq | yay -Rnsu - --noconfirm
+yay -Rnsu $(yay -Qtdq) --noconfirm
 yay -Sc --noconfirm
