@@ -51,6 +51,9 @@ if [ -f $HOME/Downloads/refind*.rpm ]; then
 	sudo sed -i 's/ro /ro quiet splash /g' /boot/refind_linux.conf
 fi
 
+# fstab
+echo "LABEL=Games	/media/Games	ext4	defaults	0 2" | sudo tee -a /etc/fstab
+
 # gdm autologin using script
 echo -e "[daemon]\nAutomaticLoginEnable=True\nAutomaticLogin=$USER" | sudo tee -a /etc/gdm/custom.conf
 
