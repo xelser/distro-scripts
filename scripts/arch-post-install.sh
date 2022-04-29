@@ -40,7 +40,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Official Packages
-sudo pacman-key --refresh-keys && sudo pacman -Syyu --needed --noconfirm --disable-download-timeout \
+sudo pacman -Syy archlinux-keyring && sudo pacman -Syu --needed --noconfirm --disable-download-timeout \
   xorg numlockx openbox obconf picom lightdm-gtk-greeter-settings alsa-{utils,plugins} pulseaudio-{alsa,equalizer-ladspa} pavucontrol \
   qt5ct kvantum-qt5 adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers \
   gtk-engine-murrine gvfs-{afc,goa,google,gphoto2,mtp,nfs,smb} sshfs tumbler ffmpegthumbnailer poppler-glib \
