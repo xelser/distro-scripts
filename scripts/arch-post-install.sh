@@ -42,7 +42,7 @@ sudo pacman -Syyu --needed --noconfirm --disable-download-timeout \
   qt5ct kvantum-qt5 gtk-engine-murrine adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers \
   tint2 network-manager-applet volumeicon lx{appearance,hotkey,input,randr,session,task}-gtk3 lxqt-{notificationd,powermanagement} \
   lxterminal pcmanfm xarchiver leafpad gpicview nitrogen xreader gvfs-* sshfs tumbler ffmpegthumbnailer poppler-glib \
-  firefox discord transmission-gtk gparted screengrab \
+  firefox discord transmission-gtk gparted screengrab
 
 # AUR packages
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
