@@ -38,15 +38,15 @@ git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sirc -
 
 # Official Packages
 sudo pacman -Syyu --needed --noconfirm --disable-download-timeout \
-  xorg numlockx openbox obconf picom lightdm-gtk-greeter-settings alsa-{utils,plugins} pulseaudio-{alsa,equalizer-ladspa} pavucontrol \
+  xorg numlockx openbox obconf picom lightdm-slick-greeter alsa-{utils,plugins} pulseaudio-{alsa,equalizer-ladspa} pavucontrol \
   qt5ct kvantum-qt5 adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers \
   gtk-engine-murrine gvfs-{afc,goa,google,gphoto2,mtp,nfs,smb} sshfs tumbler ffmpegthumbnailer poppler-glib \
   tint2 network-manager-applet volumeicon lx{appearance,hotkey,input,randr,session,task}-gtk3 lxqt-{notificationd,powermanagement} \
-  firefox discord transmission-gtk gparted screengrab lxterminal pcmanfm xarchiver leafpad gpicview nitrogen xreader 
+  firefox discord transmission-gtk gparted nitrogen screengrab alacritty celluloid nemo xarchiver xed xreader
 
 # AUR packages
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
-  obmenu-generator adapta-gtk-theme-colorpack-joshaby-git papirus-folders kvantum-theme-adapta
+  lightdm-settings xviewer obmenu-generator adapta-gtk-theme-colorpack-joshaby-git papirus-folders kvantum-theme-adapta
 
 clear
 ################################## Config ##################################
