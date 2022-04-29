@@ -24,10 +24,10 @@ sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-
 
 # Install
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
-  htop neofetch refind lxappearance-gtk3 kvantum-qt5 gnome-disk-utility gparted bitwarden pulseaudio-equalizer-ladspa \
-  latte-dock elisa vlc ktorrent ttf-roboto ttf-roboto-{mono,slab} appmenu-gtk-module lib32-libdbusmenu-glib lib32-libdbusmenu-gtk2 \
-  lib32-libdbusmenu-gtk3 libdbusmenu-glib libdbusmenu-gtk2 libdbusmenu-gtk3 gtk-engine-murrine gtk-engines \
+  htop neofetch refind lxappearance-gtk3 kvantum-qt5 gnome-disk-utility gparted pulseaudio-equalizer-ladspa \
+  latte-dock elisa vlc ktorrent ttf-roboto ttf-roboto-{mono,slab} gtk-engine-murrine gtk-engines \
   plasma5-applets-virtual-desktop-bar-git plasma5-applets-panon zoom skypeforlinux-stable-bin firefox-appmenu-bin
+  # appmenu-gtk-module lib32-libdbusmenu-glib lib32-libdbusmenu-gtk2 lib32-libdbusmenu-gtk3 libdbusmenu-glib libdbusmenu-gtk2 libdbusmenu-gtk3
 
 # Gaming
 yay -S --needed --noconfirm --disable-download-timeout \
@@ -52,9 +52,6 @@ sudo sed -i 's/DisplayStopCommand/#DisplayStopCommand/g' /etc/sddm.conf
 # Install Refind
 sudo refind-install
 sudo sed -i 's/ro /rw quiet splash /g' /boot/refind_linux.conf
-
-# fstab
-echo "LABEL=Games /media/Games ext4 defaults 0 2" | sudo tee -a /etc/fstab
 
 # Font rendering
 sudo cp -rf $HOME/distro-scripts/x11-font-rendering/local.conf /etc/fonts/

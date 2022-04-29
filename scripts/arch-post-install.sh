@@ -14,7 +14,7 @@ fi
 # refind
 sudo dmesg | grep -q "EFI v"
 if [ $? -eq 0 ]; then
-	echo && read -p "Install refind? (y/N): " refind_install
+	read -p "Install refind? (y/N): " refind_install
 fi
 
 # dotfiles
@@ -36,13 +36,16 @@ clear
 # Installing yay
 git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sirc --noconfirm && rm -rf $HOME/yay-bin
 
-# Installing Packages
-yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
+# Official Packages
+sudo pacman -Syyu --needed --noconfirm --disable-download-timeout \
   xorg numlockx openbox obconf picom lightdm-gtk-greeter-settings alsa-{utils,plugins} pulseaudio-{alsa,equalizer-ladspa} pavucontrol \
+  qt5ct kvantum-qt5 gtk-engine-murrine adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers \
   tint2 network-manager-applet volumeicon lx{appearance,hotkey,input,randr,session,task}-gtk3 lxqt-{notificationd,powermanagement} \
   lxterminal pcmanfm xarchiver leafpad gpicview nitrogen xreader gvfs-* sshfs tumbler ffmpegthumbnailer poppler-glib \
-  qt5ct kvantum-qt5 gtk-engine-murrine adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers \
-  firefox discord bitwarden transmission-gtk gparted screengrab \
+  firefox discord transmission-gtk gparted screengrab \
+
+# AUR packages
+yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
   obmenu-generator adapta-gtk-theme-colorpack-joshaby-git papirus-folders kvantum-theme-adapta
 
 clear
