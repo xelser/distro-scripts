@@ -40,27 +40,34 @@ if [ $? -ne 0 ]; then
 fi
 
 # Official Packages
-sudo pacman -Syyu --needed --noconfirm --disable-download-timeout \
-  xorg numlockx openbox obconf picom lightdm-slick-greeter alsa-{utils,plugins} pulseaudio-{alsa,equalizer-ladspa} pavucontrol \
+sudo pacman-key --refresh-keys && sudo pacman -Syyu --needed --noconfirm --disable-download-timeout \
+  xorg numlockx openbox obconf picom lightdm-gtk-greeter-settings alsa-{utils,plugins} pulseaudio-{alsa,equalizer-ladspa} pavucontrol \
   qt5ct kvantum-qt5 adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers \
   gtk-engine-murrine gvfs-{afc,goa,google,gphoto2,mtp,nfs,smb} sshfs tumbler ffmpegthumbnailer poppler-glib \
   tint2 network-manager-applet volumeicon lx{appearance,hotkey,input,randr,session,task}-gtk3 lxqt-{notificationd,powermanagement} \
-  firefox discord transmission-gtk gparted nitrogen screengrab alacritty celluloid nemo xarchiver xed xreader
+  firefox discord transmission-gtk gparted nitrogen gpicview leafpad screengrab alacritty celluloid nemo xarchiver xreader
 
 # AUR packages
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
-  lightdm-settings xviewer obmenu-generator adapta-gtk-theme-colorpack-joshaby-git papirus-folders kvantum-theme-adapta
+  obmenu-generator adapta-gtk-theme-colorpack-joshaby-git papirus-folders kvantum-theme-adapta
 
 clear
 ################################## Config ##################################
 
 # lightdm
 echo "[Seat:*]
-greeter-session=lightdm-slick-greeter
 greeter-setup-script=/usr/bin/numlockx on
 autologin-user=$USER" | sudo tee -a /etc/lightdm/lightdm.conf
 sudo groupadd -r autologin && sudo gpasswd -a $USER autologin
 sudo systemctl enable lightdm
+
+# lightdm-gtk-greeter
+echo "[greeter]
+xft-hintstyle = hintslight
+xft-dpi = 96
+hide-user-image = true
+clock-format = %a, %I:%M %p
+indicators = ~host;~spacer;~clock;~power" | sudo tee /etc/lightdm/lightdm-gtk-greeter.conf
 
 # Fix openbox's grey screen when logging in
 sudo sed -i /usr/lib/openbox/openbox-autostart -re '3,13d'

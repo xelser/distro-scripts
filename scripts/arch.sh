@@ -167,13 +167,12 @@ genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt /bin/bash << EOF
 
 # Pacman.conf
-echo "
-[options]
+echo "[options]
 ParallelDownloads = 10
 Color" | tee -a /etc/pacman.conf
 
 # Install Packages
-pacman -S --needed --noconfirm --disable-download-timeout \
+pacman-key --refresh-keys && pacman -S --needed --noconfirm --disable-download-timeout \
   grub {amd,intel}-ucode efibootmgr os-prober base base-devel linux linux-firmware networkmanager xdg-user-dirs \
   gst-libav gst-plugins-{bad,base,good,ugly} noto-{fonts,fonts-cjk,fonts-emoji} ntfs{-3g,progs} exfatprogs \
   nano vim htop neofetch zip unzip p7zip unrar git curl wget reflector
