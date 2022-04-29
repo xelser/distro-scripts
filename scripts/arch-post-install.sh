@@ -34,7 +34,10 @@ clear
 ############################### Installation ##############################
 
 # Installing yay
-git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sirc --noconfirm && rm -rf $HOME/yay-bin
+sudo pacman -Qe | grep -q "yay-bin"
+if [ $? -ne 0 ]; then
+	git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sirc --noconfirm && rm -rf $HOME/yay-bin
+fi
 
 # Official Packages
 sudo pacman -Syyu --needed --noconfirm --disable-download-timeout \
@@ -53,24 +56,11 @@ clear
 
 # lightdm
 echo "[Seat:*]
+greeter-session=lightdm-slick-greeter
 greeter-setup-script=/usr/bin/numlockx on
 autologin-user=$USER" | sudo tee -a /etc/lightdm/lightdm.conf
 sudo groupadd -r autologin && sudo gpasswd -a $USER autologin
 sudo systemctl enable lightdm
-
-# lightdm-gtk-greeter
-echo "[greeter]
-theme-name = Adapta-Cyan-Nokto-Eta
-icon-theme-name = Papirus-Dark
-font-name = Fira Sans 10
-xft-antialias = true
-xft-dpi = 96
-xft-rgba = rgb
-xft-hintstyle = hintslight
-background = /usr/share/backgrounds/Viktor Forgacs.jpg
-hide-user-image = true
-clock-format = %a, %I:%M %p
-indicators = ~host;~spacer;~clock;~power" | sudo tee -a /etc/lightdm/lightdm-gtk-greeter.conf
 
 # Fix openbox's grey screen when logging in
 sudo sed -i /usr/lib/openbox/openbox-autostart -re '3,13d'
@@ -78,8 +68,6 @@ sudo sed -i /usr/lib/openbox/openbox-autostart -re '3,13d'
 # Hide apps
 mkdir -p $HOME/.local/share/applications/ && cd /usr/share/applications/ && rm -rf $HOME/.local/share/applications/*
 cp -rf {volumeicon,qv4l2,qvidcap,avahi-discover,bssh,bvnc,compton,picom,lstopo,electron16}.desktop $HOME/.local/share/applications/
-cp -rf xfce4-{about,mail-reader,file-manager,web-browser,terminal-emulator}.desktop $HOME/.local/share/applications/
-cp -rf org.gnome.{Devhelp,Glade,Sysprof3}.desktop $HOME/.local/share/applications/
 echo "Hidden=True" | tee -a $HOME/.local/share/applications/*.desktop && clear
 
 clear
