@@ -39,10 +39,10 @@ git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sirc -
 # Official Packages
 sudo pacman -Syyu --needed --noconfirm --disable-download-timeout \
   xorg numlockx openbox obconf picom lightdm-gtk-greeter-settings alsa-{utils,plugins} pulseaudio-{alsa,equalizer-ladspa} pavucontrol \
-  qt5ct kvantum-qt5 gtk-engine-murrine adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers \
+  qt5ct kvantum-qt5 adapta-gtk-theme papirus-icon-theme ttf-fira-{sans,code} elementary-wallpapers \
+  gtk-engine-murrine gvfs-{afc,goa,google,gphoto2,mtp,nfs,smb} sshfs tumbler ffmpegthumbnailer poppler-glib \
   tint2 network-manager-applet volumeicon lx{appearance,hotkey,input,randr,session,task}-gtk3 lxqt-{notificationd,powermanagement} \
-  lxterminal pcmanfm xarchiver leafpad gpicview nitrogen xreader gvfs-* sshfs tumbler ffmpegthumbnailer poppler-glib \
-  firefox discord transmission-gtk gparted screengrab
+  firefox discord transmission-gtk gparted screengrab lxterminal pcmanfm xarchiver leafpad gpicview nitrogen xreader 
 
 # AUR packages
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
