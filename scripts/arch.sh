@@ -52,7 +52,7 @@ case $partitioning in
   	fi
   	;;
   2)	# VM quick setup
-  	device="vda"
+  	device="sda"
   	firm="i386-pc /dev/${device}"
   	root="1"
   	swap="5"
