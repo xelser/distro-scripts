@@ -35,8 +35,9 @@ sudo dnf upgrade && sudo dnf distro-sync
 # INSTALL
 sudo dnf install gnome-shell-extension-{appindicator,dash-to-dock,gsconnect,pop-shell,sound-output-device-chooser,user-theme} \
   gnome-{tweaks,extensions-app,multi-writer,builder} google-noto-{cjk,emoji-color}-fonts google-roboto-* htop neofetch unrar flatpak \
-  file-roller dconf-editor drawing lollypop gparted variety transmission inkscape easyeffects kvantum qt5ct \
-  mozilla-ublock-origin gtk-murrine-engine # google-chrome-stable chromium
+  file-roller dconf-editor drawing lollypop gparted variety transmission inkscape easyeffects kvantum qt5ct mozilla-ublock-origin gtk-murrine-engine \
+  akmod-nvidia wine wine-mono lutris steam gamescope gamemode gnome-shell-extension-gamemode mangohud goverlay mesa-libGLU.{x86_64,i686}
+  # google-chrome-stable chromium
 
 # Flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -124,17 +125,16 @@ clear
 ############################### Tests/Beta ###############################
 
 # Gaming
-#sudo dnf install akmod-nvidia wine wine-mono lutris steam gamescope gamemode gnome-shell-extension-gamemode mangohud goverlay mesa-libGLU.{x86_64,i686}
 #echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /usr/lib/modprobe.d/blacklist-nouveau.conf
 #sudo dracut --force
 
 # gdm-settings
-sudo dnf install libadwaita-devel glib2-devel pygobject3-devel gettext meson gobject-introspection
-cd /tmp/ && rm -rf gdm-settings && git clone --depth=1 https://github.com/realmazharhussain/gdm-settings
-cd gdm-settings && meson build && meson install -C build
+#sudo dnf install libadwaita-devel glib2-devel pygobject3-devel gettext meson gobject-introspection
+#cd /tmp/ && rm -rf gdm-settings && git clone --depth=1 https://github.com/realmazharhussain/gdm-settings
+#cd gdm-settings && meson build && meson install -C build
 
 # GTK (libadwaita)
-sudo dnf install ninja-build git meson sassc
-cd /tmp/ && rm -rf adw-gtk3 && sudo rm -rf /usr/share/themes/adw-gtk3
-git clone https://github.com/lassekongo83/adw-gtk3.git
-cd adw-gtk3 && meson build && sudo ninja -C build install
+#sudo dnf install ninja-build git meson sassc
+#cd /tmp/ && rm -rf adw-gtk3 && sudo rm -rf /usr/share/themes/adw-gtk3
+#git clone https://github.com/lassekongo83/adw-gtk3.git
+#cd adw-gtk3 && meson build && sudo ninja -C build install
