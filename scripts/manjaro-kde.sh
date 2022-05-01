@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 clear
 
 ############################## Preparation ###############################
@@ -26,7 +27,7 @@ sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
   htop neofetch refind lxappearance-gtk3 kvantum-qt5 gnome-disk-utility gparted pulseaudio-equalizer-ladspa \
   latte-dock elisa vlc ktorrent ttf-roboto ttf-roboto-{mono,slab} gtk-engine-murrine gtk-engines \
-  plasma5-applets-virtual-desktop-bar-git plasma5-applets-panon zoom skypeforlinux-stable-bin firefox-appmenu-bin
+  plasma5-applets-virtual-desktop-bar-git plasma5-applets-panon
   # appmenu-gtk-module lib32-libdbusmenu-glib lib32-libdbusmenu-gtk2 lib32-libdbusmenu-gtk3 libdbusmenu-glib libdbusmenu-gtk2 libdbusmenu-gtk3
 
 # Gaming
@@ -70,6 +71,7 @@ clear
 
 # cd to tmp and remove old files
 cd /tmp/ && rm -rf Qogir*
+mkdir -p $HOME/.local/share/plasma/plasmoids/
 
 # Download and install
 git clone https://github.com/vinceliuice/Qogir-kde.git && ./Qogir-kde/install.sh && sudo ./Qogir-kde/sddm/install.sh
