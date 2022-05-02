@@ -17,7 +17,7 @@ clear
 echo -e "[options]\nParallelDownloads = 10\nColor" | sudo tee -a /etc/pacman.conf
 
 # Remove bloat
-sudo pacman -Rnsu --noconfirm yakuake okular partitionmanager timeshift timeshift-autosnap-manjaro \
+sudo pacman -Rnsu --noconfirm yakuake okular timeshift timeshift-autosnap-manjaro \
   manjaro-{documentation-en,browser-settings,zsh-config,hello}
 
 # Refresh Mirrors and Install AUR
@@ -25,9 +25,8 @@ sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-
 
 # Install
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
-  htop neofetch refind lxappearance-gtk3 kvantum-qt5 gnome-disk-utility gparted pulseaudio-equalizer-ladspa \
-  latte-dock elisa vlc ktorrent ttf-roboto ttf-roboto-{mono,slab} gtk-engine-murrine gtk-engines \
-  plasma5-applets-virtual-desktop-bar-git plasma5-applets-panon
+  htop neofetch refind lxappearance-gtk3 kvantum-qt5 pulseaudio-equalizer-ladspa elisa vlc ktorrent latte-dock \
+  ttf-roboto ttf-roboto-{mono,slab} gtk-engine-murrine gtk-engines plasma5-applets-virtual-desktop-bar-git plasma5-applets-panon
   # appmenu-gtk-module lib32-libdbusmenu-glib lib32-libdbusmenu-gtk2 lib32-libdbusmenu-gtk3 libdbusmenu-glib libdbusmenu-gtk2 libdbusmenu-gtk3
 
 # Gaming
