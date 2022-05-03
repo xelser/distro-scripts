@@ -70,6 +70,7 @@ sudo ln -sf /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/font
 sudo fc-cache -fv
 
 # dotfiles
+rm -rf $HOME/.config/autostart/*.desktop
 cp -rf $HOME/distro-scripts/dotfiles/manjaro-kde/{.config,.local} $HOME/
 
 clear
