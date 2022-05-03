@@ -54,7 +54,8 @@ LABEL=Games	/media/Games	ext4	defaults	0 2
 LABEL=Home	/media/Home	ext4	defaults	0 2" | sudo tee -a /etc/fstab
 
 # MangoHUD
-echo "MANGOHUD=1" | sudo tee -a /etc/environment
+echo "MANGOHUD=1
+MANGOHUD_DLSYM=1" | sudo tee -a /etc/environment
 
 # Install Refind
 sudo refind-install
