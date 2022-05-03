@@ -25,10 +25,9 @@ sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-
 
 # Install
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
-  htop neofetch refind lxappearance-gtk3 kvantum-qt5 pulseaudio-equalizer-ladspa elisa vlc ktorrent latte-dock \
-  ttf-roboto ttf-roboto-{mono,slab} gtk-engine-murrine gtk-engines plasma5-applets-virtual-desktop-bar-git plasma5-applets-panon
-  # appmenu-gtk-module lib32-libdbusmenu-glib lib32-libdbusmenu-gtk2 lib32-libdbusmenu-gtk3 libdbusmenu-glib libdbusmenu-gtk2 libdbusmenu-gtk3
-
+  htop neofetch refind gtk-engine-murrine gtk-engines lxappearance-gtk3 kvantum-qt5 elisa vlc ktorrent latte-dock \
+  pulseeffects plasma5-applets-virtual-desktop-bar-git plasma5-applets-panon
+ 
 # Gaming
 yay -S --needed --noconfirm --disable-download-timeout \
   steam gamemode lib32-gamemode mangohud lib32-mangohud goverlay-bin optimus-manager optimus-manager-qt \
