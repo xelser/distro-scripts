@@ -7,18 +7,6 @@
   <property name="log-level-apps" type="uint" value="0"/>
   <property name="applications" type="empty">
     <property name="known_applications" type="array">
-      <value type="string" value="discord"/>
-      <value type="string" value="Firefox"/>
-      <value type="string" value="nm-applet"/>
-      <value type="string" value="notify-send"/>
-      <value type="string" value="org.gnome.Boxes"/>
-      <value type="string" value="org.x.Warpinator"/>
-      <value type="string" value="thunar"/>
-      <value type="string" value="thunar-volman"/>
-      <value type="string" value="Transmission"/>
-      <value type="string" value="Xfce volume control"/>
-      <value type="string" value="Xfce4-notifyd settings"/>
-      <value type="string" value="xfce4-settings-helper"/>
     </property>
   </property>
   <property name="do-slideout" type="bool" value="true"/>
