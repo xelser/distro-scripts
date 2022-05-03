@@ -17,7 +17,7 @@ clear
 echo -e "[options]\nParallelDownloads = 10\nColor" | sudo tee -a /etc/pacman.conf
 
 # Remove bloat
-sudo pacman -Rnsu --noconfirm yakuake okular timeshift timeshift-autosnap-manjaro \
+sudo pacman -Rnsu --noconfirm yakuake timeshift timeshift-autosnap-manjaro \
   manjaro-{documentation-en,browser-settings,zsh-config,hello}
 
 # Refresh Mirrors and Install AUR
@@ -25,8 +25,8 @@ sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-
 
 # Install
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
-  htop neofetch refind gtk-engine-murrine gtk-engines lxappearance-gtk3 kvantum-qt5 elisa vlc ktorrent latte-dock \
-  pulseeffects plasma5-applets-virtual-desktop-bar-git plasma5-applets-panon
+  htop neofetch refind gtk-engine-murrine gtk-engines kvantum-qt5 elisa vlc ktorrent latte-dock unrar \
+  plasma5-applets-virtual-desktop-bar-git plasma5-applets-panon
  
 # Gaming
 yay -S --needed --noconfirm --disable-download-timeout \
