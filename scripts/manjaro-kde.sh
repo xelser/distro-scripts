@@ -53,6 +53,9 @@ echo "# Additional Mounts
 LABEL=Games	/media/Games	ext4	defaults	0 2
 LABEL=Home	/media/Home	ext4	defaults	0 2" | sudo tee -a /etc/fstab
 
+# MangoHUD
+echo "MANGOHUD=1" | sudo tee -a /etc/environment
+
 # Install Refind
 sudo refind-install
 sudo sed -i 's/ro /rw quiet splash /g' /boot/refind_linux.conf
