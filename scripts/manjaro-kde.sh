@@ -38,6 +38,12 @@ yay -S --needed --noconfirm --disable-download-timeout \
   ncurses lib32-ncurses opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt libva lib32-libva gtk3 \
   lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader
 
+# Drivers
+yay -S --needed --noconfirm --disable-download-timeout \
+  nvidia-dkms nvidia-utils  lib32-nvidia-utils   vulkan-icd-loader lib32-vulkan-icd-loader \
+  lib32-mesa  vulkan-intel  lib32-vulkan-intel   vulkan-icd-loader lib32-vulkan-icd-loader \
+  lib32-mesa  vulkan-radeon lib32-vulkan-radeon  vulkan-icd-loader lib32-vulkan-icd-loader
+
 # Dependencies
 sudo pacman -S --asdeps --noconfirm sassc
 
