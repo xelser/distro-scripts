@@ -1,0 +1,30 @@
+#
+# /home/xelser/.nvidia-settings-rc
+#
+# Configuration file for nvidia-settings - the NVIDIA Settings utility
+# Generated on Wed May  4 16:08:53 2022
+#
+
+# ConfigProperties:
+
+RcFileLocale = C
+DisplayStatusBar = Yes
+SliderTextEntries = Yes
+IncludeDisplayNameInConfigFile = No
+ShowQuitDialog = No
+UpdateRulesOnProfileNameChange = Yes
+Timer = PowerMizer_Monitor_(GPU_0),Yes,1000
+Timer = Thermal_Monitor_(GPU_0),Yes,1000
+Timer = Memory_Used_(GPU_0),Yes,3000
+
+# Attributes:
+
+0/LogAniso=0
+0/FSAA=0
+0/TextureClamping=1
+0/FXAA=0
+0/FSAAAppControlled=1
+0/LogAnisoAppControlled=1
+0/OpenGLImageSettings=3
+0/FSAAAppEnhanced=0
+0/ShowGraphicsVisualIndicator=0
