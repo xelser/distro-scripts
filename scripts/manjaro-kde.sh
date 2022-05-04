@@ -81,7 +81,7 @@ clear
 ################################# Theme ##################################
 
 # cd to tmp and remove old files
-cd /tmp/ && rm -rf Fluent* #Qogir*
+cd /tmp/ && rm -rf Fluent* Qogir*
 mkdir -p $HOME/.local/share/plasma/plasmoids/
 
 # Download and Install
