@@ -11,8 +11,7 @@ sudo timedatectl set-ntp true
 echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
 
 # Check Latest Kernel
-sudo pacman -Ssq linux[0-9][0-9][0-9]-nvidia
-echo
+clear && echo && sudo pacman -Ssq linux[0-9][0-9][0-9]-nvidia && echo
 read -p "Select latest Kernel: " ver
 
 clear
