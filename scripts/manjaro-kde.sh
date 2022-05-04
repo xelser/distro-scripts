@@ -85,7 +85,7 @@ cd /tmp/ && rm -rf Fluent* #Qogir*
 mkdir -p $HOME/.local/share/plasma/plasmoids/
 
 # Icons
-git clone https://github.com/vinceliuice/Fluent-icon-theme.git %% cd Fluent-icon-theme
+git clone https://github.com/vinceliuice/Fluent-icon-theme.git && cd Fluent-icon-theme
 sudo ./install.sh teal -r && sudo ./cursors/install.sh
 
 # KDE
