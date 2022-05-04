@@ -10,6 +10,11 @@ sudo timedatectl set-ntp true
 # Grants sudo access to user
 echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
 
+# Check Latest Kernel
+sudo pacman -Ssq linux[0-9][0-9][0-9]-nvidia
+echo
+read -p "Select latest Kernel: " ver
+
 clear
 ################################ Packages #################################
 
@@ -26,11 +31,11 @@ sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-
 # Install
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
   htop neofetch refind gtk-engine-murrine gtk-engines kvantum-qt5 elisa vlc ktorrent latte-dock unrar firefox-ublock-origin \
-  plasma5-applets-virtual-desktop-bar-git plasma5-applets-panon
+  plasma5-applets-virtual-desktop-bar-git plasma5-applets-panon linux${ver} linux${ver}-nvidia
  
 # Gaming
 yay -S --needed --noconfirm --disable-download-timeout \
-  steam goverlay-bin optimus-manager optimus-manager-qt protonup-qt lutris-git lutris-wine-meta lutris-battlenet-meta bottles \
+  steam goverlay-bin optimus-manager optimus-manager-qt protonup-qt lutris-git lutris-{wine,battlenet}-meta bottles \
   nvidia-dkms nvidia-utils lib32-nvidia-utils gamemode lib32-gamemode mangohud lib32-mangohud \
   mesa lib32-mesa vkd3d lib32-vkd3d vulkan-intel lib32-vulkan-intel vulkan-radeon lib32-vulkan-radeon \
   wine-mono wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
