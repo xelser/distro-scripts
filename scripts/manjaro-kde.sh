@@ -81,16 +81,19 @@ clear
 ################################# Theme ##################################
 
 # cd to tmp and remove old files
-cd /tmp/ && rm -rf Qogir*
+cd /tmp/ && rm -rf Fluent* #Qogir*
 mkdir -p $HOME/.local/share/plasma/plasmoids/
 
 # Download and install
-git clone https://github.com/vinceliuice/Qogir-kde.git && ./Qogir-kde/install.sh && sudo ./Qogir-kde/sddm/install.sh
-git clone https://github.com/vinceliuice/Qogir-theme.git && sudo ./Qogir-theme/install.sh -t all
-git clone https://github.com/vinceliuice/Qogir-icon-theme.git && sudo ./Qogir-icon-theme/install.sh
+git clone https://github.com/vinceliuice/Fluent-kde.git && ./Fluent-kde/install.sh --round && sudo ./Fluent-kde/sddm/install.sh -t round
+git clone https://github.com/vinceliuice/Fluent-icon-theme.git && ./Fluent-icon-theme/install.sh teal -r
+git clone https://github.com/vinceliuice/Fluent-gtk-theme.git && ./Fluent-gtk-theme/install.sh -i manjaro -t teal --tweaks round
+#git clone https://github.com/vinceliuice/Qogir-kde.git && ./Qogir-kde/install.sh && sudo ./Qogir-kde/sddm/install.sh
+#git clone https://github.com/vinceliuice/Qogir-theme.git && sudo ./Qogir-theme/install.sh -t all
+#git clone https://github.com/vinceliuice/Qogir-icon-theme.git && sudo ./Qogir-icon-theme/install.sh
 
 # Change Cursor
-sudo sed -i 's/xcursor-breeze/Qogir-white-cursors/g' /usr/share/icons/default/index.theme
+#sudo sed -i 's/xcursor-breeze/Qogir-white-cursors/g' /usr/share/icons/default/index.theme
 
 clear
 ############################## Housekeeping ###############################
