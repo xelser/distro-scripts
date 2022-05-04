@@ -74,7 +74,7 @@ sudo fc-cache -fv
 
 # dotfiles
 rm -rf $HOME/.config/autostart/*.desktop
-cp -rf $HOME/distro-scripts/dotfiles/manjaro-kde/{.config,.local} $HOME/
+cp -rf $HOME/distro-scripts/dotfiles/manjaro-kde/{.config,.local,.kde4} $HOME/
 
 clear
 ################################# Theme ##################################
