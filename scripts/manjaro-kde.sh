@@ -30,8 +30,8 @@ yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake
  
 # Gaming
 yay -S --needed --noconfirm --disable-download-timeout \
-  steam linux-steam-integration gamemode lib32-gamemode mangohud lib32-mangohud goverlay-bin optimus-manager optimus-manager-qt \
-  protonup-qt lutris-git lutris-wine-meta lutris-battlenet-meta bottles nvidia-dkms nvidia-utils lib32-nvidia-utils \
+  steam goverlay-bin optimus-manager optimus-manager-qt protonup-qt lutris-git lutris-wine-meta lutris-battlenet-meta bottles \
+  nvidia-dkms nvidia-utils lib32-nvidia-utils gamemode lib32-gamemode mangohud lib32-mangohud \
   mesa lib32-mesa vkd3d lib32-vkd3d vulkan-intel lib32-vulkan-intel vulkan-radeon lib32-vulkan-radeon \
   wine-mono wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
   mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse libgpg-error \
