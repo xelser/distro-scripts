@@ -10,10 +10,6 @@ sudo timedatectl set-ntp true
 # Grants sudo access to user
 echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
 
-# Check Latest Kernel
-clear && echo && sudo pacman -Ssq linux[0-9][0-9][0-9]-nvidia && echo
-read -p "Select latest Kernel: " ver
-
 clear
 ################################ Packages #################################
 
@@ -79,7 +75,7 @@ sudo fc-cache -fv
 
 # dotfiles
 rm -rf $HOME/.config/autostart/*.desktop
-cp -rf $HOME/distro-scripts/dotfiles/manjaro-kde/{.config,.local,.kde4,.nvidia-settings-rc} $HOME/
+cp -rf $HOME/distro-scripts/dotfiles/manjaro-kde/{.config,.local} $HOME/
 
 clear
 ################################# Theme ##################################
