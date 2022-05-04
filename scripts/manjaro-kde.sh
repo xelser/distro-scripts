@@ -84,10 +84,18 @@ clear
 cd /tmp/ && rm -rf Fluent* #Qogir*
 mkdir -p $HOME/.local/share/plasma/plasmoids/
 
-# Download and install
-git clone https://github.com/vinceliuice/Fluent-kde.git && ./Fluent-kde/install.sh --round && sudo ./Fluent-kde/sddm/install.sh -t round
-git clone https://github.com/vinceliuice/Fluent-icon-theme.git && ./Fluent-icon-theme/install.sh teal -r
-git clone https://github.com/vinceliuice/Fluent-gtk-theme.git && ./Fluent-gtk-theme/install.sh -i manjaro -t teal --tweaks round
+# Icons
+git clone https://github.com/vinceliuice/Fluent-icon-theme.git %% cd Fluent-icon-theme
+sudo ./install.sh teal -r && sudo ./cursors/install.sh
+
+# KDE
+git clone https://github.com/vinceliuice/Fluent-kde.git && cd Fluent-kde
+./install.sh -t all --round && sudo ./sddm/install.sh -t round
+
+# GTK
+git clone https://github.com/vinceliuice/Fluent-gtk-theme.git && cd Fluent-gtk-theme
+sudo ./install.sh -i manjaro -t teal --tweaks round
+
 #git clone https://github.com/vinceliuice/Qogir-kde.git && ./Qogir-kde/install.sh && sudo ./Qogir-kde/sddm/install.sh
 #git clone https://github.com/vinceliuice/Qogir-theme.git && sudo ./Qogir-theme/install.sh -t all
 #git clone https://github.com/vinceliuice/Qogir-icon-theme.git && sudo ./Qogir-icon-theme/install.sh
