@@ -73,6 +73,12 @@ sudo ln -sf /usr/share/fontconfig/conf.avail/10-hinting-slight.conf /etc/fonts/c
 sudo ln -sf /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
 sudo fc-cache -fv
 
+# bash configs
+rm -rf $HOME/{.bashrc}
+cp /etc/skel/{.bashrc} $HOME/
+cat $HOME/distro-scripts/bash-configs/manjaro_bashrc >> $HOME/.bashrc
+#cat $HOME/distro-scripts/bash-configs/manjaro_bash_profile >> $HOME/.bash_profile
+
 # dotfiles
 rm -rf $HOME/.config/autostart/*.desktop
 cp -rf $HOME/distro-scripts/dotfiles/manjaro-kde/{.config,.local} $HOME/
