@@ -27,11 +27,11 @@ sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
   $(sudo pacman -Ssq linux[0-9][0-9][0-9]$ | awk 'END { print }') $(sudo pacman -Ssq linux[0-9][0-9][0-9]$ | awk 'END { print }')-nvidia \
   htop neofetch refind gtk-engine-murrine gtk-engines kvantum-qt5 elisa vlc ktorrent latte-dock unrar firefox-ublock-origin \
-  plasma5-applets-virtual-desktop-bar-git plasma5-applets-panon
+  plasma5-applets-virtual-desktop-bar-git plasma5-applets-panon zoom
  
 # Gaming
 yay -S --needed --noconfirm --disable-download-timeout \
-  steam goverlay-bin optimus-manager optimus-manager-qt protonup-qt lutris-git lutris-{wine,battlenet}-meta bottles \
+  steam goverlay-bin optimus-manager optimus-manager-qt lutris-git lutris-{wine,battlenet}-meta bottles \
   nvidia-dkms nvidia-utils lib32-nvidia-utils gamemode lib32-gamemode mangohud lib32-mangohud \
   mesa lib32-mesa vkd3d lib32-vkd3d vulkan-intel lib32-vulkan-intel vulkan-radeon lib32-vulkan-radeon \
   wine-mono wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
