@@ -56,6 +56,13 @@ echo "# Additional Mounts
 LABEL=Games	/media/Games	ext4	defaults	0 2
 LABEL=Home	/media/Home	ext4	defaults	0 2" | sudo tee -a /etc/fstab
 
+# Symlinks
+ln -sf /media/Home/xelser/Documents/ $HOME/Documents/"xelser's Documents"
+ln -sf /media/Home/xelser/Downloads/ $HOME/Downloads/"xelser's Downloads"
+ln -sf /media/Home/xelser/Music/ $HOME/Music/"xelser's Music"
+ln -sf /media/Home/xelser/Pictures/ $HOME/Pictures/"xelser's Pictures"
+ln -sf /media/Home/xelser/Videos/ $HOME/Videos/"xelser's Videos"
+
 # MangoHUD
 echo "MANGOHUD=1
 MANGOHUD_DLSYM=1" | sudo tee -a /etc/environment
