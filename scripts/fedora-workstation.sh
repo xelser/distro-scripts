@@ -35,8 +35,7 @@ sudo dnf upgrade && sudo dnf distro-sync
 # INSTALL
 sudo dnf install gnome-shell-extension-{appindicator,dash-to-dock,gsconnect,pop-shell,sound-output-device-chooser,user-theme} \
   gnome-{tweaks,extensions-app,multi-writer,builder} google-noto-{cjk,emoji-color}-fonts google-roboto-* htop neofetch unrar flatpak \
-  file-roller dconf-editor drawing lollypop gparted variety transmission inkscape easyeffects kvantum qt5ct mozilla-ublock-origin gtk-murrine-engine \
-  akmod-nvidia wine wine-mono lutris steam gamescope gamemode gnome-shell-extension-gamemode mangohud goverlay mesa-libGLU.{x86_64,i686}
+  file-roller dconf-editor drawing lollypop gparted variety transmission inkscape easyeffects kvantum qt5ct mozilla-ublock-origin gtk-murrine-engine
   # google-chrome-stable chromium
 
 # Flatpak
@@ -51,9 +50,6 @@ if [ -f $HOME/Downloads/refind*.rpm ]; then
 	sudo dnf install $HOME/Downloads/refind*.rpm
 	sudo sed -i 's/ro /ro quiet splash /g' /boot/refind_linux.conf
 fi
-
-# fstab
-echo "LABEL=Games	/media/Games	ext4	defaults	0 2" | sudo tee -a /etc/fstab
 
 # gdm autologin using script
 echo -e "[daemon]\nAutomaticLoginEnable=True\nAutomaticLogin=$USER" | sudo tee -a /etc/gdm/custom.conf
@@ -125,6 +121,11 @@ clear
 ############################### Tests/Beta ###############################
 
 # Gaming
+#sudo dnf install akmod-nvidia wine wine-mono lutris steam gamescope gamemode gnome-shell-extension-gamemode mangohud goverlay \
+#   mesa-libGLU.{x86_64,i686}
+
+# fstab
+#echo "LABEL=Games	/media/Games	ext4	defaults	0 2" | sudo tee -a /etc/fstab
 #echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /usr/lib/modprobe.d/blacklist-nouveau.conf
 #sudo dracut --force
 
