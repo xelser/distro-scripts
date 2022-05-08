@@ -49,7 +49,7 @@ apt update && apt upgrade -y && apt full-upgrade -y
 apt install -y lightdm-gtk-greeter-settings mugshot htop neofetch wget curl build-essential numlockx flatpak \
   gparted transmission gnome-{boxes,disk-utility} redshift-gtk geany plank pulseeffects dconf-editor \
   plymouth plymouth-themes gnome-backgrounds gtk2-engines-{murrine,pixbuf} fonts-{noto,ubuntu} \
-  mtools gvfs-{fuse,backends} unar rar zip webext-ublock-origin-firefox # ostree appstream-util
+  mtools gvfs-{fuse,backends} unar rar zip webext-ublock-origin-firefox kodi kodi-pvr-iptvsimple # ostree appstream-util
 
 # Add Flatpak repo
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
