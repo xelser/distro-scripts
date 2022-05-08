@@ -64,7 +64,7 @@ autologin-user=${user}" | tee -a /etc/lightdm/lightdm.conf
 
 # lightdm-gtk-greeter
 echo "[greeter]
-background = /usr/share/backgrounds/gnome/adwaita-night.jpg
+background = /usr/share/backgrounds/elementaryOS/Morskie Oko.jpg
 theme-name = Matcha-dark-aliz
 xft-hintstyle = hintslight
 icon-theme-name = Papirus-Dark
@@ -73,6 +73,12 @@ xft-dpi = 96
 hide-user-image = true
 clock-format = %a, %I:%M %p
 indicators = ~host;~spacer;~clock;~power" | tee /etc/lightdm/lightdm-gtk-greeter.conf
+
+# Wallpaper for lightdm
+ls /usr/share/backgrounds | grep -q elementaryOS
+if [ $? -ne 0 ]; then
+	sudo cp -rf ${home}/elementaryOS /usr/share/backgrounds
+fi
 
 # Plymouth
 sed -i 's/#GRUB_GFXMODE=640x480/GRUB_GFXMODE=1366x768x32/g' /etc/default/grub
