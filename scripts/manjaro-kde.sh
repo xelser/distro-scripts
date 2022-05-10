@@ -27,7 +27,7 @@ sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
   $(sudo pacman -Ssq linux[0-9][0-9][0-9]$ | awk 'END { print }') $(sudo pacman -Ssq linux[0-9][0-9][0-9]$ | awk 'END { print }')-nvidia \
   htop neofetch refind gtk-engine-murrine gtk-engines kvantum-qt5 elisa vlc ktorrent latte-dock unrar firefox-ublock-origin \
-  plasma5-applets-virtual-desktop-bar-git plasma5-applets-panon zoom
+  plasma5-applets-virtual-desktop-bar-git plasma5-applets-panon zoom discord
  
 # Gaming
 yay -S --needed --noconfirm --disable-download-timeout \
