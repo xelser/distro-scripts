@@ -18,7 +18,7 @@ echo -e "[options]\nParallelDownloads = 10\nColor" | sudo tee -a /etc/pacman.con
 
 # Remove bloat
 sudo pacman -Rnsu --noconfirm yakuake timeshift timeshift-autosnap-manjaro \
-  manjaro-{documentation-en,browser-settings,hello}
+  manjaro-{documentation-en,browser-settings,zsh-config,hello}
 
 # Refresh Mirrors and Install AUR
 sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-download-timeout yay base-devel
