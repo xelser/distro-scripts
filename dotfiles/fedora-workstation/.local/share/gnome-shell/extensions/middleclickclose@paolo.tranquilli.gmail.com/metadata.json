@@ -9,10 +9,9 @@
   ],
   "settings-schema": "org.gnome.shell.extensions.middleclickclose",
   "shell-version": [
-    "40",
-    "41"
+    "42"
   ],
   "url": "https://github.com/p91paul/middleclickclose",
   "uuid": "middleclickclose@paolo.tranquilli.gmail.com",
-  "version": 23
+  "version": 25
 }

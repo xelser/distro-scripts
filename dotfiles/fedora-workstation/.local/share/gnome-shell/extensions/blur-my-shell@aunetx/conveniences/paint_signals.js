@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 const { GObject, Clutter } = imports.gi;
 
@@ -6,7 +6,7 @@ const { GObject, Clutter } = imports.gi;
 var PaintSignals = class PaintSignals {
     constructor(connections) {
         this.buffer = [];
-        this.connections = connections
+        this.connections = connections;
     }
 
     connect(actor, blur_effect) {
@@ -29,18 +29,31 @@ var PaintSignals = class PaintSignals {
             } catch (e) { }
         });
 
-        this.buffer.push(infos)
+        this.buffer.push(infos);
+    }
+
+    disconnect_all_for_actor(actor) {
+        this.buffer.forEach(infos => {
+            if (infos.actor == actor) {
+                this.connections.disconnect_all_for(infos.paint_effect);
+                infos.actor.remove_effect(infos.paint_effect);
+
+                // remove from buffer
+                let index = this.buffer.indexOf(infos);
+                this.buffer.splice(index, 1);
+            }
+        });
     }
 
     disconnect_all() {
-        this.buffer.forEach((infos) => {
+        this.buffer.forEach(infos => {
             this.connections.disconnect_all_for(infos.paint_effect);
             infos.actor.remove_effect(infos.paint_effect);
         });
 
-        this.buffer = []
+        this.buffer = [];
     }
-}
+};
 
 var EmitPaintSignal = GObject.registerClass({
     GTypeName: 'EmitPaintSignal',
