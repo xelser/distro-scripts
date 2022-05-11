@@ -35,12 +35,9 @@ sudo dnf upgrade && sudo dnf distro-sync
 # INSTALL
 sudo dnf install gnome-shell-extension-{appindicator,dash-to-dock,gsconnect,pop-shell,sound-output-device-chooser,user-theme} \
   gnome-{tweaks,extensions-app,multi-writer,builder} google-noto-{cjk,emoji-color}-fonts google-roboto-* htop neofetch unrar flatpak \
-  file-roller dconf-editor drawing lollypop gparted variety transmission inkscape easyeffects kvantum qt5ct mozilla-ublock-origin gtk-murrine-engine
+  file-roller dconf-editor drawing lollypop gparted variety transmission inkscape easyeffects kvantum qt5ct mozilla-ublock-origin gtk-murrine-engine \
+  akmod-nvidia wine wine-mono lutris steam gamescope gamemode gnome-shell-extension-gamemode mangohud goverlay mesa-libGLU.{x86_64,i686}
   # google-chrome-stable chromium
-
-# Flatpak
-sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install -y flathub com.github.tchx84.Flatseal org.x.Warpinator com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom
 
 clear
 ################################# Config ##################################
@@ -53,6 +50,13 @@ fi
 
 # gdm autologin using script
 echo -e "[daemon]\nAutomaticLoginEnable=True\nAutomaticLogin=$USER" | sudo tee -a /etc/gdm/custom.conf
+
+# fstab
+echo "LABEL=Games	/media/Games	ext4	defaults	0 2" | sudo tee -a /etc/fstab
+
+# NVIDIA Driver
+#echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /usr/lib/modprobe.d/blacklist-nouveau.conf
+#sudo dracut --force
 
 clear
 ############################## Transfer Files ############################
@@ -79,6 +83,12 @@ echo "NotShowIn=GNOME" | tee -a $HOME/.local/share/applications/calf.desktop
 clear
 ################################# Themes ##################################
 
+# GTK Legacy theme (Complements with libadwaita)
+sudo dnf install ninja-build git meson sassc
+cd /tmp/ && rm -rf adw-gtk3 && sudo rm -rf /usr/share/themes/adw-gtk3
+git clone https://github.com/lassekongo83/adw-gtk3.git
+cd adw-gtk3 && meson build && sudo ninja -C build install
+
 # GTK
 sudo dnf install sassc
 cd /tmp/ && rm -rf Orchis* && sudo rm -rf /usr/share/themes/Orchis*
@@ -101,41 +111,36 @@ if [ -f $HOME/Downloads/Bibata*.tar.gz ]; then
 	sudo tar -xf $HOME/Downloads/Bibata*.tar.gz
 fi
 
-# Flatpak theme
-sudo dnf install ostree libappstream-glib
-cd /tmp/ && rm -rf stylepak
-git clone https://github.com/refi64/stylepak.git
-cd stylepak && ./stylepak install-system Orchis-dark-compact
-
 clear
 ############################## Housekeeping ##############################
 
 # Clean Packages
 sudo dnf autoremove && sudo dnf clean all
-flatpak uninstall --unused -y
+
 
 # Set ownership
 sudo chown -R $USER $HOME
 
 clear
+################################# Flatpak ################################
+
+# Flatpak
+#sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+#flatpak install -y flathub com.github.tchx84.Flatseal org.x.Warpinator com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom
+
+# Flatpak theme
+#sudo dnf install ostree libappstream-glib
+#cd /tmp/ && rm -rf stylepak
+#git clone https://github.com/refi64/stylepak.git
+#cd stylepak && ./stylepak install-system Orchis-dark-compact
+
+# Clean Packages
+#flatpak uninstall --unused -y
+
+clear
 ############################### Tests/Beta ###############################
-
-# Gaming
-#sudo dnf install akmod-nvidia wine wine-mono lutris steam gamescope gamemode gnome-shell-extension-gamemode mangohud goverlay \
-#   mesa-libGLU.{x86_64,i686}
-
-# fstab
-#echo "LABEL=Games	/media/Games	ext4	defaults	0 2" | sudo tee -a /etc/fstab
-#echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /usr/lib/modprobe.d/blacklist-nouveau.conf
-#sudo dracut --force
 
 # gdm-settings
 #sudo dnf install libadwaita-devel glib2-devel pygobject3-devel gettext meson gobject-introspection
 #cd /tmp/ && rm -rf gdm-settings && git clone --depth=1 https://github.com/realmazharhussain/gdm-settings
 #cd gdm-settings && meson build && meson install -C build
-
-# GTK (libadwaita)
-#sudo dnf install ninja-build git meson sassc
-#cd /tmp/ && rm -rf adw-gtk3 && sudo rm -rf /usr/share/themes/adw-gtk3
-#git clone https://github.com/lassekongo83/adw-gtk3.git
-#cd adw-gtk3 && meson build && sudo ninja -C build install
