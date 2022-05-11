@@ -46,6 +46,7 @@
     <property name="plugin-6" type="string" value="systray">
       <property name="square-icons" type="bool" value="true"/>
       <property name="known-legacy-items" type="array">
+        <value type="string" value="uget-gtk"/>
         <value type="string" value="xfce4-power-manager"/>
         <value type="string" value="redshift-gtk"/>
         <value type="string" value="task manager"/>
@@ -56,6 +57,8 @@
         <value type="string" value="clipman"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="zoom.real "/>
+        <value type="string" value="zoom --no-sandbox"/>
         <value type="string" value="discord1"/>
         <value type="string" value="zoom"/>
         <value type="string" value="Skype1"/>
