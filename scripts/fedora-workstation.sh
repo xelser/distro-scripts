@@ -55,8 +55,8 @@ echo -e "[daemon]\nAutomaticLoginEnable=True\nAutomaticLogin=$USER" | sudo tee -
 echo "LABEL=Games	/media/Games	ext4	defaults	0 2" | sudo tee -a /etc/fstab
 
 # NVIDIA Driver
-#echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /usr/lib/modprobe.d/blacklist-nouveau.conf
-#sudo dracut --force
+echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /usr/lib/modprobe.d/blacklist-nouveau.conf
+sudo dracut --force
 
 clear
 ############################## Transfer Files ############################
@@ -116,7 +116,6 @@ clear
 
 # Clean Packages
 sudo dnf autoremove && sudo dnf clean all
-
 
 # Set ownership
 sudo chown -R $USER $HOME
