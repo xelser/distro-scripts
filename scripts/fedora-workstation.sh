@@ -35,8 +35,8 @@ sudo dnf upgrade && sudo dnf distro-sync
 # INSTALL
 sudo dnf install gnome-shell-extension-{appindicator,dash-to-dock,gsconnect,pop-shell,sound-output-device-chooser,user-theme} \
   gnome-{tweaks,extensions-app,multi-writer,builder} google-noto-{cjk,emoji-color}-fonts google-roboto-* htop neofetch unrar flatpak \
-  file-roller dconf-editor drawing lollypop gparted variety transmission inkscape easyeffects kvantum qt5ct mozilla-ublock-origin gtk-murrine-engine
-  # google-chrome-stable chromium
+  file-roller dconf-editor drawing lollypop gparted variety transmission inkscape easyeffects mozilla-ublock-origin gtk-murrine-engine
+  # google-chrome-stable chromium kvantum qt5ct
 
 clear
 ################################# Config ##################################
@@ -84,10 +84,10 @@ git clone https://github.com/lassekongo83/adw-gtk3.git
 cd adw-gtk3 && meson build && sudo ninja -C build install
 
 # GTK
-sudo dnf install sassc
-cd /tmp/ && rm -rf Orchis* && sudo rm -rf /usr/share/themes/Orchis*
-git clone https://github.com/vinceliuice/Orchis-theme.git
-cd Orchis-theme && sudo ./install.sh
+#sudo dnf install sassc
+#cd /tmp/ && rm -rf Orchis* && sudo rm -rf /usr/share/themes/Orchis*
+#git clone https://github.com/vinceliuice/Orchis-theme.git
+#cd Orchis-theme && sudo ./install.sh
 
 # Icons
 cd /tmp/ && rm -rf Tela* && sudo rm -rf /usr/share/icons/Tela*
@@ -95,9 +95,9 @@ git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git
 cd Tela-circle-icon-theme && sudo ./install.sh
 
 # KDE
-cd /tmp/ && rm -rf Orchis* && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
-git clone https://github.com/vinceliuice/Orchis-kde.git
-cd Orchis-kde && ./install.sh
+#cd /tmp/ && rm -rf Orchis* && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
+#git clone https://github.com/vinceliuice/Orchis-kde.git
+#cd Orchis-kde && ./install.sh
 
 # Cursor
 if [ -f $HOME/Downloads/Bibata*.tar.gz ]; then
