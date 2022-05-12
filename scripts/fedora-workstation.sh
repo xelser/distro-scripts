@@ -43,6 +43,11 @@ sudo dnf install gnome-shell-extension-{appindicator,dash-to-dock,gsconnect,pop-
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 #flatpak install -y flathub com.github.tchx84.Flatseal org.x.Warpinator com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom
 
+# gdm-settings
+sudo dnf install libadwaita-devel glib2-devel pygobject3-devel gettext meson gobject-introspection
+cd /tmp/ && rm -rf gdm-settings && git clone --depth=1 https://github.com/realmazharhussain/gdm-settings
+cd gdm-settings && meson build && meson install -C build
+
 clear
 ################################# Config ##################################
 
@@ -86,6 +91,17 @@ cd /tmp/ && rm -rf adw-gtk3 && sudo rm -rf /usr/share/themes/adw-gtk3
 git clone https://github.com/lassekongo83/adw-gtk3.git
 cd adw-gtk3 && meson build && sudo ninja -C build install
 
+# GTK
+sudo dnf install sassc
+cd /tmp/ && rm -rf Orchis* && sudo rm -rf /usr/share/themes/Orchis*
+git clone https://github.com/vinceliuice/Orchis-theme.git
+cd Orchis-theme && sudo ./install.sh
+
+# KDE
+cd /tmp/ && rm -rf Orchis* && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
+git clone https://github.com/vinceliuice/Orchis-kde.git
+cd Orchis-kde && ./install.sh
+
 # Icons
 cd /tmp/ && rm -rf Tela* && sudo rm -rf /usr/share/icons/Tela*
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git
@@ -97,22 +113,11 @@ if [ -f $HOME/Downloads/Bibata*.tar.gz ]; then
 	sudo tar -xf $HOME/Downloads/Bibata*.tar.gz
 fi
 
-# GTK
-#sudo dnf install sassc
-#cd /tmp/ && rm -rf Orchis* && sudo rm -rf /usr/share/themes/Orchis*
-#git clone https://github.com/vinceliuice/Orchis-theme.git
-#cd Orchis-theme && sudo ./install.sh
-
-# KDE
-#cd /tmp/ && rm -rf Orchis* && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
-#git clone https://github.com/vinceliuice/Orchis-kde.git
-#cd Orchis-kde && ./install.sh
-
 # Flatpak theme
-#sudo dnf install ostree libappstream-glib
-#cd /tmp/ && rm -rf stylepak
-#git clone https://github.com/refi64/stylepak.git
-#cd stylepak && ./stylepak install-system Orchis-dark-compact
+sudo dnf install ostree libappstream-glib
+cd /tmp/ && rm -rf stylepak
+git clone https://github.com/refi64/stylepak.git
+cd stylepak && ./stylepak install-system Orchis-Dark-Compact
 
 clear
 ############################## Housekeeping ##############################
@@ -140,7 +145,4 @@ clear
 clear
 ############################### Tests/Beta ###############################
 
-# gdm-settings
-#sudo dnf install libadwaita-devel glib2-devel pygobject3-devel gettext meson gobject-introspection
-#cd /tmp/ && rm -rf gdm-settings && git clone --depth=1 https://github.com/realmazharhussain/gdm-settings
-#cd gdm-settings && meson build && meson install -C build
+
