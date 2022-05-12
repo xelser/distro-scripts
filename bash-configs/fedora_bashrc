@@ -11,6 +11,7 @@ alias flatpakup="flatpak update -y && flatpak uninstall --unused -y"
 alias update="dnfup && flatpakup"
 
 # user aliases
+alias post="sh $HOME/fedora-final.sh"
 alias clear="clear && history -c"
 
 # theme aliases
