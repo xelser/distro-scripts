@@ -41,12 +41,8 @@ sudo dnf install gnome-shell-extension-{appindicator,dash-to-dock,gsconnect,pop-
 
 # Flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-#flatpak install -y flathub com.github.tchx84.Flatseal org.x.Warpinator com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom
-
-# gdm-settings
-sudo dnf install libadwaita-devel glib2-devel pygobject3-devel gettext meson gobject-introspection
-cd /tmp/ && rm -rf gdm-settings && git clone --depth=1 https://github.com/realmazharhussain/gdm-settings
-cd gdm-settings && meson build && meson install -C build
+#flatpak install -y flathub com.github.tchx84.Flatseal org.x.Warpinator com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom \
+#   io.github.realmazharhussain.GdmSettings com.mattjakeman.ExtensionManager
 
 clear
 ################################# Config ##################################
