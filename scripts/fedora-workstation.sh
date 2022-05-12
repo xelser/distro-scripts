@@ -34,9 +34,14 @@ sudo dnf upgrade && sudo dnf distro-sync
 
 # INSTALL
 sudo dnf install gnome-shell-extension-{appindicator,dash-to-dock,gsconnect,pop-shell,sound-output-device-chooser,user-theme} \
-  gnome-{tweaks,extensions-app,multi-writer,builder} google-noto-{cjk,emoji-color}-fonts google-roboto-* htop neofetch unrar flatpak \
-  file-roller dconf-editor drawing lollypop gparted variety transmission inkscape easyeffects mozilla-ublock-origin gtk-murrine-engine
+  gnome-{tweaks,extensions-app,multi-writer,builder,console,console-nautilus} google-noto-{cjk,emoji-color}-fonts google-roboto-* \
+  htop neofetch unrar flatpak mozilla-ublock-origin gtk-murrine-engine \
+  file-roller dconf-editor drawing lollypop gnote gparted variety transmission inkscape easyeffects
   # google-chrome-stable chromium kvantum qt5ct
+
+# Flatpak
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+#flatpak install -y flathub com.github.tchx84.Flatseal org.x.Warpinator com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom
 
 clear
 ################################# Config ##################################
@@ -49,8 +54,6 @@ fi
 
 # gdm autologin using script
 echo -e "[daemon]\nAutomaticLoginEnable=True\nAutomaticLogin=$USER" | sudo tee -a /etc/gdm/custom.conf
-
-
 
 clear
 ############################## Transfer Files ############################
@@ -83,21 +86,10 @@ cd /tmp/ && rm -rf adw-gtk3 && sudo rm -rf /usr/share/themes/adw-gtk3
 git clone https://github.com/lassekongo83/adw-gtk3.git
 cd adw-gtk3 && meson build && sudo ninja -C build install
 
-# GTK
-#sudo dnf install sassc
-#cd /tmp/ && rm -rf Orchis* && sudo rm -rf /usr/share/themes/Orchis*
-#git clone https://github.com/vinceliuice/Orchis-theme.git
-#cd Orchis-theme && sudo ./install.sh
-
 # Icons
 cd /tmp/ && rm -rf Tela* && sudo rm -rf /usr/share/icons/Tela*
 git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git
 cd Tela-circle-icon-theme && sudo ./install.sh
-
-# KDE
-#cd /tmp/ && rm -rf Orchis* && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
-#git clone https://github.com/vinceliuice/Orchis-kde.git
-#cd Orchis-kde && ./install.sh
 
 # Cursor
 if [ -f $HOME/Downloads/Bibata*.tar.gz ]; then
@@ -105,21 +97,16 @@ if [ -f $HOME/Downloads/Bibata*.tar.gz ]; then
 	sudo tar -xf $HOME/Downloads/Bibata*.tar.gz
 fi
 
-clear
-############################## Housekeeping ##############################
+# GTK
+#sudo dnf install sassc
+#cd /tmp/ && rm -rf Orchis* && sudo rm -rf /usr/share/themes/Orchis*
+#git clone https://github.com/vinceliuice/Orchis-theme.git
+#cd Orchis-theme && sudo ./install.sh
 
-# Clean Packages
-sudo dnf autoremove && sudo dnf clean all
-
-# Set ownership
-sudo chown -R $USER $HOME
-
-clear
-################################# Flatpak ################################
-
-# Flatpak
-sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-#flatpak install -y flathub com.github.tchx84.Flatseal org.x.Warpinator com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom
+# KDE
+#cd /tmp/ && rm -rf Orchis* && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
+#git clone https://github.com/vinceliuice/Orchis-kde.git
+#cd Orchis-kde && ./install.sh
 
 # Flatpak theme
 #sudo dnf install ostree libappstream-glib
@@ -127,8 +114,15 @@ sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub
 #git clone https://github.com/refi64/stylepak.git
 #cd stylepak && ./stylepak install-system Orchis-dark-compact
 
+clear
+############################## Housekeeping ##############################
+
 # Clean Packages
-#flatpak uninstall --unused -y
+sudo dnf autoremove && sudo dnf clean all
+flatpak uninstall --unused -y
+
+# Set ownership
+sudo chown -R $USER $HOME
 
 clear
 ################################ Gaming ##################################
