@@ -33,11 +33,10 @@ sudo dnf groupupdate core sound-and-video multimedia --exclude=PackageKit-gstrea
 sudo dnf upgrade && sudo dnf distro-sync
 
 # INSTALL
-sudo dnf install gnome-shell-extension-{appindicator,dash-to-dock,gsconnect,pop-shell,sound-output-device-chooser,user-theme} \
-  gnome-{tweaks,extensions-app,multi-writer,builder,console,console-nautilus} google-noto-{cjk,emoji-color}-fonts google-roboto-* \
-  htop neofetch unrar flatpak mozilla-ublock-origin gtk-murrine-engine \
-  file-roller dconf-editor drawing lollypop gnote gparted variety transmission inkscape easyeffects
-  # google-chrome-stable chromium kvantum qt5ct
+sudo dnf install gnome-{tweaks,extensions-app,multi-writer,builder,console,console-nautilus} google-noto-{cjk,emoji-color}-fonts google-roboto-* \
+  gnome-shell-extension-pop-shell file-roller dconf-editor drawing lollypop gnote gparted variety transmission inkscape easyeffects \
+  htop neofetch unrar flatpak mozilla-ublock-origin gtk-murrine-engine openssl
+  # google-chrome-stable chromium kvantum qt5ct appindicator dash-to-dock gsconnect sound-output-device-chooser user-theme
 
 # Flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
