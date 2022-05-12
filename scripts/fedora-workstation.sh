@@ -38,11 +38,6 @@ sudo dnf install gnome-{tweaks,extensions-app,multi-writer,builder,console,conso
   htop neofetch unrar flatpak mozilla-ublock-origin gtk-murrine-engine openssl
   # google-chrome-stable chromium kvantum qt5ct appindicator dash-to-dock gsconnect sound-output-device-chooser user-theme
 
-# Flatpak
-sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-#flatpak install -y flathub com.github.tchx84.Flatseal org.x.Warpinator com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom \
-#   io.github.realmazharhussain.GdmSettings com.mattjakeman.ExtensionManager
-
 clear
 ################################# Config ##################################
 
@@ -108,18 +103,11 @@ if [ -f $HOME/Downloads/Bibata*.tar.gz ]; then
 	sudo tar -xf $HOME/Downloads/Bibata*.tar.gz
 fi
 
-# Flatpak theme
-sudo dnf install ostree libappstream-glib
-cd /tmp/ && rm -rf stylepak
-git clone https://github.com/refi64/stylepak.git
-cd stylepak && ./stylepak install-system Orchis-Dark-Compact
-
 clear
 ############################## Housekeeping ##############################
 
 # Clean Packages
 sudo dnf autoremove && sudo dnf clean all
-flatpak uninstall --unused -y
 
 # Set ownership
 sudo chown -R $USER $HOME
