@@ -23,10 +23,8 @@ sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-releas
   
 # DEBLOAT
 sudo dnf groupremove 'LibreOffice' 'Container Management' 'Guest Desktop Agents'
-sudo dnf autoremove gnome-shell-extension-{background-logo,window-list} --exclude=gnome-shell-extension-{apps,places}-menu \
-  fedora-bookmarks libreoffice-core mediawriter rhythmbox cheese simple-scan \
-  gnome-{contacts,photos,font-viewer,characters,tour,maps,clocks,weather} # calendar,logs,boxes,connections,
-sudo dnf mark install gnome-shell-extension-{apps,places}-menu
+sudo dnf autoremove gnome-{contacts,photos,font-viewer,characters,tour,maps,clocks,weather} gnome-shell-extension-* \
+  fedora-bookmarks libreoffice-core mediawriter rhythmbox cheese simple-scan # calendar,logs,boxes,connections,
 
 # UPDATE
 sudo dnf groupupdate core sound-and-video multimedia --exclude=PackageKit-gstreamer-plugin
