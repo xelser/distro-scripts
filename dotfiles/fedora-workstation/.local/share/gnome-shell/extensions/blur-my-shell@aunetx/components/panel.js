@@ -7,23 +7,38 @@ const backgroundSettings = new Gio.Settings({
 });
 
 const Me = imports.misc.extensionUtils.getCurrentExtension();
-const PaintSignals = Me.imports.conveniences.paint_signals;
+const PaintSignals = Me.imports.effects.paint_signals;
+const ColorEffect = Me.imports.effects.color_effect.ColorEffect;
+const NoiseEffect = Me.imports.effects.noise_effect.NoiseEffect;
 
 var PanelBlur = class PanelBlur {
     constructor(connections, prefs) {
         this.connections = connections;
         this.paint_signals = new PaintSignals.PaintSignals(connections);
         this.prefs = prefs;
-        this.effect = new Shell.BlurEffect({
-            brightness: this.prefs.PANEL_CUSTOMIZE.get()
-                ? this.prefs.PANEL_BRIGHTNESS.get()
-                : this.prefs.BRIGHTNESS.get(),
-            sigma: this.prefs.PANEL_CUSTOMIZE.get()
-                ? this.prefs.PANEL_SIGMA.get()
-                : this.prefs.SIGMA.get(),
-            mode: prefs.PANEL_STATIC_BLUR.get()
+        this.blur_effect = new Shell.BlurEffect({
+            brightness: prefs.panel.CUSTOMIZE
+                ? prefs.panel.BRIGHTNESS
+                : prefs.BRIGHTNESS,
+            sigma: prefs.panel.CUSTOMIZE
+                ? prefs.panel.SIGMA
+                : prefs.SIGMA,
+            mode: prefs.panel.STATIC_BLUR
                 ? Shell.BlurMode.ACTOR
                 : Shell.BlurMode.BACKGROUND
+        });
+        this.color_effect = new ColorEffect({
+            color: prefs.panel.CUSTOMIZE
+                ? prefs.panel.COLOR
+                : prefs.COLOR
+        });
+        this.noise_effect = new NoiseEffect({
+            noise: prefs.panel.CUSTOMIZE
+                ? prefs.panel.NOISE_AMOUNT
+                : prefs.NOISE_AMOUNT,
+            lightness: prefs.panel.CUSTOMIZE
+                ? prefs.panel.NOISE_LIGHTNESS
+                : prefs.NOISE_LIGHTNESS
         });
         this.background_parent = new St.Widget({
             name: 'topbar-blurred-background-parent',
@@ -33,7 +48,7 @@ var PanelBlur = class PanelBlur {
             width: this.monitor.width,
             height: 0,
         });
-        this.background = prefs.PANEL_STATIC_BLUR.get()
+        this.background = prefs.panel.STATIC_BLUR
             ? new Meta.BackgroundActor
             : new St.Widget({
                 style_class: 'topbar-blurred-background',
@@ -97,11 +112,15 @@ var PanelBlur = class PanelBlur {
     }
 
     change_blur_type() {
-        let is_static = this.prefs.PANEL_STATIC_BLUR.get();
+        let is_static = this.prefs.panel.STATIC_BLUR;
 
         // reset widgets to right state
         this.background_parent.remove_child(this.background);
-        this.background.remove_effect(this.effect);
+        this.background.remove_effect(this.blur_effect);
+        this.background.remove_effect(this.color_effect);
+        this.background.remove_effect(this.noise_effect);
+
+        // create new background actor
         this.background = is_static
             ? new Meta.BackgroundActor
             : new St.Widget({
@@ -111,8 +130,22 @@ var PanelBlur = class PanelBlur {
                 width: this.monitor.width,
                 height: Main.panel.height,
             });
-        this.effect.set_mode(is_static ? 0 : 1);
-        this.background.add_effect(this.effect);
+
+        // change blur mode
+        this.blur_effect.set_mode(is_static ? 0 : 1);
+
+        // disable other effects if the blur is dynamic, as they makes it opaque
+        this.color_effect._static = is_static;
+        this.noise_effect._static = is_static;
+        this.color_effect.update_enabled();
+        this.noise_effect.update_enabled();
+
+        // add the effects in order
+        this.background.add_effect(this.color_effect);
+        this.background.add_effect(this.noise_effect);
+        this.background.add_effect(this.blur_effect);
+
+        // add the background actor behing the panel
         this.background_parent.add_child(this.background);
 
         // perform updates
@@ -131,11 +164,11 @@ var PanelBlur = class PanelBlur {
         // [1]: https://gitlab.gnome.org/GNOME/gnome-shell/-/issues/2857
 
         if (!is_static) {
-            if (this.prefs.HACKS_LEVEL.get() == 1) {
+            if (this.prefs.HACKS_LEVEL == 1) {
                 this._log("panel hack level 1");
                 this.paint_signals.disconnect_all();
 
-                let rp = () => { this.effect.queue_repaint(); };
+                let rp = () => { this.blur_effect.queue_repaint(); };
 
                 this.connections.connect(Main.panel, 'enter-event', rp);
                 this.connections.connect(Main.panel, 'leave-event', rp);
@@ -146,11 +179,11 @@ var PanelBlur = class PanelBlur {
                     this.connections.connect(child, 'leave-event', rp);
                     this.connections.connect(child, 'button-press-event', rp);
                 });
-            } else if (this.prefs.HACKS_LEVEL.get() == 2) {
+            } else if (this.prefs.HACKS_LEVEL == 2) {
                 this._log("panel hack level 2");
                 this.paint_signals.disconnect_all();
 
-                this.paint_signals.connect(this.background, this.effect);
+                this.paint_signals.connect(this.background, this.blur_effect);
             } else {
                 this.paint_signals.disconnect_all();
             }
@@ -159,7 +192,7 @@ var PanelBlur = class PanelBlur {
 
     update_wallpaper() {
         // if static blur, get right wallpaper and update blur with it
-        if (this.prefs.PANEL_STATIC_BLUR.get()) {
+        if (this.prefs.panel.STATIC_BLUR) {
             let bg = Main.layoutManager._backgroundGroup.get_child_at_index(
                 Main.layoutManager.monitors.length - this.monitor.index - 1
             );
@@ -175,7 +208,7 @@ var PanelBlur = class PanelBlur {
         this.background.width = Main.panel.width;
 
         // if static blur, need to clip the background
-        if (this.prefs.PANEL_STATIC_BLUR.get()) {
+        if (this.prefs.panel.STATIC_BLUR) {
             let panel_box = Main.layoutManager.panelBox;
             let clip_box = panel_box.get_parent();
 
@@ -190,7 +223,7 @@ var PanelBlur = class PanelBlur {
             this.background.y = -clip_box.y;
 
             // fixes a bug where the blur is washed away when changing the sigma
-            this.effect.actor.get_content().invalidate();
+            this.invalidate_blur();
         }
     }
 
@@ -218,10 +251,10 @@ var PanelBlur = class PanelBlur {
         // if this is the case, do nothing as only the panel blur interfers with
         // hidetopbar
         if (
-            this.prefs.PANEL_BLUR.get() &&
-            this.prefs.PANEL_UNBLUR_IN_OVERVIEW.get()
+            this.prefs.panel.BLUR &&
+            this.prefs.panel.UNBLUR_IN_OVERVIEW
         ) {
-            if (!this.prefs.HIDETOPBAR_COMPATIBILITY.get()) {
+            if (!this.prefs.hidetopbar.COMPATIBILITY) {
                 this.connections.connect(
                     Main.overview, 'showing', this.hide.bind(this)
                 );
@@ -243,16 +276,33 @@ var PanelBlur = class PanelBlur {
         }
     }
 
-    set_sigma(s) {
-        this.effect.sigma = s;
+    /// Fixes a bug where the blur is washed away when changing the sigma, or
+    /// enabling/disabling other effects.
+    invalidate_blur() {
+        if (this.prefs.panel.STATIC_BLUR && this.background)
+            this.background.get_content().invalidate();
+    }
 
-        // fixes a bug where the blur is washed away when changing the sigma
-        if (this.prefs.PANEL_STATIC_BLUR.get() && this.effect.actor != null)
-            this.effect.actor.get_content().invalidate();
+    set_sigma(s) {
+        this.blur_effect.sigma = s;
+
+        this.invalidate_blur();
     }
 
     set_brightness(b) {
-        this.effect.brightness = b;
+        this.blur_effect.brightness = b;
+    }
+
+    set_color(c) {
+        this.color_effect.color = c;
+    }
+
+    set_noise_amount(n) {
+        this.noise_effect.noise = n;
+    }
+
+    set_noise_lightness(l) {
+        this.noise_effect.lightness = l;
     }
 
     disable() {
@@ -277,7 +327,7 @@ var PanelBlur = class PanelBlur {
     }
 
     _log(str) {
-        if (this.prefs.DEBUG.get())
+        if (this.prefs.DEBUG)
             log(`[Blur my Shell] ${str}`);
     }
 };

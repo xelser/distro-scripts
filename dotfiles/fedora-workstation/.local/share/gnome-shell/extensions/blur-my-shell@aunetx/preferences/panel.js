@@ -16,8 +16,6 @@ var Panel = GObject.registerClass({
     InternalChildren: [
         'blur',
         'customize',
-        'sigma',
-        'brightness',
         'static_blur',
         'unblur_in_overview',
         'hidetopbar_compatibility'
@@ -26,13 +24,15 @@ var Panel = GObject.registerClass({
     constructor(props = {}) {
         super(props);
 
-        Preferences.settings.bind('panel-blur', this._blur, 'state', Gio.SettingsBindFlags.DEFAULT);
-        Preferences.settings.bind('panel-customize', this._customize, 'enable-expansion', Gio.SettingsBindFlags.DEFAULT);
-        Preferences.settings.bind('panel-sigma', this._sigma, 'value', Gio.SettingsBindFlags.DEFAULT);
-        Preferences.settings.bind('panel-brightness', this._brightness, 'value', Gio.SettingsBindFlags.DEFAULT);
-        Preferences.settings.bind('panel-static-blur', this._static_blur, 'state', Gio.SettingsBindFlags.DEFAULT);
-        Preferences.settings.bind('panel-unblur-in-overview', this._unblur_in_overview, 'state', Gio.SettingsBindFlags.DEFAULT);
+        const prefs_panel = Preferences.panel.settings;
 
-        Preferences.settings.bind('hidetopbar-compatibility', this._hidetopbar_compatibility, 'state', Gio.SettingsBindFlags.DEFAULT);
+        prefs_panel.bind('blur', this._blur, 'state', Gio.SettingsBindFlags.DEFAULT);
+        prefs_panel.bind('static-blur', this._static_blur, 'state', Gio.SettingsBindFlags.DEFAULT);
+        prefs_panel.bind('unblur-in-overview', this._unblur_in_overview, 'state', Gio.SettingsBindFlags.DEFAULT);
+        this._customize.connect_to(Preferences.panel, this._static_blur);
+
+        const prefs_hidetopbar = Preferences.hidetopbar.settings;
+
+        prefs_hidetopbar.bind('compatibility', this._hidetopbar_compatibility, 'state', Gio.SettingsBindFlags.DEFAULT);
     }
 });

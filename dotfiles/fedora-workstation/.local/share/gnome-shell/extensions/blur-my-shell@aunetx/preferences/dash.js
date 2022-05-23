@@ -16,8 +16,6 @@ var Dash = GObject.registerClass({
     InternalChildren: [
         'blur',
         'customize',
-        'sigma',
-        'brightness',
         'override_background',
         'unblur_in_overview'
     ],
@@ -25,11 +23,11 @@ var Dash = GObject.registerClass({
     constructor(props = {}) {
         super(props);
 
-        Preferences.settings.bind('dash-to-dock-blur', this._blur, 'state', Gio.SettingsBindFlags.DEFAULT);
-        Preferences.settings.bind('dash-to-dock-customize', this._customize, 'enable-expansion', Gio.SettingsBindFlags.DEFAULT);
-        Preferences.settings.bind('dash-to-dock-sigma', this._sigma, 'value', Gio.SettingsBindFlags.DEFAULT);
-        Preferences.settings.bind('dash-to-dock-brightness', this._brightness, 'value', Gio.SettingsBindFlags.DEFAULT);
-        Preferences.settings.bind('dash-to-dock-override-background', this._override_background, 'state', Gio.SettingsBindFlags.DEFAULT);
-        Preferences.settings.bind('dash-to-dock-unblur-in-overview', this._unblur_in_overview, 'state', Gio.SettingsBindFlags.DEFAULT);
+        const prefs = Preferences.dash_to_dock.settings;
+
+        prefs.bind('blur', this._blur, 'state', Gio.SettingsBindFlags.DEFAULT);
+        prefs.bind('override-background', this._override_background, 'state', Gio.SettingsBindFlags.DEFAULT);
+        prefs.bind('unblur-in-overview', this._unblur_in_overview, 'state', Gio.SettingsBindFlags.DEFAULT);
+        this._customize.connect_to(Preferences.dash_to_dock, false);
     }
 });

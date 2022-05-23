@@ -32,7 +32,7 @@ sudo dnf upgrade && sudo dnf distro-sync
 
 # INSTALL
 sudo dnf install gnome-{tweaks,extensions-app,multi-writer,builder,console,console-nautilus} google-noto-{cjk,emoji-color}-fonts google-roboto-* \
-  gnome-shell-extension-pop-shell file-roller dconf-editor drawing lollypop gnote gparted transmission inkscape easyeffects \
+  gnome-shell-extension-pop-shell file-roller dconf-editor drawing lollypop gparted transmission inkscape easyeffects \
   htop neofetch unrar flatpak mozilla-ublock-origin gtk-murrine-engine openssl
   # google-chrome-stable chromium kvantum qt5ct variety appindicator dash-to-dock gsconnect sound-output-device-chooser user-theme
 
@@ -117,7 +117,8 @@ clear
 ################################ Gaming ##################################
 
 # Install
-#sudo dnf install akmod-nvidia wine wine-mono lutris steam gamescope gamemode gnome-shell-extension-gamemode mangohud goverlay mesa-libGLU.{x86_64,i686}
+#sudo dnf install akmod-nvidia steam gamescope gamemode mangohud goverlay mesa-libGLU.{x86_64,i686} kvantum qt5ct \
+#  wine wine-mono lutris gnome-shell-extension-gamemode
 
 # fstab
 #echo "LABEL=Games	/media/Games	ext4	defaults	0 2" | sudo tee -a /etc/fstab

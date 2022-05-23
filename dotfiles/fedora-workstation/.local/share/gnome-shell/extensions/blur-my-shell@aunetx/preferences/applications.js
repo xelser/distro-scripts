@@ -16,18 +16,16 @@ var Applications = GObject.registerClass({
     InternalChildren: [
         'blur',
         'customize',
-        'sigma',
-        'brightness',
         'whitelist'
     ],
 }, class Applications extends Adw.PreferencesPage {
     constructor(props = {}) {
         super(props);
 
-        Preferences.settings.bind('applications-blur', this._blur, 'state', Gio.SettingsBindFlags.DEFAULT);
-        Preferences.settings.bind('applications-customize', this._customize, 'enable-expansion', Gio.SettingsBindFlags.DEFAULT);
-        Preferences.settings.bind('applications-sigma', this._sigma, 'value', Gio.SettingsBindFlags.DEFAULT);
-        Preferences.settings.bind('applications-brightness', this._brightness, 'value', Gio.SettingsBindFlags.DEFAULT);
-        Preferences.settings.bind('applications-whitelist', this._whitelist.buffer, 'text', Gio.SettingsBindFlags.DEFAULT);
+        const prefs = Preferences.applications.settings;
+
+        prefs.bind('blur', this._blur, 'state', Gio.SettingsBindFlags.DEFAULT);
+        prefs.bind('whitelist', this._whitelist.buffer, 'text', Gio.SettingsBindFlags.DEFAULT);
+        this._customize.connect_to(Preferences.applications, false);
     }
 });

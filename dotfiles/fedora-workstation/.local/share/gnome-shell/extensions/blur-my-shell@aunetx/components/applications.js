@@ -3,7 +3,7 @@
 const { Shell, Clutter, Meta, GLib } = imports.gi;
 
 const Me = imports.misc.extensionUtils.getCurrentExtension();
-const PaintSignals = Me.imports.conveniences.paint_signals;
+const PaintSignals = Me.imports.effects.paint_signals;
 
 var ApplicationsBlur = class ApplicationsBlur {
     constructor(connections, prefs) {
@@ -121,6 +121,18 @@ var ApplicationsBlur = class ApplicationsBlur {
             );
         }
 
+        // update the offset constraints when the window size changes
+        this.connections.connect(meta_window, 'size-changed', () => {
+            if (this.blur_actor_map.has(pid)) {
+                let offset = this.compute_offset(meta_window);
+                let constraints = this.blur_actor_map.get(pid).get_constraints();
+                constraints[0].offset = offset.x;
+                constraints[1].offset = offset.y;
+                constraints[2].offset = offset.width;
+                constraints[3].offset = offset.height;
+            }
+        });
+
         this.check_blur(pid, window_actor, meta_window);
     }
 
@@ -132,7 +144,7 @@ var ApplicationsBlur = class ApplicationsBlur {
     check_blur(pid, window_actor, meta_window) {
         let mutter_hint = meta_window.get_mutter_hints();
         let window_wm_class = meta_window.get_wm_class();
-        let whitelist = this.prefs.APPLICATIONS_WHITELIST.get();
+        let whitelist = this.prefs.applications.WHITELIST;
 
         this._log(`checking blur for ${pid}`);
 
@@ -144,12 +156,12 @@ var ApplicationsBlur = class ApplicationsBlur {
 
             let brightness, sigma;
 
-            if (this.prefs.APPLICATIONS_CUSTOMIZE.get()) {
-                brightness = this.prefs.APPLICATIONS_BRIGHTNESS.get();
-                sigma = this.prefs.APPLICATIONS_SIGMA.get();
+            if (this.prefs.applications.CUSTOMIZE) {
+                brightness = this.prefs.applications.BRIGHTNESS;
+                sigma = this.prefs.applications.SIGMA;
             } else {
-                brightness = this.prefs.BRIGHTNESS.get();
-                sigma = this.prefs.SIGMA.get();
+                brightness = this.prefs.BRIGHTNESS;
+                sigma = this.prefs.SIGMA;
             }
 
             this.update_blur(pid, window_actor, meta_window, brightness, sigma);
@@ -197,12 +209,12 @@ var ApplicationsBlur = class ApplicationsBlur {
     parse_xprop(property) {
         // set brightness and sigma to default values
         let brightness, sigma;
-        if (this.prefs.APPLICATIONS_CUSTOMIZE.get()) {
-            brightness = this.prefs.APPLICATIONS_BRIGHTNESS.get();
-            sigma = this.prefs.APPLICATIONS_SIGMA.get();
+        if (this.prefs.applications.CUSTOMIZE) {
+            brightness = this.prefs.applications.BRIGHTNESS;
+            sigma = this.prefs.applications.SIGMA;
         } else {
-            brightness = this.prefs.BRIGHTNESS.get();
-            sigma = this.prefs.SIGMA.get();
+            brightness = this.prefs.BRIGHTNESS;
+            sigma = this.prefs.SIGMA;
         }
 
         // get the argument of the property
@@ -294,7 +306,7 @@ var ApplicationsBlur = class ApplicationsBlur {
         );
 
         // if hacks are selected, force to repaint the window
-        if (this.prefs.HACKS_LEVEL.get() >= 1) {
+        if (this.prefs.HACKS_LEVEL >= 1) {
             this._log("applications hack level 1 or 2");
 
             this.paint_signals.disconnect_all();
@@ -330,38 +342,45 @@ var ApplicationsBlur = class ApplicationsBlur {
         );
     }
 
+    // Compute the offset constraints for a blur actor relative to the size and
+    // position of the target window
+    compute_offset(meta_window) {
+        let frame = meta_window.get_frame_rect();
+        let buffer = meta_window.get_buffer_rect();
+        return {
+            x: frame.x - buffer.x,
+            y: frame.y - buffer.y,
+            width: frame.width - buffer.width,
+            height: frame.height - buffer.height
+        };
+    }
+
     /// Returns a new already blurred widget, configured to follow the size and
     /// position of its target window.
     create_blur_actor(meta_window, window_actor, blur_effect) {
         // create the constraints in size and position to its target window
-        let frame = meta_window.get_frame_rect();
-        let buffer = meta_window.get_buffer_rect();
-
-        const offset_x = frame.x - buffer.x;
-        const offset_y = frame.y - buffer.y;
-        const offset_width = buffer.width - frame.width;
-        const offset_height = buffer.height - frame.height;
+        let offset = this.compute_offset(meta_window);
 
         let constraint_x = new Clutter.BindConstraint({
             source: window_actor,
             coordinate: Clutter.BindCoordinate.X,
-            offset: offset_x
+            offset: offset.x
         });
         let constraint_y = new Clutter.BindConstraint({
             source: window_actor,
             coordinate: Clutter.BindCoordinate.Y,
-            offset: offset_y
+            offset: offset.y
         });
 
         let constraint_width = new Clutter.BindConstraint({
             source: window_actor,
             coordinate: Clutter.BindCoordinate.WIDTH,
-            offset: -offset_width
+            offset: offset.width
         });
         let constraint_height = new Clutter.BindConstraint({
             source: window_actor,
             coordinate: Clutter.BindCoordinate.HEIGHT,
-            offset: -offset_height
+            offset: offset.height
         });
 
         // create the actor and add the constraints
@@ -435,8 +454,13 @@ var ApplicationsBlur = class ApplicationsBlur {
         });
     }
 
+    // not implemented for dynamic blur
+    set_color(c) { }
+    set_noise_amount(n) { }
+    set_noise_lightness(l) { }
+
     _log(str) {
-        if (this.prefs.DEBUG.get())
+        if (this.prefs.DEBUG)
             log(`[Blur my Shell] ${str}`);
     }
 };
