@@ -23,8 +23,8 @@ sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-releas
   
 # DEBLOAT
 sudo dnf groupremove 'LibreOffice' 'Container Management' 'Guest Desktop Agents'
-sudo dnf autoremove gnome-{contacts,photos,font-viewer,characters,tour,maps,clocks,weather} gnome-shell-extension-* \
-  fedora-bookmarks libreoffice-core mediawriter rhythmbox cheese simple-scan # calendar,logs,boxes,connections,
+sudo dnf autoremove gnome-{contacts,photos,font-viewer,characters,tour,maps,clocks,weather,boxes,connections} gnome-shell-extension-* \
+  fedora-bookmarks libreoffice-core mediawriter rhythmbox cheese simple-scan # calendar,logs,
 
 # UPDATE
 sudo dnf groupupdate core sound-and-video multimedia --exclude=PackageKit-gstreamer-plugin
@@ -33,7 +33,8 @@ sudo dnf upgrade && sudo dnf distro-sync
 # INSTALL
 sudo dnf install gnome-{tweaks,extensions-app,multi-writer,builder,console,console-nautilus} google-noto-{cjk,emoji-color}-fonts google-roboto-* \
   gnome-shell-extension-pop-shell file-roller dconf-editor drawing lollypop gparted transmission inkscape easyeffects \
-  htop neofetch unrar flatpak mozilla-ublock-origin gtk-murrine-engine openssl
+  htop neofetch unrar flatpak mozilla-ublock-origin gtk-murrine-engine touchegg openssl \
+  akmod-nvidia steam gamescope gamemode mangohud goverlay mesa-libGLU.{x86_64,i686} kvantum qt5ct wine wine-mono lutris
   # google-chrome-stable chromium kvantum qt5ct variety appindicator dash-to-dock gsconnect sound-output-device-chooser user-theme
 
 clear
@@ -47,6 +48,13 @@ fi
 
 # gdm autologin using script
 echo -e "[daemon]\nAutomaticLoginEnable=True\nAutomaticLogin=$USER" | sudo tee -a /etc/gdm/custom.conf
+
+# fstab
+echo "LABEL=Games	/media/Games	ext4	defaults	0 2" | sudo tee -a /etc/fstab
+
+# NVIDIA Driver
+echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /usr/lib/modprobe.d/blacklist-nouveau.conf
+sudo dracut --force
 
 clear
 ############################## Transfer Files ############################
@@ -112,22 +120,3 @@ sudo dnf autoremove && sudo dnf clean all
 
 # Set ownership
 sudo chown -R $USER $HOME
-
-clear
-################################ Gaming ##################################
-
-# Install
-#sudo dnf install akmod-nvidia steam gamescope gamemode mangohud goverlay mesa-libGLU.{x86_64,i686} kvantum qt5ct \
-#  wine wine-mono lutris gnome-shell-extension-gamemode
-
-# fstab
-#echo "LABEL=Games	/media/Games	ext4	defaults	0 2" | sudo tee -a /etc/fstab
-
-# NVIDIA Driver
-#echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /usr/lib/modprobe.d/blacklist-nouveau.conf
-#sudo dracut --force
-
-clear
-############################### Tests/Beta ###############################
-
-
