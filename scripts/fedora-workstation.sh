@@ -17,7 +17,7 @@ clear
 ################################# Install #################################
 
 # ADD REPO: RPM Fusion
-# sudo dnf config-manager --set-enabled google-chrome rpmfusion-nonfree-steam rpmfusion-nonfree-nvidia-driver
+sudo dnf config-manager --set-enabled google-chrome # rpmfusion-nonfree-steam rpmfusion-nonfree-nvidia-driver
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
   https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
   
@@ -32,10 +32,8 @@ sudo dnf upgrade && sudo dnf distro-sync
 
 # INSTALL
 sudo dnf install gnome-{tweaks,extensions-app,multi-writer,builder,console,console-nautilus} google-noto-{cjk,emoji-color}-fonts google-roboto-* \
-  gnome-shell-extension-pop-shell file-roller dconf-editor drawing lollypop gparted transmission inkscape easyeffects \
-  htop neofetch unrar flatpak mozilla-ublock-origin gtk-murrine-engine touchegg openssl \
-  akmod-nvidia steam gamescope gamemode mangohud goverlay mesa-libGLU.{x86_64,i686} kvantum qt5ct wine wine-mono lutris
-  # google-chrome-stable chromium kvantum qt5ct variety appindicator dash-to-dock gsconnect sound-output-device-chooser user-theme
+  gnome-shell-extension-{pop-shell,user-theme} file-roller dconf-editor drawing lollypop gparted transmission inkscape easyeffects \
+  htop neofetch unrar flatpak mozilla-ublock-origin gtk-murrine-engine touchegg openssl google-chrome-stable variety
 
 clear
 ################################# Config ##################################
@@ -48,13 +46,6 @@ fi
 
 # gdm autologin using script
 echo -e "[daemon]\nAutomaticLoginEnable=True\nAutomaticLogin=$USER" | sudo tee -a /etc/gdm/custom.conf
-
-# fstab
-echo "LABEL=Games	/media/Games	ext4	defaults	0 2" | sudo tee -a /etc/fstab
-
-# NVIDIA Driver
-echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /usr/lib/modprobe.d/blacklist-nouveau.conf
-sudo dracut --force
 
 clear
 ############################## Transfer Files ############################
@@ -80,6 +71,30 @@ echo "NotShowIn=GNOME" | tee -a $HOME/.local/share/applications/calf.desktop
 
 # Fedora Post Script
 cp -rf $HOME/distro-scripts/scripts/fedora-final.sh $HOME/
+
+clear
+################################## Gaming #################################
+
+# Install
+sudo dnf install akmod-nvidia steam gamescope gamemode mangohud goverlay mesa-libGLU.{x86_64,i686} kvantum qt5ct wine wine-mono lutris
+
+# fstab
+echo "LABEL=Games	/media/Games	ext4	defaults	0 2" | sudo tee -a /etc/fstab
+
+# NVIDIA Driver
+echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /usr/lib/modprobe.d/blacklist-nouveau.conf
+sudo akmods --force && sudo dracut --force
+
+# MangoHUD
+echo "MANGOHUD=1
+MANGOHUD_DLSYM=1" | sudo tee -a /etc/environment
+
+# Launch Steam with Gamemode
+rm -rf $HOME/.local/share/applications/steam.desktop $HOME/.config/autostart/steam.desktop
+cp -rf /usr/share/applications/steam.desktop $HOME/.local/share/applications/
+sed -i 's/\/usr\/bin\/steam/gamemoderun \/usr\/bin\/steam/g' $HOME/.local/share/applications/steam.desktop
+cp -rf $HOME/.local/share/applications/steam.desktop $HOME/.config/autostart/steam.desktop
+sed -i 's/gamemoderun \/usr\/bin\/steam/gamemoderun \/usr\/bin\/steam -silent/g' $HOME/.config/autostart/steam.desktop
 
 clear
 ################################# Themes ##################################
