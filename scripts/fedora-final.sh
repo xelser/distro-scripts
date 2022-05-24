@@ -6,8 +6,8 @@ clear
 
 # Install
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install -y flathub com.github.tchx84.Flatseal org.x.Warpinator com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom \
-   io.github.realmazharhussain.GdmSettings com.mattjakeman.ExtensionManager
+flatpak install -y flathub com.github.tchx84.Flatseal com.mattjakeman.ExtensionManager io.github.realmazharhussain.GdmSettings \
+  org.x.Warpinator com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom
 
 # Theme
 sudo dnf install ostree libappstream-glib
