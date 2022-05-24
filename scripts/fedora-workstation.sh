@@ -32,7 +32,7 @@ sudo dnf upgrade && sudo dnf distro-sync
 
 # INSTALL
 sudo dnf install gnome-{tweaks,extensions-app,multi-writer,builder,console,console-nautilus} google-noto-{cjk,emoji-color}-fonts google-roboto-* \
-  gnome-shell-extension-{pop-shell,user-theme} file-roller dconf-editor drawing lollypop seahorse gparted transmission inkscape easyeffects \
+  gnome-shell-extension-{pop-shell,user-theme} file-roller dconf-editor drawing lollypop seahorse fragments easyeffects gparted transmission inkscape \
   htop neofetch unrar flatpak mozilla-ublock-origin google-chrome-stable variety gtk-murrine-engine touchegg openssl
 
 clear
