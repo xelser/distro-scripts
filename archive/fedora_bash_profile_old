@@ -38,3 +38,23 @@ if [ $? -ne 0 ]; then
 	gsettings set org.gnome.desktop.interface document-font-name "Cantarell 10"
 	gsettings set org.gnome.desktop.interface monospace-font-name "Source Code Pro 10"
 fi
+
+# NEW
+
+# User specific environment and startup programs
+export QT_QPA_PLATFORMTHEME="qt5ct"
+
+# Check whether if the windowing system is Xorg or Wayland
+echo $XDG_SESSION_TYPE | grep -q wayland
+if [ $? -eq 0 ]; then
+	export QT_QPA_PLATFORM="xcb"
+	export OBS_USE_EGL=1
+	gsettings set org.gnome.shell.extensions.user-theme name 'Orchis-Dark-Compact'
+	gsettings set org.gnome.desktop.interface gtk-theme 'Orchis-Dark-Compact'
+else
+	gsettings set org.gnome.shell.extensions.user-theme name 'default-pure'
+	gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
+fi
+
+# Run every startup
+#nvidia-settings --assign CurrentMetaMode="nvidia-auto-select +0+0 { ForceFullCompositionPipeline = On }"

@@ -11,9 +11,6 @@ alias update="aptup && flatpakup"
 alias post="sh $HOME/debian-final.sh"
 alias clear="clear && history -c"
 
-# theme
-alias gtkup="cd /tmp/ && rm -rf Matcha* && sudo rm -rf /usr/share/themes/Matcha* && git clone https://github.com/vinceliuice/Matcha-gtk-theme.git && sudo ./Matcha-gtk-theme/install.sh -c dark -t aliz && cd $HOME"
-
 # git aliases
 alias gitclone="cd $HOME/Downloads && git clone"
 alias gitcommit="git fetch && git pull && git add . && git commit -m 'Updated @ debian' && git push"

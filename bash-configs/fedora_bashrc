@@ -14,9 +14,6 @@ alias update="dnfup && flatpakup"
 alias post="sh $HOME/fedora-final.sh"
 alias clear="clear && history -c"
 
-# theme aliases
-alias gtkup="cd /tmp/ && rm Orchis* && sudo rm -rf /usr/share/themes/Orchis* && git clone https://github.com/vinceliuice/Orchis-theme.git && sudo ./Orchis-theme/install.sh && cd $HOME"
-
 # git aliases
 alias gitclone="cd $HOME/Github && git clone"
 alias gitcommit="git fetch && git pull && git add . && git commit -m 'Updated @ fedora' && git push"

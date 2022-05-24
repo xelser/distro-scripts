@@ -2,6 +2,16 @@
 set -e
 clear
 
+################################## Gaming ##################################
+
+# Gaming
+echo && read -p "Install gaming apps and drivers? (y/N): " gaming
+case $gaming in
+   y)	bash $HOME/.config/fedora-gaming.sh
+   	rm -rf $HOME/.config/fedora-gaming.sh;;
+   *)	rm -rf $HOME/.config/fedora-gaming.sh;;
+esac
+
 ################################# Flatpak ##################################
 
 # Install
