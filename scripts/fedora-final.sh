@@ -23,7 +23,7 @@ clear
 
 # Install
 flatpak install -y flathub com.github.tchx84.Flatseal com.mattjakeman.ExtensionManager org.x.Warpinator de.haeckerfelix.Fragments \
-  com.bitwarden.desktop org.onlyoffice.desktopeditors com.discordapp.Discord com.skype.Client us.zoom.Zoom
+  com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom
 
 clear
 ############################### Orchis Theme ###############################
