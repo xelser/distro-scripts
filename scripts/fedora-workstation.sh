@@ -99,6 +99,72 @@ if [ -f $HOME/Downloads/Bibata*.tar.gz ]; then
 fi
 
 clear
+############################# dconf/gsettings #############################
+
+# Variables
+cursor_theme="Bibata-Modern-Classic"
+icon_theme="Tela-circle-dark"
+
+# GDM
+#echo -e "[org/gnome/desktop/interface]\ncursor-theme='${cursor_theme}'" | sudo tee /etc/dconf/db/gdm.d/10-cursor-settings
+#sudo -u gdm dbus-launch gsettings set org.gnome.desktop.interface cursor-theme "${icon_theme}"
+
+#echo -e "[org/gnome/desktop/interface]\nicon-theme='${icon_theme}'" | sudo tee /etc/dconf/db/gdm.d/11-icon-settings
+#sudo -u gdm dbus-launch gsettings set org.gnome.desktop.interface icon-theme "${icon_theme}"
+
+#echo -e "[org/gnome/desktop/peripherals/touchpad]\ntap-to-click=true" | sudo tee /etc/dconf/db/gdm.d/06-tap-to-click
+#sudo -u gdm dbus-launch gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click "true"
+
+#echo -e "[org/gnome/desktop/interface]\ntoolkit-accessibility='false'" | sudo tee /etc/dconf/db/gdm.d/07-accessibility
+#sudo -u gdm dbus-launch gsettings set org.gnome.desktop.interface toolkit-accessibility "false"
+
+#sudo -u gdm dbus-launch gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
+
+# Interface
+gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
+gsettings set org.gnome.desktop.interface icon-theme 'Tela-circle-dark'
+gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Classic'
+
+gsettings set org.gnome.desktop.interface font-name 'Roboto 10'
+gsettings set org.gnome.desktop.interface document-font-name 'Roboto Slab 10'
+gsettings set org.gnome.desktop.interface monospace-font-name 'Roboto Mono 10'
+
+gsettings set org.gnome.desktop.interface clock-format '12h'
+gsettings set org.gnome.desktop.interface clock-show-date 'false'
+
+gsettings set org.gnome.desktop.interface enable-hot-corners 'false'
+gsettings set org.gnome.desktop.interface show-battery-percentage 'true'
+
+# Window Manager
+gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
+gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Roboto Medium 10'
+
+# Background
+gsettings set org.gnome.desktop.background picture-options 'stretched'
+gsettings set org.gnome.desktop.background picture-uri 'file:///home/xelser/.local/share/backgrounds/2022-05-25-02-21-05-sea_surf_aerial_view_131444_3840x2160.jpg'
+gsettings set org.gnome.desktop.background picture-uri-dark 'file:///home/xelser/.local/share/backgrounds/2022-05-25-02-21-05-sea_surf_aerial_view_131444_3840x2160.jpg'
+
+# Screensaver
+gsettings set org.gnome.desktop.screensaver picture-options 'stretched'
+gsettings set org.gnome.desktop.screensaver picture-uri 'file:///home/xelser/.local/share/backgrounds/2022-05-25-02-21-05-sea_surf_aerial_view_131444_3840x2160.jpg'
+
+# Touchpad
+gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click 'true'
+
+# Privacy
+gsettings set org.gnome.desktop.privacy old-files-age '30'
+gsettings set org.gnome.desktop.privacy remove-old-temp-files 'true'
+gsettings set org.gnome.desktop.privacy remove-old-trash-files 'true'
+gsettings set org.gnome.desktop.privacy report-technical-problems 'true'
+
+# GNOME Software
+gsettings set org.gnome.software download-updates 'false'
+gsettings set org.gnome.software download-updates-notify 'false'
+
+# Totem
+gsettings set org.gnome.totem subtitle-font 'Roboto Mono Medium 14'
+
+clear
 ############################## Housekeeping ##############################
 
 # Clean Packages
