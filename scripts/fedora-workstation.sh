@@ -33,7 +33,7 @@ sudo dnf upgrade && sudo dnf distro-sync
 
 # INSTALL
 sudo dnf install gnome-{tweaks,extensions-app,multi-writer,builder,console,console-nautilus} google-noto-{cjk,emoji-color}-fonts google-roboto-* \
-  gnome-shell-extension-{pop-shell,user-theme,apps-menu,gsconnect} file-roller dconf-editor drawing lollypop seahorse easyeffects \
+  gnome-shell-extension-{pop-shell,user-theme,apps-menu,appindicator,gsconnect} file-roller dconf-editor drawing lollypop seahorse easyeffects \
   mozilla-ublock-origin gparted transmission inkscape google-chrome-stable variety \
   gtk-murrine-engine htop neofetch unrar flatpak
 
@@ -65,7 +65,7 @@ cat $HOME/distro-scripts/bash-configs/fedora_bash_profile >> $HOME/.bash_profile
 case $cp_dotfiles in
    n)	;;
    *)	# Remove old .config files
-   	rm -rf $HOME/{.config,.local}
+   	sudo rm -rf $HOME/{.config,.local}
    	cp -rf $HOME/distro-scripts/dotfiles/fedora-workstation/{.config,.local} $HOME/;;
 esac
 
@@ -81,22 +81,11 @@ cp -rf $HOME/distro-scripts/scripts/fedora-gaming.sh $HOME/.config/
 clear
 ################################# Themes ##################################
 
-# GTK Legacy theme (Complements with libadwaita)
+# GTK Legacy theme (Fits well with libadwaita)
 sudo dnf install ninja-build git meson sassc
 cd /tmp/ && rm -rf adw-gtk3 && sudo rm -rf /usr/share/themes/adw-gtk3
 git clone https://github.com/lassekongo83/adw-gtk3.git
 cd adw-gtk3 && meson build && sudo ninja -C build install
-
-# GTK
-sudo dnf install sassc
-cd /tmp/ && rm -rf Orchis* && sudo rm -rf /usr/share/themes/Orchis*
-git clone https://github.com/vinceliuice/Orchis-theme.git
-cd Orchis-theme && sudo ./install.sh
-
-# KDE
-cd /tmp/ && rm -rf Orchis* && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
-git clone https://github.com/vinceliuice/Orchis-kde.git
-cd Orchis-kde && ./install.sh
 
 # Icons
 cd /tmp/ && rm -rf Tela* && sudo rm -rf /usr/share/icons/Tela*
