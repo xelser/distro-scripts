@@ -23,8 +23,9 @@ sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-releas
   
 # DEBLOAT
 sudo dnf groupremove 'LibreOffice' 'Container Management' 'Guest Desktop Agents'
-sudo dnf autoremove gnome-{contacts,photos,font-viewer,characters,tour,maps,clocks,weather,boxes,connections} \
-  gnome-shell-extension-* fedora-bookmarks libreoffice-core mediawriter rhythmbox cheese simple-scan # calendar,logs,
+sudo dnf autoremove --exclude=gnome-shell-extension-{common,places-menu} fedora-bookmarks libreoffice-core mediawriter rhythmbox cheese simple-scan \
+  gnome-{contacts,photos,font-viewer,characters,tour,maps,clocks,weather,boxes,connections} # calendar,logs,
+sudo mark install gnome-shell-extension-{common,places-menu}
 
 # UPDATE
 sudo dnf groupupdate core sound-and-video multimedia --exclude=PackageKit-gstreamer-plugin
@@ -32,8 +33,12 @@ sudo dnf upgrade && sudo dnf distro-sync
 
 # INSTALL
 sudo dnf install gnome-{tweaks,extensions-app,multi-writer,builder,console,console-nautilus} google-noto-{cjk,emoji-color}-fonts google-roboto-* \
-  gnome-shell-extension-{pop-shell,user-theme} file-roller dconf-editor drawing lollypop seahorse fragments easyeffects gparted transmission inkscape \
-  htop neofetch unrar flatpak mozilla-ublock-origin google-chrome-stable variety gtk-murrine-engine touchegg openssl
+  gnome-shell-extension-{pop-shell,user-theme,apps-menu,gsconnect} file-roller dconf-editor drawing lollypop seahorse easyeffects \
+  mozilla-ublock-origin gparted transmission inkscape google-chrome-stable variety \
+  gtk-murrine-engine htop neofetch unrar flatpak
+
+# ADD REPO: Flatpak
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
 clear
 ################################# Config ##################################

@@ -12,12 +12,17 @@ case $gaming in
    *)	rm -rf $HOME/.config/fedora-gaming.sh;;
 esac
 
+# Enable repo first
+gnome-software
+
+# Remove gnome-terminal
+sudo dnf autoremove gnome-{terminal,terminal-nautilus}
+
 ################################# Flatpak ##################################
 
 # Install
-sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-flatpak install -y flathub com.github.tchx84.Flatseal com.mattjakeman.ExtensionManager io.github.realmazharhussain.GdmSettings \
-  org.x.Warpinator com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom
+flatpak install -y flathub com.github.tchx84.Flatseal com.mattjakeman.ExtensionManager org.x.Warpinator de.haeckerfelix.Fragments \
+  com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom
 
 # Theme
 sudo dnf install ostree libappstream-glib
@@ -27,3 +32,7 @@ cd stylepak && ./stylepak install-system Orchis-Dark-Compact
 
 # Clean
 flatpak uninstall --unused -y
+############################## Housekeeping ################################
+
+# Delete script
+rm -rf $HOME/fedora-final.sh
