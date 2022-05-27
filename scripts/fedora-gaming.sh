@@ -21,6 +21,5 @@ MANGOHUD_DLSYM=1" | sudo tee -a /etc/environment
 # Launch Steam with Gamemode
 rm -rf $HOME/.local/share/applications/steam.desktop $HOME/.config/autostart/steam.desktop
 cp -rf /usr/share/applications/steam.desktop $HOME/.local/share/applications/
-sed -i 's/\/usr\/bin\/steam/gamemoderun \/usr\/bin\/steam/g' $HOME/.local/share/applications/steam.desktop
-cp -rf $HOME/.local/share/applications/steam.desktop $HOME/.config/autostart/steam.desktop
-sed -i 's/gamemoderun \/usr\/bin\/steam/gamemoderun \/usr\/bin\/steam -silent/g' $HOME/.config/autostart/steam.desktop
+sed -i 's/\/usr\/bin\/steam/gamemoderun \/usr\/bin\/steam -silent/g' $HOME/.local/share/applications/steam.desktop
+ln -sf $HOME/.local/share/applications/steam.desktop $HOME/.config/autostart/steam.desktop

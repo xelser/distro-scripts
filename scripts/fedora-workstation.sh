@@ -138,7 +138,8 @@ gsettings set org.gnome.desktop.interface document-font-name 'Roboto Slab 10'
 gsettings set org.gnome.desktop.interface monospace-font-name 'Roboto Mono 10'
 
 gsettings set org.gnome.desktop.interface clock-format '12h'
-gsettings set org.gnome.desktop.interface clock-show-date 'false'
+gsettings set org.gnome.desktop.interface clock-show-date 'true'
+gsettings set org.gnome.desktop.interface clock-show-weekday 'true'
 
 gsettings set org.gnome.desktop.interface enable-hot-corners 'false'
 gsettings set org.gnome.desktop.interface show-battery-percentage 'true'
