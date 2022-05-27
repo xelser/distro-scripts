@@ -6,7 +6,7 @@
 PS1="\[\e[1;34m\]\u@\h \[\e[0;37m\][\[\e[1;33m\]\W\[\e[0;37m\]] \[\e[0;37m\]± \[\e[1;35m\]| \[\e[1;36m\]Date\[\e[0;37m\]: \d \[\e[1;35m\]| \[\e[1;36m\]Time\[\e[0;37m\]: \@ \n\[\e[1;32m\]-\[\e[1;31m\]> \[\e[0;37m\]"
 
 # package manager aliases
-alias dnfup="sudo dnf upgrade && sudo dnf distro-sync && sudo dnf autoremove && sudo dnf clean all"
+alias dnfup="sudo dnf upgrade && sudo dnf distro-sync && sudo dnf autoremove"
 alias flatpakup="flatpak update -y && flatpak uninstall --unused -y"
 alias update="dnfup && flatpakup"
 

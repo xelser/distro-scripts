@@ -5,7 +5,7 @@ clear
 ################################## Gaming #################################
 
 # Install
-sudo dnf install akmod-nvidia steam gamescope gamemode mangohud goverlay mesa-libGLU.{x86_64,i686} kvantum qt5ct wine wine-mono lutris
+sudo dnf install akmod-nvidia steam gamescope gamemode mangohud goverlay mesa-libGLU.{x86_64,i686} wine wine-mono lutris
 
 # fstab
 echo "LABEL=Games	/media/Games	ext4	defaults	0 2" | sudo tee -a /etc/fstab

@@ -11,13 +11,19 @@ echo && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
 echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
 
 # Configure DNF
-echo -e "keepcache=True\nfastestmirror=True\nassumeyes=True\ninstall_weak_deps=False\nmax_parallel_downloads=10\ncolor=always" | sudo tee -a /etc/dnf/dnf.conf
+echo -e "keepcache=True
+fastestmirror=True
+assumeyes=True
+defaultyes=True
+install_weak_deps=False
+max_parallel_downloads=10
+color=always" | sudo tee -a /etc/dnf/dnf.conf
 
 clear
 ################################# Install #################################
 
 # ADD REPO: RPM Fusion
-sudo dnf config-manager --set-enabled google-chrome # rpmfusion-nonfree-steam rpmfusion-nonfree-nvidia-driver
+# sudo dnf config-manager --set-enabled google-chrome rpmfusion-nonfree-steam rpmfusion-nonfree-nvidia-driver
 sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
   https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
   
@@ -34,8 +40,8 @@ sudo dnf upgrade && sudo dnf distro-sync
 # INSTALL
 sudo dnf install gnome-{tweaks,extensions-app,multi-writer,builder,console,console-nautilus} google-noto-{cjk,emoji-color}-fonts google-roboto-* \
   gnome-shell-extension-{pop-shell,user-theme,apps-menu,appindicator,gsconnect} file-roller dconf-editor drawing lollypop seahorse easyeffects \
-  mozilla-ublock-origin gparted transmission inkscape google-chrome-stable variety \
-  gtk-murrine-engine htop neofetch unrar flatpak
+  mozilla-ublock-origin gparted transmission inkscape kvantum qt5ct gtk-murrine-engine htop neofetch unrar flatpak
+  # google-chrome-stable variety
 
 # ADD REPO: Flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -82,21 +88,23 @@ clear
 ################################# Themes ##################################
 
 # GTK Legacy theme (Fits well with libadwaita)
-sudo dnf install ninja-build git meson sassc
-cd /tmp/ && rm -rf adw-gtk3 && sudo rm -rf /usr/share/themes/adw-gtk3
-git clone https://github.com/lassekongo83/adw-gtk3.git
-cd adw-gtk3 && meson build && sudo ninja -C build install
+sudo dnf copr enable nickavem/adw-gtk3 && sudo dnf install adw-gtk3
 
 # Icons
 cd /tmp/ && rm -rf Tela* && sudo rm -rf /usr/share/icons/Tela*
-git clone https://github.com/vinceliuice/Tela-circle-icon-theme.git
-cd Tela-circle-icon-theme && sudo ./install.sh
+git clone https://github.com/xelser/tela-circle-icon.git
+cd tela-circle-icon && sudo ./install.sh
 
 # Cursor
 if [ -f $HOME/Downloads/Bibata*.tar.gz ]; then
 	cd /usr/share/icons/ && sudo rm -rf Bibata*
 	sudo tar -xf $HOME/Downloads/Bibata*.tar.gz
 fi
+
+# Kvantum
+cd /tmp/ && rm -rf KvLibadwaita && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
+git clone https://github.com/GabePoel/KvLibadwaita.git
+cd KvLibadwaita && chmod +x install.sh && echo "y" | ./install.sh
 
 clear
 ############################# dconf/gsettings #############################
