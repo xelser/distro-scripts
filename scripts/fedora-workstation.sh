@@ -15,7 +15,9 @@ fi
 
 # Configure DNF
 sudo cat /etc/dnf/dnf.conf | grep -q "keepcache=True\nfastestmirror=True\nassumeyes=True\ndefaultyes=True\ninstall_weak_deps=False\nmax_parallel_downloads=10\ncolor=always"
-echo -e "keepcache=True\nfastestmirror=True\nassumeyes=True\ndefaultyes=True\ninstall_weak_deps=False\nmax_parallel_downloads=10\ncolor=always" | sudo tee -a /etc/dnf/dnf.conf
+if [ $? -ne 0 ]; then
+	echo -e "keepcache=True\nfastestmirror=True\nassumeyes=True\ndefaultyes=True\ninstall_weak_deps=False\nmax_parallel_downloads=10\ncolor=always" | sudo tee -a /etc/dnf/dnf.conf
+fi
 
 clear
 ################################# Install #################################
