@@ -8,16 +8,14 @@ clear
 echo && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
 
 # No password for user
-echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
+sudo cat /etc/sudoers | grep -q "$USER ALL=(ALL) NOPASSWD: ALL"
+if [ $? -ne 0 ]; then
+	echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
+fi
 
 # Configure DNF
-echo -e "keepcache=True
-fastestmirror=True
-assumeyes=True
-defaultyes=True
-install_weak_deps=False
-max_parallel_downloads=10
-color=always" | sudo tee -a /etc/dnf/dnf.conf
+sudo cat /etc/dnf/dnf.conf | grep -q "keepcache=True\nfastestmirror=True\nassumeyes=True\ndefaultyes=True\ninstall_weak_deps=False\nmax_parallel_downloads=10\ncolor=always"
+echo -e "keepcache=True\nfastestmirror=True\nassumeyes=True\ndefaultyes=True\ninstall_weak_deps=False\nmax_parallel_downloads=10\ncolor=always" | sudo tee -a /etc/dnf/dnf.conf
 
 clear
 ################################# Install #################################
@@ -29,9 +27,10 @@ sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-releas
   
 # DEBLOAT
 sudo dnf groupremove 'LibreOffice' 'Container Management' 'Guest Desktop Agents'
-sudo dnf autoremove --exclude=gnome-shell-extension-{common,places-menu} fedora-bookmarks mediawriter rhythmbox cheese simple-scan \
-  gnome-{contacts,photos,font-viewer,characters,tour,maps,clocks,weather,boxes,connections} # calendar,logs,
-sudo mark install gnome-shell-extension-{common,places-menu}
+sudo dnf autoremove --exclude=gnome-shell-extension-{common,places-menu} gnome-shell-extension-* libreoffice* \
+  gnome-{contacts,photos,font-viewer,characters,tour,maps,clocks,weather,boxes,connections} \
+  fedora-bookmarks mediawriter rhythmbox cheese simple-scan # calendar,logs,
+sudo dnf mark install gnome-shell-extension-{common,places-menu}
 
 # UPDATE
 sudo dnf groupupdate core sound-and-video multimedia --exclude=PackageKit-gstreamer-plugin
@@ -56,7 +55,10 @@ if [ -f $HOME/Downloads/refind*.rpm ]; then
 fi
 
 # gdm autologin using script
-echo -e "[daemon]\nAutomaticLoginEnable=True\nAutomaticLogin=$USER" | sudo tee -a /etc/gdm/custom.conf
+sudo cat /etc/gdm/custom.conf | grep -q "[daemon]\nAutomaticLoginEnable=True\nAutomaticLogin=$USER"
+if [ $? -ne 0 ]; then
+	echo -e "[daemon]\nAutomaticLoginEnable=True\nAutomaticLogin=$USER" | sudo tee -a /etc/gdm/custom.conf
+fi
 
 clear
 ############################## Transfer Files ############################
