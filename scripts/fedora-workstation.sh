@@ -71,7 +71,7 @@ cat $HOME/distro-scripts/bash-configs/fedora_bash_profile >> $HOME/.bash_profile
 case $cp_dotfiles in
    n)	;;
    *)	# Remove old .config files
-   	sudo rm -rf $HOME/{.config,.local}
+   	sudo rm -rf $HOME/{.config,.local,.var}
    	cp -rf $HOME/distro-scripts/dotfiles/fedora-workstation/{.config,.local} $HOME/;;
 esac
 
@@ -171,7 +171,7 @@ gsettings set org.gnome.software download-updates 'false'
 gsettings set org.gnome.software download-updates-notify 'false'
 
 # Totem
-gsettings set org.gnome.totem subtitle-font 'Roboto Mono Medium 14'
+gsettings set org.gnome.totem subtitle-font 'Roboto Medium 14'
 
 clear
 ############################## Housekeeping ##############################
