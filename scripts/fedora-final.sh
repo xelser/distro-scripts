@@ -16,7 +16,7 @@ esac
 gnome-software
 
 # Remove gnome-terminal
-sudo dnf autoremove gnome-terminal-nautilus
+sudo dnf autoremove gnome-{terminal,terminal-nautilus}
 
 clear
 ################################# Flatpak ##################################
