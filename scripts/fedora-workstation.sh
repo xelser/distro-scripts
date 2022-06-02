@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 clear
 
 ############################### Preparation ##############################
@@ -14,9 +13,21 @@ if [ $? -ne 0 ]; then
 fi
 
 # Configure DNF
-sudo cat /etc/dnf/dnf.conf | grep -q "keepcache=True\nfastestmirror=True\nassumeyes=True\ndefaultyes=True\ninstall_weak_deps=False\nmax_parallel_downloads=10\ncolor=always"
+sudo cat /etc/dnf/dnf.conf | grep -wq "keepcache=True
+fastestmirror=True
+#assumeyes=True
+defaultyes=True
+install_weak_deps=False
+max_parallel_downloads=10
+color=always"
 if [ $? -ne 0 ]; then
-	echo -e "keepcache=True\nfastestmirror=True\nassumeyes=True\ndefaultyes=True\ninstall_weak_deps=False\nmax_parallel_downloads=10\ncolor=always" | sudo tee -a /etc/dnf/dnf.conf
+	echo -e "keepcache=True
+	fastestmirror=True
+	#assumeyes=True
+	defaultyes=True
+	install_weak_deps=False
+	max_parallel_downloads=10
+	color=always" | sudo tee -a /etc/dnf/dnf.conf
 fi
 
 clear
@@ -40,9 +51,9 @@ sudo dnf upgrade && sudo dnf distro-sync
 
 # INSTALL
 sudo dnf install gnome-{tweaks,extensions-app,multi-writer,builder,console,console-nautilus} google-noto-{cjk,emoji-color}-fonts google-roboto-* \
-  gnome-shell-extension-{pop-shell,user-theme,apps-menu,appindicator,gsconnect} file-roller dconf-editor drawing lollypop seahorse easyeffects \
-  mozilla-ublock-origin gparted transmission inkscape kvantum qt5ct gtk-murrine-engine htop neofetch unrar flatpak
-  # google-chrome-stable variety
+  gnome-shell-extension-{pop-shell,user-theme,apps-menu,appindicator,gsconnect,sound-output-device-chooser} \
+  file-roller dconf-editor drawing lollypop seahorse easyeffects gparted transmission inkscape kvantum qt5ct \
+  mozilla-ublock-origin gtk-murrine-engine htop neofetch unrar flatpak # google-chrome-stable variety
 
 # ADD REPO: Flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -57,9 +68,13 @@ if [ -f $HOME/Downloads/refind*.rpm ]; then
 fi
 
 # gdm autologin using script
-sudo cat /etc/gdm/custom.conf | grep -q "[daemon]\nAutomaticLoginEnable=True\nAutomaticLogin=$USER"
+sudo cat /etc/gdm/custom.conf | grep -wq "[daemon]
+AutomaticLoginEnable=True
+AutomaticLogin=$USER"
 if [ $? -ne 0 ]; then
-	echo -e "[daemon]\nAutomaticLoginEnable=True\nAutomaticLogin=$USER" | sudo tee -a /etc/gdm/custom.conf
+	echo -e "[daemon]
+	AutomaticLoginEnable=True
+	AutomaticLogin=$USER" | sudo tee -a /etc/gdm/custom.conf
 fi
 
 clear
@@ -74,9 +89,7 @@ cat $HOME/distro-scripts/bash-configs/fedora_bash_profile >> $HOME/.bash_profile
 # dotfiles
 case $cp_dotfiles in
    n)	;;
-   *)	# Remove old .config files
-   	sudo rm -rf $HOME/{.config,.local,.var}
-   	cp -rf $HOME/distro-scripts/dotfiles/fedora-workstation/{.config,.local} $HOME/;;
+   *)	cp -rf $HOME/distro-scripts/dotfiles/fedora-workstation/{.config,.local} $HOME/;;
 esac
 
 # Hide some .desktop files
@@ -154,12 +167,9 @@ gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Roboto Medium 10'
 
 # Background
 gsettings set org.gnome.desktop.background picture-options 'stretched'
-gsettings set org.gnome.desktop.background picture-uri 'file:///home/xelser/.local/share/backgrounds/2022-05-25-02-21-05-sea_surf_aerial_view_131444_3840x2160.jpg'
-gsettings set org.gnome.desktop.background picture-uri-dark 'file:///home/xelser/.local/share/backgrounds/2022-05-25-02-21-05-sea_surf_aerial_view_131444_3840x2160.jpg'
 
 # Screensaver
 gsettings set org.gnome.desktop.screensaver picture-options 'stretched'
-gsettings set org.gnome.desktop.screensaver picture-uri 'file:///home/xelser/.local/share/backgrounds/2022-05-25-02-21-05-sea_surf_aerial_view_131444_3840x2160.jpg'
 
 # Touchpad
 gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click 'true'
