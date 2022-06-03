@@ -15,8 +15,7 @@ echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /usr/lib/modpr
 sleep 10m && sudo akmods --force && sudo dracut --force
 
 # MangoHUD
-echo "MANGOHUD=1
-MANGOHUD_DLSYM=1" | sudo tee -a /etc/environment
+echo -e "MANGOHUD=1\nMANGOHUD_DLSYM=1" | sudo tee -a /etc/environment
 
 # Launch Steam with Gamemode
 rm -rf $HOME/.local/share/applications/steam.desktop $HOME/.config/autostart/steam.desktop

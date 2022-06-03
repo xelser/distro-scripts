@@ -21,13 +21,7 @@ install_weak_deps=False
 max_parallel_downloads=10
 color=always"
 if [ $? -ne 0 ]; then
-	echo -e "keepcache=True
-	fastestmirror=True
-	#assumeyes=True
-	defaultyes=True
-	install_weak_deps=False
-	max_parallel_downloads=10
-	color=always" | sudo tee -a /etc/dnf/dnf.conf
+	echo -e "keepcache=True\nfastestmirror=True\n#assumeyes=True\ndefaultyes=True\ninstall_weak_deps=False\nmax_parallel_downloads=10\ncolor=always" | sudo tee -a /etc/dnf/dnf.conf
 fi
 
 clear
@@ -72,9 +66,7 @@ sudo cat /etc/gdm/custom.conf | grep -wq "[daemon]
 AutomaticLoginEnable=True
 AutomaticLogin=$USER"
 if [ $? -ne 0 ]; then
-	echo -e "[daemon]
-	AutomaticLoginEnable=True
-	AutomaticLogin=$USER" | sudo tee -a /etc/gdm/custom.conf
+	echo -e "[daemon]\nAutomaticLoginEnable=True\nAutomaticLogin=$USER" | sudo tee -a /etc/gdm/custom.conf
 fi
 
 clear
