@@ -64,8 +64,7 @@ ln -sf /media/Home/xelser/Pictures/ $HOME/Pictures/"xelser's Pictures"
 ln -sf /media/Home/xelser/Videos/ $HOME/Videos/"xelser's Videos"
 
 # MangoHUD
-echo "MANGOHUD=1
-MANGOHUD_DLSYM=1" | sudo tee -a /etc/environment
+echo -e "MANGOHUD=1\nMANGOHUD_DLSYM=1" | sudo tee -a /etc/environment
 
 # Install Refind
 sudo refind-install
@@ -75,7 +74,7 @@ sudo sed -i 's/ro /rw quiet splash /g' /boot/refind_linux.conf
 rm -rf $HOME/.local/share/applications/steam.desktop $HOME/.config/autostart/steam.desktop
 cp -rf /usr/share/applications/steam.desktop $HOME/.local/share/applications/
 sed -i 's/\/usr\/bin\/steam-runtime/gamemoderun \/usr\/bin\/steam-runtime/g' $HOME/.local/share/applications/steam.desktop
-cp -rf $HOME/.local/share/applications/steam.desktop $HOME/.config/autostart/steam.desktop
+ln -sf $HOME/.local/share/applications/steam.desktop $HOME/.config/autostart/steam.desktop
 
 # Font rendering
 sudo cp -rf $HOME/distro-scripts/x11-font-rendering/local.conf /etc/fonts/
