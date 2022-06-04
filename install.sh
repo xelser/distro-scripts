@@ -20,7 +20,7 @@ case $var in
    1)	systemd-inhibit ./arch.sh;;
    2)	systemd-inhibit ./debian-xfce.sh;;
    3)	systemd-inhibit ./fedora-workstation.sh;;
-   4)	systemd-inhibit ./manjaro-kde.sh;;
+   4)	systemd-inhibit ./manjaro-cinnamon.sh;;
    5)	systemd-inhibit ./endeavour-cinnamon.sh;;
    *)	echo "invalid option";;
 esac
