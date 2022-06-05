@@ -109,6 +109,7 @@ clear
 
 # cd to tmp and remove old files
 mkdir -p $HOME/.local/share/plasma/plasmoids/ && cd /tmp/ && rm -rf vimix* Vimix*
+rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
 sudo rm -rf /usr/share/themes/{Vimix*,vimix*} /usr/share/icons/{Vimix*,vimix*}
 
 # Download and Install
