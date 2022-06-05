@@ -7,18 +7,22 @@ clear
 # Refresh time and date
 sudo timedatectl set-ntp true
 
-# Grants sudo access to user
-echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
+# No password for user
+sudo cat /etc/sudoers | grep -q "$USER ALL=(ALL) NOPASSWD: ALL"
+if [ $? -ne 0 ]; then
+	echo "$USER ALL=(ALL) NOPASSWD: ALL" | sudo tee -a /etc/sudoers
+fi
 
 clear
 ################################ Packages #################################
 
-# Pacman
-echo -e "[options]\nParallelDownloads = 10\nColor" | sudo tee -a /etc/pacman.conf
-
-# Remove bloat
-sudo pacman -Rnsu --noconfirm yakuake timeshift timeshift-autosnap-manjaro \
-  manjaro-{documentation-en,browser-settings,zsh-config,hello}
+# Configure Pacman
+sudo cat /etc/pacman.conf | grep -wq "[options]
+ParallelDownloads = 10
+Color"
+if [ $? -ne 0 ]; then
+	echo -e "[options]\nParallelDownloads = 10\nColor" | sudo tee -a /etc/pacman.conf
+fi
 
 # Refresh Mirrors and Install AUR
 sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-download-timeout yay base-devel
@@ -46,14 +50,13 @@ sudo pacman -S --asdeps --noconfirm sassc
 clear
 ################################# Config ##################################
 
-# Optimus manager
-#sudo sed -i 's/DisplayCommand/#DisplayCommand/g' /etc/sddm.conf
-#sudo sed -i 's/DisplayStopCommand/#DisplayStopCommand/g' /etc/sddm.conf
-
 # Fstab
-echo "# Additional Mounts
+sudo cat /etc/fstab | grep -wq "# Additional Mounts
 LABEL=Games	/media/Games	ext4	defaults	0 2
-LABEL=Home	/media/Home	ext4	defaults	0 2" | sudo tee -a /etc/fstab
+LABEL=Home	/media/Home	ext4	defaults	0 2"
+if [ $? -ne 0 ]; then
+	echo -e "# Additional Mounts\nLABEL=Games	/media/Games	ext4	defaults	0 2\nLABEL=Home	/media/Home	ext4	defaults	0 2" | sudo tee -a /etc/fstab
+fi
 
 # Symlinks
 ln -sf /media/Home/xelser/Documents/ $HOME/Documents/"xelser's Documents"
@@ -63,7 +66,11 @@ ln -sf /media/Home/xelser/Pictures/ $HOME/Pictures/"xelser's Pictures"
 ln -sf /media/Home/xelser/Videos/ $HOME/Videos/"xelser's Videos"
 
 # MangoHUD
-echo -e "MANGOHUD=1\nMANGOHUD_DLSYM=1" | sudo tee -a /etc/environment
+sudo cat /etc/environment | grep -wq "MANGOHUD=1
+MANGOHUD_DLSYM=1"
+if [ $? -ne 0 ]; then
+	echo -e "MANGOHUD=1\nMANGOHUD_DLSYM=1" | sudo tee -a /etc/environment
+fi
 
 # Install Refind
 sudo refind-install
@@ -104,10 +111,6 @@ mkdir -p $HOME/.local/share/plasma/plasmoids/
 #git clone https://github.com/vinceliuice/Fluent-kde && ./Fluent-kde/install.sh -t all --round && sudo ./Fluent-kde/sddm/install.sh -t round
 #git clone https://github.com/vinceliuice/Fluent-gtk-theme && sudo ./Fluent-gtk-theme/install.sh -i manjaro -t teal --tweaks round
 #git clone https://github.com/vinceliuice/Fluent-icon-theme && sudo ./Fluent-icon-theme/install.sh teal -r && sudo ./Fluent-icon-theme/cursors/install.sh
-
-#git clone https://github.com/vinceliuice/Qogir-kde && cd ./Qogir-kde/install.sh && sudo ./Qogir-kde/sddm/install.sh
-#git clone https://github.com/vinceliuice/Qogir-theme && sudo ./Qogir-theme/install.sh -t all
-#git clone https://github.com/vinceliuice/Qogir-icon-theme && sudo ./Qogir-icon-theme/install.sh
 
 git clone https://github.com/vinceliuice/vimix-gtk-themes.git && sudo ./vimix-gtk-themes/install.sh -t beryl -s compact -tweaks translucent
 git clone https://github.com/vinceliuice/vimix-icon-theme.git && sudo ./vimix-icon-theme/install.sh
