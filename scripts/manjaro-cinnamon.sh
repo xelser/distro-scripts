@@ -32,7 +32,7 @@ sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-
 
 # Install
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
-  htop neofetch refind gtk-engine-murrine gtk-engines kvantum-qt5 qt5ct unrar firefox-ublock-origin
+  ttf-fira-{code,sans} htop neofetch refind gtk-engine-murrine gtk-engines kvantum-qt5 qt5ct unrar firefox-ublock-origin
 
 # Gaming
 yay -S --needed --noconfirm --disable-download-timeout \
@@ -112,7 +112,7 @@ sudo rm -rf /usr/share/themes/{Vimix*,vimix*} /usr/share/icons/{Vimix*,vimix*}
 sudo pacman -S --asdeps --noconfirm sassc
 
 # Download and Install
-git clone https://github.com/vinceliuice/vimix-gtk-themes.git && sudo ./vimix-gtk-themes/install.sh -t beryl
+git clone https://github.com/vinceliuice/vimix-gtk-themes.git && sudo ./vimix-gtk-themes/install.sh -t beryl -s compact
 git clone https://github.com/vinceliuice/vimix-icon-theme.git && sudo ./vimix-icon-theme/install.sh Beryl
 git clone https://github.com/vinceliuice/Vimix-cursors.git && sudo ./Vimix-cursors/install.sh
 git clone https://github.com/vinceliuice/vimix-kde.git && ./vimix-kde/install.sh -t beryl
@@ -120,6 +120,9 @@ git clone https://github.com/vinceliuice/vimix-kde.git && ./vimix-kde/install.sh
 #git clone https://github.com/vinceliuice/Fluent-kde && ./Fluent-kde/install.sh -t all --round && sudo ./Fluent-kde/sddm/install.sh -t round
 #git clone https://github.com/vinceliuice/Fluent-gtk-theme && sudo ./Fluent-gtk-theme/install.sh -i manjaro -t teal --tweaks round
 #git clone https://github.com/vinceliuice/Fluent-icon-theme && sudo ./Fluent-icon-theme/install.sh teal -r && sudo ./Fluent-icon-theme/cursors/install.sh
+
+# Theme Tweaks
+sudo sed -i 's/Roboto/Fira Sans/g' /usr/share/themes/vimix-dark-compact-beryl/cinnamon/cinnamon.css
 
 clear
 ############################## Housekeeping ###############################
