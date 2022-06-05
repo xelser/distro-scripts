@@ -37,7 +37,7 @@ yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake
 
 # Gaming
 yay -S --needed --noconfirm --disable-download-timeout \
-  steam goverlay-bin optimus-manager optimus-manager-qt lutris-git lutris-{wine,battlenet}-meta bottles \
+  steam goverlay-bin optimus-manager optimus-manager-qt lutris-git lutris-{wine,battlenet}-meta \
   nvidia-utils lib32-nvidia-utils gamemode lib32-gamemode mangohud lib32-mangohud \
   mesa lib32-mesa vkd3d lib32-vkd3d vulkan-intel lib32-vulkan-intel vulkan-radeon lib32-vulkan-radeon \
   wine-mono wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
@@ -108,8 +108,8 @@ clear
 ################################# Theme ##################################
 
 # cd to tmp and remove old files
-cd /tmp/ && rm -rf vimix* Vimix*
-mkdir -p $HOME/.local/share/plasma/plasmoids/
+mkdir -p $HOME/.local/share/plasma/plasmoids/ && cd /tmp/ && rm -rf vimix* Vimix*
+sudo rm -rf /usr/share/themes/{Vimix*,vimix*} /usr/share/icons/{Vimix*,vimix*}
 
 # Download and Install
 #git clone https://github.com/vinceliuice/Fluent-kde && ./Fluent-kde/install.sh -t all --round && sudo ./Fluent-kde/sddm/install.sh -t round
@@ -120,9 +120,6 @@ git clone https://github.com/vinceliuice/vimix-gtk-themes.git && sudo ./vimix-gt
 git clone https://github.com/vinceliuice/vimix-icon-theme.git && sudo ./vimix-icon-theme/install.sh
 git clone https://github.com/vinceliuice/Vimix-cursors.git && sudo ./Vimix-cursors/install.sh
 git clone https://github.com/vinceliuice/vimix-kde.git && ./vimix-kde/install.sh -t beryl
-
-# Change Cursor
-#sudo sed -i 's/xcursor-breeze/Qogir-white-cursors/g' /usr/share/icons/default/index.theme
 
 clear
 ############################## Housekeeping ###############################
