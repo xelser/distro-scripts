@@ -28,12 +28,11 @@ fi
 sudo pacman -Rnsu --noconfirm midori manjaro-{browser-settings,hello}
   
 # Refresh Mirrors and Install AUR
-sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-download-timeout yay base-devel \
-  $(sudo pacman -Ssq linux[0-9][0-9][0-9]$ | awk 'END { print }') $(sudo pacman -Ssq linux[0-9][0-9][0-9]$ | awk 'END { print }')-nvidia
+sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-download-timeout yay base-devel
 
 # Install
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
-  htop neofetch refind gtk-engine-murrine gtk-engines kvantum-qt5 unrar firefox-ublock-origin
+  htop neofetch refind gtk-engine-murrine gtk-engines kvantum-qt5 qt5ct unrar firefox-ublock-origin
 
 # Gaming
 yay -S --needed --noconfirm --disable-download-timeout \
@@ -46,9 +45,6 @@ yay -S --needed --noconfirm --disable-download-timeout \
   sqlite lib32-sqlite libxcomposite lib32-libxcomposite libxinerama lib32-libgcrypt libgcrypt lib32-libxinerama \
   ncurses lib32-ncurses opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt libva lib32-libva gtk3 \
   lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader
-
-# Dependencies
-sudo pacman -S --asdeps --noconfirm sassc
 
 clear
 ################################# Config ##################################
@@ -112,15 +108,18 @@ mkdir -p $HOME/.local/share/plasma/plasmoids/ && cd /tmp/ && rm -rf vimix* Vimix
 rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
 sudo rm -rf /usr/share/themes/{Vimix*,vimix*} /usr/share/icons/{Vimix*,vimix*}
 
+# Dependencies
+sudo pacman -S --asdeps --noconfirm sassc
+
 # Download and Install
+git clone https://github.com/vinceliuice/vimix-gtk-themes.git && sudo ./vimix-gtk-themes/install.sh -t beryl
+git clone https://github.com/vinceliuice/vimix-icon-theme.git && sudo ./vimix-icon-theme/install.sh Beryl
+git clone https://github.com/vinceliuice/Vimix-cursors.git && sudo ./Vimix-cursors/install.sh
+git clone https://github.com/vinceliuice/vimix-kde.git && ./vimix-kde/install.sh -t beryl
+
 #git clone https://github.com/vinceliuice/Fluent-kde && ./Fluent-kde/install.sh -t all --round && sudo ./Fluent-kde/sddm/install.sh -t round
 #git clone https://github.com/vinceliuice/Fluent-gtk-theme && sudo ./Fluent-gtk-theme/install.sh -i manjaro -t teal --tweaks round
 #git clone https://github.com/vinceliuice/Fluent-icon-theme && sudo ./Fluent-icon-theme/install.sh teal -r && sudo ./Fluent-icon-theme/cursors/install.sh
-
-git clone https://github.com/vinceliuice/vimix-gtk-themes.git && sudo ./vimix-gtk-themes/install.sh -t beryl -s compact -tweaks translucent
-git clone https://github.com/vinceliuice/vimix-icon-theme.git && sudo ./vimix-icon-theme/install.sh
-git clone https://github.com/vinceliuice/Vimix-cursors.git && sudo ./Vimix-cursors/install.sh
-git clone https://github.com/vinceliuice/vimix-kde.git && ./vimix-kde/install.sh -t beryl
 
 clear
 ############################## Housekeeping ###############################
