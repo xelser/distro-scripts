@@ -108,6 +108,7 @@ clear
 ################################# Theme ##################################
 
 # cd to tmp and remove old files
+cd /tmp/ && rm -rf vimix* Vimix*
 mkdir -p $HOME/.local/share/plasma/plasmoids/
 
 # Download and Install
