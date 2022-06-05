@@ -24,6 +24,9 @@ if [ $? -ne 0 ]; then
 	echo -e "[options]\nParallelDownloads = 10\nColor" | sudo tee -a /etc/pacman.conf
 fi
 
+# Remove bloat
+sudo pacman -Rnsu --noconfirm midori manjaro-{browser-settings,hello}
+  
 # Refresh Mirrors and Install AUR
 sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-download-timeout yay base-devel \
   $(sudo pacman -Ssq linux[0-9][0-9][0-9]$ | awk 'END { print }') $(sudo pacman -Ssq linux[0-9][0-9][0-9]$ | awk 'END { print }')-nvidia
