@@ -95,10 +95,10 @@ sudo ln -sf /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/font
 sudo fc-cache -fv
 
 # bash configs
-#rm -rf $HOME/{.bashrc}
-#cp /etc/skel/{.bashrc} $HOME/
-#cat $HOME/distro-scripts/bash-configs/manjaro_bashrc >> $HOME/.bashrc
-#cat $HOME/distro-scripts/bash-configs/manjaro_bash_profile >> $HOME/.bash_profile
+rm -rf $HOME/{.bashrc,.bash_profile}
+cp /etc/skel/{.bashrc,.bash_profile} $HOME/
+cat $HOME/distro-scripts/bash-configs/manjaro_bashrc >> $HOME/.bashrc
+cat $HOME/distro-scripts/bash-configs/manjaro_bash_profile >> $HOME/.bash_profile
 
 # dotfiles
 rm -rf $HOME/.config/autostart/*.desktop
