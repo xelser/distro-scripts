@@ -30,11 +30,11 @@ sudo pacman -Rnsu --noconfirm midori manjaro-{browser-settings,hello}
 sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-download-timeout yay base-devel
 
 # Install
-sudo pacman -Syyu --noconfirm --needed --disable-download-timeout \
+sudo pacman -S --noconfirm --needed --disable-download-timeout \
   ttf-fira-{code,sans} htop neofetch refind gtk-engine-murrine gtk-engines kvantum-qt5 qt5ct unrar firefox-ublock-origin steam
 
 # Gaming
-sudo pacman -Syyu --noconfirm --needed --disable-download-timeout \
+sudo pacman -S --noconfirm --needed --disable-download-timeout \
   nvidia-utils lib32-nvidia-utils gamemode lib32-gamemode mangohud-x11 lib32-mangohud-x11 \
   mesa lib32-mesa vkd3d lib32-vkd3d vulkan-intel lib32-vulkan-intel vulkan-radeon lib32-vulkan-radeon \
   wine-mono wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
