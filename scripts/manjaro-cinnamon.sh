@@ -46,8 +46,8 @@ sudo pacman -S --noconfirm --needed --disable-download-timeout \
 
 # AUR
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
-  goverlay-bin optimus-manager optimus-manager-qt lutris-git lutris-{wine,battlenet}-meta 
-
+  lutris-git goverlay-bin optimus-manager optimus-manager-qt
+ 
 clear
 ################################# Config ##################################
 
