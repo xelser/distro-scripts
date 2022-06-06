@@ -29,11 +29,11 @@ sudo pacman -Rnsu --noconfirm midori manjaro-{browser-settings,hello}
 # Refresh Mirrors, Update and Install Packages
 sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-download-timeout \
   yay base-devel htop neofetch refind gtk-engine-murrine gtk-engines unrar firefox firefox-ublock-origin pulseaudio-equalizer-ladspa \
-  kvantum-qt5 qt5ct steam vlc gnome-disk-utility gparted geany ttf-fira-{code,sans} 
+  kvantum-qt5 qt5ct vlc gnome-disk-utility gparted geany ttf-fira-{code,sans} 
 
 # Gaming
 sudo pacman -S --noconfirm --needed --disable-download-timeout \
-  nvidia-utils lib32-nvidia-utils gamemode lib32-gamemode mangohud-x11 lib32-mangohud-x11 \
+  steam nvidia-utils lib32-nvidia-utils gamemode lib32-gamemode mangohud-x11 lib32-mangohud-x11 \
   mesa lib32-mesa vkd3d lib32-vkd3d vulkan-intel lib32-vulkan-intel vulkan-radeon lib32-vulkan-radeon \
   wine-mono wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
   mpg123 lib32-mpg123 openal lib32-openal v4l-utils lib32-v4l-utils libpulse lib32-libpulse libgpg-error \
