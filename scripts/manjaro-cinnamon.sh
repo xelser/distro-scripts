@@ -31,7 +31,8 @@ sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-
 
 # Install
 sudo pacman -S --noconfirm --needed --disable-download-timeout \
-  ttf-fira-{code,sans} htop neofetch refind gtk-engine-murrine gtk-engines kvantum-qt5 qt5ct unrar firefox-ublock-origin steam
+  ttf-fira-{code,sans} htop neofetch refind gtk-engine-murrine gtk-engines unrar firefox-ublock-origin pulseaudio-equalizer-ladspa \
+  kvantum-qt5 qt5ct steam vlc gnome-disk-utility gparted geany 
 
 # Gaming
 sudo pacman -S --noconfirm --needed --disable-download-timeout \
