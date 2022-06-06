@@ -127,6 +127,11 @@ sudo sed -i 's/Roboto/Fira Sans/g' /usr/share/themes/vimix*/cinnamon/cinnamon.cs
 clear
 ############################## Housekeeping ###############################
 
+# Remove Unneeded Packages
+yay -Qtdq
+if [ $? -eq 0 ]; then
+	yay -Rnsu $(yay -Qtdq) --noconfirm
+fi
+
 # Clean packages
-yay -Rnsu $(yay -Qtdq) --noconfirm
 yay -Sc --noconfirm
