@@ -30,12 +30,11 @@ sudo pacman -Rnsu --noconfirm midori manjaro-{browser-settings,hello}
 sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-download-timeout yay base-devel
 
 # Install
-yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
-  ttf-fira-{code,sans} htop neofetch refind gtk-engine-murrine gtk-engines kvantum-qt5 qt5ct unrar firefox-ublock-origin
+sudo pacman -Syyu --noconfirm --needed --disable-download-timeout \
+  ttf-fira-{code,sans} htop neofetch refind gtk-engine-murrine gtk-engines kvantum-qt5 qt5ct unrar firefox-ublock-origin steam
 
 # Gaming
-yay -S --needed --noconfirm --disable-download-timeout \
-  steam goverlay-bin optimus-manager optimus-manager-qt lutris-git lutris-{wine,battlenet}-meta \
+sudo pacman -Syyu --noconfirm --needed --disable-download-timeout \
   nvidia-utils lib32-nvidia-utils gamemode lib32-gamemode mangohud-x11 lib32-mangohud-x11 \
   mesa lib32-mesa vkd3d lib32-vkd3d vulkan-intel lib32-vulkan-intel vulkan-radeon lib32-vulkan-radeon \
   wine-mono wine-staging giflib lib32-giflib libpng lib32-libpng libldap lib32-libldap gnutls lib32-gnutls \
@@ -44,6 +43,10 @@ yay -S --needed --noconfirm --disable-download-timeout \
   sqlite lib32-sqlite libxcomposite lib32-libxcomposite libxinerama lib32-libgcrypt libgcrypt lib32-libxinerama \
   ncurses lib32-ncurses opencl-icd-loader lib32-opencl-icd-loader libxslt lib32-libxslt libva lib32-libva gtk3 \
   lib32-gtk3 gst-plugins-base-libs lib32-gst-plugins-base-libs vulkan-icd-loader lib32-vulkan-icd-loader
+
+# AUR
+yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
+  goverlay-bin optimus-manager optimus-manager-qt lutris-git lutris-{wine,battlenet}-meta 
 
 clear
 ################################# Config ##################################
