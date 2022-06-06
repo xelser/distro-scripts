@@ -29,7 +29,7 @@ sudo pacman -Rnsu --noconfirm midori manjaro-{browser-settings,hello}
 # Refresh Mirrors, Update and Install Packages
 sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-download-timeout \
   yay base-devel htop neofetch refind gtk-engine-murrine gtk-engines unrar firefox firefox-ublock-origin pulseaudio-equalizer-ladspa \
-  kvantum-qt5 qt5ct vlc gnome-disk-utility gparted geany ttf-fira-{code,sans} 
+  kvantum-qt5 qt5ct vlc gnome-disk-utility gparted geany lxtask-gtk3 ttf-fira-{code,sans} 
 
 # Gaming
 sudo pacman -S --noconfirm --needed --disable-download-timeout \
