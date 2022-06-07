@@ -76,10 +76,10 @@ sudo refind-install
 sudo sed -i 's/ro /rw quiet splash /g' /boot/refind_linux.conf
 
 # Launch Steam with Gamemode
-rm -rf $HOME/.local/share/applications/steam.desktop $HOME/.config/autostart/steam.desktop
-cp -rf /usr/share/applications/steam.desktop $HOME/.local/share/applications/
-sed -i 's/\/usr\/bin\/steam-runtime/gamemoderun \/usr\/bin\/steam-runtime -silent/g' $HOME/.local/share/applications/steam.desktop
-ln -sf $HOME/.local/share/applications/steam.desktop $HOME/.config/autostart/steam.desktop
+rm -rf $HOME/.local/share/applications/steam-native.desktop $HOME/.config/autostart/steam-native.desktop
+cp -rf /usr/share/applications/steam-native.desktop $HOME/.local/share/applications/
+sed -i 's/\/usr\/bin\/steam-native/gamemoderun \/usr\/bin\/steam-native -silent/g' $HOME/.local/share/applications/steam-native.desktop
+ln -sf $HOME/.local/share/applications/steam-native.desktop $HOME/.config/autostart/steam-native.desktop
 
 # Font rendering
 sudo cp -rf $HOME/distro-scripts/x11-font-rendering/local.conf /etc/fonts/
