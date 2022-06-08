@@ -22,8 +22,9 @@ clear
 ################################# Flatpak ##################################
 
 # Install
-flatpak install -y flathub org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark com.github.tchx84.Flatseal com.mattjakeman.ExtensionManager \
-  org.x.Warpinator de.haeckerfelix.Fragments com.bitwarden.desktop com.discordapp.Discord com.skype.Client us.zoom.Zoom
+flatpak install -y flathub org.gtk.Gtk3theme.adw-gtk3 org.gtk.Gtk3theme.adw-gtk3-dark \
+  com.mattjakeman.ExtensionManager org.x.Warpinator com.discordapp.Discord com.skype.Client us.zoom.Zoom \
+  com.github.tchx84.Flatseal de.haeckerfelix.Fragments
 
 clear
 ############################## Housekeeping ################################

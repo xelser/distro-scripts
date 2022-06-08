@@ -34,10 +34,10 @@ sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-releas
   
 # DEBLOAT
 sudo dnf groupremove 'LibreOffice' 'Container Management' 'Guest Desktop Agents'
-sudo dnf autoremove --exclude=gnome-shell-extension-{common,places-menu} gnome-shell-extension-* libreoffice* \
+sudo dnf autoremove --exclude=gnome-shell-extension-{common,places-menu,apps-menu} gnome-shell-extension-* libreoffice* \
   gnome-{contacts,photos,font-viewer,characters,tour,maps,clocks,weather,boxes,connections} \
   fedora-bookmarks mediawriter rhythmbox cheese simple-scan # calendar,logs,
-sudo dnf mark install gnome-shell-extension-{common,places-menu}
+sudo dnf mark install gnome-shell-extension-{common,places-menu,apps-menu}
 
 # UPDATE
 sudo dnf groupupdate core sound-and-video multimedia --exclude=PackageKit-gstreamer-plugin
@@ -45,7 +45,7 @@ sudo dnf upgrade && sudo dnf distro-sync
 
 # INSTALL
 sudo dnf install gnome-{tweaks,extensions-app,multi-writer,builder,console,console-nautilus} google-noto-{cjk,emoji-color}-fonts google-roboto-* \
-  gnome-shell-extension-{pop-shell,user-theme,apps-menu,appindicator,gsconnect,sound-output-device-chooser} \
+  gnome-shell-extension-{pop-shell,user-theme,appindicator,gsconnect,sound-output-device-chooser} \
   file-roller dconf-editor drawing lollypop seahorse easyeffects gparted transmission inkscape kvantum qt5ct \
   mozilla-ublock-origin gtk-murrine-engine htop neofetch unrar flatpak # google-chrome-stable variety
 
@@ -101,19 +101,17 @@ sudo dnf copr enable nickavem/adw-gtk3 && sudo dnf install adw-gtk3
 
 # Icons
 cd /tmp/ && rm -rf Tela* && sudo rm -rf /usr/share/icons/Tela*
-git clone https://github.com/xelser/tela-circle-icon.git
-cd tela-circle-icon && sudo ./install.sh
+git clone https://github.com/xelser/tela-circle-icon.git && cd tela-circle-icon && sudo ./install.sh
+
+# Kvantum
+cd /tmp/ && rm -rf KvLibadwaita && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
+git clone https://github.com/xelser/KvLibadwaita.git && cd KvLibadwaita && ./install.sh
 
 # Cursor
 if [ -f $HOME/Downloads/Bibata*.tar.gz ]; then
 	cd /usr/share/icons/ && sudo rm -rf Bibata*
 	sudo tar -xf $HOME/Downloads/Bibata*.tar.gz
 fi
-
-# Kvantum
-cd /tmp/ && rm -rf KvLibadwaita && rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
-git clone https://github.com/GabePoel/KvLibadwaita.git
-cd KvLibadwaita && chmod +x install.sh && echo "y" | ./install.sh
 
 clear
 ############################# dconf/gsettings #############################
