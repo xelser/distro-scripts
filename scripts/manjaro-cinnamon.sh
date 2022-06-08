@@ -55,7 +55,7 @@ sudo sed -i 's/ro /rw quiet splash /g' /boot/refind_linux.conf
 # Geany Themes
 cd /tmp/ && rm -rf geany-themes
 git clone https://github.com/xelser/geany-themes.git
-cd geany-themes && ./install.sh
+cd geany-themes && sudo ./install.sh
 
 clear
 ################################# Config ##################################
@@ -98,9 +98,9 @@ sudo ln -sf /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/font
 sudo fc-cache -fv
 
 # bash configs
-#rm -rf $HOME/{.bashrc,.bash_profile}
-#cp /etc/skel/{.bashrc,.bash_profile} $HOME/
-#cat $HOME/distro-scripts/bash-configs/manjaro_bashrc >> $HOME/.bashrc
+rm -rf $HOME/{.bashrc,.bash_profile}
+cp /etc/skel/{.bashrc,.bash_profile} $HOME/
+cat $HOME/distro-scripts/bash-configs/manjaro_bashrc >> $HOME/.bashrc
 #cat $HOME/distro-scripts/bash-configs/manjaro_bash_profile >> $HOME/.bash_profile
 
 # dotfiles
