@@ -1,1 +1,15 @@
 
+# Custom PS1
+PS1="\[\033[1;32m\]\u@\h \[\033[0;37m\][\[\033[1;33m\]\W\[\033[0;37m\]] \[\033[0;37m\]$ "
+
+# package manager aliases
+alias update="sudo pacman -Syyu --noconfirm --disable-download-timeout && sudo pacman -Rnsu $(sudo pacman -Qtdq) --noconfirm && sudo pacman -Sc --noconfirm"
+
+# user aliases
+alias post="sh arch-post-install.sh"
+alias clear="clear && history -c"
+
+# git aliases
+alias gitclone="cd $HOME/Downloads && git clone"
+alias gitcommit="git fetch && git pull && git add . && git commit -m 'Updated @ manjaro' && git push"
+alias gitupdate="cd /media/Home/xelser/Github/distro-scripts && gitcommit"
