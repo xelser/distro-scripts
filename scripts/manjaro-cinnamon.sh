@@ -45,7 +45,18 @@ sudo pacman -S --noconfirm --needed --disable-download-timeout \
 # AUR
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
   lutris-git goverlay-bin optimus-manager optimus-manager-qt
- 
+
+############################### Build/Clone ###############################
+
+# Install Refind
+sudo refind-install
+sudo sed -i 's/ro /rw quiet splash /g' /boot/refind_linux.conf
+
+# Geany Themes
+cd /tmp/ && rm -rf geany-themes
+git clone https://github.com/xelser/geany-themes.git
+cd geany-themes && ./install.sh
+
 clear
 ################################# Config ##################################
 
@@ -70,10 +81,6 @@ MANGOHUD_DLSYM=1"
 if [ $? -ne 0 ]; then
 	echo -e "MANGOHUD=1\nMANGOHUD_DLSYM=1" | sudo tee -a /etc/environment
 fi
-
-# Install Refind
-sudo refind-install
-sudo sed -i 's/ro /rw quiet splash /g' /boot/refind_linux.conf
 
 # Launch Steam with Gamemode
 rm -rf $HOME/.local/share/applications/steam-native.desktop $HOME/.config/autostart/steam-native.desktop
