@@ -15,13 +15,12 @@ fi
 # Configure DNF
 sudo cat /etc/dnf/dnf.conf | grep -wq "keepcache=True
 fastestmirror=True
-#assumeyes=True
 defaultyes=True
 install_weak_deps=False
 max_parallel_downloads=10
 color=always"
 if [ $? -ne 0 ]; then
-	echo -e "keepcache=True\nfastestmirror=True\n#assumeyes=True\ndefaultyes=True\ninstall_weak_deps=False\nmax_parallel_downloads=10\ncolor=always" | sudo tee -a /etc/dnf/dnf.conf
+	echo -e "keepcache=True\nfastestmirror=True\ndefaultyes=True\ninstall_weak_deps=False\nmax_parallel_downloads=10\ncolor=always" | sudo tee -a /etc/dnf/dnf.conf
 fi
 
 clear
@@ -29,25 +28,25 @@ clear
 
 # ADD REPO: RPM Fusion
 # sudo dnf config-manager --set-enabled google-chrome rpmfusion-nonfree-steam rpmfusion-nonfree-nvidia-driver
-sudo dnf install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+sudo dnf install --assumeyes https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
   https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
   
 # DEBLOAT
-sudo dnf groupremove 'LibreOffice' 'Container Management' 'Guest Desktop Agents'
-sudo dnf autoremove --exclude=gnome-shell-extension-{common,places-menu,apps-menu} gnome-shell-extension-* libreoffice* \
+sudo dnf groupremove --assumeyes 'LibreOffice' 'Container Management' 'Guest Desktop Agents'
+sudo dnf autoremove --assumeyes --exclude=gnome-shell-extension-{common,places-menu,apps-menu} gnome-shell-extension-* libreoffice* \
   gnome-{contacts,photos,font-viewer,characters,tour,maps,clocks,weather,boxes,connections} \
   fedora-bookmarks mediawriter rhythmbox cheese simple-scan # calendar,logs,
 sudo dnf mark install gnome-shell-extension-{common,places-menu,apps-menu}
 
 # UPDATE
-sudo dnf groupupdate core sound-and-video multimedia --exclude=PackageKit-gstreamer-plugin
-sudo dnf upgrade && sudo dnf distro-sync
+sudo dnf groupupdate core sound-and-video multimedia --exclude=PackageKit-gstreamer-plugin --assumeyes
+sudo dnf upgrade --assumeyes && sudo dnf distro-sync --assumeyes
 
 # INSTALL
 sudo dnf install gnome-{tweaks,extensions-app,multi-writer,builder,console,console-nautilus} google-noto-{cjk,emoji-color}-fonts google-roboto-* \
   gnome-shell-extension-{pop-shell,user-theme,appindicator,gsconnect,sound-output-device-chooser} \
   file-roller dconf-editor drawing lollypop seahorse easyeffects gparted transmission inkscape kvantum qt5ct \
-  mozilla-ublock-origin gtk-murrine-engine htop neofetch unrar flatpak # google-chrome-stable variety
+  mozilla-ublock-origin gtk-murrine-engine htop neofetch unrar flatpak --assumeyes # google-chrome-stable variety
 
 # ADD REPO: Flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -57,7 +56,7 @@ clear
 
 # rEFInd
 if [ -f $HOME/Downloads/refind*.rpm ]; then
-	sudo dnf install $HOME/Downloads/refind*.rpm
+	sudo dnf install $HOME/Downloads/refind*.rpm --assumeyes
 	sudo sed -i 's/ro /ro quiet splash /g' /boot/refind_linux.conf
 fi
 
@@ -154,12 +153,6 @@ gsettings set org.gnome.desktop.interface show-battery-percentage 'true'
 # Window Manager
 gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
 gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Roboto Medium 10'
-
-# Background
-gsettings set org.gnome.desktop.background picture-options 'stretched'
-
-# Screensaver
-gsettings set org.gnome.desktop.screensaver picture-options 'stretched'
 
 # Touchpad
 gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click 'true'
