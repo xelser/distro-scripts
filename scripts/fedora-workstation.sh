@@ -27,7 +27,7 @@ clear
 ################################# Install #################################
 
 # ADD REPO: RPM Fusion
-# sudo dnf config-manager --set-enabled google-chrome rpmfusion-nonfree-steam rpmfusion-nonfree-nvidia-driver
+sudo dnf config-manager --set-enabled google-chrome # rpmfusion-nonfree-steam rpmfusion-nonfree-nvidia-driver
 sudo dnf install --assumeyes https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
   https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
   
@@ -43,10 +43,10 @@ sudo dnf groupupdate core sound-and-video multimedia --exclude=PackageKit-gstrea
 sudo dnf upgrade --assumeyes && sudo dnf distro-sync --assumeyes
 
 # INSTALL
-sudo dnf install gnome-{tweaks,extensions-app,multi-writer,builder,console,console-nautilus} google-noto-{cjk,emoji-color}-fonts google-roboto-* \
-  gnome-shell-extension-{pop-shell,user-theme,appindicator,gsconnect,sound-output-device-chooser} \
-  file-roller dconf-editor drawing lollypop seahorse easyeffects gparted transmission inkscape kvantum qt5ct \
-  mozilla-ublock-origin gtk-murrine-engine htop neofetch unrar flatpak --assumeyes # google-chrome-stable variety
+sudo dnf install --assumeyes gnome-{tweaks,extensions-app,multi-writer,builder,console,console-nautilus} google-noto-{cjk,emoji-color}-fonts \
+  gnome-shell-extension-{pop-shell,user-theme,appindicator,gsconnect,sound-output-device-chooser} dconf-editor easyeffects kvantum qt5ct \
+  file-roller drawing lollypop seahorse gparted transmission inkscape google-chrome-stable \
+  google-roboto-* mozilla-ublock-origin gtk-murrine-engine htop neofetch unrar flatpak # variety
 
 # ADD REPO: Flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
