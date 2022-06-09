@@ -115,25 +115,6 @@ fi
 clear
 ############################# dconf/gsettings #############################
 
-# Variables
-cursor_theme="Bibata-Modern-Classic"
-icon_theme="Tela-circle-dark"
-
-# GDM
-#echo -e "[org/gnome/desktop/interface]\ncursor-theme='${cursor_theme}'" | sudo tee /etc/dconf/db/gdm.d/10-cursor-settings
-#sudo -u gdm dbus-launch gsettings set org.gnome.desktop.interface cursor-theme "${icon_theme}"
-
-#echo -e "[org/gnome/desktop/interface]\nicon-theme='${icon_theme}'" | sudo tee /etc/dconf/db/gdm.d/11-icon-settings
-#sudo -u gdm dbus-launch gsettings set org.gnome.desktop.interface icon-theme "${icon_theme}"
-
-#echo -e "[org/gnome/desktop/peripherals/touchpad]\ntap-to-click=true" | sudo tee /etc/dconf/db/gdm.d/06-tap-to-click
-#sudo -u gdm dbus-launch gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click "true"
-
-#echo -e "[org/gnome/desktop/interface]\ntoolkit-accessibility='false'" | sudo tee /etc/dconf/db/gdm.d/07-accessibility
-#sudo -u gdm dbus-launch gsettings set org.gnome.desktop.interface toolkit-accessibility "false"
-
-#sudo -u gdm dbus-launch gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
-
 # Interface
 gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
 gsettings set org.gnome.desktop.interface icon-theme 'Tela-circle-dark'
@@ -154,6 +135,12 @@ gsettings set org.gnome.desktop.interface show-battery-percentage 'true'
 gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:minimize,maximize,close'
 gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Roboto Medium 10'
 
+# Mutter
+gsettings set org.gnome.mutter center-new-windows 'true'
+
+# Media
+gsettings set org.gnome.desktop.media-handling autorun-never 'true'
+
 # Touchpad
 gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click 'true'
 
@@ -169,6 +156,25 @@ gsettings set org.gnome.software download-updates-notify 'false'
 
 # Totem
 gsettings set org.gnome.totem subtitle-font 'Roboto Medium 14'
+
+# Variables
+cursor_theme="Bibata-Modern-Classic"
+icon_theme="Tela-circle-dark"
+
+# GDM
+#echo -e "[org/gnome/desktop/interface]\ncursor-theme='${cursor_theme}'" | sudo tee /etc/dconf/db/gdm.d/10-cursor-settings
+#sudo -u gdm dbus-launch gsettings set org.gnome.desktop.interface cursor-theme "${icon_theme}"
+
+#echo -e "[org/gnome/desktop/interface]\nicon-theme='${icon_theme}'" | sudo tee /etc/dconf/db/gdm.d/11-icon-settings
+#sudo -u gdm dbus-launch gsettings set org.gnome.desktop.interface icon-theme "${icon_theme}"
+
+#echo -e "[org/gnome/desktop/peripherals/touchpad]\ntap-to-click=true" | sudo tee /etc/dconf/db/gdm.d/06-tap-to-click
+#sudo -u gdm dbus-launch gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click "true"
+
+#echo -e "[org/gnome/desktop/interface]\ntoolkit-accessibility='false'" | sudo tee /etc/dconf/db/gdm.d/07-accessibility
+#sudo -u gdm dbus-launch gsettings set org.gnome.desktop.interface toolkit-accessibility "false"
+
+#sudo -u gdm dbus-launch gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled true
 
 clear
 ############################## Housekeeping ##############################
