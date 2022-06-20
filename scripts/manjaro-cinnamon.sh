@@ -3,6 +3,9 @@ clear
 
 ############################## Preparation ###############################
 
+# Prompt User
+echo && read -p "Install Theme? (Y/n): " theming
+
 # Refresh time and date
 sudo timedatectl set-ntp true
 
@@ -82,10 +85,10 @@ if [ $? -ne 0 ]; then
 fi
 
 # Launch Steam with Gamemode
-rm -rf $HOME/.local/share/applications/steam.desktop $HOME/.config/autostart/steam.desktop
-cp -rf /usr/share/applications/steam.desktop $HOME/.local/share/applications/
-sed -i 's/\/usr\/bin\/steam-runtime/gamemoderun \/usr\/bin\/steam-runtime -silent/g' $HOME/.local/share/applications/steam.desktop
-ln -sf $HOME/.local/share/applications/steam.desktop $HOME/.config/autostart/steam.desktop
+#rm -rf $HOME/.local/share/applications/steam.desktop $HOME/.config/autostart/steam.desktop
+#cp -rf /usr/share/applications/steam.desktop $HOME/.local/share/applications/
+#sed -i 's/\/usr\/bin\/steam-runtime/gamemoderun \/usr\/bin\/steam-runtime -silent/g' $HOME/.local/share/applications/steam.desktop
+#ln -sf $HOME/.local/share/applications/steam.desktop $HOME/.config/autostart/steam.desktop
 
 # Font rendering
 sudo cp -rf $HOME/distro-scripts/x11-font-rendering/local.conf /etc/fonts/
@@ -100,35 +103,37 @@ sudo fc-cache -fv
 rm -rf $HOME/{.bashrc,.bash_profile}
 cp /etc/skel/{.bashrc,.bash_profile} $HOME/
 cat $HOME/distro-scripts/bash-configs/manjaro_bashrc >> $HOME/.bashrc
-#cat $HOME/distro-scripts/bash-configs/manjaro_bash_profile >> $HOME/.bash_profile
 
 # dotfiles
 rm -rf $HOME/.config/autostart/*.desktop
-#cp -rf $HOME/distro-scripts/dotfiles/manjaro-kde/{.config,.local} $HOME/
+cp -rf $HOME/distro-scripts/dotfiles/manjaro-cinnamon/{.config,.local} $HOME/
 
 clear
 ################################# Theme ##################################
 
-# cd to tmp and remove old files
-mkdir -p $HOME/.local/share/plasma/plasmoids/ && cd /tmp/ && rm -rf vimix* Vimix*
-rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
-sudo rm -rf /usr/share/themes/{Vimix*,vimix*} /usr/share/icons/{Vimix*,vimix*}
+case $theming in
+   n)	;;
+   *)	# cd to tmp and remove old files
+	mkdir -p $HOME/.local/share/plasma/plasmoids/ && cd /tmp/ && rm -rf vimix* Vimix*
+	rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
+	sudo rm -rf /usr/share/themes/{Vimix*,vimix*} /usr/share/icons/{Vimix*,vimix*}
 
-# Dependencies
-sudo pacman -S --asdeps --noconfirm sassc
+	# Dependencies
+	sudo pacman -S --asdeps --noconfirm sassc
 
-# Download and Install
-git clone https://github.com/vinceliuice/vimix-gtk-themes.git && sudo ./vimix-gtk-themes/install.sh -t beryl -s compact
-git clone https://github.com/vinceliuice/vimix-icon-theme.git && sudo ./vimix-icon-theme/install.sh Beryl
-git clone https://github.com/vinceliuice/vimix-kde.git && ./vimix-kde/install.sh -t beryl
-git clone https://github.com/vinceliuice/Vimix-cursors.git && cd Vimix-cursors && sudo ./install.sh
+	# Download and Install
+	git clone https://github.com/vinceliuice/vimix-gtk-themes.git && sudo ./vimix-gtk-themes/install.sh -t beryl -s compact
+	git clone https://github.com/vinceliuice/vimix-icon-theme.git && sudo ./vimix-icon-theme/install.sh Beryl
+	git clone https://github.com/vinceliuice/vimix-kde.git && ./vimix-kde/install.sh -t beryl
+	git clone https://github.com/vinceliuice/Vimix-cursors.git && cd Vimix-cursors && sudo ./install.sh
+
+	# Theme Tweaks
+	sudo sed -i 's/Roboto/Fira Sans/g' /usr/share/themes/vimix*/cinnamon/cinnamon.css;;
+esac
 
 #git clone https://github.com/vinceliuice/Fluent-kde && ./Fluent-kde/install.sh -t all --round && sudo ./Fluent-kde/sddm/install.sh -t round
 #git clone https://github.com/vinceliuice/Fluent-gtk-theme && sudo ./Fluent-gtk-theme/install.sh -i manjaro -t teal --tweaks round
 #git clone https://github.com/vinceliuice/Fluent-icon-theme && sudo ./Fluent-icon-theme/install.sh teal -r && sudo ./Fluent-icon-theme/cursors/install.sh
-
-# Theme Tweaks
-sudo sed -i 's/Roboto/Fira Sans/g' /usr/share/themes/vimix*/cinnamon/cinnamon.css
 
 clear
 ############################## Housekeeping ###############################

@@ -1,0 +1,8 @@
+{
+    "uuid": "clockTow@armandobs14",
+    "name": "ClockTow desklet",
+    "description": "A fork desklet that displays the time",
+    "prevent-decorations": false,
+    "author": "none",
+    "last-edited": 1640168234
+}

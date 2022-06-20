@@ -1,0 +1,153 @@
+{
+    "head0": {
+        "type": "header",
+        "description": "Settings for notes@schorschii"
+    },
+    "head1": {
+        "type": "header",
+        "description": "General"
+    },
+    "file": {
+        "type": "filechooser",
+        "default": "",
+        "description": "Path to note text file",
+        "tooltip": "Select your text file, where to read from and save to.",
+        "allow-none": true,
+        "value": "file:///home/xelser/Documents/note.txt"
+    },
+    "edit-cmd": {
+        "type": "entry",
+        "default": "xed %f",
+        "description": "Command for editing this note (on mouse click)",
+        "tooltip": "%f will replaced by the text file path.",
+        "allow-none": true,
+        "value": "xed %f"
+    },
+    "head2": {
+        "type": "header",
+        "description": "Visual"
+    },
+    "style": {
+        "type": "combobox",
+        "default": "Niki_black_magnet",
+        "description": "Notes style",
+        "options": {
+            "Blank Note - Black": "Niki_blank_black",
+            "Blank Note - Blue": "Niki_blank_blue",
+            "Blank Note - Green": "Niki_blank_green",
+            "Blank Note - Orange": "Niki_blank_orange",
+            "Blank Note - Purple": "Niki_blank_purple",
+            "Blank Note - White": "Niki_blank_white",
+            "Blank Note - Yellow": "Niki_blank_yellow",
+            "White Note - Black Button": "Niki_black_button",
+            "White Note - Blue Button": "Niki_blue_button",
+            "White Note - Green Button": "Niki_green_button",
+            "White Note - Red Button": "Niki_red_button",
+            "White Note - Yellow Button": "Niki_yellow_button",
+            "Yellow Note - Black Clip": "Niki_black_clip",
+            "Yellow Note - Blue Clip": "Niki_blue_clip",
+            "Yellow Note - Green Clip": "Niki_green_clip",
+            "Yellow Note - Jingle Clip": "Niki_jingle_clip",
+            "Yellow Note - Red Clip": "Niki_red_clip",
+            "Yellow Note - Yellow Clip": "Niki_yellow_clip",
+            "White Note - Black Magnet": "Niki_black_magnet",
+            "Yellow Note - Blue Magnet": "Niki_blue_magnet",
+            "White Note - Lines and Red Magnet": "Niki_red_magnet",
+            "Black Note - White Magnet": "Niki_white_magnet",
+            "Yellow Note - Yellow Magnet": "Niki_yellow_magnet",
+            "Blue Paint Strokes": "Niki_blue_paint_strokes",
+            "Green Paint Strokes": "Niki_green_paint_strokes",
+            "Purple Paint Strokes": "Niki_purple_paint_strokes",
+            "Red Paint Strokes": "Niki_red_paint_strokes",
+            "Yellow Paint Strokes": "Niki_yellow_paint_strokes",
+            "White Note - Silver Spiral": "schorschii_white",
+            "White Note - Silver Spiral 2": "Niki_white",
+            "White Note - Black Spiral": "Niki_white_black_spiral",
+            "White Note Large - Silver Spiral": "Niki_white_large",
+            "Yellow Sticker": "Niki_sticker",
+            "Yellow Note (iOS Style)": "schorschii_yellow",
+            "Birch Bark": "Niki_birch_bark",
+            "Burned Paper": "Niki_burned_paper",
+            "Clay Tablet": "Niki_clay_tablet",
+            "Coffee Stained": "Niki_coffee_stained",
+            "Clipboard": "Niki_board_tablet",
+            "None": "none"
+        },
+        "tooltip": "Select the background graphic you would like to use.",
+        "value": "Niki_blank_green"
+    },
+    "hide-decorations": {
+        "type": "checkbox",
+        "description": "Hide decorations",
+        "default": false,
+        "value": true
+    },
+    "font": {
+        "type": "entry",
+        "description": "Font",
+        "default": "Purisa",
+        "value": "Fira Sans"
+    },
+    "size-font": {
+        "type": "spinbutton",
+        "default": 13,
+        "min": 5,
+        "max": 100,
+        "step": 1,
+        "units": "pixels",
+        "description": "Font size",
+        "tooltip": "Increase or decrease the note font size.",
+        "value": 13
+    },
+    "font-bold": {
+        "type": "checkbox",
+        "description": "Bold",
+        "default": false,
+        "value": false
+    },
+    "font-italic": {
+        "type": "checkbox",
+        "description": "Italic",
+        "default": false,
+        "value": false
+    },
+    "text-color": {
+        "type": "colorchooser",
+        "default": "rgba(0,0,0,0)",
+        "description": "Text color",
+        "tooltip": "Set the text color of this desklet.",
+        "value": "rgba(0,0,0,0)"
+    },
+    "scale-size": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 0.5,
+        "max": 10,
+        "step": 0.2,
+        "units": "scale factor",
+        "description": "Desklet size",
+        "tooltip": "Increase or decrease the size of this desklet using this scale factor.",
+        "value": 2
+    },
+    "head3": {
+        "type": "header",
+        "description": "Custom desklet label (only visible if decorations are enabled)"
+    },
+    "use-custom-label": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Use a custom desklet label",
+        "tooltip": "Checking this box allows you to set a custom label in the field below.",
+        "value": false
+    },
+    "custom-label": {
+        "type": "entry",
+        "default": "Note 1",
+        "description": "Custom desklet label",
+        "indent": true,
+        "dependency": "use-custom-label",
+        "tooltip": "Set your custom label here. This field is unavailable unless the checkbox above is enabled.",
+        "value": "Note 1"
+    },
+    "__md5__": "0aa8c5e1e926d5af0fc72e8144dd2e7c"
+}
