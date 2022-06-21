@@ -32,7 +32,7 @@ sudo pacman -Rnsu --noconfirm midori manjaro-{browser-settings,hello}
 # Refresh Mirrors, Update and Install Packages
 sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-download-timeout \
   yay base-devel htop neofetch refind $(sudo pacman -Ssq gtk-engine) $(sudo pacman -Ssq libappindicator) unrar ttf-fira-{code,sans} \
-  firefox firefox-ublock-origin pulseaudio-equalizer-ladspa kvantum-qt5 qt5ct vlc gnome-disk-utility gparted lxtask-gtk3
+  firefox firefox-ublock-origin pulseaudio-equalizer-ladspa kvantum-qt5 qt5ct vlc gnome-disk-utility gparted geany lxtask-gtk3
 
 # Gaming
 sudo pacman -S --noconfirm --needed --disable-download-timeout \
@@ -46,7 +46,7 @@ sudo pacman -S --noconfirm --needed --disable-download-timeout \
 
 # AUR
 yay -S --needed --noconfirm --disable-download-timeout --cleanafter --removemake --noredownload --norebuild --batchinstall --save \
-  lutris-git goverlay-bin optimus-manager optimus-manager-qt
+  lutris-git goverlay-bin optimus-manager optimus-manager-qt google-chrome
 
 ############################### Build/Clone ###############################
 
@@ -71,11 +71,11 @@ if [ $? -ne 0 ]; then
 fi
 
 # Symlinks
-ln -sf /media/Home/xelser/Documents/ $HOME/Documents/"xelser's Documents"
-ln -sf /media/Home/xelser/Downloads/ $HOME/Downloads/"xelser's Downloads"
-ln -sf /media/Home/xelser/Music/ $HOME/Music/"xelser's Music"
-ln -sf /media/Home/xelser/Pictures/ $HOME/Pictures/"xelser's Pictures"
-ln -sf /media/Home/xelser/Videos/ $HOME/Videos/"xelser's Videos"
+ls ~/Documents/ | grep -q "xelser's Documents"; if [ $? -ne 0 ]; then ln -sf /media/Home/xelser/Documents/ $HOME/Documents/"xelser's Documents"; fi
+ls ~/Downloads/ | grep -q "xelser's Downloads"; if [ $? -ne 0 ]; then ln -sf /media/Home/xelser/Downloads/ $HOME/Downloads/"xelser's Downloads"; fi
+ls ~/Music/ | grep -q "xelser's Music"; if [ $? -ne 0 ]; then ln -sf /media/Home/xelser/Music/ $HOME/Music/"xelser's Music"; fi
+ls ~/Pictures/ | grep -q "xelser's Pictures"; if [ $? -ne 0 ]; then ln -sf /media/Home/xelser/Pictures/ $HOME/Pictures/"xelser's Pictures"; fi
+ls ~/Videos/ | grep -q "xelser's Videos"; if [ $? -ne 0 ]; then ln -sf /media/Home/xelser/Videos/ $HOME/Videos/"xelser's Videos"; fi
 
 # MangoHUD
 sudo cat /etc/environment | grep -wq "MANGOHUD=1
@@ -105,8 +105,8 @@ cp /etc/skel/{.bashrc,.bash_profile} $HOME/
 cat $HOME/distro-scripts/bash-configs/manjaro_bashrc >> $HOME/.bashrc
 
 # dotfiles
-rm -rf $HOME/.config/autostart/*.desktop
-cp -rf $HOME/distro-scripts/dotfiles/manjaro-cinnamon/{.config,.local} $HOME/
+rm -rf $HOME/{.config,.cinnamon}/
+cp -rf $HOME/distro-scripts/dotfiles/manjaro-cinnamon/{.config,.local,.cinnamon} $HOME/
 
 clear
 ################################# Theme ##################################
