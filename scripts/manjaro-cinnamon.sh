@@ -30,8 +30,8 @@ fi
 sudo pacman -Rnsu --noconfirm midori manjaro-{browser-settings,hello}
   
 # Refresh Mirrors, Update and Install Packages
-sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-download-timeout \
-  yay base-devel htop neofetch refind $(sudo pacman -Ssq gtk-engine) $(sudo pacman -Ssq libappindicator) unrar ttf-fira-{code,sans} \
+sudo pacman-mirrors --geoip && sudo pacman -Syyu --noconfirm --needed --disable-download-timeout yay base-devel htop neofetch \
+  refind $(sudo pacman -Ssq gtk-engine) $(sudo pacman -Ssq libappindicator) unrar ttf-fira-{code,sans} noto-fonts-{cjk,emoji} \
   firefox firefox-ublock-origin pulseaudio-equalizer-ladspa kvantum-qt5 qt5ct vlc gnome-disk-utility gparted geany lxtask-gtk3
 
 # Gaming
