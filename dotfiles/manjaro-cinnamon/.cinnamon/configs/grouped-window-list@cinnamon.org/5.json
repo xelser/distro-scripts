@@ -164,13 +164,12 @@
         ],
         "value": [
             "firefox.desktop",
+            "google-chrome.desktop",
             "org.gnome.Terminal.desktop",
             "nemo.desktop",
-            "steam.desktop",
-            "io.github.benjamimgois.goverlay.desktop",
-            "net.lutris.Lutris.desktop",
-            "lxtask.desktop",
-            "cinnamon-settings.desktop"
+            "geany.desktop",
+            "cinnamon-settings.desktop",
+            "lxtask.desktop"
         ]
     },
     "group-apps": {

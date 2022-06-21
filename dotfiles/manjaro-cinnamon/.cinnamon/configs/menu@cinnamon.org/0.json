@@ -255,7 +255,7 @@
         "default": false,
         "description": "Use menu animations",
         "tooltip": "Allow the menu to animate on open and close",
-        "value": false
+        "value": true
     },
     "menu-editor-button": {
         "type": "button",
