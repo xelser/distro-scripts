@@ -17,7 +17,12 @@ clear
 
 # Remove Bloat
 
-# Refresh Mirrors, Update and Install Packages
+# Update
+sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y
+
+# Install Packages
+sudo apt install -y htop neofetch wget curl build-essential numlockx flatpak \
+  gparted geany transmission gnome-disk-utility unar rar zip webext-ublock-origin-firefox
 
 clear
 ############################### Build/Clone ###############################
@@ -90,5 +95,7 @@ clear
 ############################## Housekeeping ###############################
 
 # Remove Unneeded Packages
+sudo apt autoremove --purge -y
 
 # Clean packages
+sudo apt autoclean
