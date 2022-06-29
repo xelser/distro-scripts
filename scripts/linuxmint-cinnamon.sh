@@ -63,7 +63,7 @@ sudo fc-cache -fv
 # bash configs
 rm -rf $HOME/{.bashrc,.bash_profile}
 cp /etc/skel/{.bashrc,.bash_profile} $HOME/
-#cat $HOME/distro-scripts/bash-configs/manjaro_bashrc >> $HOME/.bashrc
+cat $HOME/distro-scripts/bash-configs/mint_bashrc >> $HOME/.bashrc
 
 # dotfiles
 rm -rf $HOME/{.config,.cinnamon}/
