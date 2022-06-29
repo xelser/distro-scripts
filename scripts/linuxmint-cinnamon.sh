@@ -16,13 +16,14 @@ clear
 ################################ Packages #################################
 
 # Remove Bloat
+sudo apt autoremove --purge -y libreoffice*
 
 # Update
 sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y
 
 # Install Packages
-sudo apt install -y htop neofetch wget curl build-essential numlockx flatpak \
-  gparted geany transmission gnome-disk-utility unar rar zip webext-ublock-origin-firefox
+sudo apt install -y mint-meta-codecs build-essential numlockx unar rar zip htop neofetch wget curl flatpak \
+  gparted geany transmission gnome-disk-utility qt5-style-kvantum qt5ct
 
 clear
 ############################### Build/Clone ###############################
@@ -70,26 +71,27 @@ clear
 case $theming in
    n)	;;
    *)	# cd to tmp and remove old files
-	mkdir -p $HOME/.local/share/plasma/plasmoids/ && cd /tmp/ && rm -rf vimix* Vimix*
+	mkdir -p $HOME/.local/share/plasma/plasmoids/ && cd /tmp/ && rm -rf Fluent*
 	rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
-	sudo rm -rf /usr/share/themes/{Vimix*,vimix*} /usr/share/icons/{Vimix*,vimix*}
+	sudo rm -rf /usr/share/themes/Fluent* /usr/share/icons/Fluent*
 
 	# Dependencies
-	sudo apt install -y sassc && sudo apt mark auto sassc
+	sudo apt install -y sassc && sudo apt-mark auto sassc
 
-	# Download and Install
-	git clone https://github.com/vinceliuice/vimix-gtk-themes.git && sudo ./vimix-gtk-themes/install.sh -t beryl -s compact
-	git clone https://github.com/vinceliuice/vimix-icon-theme.git && sudo ./vimix-icon-theme/install.sh Beryl
-	git clone https://github.com/vinceliuice/vimix-kde.git && ./vimix-kde/install.sh -t beryl
-	git clone https://github.com/vinceliuice/Vimix-cursors.git && cd Vimix-cursors && sudo ./install.sh
-
+	# Download
+	git clone https://github.com/vinceliuice/Fluent-kde 
+	git clone https://github.com/vinceliuice/Fluent-gtk-theme
+	git clone https://github.com/vinceliuice/Fluent-icon-theme
+	
+	# Install
+	./Fluent-kde/install.sh -t green --round
+	sudo ./Fluent-gtk-theme/install.sh -t green --tweaks round noborder
+	sudo ./Fluent-icon-theme/install.sh green -r
+	sudo ./Fluent-icon-theme/cursors/install.sh
+	
 	# Theme Tweaks
-	sudo sed -i 's/Roboto/Fira Sans/g' /usr/share/themes/vimix*/cinnamon/cinnamon.css;;
+	#sudo sed -i 's/Roboto/Fira Sans/g' /usr/share/themes/vimix*/cinnamon/cinnamon.css;;
 esac
-
-#git clone https://github.com/vinceliuice/Fluent-kde && ./Fluent-kde/install.sh -t all --round && sudo ./Fluent-kde/sddm/install.sh -t round
-#git clone https://github.com/vinceliuice/Fluent-gtk-theme && sudo ./Fluent-gtk-theme/install.sh -i manjaro -t teal --tweaks round
-#git clone https://github.com/vinceliuice/Fluent-icon-theme && sudo ./Fluent-icon-theme/install.sh teal -r && sudo ./Fluent-icon-theme/cursors/install.sh
 
 clear
 ############################## Housekeeping ###############################
