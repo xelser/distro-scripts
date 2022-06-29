@@ -88,9 +88,6 @@ case $theming in
 	sudo ./Fluent-gtk-theme/install.sh -t green --tweaks round noborder
 	sudo ./Fluent-icon-theme/install.sh green -r
 	sudo ./Fluent-icon-theme/cursors/install.sh
-	
-	# Theme Tweaks
-	#sudo sed -i 's/Roboto/Fira Sans/g' /usr/share/themes/vimix*/cinnamon/cinnamon.css;;
 esac
 
 clear
