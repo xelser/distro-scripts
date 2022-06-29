@@ -23,15 +23,15 @@ sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y
 
 # Install Packages
 sudo apt install -y mint-meta-codecs build-essential numlockx unar rar zip htop neofetch wget curl flatpak \
-  gparted geany transmission gnome-disk-utility qt5-style-kvantum qt5ct
+  gparted transmission gnome-disk-utility # qt5-style-kvantum qt5ct geany
 
 clear
 ############################### Build/Clone ###############################
 
 # Geany Themes
-cd /tmp/ && rm -rf geany-themes
-git clone https://github.com/xelser/geany-themes.git
-cd geany-themes && sudo ./install.sh
+#cd /tmp/ && rm -rf geany-themes
+#git clone https://github.com/xelser/geany-themes.git
+#cd geany-themes && sudo ./install.sh
 
 clear
 ################################# Config ##################################
@@ -64,6 +64,10 @@ sudo fc-cache -fv
 rm -rf $HOME/{.bashrc,.bash_profile}
 cp /etc/skel/{.bashrc,.bash_profile} $HOME/
 #cat $HOME/distro-scripts/bash-configs/manjaro_bashrc >> $HOME/.bashrc
+
+# dotfiles
+rm -rf $HOME/{.config,.cinnamon}/
+cp -rf $HOME/distro-scripts/dotfiles/linuxmint-cinnamon/{.config,.local,.cinnamon} $HOME/
 
 clear
 ################################# Theme ##################################
