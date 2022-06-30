@@ -22,7 +22,7 @@ sudo apt autoremove --purge -y libreoffice*
 sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y
 
 # Install Packages
-sudo apt install -y mint-meta-codecs build-essential numlockx unar rar zip htop neofetch wget curl flatpak \
+sudo apt install -y mint-meta-codecs build-essential gtk2-engines-murrine numlockx unar rar zip htop neofetch wget curl flatpak \
   gparted transmission gnome-disk-utility # qt5-style-kvantum qt5ct geany
 
 clear
@@ -88,9 +88,9 @@ case $theming in
 	git clone https://github.com/vinceliuice/Fluent-icon-theme
 	
 	# Install
-	./Fluent-kde/install.sh -t green --round
-	sudo ./Fluent-gtk-theme/install.sh -t green --tweaks round noborder
-	sudo ./Fluent-icon-theme/install.sh green -r
+	./Fluent-kde/install.sh -t all --round
+	sudo ./Fluent-gtk-theme/install.sh -t all --tweaks round noborder
+	sudo ./Fluent-icon-theme/install.sh -a -r
 	sudo ./Fluent-icon-theme/cursors/install.sh
 esac
 
