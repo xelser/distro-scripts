@@ -5,6 +5,7 @@ clear
 
 # Prompt User
 echo && read -p "Install Theme? (Y/n): " theming
+clear && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
 
 # No password for user
 sudo cat /etc/sudoers | grep -q "$USER ALL=(ALL) NOPASSWD: ALL"
@@ -23,15 +24,16 @@ sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y
 
 # Install Packages
 sudo apt install -y mint-meta-codecs build-essential gtk2-engines-murrine numlockx unar rar zip htop neofetch wget curl flatpak \
-  gparted transmission gnome-disk-utility # qt5-style-kvantum qt5ct geany
+  gparted transmission gnome-disk-utility qt5-style-kvantum qt5ct # geany
 
 clear
 ############################### Build/Clone ###############################
 
 # Geany Themes
-#cd /tmp/ && rm -rf geany-themes
-#git clone https://github.com/xelser/geany-themes.git
-#cd geany-themes && sudo ./install.sh
+sudo apt list --installed | grep -q geany
+if [ $? -eq 0 ]; then 
+	cd /tmp/ && rm -rf geany-themes && git clone https://github.com/xelser/geany-themes.git && cd geany-themes && sudo ./install.sh
+fi
 
 clear
 ################################# Config ##################################
@@ -66,8 +68,12 @@ cp /etc/skel/{.bashrc,.bash_profile} $HOME/
 cat $HOME/distro-scripts/bash-configs/mint_bashrc >> $HOME/.bashrc
 
 # dotfiles
-rm -rf $HOME/{.config,.cinnamon}/
-cp -rf $HOME/distro-scripts/dotfiles/linuxmint-cinnamon/{.config,.local,.cinnamon} $HOME/
+case $cp_dotfiles in
+   n)	;;
+   *)	# Remove old .config files
+   	rm -rf $HOME/{.config,.cinnamon}/
+	cp -rf $HOME/distro-scripts/dotfiles/linuxmint-cinnamon/{.config,.local,.cinnamon} $HOME/;;
+esac
 
 clear
 ################################# Theme ##################################
@@ -90,8 +96,7 @@ case $theming in
 	# Install
 	./Fluent-kde/install.sh -t all --round
 	sudo ./Fluent-gtk-theme/install.sh -t all --tweaks round noborder
-	sudo ./Fluent-icon-theme/install.sh -a -r
-	sudo ./Fluent-icon-theme/cursors/install.sh
+	sudo ./Fluent-icon-theme/install.sh -a -r && sudo ./Fluent-icon-theme/cursors/install.sh
 esac
 
 clear
