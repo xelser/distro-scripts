@@ -88,7 +88,7 @@ case $theming in
 	sudo rm -rf /usr/share/themes/Fluent* /usr/share/icons/Fluent*
 
 	# Dependencies
-	sudo apt install -y sassc ostree libappstream-glib && sudo apt-mark auto sassc ostree libappstream-glib
+	sudo apt install -y sassc ostree appstream-util && sudo apt-mark auto sassc ostree appstream-util
 
 	# Download
 	git clone https://github.com/vinceliuice/Fluent-kde 
