@@ -24,7 +24,7 @@ sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y
 
 # Install Packages
 sudo apt install -y mint-meta-codecs build-essential gtk2-engines-murrine numlockx unar rar zip htop neofetch wget curl flatpak \
-  gparted transmission gnome-disk-utility qt5-style-kvantum qt5ct # geany
+  gparted transmission gnome-disk-utility vlc qt5-style-kvantum qt5ct # geany
 
 clear
 ############################### Build/Clone ###############################
