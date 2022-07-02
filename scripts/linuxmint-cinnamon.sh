@@ -96,7 +96,7 @@ case $theming in
 	git clone https://github.com/vinceliuice/Fluent-icon-theme
 	
 	# Install
-	cd Fluent-kde && ./install.sh -t all --round && cd ..
+	cd Fluent-kde && ./install.sh -t all && cd ..
 	cd Fluent-gtk-theme && sudo ./install.sh -t all --tweaks round noborder && cd ..
 	cd Fluent-icon-theme && sudo ./install.sh -a -r && cd cursors && sudo ./install.sh
 	
