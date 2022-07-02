@@ -24,7 +24,9 @@ sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y
 
 # Install Packages
 sudo apt install -y mint-meta-codecs build-essential gtk2-engines-murrine numlockx unar rar zip htop neofetch wget curl flatpak \
-  gparted transmission gnome-disk-utility vlc qt5-style-kvantum qt5ct # geany
+  gparted transmission gnome-disk-utility vlc qt5-style-kvantum qt5ct geany
+
+flatpak install -y flatseal discord zoom skype
 
 clear
 ############################### Build/Clone ###############################
@@ -86,7 +88,7 @@ case $theming in
 	sudo rm -rf /usr/share/themes/Fluent* /usr/share/icons/Fluent*
 
 	# Dependencies
-	sudo apt install -y sassc && sudo apt-mark auto sassc
+	sudo apt install -y sassc ostree libappstream-glib && sudo apt-mark auto sassc ostree libappstream-glib
 
 	# Download
 	git clone https://github.com/vinceliuice/Fluent-kde 
@@ -97,6 +99,10 @@ case $theming in
 	cd Fluent-kde && ./install.sh -t all --round && cd ..
 	cd Fluent-gtk-theme && sudo ./install.sh -t all --tweaks round noborder && cd ..
 	cd Fluent-icon-theme && sudo ./install.sh -a -r && cd cursors && sudo ./install.sh
+	
+	# Flatpak
+	cd /tmp/ && rm -rf stylepak && git clone https://github.com/refi64/stylepak.git
+	cd stylepak && ./stylepak install-system Fluent-round-green-Dark-compact
 esac
 
 clear
