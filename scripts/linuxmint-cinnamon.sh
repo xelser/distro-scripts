@@ -5,7 +5,7 @@ clear
 
 # Prompt User
 echo && read -p "Install Theme? (Y/n): " theming
-clear && read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
+read -p "Copy (xelser's) dotfiles? (Y/n): " cp_dotfiles
 
 # No password for user
 sudo cat /etc/sudoers | grep -q "$USER ALL=(ALL) NOPASSWD: ALL"
