@@ -17,7 +17,7 @@ clear
 ################################ Packages #################################
 
 # Remove Bloat
-sudo apt autoremove --purge -y libreoffice*
+sudo apt autoremove --purge -y libreoffice* timeshift
 
 # Update
 sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y
