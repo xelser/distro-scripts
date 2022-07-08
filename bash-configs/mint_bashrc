@@ -3,8 +3,8 @@
 PS1="\[\033[1;32m\]\u@\h \[\033[0;37m\][\[\033[1;33m\]\W\[\033[0;37m\]] \[\033[0;37m\]$ "
 
 # package manager aliases
-alias aptup="sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y && sudo apt autoremove --purge -y "
-alias flatpakup="flatpak update -y && flatpak uninstall --unused -y"
+alias aptup="sudo apt update && sudo apt upgrade && sudo apt full-upgrade && sudo apt autoremove --purge -y"
+alias flatpakup="flatpak update && flatpak uninstall --unused -y"
 alias update="aptup && flatpakup"
 
 # user aliases
