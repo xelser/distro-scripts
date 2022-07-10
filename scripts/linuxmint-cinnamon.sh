@@ -23,10 +23,10 @@ sudo apt autoremove --purge -y libreoffice* timeshift
 sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y
 
 # Install Packages
-sudo apt install -y mint-meta-codecs build-essential gtk2-engines-murrine numlockx unar rar zip htop neofetch wget curl flatpak \
-  gparted transmission gnome-disk-utility vlc qt5-style-kvantum qt5ct geany
+sudo apt install -y mint-meta-codecs build-essential gtk2-engines-murrine numlockx sassc ostree appstream-util wget curl unar rar zip \
+  htop neofetch flatpak gparted transmission gnome-disk-utility vlc qt5-style-kvantum qt5ct geany
 
-flatpak install -y flatseal discord zoom skype
+# flatpak install -y flatseal discord zoom skype
 
 clear
 ############################### Build/Clone ###############################
@@ -74,7 +74,7 @@ case $cp_dotfiles in
    n)	;;
    *)	# Remove old .config files
    	rm -rf $HOME/{.config,.cinnamon}/
-	cp -rf $HOME/distro-scripts/dotfiles/linuxmint-cinnamon/{.config,.local,.cinnamon} $HOME/;;
+   	cp -rf $HOME/distro-scripts/dotfiles/linuxmint-cinnamon/{.config,.local,.cinnamon} $HOME/;;
 esac
 
 clear
@@ -83,26 +83,23 @@ clear
 case $theming in
    n)	;;
    *)	# cd to tmp and remove old files
-	mkdir -p $HOME/.local/share/plasma/plasmoids/ && cd /tmp/ && rm -rf Fluent*
-	rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
-	sudo rm -rf /usr/share/themes/Fluent* /usr/share/icons/Fluent*
+   	mkdir -p $HOME/.local/share/plasma/plasmoids/ && cd /tmp/ && rm -rf Fluent*
+   	rm -rf $HOME/.local/share/{aurorae,color-schemes,plasma}
+   	sudo rm -rf /usr/share/themes/Fluent* /usr/share/icons/Fluent*
 
-	# Dependencies
-	sudo apt install -y sassc ostree appstream-util && sudo apt-mark auto sassc ostree appstream-util
+   	# Download
+   	git clone https://github.com/vinceliuice/Fluent-kde
+   	git clone https://github.com/vinceliuice/Fluent-gtk-theme
+   	git clone https://github.com/vinceliuice/Fluent-icon-theme
 
-	# Download
-	git clone https://github.com/vinceliuice/Fluent-kde 
-	git clone https://github.com/vinceliuice/Fluent-gtk-theme
-	git clone https://github.com/vinceliuice/Fluent-icon-theme
-	
-	# Install
-	cd Fluent-kde && ./install.sh -t all && cd ..
-	cd Fluent-gtk-theme && sudo ./install.sh -t all --tweaks round noborder && cd ..
-	cd Fluent-icon-theme && sudo ./install.sh -a -r && cd cursors && sudo ./install.sh
-	
-	# Flatpak
-	cd /tmp/ && rm -rf stylepak && git clone https://github.com/refi64/stylepak.git
-	cd stylepak && ./stylepak install-system Fluent-round-green-Dark-compact
+   	# Install
+   	cd Fluent-kde && ./install.sh -t all && cd ..
+   	cd Fluent-gtk-theme && sudo ./install.sh -t all --tweaks round noborder && cd ..
+   	cd Fluent-icon-theme && sudo ./install.sh -a -r && cd cursors && sudo ./install.sh
+
+   	# Flatpak
+   	#cd /tmp/ && rm -rf stylepak && git clone https://github.com/refi64/stylepak.git
+   	#cd stylepak && ./stylepak install-system Fluent-round-green-Dark-compact
 esac
 
 clear
