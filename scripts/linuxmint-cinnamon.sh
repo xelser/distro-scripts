@@ -24,7 +24,7 @@ sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y
 
 # Install Packages
 sudo apt install -y mint-meta-codecs build-essential gtk2-engines-murrine numlockx sassc ostree appstream-util wget curl unar rar zip \
-  htop neofetch flatpak gparted transmission gnome-disk-utility vlc qt5-style-kvantum qt5ct geany
+  htop neofetch flatpak gparted transmission gnome-disk-utility vlc qt5-style-kvantum qt5ct # geany
 
 # flatpak install -y flatseal discord zoom skype
 
