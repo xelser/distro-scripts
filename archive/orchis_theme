@@ -6,7 +6,7 @@
 sudo dnf install sassc
 cd /tmp/ && rm -rf Orchis* && sudo rm -rf /usr/share/themes/Orchis*
 git clone https://github.com/vinceliuice/Orchis-theme.git
-cd Orchis-theme && sudo ./install.sh -l
+cd Orchis-theme && sudo ./install.sh --theme all --tweaks primary --libadwaita
 
 # Flatpak
 sudo dnf install ostree libappstream-glib
