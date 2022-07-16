@@ -17,7 +17,7 @@ clear
 ################################ Packages #################################
 
 # Remove Bloat
-sudo apt autoremove --purge -y libreoffice* timeshift
+sudo apt autoremove --purge -y libreoffice* timeshift thunderbird hypnotix rhythmbox hexchat pix thingy
 
 # Update
 sudo apt update && sudo apt upgrade -y && sudo apt full-upgrade -y
