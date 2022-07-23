@@ -14,13 +14,14 @@ fi
 
 # Configure DNF
 sudo cat /etc/dnf/dnf.conf | grep -wq "keepcache=True
-fastestmirror=True
 defaultyes=True
 install_weak_deps=False
 max_parallel_downloads=10
-color=always"
+color=always
+#fastestmirror=True
+#assumeyes=True"
 if [ $? -ne 0 ]; then
-	echo -e "keepcache=True\nfastestmirror=True\ndefaultyes=True\ninstall_weak_deps=False\nmax_parallel_downloads=10\ncolor=always" | sudo tee -a /etc/dnf/dnf.conf
+	echo -e "keepcache=True\ndefaultyes=True\ninstall_weak_deps=False\nmax_parallel_downloads=10\ncolor=always\n#fastestmirror=True\n#assumeyes=True" | sudo tee -a /etc/dnf/dnf.conf
 fi
 
 clear
@@ -45,8 +46,8 @@ sudo dnf upgrade --assumeyes && sudo dnf distro-sync --assumeyes
 # INSTALL
 sudo dnf install --assumeyes gnome-{tweaks,extensions-app,multi-writer,builder,console,console-nautilus} google-noto-{cjk,emoji-color}-fonts \
   gnome-shell-extension-{pop-shell,user-theme,appindicator,gsconnect,sound-output-device-chooser} dconf-editor easyeffects kvantum qt5ct \
-  file-roller drawing lollypop seahorse gparted transmission inkscape google-chrome-stable \
-  google-roboto-* mozilla-ublock-origin gtk-murrine-engine htop neofetch unrar flatpak # variety
+  file-roller drawing lollypop seahorse gparted transmission google-chrome-stable \
+  google-roboto-* mozilla-ublock-origin gtk-murrine-engine htop neofetch unrar flatpak # variety inkscape
 
 # ADD REPO: Flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -83,7 +84,7 @@ case $cp_dotfiles in
    *)	cp -rf $HOME/distro-scripts/dotfiles/fedora-workstation/{.config,.local} $HOME/;;
 esac
 
-# Hide some .desktop files
+# Hide some .desktop files (calf)
 mkdir $HOME/.local/share/applications/ && rm -rf $HOME/.local/share/applications/*
 cp /usr/share/applications/calf.desktop $HOME/.local/share/applications/
 echo "NotShowIn=GNOME" | tee -a $HOME/.local/share/applications/calf.desktop
@@ -96,7 +97,7 @@ clear
 ################################# Themes ##################################
 
 # GTK Legacy theme (Fits well with libadwaita)
-sudo dnf copr enable nickavem/adw-gtk3 && sudo dnf install adw-gtk3
+sudo dnf copr enable nickavem/adw-gtk3 && sudo dnf install --assumeyes adw-gtk3
 
 # Icons
 cd /tmp/ && rm -rf Tela* && sudo rm -rf /usr/share/icons/Tela*
