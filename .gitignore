@@ -1,0 +1,6 @@
+
+cache/
+caches/
+
+*.po
+obmenu-generator/icons/*.png

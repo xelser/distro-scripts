@@ -1,0 +1,4 @@
+#!/bin/bash
+
+xdg-open $HOME/.local/share/dark-mode.d/dark.sh
+xdg-open $HOME/.local/share/light-mode.d/default.sh
