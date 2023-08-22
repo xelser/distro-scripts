@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Name=Autostart Script
+Icon=terminal
+Comment=Startup scripts to launch command upon startup
+Exec=/home/xelser/.config/autostart/autostart-script.sh
+StartupNotify=true
+Terminal=false
+Hidden=false
+

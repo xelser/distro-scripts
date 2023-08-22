@@ -1,0 +1,100 @@
+{
+  "float": [
+    {
+      "class": "pop-shell-example",
+      "title": "pop-shell-example"
+    },
+    {
+      "class": "pop-shell-exceptions"
+    },
+    {
+      "class": "org.gnome.Solanum"
+    },
+    {
+      "class": "org.gnome.TextEditor"
+    },
+    {
+      "class": "file-roller"
+    },
+    {
+      "class": "eog"
+    },
+    {
+      "class": "evince"
+    },
+    {
+      "class": "totem"
+    },
+    {
+      "class": "org.gnome.Calculator"
+    },
+    {
+      "class": "gnome-multi-writer"
+    },
+    {
+      "class": "gnome-pomodoro"
+    },
+    {
+      "class": "gnome-system-monitor"
+    },
+    {
+      "class": "org.gnome.clocks"
+    },
+    {
+      "class": "me.dusansimic.DynamicWallpaper"
+    },
+    {
+      "class": "de.haeckerfelix.Fragments"
+    },
+    {
+      "class": "io.github.seadve.Kooha"
+    },
+    {
+      "class": "com.rafaelmardojai.Blanket"
+    },
+    {
+      "class": "io.bassi.Amberol"
+    },
+    {
+      "class": "com.github.unrud.VideoDownloader"
+    },
+    {
+      "class": "Ventoy2Disk.gtk3"
+    },
+    {
+      "class": "org.gnome.Settings"
+    },
+    {
+      "class": "io.github.celluloid_player.Celluloid"
+    },
+    {
+      "class": "dconf-editor"
+    },
+    {
+      "class": "gnome-tweaks"
+    },
+    {
+      "class": "warpinator"
+    },
+    {
+      "class": "org.gnome.Console"
+    },
+    {
+      "class": "org.gnome.Nautilus"
+    },
+    {
+      "class": "kgx"
+    },
+    {
+      "class": "steam"
+    },
+    {
+      "class": "wineboot.exe"
+    },
+    {
+      "class": "gnome-text-editor"
+    }
+  ],
+  "skiptaskbarhidden": [],
+  "log_on_focus": false
+}

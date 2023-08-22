@@ -1,0 +1,12 @@
+[:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
+audible-bell=true
+background-transparency-percent=0
+cursor-shape='ibeam'
+default-size-columns=100
+default-size-rows=26
+font='UbuntuMono Nerd Font 11.5'
+scrollbar-policy='never'
+use-system-font=true
+use-theme-colors=true
+use-theme-transparency=true
+use-transparent-background=false

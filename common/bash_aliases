@@ -1,0 +1,87 @@
+
+# package managers
+if   [ -f /usr/bin/nala ]; then
+	alias update="sudo nala upgrade --assume-yes"
+	alias install="sudo nala install $1"
+	alias uninstall="sudo nala purge $1"
+	alias clean="sudo nala autoremove --purge --assume-yes && sudo nala clean"
+	alias search="sudo nala search $1"
+	alias list="sudo nala list --installed $1"
+elif [ -f /usr/bin/apt ]; then
+	alias update="sudo apt update && sudo apt upgrade --yes"
+	alias install="sudo apt install --yes $1"
+	alias uninstall="sudo apt autoremove --purge $1"
+	alias clean="sudo apt autoremove --purge --yes && sudo apt autoclean"
+	alias search="sudo apt search $1"
+	alias list="sudo apt list --installed $1"
+elif [ -f /usr/bin/yay ]; then
+	alias update="yay -Syyu --noconfirm"
+	alias install="yay -S $1 --needed"
+	alias uninstall="yay -Rnsu $1"
+	alias clean="yay -Qtdq | yay -Rnsu - --noconfirm 1> /dev/null; yay -Sc --noconfirm"
+	alias search="yay -Ss $1"
+	alias list="yay -Qq $1"
+elif [ -f /usr/bin/pacman ]; then
+	alias update="sudo pacman -Syyu --noconfirm"
+	alias install="sudo pacman -S $1 --needed"
+	alias uninstall="sudo pacman -Rnsu $1"
+	alias clean="sudo pacman -Qtdq | sudo pacman -Rnsu - --noconfirm 1> /dev/null; sudo pacman -Sc --noconfirm"
+	alias search="sudo pacman -Ss $1"
+	alias list="sudo pacman -Qq $1"
+elif [ -f /usr/bin/dnf ]; then
+	alias update="sudo dnf upgrade --assumeyes"
+	alias install="sudo dnf install $1"
+	alias uninstall="sudo dnf autoremove $1"
+	alias clean="sudo dnf autoremove --assumeyes && sudo dnf clean packages"
+	alias search="sudo dnf search $1"
+	alias list="sudo dnf list --installed $1"
+fi
+
+# Flatpak
+alias flatupdate="flatpak update --assumeyes"
+alias flatinstall="flatpak install --user flathub $1"
+alias flatuninstall="flatpak uninstall $1"
+alias flatclean="flatpak uninstall --unused --delete-data --assumeyes"
+alias flatsearch="flatpak search $1"
+
+# GNOME Shell Extensions
+alias gextup="gext update --user --install"
+
+# editors
+if [[ ${wm_de} == "gnome" ]] || [[ ${wm_de} == "budgie" ]]; then
+	alias edit="gnome-text-editor"
+elif [[ ${wm_de} == "cinnamon" ]]; then
+	alias edit="xed"
+elif [[ ${wm_de} == "xfce" ]]; then
+	alias edit="mousepad"
+elif [[ ${wm_de} == "kde" ]]; then
+	alias edit="kwrite"
+elif [[ -f /bin/nvim ]]; then
+	alias edit="nvim"
+else
+	alias edit="nano"
+fi
+
+# dotfiles
+alias bashaliasesup="cat $HOME/Documents/distro-scripts/common/bash_aliases > $HOME/.bash_aliases && source $HOME/.bash_aliases"
+alias bashprofileup="cat $HOME/Documents/distro-scripts/common/bash_profile > $HOME/.bash_profile && source $HOME/.bash_profile"
+alias bashup="bashaliasesup && bashprofileup"
+alias dotup="bash $HOME/Documents/distro-scripts/common/update-dotfiles.sh"
+
+# git aliases
+alias gitclone="cd $HOME/Documents && git clone"
+alias gitpull="git fetch && git pull"
+alias gitcommit="git add . && git commit -m 'auto-update @ $(hostname)' && git push"
+alias gitupdate="cd $HOME/Documents/distro-scripts && gitpull ; bashup ; dotup ; gitcommit ; cd $HOME"
+
+# others
+alias post="bash $HOME/.config/post.sh"
+alias clear="clear && history -c"
+
+if [ -f $HOME/.local/bin/gext ] && [ -d $HOME/Documents/distro-scripts ]; then
+	alias upall="update ; flatupdate ; gextup ; gitupdate"
+elif [ -d $HOME/Documents/distro-scripts ]; then
+	alias upall="update ; flatupdate ; gitupdate"
+else
+	alias upall="update ; flatupdate"
+fi

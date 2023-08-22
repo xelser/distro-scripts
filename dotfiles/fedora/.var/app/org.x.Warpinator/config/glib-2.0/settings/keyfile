@@ -1,0 +1,8 @@
+[org/x/warpinator/preferences]
+receiving-folder='file:///media/Media/Shared'
+use-tray-icon=false
+start-with-window=false
+ask-for-send-permission=true
+autostart=false
+no-overwrite=true
+connect-id='FEDORA-EF6649FE56FF3ABAF864'

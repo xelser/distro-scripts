@@ -1,0 +1,37 @@
+$surface-darkgrey: #20252b;
+$surface-fg: #949494;
+$surface-lightgrey: #3d464e;
+$surface-grey: #2b3238;
+$surface-red: #f87070;
+
+* { 
+  all: unset; 
+  font-family: Fira, FiraCode;
+}
+
+.layout-box {
+  background-color: rgb(17, 17, 27);
+  background-repeat: no-repeat;
+  background-size: contain;
+  padding: 5em;
+  color: rgba($surface-fg, 0.8);
+}
+
+.btns-box {
+  font-size: 2.5em;
+
+  button {
+    padding: 0.4em;
+    border-radius: 0.1em;
+
+    &:hover {
+      transition: 200ms linear background-color, border-radius;
+      background-color: rgba($surface-lightgrey, 0.6);
+    }
+
+    &:first-child {
+      color: rgba($surface-red, 0.8);
+    }
+  }
+}
+
