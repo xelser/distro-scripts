@@ -5,8 +5,11 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 gnome-extensions enable places-menu@gnome-shell-extensions.gcampax.github.com
 gnome-extensions enable pop-shell@system76.com
 
-# Set Document Font
+# Set Fonts
+gsettings set org.gnome.desktop.interface font-name 'Roboto 10'
 gsettings set org.gnome.desktop.interface document-font-name 'Roboto Slab 10'
+gsettings set org.gnome.desktop.interface monospace-font-name 'Roboto Mono 10'
+gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Roboto Medium 10'
 
 # Remove gnome-terminal
 sudo dnf autoremove --assumeyes gnome-terminal
