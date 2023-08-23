@@ -9,20 +9,10 @@ sed -i 's/non-free non-free/non-free/g' /etc/apt/sources.list
 # PACKAGE MANAGER: Nala
 apt update && apt install nala --yes
 
-# INSTALL: Debian Base (x11) 
-nala install --assume-yes firefox-esr build-essential curl \
-  plymouth qt5ct qt5-style-kvantum lxappearance fonts-ubuntu{,-console} \
-  pipewire-{alsa,audio,jack,pulse} wireplumber easyeffects lsp-plugins-lv2 \
-  lightdm-gtk-greeter-settings light-locker mugshot numlockx dconf-{editor,cli} \
-  {redshift,transmission}-gtk geany
-
 # INSTALL: Debian XFCE 
-nala install --assume-yes xfce4{,-goodies,-notifyd,-power-manager} \
-  gvfs-{fuse,backends} thunar-volman parole
-
-# INSTALL: Debian i3
-nala install --assume-yes brightnessctl i3-wm picom polybar nitrogen \
-  alacritty neovim xclip ranger imv mpv rofi dunst
+nala install --assume-yes build-essential plymouth qt5ct qt5-style-kvantum fonts-ubuntu{,-console} \
+  lightdm-gtk-greeter-settings blueman light-locker mugshot numlockx pulseeffects gvfs-{fuse,backends} \
+  dconf-{editor,cli} {redshift,transmission}-gtk geany
 
 #################################### CONFIG ####################################
 
