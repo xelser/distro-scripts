@@ -15,7 +15,7 @@ nala install --assume-yes --no-install-recommends build-essential curl firefox-e
 	lightdm-gtk-greeter-settings mugshot dconf-{editor,cli} numlockx 
 
 # INSTALL: Debian i3
-nala install --assume-yes --no-install-recommends brightnessctl i3 picom polybar nitrogen \
+nala install --assume-yes --no-install-recommends brightnessctl i3-wm picom polybar nitrogen \
 	alacritty ranger imv mpv gammastep rofi dunst libnotify4 neovim xclip wl-clipboard 
 
 # INSTALL: NixPkg
