@@ -16,7 +16,7 @@ nala install --assume-yes --no-install-recommends xorg build-essential curl \
   dconf-{editor,cli} {redshift,transmission}-gtk firefox-esr geany
 
 # INSTALL: Debian XFCE 
-nala install --assume-yes --no-install-recommends xfce4{,goodies,notifyd,power-manager} \
+nala install --assume-yes --no-install-recommends xfce4{,-goodies,-notifyd,-power-manager} \
   gvfs-{fuse,backends} thunar-volman parole
 
 # INSTALL: Debian i3
