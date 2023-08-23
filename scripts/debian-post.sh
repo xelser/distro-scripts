@@ -1,10 +1,5 @@
 #!/bin/bash
 
-##################################### POST #####################################
-
-# nixpkgs (3rd Party Packages)
-sudo nix-env -iA nixpkgs.{wallutils,xidlehook,betterlockscreen}
-
 #################################### THEMES ####################################
 
 # gtk, icons and more
@@ -22,7 +17,4 @@ sed -i 's/Iosevka/UbuntuMono/g' $HOME/.config/rofi/launchers/type-4/shared/fonts
 sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
 sed -i 's/onedark/catppuccin/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
 sed -i 's/JetBrains Mono/UbuntuMono/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
-
-# betterlockscreen
-[ -f /usr/bin/betterlockscreen ] && betterlockscreen --update "/usr/share/backgrounds/catppuccin" --fx dim 50
 
