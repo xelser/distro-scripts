@@ -10,10 +10,10 @@ sed -i 's/non-free non-free/non-free/g' /etc/apt/sources.list
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base (x11) 
-nala install --assume-yes --no-install-recommend xorg sudo build-essential curl \
-  lightdm-gtk-greeter-settings light-locker mugshot numlockx dconf-{editor,cli} \
+nala install --assume-yes --no-install-recommend xorg build-essential curl \
+  lightdm-gtk-greeter-settings light-locker mugshot numlockx pulseeffects \
   plymouth qt5ct qt5-style-kvantum lxappearance fonts-ubuntu{,-console} \
-  {redshift,transmission}-gtk firefox-esr geany
+  dconf-{editor,cli} {redshift,transmission}-gtk firefox-esr geany
 
 # INSTALL: Debian XFCE 
 nala install --assume-yes --no-install-recommends xfce4{,goodies,notifyd,power-manager} \
@@ -21,7 +21,7 @@ nala install --assume-yes --no-install-recommends xfce4{,goodies,notifyd,power-m
 
 # INSTALL: Debian i3
 nala install --assume-yes --no-install-recommends brightnessctl i3-wm picom polybar nitrogen \
-  alacritty ranger imv mpv gammastep rofi dunst libnotify4 neovim xclip wl-clipboard 
+  alacritty neovim xclip ranger imv mpv rofi dunst
 
 #################################### CONFIG ####################################
 

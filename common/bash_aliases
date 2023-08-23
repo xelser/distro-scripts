@@ -2,14 +2,14 @@
 # package managers
 if   [ -f /usr/bin/nala ]; then
 	alias update="sudo nala upgrade --assume-yes"
-	alias install="sudo nala install $1"
+	alias install="sudo nala install --no-install-recommends $1"
 	alias uninstall="sudo nala purge $1"
 	alias clean="sudo nala autoremove --purge --assume-yes && sudo nala clean"
 	alias search="sudo nala search $1"
 	alias list="sudo nala list --installed $1"
 elif [ -f /usr/bin/apt ]; then
 	alias update="sudo apt update && sudo apt upgrade --yes"
-	alias install="sudo apt install --yes $1"
+	alias install="sudo apt install --yes --no-install-recommends $1"
 	alias uninstall="sudo apt autoremove --purge $1"
 	alias clean="sudo apt autoremove --purge --yes && sudo apt autoclean"
 	alias search="sudo apt search $1"
