@@ -9,7 +9,7 @@ sed -i 's/non-free non-free/non-free/g' /etc/apt/sources.list
 # PACKAGE MANAGER: Nala
 apt update && apt install nala --yes
 
-# INSTALL: Debian Base 
+# INSTALL: Debian XFCE 
 nala install --assume-yes --no-install-recommends build-essential curl firefox-esr \
 	plymouth qt5ct qt5-style-kvantum lxappearance ukui-wallpapers fonts-ubuntu{,-console} \
 	lightdm-gtk-greeter-settings mugshot dconf-{editor,cli} numlockx 
@@ -17,9 +17,6 @@ nala install --assume-yes --no-install-recommends build-essential curl firefox-e
 # INSTALL: Debian i3
 nala install --assume-yes --no-install-recommends brightnessctl i3-wm picom polybar nitrogen \
 	alacritty ranger imv mpv gammastep rofi dunst libnotify4 neovim xclip wl-clipboard 
-
-# INSTALL: NixPkg
-echo -e "n\n" | sh <(curl -L https://nixos.org/nix/install) --daemon
 
 #################################### CONFIG ####################################
 
