@@ -3,17 +3,12 @@
 ##################################### POST #####################################
 
 # nixpkgs (3rd Party Packages)
-nix-env -iA nixpkgs.{wallutils,xidlehook,betterlockscreen}
-
-# git
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/distro_scripts.sh)"
-
-# flameshot directory
-mkdir -p $HOME/Pictures/Screenshots
+sudo nix-env -iA nixpkgs.{wallutils,xidlehook,betterlockscreen}
 
 #################################### THEMES ####################################
 
 # gtk, icons and more
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/theme-matcha.sh)"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-catppuccin.sh)"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/fonts-nerd.sh UbuntuMono)"
 

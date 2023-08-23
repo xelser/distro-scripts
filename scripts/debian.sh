@@ -9,13 +9,17 @@ sed -i 's/non-free non-free/non-free/g' /etc/apt/sources.list
 # PACKAGE MANAGER: Nala
 apt update && apt install nala --yes
 
-# INSTALL: Debian 
-nala install --assume-yes --no-install-recommends build-essential sddm plymouth qt5ct qt5-style-kvantum ukui-wallpapers fonts-ubuntu{,-console} \
-  pipewire-{alsa,audio,jack,pulse} easyeffects wireplumber lsp-plugins-lv2 brightnessctl mugshot network-manager gvfs dconf-{editor,cli} curl \
-  firefox-esr alacritty ranger imv mpv gammastep rofi flameshot xdg-desktop-portal-wlr grim neovim xclip wl-clipboard dunst libnotify4 \
-  xarchiver pcmanfm i3 picom polybar lxappearance numlockx nitrogen swaybg feh
+# INSTALL: Debian Base 
+nala install --assume-yes --no-install-recommends build-essential curl firefox-esr \
+	plymouth qt5ct qt5-style-kvantum lxappearance ukui-wallpapers fonts-ubuntu{,-console} \
+	lightdm-gtk-greeter-settings mugshot dconf-{editor,cli} numlockx 
 
-	# wallutils 
+# INSTALL: Debian i3
+nala install --assume-yes --no-install-recommends brightnessctl i3 picom polybar nitrogen \
+	alacritty ranger imv mpv gammastep rofi dunst libnotify4 neovim xclip wl-clipboard 
+
+# INSTALL: NixPkg
+echo -e "n\n" | sh <(curl -L https://nixos.org/nix/install) --daemon
 
 #################################### CONFIG ####################################
 
@@ -23,15 +27,8 @@ nala install --assume-yes --no-install-recommends build-essential sddm plymouth 
 usermod -aG sudo ${user}
 
 # grub 
-#sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
-#sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
-#sed -i 's/quiet/quiet splash/g' /etc/default/grub
-#sed -i 's/splash splash/splash/g' /etc/default/grub
-#append_file "GRUB_DISABLE_OS_PROBER=false" /etc/default/grub
-#update-grub
-
-# sddm
-echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
-echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
-systemctl enable sddm
+sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
+sed -i 's/quiet/quiet splash/g' /etc/default/grub
+sed -i 's/splash splash/splash/g' /etc/default/grub
+update-grub
 
