@@ -43,7 +43,7 @@ for icon_theme in "${papirus_folders[@]}"; do ./papirus-folders -u -C ${color_fo
 
 # cursors
 cd /tmp/ && git clone https://github.com/catppuccin/cursors.git
-cd cursors/cursors/ ; cat_cursors=($(ls | grep /tmp/cursors/cursors/ ))
+cd cursors/cursors/ ; cat_cursors=($(ls | grep /tmp/cursors/cursors/))
 for cursor_theme in "${cat_cursors[@]}"; do sudo unzip -qqo ${cursor_theme} -d /usr/share/icons/; done
 
 # gtksourceview
