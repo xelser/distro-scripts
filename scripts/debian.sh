@@ -10,7 +10,7 @@ sed -i 's/non-free non-free/non-free/g' /etc/apt/sources.list
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base (x11) 
-nala install --assume-yes --no-install-recommend xorg build-essential curl \
+nala install --assume-yes --no-install-recommends xorg build-essential curl \
   lightdm-gtk-greeter-settings light-locker mugshot numlockx pulseeffects \
   plymouth qt5ct qt5-style-kvantum lxappearance fonts-ubuntu{,-console} \
   dconf-{editor,cli} {redshift,transmission}-gtk firefox-esr geany
