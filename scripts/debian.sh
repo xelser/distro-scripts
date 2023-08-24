@@ -31,5 +31,4 @@ autologin-user=xelser
 autologin-user-timeout=0
 greeter-hide-users=false
 " >> /etc/lightdm/lightdm.conf
-systemctl enable lightdm
 
