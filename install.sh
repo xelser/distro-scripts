@@ -15,15 +15,18 @@ fi
 
 ## Directories ##
 [ -f ./install.sh ] && export source_dir="$(pwd)" || export source_dir="$(pwd)/distro-scripts"
+export dotfiles_dir="${source_dir}/dotfiles/${distro_id}"
+
+## For Arch Linux ##
+if [[ ${distro_id} == "arch" ]]; then
+	${source_dir}/archiso.sh
+	root_mnt="/mnt"
+else
+	root_mnt=""
+fi
 
 ## Start Installation ##
-if [[ ${distro_id} == "arch" ]]; then
-	export dotfiles_dir="/distro-scripts/dotfiles/arch"
-	${source_dir}/scripts/arch.sh
-else
-	export dotfiles_dir="${source_dir}/dotfiles/${distro_id}"
-	${source_dir}/start.sh
-fi
+${source_dir}/start.sh
 
 ## Reboot ##
 echo "#################################### FINISHED ####################################"
@@ -31,6 +34,8 @@ echo && read -p "Reboot? (Y/n): " end
 case $end in
    n)	echo "Reboot Cancelled";;
    *)	echo "Rebooting... "
+	[[ ${distro_id} == "arch" ]] && umount -R /mnt >&/dev/null ; swapoff -a
+	#rm -rf /mnt/distro-scripts
 	rm -rf $HOME/distro-scripts
 	sudo reboot;;
 esac

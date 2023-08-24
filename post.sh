@@ -6,6 +6,21 @@ check_flag () {
 	[ ! -f /.flag ] && sudo cp -rf $1 $1.bak || sudo cp -rf $1.bak $1
 }
 
+# Essential Packages
+if [ -f /usr/bin/nala ]; then sudo nala install --assume-yes \
+	neofetch nano htop zip un{zip,rar} ffmpeg ffmpegthumbnailer tumbler sassc \
+  	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf ntfs-3g wget curl git openssh-client \
+  	intel-media-va-driver i965-va-driver
+elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
+	neofetch nano htop zip un{zip,rar} ffmpeg ffmpegthumbnailer tumbler sassc \
+  	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines ntfs-3g wget curl git openssh \
+  	libva-intel-driver intel-media-driver
+elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes --skip-broken --allowerasing \
+	neofetch nano htop zip un{zip,rar} ffmpeg ffmpegthumbnailer tumbler sassc \
+  	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines ntfs-3g wget curl git openssh \
+  	libva-intel-driver intel-media-driver
+fi
+
 # Set to performance
 [ -f /usr/bin/powerprofilesctl ] && powerprofilesctl set performance
 
@@ -32,12 +47,6 @@ if [[ ${USER} == "xelser" ]]; then
 	[ ! -d $HOME/Pictures/"xelser's Pictures" ]   && ln -sf /media/Media/Pictures  $HOME/Pictures/"xelser's Pictures"
 	[ ! -d $HOME/Videos/"xelser's Videos" ]       && ln -sf /media/Media/Videos    $HOME/Videos/"xelser's Videos"
 fi
-
-# Modules
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/essential_pkgs.sh)"
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/flatpak.sh)"
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/refind.sh)"
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/vaapi.sh)"
 
 # Distro Post Install Script
 [ -f $HOME/.config/${distro_id}-post.sh ] && bash $HOME/.config/${distro_id}-post.sh
