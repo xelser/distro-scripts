@@ -1,9 +1,0 @@
-export machine="$(sudo dmidecode -s system-product-name | cut -d' ' -f2)"
-export machine_type="$(sudo dmidecode -s chassis-type | tr '[:upper:]' '[:lower:]')"
-export distro_id="$(grep '^ID=' /etc/os-release | cut -d'=' -f2)"
-
-if [ -z ${XDG_CURRENT_DESKTOP} ]; then
-	export wm_de="$(echo $DESKTOP_SESSION | cut -d'-' -f2 | tr '[:upper:]' '[:lower:]')"
-else
-	export wm_de="$(echo $XDG_CURRENT_DESKTOP | cut -d'-' -f2 | tr '[:upper:]' '[:lower:]')"
-fi

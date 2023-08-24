@@ -146,25 +146,12 @@ echo "arch" > /etc/hostname
 # Packages
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf
-pacman -Syy --needed --noconfirm linux linux-firmware base-devel grub os-prober efibootmgr dosfstools {intel,amd}-ucode dmidecode \
-  git inetutils reflector xdg-user-dirs brightnessctl networkmanager nm-connection-editor gvfs-{afc,goa,google,gphoto2,mtp,nfs,smb} \
-  sddm firefox alacritty ranger imv mpv gammastep rofi wallutils swaybg feh dunst libnotify neovim{,-plugins} xclip wl-clipboard \
-  pipewire-{alsa,audio,jack,pulse,zeroconf} easyeffects wireplumber lsp-plugins-lv2 ecasound flameshot xdg-desktop-portal-wlr grim \
-  grub-customizer plymouth qt5ct kvantum lxappearance-gtk3 ttf-fira{-sans,-mono,code-nerd} picom i3-wm polybar sway waybar \
-  obs-studio warpinator qbittorrent atril xarchiver pcmanfm
+pacman -Syy --needed --noconfirm linux linux-firmware base-devel grub os-prober efibootmgr dosfstools \
+  {intel,amd}-ucode dmidecode git inetutils reflector networkmanager
   
 # networkmanager
 systemctl enable NetworkManager.service
 
-# sddm
-echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
-echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
-systemctl enable sddm
-
-# plymouth
-sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
-sed -i 's/plymouth plymouth/plymouth/g' /etc/mkinitcpio.conf
-	
 # grub
 sed -i 's/quiet/quiet splash/g' /etc/default/grub
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/g' /etc/default/grub
@@ -176,36 +163,6 @@ grub-install --target=${grub_target}
 # users
 useradd -mG wheel,video ${user}
 echo -e "root:${psswrd}\n${user}:${psswrd}" | chpasswd
-echo -e "${user} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${user}
-
-# environment
-cat /distro-scripts/common/env-var >> /etc/profile
-
-# dotfiles
-[ -d ${dotfiles_dir}/.config/ ]       && cp -rf ${dotfiles_dir}/.config/       /home/${user}/
-[ -d ${dotfiles_dir}/.local/ ] 	      && cp -rf ${dotfiles_dir}/.local/        /home/${user}/
-[ -d ${dotfiles_dir}/.var/ ] 	      && cp -rf ${dotfiles_dir}/.var/          /home/${user}/
-[ -f ${dotfiles_dir}/.gtk-bookmarks ] && cp -rf ${dotfiles_dir}/.gtk-bookmarks /home/${user}/
-[ -f ${dotfiles_dir}/.gtkrc-2.0 ]     && cp -rf ${dotfiles_dir}/.gtkrc-2.0     /home/${user}/
-
-# bashrc
-cp -rf /etc/skel/.bashrc /home/${user}/.bashrc
-cat /distro-scripts/bashrc/arch_bashrc >> /home/${user}/.bashrc
-
-# bash profile and aliases
-cp -rf /distro-scripts/common/bash_profile /home/${user}/.bash_profile
-cp -rf /distro-scripts/common/bash_aliases /home/${user}/.bash_aliases
-echo -e "\n# Aliases\n. ~/.bash_profile" >> /home/${user}/.bashrc
-echo -e "\n# Aliases\n. ~/.bash_aliases" >> /home/${user}/.bashrc
-
-# post installer
-mkdir -p /home/${user}/.config/
-cp -rf /distro-scripts/post.sh /home/${user}/.config/
-cp -rf /distro-scripts/scripts/arch-post.sh /home/${user}/.config/
-
-# permission
-chown -R ${user} /home/${user} 1> /dev/null
-[[ ${machine} == "G41T-R3" ]] || [[ ${machine} == "E5-476G" ]] && chown -R ${user} /media/Media 1> /dev/null
 EOF
 }
 
