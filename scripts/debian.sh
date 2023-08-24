@@ -10,7 +10,7 @@ sed -i 's/non-free non-free/non-free/g' /etc/apt/sources.list
 apt update && apt install nala --yes
 
 # INSTALL: Debian XFCE 
-nala install --assume-yes build-essential curl qt5ct qt5-style-kvantum fonts-ubuntu{,-console} \
+nala install --assume-yes build-essential qt5ct qt5-style-kvantum fonts-ubuntu{,-console} \
   lightdm-gtk-greeter-settings blueman mugshot numlockx pulseeffects gvfs-{fuse,backends} \
   dconf-{editor,cli} {redshift,transmission}-gtk geany
 
