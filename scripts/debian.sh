@@ -9,10 +9,17 @@ sed -i 's/non-free non-free/non-free/g' /etc/apt/sources.list
 # PACKAGE MANAGER: Nala
 apt update && apt install nala --yes
 
-# INSTALL: Debian XFCE 
-nala install --assume-yes build-essential qt5ct qt5-style-kvantum fonts-ubuntu{,-console} \
-  lightdm-gtk-greeter-settings blueman mugshot numlockx pulseeffects gvfs-{fuse,backends} \
-  dconf-{editor,cli} {redshift,transmission}-gtk geany
+# INSTALL: Debian Base
+nala install --assume-yes lightdm xorg numlockx build-essential \
+	qt5ct qt5-style-kvantum blueman mugshot pulseeffects \
+	dconf-{editor,cli} {redshift,transmission}-gtk geany
+
+# INSTALL: Debian i3
+nala install --assume-yes --no-install-recommends lightdm-gtk-greeter-settings \
+	i3-wm picom polybar alacritty neovim imv mpv rofi dunst
+
+# INSTALL: nix-env
+echo -e "n\n" | sh <(curl -L https://nixos.org/nix/install) --daemon
 
 #################################### CONFIG ####################################
 
@@ -30,5 +37,6 @@ echo -e "[Seat:*]
 autologin-user=xelser
 autologin-user-timeout=0
 greeter-hide-users=false
-" >> /etc/lightdm/lightdm.conf
+user-session=i3" >> /etc/lightdm/lightdm.conf
+systemctl enable lightdm
 
