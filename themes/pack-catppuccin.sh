@@ -1,12 +1,15 @@
 #!/bin/bash
 
 # dependencies
-if [ -f /usr/bin/pacman ]; then
-	sudo pacman -S --needed --noconfirm python-{pip,virtualenv} papirus-icon-theme unzip wget xorg-xrdb
-elif [ -f /usr/bin/nala ]; then
-	sudo nala install --assume-yes python3-{pip,virtualenv} papirus-icon-theme unzip wget x11-xserver-utils
-elif [ -f /usr/bin/dnf ]; then
-	sudo dnf install --assumeyes python3-{pip,virtualenv} papirus-icon-theme unzip wget xrdb
+if [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
+	python-{pip,virtualenv} papirus-icon-theme unzip wget xorg-xrdb \
+	qt5-graphicaleffects qt5-svg qt5-quickcontrols2
+elif [ -f /usr/bin/nala ]; then	sudo nala install --assume-yes --no-install-recommends \
+	python3-{pip,virtualenv} papirus-icon-theme unzip wget x11-xserver-utils \
+	qml‑module‑qtquick‑layouts qml‑module‑qtgraphicaleffects qml‑module‑qtquick‑controls2 libqt5svg5
+elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes \
+	python3-{pip,virtualenv} papirus-icon-theme unzip wget xrdb \
+	qt5‑qtgraphicaleffects qt5‑qtquickcontrols2 qt5‑qtsvg
 fi
 
 if [ -f /etc/default/grub ]; then
@@ -90,10 +93,10 @@ if [ -f /usr/bin/waybar ]; then
 	cp -rf /tmp/waybar/themes/*.css $HOME/.config/waybar/
 fi
 
-#if [ -f /usr/bin/dunst ]; then
-	#cd /tmp/ && git clone https://github.com/catppuccin/dunst && mkdir -p $HOME/.config/dunst
-	#cat /etc/dunst/dunstrc > $HOME/.config/dunst/dunstrc ; cat /tmp/dunst/src/mocha.conf >> $HOME/.config/dunst/dunstrc
-#fi
+if [ -f /usr/bin/dunst ]; then
+	cd /tmp/ && git clone https://github.com/catppuccin/dunst && mkdir -p $HOME/.config/dunst
+	cat /etc/dunst/dunstrc > $HOME/.config/dunst/dunstrc ; cat /tmp/dunst/src/mocha.conf >> $HOME/.config/dunst/dunstrc
+fi
 
 #if [ -f /usr/bin/rofi ]; then
 #	cd /tmp/ && git clone https://github.com/catppuccin/rofi && mkdir -p $HOME/.config/rofi
