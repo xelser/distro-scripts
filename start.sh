@@ -43,6 +43,7 @@ echo -e "\n# Profile\n. ~/.bash_profile" >> ${root_mnt}/home/${user}/.bashrc
 echo -e "\n# Aliases\n. ~/.bash_aliases" >> ${root_mnt}/home/${user}/.bashrc
 
 ## Post Install Script ##
+mkdir -p ${root_mnt}/home/${user}/.config
 cp -rf ${source_dir}/post.sh ${root_mnt}/home/${user}/.config/post.sh
 if [ -f ${source_dir}/scripts/${distro_id}-post.sh ]; then
 	cp -rf ${source_dir}/scripts/${distro_id}-post.sh ${root_mnt}/home/${user}/.config/${distro_id}-post.sh

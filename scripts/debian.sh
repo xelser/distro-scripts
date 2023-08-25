@@ -10,13 +10,13 @@ sed -i 's/non-free non-free/non-free/g' /etc/apt/sources.list
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base
-nala install --assume-yes lightdm xorg numlockx build-essential \
+nala install --assume-yes lightdm xorg numlockx build-essential curl \
 	qt5ct qt5-style-kvantum blueman mugshot pulseeffects \
 	dconf-{editor,cli} {redshift,transmission}-gtk geany
 
 # INSTALL: Debian i3
 nala install --assume-yes --no-install-recommends lightdm-gtk-greeter-settings \
-	i3-wm picom polybar alacritty neovim imv mpv rofi dunst
+	i3-wm picom brightnessctl polybar alacritty neovim xclip imv mpv rofi dunst
 
 # INSTALL: nix-env
 echo -e "n\n" | sh <(curl -L https://nixos.org/nix/install) --daemon
