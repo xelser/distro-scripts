@@ -17,9 +17,6 @@ yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload
 
 ##################################### POST #####################################
 
-# git
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/distro_scripts.sh)"
-
 # flameshot directory
 mkdir -p $HOME/Pictures/Screenshots
 
@@ -43,6 +40,12 @@ fi
 # catppuccin
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-catppuccin.sh)"
 
+# dunst
+sed -i 's/origin = top-right/origin = bottom-right/' $HOME/.config/dunst/dunstrc
+sed -i 's/offset = 10x50/offset = 20x20/' $HOME/.config/dunst/dunstrc
+sed -i 's/font = Monospace 8/font = FiraCode Nerd Font 10/' $HOME/.config/dunst/dunstrc
+sed -i 's/icon_theme = Adwaita/icon_theme = Papirus-Dark/' $HOME/.config/dunst/dunstrc
+
 # rofi (launcher and powermenu)
 cd /tmp/ && git clone --depth=1 https://github.com/adi1090x/rofi.git && cd rofi && chmod +x setup.sh && ./setup.sh && cd
 
@@ -53,7 +56,6 @@ sed -i 's/Iosevka/FiraCode/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.r
 sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
 sed -i 's/onedark/catppuccin/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
 sed -i 's/JetBrains Mono/FiraCode/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
-
 
 # betterlockscreen
 [ -f /usr/bin/betterlockscreen ] && betterlockscreen --update "/usr/share/backgrounds/catppuccin" --fx dim 50
