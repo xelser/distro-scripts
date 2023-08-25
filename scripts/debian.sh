@@ -10,7 +10,7 @@ sed -i 's/non-free non-free/non-free/g' /etc/apt/sources.list
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base
-nala install --assume-yes lightdm xorg numlockx build-essential curl \
+nala install --assume-yes lightdm numlockx build-essential curl \
 	qt5ct qt5-style-kvantum blueman mugshot pulseeffects \
 	dconf-{editor,cli} {redshift,transmission}-gtk geany
 
