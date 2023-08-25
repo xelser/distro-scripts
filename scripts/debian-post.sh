@@ -2,7 +2,7 @@
 
 ################################### PACKAGES ###################################
 
-nix-env -iA nixpkgs.{autotiling,betterlockscreen,xidlehook}
+#nix-env -iA nixpkgs.{autotiling,betterlockscreen,xidlehook}
 
 #################################### THEMES ####################################
 
@@ -22,5 +22,5 @@ sed -i 's/onedark/gruvbox/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.r
 sed -i 's/JetBrains Mono/UbuntuMono/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
 
 # betterlockscreen
-betterlockscreen --update "/usr/share/backgrounds/gruvbox" --fx dim 50
+#betterlockscreen --update "/usr/share/backgrounds/gruvbox" --fx dim 50
 
