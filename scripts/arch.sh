@@ -11,7 +11,7 @@ pacman -S --needed --noconfirm xdg-user-dirs brightnessctl nm-connection-editor 
   obs-studio warpinator qbittorrent atril xarchiver pcmanfm
  
 # sddm
-echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
+echo -e "\n[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
 echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
 systemctl enable sddm
 
