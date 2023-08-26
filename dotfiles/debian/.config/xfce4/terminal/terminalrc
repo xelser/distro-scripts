@@ -34,4 +34,5 @@ BackgroundDarkness=0.950000
 ColorForeground=#000000
 ColorBackground=#ffffff
 ColorUseTheme=TRUE
+FontUseSystem=TRUE
 

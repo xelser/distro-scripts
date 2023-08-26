@@ -65,5 +65,4 @@ if [ ! -f /.flag ]; then
 	${source_dir}/themes/pack-libadwaita.sh
 	${source_dir}/themes/icon-tela-circle.sh
    	${source_dir}/themes/cursor-bibata.sh
-   	${source_dir}/themes/fonts-nerd.sh RobotoMono
 fi

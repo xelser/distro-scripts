@@ -56,10 +56,9 @@ if [[ ${wm_de} == "gnome" ]] || [[ ${wm_de} == "cinnamon" ]] || [[ ${wm_de} == "
 	bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/${wm_de}_settings.sh)"
 fi
 
-# X11 Fonts
-if [[ ${XDG_SESSION_TYPE} == "x11" ]]; then
-	bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/x11_fonts.sh)"
-fi
+# Fonts
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/nerd_fonts.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/x11_fonts.sh)"
 
 # Audio
 if [ -f /etc/pulse/daemon.conf ]; then

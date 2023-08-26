@@ -1,23 +1,24 @@
 #!/bin/bash
 
+# Backgrounds
+cd /tmp/ && git clone https://github.com/xelser/gruvbox-backgrounds
+sudo cp -rf gruvbox-backgrounds/backgrounds /usr/share/
+
+# Cursors
+#cd /tmp/ && wget -cO- https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2 | sudo tar xfj - -C /usr/share/icons
+
 # GTK
 cd /tmp/ && git clone https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme.git
 sudo cp -rf Gruvbox-GTK-Theme/themes /usr/share/
-
-# Plank
-sudo cp -rf Gruvbox-GTK-Theme/extra/plank/* /usr/share/plank/themes/
 
 # GtkSourceView
 sudo mkdir -p /usr/share/gtksourceview-{3.0,4}/styles/
 sudo cp -rf Gruvbox-GTK-Theme/extra/text-editor/* /usr/share/gtksourceview-3.0/styles/
 sudo ln -sf /usr/share/gtksourceview-3.0/styles/gruvbox-*.xml /usr/share/gtksourceview-4/styles/
 
-# Cursors
-#cd /tmp/ && wget -cO- https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2 | sudo tar xfj - -C /usr/share/icons
-
-# Backgrounds
-cd /tmp/ && git clone https://github.com/xelser/gruvbox-backgrounds
-sudo cp -rf gruvbox-backgrounds/backgrounds /usr/share/
+if [ -f /usr/bin/plank ]; then
+	sudo cp -rf Gruvbox-GTK-Theme/extra/plank/* /usr/share/plank/themes/
+fi
 
 if [ -f /usr/bin/openbox ]; then
 	cd /tmp/ && git clone https://github.com/nathanielevan/gruvbox-material-openbox
