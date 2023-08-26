@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Type=Application
+Name=Autostart Script
+Icon=terminal
+Comment=Startup scripts to launch command upon startup
+Exec=/home/xelser/.config/autostart/autostart-script.sh
+OnlyShowIn=XFCE;
+RunHook=0
+StartupNotify=true
+Terminal=false
+Hidden=false
