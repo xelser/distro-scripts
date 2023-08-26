@@ -9,7 +9,7 @@ fi
 
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-  xfce-polkit mugshot {stylepak,zscroll,polybar-scripts}-git neovim-{plug,symlinks} xidlehook betterlockscreen autotiling
+  mugshot {stylepak,zscroll,polybar-scripts}-git neovim-{plug,symlinks} xfce-polkit autotiling betterlockscreen xidlehook 
   # {chatterino2-dankerino,ventoy}-bin ulauncher
 
 # INSTALL: Flatpak 
@@ -45,11 +45,11 @@ cd /tmp/ && git clone --depth=1 https://github.com/adi1090x/rofi.git && cd rofi 
 
 sed -i 's/style-1/style-4/g' $HOME/.config/rofi/launchers/type-4/launcher.sh
 sed -i 's/onedark/catppuccin/g' $HOME/.config/rofi/launchers/type-4/shared/colors.rasi
-sed -i 's/Iosevka/FiraCode/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.rasi
+sed -i 's/Iosevka/Fira Code/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.rasi
 
 sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
 sed -i 's/onedark/catppuccin/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
-sed -i 's/JetBrains Mono/FiraCode/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
+sed -i 's/JetBrains Mono/Fira Code/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
 
 # betterlockscreen
 [ -f /usr/bin/betterlockscreen ] && betterlockscreen --update "/usr/share/backgrounds/catppuccin" --fx dim 50

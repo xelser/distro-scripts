@@ -10,7 +10,7 @@ sed -i 's/non-free non-free/non-free/g' /etc/apt/sources.list
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base
-nala install --assume-yes build-essential curl firefox-esr \
+nala install --assume-yes lightdm build-essential curl firefox-esr \
   qt5ct qt5-style-kvantum blueman mugshot pulseeffects numlockx \
   dconf-{editor,cli} {redshift,transmission}-gtk geany
 
@@ -32,9 +32,9 @@ sed -i 's/splash splash/splash/g' /etc/default/grub
 update-grub
 
 # lightdm
-echo -e "[Seat:*]
+echo -e "\n[Seat:*]
 autologin-user=xelser
 autologin-user-timeout=0
 greeter-hide-users=false
-#user-session=i3" >> /etc/lightdm/lightdm.conf
-
+user-session=xfce" >> /etc/lightdm/lightdm.conf
+systemctl enable lightdm
