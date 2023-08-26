@@ -10,14 +10,12 @@ sed -i 's/non-free non-free/non-free/g' /etc/apt/sources.list
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base
-nala install --assume-yes lightdm build-essential curl \
+nala install --assume-yes build-essential curl firefox-esr \
   qt5ct qt5-style-kvantum blueman mugshot pulseeffects numlockx \
   dconf-{editor,cli} {redshift,transmission}-gtk geany
 
-# INSTALL: Debian i3
-nala install --assume-yes --no-install-recommends lightdm-gtk-greeter-settings \
-  i3-wm picom brightnessctl polybar alacritty neovim xclip imv mpv rofi dunst \
-  nitrogen lxappearance
+# INSTALL: Debian XFCE
+nala install --assume-yes --no-install-recommends lightdm-gtk-greeter-settings
 
 # INSTALL: nix-env
 #echo -e "n\n" | sh <(curl -L https://nixos.org/nix/install) --daemon
@@ -38,6 +36,5 @@ echo -e "[Seat:*]
 autologin-user=xelser
 autologin-user-timeout=0
 greeter-hide-users=false
-user-session=i3" >> /etc/lightdm/lightdm.conf
-systemctl enable lightdm
+#user-session=i3" >> /etc/lightdm/lightdm.conf
 
