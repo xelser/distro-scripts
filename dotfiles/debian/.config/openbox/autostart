@@ -1,0 +1,7 @@
+sh /home/xelser/.config/autostart/autostart-script.sh &
+pulseeffects --gapplication-service &
+picom --backend xrender --vsync --experimental-backends &
+
+pcmanfm -d &
+xfsettingsd &
+/usr/lib/xfce4/notifyd/xfce4-notifyd &
