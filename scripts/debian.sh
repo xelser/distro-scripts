@@ -38,3 +38,12 @@ autologin-user-timeout=0
 greeter-hide-users=false
 user-session=xfce" >> /etc/lightdm/lightdm.conf
 systemctl enable lightdm
+
+# lightdm-gtk-greeter
+echo -e "\n[greeter]
+theme-name = Gruvbox-Dark-BL-LB
+icon-theme-name = Papirus-Dark
+font-name = Noto Sans 10
+clock-format = %a, %I:%M %p
+indicators = ~host;~spacer;~clock;~spacer;~session;~power
+" >> /etc/lightdm/lightdm-gtk-greeter.conf

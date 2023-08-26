@@ -1,5 +1,5 @@
 [Added Associations]
-application/x-shellscript=geany.desktop;org.xfce.mousepad.desktop;
+application/x-shellscript=org.xfce.mousepad.desktop;geany.desktop;
 text/plain=org.xfce.mousepad.desktop;
 application/x-desktop=org.xfce.mousepad.desktop;
 image/jpeg=org.xfce.ristretto.desktop;
