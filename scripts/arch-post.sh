@@ -40,12 +40,6 @@ fi
 # catppuccin
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-catppuccin.sh)"
 
-# dunst
-sed -i 's/origin = top-right/origin = bottom-right/' $HOME/.config/dunst/dunstrc
-sed -i 's/offset = 10x50/offset = 20x20/' $HOME/.config/dunst/dunstrc
-sed -i 's/font = Monospace 8/font = FiraCode Nerd Font 10/' $HOME/.config/dunst/dunstrc
-sed -i 's/icon_theme = Adwaita/icon_theme = Papirus-Dark/' $HOME/.config/dunst/dunstrc
-
 # rofi (launcher and powermenu)
 cd /tmp/ && git clone --depth=1 https://github.com/adi1090x/rofi.git && cd rofi && chmod +x setup.sh && ./setup.sh && cd
 

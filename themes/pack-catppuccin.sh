@@ -41,7 +41,7 @@ sudo python install.py mocha -a all -s compact --tweaks rimless normal -d /usr/s
 # papirus folders
 cd /tmp/ && git clone https://github.com/catppuccin/papirus-folders
 cd papirus-folders && sudo cp -rf src/* /usr/share/icons/Papirus
-color_folder="cat-mocha-mauve"; papirus_folders=(Papirus Papirus-Dark Papirus-Light ePapirus ePapirus-Dark)
+color_folder="cat-mocha-peach"; papirus_folders=(Papirus Papirus-Dark Papirus-Light ePapirus ePapirus-Dark)
 for icon_theme in "${papirus_folders[@]}"; do ./papirus-folders -u -C ${color_folder} -t ${icon_theme}; done
 
 # cursors
@@ -96,6 +96,10 @@ fi
 if [ -f /usr/bin/dunst ]; then
 	cd /tmp/ && git clone https://github.com/catppuccin/dunst && mkdir -p $HOME/.config/dunst
 	cat /etc/dunst/dunstrc > $HOME/.config/dunst/dunstrc ; cat /tmp/dunst/src/mocha.conf >> $HOME/.config/dunst/dunstrc
+	sed -i 's/origin = top-right/origin = bottom-right/g' $HOME/.config/dunst/dunstrc
+	sed -i 's/offset = 10x50/offset = 20x20/g' $HOME/.config/dunst/dunstrc
+	sed -i 's/font = Monospace 8/font = FiraCode Nerd Font 10/g' $HOME/.config/dunst/dunstrc
+	sed -i 's/icon_theme = Adwaita/icon_theme = Papirus-Dark/g' $HOME/.config/dunst/dunstrc
 fi
 
 #if [ -f /usr/bin/rofi ]; then
