@@ -77,11 +77,3 @@ alias gitupdate="cd $HOME/Documents/distro-scripts && gitpull ; bashup ; dotup ;
 # others
 alias post="bash $HOME/.config/post.sh"
 alias clear="clear && history -c"
-
-if [ -f $HOME/.local/bin/gext ] && [ -d $HOME/Documents/distro-scripts ]; then
-	alias upall="update ; flatupdate ; gextup ; gitupdate"
-elif [ -d $HOME/Documents/distro-scripts ]; then
-	alias upall="update ; flatupdate ; gitupdate"
-else
-	alias upall="update ; flatupdate"
-fi
