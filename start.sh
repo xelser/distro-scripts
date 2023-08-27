@@ -46,12 +46,14 @@ echo -e "\n# Aliases\n. ~/.bash_aliases" >> ${root_mnt}/home/${user}/.bashrc
 mkdir -p ${root_mnt}/home/${user}/.config
 cp -rf ${source_dir}/post.sh ${root_mnt}/home/${user}/.config/post.sh
 if [ -f ${source_dir}/scripts/${distro_id}-post.sh ]; then
-	cp -rf ${source_dir}/scripts/${distro_id}-post.sh ${root_mnt}/home/${user}/.config/${distro_id}-post.sh
+	cp -rf ${source_dir}/scripts/${distro_id}-post.sh \
+	${root_mnt}/home/${user}/.config/${distro_id}-post.sh
 else
 	bash ${source_dir}/post.sh
 fi
 
 ## Set Permissions ##
+permissions_chown () {
 sudo chown -R ${user} ${root_mnt}/home/${user}
 if [[ ${user} == "xelser" ]]; then
 	sudo mkdir -p ${root_mnt}/media/Media
@@ -61,4 +63,5 @@ if [[ ${user} == "xelser" ]]; then
 		sudo chown -R ${user} ${root_mnt}/media/Games
 		sudo chown -R ${user} ${root_mnt}/media/Shared
 	fi
-fi
+fi}
+[[ ${distro_dir} == "arch" ]] && arch-chroot /mnt /bin/bash <(permissions_chown) || permissions_chown

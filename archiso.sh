@@ -43,19 +43,18 @@ else
 	read -p "Root Partition (#): " root
 fi
 
+format_efi () {
+	echo && read -p "Format EFI Partition? (Y/n): " format_efi
+	case $format_efi in
+	   n)   ;;
+	 *|Y)   mkfs.fat -F 32 /dev/${device}${efi};;
+	esac
+	mkdir -p /mnt/boot/efi && mount /dev/${device}${efi} /mnt/boot/efi
+}
+
 partitioning () {
 umount -R /mnt >&/dev/null ; swapoff -a
-if   [[ ${machine} == "G41T-R3" ]]; then
-	mkfs.ext4 -F /dev/${device}${root} -L "Arch" && mount /dev/${device}${root} /mnt && swapon /dev/${device}${swap}
-        mkdir -p /mnt/media/Media && mount LABEL=Media /mnt/media/Media
-elif [[ ${machine} == "E5-476G" ]]; then
-        mkfs.ext4 -F /dev/${device}${root} -L "Arch" && mount /dev/${device}${root} /mnt && swapon /dev/${device}${swap}
-        #mkfs.fat -F 32 /dev/${device}${efi}
-        mkdir -p /mnt/boot/efi && mount /dev/${device}${efi} /mnt/boot/efi
-        mkdir -p /mnt/media/Media && mount LABEL=Media /mnt/media/Media
-        mkdir -p /mnt/media/Games && mount LABEL=Games /mnt/media/Games
-elif [[ ${machine} == "PC" ]]; then # GNOME BOXES
-
+if [[ ${machine} == "PC" ]]; then # GNOME BOXES
 	create_gpt () {
 	        sgdisk /dev/${device} -n 1::1GiB -t 1:ef00
         	sgdisk /dev/${device} -n 2::3GiB -t 1:8200
@@ -69,63 +68,27 @@ elif [[ ${machine} == "PC" ]]; then # GNOME BOXES
 	# Create Partitions
 	dmesg | grep -q "EFI v" && create_gpt || create_mbr
         
-	# Format Partitions
-	mkswap -f /dev/${device}${swap} -L "Swap" && swapon /dev/${device}${swap}
-        mkfs.ext4 -F /dev/${device}${root} -L "Arch" && mount /dev/${device}${root} /mnt
-
-	# EFI
-	func_efi_format_partition () {
-		echo && read -p "Format EFI Partition? (Y/n): " format_efi
-		case $format_efi in
-		   n)   ;;
-		 *|Y)   mkfs.fat -F 32 /dev/${device}${efi};;
-		esac
-
-		mkdir -p /mnt/boot/efi && mount /dev/${device}${efi} /mnt/boot/efi
-
-	}
-
-        dmesg | grep -q "EFI v" && func_efi_format_partition
-
+	# Format Swap
+	mkswap -f /dev/${device}${swap} -L "Swap"
 else
-	# EFI
-	func_efi_format_partition () {
-		echo && read -p "Format EFI Partition? (Y/n): " format_efi
-		case $format_efi in
-		   n)   ;;
-		 *|Y)   mkfs.fat -F 32 /dev/${device}${efi};;
-		esac
-
-		mkdir -p /mnt/boot/efi && mount /dev/${device}${efi} /mnt/boot/efi
-
-	}
-
-        dmesg | grep -q "EFI v" && func_efi_format_partition
-
-	# Swap
-	echo && read -p "Format Swap Partition? (Y/n): " format_swap
-	case $format_swap in
+	# Make/Format Swap
+	echo && read -p "Make Swap Partition? (Y/n): " make_swap
+	case $make_swap in
 	   n)   ;;
 	 *|Y)   mkswap -f /dev/${device}${swap} -L "Swap";;
 	esac
-
-	swapon /dev/${device}${swap}
-
-	# Root
-	mkfs.ext4 -F /dev/${device}${root} -L "Arch" && mount /dev/${device}${root} /mnt
-
 fi
+
+# Default: format root, mount swap, check efi (whether create or leave as is)
+mkfs.ext4 -F /dev/${device}${root} -L "Arch" && mount /dev/${device}${root} /mnt
+swapon /dev/${device}${swap} ; dmesg | grep -q "EFI v" && format_efi
 }
 
 ## INSTALL ##
 arch_install () { # Install Arch Linux
-pacman -Sy archlinux-keyring --needed --noconfirm && cp -rf ${source_dir} /mnt/
+pacman -Sy archlinux-keyring --needed --noconfirm
 pacstrap /mnt base && genfstab -U /mnt >> /mnt/etc/fstab
-
-## CHROOT ##
 arch-chroot /mnt /bin/bash << EOF
-
-## LOCALIZATION ##
 
 # Time
 ln -sf /usr/share/zoneinfo/Asia/Manila /etc/localtime
