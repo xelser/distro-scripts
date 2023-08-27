@@ -110,7 +110,7 @@ echo "arch" > /etc/hostname
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 pacman -Sy --needed --noconfirm linux linux-firmware base-devel grub os-prober efibootmgr dosfstools \
-  {intel,amd}-ucode dmidecode git inetutils reflector networkmanager
+  plymouth {intel,amd}-ucode dmidecode git inetutils reflector networkmanager
   
 # networkmanager
 systemctl enable NetworkManager.service
@@ -122,6 +122,10 @@ sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
 sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
 mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=${grub_target}
+
+# plymouth
+sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
+sed -i 's/plymouth plymouth/plymouth/g' /etc/mkinitcpio.conf
 
 # users
 useradd -mG wheel,video ${user}
