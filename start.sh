@@ -64,4 +64,4 @@ if [[ ${user} == "xelser" ]]; then
 		sudo chown -R ${user} ${root_mnt}/media/Shared
 	fi
 fi}
-[[ ${distro_dir} == "arch" ]] && arch-chroot /mnt /bin/bash <(permissions_chown) || permissions_chown
+[[ ${distro_dir} == "arch" ]] && arch-chroot /mnt bash -c "permissions_chown" || permissions_chown
