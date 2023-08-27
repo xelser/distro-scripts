@@ -26,7 +26,7 @@ else
 fi
 
 ## Start Installation ##
-${source_dir}/start.sh
+bash ${source_dir}/start.sh
 
 ## Reboot ##
 echo "#################################### FINISHED ####################################"
