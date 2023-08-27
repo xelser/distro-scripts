@@ -1,6 +1,6 @@
 [Added Associations]
 application/x-shellscript=org.xfce.mousepad.desktop;geany.desktop;
-text/plain=org.xfce.mousepad.desktop;
+text/plain=geany.desktop;org.xfce.mousepad.desktop;
 application/x-desktop=org.xfce.mousepad.desktop;
 image/jpeg=org.xfce.ristretto.desktop;
 x-scheme-handler/http=xfce4-web-browser.desktop;
