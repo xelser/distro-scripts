@@ -20,16 +20,6 @@ systemd-inhibit ${source_dir}/scripts/${distro_id}.sh
 
 ################################# POST INSTALL #################################
 
-## Fstab ##
-if [[ ${machine} == "E5-476G" ]] || [[ ${machine} == "G41T-R3" ]]; then
-	echo -e "\nLABEL=Media /media/Media ext4 defaults,user 0 0" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
-elif [[ ${machine} == "E5-476G" ]]; then
-	echo -e "\nLABEL=Media /media/Media ext4 defaults,user 0 0" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
-	echo -e "LABEL=Games /media/Games ext4 defaults,user 0 0" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
-	echo -e "LABEL=Shared /media/Shared ntfs-3g defaults,nls=utf8,umask=000,dmask=027,fmask=137,uid=1000,gid=1000,windows_names 0 0" \
-	| sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
-fi
-
 ## Environment Variables ##
 check_flag ${root_mnt}/etc/profile
 cat ${source_dir}/common/env-var | sudo tee -a ${root_mnt}/etc/profile 1> /dev/null
@@ -52,17 +42,9 @@ else
 	bash ${source_dir}/post.sh
 fi
 
-## Set Permissions ##
-permissions_chown () {
-sudo chown -R ${user} ${root_mnt}/home/${user}
-if [[ ${user} == "xelser" ]]; then
-	sudo mkdir -p ${root_mnt}/media/Media
-	sudo chown -R ${user} ${root_mnt}/media/Media
-	if [[ ${machine} == "E5-476G" ]]; then
-		sudo mkdir -p ${root_mnt}/media/{Games,Shared}
-		sudo chown -R ${user} ${root_mnt}/media/Games
-		sudo chown -R ${user} ${root_mnt}/media/Shared
-	fi
+## Permissions ## 
+if [[ ${distro_dir} == "arch" ]]; then
+        arch-chroot /mnt /bin/bash ${source_dir}/modules/fstab.sh
+else
+	bash ${source_dir}/modules/fstab.sh
 fi
-}
-[[ ${distro_dir} == "arch" ]] && arch-chroot /mnt /bin/bash -c "permissions_chown" || permissions_chown
