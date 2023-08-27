@@ -145,7 +145,7 @@ echo "arch" > /etc/hostname
 
 # Packages
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
-[multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf
+[multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 pacman -Sy --needed --noconfirm linux linux-firmware base-devel grub os-prober efibootmgr dosfstools \
   {intel,amd}-ucode dmidecode git inetutils reflector networkmanager
   
