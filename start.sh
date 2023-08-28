@@ -42,9 +42,3 @@ else
 	bash ${source_dir}/post.sh
 fi
 
-## Permissions ## 
-if [[ ${distro_dir} == "arch" ]]; then
-        arch-chroot /mnt /bin/bash ${source_dir}/modules/fstab.sh
-else
-	bash ${source_dir}/modules/fstab.sh
-fi
