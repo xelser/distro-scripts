@@ -20,9 +20,9 @@ export dotfiles_dir="${source_dir}/dotfiles/${distro_id}"
 ## For Arch Linux ##
 if [[ ${distro_id} == "arch" ]]; then
 	${source_dir}/archiso.sh
-	root_mnt="/mnt"
+	export root_mnt="/mnt"
 else
-	root_mnt=""
+	export root_mnt=""
 fi
 
 ## Start Installation ##
