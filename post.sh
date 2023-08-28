@@ -1,25 +1,10 @@
 #!/bin/bash
 
-################################# POST INSTALL #################################
-
 check_flag () {
 	[ ! -f /.flag ] && sudo cp -rf $1 $1.bak || sudo cp -rf $1.bak $1
 }
 
-# Essential Packages
-if [ -f /usr/bin/nala ]; then sudo nala install --assume-yes \
-	neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
-  	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf ntfs-3g wget curl git openssh-client \
-  	intel-media-va-driver i965-va-driver
-elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
-	neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
-  	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines ntfs-3g wget curl git openssh \
-  	libva-intel-driver intel-media-driver
-elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes --skip-broken --allowerasing \
-	neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
-  	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines ntfs-3g wget curl git openssh \
-  	libva-intel-driver intel-media-driver
-fi
+################################# PREPARATIONS #################################
 
 # Set to performance
 [ -f /usr/bin/powerprofilesctl ] && powerprofilesctl set performance
@@ -36,16 +21,50 @@ fi
 # Update Time (Enable Network Time)
 sudo timedatectl set-ntp true
 
+################################# POST INSTALL #################################
+
+# Permissions
+sudo chown -R $USER $HOME
+if [[ $USER == "xelser" ]] && [[ ! ${machine} == "PC" ]]; then
+	echo -e "\nLABEL=Media /media/Media ext4 defaults,user 0 0" | sudo tee -a /etc/fstab 1> /dev/null
+        sudo mkdir -p /media/Media && sudo chown -R $USER /media/Media
+fi
+
+if [[ ${machine} == "E5-476G" ]]; then
+	echo -e "LABEL=Games /media/Games ext4 defaults,user 0 0" | sudo tee -a /etc/fstab 1> /dev/null
+	echo -e "LABEL=Shared /media/Shared ntfs-3g defaults,nls=utf8,umask=000,dmask=027,fmask=137,uid=1000,gid=1000,windows_names 0 0" \
+	| sudo tee -a /etc/fstab 1> /dev/null
+
+        sudo mkdir -p /media/{Games,Shared}
+        sudo chown -R $USER /media/Games
+        sudo chown -R $USER /media/Shared
+fi
+
 # Update User Dirs
 [ -f /usr/bin/xdg-user-dirs-update ] && xdg-user-dirs-update
-
+ 
 # Create Symlinks
-if [[ ${USER} == "xelser" ]]; then
+if [[ $USER == "xelser" ]]; then
 	[ ! -d $HOME/Documents/"xelser's Documents" ] && ln -sf /media/Media/Documents $HOME/Documents/"xelser's Documents"
 	[ ! -d $HOME/Downloads/"xelser's Downloads" ] && ln -sf /media/Media/Downloads $HOME/Downloads/"xelser's Downloads"
 	[ ! -d $HOME/Music/"xelser's Music" ]         && ln -sf /media/Media/Music     $HOME/Music/"xelser's Music"
 	[ ! -d $HOME/Pictures/"xelser's Pictures" ]   && ln -sf /media/Media/Pictures  $HOME/Pictures/"xelser's Pictures"
 	[ ! -d $HOME/Videos/"xelser's Videos" ]       && ln -sf /media/Media/Videos    $HOME/Videos/"xelser's Videos"
+fi
+
+# Essential Packages
+if [ -f /usr/bin/nala ]; then sudo nala install --assume-yes \
+	neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
+  	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf ntfs-3g wget curl git openssh-client \
+  	intel-media-va-driver i965-va-driver
+elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
+	neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
+  	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines ntfs-3g wget curl git openssh \
+  	libva-intel-driver intel-media-driver
+elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes --skip-broken --allowerasing \
+	neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
+  	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines ntfs-3g wget curl git openssh \
+  	libva-intel-driver intel-media-driver
 fi
 
 # Distro Post Install Script
