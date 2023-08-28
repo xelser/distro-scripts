@@ -52,6 +52,14 @@ format_efi () {
 	mkdir -p /mnt/boot/efi && mount /dev/${device}${efi} /mnt/boot/efi
 }
 
+format_swap () {
+	echo && read -p "Make Swap Partition? (Y/n): " make_swap
+	case $make_swap in
+	   n)   ;;
+	 *|Y)   mkswap -f /dev/${device}${swap} -L "Swap";;
+	esac
+}
+
 partitioning () {
 umount -R /mnt >&/dev/null ; swapoff -a
 if [[ ${machine} == "PC" ]]; then # GNOME BOXES
@@ -70,13 +78,6 @@ if [[ ${machine} == "PC" ]]; then # GNOME BOXES
         
 	# Format Swap
 	mkswap -f /dev/${device}${swap} -L "Swap"
-else
-	# Make/Format Swap
-	echo && read -p "Make Swap Partition? (Y/n): " make_swap
-	case $make_swap in
-	   n)   ;;
-	 *|Y)   mkswap -f /dev/${device}${swap} -L "Swap";;
-	esac
 fi
 
 # Default: format root, mount swap, check efi (whether create or leave as is)
@@ -122,10 +123,6 @@ sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
 sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
 mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=${grub_target}
-
-# plymouth
-sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
-sed -i 's/plymouth plymouth/plymouth/g' /etc/mkinitcpio.conf
 
 # users
 useradd -mG wheel,video ${user}

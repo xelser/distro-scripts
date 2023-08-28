@@ -71,6 +71,28 @@ else
 	bash ${source_dir}/post.sh
 fi
 
+## Fstab ##
+if [[ ${user} == "xelser" ]] && [[ ! ${machine} == "PC" ]]; then sudo mkdir -p ${root_mnt}/media/Media
+	echo -e "\nLABEL=Media /media/Media ext4 defaults,user 0 0" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
+fi
+
+if [[ ${machine} == "E5-476G" ]]; then sudo mkdir -p ${root_mnt}/media/{Games,Shared}
+	echo -e "LABEL=Games /media/Games ext4 defaults,user 0 0" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
+	echo -e "LABEL=Shared /media/Shared ntfs-3g defaults,nls=utf8,umask=000,dmask=027,fmask=137,uid=1000,gid=1000,windows_names 0 0" \
+	| sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
+fi
+
+## Permissions ##
+grant_permissions=(/home/${user} /media/Media /media/Games /media/Shared)
+for directory in "${grant_permissions[@]}"; do if [ -d ${root_mnt}/${directory} ]; then
+	if [[ ${distro_id} == "arch" ]]; then
+		arch-chroot /mnt /bin/bash sudo chown -R ${user} ${root_mnt}/${directory}
+	else
+		sudo chown -R ${user} ${root_mnt}/${directory}
+	fi
+fi
+done
+
 ## Reboot ##
 echo "#################################### FINISHED ####################################"
 echo && read -p "Reboot? (Y/n): " end
@@ -78,7 +100,6 @@ case $end in
    n)	echo "Reboot Cancelled";;
    *)	echo "Rebooting... "
 	[[ ${distro_id} == "arch" ]] && umount -R /mnt >&/dev/null ; swapoff -a
-	#rm -rf /mnt/distro-scripts
-	rm -rf $HOME/distro-scripts
+	rm -rf $HOME/distro-scripts*
 	sudo reboot;;
 esac

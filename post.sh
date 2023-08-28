@@ -23,23 +23,6 @@ sudo timedatectl set-ntp true
 
 ################################# POST INSTALL #################################
 
-# Permissions
-sudo chown -R $USER $HOME
-if [[ $USER == "xelser" ]] && [[ ! ${machine} == "PC" ]]; then
-	echo -e "\nLABEL=Media /media/Media ext4 defaults,user 0 0" | sudo tee -a /etc/fstab 1> /dev/null
-        sudo mkdir -p /media/Media && sudo chown -R $USER /media/Media
-fi
-
-if [[ ${machine} == "E5-476G" ]]; then
-	echo -e "LABEL=Games /media/Games ext4 defaults,user 0 0" | sudo tee -a /etc/fstab 1> /dev/null
-	echo -e "LABEL=Shared /media/Shared ntfs-3g defaults,nls=utf8,umask=000,dmask=027,fmask=137,uid=1000,gid=1000,windows_names 0 0" \
-	| sudo tee -a /etc/fstab 1> /dev/null
-
-        sudo mkdir -p /media/{Games,Shared}
-        sudo chown -R $USER /media/Games
-        sudo chown -R $USER /media/Shared
-fi
-
 # Update User Dirs
 [ -f /usr/bin/xdg-user-dirs-update ] && xdg-user-dirs-update
  
