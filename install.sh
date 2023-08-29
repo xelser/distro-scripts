@@ -67,8 +67,6 @@ cp -rf ${source_dir}/post.sh ${root_mnt}/home/${user}/.config/post.sh
 if [ -f ${source_dir}/scripts/${distro_id}-post.sh ]; then
 	cp -rf ${source_dir}/scripts/${distro_id}-post.sh \
 	${root_mnt}/home/${user}/.config/${distro_id}-post.sh
-else
-	bash ${source_dir}/post.sh
 fi
 
 ## Fstab ##
