@@ -1,22 +1,21 @@
 #!/bin/bash
 
-#################################### THEMES ####################################
+# gtksourceview
+sudo ln -sf /usr/share/gtksourceview-3.0/styles/matcha*.xml /usr/share/gtksourceview-4/styles/
 
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-gruvbox.sh)"
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/icon-papirus.sh)"
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/fonts-nerd.sh DejaVuSansMono)"
+if [[ ${wm_de} == "xfce" ]]; then 
+        # Themes and Fonts
+        xfconf-query -cn xsettings -pn /Net/ThemeName -t string -s "Matcha-dark-aliz"
+        xfconf-query -cn xsettings -pn /Net/IconThemeName -t string -s "Papirus-Dark"
+        xfconf-query -cn xsettings -pn /Gtk/CursorThemeName -t string -s "Adwaita"
+        xfconf-query -cn xsettings -pn /Gtk/FontName -t string -s "Noto Sans 10"
+        xfconf-query -cn xsettings -pn /Gtk/MonospaceFontName -t string -s "Noto Mono 10"
+        xfconf-query -cn parole -pn /subtitles/font -t string -s "Noto Mono Bold 10"
+        gsettings set org.xfce.mousepad.preferences.view color-scheme 'matchav2'
+        gsettings set org.xfce.mousepad.preferences.view font-name 'Noto Mono Bold 10'        
+fi
 
-# rofi (launcher and powermenu)
-cd /tmp/ && git clone --depth=1 https://github.com/adi1090x/rofi.git && cd rofi && chmod +x setup.sh && ./setup.sh && cd
+#################################### FLATPAK ###################################
 
-sed -i 's/style-1/style-4/g' $HOME/.config/rofi/launchers/type-4/launcher.sh
-sed -i 's/onedark/gruvbox/g' $HOME/.config/rofi/launchers/type-4/shared/colors.rasi
-sed -i 's/Iosevka/DejaVuSansM/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.rasi
-
-sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
-sed -i 's/onedark/gruvbox/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
-sed -i 's/JetBrains Mono/DejaVuSansM/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
-
-# betterlockscreen
-betterlockscreen --update "/usr/share/backgrounds/gruvbox" --fx dim 50
-
+# INSTALL: Debian
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/flatpak.sh)"

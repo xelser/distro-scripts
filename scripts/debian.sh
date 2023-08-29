@@ -11,18 +11,16 @@ apt update && apt install nala --yes
 
 # INSTALL: Debian Base
 nala install --assume-yes lightdm build-essential curl firefox-esr \
-  lxappearance qt5ct qt5-style-kvantum blueman mugshot numlockx \
-  pipewire-{alsa,audio,jack,pulse} easyeffects wireplumber \
-  dconf-{editor,cli} redshift transmission-gtk geany
+        qt5ct qt5-style-kvantum blueman mugshot pulseeffects numlockx \
+        dconf-{editor,cli} redshift transmission-gtk geany
 
-# INSTALL: Debian i3
-nala install --assume-yes i3-wm brightnessctl picom polybar nitrogen \
-  alacritty neovim xclip dunst libnotify4 ranger imv mpv rofi \
-  xarchiver pcmanfm
-
-# INSTALL: nix-env
-echo -e "y\n" | sh <(curl -L https://nixos.org/nix/install) --daemon
-bash -c "nix-env -iA nixpkgs.{autotiling,betterlockscreen,xidlehook}"
+if [[ ${wm_de} == "tty" ]]; then nala install --assume-yes \
+        i3-wm brightnessctl picom polybar nitrogen alacritty \
+        neovim xclip dunst libnotify4 ranger imv mpv rofi \
+        xarchiver pcmanfm lxappearance 
+elif [[ ${wm_de} == "xfce" ]]; then nala install --assume-yes \
+        lightdm-gtk-greeter-settings gvfs-{backends,fuse} 
+fi
 
 #################################### CONFIG ####################################
 
@@ -40,5 +38,14 @@ echo -e "\n[Seat:*]
 autologin-user=xelser
 autologin-user-timeout=0
 greeter-hide-users=false
-user-session=i3" >> /etc/lightdm/lightdm.conf
+user-session=xfce" >> /etc/lightdm/lightdm.conf
 systemctl enable lightdm
+
+#################################### THEMES ####################################
+
+# INSTALL: GTK, KDE, Icon, Cursors
+if [ ! -f /.flag ]; then
+	${source_dir}/themes/theme-matcha.sh
+	${source_dir}/themes/icon-papirus.sh
+        ${source_dir}/themes/fonts-nerd.sh Noto
+fi
