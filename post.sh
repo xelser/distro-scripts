@@ -84,7 +84,8 @@ elif [ -f /usr/bin/easyeffects ]; then
 fi
 
 # Hide Apps
-name=(calf org.gnome.dspy org.gnome.Devhelp org.gnome.Sysprof lstopo mpv htop avahi-discover bssh bvnc stoken-gui stoken-gui-small qv4l2 qvidcap)
+name=(calf org.gnome.dspy org.gnome.Devhelp org.gnome.Sysprof lstopo mpv htop avahi-discover bssh bvnc stoken-gui stoken-gui-small qv4l2 qvidcap
+	pcmanfm-desktop-pref)
 for app in "${name[@]}"; do if [ -f /usr/share/applications/${app}.desktop ]; then mkdir -p $HOME/.local/share/applications/
 	cp -rf /usr/share/applications/${app}.desktop $HOME/.local/share/applications/${app}.desktop
 	echo "NoDisplay=true" >> $HOME/.local/share/applications/${app}.desktop

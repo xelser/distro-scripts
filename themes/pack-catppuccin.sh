@@ -45,9 +45,9 @@ color_folder="cat-mocha-peach"; papirus_folders=(Papirus Papirus-Dark Papirus-Li
 for icon_theme in "${papirus_folders[@]}"; do ./papirus-folders -u -C ${color_folder} -t ${icon_theme}; done
 
 # cursors
-cd /tmp/ && git clone https://github.com/catppuccin/cursors.git
-cd cursors/cursors/ ; cat_cursors=($(ls | grep /tmp/cursors/cursors/))
-for cursor_theme in "${cat_cursors[@]}"; do sudo unzip -qqo ${cursor_theme} -d /usr/share/icons/; done
+cd /tmp/ && git clone https://github.com/catppuccin/cursors.git && cd cursors/cursors/
+cat_cursors=($(ls /tmp/cursors/cursors/)); for cursor_theme in "${cat_cursors[@]}"
+do sudo unzip -qqo ${cursor_theme} -d /usr/share/icons/; done
 
 # gtksourceview
 cd /tmp/ && git clone https://github.com/catppuccin/gedit && mkdir -p $HOME/.local/share/gtksourceview-{3.0,4}/styles
