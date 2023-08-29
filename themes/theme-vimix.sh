@@ -11,7 +11,7 @@ src_dir_kde="vimix-kde"
 
 # Install Commands
 install_gtk () {
-./install.sh -t all -s all
+sudo ./install.sh -t all -s all
 }
 
 install_kde () {

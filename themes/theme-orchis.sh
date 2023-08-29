@@ -11,7 +11,7 @@ src_dir_kde="Orchis-kde"
 
 # Install Commands
 install_gtk () {
-./install.sh --theme all --tweaks solid
+sudo ./install.sh --theme all --tweaks solid
 }
 
 install_kde () {
