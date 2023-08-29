@@ -11,7 +11,7 @@ src_dir_kde="Fluent-kde"
 
 # Install Commands
 install_gtk () {
-./install.sh --theme all --tweaks noborder && ./install.sh --theme all --tweaks round noborder
+sudo ./install.sh --theme all --tweaks noborder && sudo ./install.sh --theme all --tweaks round noborder
 }
 
 install_kde () {

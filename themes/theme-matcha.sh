@@ -11,7 +11,7 @@ src_dir_kde="matcha-kde"
 
 # Install Commands
 install_gtk () {
-./install.sh
+sudo ./install.sh
 }
 
 install_kde () {
