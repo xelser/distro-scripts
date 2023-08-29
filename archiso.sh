@@ -6,7 +6,7 @@ read -p "Password: " -s psswrd
 ## PARTITIONING ##
 if   [[ ${machine} == "G41T-R3" ]]; then
         device="sda"
-        root="2"
+        root="1"
         swap="6"
         grub_target="i386-pc /dev/${device}"
 elif [[ ${machine} == "E5-476G" ]]; then
