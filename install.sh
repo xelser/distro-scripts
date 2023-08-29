@@ -86,9 +86,9 @@ fi
 grant_permissions=(home/${user} media/Media media/Games media/Shared)
 for directory in "${grant_permissions[@]}"; do if [ -d ${root_mnt}/${directory} ]; then
 	if [[ ${distro_id} == "arch" ]]; then
-		arch-chroot /mnt /bin/bash -c "sudo chown -R ${user} ${root_mnt}/${directory}"
+		arch-chroot /mnt /bin/bash -c "sudo chown -R ${user} /${directory}"
 	else
-		sudo chown -R ${user} ${root_mnt}/${directory}
+		sudo chown -R ${user} /${directory}
 	fi
 fi
 done
