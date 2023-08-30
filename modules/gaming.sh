@@ -5,9 +5,9 @@
 # Install: Proprietary NVIDIA Drivers
 install_nvidia () {
 	if [[ ${distro_id} == "fedora" ]]; then
-		sudo dnf install --assumeyes akmod-nvidia
-		#echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /usr/lib/modprobe.d/blacklist-nouveau.conf 1> /dev/null
-		#sudo dracut --force
+		sudo dnf install --assumeyes --allowerasing akmod-nvidia
+		echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /usr/lib/modprobe.d/blacklist-nouveau.conf 1> /dev/null
+		sudo dracut --force
 	elif [[ ${distro_id} == "arch" ]] || [[ ${distro_id} == "endeavouros" ]]; then
 		sudo pacman -S --needed --noconfirm nvidia nvidia-utils lib32-nvidia-utils
 	fi
