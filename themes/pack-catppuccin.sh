@@ -16,6 +16,7 @@ if [ -f /etc/default/grub ]; then
 	cd /tmp/ && git clone https://github.com/catppuccin/grub
 	sudo mkdir -p /usr/share/grub/themes && sudo cp -rf /tmp/grub/src/* /usr/share/grub/themes/
 	echo "GRUB_THEME='/usr/share/grub/themes/catppuccin-mocha-grub-theme/theme.txt'" | sudo tee -a /etc/default/grub 1> /dev/null
+	sudo grub-mkconfig -o /boot/grub/grub.cfg
 fi
 
 if [ -f /etc/sddm.conf ]; then

@@ -101,32 +101,6 @@ save_file /.config/Kvantum/ kvantum.kvconfig
 # Qt5ct
 save_file /.config/qt5ct/ qt5ct.conf
 
-# Nitrogen
-save_folder /.config/nitrogen/
-
-# Dunst
-save_file /.config/dunst/ dunstrc
-
-# Ulauncher
-save_file /.config/ulauncher/ settings.json
-
-# Picom
-save_folder /.config/picom/
-
-# EWW
-save_folder /.config/eww/
-
-# Polybar
-save_folder /.config/polybar/
-
-# Waybar
-save_file /.config/waybar/ config
-save_file /.config/waybar/ style.css
-save_file /.config/waybar/ launch.sh
-
-# Yambar
-save_file /.config/yambar/ config.yml
-
 # Tint2
 save_file /.config/tint2/ tint2rc
 
@@ -198,6 +172,29 @@ save_file /.config/sway/ config
 
 # Swhkd
 save_file /.config/swhkd/ swhkdrc
+
+# Picom
+save_folder /.config/picom/
+
+# Nitrogen
+save_folder /.config/nitrogen/
+
+# Ulauncher
+save_file /.config/ulauncher/ settings.json
+
+# EWW
+save_folder /.config/eww/
+
+# Polybar
+save_folder /.config/polybar/
+
+# Waybar
+save_file /.config/waybar/ config
+save_file /.config/waybar/ style.css
+save_file /.config/waybar/ launch.sh
+
+# Yambar
+save_file /.config/yambar/ config.yml
 
 ############################# DESKTOP ENVIRONMENTS #############################
 
