@@ -16,8 +16,8 @@ sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
 sed -i 's/plymouth plymouth/plymouth/g' /etc/mkinitcpio.conf
  
 # sddm
-echo -e "\n[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
-echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
+echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
+#echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
 systemctl enable sddm
 
 EOF
