@@ -34,6 +34,7 @@ save_file / .vimrc
 
 # NeoVim
 save_file /.config/nvim/ init.vim
+save_folder /.local/share/nvim/
 
 # Ranger 
 save_file /.config/ranger/ rc.conf
