@@ -209,7 +209,7 @@ exec --no-startup-id dunst
 exec_always --no-startup-id betterlockscreen -u "/usr/share/backgrounds/catppuccin" --fx dim 50
 exec_always --no-startup-id sh $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id xset led on
-#exec_always --no-startup-id numlockx on
+exec_always --no-startup-id numlockx on
 exec_always --no-startup-id picom
 
 # Autostart (for i3)
