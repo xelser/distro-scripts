@@ -42,7 +42,7 @@ sudo python install.py mocha -a all -s compact --tweaks rimless normal -d /usr/s
 # papirus folders
 cd /tmp/ && git clone https://github.com/catppuccin/papirus-folders
 cd papirus-folders && sudo cp -rf src/* /usr/share/icons/Papirus
-color_folder="cat-mocha-peach"; papirus_folders=(Papirus Papirus-Dark Papirus-Light ePapirus ePapirus-Dark)
+color_folder="cat-mocha-lavender"; papirus_folders=(Papirus Papirus-Dark Papirus-Light ePapirus ePapirus-Dark)
 for icon_theme in "${papirus_folders[@]}"; do ./papirus-folders -u -C ${color_folder} -t ${icon_theme}; done
 
 # cursors
