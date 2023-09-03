@@ -29,7 +29,9 @@ export dotfiles_dir="${source_dir}/dotfiles/${distro_id}"
 ################################# INSTALLATION #################################
 
 ## No password for user ##
-echo -e "${user} ALL=(ALL) NOPASSWD: ALL" | sudo tee ${root_mnt}/etc/sudoers.d/${user} 1> /dev/null
+if [[ ! ${distro_id} == "arch" ]]; then
+	echo -e "${user} ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/${user} 1> /dev/null
+fi
 
 ## Install ##
 [ -f /usr/bin/powerprofilesctl ] && powerprofilesctl set performance
