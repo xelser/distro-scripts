@@ -23,15 +23,10 @@ fi
 [ -f ./install.sh ] && export source_dir="$(pwd)" || export source_dir="$(pwd)/distro-scripts"
 export dotfiles_dir="${source_dir}/dotfiles/${distro_id}"
 
-################################# INSTALLATION #################################
-
 ## For Arch Linux ##
-if [[ ${distro_id} == "arch" ]]; then
-	${source_dir}/archiso.sh
-	export root_mnt="/mnt"
-else
-	export root_mnt=""
-fi
+[[ ${distro_id} == "arch" ]] && export root_mnt="/mnt" || export root_mnt=""
+
+################################# INSTALLATION #################################
 
 ## No password for user ##
 echo -e "${user} ALL=(ALL) NOPASSWD: ALL" | sudo tee ${root_mnt}/etc/sudoers.d/${user} 1> /dev/null
