@@ -151,6 +151,7 @@ systemctl enable NetworkManager
 # users
 useradd -mG wheel,video ${user}
 echo -e "root:${psswrd}\n${user}:${psswrd}" | chpasswd
+echo -e "${user} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/${user}
 EOF
 }
 
