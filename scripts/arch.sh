@@ -137,36 +137,31 @@ echo "arch" > /etc/hostname
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 pacman -Sy --needed --noconfirm linux linux-firmware base-devel dmidecode git inetutils reflector xdg-user-dirs \
+  grub-{btrfs,customizer} btrfs-progs snapper inotify-tools os-prober efibootmgr dosfstools {intel,amd}-ucode \
   pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound \
-  qt5ct kvantum lxappearance-gtk3 ttf-fira{-sans,code-nerd} firefox timeshift numlockx
-
-# CLI Apps
-pacman -S --needed --noconfirm htop neofetch ranger imv mpv neovim{,-plugins} xclip wl-clipboard
+  plymouth sddm networkmanager nm-connection-editor firefox timeshift \
+  qt5ct kvantum lxappearance-gtk3 ttf-fira{-sans,code-nerd}
 
 # i3 and sway
-pacman -S --needed --noconfirm sway waybar i3-wm polybar picom brightnessctl alacritty \
-  gammastep rofi wallutils swaybg feh dunst libnotify flameshot xdg-desktop-portal-wlr grim \
-  obs-studio warpinator qbittorrent atril xarchiver pcmanfm gvfs
+pacman -S --needed --noconfirm sway waybar i3-wm polybar picom brightnessctl \
+  alacritty ranger imv mpv gammastep rofi neovim{,-plugins} xclip wl-clipboard \
+  dunst libnotify wallutils swaybg feh flameshot xdg-desktop-portal-wlr grim \
+  obs-studio warpinator qbittorrent atril xarchiver pcmanfm gvfs numlockx
 
 # plymouth
-pacman -S --needed --noconfirm plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
+sed -i 's/quiet/quiet splash/g' /etc/default/grub
 
 # grub
-pacman -S --needed --noconfirm grub-{btrfs,customizer} btrfs-progs snapper inotify-tools 
-  os-prober efibootmgr dosfstools {intel,amd}-ucode 
-sed -i 's/quiet/quiet splash/g' /etc/default/grub
 mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=${grub_target}
 
 # sddm
-pacman -S --needed --noconfirm sddm 
 echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
 echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
 systemctl enable sddm
 
 # networkmanager
-pacman -S --needed --noconfirm networkmanager nm-connection-editor
 systemctl enable NetworkManager
 
 # users
