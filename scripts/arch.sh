@@ -49,14 +49,18 @@ ext4_setup () {
 }
 
 btrfs_setup () { 
-	mkdir -p /mnt/{home,root,srv,var/log,var/cache,tmp}
 	mkfs.btrfs -L "Arch" /dev/${device}${root} --force
 	mount /dev/${device}${root} /mnt
 
-	name=('' 'home' 'root' 'srv' 'log' 'cache' 'tmp')
-	for subvol in "${name[@]}"; do btrfs su cr /mnt/@${subvol}; done
+	subvol_name=('' 'home' 'root' 'srv' 'log' 'cache' 'tmp')
+	for subvol in "${subvol_name[@]}"; do btrfs su cr /mnt/@${subvol}; done
 		
-	cd / && umount -R /mnt ; for subvol in "${name[@]}"; do 
+	cd / && umount -R /mnt
+	mount -o defaults,noatime,compress=zstd,commit=120,subvol=@ /dev/${device}${root} /mnt
+	mkdir -p /mnt/{home,root,srv,var/log,var/cache,tmp}
+	
+	mount_name=('home' 'root' 'srv' 'log' 'cache' 'tmp')
+	for subvol in "${mount_name[@]}"; do 
 		mount -o defaults,noatime,compress=zstd,commit=120,subvol=@${subvol} /dev/${device}${root} /mnt/${subvol}
 	done
 }
