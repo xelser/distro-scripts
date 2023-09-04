@@ -53,7 +53,7 @@ btrfs_setup () {
 	mount /dev/${device}${root} /mnt
 	
 	# create subvolumes first
-	subvol_name=('' 'home' 'root' 'tmp')
+	subvol_name=('' 'home' 'root' 'tmp' 'var')
 	for subvol in "${subvol_name[@]}"; do 
 		btrfs su cr /mnt/@${subvol}
 	done
@@ -63,7 +63,7 @@ btrfs_setup () {
 	mount -o defaults,noatime,compress=zstd,commit=120,subvol=@ /dev/${device}${root} /mnt
 	
 	# mount the subvolumes
-	mount_name=('home' 'root' 'tmp')
+	mount_name=('home' 'root' 'tmp' 'var')
 	for subvol in "${mount_name[@]}"; do mkdir -p /mnt/${subvol}
 		mount -o defaults,noatime,compress=zstd,commit=120,subvol=@${subvol} /dev/${device}${root} /mnt/${subvol}
 	done
@@ -137,7 +137,7 @@ echo "arch" > /etc/hostname
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 pacman -Sy --needed --noconfirm linux linux-firmware base-devel dmidecode git inetutils reflector xdg-user-dirs \
-  grub-{btrfs,customizer} btrfs-progs snapper inotify-tools os-prober efibootmgr dosfstools {intel,amd}-ucode \
+  grub-btrfs btrfs-progs snapper inotify-tools os-prober efibootmgr dosfstools {intel,amd}-ucode \
   pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound \
   plymouth sddm networkmanager nm-connection-editor firefox timeshift \
   qt5ct kvantum lxappearance-gtk3 ttf-fira{-sans,code-nerd}
@@ -150,11 +150,18 @@ pacman -S --needed --noconfirm sway waybar i3-wm polybar picom brightnessctl \
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
-sed -i 's/quiet/quiet splash/g' /etc/default/grub
 
 # grub
+sed -i 's/quiet/quiet splash/g' /etc/default/grub
+#sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/g' /etc/default/grub
+sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
+#sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
 mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=${grub_target}
+
+# grub-btrfs w/ timeshift
+sed -i 's/\/.snapshots/--timeshift-auto/g' | systemctl edit --full grub-btrfsd
+systemctl enable grub-btrfsd
 
 # sddm
 echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
