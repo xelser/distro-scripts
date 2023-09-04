@@ -9,8 +9,8 @@ fi
 
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-  mugshot {stylepak,zscroll,polybar-scripts}-git neovim-{plug,symlinks} xfce-polkit autotiling betterlockscreen xidlehook 
-  # {chatterino2-dankerino,ventoy}-bin ulauncher
+  mugshot {stylepak,zscroll,polybar-scripts}-git neovim-{plug,symlinks} xfce-polkit autotiling betterlockscreen xidlehook \
+  {chatterino2-dankerino,ventoy}-bin #ulauncher
 
 # INSTALL: Flatpak 
 #flatpak install --user --assumeyes --noninteractive flathub com.spotify.Client
@@ -21,10 +21,9 @@ yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload
 mkdir -p $HOME/Pictures/Screenshots
 
 # bluetooth
-if [[ $(sudo dmesg | grep -q 'Bluetooth') -eq 0 ]]; then
-	sudo pacman -S --needed --noconfirm blue{man,z-utils}
+sudo dmesg | grep -q 'Bluetooth' && \
+	sudo pacman -S --needed --noconfirm blue{man,z-utils} && \
 	sudo systemctl enable bluetooth
-fi
 
 # touchpad
 #if [[ ${machine_type} == "notebook" ]]; then
