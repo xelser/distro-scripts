@@ -17,10 +17,6 @@ yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload
 
 ##################################### POST #####################################
 
-# grub-btrfs w/ timeshift
-sudo sed -i 's/\/.snapshots/--timeshift-auto/g' /etc/systemd/system/grub-btrfsd.service
-sudo systemctl restart grub-btrfsd
-
 # flameshot directory
 mkdir -p $HOME/Pictures/Screenshots
 
