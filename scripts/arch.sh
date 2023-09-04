@@ -164,6 +164,9 @@ echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
 echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
 systemctl enable sddm
 
+# timeshift
+systemctl enable cronie
+
 # networkmanager
 systemctl enable NetworkManager
 
