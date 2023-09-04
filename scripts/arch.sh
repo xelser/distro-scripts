@@ -137,10 +137,10 @@ echo "arch" > /etc/hostname
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 pacman -Sy --needed --noconfirm linux linux-firmware base-devel dmidecode git inetutils reflector xdg-user-dirs \
-  timeshift grub-btrfs btrfs-progs inotify-tools os-prober efibootmgr dosfstools {intel,amd}-ucode \
   pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound \
-  plymouth sddm networkmanager nm-connection-editor firefox \
-  qt5ct kvantum lxappearance-gtk3 ttf-fira{-sans,code-nerd}
+  grub btrfs-progs os-prober efibootmgr dosfstools {intel,amd}-ucode sddm \
+  plymouth qt5ct kvantum lxappearance-gtk3 ttf-fira{-sans,code-nerd} \
+  networkmanager nm-connection-editor firefox timeshift
 
 # i3 and sway
 pacman -S --needed --noconfirm sway waybar i3-wm polybar picom brightnessctl \
@@ -158,7 +158,6 @@ sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
 #sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
 mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=${grub_target}
-systemctl enable grub-btrfsd
 
 # sddm
 echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
