@@ -158,9 +158,6 @@ sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
 #sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
 mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=${grub_target}
-
-# grub-btrfs w/ timeshift
-sed -i 's/\/.snapshots/--timeshift-auto/g' /etc/systemd/system/grub-btrfsd.service
 systemctl enable grub-btrfsd
 
 # sddm
