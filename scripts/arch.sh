@@ -160,7 +160,7 @@ mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=${grub_target}
 
 # grub-btrfs w/ timeshift
-sed -i 's/\/.snapshots/--timeshift-auto/g' | systemctl edit --full grub-btrfsd
+sed -i 's/\/.snapshots/--timeshift-auto/g' /etc/systemd/system/grub-btrfsd. service
 systemctl enable grub-btrfsd
 
 # sddm
