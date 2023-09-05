@@ -1,5 +1,7 @@
 #!/bin/bash
 
+################################## VARIABLES #################################
+
 ## ROOT PASSWORD ##
 read -p "Password: " -s psswrd
 
@@ -42,6 +44,8 @@ else
 	read -p "Swap Partition (#): " swap
 	read -p "Root Partition (#): " root
 fi
+
+################################# FORMATTING #################################
 
 ext4_setup () {
 	mkfs.ext4 -L "Arch" /dev/${device}${root} -F
@@ -111,12 +115,39 @@ fi
 btrfs_setup && swapon /dev/${device}${swap} ; dmesg | grep -q "EFI v" && format_efi
 }
 
-## INSTALL ##
-arch_install () { # Install Arch Linux
+################################### INSTALL ##################################
+
+arch_base_install () {
 pacman -Sy archlinux-keyring --needed --noconfirm
 pacstrap /mnt base && genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt /bin/bash << EOF
+# Hostname
+echo "arch" > /etc/hostname
 
+# Base Minimal Packages
+echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
+[multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
+pacman -Sy --needed --noconfirm linux grub networkmanager git neofetch htop ttf-noto-nerd
+
+# grub
+sed -i 's/quiet/quiet splash/g' /etc/default/grub
+#sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/g' /etc/default/grub
+sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
+#sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
+mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
+grub-install --target=${grub_target}
+
+# networkmanager
+systemctl enable NetworkManager
+
+# users
+useradd -mG wheel,video ${user}
+echo -e "root:${psswrd}\n${user}:${psswrd}" | chpasswd
+EOF
+}
+
+arch_xelser_install () { 
+arch-chroot /mnt /bin/bash << EOF
 # Time
 ln -sf /usr/share/zoneinfo/Asia/Manila /etc/localtime
 hwclock --systohc
@@ -130,50 +161,35 @@ echo "LANG=en_US.UTF-8" > /etc/locale.conf
 # Keyboard
 echo "KEYMAP=us" > /etc/vconsole.conf
 
-# Hostname
-echo "arch" > /etc/hostname
-
 # Base Packages
-echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
-[multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
-pacman -Sy --needed --noconfirm linux linux-firmware base-devel dmidecode git inetutils reflector xdg-user-dirs \
-  grub btrfs-progs os-prober efibootmgr dosfstools {intel,amd}-ucode networkmanager nm-connection-editor \
+pacman -Sy --needed --noconfirm linux-firmware base-devel btrfs-progs os-prober efibootmgr dosfstools {intel,amd}-ucode \
   pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound \
-  plymouth qt5ct kvantum lxappearance-gtk3 ttf-fira{-sans,code-nerd} \
-  firefox timeshift
+  firefox timeshift nm-connection-editor dmidecode inetutils reflector xdg-user-dirs \
+  plymouth qt5ct kvantum lxappearance-gtk3 ttf-fira{-sans,code-nerd}
 
-# i3 and sway
+# plymouth
+sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
+
+# timeshift
+systemctl enable cronie
+
+# users
+echo -e "${user} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/${user}
+EOF
+}
+
+arch_i3_sway_install () {
+arch-chroot /mnt /bin/bash << EOF
+# packages
 pacman -S --needed --noconfirm sddm sway waybar i3-wm polybar picom brightnessctl \
   alacritty ranger imv mpv gammastep rofi neovim{,-plugins} xclip wl-clipboard \
   dunst libnotify wallutils swaybg feh flameshot xdg-desktop-portal-wlr grim \
   obs-studio warpinator qbittorrent atril xarchiver pcmanfm gvfs numlockx
 
-# plymouth
-sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
-
-# grub
-sed -i 's/quiet/quiet splash/g' /etc/default/grub
-#sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/g' /etc/default/grub
-sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
-#sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
-mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
-grub-install --target=${grub_target}
-
 # sddm
 echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
 echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
 systemctl enable sddm
-
-# timeshift
-systemctl enable cronie
-
-# networkmanager
-systemctl enable NetworkManager
-
-# users
-useradd -mG wheel,video ${user}
-echo -e "root:${psswrd}\n${user}:${psswrd}" | chpasswd
-echo -e "${user} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/${user}
 EOF
 }
 
@@ -194,7 +210,9 @@ echo "---------------------"
 read -p "Proceed? (Y/n): " confirm
 case $confirm in
    n)   ;;
- *|Y)   partitioning
-	arch_install;;
+ *|Y)   partitioning && arch_base_install
+	[[ ${user} == "xelser" ]] && arch_xelser_install
+	[[ ! ${machine} == "PC" ]] && arch_i3_sway_install
+	;;
 esac
 
