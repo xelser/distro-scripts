@@ -137,13 +137,13 @@ echo "arch" > /etc/hostname
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 pacman -Sy --needed --noconfirm linux linux-firmware base-devel dmidecode git inetutils reflector xdg-user-dirs \
+  grub btrfs-progs os-prober efibootmgr dosfstools {intel,amd}-ucode networkmanager nm-connection-editor \
   pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound \
-  grub btrfs-progs os-prober efibootmgr dosfstools {intel,amd}-ucode sddm \
   plymouth qt5ct kvantum lxappearance-gtk3 ttf-fira{-sans,code-nerd} \
-  networkmanager nm-connection-editor firefox timeshift
+  firefox timeshift
 
 # i3 and sway
-pacman -S --needed --noconfirm sway waybar i3-wm polybar picom brightnessctl \
+pacman -S --needed --noconfirm sddm sway waybar i3-wm polybar picom brightnessctl \
   alacritty ranger imv mpv gammastep rofi neovim{,-plugins} xclip wl-clipboard \
   dunst libnotify wallutils swaybg feh flameshot xdg-desktop-portal-wlr grim \
   obs-studio warpinator qbittorrent atril xarchiver pcmanfm gvfs numlockx
