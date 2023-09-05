@@ -145,8 +145,8 @@ echo "arch" > /etc/hostname
 # Base Minimal Packages
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
-pacman -Sy --needed --noconfirm linux-firmware btrfs-progs os-prober efibootmgr dosfstools {intel,amd}-ucode \
-  base-devel dmidecode inetutils reflector xdg-user-dirs networkmanager plymouth ttf-noto-nerd neofetch htop
+pacman -Sy --needed --noconfirm os-prober base-devel dmidecode inetutils reflector xdg-user-dirs \
+  networkmanager plymouth ttf-noto-nerd neofetch htop
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
@@ -172,11 +172,14 @@ EOF
 arch_i3_sway_install () {
 arch-chroot /mnt /bin/bash << EOF
 # packages
-pacman -S --needed --noconfirm pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound \
-  firefox qbittorrent timeshift numlockx nm-connection-editor qt5ct kvantum lxappearance-gtk3 ttf-fira{-sans,code-nerd} \
-  alacritty ranger imv mpv gammastep rofi neovim{,-plugins} xclip wl-clipboard dunst libnotify wallutils swaybg feh \
-  sddm sway waybar i3-wm polybar picom brightnessctl flameshot xdg-desktop-portal-wlr grim \
-  obs-studio warpinator atril xarchiver pcmanfm gvfs 
+pacman -S --needed --noconfirm linux-firmware btrfs-progs efibootmgr dosfstools {intel,amd}-ucode \
+  pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound \
+  alacritty ranger imv mpv gammastep rofi neovim{,-plugins} xclip wl-clipboard \
+  dunst libnotify wallutils swaybg feh flameshot xdg-desktop-portal-wlr grim \
+  qt5ct kvantum lxappearance-gtk3 ttf-fira{-sans,code-nerd} picom \
+  firefox qbittorrent timeshift numlockx nm-connection-editor \
+  obs-studio warpinator atril xarchiver pcmanfm gvfs \
+  sddm sway waybar i3-wm polybar brightnessctl
 
 # timeshift
 systemctl enable cronie
