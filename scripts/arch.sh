@@ -92,7 +92,11 @@ format_swap () {
 
 partitioning () {
 umount -R /mnt >&/dev/null ; swapoff -a
-if [[ ${machine} == "PC" ]]; then # GNOME BOXES
+if   [[ ${machine} == "G41T-R3" ]]; then
+	btrfs_setup && swapon /dev/${device}${swap}
+elif [[ ${machine} == "E5-476G" ]]; then
+        ext4_setup && swapon /dev/${device}${swap} ; dmesg | grep -q "EFI v" && format_efi
+elif [[ ${machine} == "PC" ]]; then # GNOME BOXES
 	create_gpt () {
 	        sgdisk /dev/${device} -n 1::1GiB -t 1:ef00
         	sgdisk /dev/${device} -n 2::3GiB -t 1:8200
@@ -107,12 +111,12 @@ if [[ ${machine} == "PC" ]]; then # GNOME BOXES
 	# Create Partitions
 	dmesg | grep -q "EFI v" && create_gpt || create_mbr
         
+	# Format Root
+	ext4_setup
+	
 	# Format Swap
-	mkswap -f /dev/${device}${swap} -L "Swap"
+	mkswap -f /dev/${device}${swap} -L "Swap" && swapon /dev/${device}${swap}
 fi
-
-# Default: format root, mount swap, check efi (whether create or leave as is)
-btrfs_setup && swapon /dev/${device}${swap} ; dmesg | grep -q "EFI v" && format_efi
 }
 
 ################################### INSTALL ##################################
