@@ -123,7 +123,7 @@ fi
 
 arch_base_install () {
 pacman -Sy archlinux-keyring --needed --noconfirm
-pacstrap /mnt base linux grub && genfstab -U /mnt >> /mnt/etc/fstab
+pacstrap /mnt base linux && genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt /bin/bash << EOF
 
 # Time
@@ -145,8 +145,8 @@ echo "arch" > /etc/hostname
 # Base Minimal Packages
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
-pacman -Sy --needed --noconfirm os-prober base-devel dmidecode inetutils reflector xdg-user-dirs \
-  networkmanager plymouth ttf-noto-nerd neofetch htop
+pacman -Sy --needed --noconfirm grub os-prober base-devel dmidecode inetutils reflector xdg-user-dirs \
+  networkmanager plymouth ttf-noto-nerd neofetch htop neovim{,-plugins} xclip wl-clipboard
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
@@ -174,12 +174,10 @@ arch-chroot /mnt /bin/bash << EOF
 # packages
 pacman -S --needed --noconfirm linux-firmware btrfs-progs efibootmgr dosfstools {intel,amd}-ucode \
   pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound \
-  alacritty ranger imv mpv gammastep rofi neovim{,-plugins} xclip wl-clipboard \
-  dunst libnotify wallutils swaybg feh flameshot xdg-desktop-portal-wlr grim \
-  qt5ct kvantum lxappearance-gtk3 ttf-fira{-sans,code-nerd} picom \
-  firefox qbittorrent timeshift numlockx nm-connection-editor \
-  obs-studio warpinator atril xarchiver pcmanfm gvfs \
-  sddm sway waybar i3-wm polybar brightnessctl
+  qt5ct kvantum lxappearance-gtk3 ttf-fira{-sans,code-nerd} picom i3-wm polybar sway waybar \
+  sddm brightnessctl numlockx gvfs firefox nm-connection-editor qbittorrent timeshift \
+  alacritty ranger imv mpv gammastep rofi dunst libnotify wallutils swaybg feh \
+  flameshot xdg-desktop-portal-wlr grim xarchiver pcmanfm atril warpinator
 
 # timeshift
 systemctl enable cronie
