@@ -57,7 +57,7 @@ btrfs_setup () {
 	mount /dev/${device}${root} /mnt
 	
 	# create subvolumes first
-	subvol_name=('' 'home' 'root' 'var')
+	subvol_name=('' 'home' 'var')
 	for subvol in "${subvol_name[@]}"; do 
 		btrfs su cr /mnt/@${subvol}
 	done
@@ -67,7 +67,7 @@ btrfs_setup () {
 	mount -o defaults,noatime,compress=zstd,commit=120,subvol=@ /dev/${device}${root} /mnt
 	
 	# mount the subvolumes
-	mount_name=('home' 'root' 'var')
+	mount_name=('home' 'var')
 	for subvol in "${mount_name[@]}"; do mkdir -p /mnt/${subvol}
 		mount -o defaults,noatime,compress=zstd,commit=120,subvol=@${subvol} /dev/${device}${root} /mnt/${subvol}
 	done
