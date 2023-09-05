@@ -146,7 +146,7 @@ echo "arch" > /etc/hostname
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 pacman -Sy --needed --noconfirm grub os-prober base-devel dmidecode inetutils reflector xdg-user-dirs \
-  networkmanager plymouth ttf-noto-nerd neofetch htop neovim{,-plugins} xclip wl-clipboard
+  networkmanager plymouth ttf-fira{-sans,code-nerd} neofetch htop neovim{,-plugins} xclip wl-clipboard git
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
@@ -174,10 +174,10 @@ arch-chroot /mnt /bin/bash << EOF
 # packages
 pacman -S --needed --noconfirm linux-firmware btrfs-progs efibootmgr dosfstools {intel,amd}-ucode \
   pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound \
-  qt5ct kvantum lxappearance-gtk3 ttf-fira{-sans,code-nerd} picom i3-wm polybar sway waybar \
   sddm brightnessctl numlockx gvfs firefox nm-connection-editor qbittorrent timeshift \
   alacritty ranger imv mpv gammastep rofi dunst libnotify wallutils swaybg feh \
-  flameshot xdg-desktop-portal-wlr grim xarchiver pcmanfm atril warpinator
+  flameshot xdg-desktop-portal-wlr grim xarchiver pcmanfm atril warpinator \
+  qt5ct kvantum lxappearance-gtk3 picom i3-wm polybar sway waybar
 
 # timeshift
 systemctl enable cronie
