@@ -42,7 +42,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 # rofi (launcher and powermenu)
 cd /tmp/ && git clone --depth=1 https://github.com/adi1090x/rofi.git && cd rofi && chmod +x setup.sh && ./setup.sh && cd
 
-sed -i 's/style-1/style-4/g' $HOME/.config/rofi/launchers/type-4/launcher.sh
+sed -i 's/style-1/style-3/g' $HOME/.config/rofi/launchers/type-4/launcher.sh
 sed -i 's/onedark/catppuccin/g' $HOME/.config/rofi/launchers/type-4/shared/colors.rasi
 sed -i 's/Iosevka/Fira Code/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.rasi
 
