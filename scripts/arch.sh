@@ -112,7 +112,7 @@ elif [[ ${machine} == "PC" ]]; then # GNOME BOXES
 	dmesg | grep -q "EFI v" && create_gpt || create_mbr
         
 	# Format Root
-	ext4_setup
+	btrfs_setup
 	
 	# Format Swap
 	mkswap -f /dev/${device}${swap} -L "Swap" && swapon /dev/${device}${swap}
