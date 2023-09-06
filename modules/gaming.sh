@@ -64,8 +64,9 @@ elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm {lib32-,}g
 fi
 
 # Install: Lutris & MangoHud
-flatpak install --user --assumeyes --noninteractive flathub \
-	net.lutris.Lutris org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/22.08 # com.valvesoftware.Steam
+flatpak install --assumeyes --noninteractive flathub \
+	com.valvesoftware.Steam net.lutris.Lutris \
+	org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/22.08
 	
 #################################### CONFIG ####################################
 

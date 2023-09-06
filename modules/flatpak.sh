@@ -8,8 +8,8 @@ elif [ -f /usr/bin/apt ]; then sudo apt install --yes flatpak
 fi
 
 # Packages 
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo && sudo flatpak remote-modify --enable flathub
-flatpak install --assumeyes --noninteractive flathub com.github.tchx84.Flatseal
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo flatpak remote-modify --enable flathub && flatpak install --assumeyes --noninteractive flathub com.github.tchx84.Flatseal
 
 # Configs
 flatpak override --user --filesystem=/usr/share/icons/:ro
