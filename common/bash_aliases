@@ -37,15 +37,18 @@ elif [ -f /usr/bin/dnf ]; then
 	alias list="sudo dnf list --installed $1"
 fi
 
-# Flatpak
-alias flatupdate="flatpak update --assumeyes"
-alias flatinstall="flatpak install --user flathub $1"
-alias flatuninstall="flatpak uninstall $1"
-alias flatclean="flatpak uninstall --unused --delete-data --assumeyes"
-alias flatsearch="flatpak search $1"
+if [ -f /usr/bin/flatpak ]; then
+	alias flatupdate="flatpak update --assumeyes"
+	alias flatinstall="flatpak install --user flathub $1"
+	alias flatuninstall="flatpak uninstall $1"
+	alias flatclean="flatpak uninstall --unused --delete-data --assumeyes"
+	alias flatsearch="flatpak search $1"
+fi
 
 # GNOME Shell Extensions
-alias gextup="gext update --user --install"
+if [ -f $HOME/.local/bin/gnome-extensions-cli ]; then
+	alias gextup="gext update --user --install"
+fi
 
 # editors
 if [[ ${wm_de} == "gnome" ]] || [[ ${wm_de} == "budgie" ]]; then
@@ -63,16 +66,15 @@ else
 fi
 
 # dotfiles
-alias bashaliasesup="cat $HOME/Documents/distro-scripts/common/bash_aliases > $HOME/.bash_aliases && source $HOME/.bash_aliases"
-alias bashprofileup="cat $HOME/Documents/distro-scripts/common/bash_profile > $HOME/.bash_profile && source $HOME/.bash_profile"
-alias bashup="bashaliasesup && bashprofileup"
-alias dotup="bash $HOME/Documents/distro-scripts/common/update-dotfiles.sh"
-
-# git aliases
-alias gitclone="cd $HOME/Documents && git clone"
-alias gitpull="git fetch && git pull"
-alias gitcommit="git add . && git commit -m 'auto-update @ $(hostname)' && git push"
-alias gitupdate="cd $HOME/Documents/distro-scripts && gitpull ; bashup ; dotup ; gitcommit ; cd $HOME"
+if [ -d $HOME/Documents/distro-scripts/ ] ; then
+	alias bashaliasesup="cat $HOME/Documents/distro-scripts/common/bash_aliases > $HOME/.bash_aliases && source $HOME/.bash_aliases"
+	alias bashprofileup="cat $HOME/Documents/distro-scripts/common/bash_profile > $HOME/.bash_profile && source $HOME/.bash_profile"
+	alias bashup="bashaliasesup && bashprofileup"
+	alias dotup="bash $HOME/Documents/distro-scripts/common/update-dotfiles.sh"
+	alias gitpull="git fetch && git pull"
+	alias gitcommit="git add . && git commit -m 'auto-update @ $(hostname)' && git push"
+	alias gitupdate="cd $HOME/Documents/distro-scripts && gitpull ; bashup ; dotup ; gitcommit ; cd $HOME"
+fi
 
 # others
 alias post="bash $HOME/.config/post.sh"
