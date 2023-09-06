@@ -21,7 +21,7 @@ sudo dnf autoremove --assumeyes gnome-{contacts,characters,connections,font-view
   totem rhythmbox cheese mediawriter fedora-bookmarks gnome-shell-extension-background-logo libreoffice-\*
 
 # REPO: Google Chrome | RPMFUSION
-sudo dnf config-manager --set-enabled --assumeyes google-chrome
+#sudo dnf config-manager --set-enabled --assumeyes google-chrome
 sudo dnf list --installed | grep -q "rpmfusion" || \
 sudo dnf install --assumeyes --skip-broken https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
@@ -37,8 +37,8 @@ sudo dnf groupupdate sound-and-video multimedia --assumeyes --exclude=PackageKit
 # INSTALL: Fedora Workstation
 sudo dnf install --assumeyes --skip-broken google-roboto-{fonts,mono-fonts,slab-fonts} gnome-{builder,console,multi-writer,tweaks} \
   dconf-editor file-roller easyeffects fragments celluloid drawing gnome-shell-extension-{appindicator,pop-shell} \
-  google-chrome-stable libheif-tools libgda libgda-sqlite
-  # inkscape telegram discord video-downloader qt5ct kvantum touchegg
+  libheif-tools libgda libgda-sqlite
+  # inkscape telegram discord video-downloader qt5ct kvantum touchegg google-chrome-stable 
 
 #################################### CONFIG ####################################
 
