@@ -20,29 +20,33 @@ else
 	sans_font="$(cat $HOME/.config/gtk-3.0/settings.ini | grep 'gtk-font-name' | cut -d'=' -f2)"
 fi
 
-# GTK 4
+# DEs that is not gnome 
 if [[ ! ${wm_de} == "gnome" ]]; then
 	[ -d /usr/share/themes/${gtk_theme} ] && theme_dir="/usr/share/themes/${gtk_theme}" || theme_dir="$HOME/.themes/${gtk_theme}"
+	
+	# GTK 3
+	[ -d $HOME/.themes/${gtk_theme} ] || mkdir -p $HOME/.themes && cp -rf ${theme_dir} $HOME/.themes/
+	flatpak override --user --filesystem=~/.themes:ro
+	flatpak override --user --env=GTK_THEME=${gtk_theme}
+
+	# GTK 4
 	rm -rf 					   "$HOME/.config/gtk-4.0/{assets,gtk.css,gtk-dark.css}"
 	mkdir -p 				   "$HOME/.config/gtk-4.0"
 	ln -sf "${theme_dir}/gtk-4.0/assets"       "$HOME/.config/gtk-4.0/"
 	ln -sf "${theme_dir}/gtk-4.0/gtk.css"      "$HOME/.config/gtk-4.0/gtk.css"
 	ln -sf "${theme_dir}/gtk-4.0/gtk-dark.css" "$HOME/.config/gtk-4.0/gtk-dark.css"
+	flatpak override --user --filesystem=xdg-config/gtk-4.0
 fi
 
 # Cursor
 mkdir -p $HOME/.icons/default && echo -e "[Icon Theme]\nInherits=${cursor_theme}" > $HOME/.icons/default/index.theme
 echo -e "[Icon Theme]\nInherits=${cursor_theme}" | sudo tee -a /usr/share/icons/default/index.theme 1> /dev/null
 
-# Flatpak theming
-if [ -f /usr/bin/flatpak ]; then
+# QT/kvantum flatpak
+if [ -f /usr/bin/kvantummanager ]; then
+	flatpak install --assumeyes --noninteractive flathub org.kde.KStyle.Kvantum/x86_64/5.15-22.08
 	flatpak override --user --filesystem=/usr/share/Kvantum/:ro
 	flatpak override --user --filesystem=xdg-config/Kvantum:ro
-	flatpak override --user --env=GTK_THEME=${gtk_theme}
-fi
-
-# Stylepak
-if [ -f /usr/bin/stylepak ]; then
-	stylepak install-system ${gtk_theme}
+	flatpak override --user --env=QT_STYLE_OVERRIDE=kvantum-dark
 fi
 
