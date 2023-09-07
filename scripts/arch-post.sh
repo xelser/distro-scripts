@@ -9,7 +9,7 @@ fi
 
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-  mugshot {stylepak,zscroll,polybar-scripts}-git neovim-{plug,symlinks} xfce-polkit autotiling betterlockscreen xidlehook \
+  mugshot {zscroll,polybar-scripts}-git neovim-{plug,symlinks} xfce-polkit autotiling betterlockscreen xidlehook \
   {chatterino2-dankerino,ventoy}-bin #ulauncher
 
 # INSTALL: Flatpak 
