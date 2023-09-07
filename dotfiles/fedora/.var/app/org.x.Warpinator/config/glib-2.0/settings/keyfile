@@ -1,0 +1,7 @@
+[org/x/warpinator/preferences]
+connect-id='FEDORA-58CF5A51BD3D7E85B041'
+ask-for-send-permission=true
+autostart=false
+no-overwrite=true
+receiving-folder='file:///home/xelser/Public'
+group-code='xelser'
