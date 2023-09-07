@@ -25,7 +25,7 @@ if [[ ! ${wm_de} == "gnome" ]]; then
 	[ -d /usr/share/themes/${gtk_theme} ] && theme_dir="/usr/share/themes/${gtk_theme}" || theme_dir="$HOME/.themes/${gtk_theme}"
 	
 	# GTK 3
-	[ -d $HOME/.themes/${gtk_theme} ] || mkdir -p $HOME/.themes && cp -rf ${theme_dir} $HOME/.themes/
+	[ ! -d $HOME/.themes/${gtk_theme} ] && mkdir -p $HOME/.themes && cp -rf ${theme_dir} $HOME/.themes/
 	flatpak override --user --filesystem=~/.themes:ro
 	flatpak override --user --env=GTK_THEME=${gtk_theme}
 
