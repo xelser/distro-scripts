@@ -1,0 +1,5 @@
+game:
+  exe: /media/Shared/Games/Alan Wake/alanwake.exe
+system: {}
+wine:
+  version: lutris-GE-Proton8-12-x86_64
