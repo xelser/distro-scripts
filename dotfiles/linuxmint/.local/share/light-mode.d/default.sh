@@ -18,7 +18,10 @@ gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profi
 # QT/Kvantum
 cp -rf $HOME/.local/share/light-mode.d/kvantum.kvconfig	$HOME/.config/Kvantum/
 cp -rf $HOME/.local/share/light-mode.d/qt5ct.conf	$HOME/.config/qt5ct/
+
+# Flatpak
 flatpak override --user --env=QT_STYLE_OVERRIDE=kvantum
+flatpak override --user --env=GTK_THEME=vimix-compact-jade
 
 # Desktop Background
 #gsettings set org.cinnamon.desktop.background picture-uri 'file:///home/xelser/.local/share/backgrounds/Cyberpunk%20Girl/Cyberpunk%20Girl-l.jpg'
