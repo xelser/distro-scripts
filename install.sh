@@ -94,7 +94,7 @@ echo && read -p "Reboot? (Y/n): " end
 case $end in
    n)	echo "Reboot Cancelled";;
    *)	echo "Rebooting... "
-	[[ ${distro_id} == "arch" ]] && umount -R /mnt >&/dev/null ; swapoff -a
+	[[ ${distro_id} == "arch" ]] && umount -R /mnt >&/dev/null && swapoff -a
 	rm -rf $HOME/distro-scripts*
 	sudo reboot;;
 esac
