@@ -21,4 +21,4 @@ cp -rf $HOME/.local/share/dark-mode.d/qt5ct.conf	$HOME/.config/qt5ct/
 flatpak override --user --env=QT_STYLE_OVERRIDE=kvantum-dark
 
 # Desktop Background
-gsettings set org.cinnamon.desktop.background picture-uri 'file:///home/xelser/.local/share/backgrounds/Cyberpunk%20Girl/Cyberpunk%20Girl-d.jpg'
+#gsettings set org.cinnamon.desktop.background picture-uri 'file:///home/xelser/.local/share/backgrounds/Cyberpunk%20Girl/Cyberpunk%20Girl-d.jpg'
