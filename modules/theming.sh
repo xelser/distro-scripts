@@ -34,6 +34,13 @@ fi
 mkdir -p $HOME/.icons/default && echo -e "[Icon Theme]\nInherits=${cursor_theme}" > $HOME/.icons/default/index.theme
 echo -e "[Icon Theme]\nInherits=${cursor_theme}" | sudo tee -a /usr/share/icons/default/index.theme 1> /dev/null
 
+# Flatpak theming
+if [ -f /usr/bin/flatpak ]; then
+	flatpak override --user --filesystem=/usr/share/Kvantum/:ro
+	flatpak override --user --filesystem=xdg-config/Kvantum:ro
+	flatpak override --user --env=GTK_THEME=${gtk_theme}
+fi
+
 # Stylepak
 if [ -f /usr/bin/stylepak ]; then
 	stylepak install-system ${gtk_theme}
