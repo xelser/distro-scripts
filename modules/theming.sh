@@ -45,7 +45,6 @@ echo -e "[Icon Theme]\nInherits=${cursor_theme}" | sudo tee -a /usr/share/icons/
 # QT/kvantum flatpak
 if [ -f /usr/bin/kvantummanager ]; then
 	flatpak install --assumeyes --noninteractive flathub org.kde.KStyle.Kvantum/x86_64/5.15-22.08
-	flatpak override --user --filesystem=/usr/share/Kvantum/:ro
 	flatpak override --user --filesystem=xdg-config/Kvantum:ro
 	flatpak override --user --env=QT_STYLE_OVERRIDE=kvantum-dark
 fi
