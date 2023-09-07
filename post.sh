@@ -7,7 +7,9 @@ check_flag () {
 ################################# PREPARATIONS #################################
 
 # Set to performance
-[ -f /usr/bin/powerprofilesctl ] && powerprofilesctl set performance
+if [ -f /usr/bin/powerprofilesctl ]; then
+	powerprofilesctl list | grep -q performance && powerprofilesctl set performance
+fi
 
 # Connect to Wifi
 wget --spider --quiet http://google.com > /dev/null 2>&1 || if [[ ${machine} == "E5-476G" || "G41T-R3" ]]; then

@@ -34,7 +34,10 @@ if [[ ! ${distro_id} == "arch" ]]; then
 fi
 
 ## Install ##
-[ -f /usr/bin/powerprofilesctl ] && powerprofilesctl set performance
+if [ -f /usr/bin/powerprofilesctl ]; then
+	powerprofilesctl list | grep -q performance && powerprofilesctl set performance
+fi
+
 systemd-inhibit ${source_dir}/scripts/${distro_id}.sh
 
 ################################# POST INSTALL #################################
