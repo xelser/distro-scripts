@@ -39,7 +39,7 @@ fi
 
 if [ -f /usr/bin/flatpak ]; then
 	alias flatupdate="flatpak update --assumeyes"
-	alias flatinstall="flatpak install --user flathub $1"
+	alias flatinstall="flatpak install flathub $1"
 	alias flatuninstall="flatpak uninstall $1"
 	alias flatclean="flatpak uninstall --unused --delete-data --assumeyes"
 	alias flatsearch="flatpak search $1"
