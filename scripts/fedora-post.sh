@@ -2,8 +2,7 @@
 
 # GNOME Shell Extensions
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/gext.sh)"
-gnome-extensions enable places-menu@gnome-shell-extensions.gcampax.github.com
-gnome-extensions enable pop-shell@system76.com
+ext_list=($(gnome-extensions list)); for ext in "${ext_list[@]}"; do gnome-extensions enable ${ext}; done
 
 # Set Fonts
 gsettings set org.gnome.desktop.interface font-name 'Roboto 10'
