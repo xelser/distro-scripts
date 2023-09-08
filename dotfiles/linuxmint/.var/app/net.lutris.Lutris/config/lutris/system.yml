@@ -1,4 +1,5 @@
 system:
   game_path: /media/Shared/Games
   mangohud: true
+  prime: true
   vk_icd: /usr/lib/x86_64-linux-gnu/GL/vulkan/icd.d/nvidia_icd.json:/usr/lib/i386-linux-gnu/GL/vulkan/icd.d/nvidia_icd.json
