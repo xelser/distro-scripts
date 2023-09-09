@@ -176,8 +176,8 @@ pacman -S --needed --noconfirm linux-firmware btrfs-progs efibootmgr dosfstools 
   pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound \
   sddm brightnessctl numlockx gvfs firefox nm-connection-editor qbittorrent timeshift \
   alacritty ranger imv mpv gammastep rofi dunst libnotify wallutils swaybg feh \
-  flameshot xdg-desktop-portal-wlr grim xarchiver pcmanfm atril warpinator \
-  qt5ct kvantum lxappearance-gtk3 picom i3-wm polybar sway waybar
+  flameshot xdg-desktop-portal-wlr grim qt5ct kvantum lxappearance-gtk3 \
+  xarchiver pcmanfm atril picom i3-wm polybar sway waybar
 
 # timeshift
 systemctl enable cronie
