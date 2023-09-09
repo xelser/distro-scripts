@@ -14,12 +14,12 @@ pipx ensurepath && bash -c "pipx install gnome-extensions-cli --system-site-pack
 gext --filesystem install 4269 # AlphabeticalAppGrid
 gext --filesystem install 595 # autohide-battery
 gext --filesystem install 1401 # bluetooth-quick-connect
-#gext --filesystem install 3193 # blur-my-shell
-#gext --filesystem install 517 # caffeine
-#gext --filesystem install 307 # dash-to-dock
+gext --filesystem install 3193 # blur-my-shell
+gext --filesystem install 517 # caffeine
+gext --filesystem install 307 # dash-to-dock
 gext --filesystem install 4158 # gnome-ui-tune
-#gext --filesystem install 3843 # just-perfection
-#gext --filesystem install 5575 # power-profile-switcher
+gext --filesystem install 3843 # just-perfection
+gext --filesystem install 5575 # power-profile-switcher
 gext --filesystem install 352 # middleclickclose
 gext --filesystem install 5237 # rounded-window-corners
 gext --filesystem install 701 # scroll-workspaces

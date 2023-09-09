@@ -38,7 +38,7 @@ sudo dnf groupupdate sound-and-video multimedia --assumeyes --exclude=PackageKit
 # INSTALL: Fedora Workstation
 sudo dnf install --assumeyes --skip-broken google-roboto-{fonts,mono-fonts,slab-fonts} gnome-{builder,console,multi-writer,tweaks} \
   dconf-editor file-roller easyeffects fragments celluloid drawing libheif-tools libgda libgda-sqlite \
-  gnome-shell-extension-{appindicator,blur-my-shell,caffeine,dash-to-dock,just-perfection,pop-shell}
+  gnome-shell-extension-{appindicator,pop-shell}
   # inkscape telegram discord video-downloader qt5ct kvantum touchegg google-chrome-stable 
 
 #################################### CONFIG ####################################
