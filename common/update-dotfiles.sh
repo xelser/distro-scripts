@@ -74,6 +74,10 @@ save_file /.config/libreoffice/4/user/ registrymodifications.xcu
 # Warpinator
 save_file /.var/app/org.x.Warpinator/config/glib-2.0/settings/ keyfile
 
+# Syncthing
+save_file /.config/syncthing-gtk/ config.json
+save_file /.var/app/me.kozec.syncthingtk/config/syncthing-gtk/ config.json
+
 # Zoom
 #save_file /.var/app/us.zoom.Zoom/config/ zoomus.conf
 
