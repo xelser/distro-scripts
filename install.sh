@@ -84,7 +84,7 @@ fi
 if [[ ${distro_id} == "arch" ]]; then
 	arch-chroot /mnt /bin/bash -c "sudo chown -R ${user} /home/${user}"
 else
-	sudo chown -R ${user} /$home/${user}
+	sudo chown -R ${user} /home/${user}
 fi
 
 ## Reboot ##
