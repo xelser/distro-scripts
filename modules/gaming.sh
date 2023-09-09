@@ -72,6 +72,10 @@ flatpak install --assumeyes --noninteractive flathub \
 
 # MangoHud Config File
 flatpak override --user --filesystem=xdg-config/MangoHud:ro
+if [[ ${machine} == "E5-476G" ]]; then
+	flatpak override --user --filesystem=/run/media/$USER/Games:rw
+	flatpak override --user --filesystem=/run/media/$USER/Shared:rw
+fi
 
 echo "
 ################################### FINISHED ###################################"

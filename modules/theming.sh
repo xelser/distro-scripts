@@ -22,11 +22,18 @@ fi
 
 # DEs that is not gnome 
 if [[ ! ${wm_de} == "gnome" ]]; then
-	[ -d /usr/share/themes/${gtk_theme} ] && theme_dir="/usr/share/themes/${gtk_theme}" || theme_dir="$HOME/.themes/${gtk_theme}"
+	if [ -d /usr/share/themes/${gtk_theme} ]; then
+		theme_dir="/usr/share/themes/${gtk_theme}"
+	else
+		theme_dir="$HOME/.local/share/themes/${gtk_theme}"
+	fi
 	
 	# GTK 3
-	[ ! -d $HOME/.themes/${gtk_theme} ] && mkdir -p $HOME/.themes && cp -rf ${theme_dir} $HOME/.themes/
-	flatpak override --user --filesystem=~/.themes:ro
+	if [ ! -d $HOME/.local/share/themes/${gtk_theme} ]; then
+		mkdir -p $HOME/.local/share/themes && cp -rf ${theme_dir} $HOME/.local/share/themes/
+	fi
+
+	flatpak override --user --filesystem=xdg-data/themes:ro
 	flatpak override --user --env=GTK_THEME=${gtk_theme}
 
 	# GTK 4
