@@ -19,7 +19,7 @@ color=always
 sudo dnf groupremove --assumeyes "Guest Desktop Agents" "Container Management" "LibreOffice"
 sudo dnf autoremove --assumeyes rhythmbox cheese mediawriter fedora-bookmarks libreoffice-\* \
   gnome-{contacts,characters,connections,font-viewer,photos,tour,clocks,weather,maps} totem \
-  gnome-shell-extension-{background-logo,window-list,apps-menu,launch-new-instance} --exclude=gnome-shell-extension-places-menu
+  gnome-shell-extension-\* --exclude=gnome-shell-extension-places-menu
 
 # REPO: Google Chrome | RPMFUSION
 #sudo dnf config-manager --set-enabled --assumeyes google-chrome
@@ -37,8 +37,7 @@ sudo dnf groupupdate sound-and-video multimedia --assumeyes --exclude=PackageKit
 
 # INSTALL: Fedora Workstation
 sudo dnf install --assumeyes --skip-broken google-roboto-{fonts,mono-fonts,slab-fonts} gnome-{builder,console,multi-writer,tweaks} \
-  dconf-editor file-roller easyeffects fragments celluloid drawing libheif-tools libgda libgda-sqlite \
-  gnome-shell-extension-{appindicator,pop-shell}
+  dconf-editor file-roller easyeffects fragments celluloid drawing libheif-tools gnome-shell-extension-pop-shell
   # inkscape telegram discord video-downloader qt5ct kvantum touchegg google-chrome-stable 
 
 #################################### CONFIG ####################################
