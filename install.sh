@@ -70,26 +70,22 @@ if [ -f ${source_dir}/scripts/${distro_id}-post.sh ]; then
 fi
 
 ## Fstab ##
-if [[ ${user} == "xelser" ]] && [[ ! ${machine} == "PC" ]]; then sudo mkdir -p ${root_mnt}/media/Media
-	echo -e "\nLABEL=Media /media/Media ext4 defaults,user 0 0" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
+if [[ ${user} == "xelser" ]] && [[ ! ${machine} == "PC" ]]; then
+	echo -e "\nLABEL=Media /run/media/${user}/Media ext4 defaults,user 0 0" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
 fi
 
-if [[ ${machine} == "E5-476G" ]]; then sudo mkdir -p ${root_mnt}/media/{Games,Shared}
-	echo -e "LABEL=Games /media/Games ext4 defaults,user 0 0" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
-	echo -e "LABEL=Shared /media/Shared ntfs-3g defaults,nls=utf8,umask=000,dmask=027,fmask=137,uid=1000,gid=1000,windows_names 0 0" \
+if [[ ${machine} == "E5-476G" ]]; then
+	echo -e "LABEL=Games /run/media/${user}/Games ext4 defaults,user 0 0" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
+	echo -e "LABEL=Shared /run/media/${user}/Shared ntfs-3g defaults,nls=utf8,umask=000,dmask=027,fmask=137,uid=1000,gid=1000,windows_names 0 0" \
 	| sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
 fi
 
 ## Permissions ##
-grant_permissions=(home/${user} media/Media media/Games media/Shared)
-for directory in "${grant_permissions[@]}"; do if [ -d ${root_mnt}/${directory} ]; then
-	if [[ ${distro_id} == "arch" ]]; then
-		arch-chroot /mnt /bin/bash -c "sudo chown -R ${user} /${directory}"
-	else
-		sudo chown -R ${user} /${directory}
-	fi
+if [[ ${distro_id} == "arch" ]]; then
+	arch-chroot /mnt /bin/bash -c "sudo chown -R ${user} /home/${user}"
+else
+	sudo chown -R ${user} /$home/${user}
 fi
-done
 
 ## Reboot ##
 echo "#################################### FINISHED ####################################"
