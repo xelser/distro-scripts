@@ -43,14 +43,14 @@ sudo dmesg | grep -q 'Bluetooth' && \
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-catppuccin.sh)"
 
 # rofi (launcher and powermenu)
-cd /tmp/ && git clone --depth=1 https://github.com/adi1090x/rofi.git && cd rofi && chmod +x setup.sh && ./setup.sh && cd
+cd /tmp/ && git clone --depth=1 https://github.com/xelser/rofi.git && cd rofi && chmod +x setup.sh && ./setup.sh && cd
 
 sed -i 's/style-1/style-3/g' $HOME/.config/rofi/launchers/type-4/launcher.sh
-sed -i 's/onedark/catppuccin/g' $HOME/.config/rofi/launchers/type-4/shared/colors.rasi
+sed -i 's/onedark/catppuccin-mocha/g' $HOME/.config/rofi/launchers/type-4/shared/colors.rasi
 sed -i 's/Iosevka/Fira Code/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.rasi
 
 sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
-sed -i 's/onedark/catppuccin/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
+sed -i 's/onedark/catppuccin-mocha/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
 sed -i 's/JetBrains Mono/Fira Code/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
 
 # betterlockscreen
