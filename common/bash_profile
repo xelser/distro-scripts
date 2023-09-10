@@ -8,3 +8,6 @@ if [ -z ${XDG_CURRENT_DESKTOP} ]; then
 else
 	export wm_de="$(echo $XDG_CURRENT_DESKTOP | cut -d'-' -f2 | cut -d':' -f1 | tr '[:upper:]' '[:lower:]')"
 fi
+
+# Add binary path for rust packages
+export PATH=$HOME/.cargo/bin:$PATH
