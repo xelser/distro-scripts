@@ -34,9 +34,6 @@ sudo dmesg | grep -q 'Bluetooth' && \
 # ulauncher
 [ -f /usr/bin/ulauncher ] && systemctl enable --user ulauncher
 
-# syncthing
-[ -f /usr/bin/syncthing ] && systemctl enable --user syncthing
-
 #################################### THEMES ####################################
 
 # catppuccin
