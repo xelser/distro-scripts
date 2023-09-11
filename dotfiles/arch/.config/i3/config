@@ -226,6 +226,6 @@ exec --no-startup-id sh $HOME/.config/gammastep/launch.sh
 bindsym $mod+o exec sh $HOME/.config/gammastep/toggle.sh
 
 # Inhibit
-#bindsym $mod+i exec caffeine & disown && notify-send "Inhibit: caffeine-ng 󰅶 enable"
-#bindsym $mod+shift+i exec killall caffeine && notify-send "Inhibit: caffeine-ng 󰛊 disbled" || notify-send "caffeine-ng 󰾫 is not running"
+bindsym $mod+i exec caffeinate & disown && notify-send "Inhibit: caffeinate 󰅶 enable"
+bindsym $mod+shift+i exec killall caffeinate && notify-send "Inhibit: caffeinate 󰛊 disbled" || notify-send "caffeinate 󰾫 is not running"
 
