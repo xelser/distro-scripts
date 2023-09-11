@@ -12,8 +12,9 @@ yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload
   mugshot {zscroll,polybar-scripts}-git neovim-{plug,symlinks} xfce-polkit autotiling betterlockscreen xidlehook \
   syncthing-gtk {chatterino2-dankerino,ventoy}-bin #ulauncher
 
-# INSTALL: Flatpak 
-#flatpak install --user --assumeyes --noninteractive flathub com.spotify.Client
+# BUILD: caffeinate
+sudo pacman -S --needed --noconfirm rustup && rustup default stable
+cargo install --git https://github.com/rschmukler/caffeinate
 
 ##################################### POST #####################################
 
