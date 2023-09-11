@@ -108,6 +108,10 @@ if [ -f /usr/bin/mangohud ]; then check_flag /etc/environment
 	echo -e "\nexport MANGOHUD=1\nexport MANGOHUD_DLSYM=1\n" | sudo tee -a /etc/environment 1> /dev/null
 fi
 
+# rEFInd
+[[ ${machine} == "E5-476G" ]] && \
+  bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/refind.sh)"
+
 #################################### THEMES ####################################
 
 # General Theming
