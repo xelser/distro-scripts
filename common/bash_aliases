@@ -77,5 +77,6 @@ if [ -d $HOME/Documents/distro-scripts/ ] ; then
 fi
 
 # others
+alias upall="update ; flatupdate ; [ -d $HOME/Documents/distro-scripts/ ] && gitupdate"
 alias post="bash $HOME/.config/post.sh"
 alias clear="clear && history -c"
