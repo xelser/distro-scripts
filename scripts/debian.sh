@@ -10,17 +10,19 @@ sed -i 's/non-free non-free/non-free/g' /etc/apt/sources.list
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base
-nala install --assume-yes lightdm build-essential curl firefox-esr \
+nala install --assume-yes --no-install-recommends \
+	lightdm-gtk-greeter-settings build-essential curl firefox-esr \
         qt5ct qt5-style-kvantum blueman mugshot pulseeffects numlockx \
         dconf-{editor,cli} redshift transmission-gtk geany
 
-if [[ ${wm_de} == "xfce" ]]; then nala install --assume-yes \
-        lightdm-gtk-greeter-settings gvfs-{backends,fuse} 
-
+if [[ ${wm_de} == "xfce" ]]; then 
+	nala install --assume-yes --no-install-recommends \
+          gvfs-{backends,fuse} 
 else
-	nala install --assume-yes i3-wm brightnessctl picom \
-	polybar nitrogen alacritty neovim xclip dunst libnotify4 \
-	ranger imv mpv rofi xarchiver pcmanfm lxappearance
+	nala install --assume-yes --no-install-recommends \
+	  i3-wm brightnessctl picom polybar alacritty ranger imv mpv rofi \
+	  neovim xclip dunst libnotify4 nitrogen lxappearance \
+ 	  xarchiver pcmanfm
 fi
 
 #################################### CONFIG ####################################
@@ -46,8 +48,6 @@ systemctl enable lightdm
 
 # INSTALL: GTK, KDE, Icon, Cursors
 if [ ! -f /.flag ]; then
-	${source_dir}/themes/theme-matcha.sh
-	${source_dir}/themes/icon-papirus.sh
         ${source_dir}/themes/fonts-nerd.sh Noto
 fi
 
