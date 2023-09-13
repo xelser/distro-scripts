@@ -11,7 +11,7 @@ apt update && apt install nala --yes
 
 # INSTALL: Debian Base
 nala install --assume-yes --no-install-recommends \
-	lightdm-gtk-greeter-settings build-essential curl firefox-esr \
+	lightdm{,-gtk-greeter-settings} build-essential curl firefox-esr \
         qt5ct qt5-style-kvantum blueman mugshot pulseeffects numlockx \
         dconf-{editor,cli} redshift transmission-gtk geany
 
