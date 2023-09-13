@@ -12,6 +12,7 @@ src_dir_kde="matcha-kde"
 # Install Commands
 install_gtk () {
 sudo ./install.sh
+sudo ln -sf /usr/share/gtksourceview-3.0/styles/matcha*.xml /usr/share/gtksourceview-4/styles/
 }
 
 install_kde () {

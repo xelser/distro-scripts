@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# gtksourceview
-sudo ln -sf /usr/share/gtksourceview-3.0/styles/matcha*.xml /usr/share/gtksourceview-4/styles/
-
 if [[ ${wm_de} == "xfce" ]]; then 
         # Themes and Fonts
         xfconf-query -cn xsettings -pn /Net/ThemeName -t string -s "Matcha-dark-aliz"
@@ -15,7 +12,3 @@ if [[ ${wm_de} == "xfce" ]]; then
         gsettings set org.xfce.mousepad.preferences.view font-name 'Noto Mono Bold 10'        
 fi
 
-#################################### FLATPAK ###################################
-
-# INSTALL: Debian
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/flatpak.sh)"
