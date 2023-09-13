@@ -14,12 +14,13 @@ nala install --assume-yes lightdm build-essential curl firefox-esr \
         qt5ct qt5-style-kvantum blueman mugshot pulseeffects numlockx \
         dconf-{editor,cli} redshift transmission-gtk geany
 
-if [[ ${wm_de} == "tty" ]]; then nala install --assume-yes \
-        i3-wm brightnessctl picom polybar nitrogen alacritty \
-        neovim xclip dunst libnotify4 ranger imv mpv rofi \
-        xarchiver pcmanfm lxappearance 
-elif [[ ${wm_de} == "xfce" ]]; then nala install --assume-yes \
+if [[ ${wm_de} == "xfce" ]]; then nala install --assume-yes \
         lightdm-gtk-greeter-settings gvfs-{backends,fuse} 
+
+else
+	nala install --assume-yes i3-wm brightnessctl picom \
+	polybar nitrogen alacritty neovim xclip dunst libnotify4 \
+	ranger imv mpv rofi xarchiver pcmanfm lxappearance
 fi
 
 #################################### CONFIG ####################################
