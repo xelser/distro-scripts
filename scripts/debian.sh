@@ -43,8 +43,8 @@ systemctl enable lightdm
 
 # INSTALL: GTK, KDE, Icon, Cursors
 if [ ! -f /.flag ]; then
+        ${source_dir}/themes/pack-gruvbox.sh
         ${source_dir}/themes/icon-papirus.sh 
         ${source_dir}/themes/fonts-nerd.sh Noto
-        ${source_dir}/themes/pack-catppuccin.sh
 fi
 
