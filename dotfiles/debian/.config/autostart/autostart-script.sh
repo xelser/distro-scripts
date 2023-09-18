@@ -8,3 +8,6 @@ xfconf-query -cn thunar -pn /last-window-width -t int -s "900"
 # Keyboard and Numlock
 exec xset led on
 exec numlockx on
+
+# Wallpaper
+nitrogen --restore

@@ -14,10 +14,10 @@ nala install --assume-yes --no-install-recommends \
   xfce4-{session,settings,terminal,notifyd,power-manager,appfinder,screenshooter} xfwm4 
 
 # INSTALL: Debian polybar and plank setup
-nala install --assume-yes lightdm{,-gtk-greeter-settings} light-locker \
+nala install --assume-yes plymouth lightdm{,-gtk-greeter-settings} light-locker \
   gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} xarchiver \
   dconf-{editor,cli} redshift transmission-gtk geany polybar plank nitrogen \
-  build-essential plymouth mugshot easyeffects firefox-esr \
+  build-essential mugshot easyeffects pipewire-audio firefox-esr \
   ristretto parole mousepad curl numlockx
 
 #################################### CONFIG ####################################
@@ -45,5 +45,6 @@ systemctl enable lightdm
 if [ ! -f /.flag ]; then
         ${source_dir}/themes/icon-papirus.sh 
         ${source_dir}/themes/fonts-nerd.sh Noto
+        ${source_dir}/themes/pack-catppuccin.sh
 fi
 
