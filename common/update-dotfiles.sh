@@ -190,7 +190,10 @@ save_file /.config/ulauncher/ settings.json
 save_folder /.config/eww/
 
 # Polybar
-save_folder /.config/polybar/
+save_folder /.config/polybar/modules/
+save_folder /.config/polybar/scripts/
+save_file /.config/polybar/ launch.sh
+save_file /.config/polybar/ config.ini
 
 # Waybar
 save_file /.config/waybar/ config
