@@ -6,8 +6,11 @@ xfconf-query -cn thunar -pn /last-window-height -t int -s "600"
 xfconf-query -cn thunar -pn /last-window-width -t int -s "900"   
 
 # Keyboard and Numlock
-exec xset led on
-exec numlockx on
+xset led on
+#numlockx on
 
 # Wallpaper
 nitrogen --restore
+
+# Polybar
+sh $HOME/.config/polybar/launch.sh

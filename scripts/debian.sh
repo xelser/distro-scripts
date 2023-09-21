@@ -16,9 +16,8 @@ nala install --assume-yes --no-install-recommends \
 # INSTALL: Debian polybar and plank setup
 nala install --assume-yes plymouth lightdm{,-gtk-greeter-settings} light-locker \
   gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} xarchiver \
-  dconf-{editor,cli} redshift transmission-gtk geany polybar plank nitrogen \
-  build-essential curl numlockx mugshot pulseeffects firefox-esr \
-  ristretto parole mousepad
+  build-essential curl numlockx dconf-{editor,cli} mugshot pulseeffects firefox-esr \
+  ristretto parole mousepad redshift transmission-gtk geany polybar plank nitrogen xdo
 
 #################################### CONFIG ####################################
 
@@ -47,4 +46,3 @@ if [ ! -f /.flag ]; then
         ${source_dir}/themes/icon-papirus.sh 
         ${source_dir}/themes/fonts-nerd.sh Noto
 fi
-
