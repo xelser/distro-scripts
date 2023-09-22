@@ -34,12 +34,12 @@ fi
 
 if [ -f /usr/bin/xfce4-terminal ]; then
 	cd /tmp/ && git clone https://github.com/xelser/gruvbox-xfce4-terminal
-	cp -rf /tmp/gruvbox-xfce4-terminal/*.theme /usr/share/xfce4/terminal/colorschemes/
+	sudo cp -rf /tmp/gruvbox-xfce4-terminal/*.theme /usr/share/xfce4/terminal/colorschemes/
 fi
 
 if [ -f /usr/bin/geany ]; then
 	cd /tmp/ && git clone https://github.com/kdnfgc/gruvbox-material-geany.git
-	sudo cp gruvbox-material-geany/gruvbox-material-dark.conf /usr/share/geany/colorschemes/
+	sudo cp -rf gruvbox-material-geany/gruvbox-material-dark.conf /usr/share/geany/colorschemes/
 fi
 
 ######## OLD ########
