@@ -15,7 +15,7 @@ sudo wget -q https://raw.githubusercontent.com/morhetz/gruvbox-contrib/master/ge
 sudo ln -sf /usr/share/gtksourceview-3.0/styles/gruvbox-dark.xml /usr/share/gtksourceview-4/styles/
 
 # Cursors
-#cd /tmp/ && wget -cO- https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2 | sudo tar xfj - -C /usr/share/icons
+cd /tmp/ && wget -cO- https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2 | sudo tar xfj - -C /usr/share/icons
 
 if [ -f /usr/bin/kvantummanager ]; then
 	cd /tmp/ && git clone https://github.com/sachnr/gruvbox-kvantum-themes.git
