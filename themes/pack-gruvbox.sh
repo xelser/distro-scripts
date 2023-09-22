@@ -10,9 +10,10 @@ sudo cp -rf gruvbox-material-gtk/{themes,icons} /usr/share/
 sudo gtk-update-icon-cache /usr/share/icons/Gruvbox-Material-Dark
 
 # gtksourceview
-sudo mkdir -p /usr/share/gtksourceview-{3.0,4}/styles/ && cd /usr/share/gtksourceview-3.0/styles/
-sudo wget -q https://raw.githubusercontent.com/morhetz/gruvbox-contrib/master/gedit/gruvbox-dark.xml
-sudo ln -sf /usr/share/gtksourceview-3.0/styles/gruvbox-dark.xml /usr/share/gtksourceview-4/styles/
+sudo mkdir -p /usr/share/gtksourceview-{3.0,4}/styles/
+cd /tmp/ && git clone https://github.com/xelser/gruvbox-gtksourceview
+sudo cp /tmp/gruvbox-gtksourceview/*.xml /usr/share/gtksourceview-3.0/styles/
+sudo ln -sf /usr/share/gtksourceview-3.0/styles/gruvbox_material_*.xml /usr/share/gtksourceview-4/styles/
 
 # Cursors
 cd /tmp/ && wget -cO- https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2 | sudo tar xfj - -C /usr/share/icons

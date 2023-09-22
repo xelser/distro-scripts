@@ -44,7 +44,6 @@ echo -e "[greeter]
 background = /usr/share/backgrounds/gruvbox/gruvbox_astro.jpg
 theme-name = Gruvbox-Material-Dark
 icon-theme-name = Papirus-Dark
-cursor-theme-name = phinger-cursors
 font-name = Noto Sans 10
 clock-format = %a, %I:%M %p
 indicators = ~host;~spacer;~clock;~spacer;~session;~power
