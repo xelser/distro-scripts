@@ -17,7 +17,8 @@ nala install --assume-yes --no-install-recommends \
 nala install --assume-yes plymouth lightdm{,-gtk-greeter-settings} light-locker \
   gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} xarchiver \
   build-essential curl numlockx dconf-{editor,cli} mugshot pulseeffects firefox-esr \
-  ristretto parole mousepad redshift transmission-gtk geany polybar plank nitrogen xdo
+  ristretto parole mousepad redshift transmission-gtk geany polybar plank nitrogen xdo \
+  gnome-boxes gcolor3
 
 #################################### CONFIG ####################################
 
@@ -42,7 +43,7 @@ systemctl enable lightdm
 
 # INSTALL: GTK, KDE, Icon, Cursors
 if [ ! -f /.flag ]; then
+        ${source_dir}/themes/icon-papirus.sh
         ${source_dir}/themes/pack-gruvbox.sh
-        ${source_dir}/themes/icon-papirus.sh 
         ${source_dir}/themes/fonts-nerd.sh Noto
 fi
