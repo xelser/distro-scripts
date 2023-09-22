@@ -17,9 +17,9 @@ sudo ln -sf /usr/share/gtksourceview-3.0/styles/gruvbox-dark.xml /usr/share/gtks
 # Cursors
 #cd /tmp/ && wget -cO- https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2 | sudo tar xfj - -C /usr/share/icons
 
-if [ -f /usr/bin/polybar ]; then
-	cd /tmp/ && git clone git@github.com:xelser/gruvbox-polybar && mkdir -p $HOME/.config/polybar/
-	cp -rf /tmp/gruvbox-polybar/*.ini $HOME/.config/polybar/themes/
+if [ -f /usr/bin/kvantummanager ]; then
+	cd /tmp/ && git clone https://github.com/sachnr/gruvbox-kvantum-themes.git
+	sudo cp -rf gruvbox-kvantum-themes/Gruvbox* /usr/share/Kvantum/
 fi
 
 if [ -f /usr/bin/openbox ]; then
@@ -27,14 +27,14 @@ if [ -f /usr/bin/openbox ]; then
 	sudo cp -rf gruvbox-material-openbox/gruvbox-material-* /usr/share/themes/
 fi
 
-if [ -f /usr/bin/kvantummanager ]; then
-	cd /tmp/ && git clone https://github.com/sachnr/gruvbox-kvantum-themes.git
-	sudo cp -rf gruvbox-kvantum-themes/Gruvbox* /usr/share/Kvantum/
+if [ -f /usr/bin/polybar ]; then
+	cd /tmp/ && git clone https://github.com/xelser/gruvbox-polybar && mkdir -p $HOME/.config/polybar/
+	cp -rf /tmp/gruvbox-polybar/*.ini $HOME/.config/polybar/themes/
 fi
 
-if [ -f /usr/bin/xfce4-terminal ]; then 
-	sudo mkdir -p /usr/share/xfce4/terminal/colorschemes && cd /usr/share/xfce4/terminal/colorschemes
-	sudo wget -q https://gist.githubusercontent.com/tsbarnes/76724165773e834ea90c/raw/7d32273d76ace3553a43ec24a145ffa4bd2e1b10/gruvbox-dark.theme
+if [ -f /usr/bin/xfce4-terminal ]; then
+	cd /tmp/ && git clone https://github.com/xelser/gruvbox-xfce4-terminal
+	cp -rf /tmp/gruvbox-xfce4-terminal/*.theme /usr/share/xfce4/terminal/colorschemes/
 fi
 
 if [ -f /usr/bin/geany ]; then
