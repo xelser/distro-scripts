@@ -8,6 +8,7 @@ x-scheme-handler/https=xfce4-web-browser.desktop;
 inode/directory=xfce4-file-manager.desktop;
 x-scheme-handler/trash=xfce4-file-manager.desktop;
 application/toml=org.xfce.mousepad.desktop;geany.desktop;
+application/xml=org.xfce.mousepad.desktop;
 
 [Default Applications]
 image/jpeg=org.xfce.ristretto.desktop
