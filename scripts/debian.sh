@@ -16,9 +16,9 @@ nala install --assume-yes --no-install-recommends \
 # INSTALL: Debian polybar and plank setup
 nala install --assume-yes plymouth lightdm{,-gtk-greeter-settings} light-locker \
   gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} xarchiver \
-  build-essential numlockx dconf-{editor,cli} mugshot pulseeffects firefox-esr redshift \
+  build-essential synaptic dconf-{editor,cli} mugshot pulseeffects firefox-esr redshift \
   ristretto parole mousepad transmission-gtk polybar plank nitrogen xdo alacritty neovim \
-  gnome-boxes gcolor3
+  gnome-boxes gcolor3 numlockx 
 
 #################################### CONFIG ####################################
 
