@@ -17,7 +17,7 @@ nala install --assume-yes --no-install-recommends \
 nala install --assume-yes plymouth lightdm{,-gtk-greeter-settings} light-locker \
   gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} xarchiver \
   build-essential numlockx dconf-{editor,cli} mugshot pulseeffects firefox-esr redshift \
-  ristretto parole transmission-gtk polybar plank nitrogen xdo alacritty neovim \
+  ristretto parole mousepad transmission-gtk polybar plank nitrogen xdo alacritty neovim \
   gnome-boxes gcolor3
 
 #################################### CONFIG ####################################
