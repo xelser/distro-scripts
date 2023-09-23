@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Backgrounds
+# backgrounds
 cd /tmp/ && git clone https://github.com/xelser/gruvbox-backgrounds
 sudo cp -rf gruvbox-backgrounds/backgrounds /usr/share/
 
@@ -9,14 +9,29 @@ cd /tmp/ && git clone https://github.com/TheGreatMcPain/gruvbox-material-gtk.git
 sudo cp -rf gruvbox-material-gtk/{themes,icons} /usr/share/
 sudo gtk-update-icon-cache /usr/share/icons/Gruvbox-Material-Dark
 
-# gtksourceview
-sudo mkdir -p /usr/share/gtksourceview-{3.0,4}/styles/
-cd /tmp/ && git clone https://github.com/xelser/gruvbox-gtksourceview
-sudo cp /tmp/gruvbox-gtksourceview/*.xml /usr/share/gtksourceview-3.0/styles/
-sudo ln -sf /usr/share/gtksourceview-3.0/styles/gruvbox_material_*.xml /usr/share/gtksourceview-4/styles/
-
-# Cursors
+# cursors
 cd /tmp/ && wget -cO- https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2 | sudo tar xfj - -C /usr/share/icons
+
+# gtksourceview
+mkdir -p $HOME/.local/share/gtksourceview-{3.0,4}/styles
+cd /tmp/ && git clone https://github.com/xelser/gruvbox-gtksourceview
+cp -rf /tmp/gruvbox-gtksourceview/*.xml $HOME/.local/share/gtksourceview-3.0/styles/
+ln -sf $HOME/.local/share/gtksourceview-3.0/styles/gruvbox*.xml $HOME/.local/share/gtksourceview-4/styles/
+
+if [ -f /usr/bin/alacritty ]; then
+	mkdir -p $HOME/.config/alacritty && cd $HOME/.config/alacritty/ && curl -fsSL -o gruvbox-material.yml \
+	https://gist.githubusercontent.com/xelser/017a54e51562a9294e9dd370b1c0649d/raw/1741df2464bd0f25c6522f60a2d5ecda613eb188/gruvbox-material-alacritty.yml
+fi
+
+if [ -f /usr/bin/xfce4-terminal ]; then
+	cd /tmp/ && git clone https://github.com/xelser/gruvbox-xfce4-terminal && mkdir -p $HOME/.local/share/xfce4/terminal/colorschemes
+	cp -rf /tmp/gruvbox-xfce4-terminal/*.theme $HOME/.local/share/xfce4/terminal/colorschemes/
+fi
+
+if [ -f /usr/bin/polybar ]; then
+	cd /tmp/ && git clone https://github.com/xelser/gruvbox-polybar && mkdir -p $HOME/.config/polybar/
+	cp -rf /tmp/gruvbox-polybar/*.ini $HOME/.config/polybar/themes/
+fi
 
 if [ -f /usr/bin/kvantummanager ]; then
 	cd /tmp/ && git clone https://github.com/sachnr/gruvbox-kvantum-themes.git
@@ -28,32 +43,8 @@ if [ -f /usr/bin/openbox ]; then
 	sudo cp -rf gruvbox-material-openbox/gruvbox-material-* /usr/share/themes/
 fi
 
-if [ -f /usr/bin/polybar ]; then
-	cd /tmp/ && git clone https://github.com/xelser/gruvbox-polybar && mkdir -p $HOME/.config/polybar/
-	cp -rf /tmp/gruvbox-polybar/*.ini $HOME/.config/polybar/themes/
-fi
-
-if [ -f /usr/bin/xfce4-terminal ]; then
-	cd /tmp/ && git clone https://github.com/xelser/gruvbox-xfce4-terminal
-	sudo cp -rf /tmp/gruvbox-xfce4-terminal/*.theme /usr/share/xfce4/terminal/colorschemes/
-fi
-
 if [ -f /usr/bin/geany ]; then
 	cd /tmp/ && git clone https://github.com/kdnfgc/gruvbox-material-geany.git
 	sudo cp -rf gruvbox-material-geany/gruvbox-material-dark.conf /usr/share/geany/colorschemes/
 fi
 
-######## OLD ########
-
-# GTK
-#cd /tmp/ && git clone https://github.com/Fausto-Korpsvart/Gruvbox-GTK-Theme.git
-#sudo cp -rf Gruvbox-GTK-Theme/themes /usr/share/
-
-# GtkSourceView
-#sudo mkdir -p /usr/share/gtksourceview-{3.0,4}/styles/
-#sudo cp -rf Gruvbox-GTK-Theme/extra/text-editor/* /usr/share/gtksourceview-3.0/styles/
-#sudo ln -sf /usr/share/gtksourceview-3.0/styles/gruvbox-*.xml /usr/share/gtksourceview-4/styles/
-
-#if [ -f /usr/bin/plank ]; then
-#	sudo cp -rf Gruvbox-GTK-Theme/extra/plank/* /usr/share/plank/themes/
-#fi
