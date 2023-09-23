@@ -59,11 +59,14 @@ elif [[ ${wm_de} == "xfce" ]]; then
 	alias edit="mousepad"
 elif [[ ${wm_de} == "kde" ]]; then
 	alias edit="kwrite"
-elif [[ -f /bin/nvim ]]; then
-	alias edit="nvim"
 else
 	alias edit="nano"
 fi
+
+if [[ -f /bin/nvim ]]; then
+	alias edit="nvim"
+fi
+
 
 # dotfiles
 if [ -d $HOME/Documents/distro-scripts/ ] ; then

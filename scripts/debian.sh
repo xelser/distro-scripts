@@ -11,13 +11,13 @@ apt update && apt install nala --yes
 
 # INSTALL: Debian XFCE
 nala install --assume-yes --no-install-recommends \
-  xfce4-{session,settings,terminal,notifyd,power-manager,appfinder,screenshooter} xfwm4 
+  xfce4-{session,settings,notifyd,power-manager,appfinder,screenshooter} xfwm4 
 
 # INSTALL: Debian polybar and plank setup
 nala install --assume-yes plymouth lightdm{,-gtk-greeter-settings} light-locker \
   gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} xarchiver \
   build-essential curl numlockx dconf-{editor,cli} mugshot pulseeffects firefox-esr \
-  ristretto parole mousepad redshift transmission-gtk geany polybar plank nitrogen xdo \
+  ristretto parole redshift transmission-gtk polybar plank nitrogen xdo alacritty neovim \
   gnome-boxes gcolor3
 
 #################################### CONFIG ####################################
@@ -25,7 +25,7 @@ nala install --assume-yes plymouth lightdm{,-gtk-greeter-settings} light-locker 
 # sudo
 usermod -aG sudo ${user}
 
-# grub 
+# grub
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
 sed -i 's/quiet/quiet splash/g' /etc/default/grub
 sed -i 's/splash splash/splash/g' /etc/default/grub
@@ -48,7 +48,6 @@ font-name = Noto Sans 10
 clock-format = %a, %I:%M %p
 indicators = ~host;~spacer;~clock;~spacer;~session;~power
 " > /etc/lightdm/lightdm-gtk-greeter.conf
-
 
 #################################### THEMES ####################################
 

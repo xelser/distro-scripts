@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Vim/Neovim Plug
+[ -f /usr/bin/vim ] && curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+        https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+[ -f /usr/bin/nvim ] && sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim \
+        --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+       
 if [[ ${wm_de} == "xfce" ]]; then 
         # Themes and Fonts
         xfconf-query -cn xsettings -pn /Net/ThemeName -t string -s "Gruvbox-Material-Dark"
