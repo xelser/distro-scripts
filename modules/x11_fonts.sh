@@ -6,5 +6,5 @@ if [[ ${XDG_SESSION_TYPE} == "x11" ]]; then
         sudo ln -sf /usr/share/fontconfig/conf.avail/10-sub-pixel-rgb.conf /etc/fonts/conf.d/
         sudo ln -sf /usr/share/fontconfig/conf.avail/10-hinting-slight.conf /etc/fonts/conf.d/
         sudo ln -sf /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
-        [ -f /usr/bin/xrdb ] && xrdb -merge $HOME/.Xresources ; sudo fc-cache -fv
+        [ -f /usr/bin/xrdb ] && xrdb -merge $HOME/.Xresources ; fc-cache -fv
 fi
