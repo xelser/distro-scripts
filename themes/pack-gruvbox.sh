@@ -29,7 +29,7 @@ if [ -f /usr/bin/xfce4-terminal ]; then
 fi
 
 if [ -f /usr/bin/polybar ]; then
-	cd /tmp/ && git clone https://github.com/xelser/gruvbox-polybar && mkdir -p $HOME/.config/polybar/
+	cd /tmp/ && git clone https://github.com/xelser/gruvbox-polybar && mkdir -p $HOME/.config/polybar/themes/
 	cp -rf /tmp/gruvbox-polybar/*.ini $HOME/.config/polybar/themes/
 fi
 
