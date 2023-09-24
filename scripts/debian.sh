@@ -17,9 +17,9 @@ nala install --assume-yes --no-install-recommends \
 # INSTALL: Debian polybar and plank setup
 nala install --assume-yes plymouth lightdm{,-gtk-greeter-settings} light-locker \
   gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} xarchiver \
-  build-essential synaptic dconf-{editor,cli} mugshot pulseeffects firefox-esr redshift \
-  ristretto parole mousepad transmission-gtk polybar plank nitrogen xdo alacritty neovim \
-  gnome-boxes gcolor3 numlockx 
+  build-essential synaptic dconf-{editor,cli} mugshot pulseeffects firefox-esr neovim \
+  fonts-ubuntu{,-console} polybar plank nitrogen xdo alacritty redshift numlockx \
+  ristretto parole mousepad transmission-gtk gnome-boxes gcolor3 
 
 #################################### CONFIG ####################################
 
@@ -55,5 +55,5 @@ indicators = ~host;~spacer;~clock;~spacer;~session;~power
 # INSTALL: GTK, KDE, Icon, Cursors
 if [ ! -f /.flag ]; then
         ${source_dir}/themes/icon-papirus.sh
-        ${source_dir}/themes/fonts-nerd.sh Noto
+        ${source_dir}/themes/fonts-nerd.sh UbuntuMono
 fi
