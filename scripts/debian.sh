@@ -3,8 +3,9 @@
 ################################### PACKAGES ###################################
 
 # Debian Non-Free Repos
-sed -i 's/non-free-firmware/non-free-firmware non-free/g' /etc/apt/sources.list
+sed -i 's/non-free-firmware/non-free-firmware non-free contrib/g' /etc/apt/sources.list
 sed -i 's/non-free non-free/non-free/g' /etc/apt/sources.list
+sed -i 's/contrib contrib/contrib/g' /etc/apt/sources.list
 
 # PACKAGE MANAGER: Nala
 apt update && apt install nala --yes
