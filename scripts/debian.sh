@@ -17,9 +17,9 @@ nala install --assume-yes --no-install-recommends \
 # INSTALL: Debian polybar and plank setup
 nala install --assume-yes plymouth lightdm{,-gtk-greeter-settings} light-locker \
   gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} xarchiver \
-  build-essential synaptic dconf-{editor,cli} mugshot pulseeffects firefox-esr neovim \
+  build-essential curl synaptic dconf-{editor,cli} mugshot pulseeffects firefox-esr \
   fonts-ubuntu{,-console} polybar plank nitrogen xdo alacritty redshift numlockx \
-  ristretto parole mousepad transmission-gtk gnome-boxes gcolor3 
+  neovim ristretto parole mousepad transmission-gtk gnome-boxes gcolor3 
 
 #################################### CONFIG ####################################
 
@@ -45,7 +45,7 @@ echo -e "[greeter]
 background = /usr/share/backgrounds/gruvbox/gruvbox_astro.jpg
 theme-name = Gruvbox-Material-Dark
 icon-theme-name = Papirus-Dark
-font-name = Noto Sans 10
+font-name = Ubuntu 10
 clock-format = %a, %I:%M %p
 indicators = ~host;~spacer;~clock;~spacer;~session;~power
 " > /etc/lightdm/lightdm-gtk-greeter.conf
