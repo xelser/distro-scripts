@@ -13,4 +13,5 @@ xset led on
 nitrogen --restore
 
 # Polybar
-sh $HOME/.config/polybar/launch.sh && xdo hide -N Polybar && xdo show -N Polybar
+sh $HOME/.config/polybar/launch.sh && sleep 10s && \
+	xdo hide -N Polybar && xdo show -N Polybar
