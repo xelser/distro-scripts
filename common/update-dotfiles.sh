@@ -54,6 +54,7 @@ save_file /.config/mpv/ mpv.conf
 save_file /.config/celluloid/ mpv.conf
 
 # Redshift
+save_file /.config/ redshift.conf
 save_folder /.config/redshift/
 
 # Gammastep 
