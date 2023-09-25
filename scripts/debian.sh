@@ -12,8 +12,8 @@ apt update && apt install nala --yes
 
 # INSTALL: Debian Base (X11 and PulseAudio)
 nala install --assume-yes lightdm redshift numlockx nitrogen pulseeffects \
+  dconf-{editor,cli} mugshot at-spi2-core firefox-esr transmission-gtk \
   curl build-essential synaptic plymouth fonts-ubuntu{,-console} \
-  dconf-{editor,cli} mugshot firefox-esr transmission-gtk \
   alacritty neovim
 
 # INSTALL: Debian XFCE
