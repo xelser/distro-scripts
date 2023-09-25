@@ -205,14 +205,7 @@ exec --no-startup-id dunst
 exec_always --no-startup-id sh $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id nitrogen --restore
 exec_always --no-startup-id xset led on
-#exec_always --no-startup-id numlockx on
+exec_always --no-startup-id numlockx on
 exec_always --no-startup-id picom
 exec --no-startup-id redshift 
-
-# Autostart (for i3)
-
-# Screenshot (flameshot)
-
-# Night light (gammastep)
-
 
