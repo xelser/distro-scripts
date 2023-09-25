@@ -10,16 +10,21 @@ sed -i 's/contrib contrib/contrib/g' /etc/apt/sources.list
 # PACKAGE MANAGER: Nala
 apt update && apt install nala --yes
 
+# INSTALL: Debian Base (X11 and PulseAudio)
+nala install --assume-yes lightdm redshift numlockx nitrogen pulseeffects \
+  curl build-essential synaptic plymouth fonts-ubuntu{,-console} \
+  dconf-{editor,cli} mugshot firefox-esr transmission-gtk \
+  alacritty neovim
+
 # INSTALL: Debian XFCE
 nala install --assume-yes --no-install-recommends \
-  xfce4-{session,settings,notifyd,power-manager,appfinder,screenshooter} xfwm4 
+  xfce4-{session,settings,notifyd,power-manager,appfinder,screenshooter} \
+  xfwm4 lightdm-gtk-greeter-settings light-locker
 
 # INSTALL: Debian polybar and plank setup
-nala install --assume-yes plymouth lightdm{,-gtk-greeter-settings} light-locker \
-  gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} xarchiver \
-  build-essential curl synaptic dconf-{editor,cli} mugshot pulseeffects firefox-esr \
-  fonts-ubuntu{,-console} polybar plank nitrogen xdo alacritty redshift numlockx \
-  neovim ristretto parole mousepad transmission-gtk gcolor3 
+nala install --assume-yes xarchiver ristretto parole mousepad \
+  gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} \
+  polybar plank nitrogen xdo
 
 #################################### CONFIG ####################################
 
