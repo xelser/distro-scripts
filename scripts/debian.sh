@@ -22,6 +22,11 @@ nala install --assume-yes i3-wm picom polybar nitrogen rofi \
   xfce4-screenshooter xarchiver ristretto parole mousepad \
   gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin}
 
+# BUILD: autotiling
+nala install --assume-yes python3-i3ipc && wget -q -O /usr/bin/autotiling \
+  https://raw.githubusercontent.com/nwg-piotr/autotiling/master/autotiling/main.py
+chmod +x /usr/bin/autotiling
+
 #################################### CONFIG ####################################
 
 # sudo
