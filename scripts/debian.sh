@@ -19,9 +19,8 @@ nala install --assume-yes lightdm redshift numlockx nitrogen pulseeffects \
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar nitrogen rofi \
   dunst libnotify-bin policykit-1-gnome lxappearance \
-  lightdm-gtk-greeter-settings xfce4-screenshooter \
-  xarchiver ristretto parole mousepad \
-  gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin
+  xfce4-screenshooter xarchiver ristretto parole mousepad \
+  gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin}
 
 #################################### CONFIG ####################################
 
@@ -41,16 +40,6 @@ autologin-user-timeout=0
 greeter-hide-users=false
 user-session=i3" >> /etc/lightdm/lightdm.conf
 systemctl enable lightdm
-
-# lightdm-gtk-greeter
-echo -e "[greeter]
-background = /usr/share/backgrounds/gruvbox/gruvbox_astro.jpg
-theme-name = Gruvbox-Material-Dark
-icon-theme-name = Papirus-Dark
-font-name = Ubuntu 10
-clock-format = %a, %I:%M %p
-indicators = ~host;~spacer;~clock;~spacer;~session;~power
-" > /etc/lightdm/lightdm-gtk-greeter.conf
 
 #################################### THEMES ####################################
 
