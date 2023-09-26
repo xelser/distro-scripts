@@ -16,15 +16,12 @@ nala install --assume-yes lightdm redshift numlockx nitrogen pulseeffects \
   curl build-essential synaptic plymouth fonts-ubuntu{,-console} \
   alacritty neovim
 
-# INSTALL: Debian XFCE
-nala install --assume-yes --no-install-recommends \
-  xfce4-{session,settings,notifyd,power-manager,appfinder,screenshooter} \
-  xfwm4 lightdm-gtk-greeter-settings light-locker
-
-# INSTALL: Debian polybar and plank setup
-nala install --assume-yes xarchiver ristretto parole mousepad \
-  gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} \
-  polybar plank nitrogen xdo
+# INSTALL: Debian i3
+nala install --assume-yes i3-wm picom polybar nitrogen rofi \
+  dunst libnotify-bin policykit-1-gnome lxappearance \
+  lightdm-gtk-greeter-settings xfce4-screenshooter \
+  xarchiver ristretto parole mousepad \
+  gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin
 
 #################################### CONFIG ####################################
 
@@ -42,7 +39,7 @@ echo -e "\n[Seat:*]
 autologin-user=${user}
 autologin-user-timeout=0
 greeter-hide-users=false
-user-session=xfce" >> /etc/lightdm/lightdm.conf
+user-session=i3" >> /etc/lightdm/lightdm.conf
 systemctl enable lightdm
 
 # lightdm-gtk-greeter
