@@ -1,10 +1,6 @@
 #!/bin/bash
 clear
 
-check_flag () {
-	[ ! -f ${root_mnt}/.flag ] && sudo cp -rf $1 $1.bak || sudo cp -rf $1.bak $1
-}
-
 ################################# SET VARIABLES ################################
 
 ## ID ##
@@ -50,8 +46,7 @@ systemd-inhibit ${source_dir}/scripts/${distro_id}.sh
 [ -f ${dotfiles_dir}/.gtkrc-2.0 ]     && cp -rf ${dotfiles_dir}/.gtkrc-2.0     ${root_mnt}/home/${user}/
 
 ## Environment Variables ##
-check_flag ${root_mnt}/etc/profile
-cat ${source_dir}/common/env-var | sudo tee -a ${root_mnt}/etc/profile 1> /dev/null
+sudo cp -rf ${source_dir}/common/env.sh ${root_mnt}/etc/profile.d/
 
 ## Bash Configs ##
 cp -rf ${root_mnt}/etc/skel/.bashrc ${root_mnt}/home/${user}/.bashrc
