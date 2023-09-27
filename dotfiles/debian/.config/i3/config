@@ -201,6 +201,7 @@ gaps top 42
 # Autostart (Once)
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id pulseeffects --gapplication-service
+exec --no-startup-id picom --daemon
 exec --no-startup-id redshift 
 exec --no-startup-id numlockx
 exec --no-startup-id dunst 
@@ -208,6 +209,5 @@ exec --no-startup-id dunst
 # Autostart (Always)
 exec_always --no-startup-id sh $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id nitrogen --restore
-exec_always --no-startup-id picom --daemon
 exec_always --no-startup-id xset led on
 exec_always --no-startup-id autotiling
