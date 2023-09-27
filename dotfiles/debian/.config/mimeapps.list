@@ -10,6 +10,7 @@ x-scheme-handler/trash=xfce4-file-manager.desktop;
 application/toml=org.xfce.mousepad.desktop;geany.desktop;
 application/xml=org.xfce.mousepad.desktop;
 image/png=org.xfce.ristretto.desktop;
+text/x-csrc=org.xfce.mousepad.desktop;
 
 [Default Applications]
 image/jpeg=org.xfce.ristretto.desktop
