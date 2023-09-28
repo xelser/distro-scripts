@@ -11,9 +11,9 @@ sed -i 's/contrib contrib/contrib/g' /etc/apt/sources.list
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base (X11 and PulseAudio)
-nala install --assume-yes xinit redshift numlockx nitrogen pulseeffects \
+nala install --assume-yes lightdm{,-gtk-greeter-settings} curl build-essential synaptic \
+  redshift numlockx nitrogen pulseeffects plymouth fonts-ubuntu{,-console} \
   dconf-{editor,cli} mugshot at-spi2-core firefox-esr transmission-gtk \
-  curl build-essential synaptic plymouth fonts-ubuntu{,-console} \
   alacritty neovim mpv mpd ncmpcpp imv
 
 # INSTALL: Debian i3
@@ -37,9 +37,10 @@ sed -i 's/quiet/quiet splash/g' /etc/default/grub
 sed -i 's/splash splash/splash/g' /etc/default/grub
 update-grub
 
-# mpd
-systemctl enable mpd
-
+# lightdm
+echo -e "\n[Seat:*]
+autologin-user=${user}" >> /etc/lightdm/lightdm.conf
+systemctl enable lightdm
 
 #################################### THEMES ####################################
 
