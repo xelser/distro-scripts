@@ -13,12 +13,16 @@ apt update && apt install nala --yes
 # INSTALL: Debian Base (X11 and PulseAudio)
 nala install --assume-yes lightdm{,-gtk-greeter-settings} curl build-essential synaptic \
   plymouth dconf-{editor,cli} mugshot at-spi2-core firefox-esr transmission-gtk \
-  redshift numlockx nitrogen pulseeffects alacritty neovim mpv mpd ncmpcpp imv
+  redshift numlockx nitrogen pulseeffects alacritty neovim mpv mpd imv
 
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar nitrogen rofi dunst libnotify-bin \
   gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} xarchiver \
   policykit-1-gnome lxappearance mousepad xfce4-screenshooter
+
+# INSTALL: Fira Sans (Google fonts)
+wget -q http://bootes.ethz.ch/fonts/deb/fonts-firasans_1.0_all.deb -P /tmp
+sudo nala install --assume-yes /tmp/fonts-firasans_1.0_all.deb
 
 # BUILD: autotiling
 nala install --assume-yes python3-i3ipc && wget -q -O /usr/bin/autotiling \
