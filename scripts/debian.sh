@@ -11,16 +11,15 @@ sed -i 's/contrib contrib/contrib/g' /etc/apt/sources.list
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base (X11 and PulseAudio)
-nala install --assume-yes lightdm redshift numlockx nitrogen pulseeffects \
+nala install --assume-yes xinit redshift numlockx nitrogen pulseeffects \
   dconf-{editor,cli} mugshot at-spi2-core firefox-esr transmission-gtk \
   curl build-essential synaptic plymouth fonts-ubuntu{,-console} \
-  alacritty neovim
+  alacritty neovim mpv mpd ncmpcpp imv
 
 # INSTALL: Debian i3
-nala install --assume-yes i3-wm picom polybar nitrogen rofi \
-  dunst libnotify-bin policykit-1-gnome lxappearance \
-  xfce4-screenshooter xarchiver ristretto parole mousepad \
-  gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin}
+nala install --assume-yes i3-wm picom polybar nitrogen rofi dunst libnotify-bin \
+  gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} xarchiver \
+  policykit-1-gnome lxappearance mousepad xfce4-screenshooter
 
 # BUILD: autotiling
 nala install --assume-yes python3-i3ipc && wget -q -O /usr/bin/autotiling \
@@ -38,13 +37,9 @@ sed -i 's/quiet/quiet splash/g' /etc/default/grub
 sed -i 's/splash splash/splash/g' /etc/default/grub
 update-grub
 
-# lightdm
-echo -e "\n[Seat:*]
-autologin-user=${user}
-autologin-user-timeout=0
-greeter-hide-users=false
-user-session=i3" >> /etc/lightdm/lightdm.conf
-systemctl enable lightdm
+# mpd
+systemctl enable mpd
+
 
 #################################### THEMES ####################################
 
