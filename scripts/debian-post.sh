@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# mpd
+systemctl enable --user mpd
+
 # gruvbox material
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-gruvbox.sh)"
 
@@ -11,6 +14,11 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
         --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
        
 # Themes and Fonts
+if [ -f /usr/bin/mousepad ]; then
+        dconf write /org/xfce/mousepad/preferences/view/color-scheme "'gruvbox_material_hard_dark'"
+        dconf write /org/xfce/mousepad/preferences/view/font-name "'UbuntuMono Nerd Font 11.5'"
+fi
+
 if [[ ${wm_de} == "xfce" ]]; then 
         xfconf-query -cn xsettings -pn /Net/ThemeName -t string -s "Gruvbox-Material-Dark"
         xfconf-query -cn xsettings -pn /Net/IconThemeName -t string -s "Papirus-Dark"
@@ -20,9 +28,6 @@ if [[ ${wm_de} == "xfce" ]]; then
         xfconf-query -cn xsettings -pn /Gtk/MonospaceFontName -t string -s "UbuntuMono Nerd Font 11.5"
         xfconf-query -cn xfwm4 -pn /general/theme -t string -s "Gruvbox-Material-Dark"
         xfconf-query -cn xfwm4 -pn /general/title_font -t string -s "Ubuntu Bold 9"
-        xfconf-query -cn parole -pn /subtitles/font -t string -s "Ubuntu Mono Bold 10"
-        dconf write /org/xfce/mousepad/preferences/view/color-scheme "'gruvbox_material_hard_dark'"
-        dconf write /org/xfce/mousepad/preferences/view/font-name "'UbuntuMono Nerd Font 11.5'"
 fi
 
 # rofi (launcher and powermenu)
