@@ -12,9 +12,8 @@ apt update && apt install nala --yes
 
 # INSTALL: Debian Base (X11 and PulseAudio)
 nala install --assume-yes lightdm{,-gtk-greeter-settings} curl build-essential synaptic \
-  redshift numlockx nitrogen pulseeffects plymouth fonts-ubuntu{,-console} \
-  dconf-{editor,cli} mugshot at-spi2-core firefox-esr transmission-gtk \
-  alacritty neovim mpv mpd ncmpcpp imv
+  plymouth dconf-{editor,cli} mugshot at-spi2-core firefox-esr transmission-gtk \
+  redshift numlockx nitrogen pulseeffects alacritty neovim mpv mpd ncmpcpp imv
 
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar nitrogen rofi dunst libnotify-bin \
@@ -47,5 +46,5 @@ systemctl enable lightdm
 # INSTALL: GTK, KDE, Icon, Cursors
 if [ ! -f /.flag ]; then
         ${source_dir}/themes/icon-papirus.sh
-        ${source_dir}/themes/fonts-nerd.sh UbuntuMono
+        ${source_dir}/themes/fonts-nerd.sh FiraCode 
 fi

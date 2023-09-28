@@ -33,6 +33,16 @@ if [ -f /usr/bin/polybar ]; then
 	cp -rf /tmp/gruvbox-polybar/*.ini $HOME/.config/polybar/themes/
 fi
 
+if [ -f /usr/bin/dunst ]; then
+	cd /tmp/ && git clone https://github.com/xelser/gruvbox-dunst
+	mkdir -p $HOME/.config/dunst ; cat /etc/xdg/dunst/dunstrc > $HOME/.config/dunst/dunstrc
+	cat /tmp/gruvbox-dunst/gruvbox-material-hard-dark.conf >> $HOME/.config/dunst/dunstrc
+	sed -i 's/origin = top-right/origin = bottom-right/g' $HOME/.config/dunst/dunstrc
+	sed -i 's/offset = 10x50/offset = 20x20/g' $HOME/.config/dunst/dunstrc
+	sed -i 's/font = Monospace 8/font = FiraCode Nerd Font 10/g' $HOME/.config/dunst/dunstrc
+	sed -i 's/icon_theme = Adwaita/icon_theme = Papirus-Dark/g' $HOME/.config/dunst/dunstrc
+fi
+
 if [ -f /usr/bin/kvantummanager ]; then
 	cd /tmp/ && git clone https://github.com/sachnr/gruvbox-kvantum-themes.git
 	sudo cp -rf gruvbox-kvantum-themes/Gruvbox* /usr/share/Kvantum/
