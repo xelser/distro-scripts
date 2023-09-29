@@ -11,14 +11,18 @@ sed -i 's/contrib contrib/contrib/g' /etc/apt/sources.list
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base (X11 and PulseAudio)
-nala install --assume-yes lightdm{,-gtk-greeter-settings} curl build-essential synaptic \
-  plymouth dconf-{editor,cli} mugshot at-spi2-core firefox-esr transmission-gtk \
+nala install --assume-yes plymouth lightdm{,-gtk-greeter-settings} curl build-essential synaptic \
+  dconf-{editor,cli} mugshot at-spi2-core firefox-esr {transmission,syncthing}-gtk \
   redshift numlockx nitrogen pulseeffects alacritty neovim mpv mpd imv
 
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar nitrogen rofi dunst libnotify-bin \
   gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} xarchiver \
   policykit-1-gnome lxappearance mousepad xfce4-screenshooter
+
+# INSTALL: TeamViewer (deb)
+wget -q https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -P /tmp
+sudo nala install --assume-yes /tmp/teamviewer_amd64.deb
 
 # INSTALL: Fira Sans (Google fonts)
 wget -q http://bootes.ethz.ch/fonts/deb/fonts-firasans_1.0_all.deb -P /tmp
