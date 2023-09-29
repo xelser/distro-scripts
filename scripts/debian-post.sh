@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# mpd
+# user systemd daemons
 systemctl enable --user mpd
+systemctl enable --user syncthing
 
 # gruvbox material
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-gruvbox.sh)"
