@@ -386,7 +386,8 @@
     <eventcontext
        id="connector"
        style="fill:none;fill-rule:evenodd;stroke:black;stroke-opacity:1;stroke-linejoin:miter;stroke-width:1px;stroke-linecap:butt;"
-       selcue="1" />
+       selcue="1"
+       curvature="0" />
     <eventcontext
        id="paintbucket"
        style="fill:#a0a0a0;stroke:none;"
@@ -1063,7 +1064,7 @@
      id="theme"
      defaultPreferDarkTheme="0"
      defaultIconTheme="Papirus-Dark"
-     defaultGtkTheme="Matcha-dark-azul"
+     defaultGtkTheme="Matcha-dark-aliz"
      narrowSpinButton="1"
      preferDarkTheme="1"
      darkTheme="1"
