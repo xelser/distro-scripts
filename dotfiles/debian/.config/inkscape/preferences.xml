@@ -1079,4 +1079,7 @@
        symbolicWarningColor="4279865599"
        symbolicErrorColor="10086143" />
   </group>
+  <group
+     id="gradient-edit"
+     stoplist="1" />
 </inkscape>
