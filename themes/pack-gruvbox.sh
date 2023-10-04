@@ -12,6 +12,12 @@ sudo gtk-update-icon-cache /usr/share/icons/Gruvbox-Material-Dark
 # cursors
 cd /tmp/ && wget -cO- https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2 | sudo tar xfj - -C /usr/share/icons
 
+# papirus folders
+cd /tmp/ && git clone https://github.com/xelser/gruvbox-papirus-folders
+cd gruvbox-papirus-folders && sudo cp -rf src/* /usr/share/icons/Papirus
+color_folder="gruv-mat-hard-dark-red"; papirus_folders=(Papirus Papirus-Dark Papirus-Light ePapirus ePapirus-Dark)
+for icon_theme in "${papirus_folders[@]}"; do ./papirus-folders -u -C ${color_folder} -t ${icon_theme}; done
+
 # gtksourceview
 mkdir -p $HOME/.local/share/gtksourceview-{3.0,4}/styles
 cd /tmp/ && git clone https://github.com/xelser/gruvbox-gtksourceview
