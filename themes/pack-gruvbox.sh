@@ -22,8 +22,6 @@ cd /tmp/ && git clone https://github.com/xelser/gruvbox-papirus-folders
 cd gruvbox-papirus-folders && sudo cp -rf src/* /usr/share/icons/Papirus
 ./papirus-folders -u -C gruv-mat-hard-dark-${color} -t Papirus-Dark
 ./papirus-folders -u -C gruv-mat-hard-light-${color} -t Papirus-Light
-./papirus-folders -u -C gruv-mat-hard-light-${color} -t ePapirus
-./papirus-folders -u -C gruv-mat-hard-dark-${color} -t ePapirus-Dark
 
 # gtksourceview
 mkdir -p $HOME/.local/share/gtksourceview-{3.0,4}/styles
