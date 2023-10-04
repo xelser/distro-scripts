@@ -3,7 +3,7 @@
 
 include "/home/xelser/.gtkrc-2.0.mine"
 gtk-theme-name="Matcha-dark-aliz"
-gtk-icon-theme-name="Papirus-Dark"
+gtk-icon-theme-name="ePapirus"
 gtk-font-name="Fira Sans 10"
 gtk-cursor-theme-name="phinger-cursors"
 gtk-cursor-theme-size=0

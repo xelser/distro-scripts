@@ -201,6 +201,7 @@ gaps top 42
 # Autostart (Once)
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id pulseeffects --gapplication-service
+exec --no-startup-id sudo timedatectl set-ntp true
 exec --no-startup-id xset s off -dpms
 exec --no-startup-id picom --daemon
 exec --no-startup-id redshift 
