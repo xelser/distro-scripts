@@ -4,10 +4,9 @@
 cd /tmp/ && git clone https://github.com/xelser/gruvbox-backgrounds
 sudo cp -rf gruvbox-backgrounds/backgrounds /usr/share/
 
-# gtk & icons
+# gtk
 cd /tmp/ && git clone https://github.com/TheGreatMcPain/gruvbox-material-gtk.git
-sudo cp -rf gruvbox-material-gtk/{themes,icons} /usr/share/
-sudo gtk-update-icon-cache /usr/share/icons/Gruvbox-Material-Dark
+sudo cp -rf gruvbox-material-gtk/themes /usr/share/
 
 # cursors
 cd /tmp/ && wget -cO- https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2 | sudo tar xfj - -C /usr/share/icons
@@ -20,8 +19,10 @@ cd /tmp/ && wget -cO- https://github.com/phisch/phinger-cursors/releases/latest/
 wget -qO- https://git.io/papirus-icon-theme-install | sh
 cd /tmp/ && git clone https://github.com/xelser/gruvbox-papirus-folders
 cd gruvbox-papirus-folders && sudo cp -rf src/* /usr/share/icons/Papirus
-./papirus-folders -u -C gruv-mat-hard-dark-${color} -t Papirus-Dark
-./papirus-folders -u -C gruv-mat-hard-light-${color} -t Papirus-Light
+papirus_folders=(Papirus Papirus-Dark Papirus-Light ePapirus ePapirus-Dark)
+for icon_theme in "${papirus_folders[@]}"; do 
+	./papirus-folders -u -C gruv-mat-hard-dark-${color} -t ${icon_theme}
+done
 
 # gtksourceview
 mkdir -p $HOME/.local/share/gtksourceview-{3.0,4}/styles
