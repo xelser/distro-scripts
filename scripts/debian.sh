@@ -11,9 +11,9 @@ sed -i 's/contrib contrib/contrib/g' /etc/apt/sources.list
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base (X11 and PulseAudio)
-nala install --assume-yes plymouth lightdm{,-gtk-greeter-settings} curl build-essential synaptic \
+nala install --assume-yes plymouth curl build-essential alacritty neovim mpv mpd imv \
   dconf-{editor,cli} mugshot at-spi2-core firefox-esr {transmission,syncthing}-gtk \
-  redshift numlockx nitrogen pulseeffects alacritty neovim mpv mpd imv
+  lightdm{,-gtk-greeter-settings} redshift numlockx nitrogen pulseeffects
 
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar nitrogen rofi dunst libnotify-bin \
@@ -49,10 +49,3 @@ echo -e "\n[Seat:*]
 autologin-user=${user}" >> /etc/lightdm/lightdm.conf
 systemctl enable lightdm
 
-#################################### THEMES ####################################
-
-# INSTALL: GTK, KDE, Icon, Cursors
-if [ ! -f /.flag ]; then
-        ${source_dir}/themes/icon-papirus.sh
-        ${source_dir}/themes/fonts-nerd.sh FiraCode 
-fi
