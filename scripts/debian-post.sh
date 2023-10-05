@@ -4,8 +4,9 @@
 systemctl enable --user mpd
 systemctl enable --user syncthing
 
-# gruvbox material
+# themes and fonts
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-gruvbox.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/fonts-nerd.sh FiraCode)"
 
 # vim/neovim plug
 [ -f /usr/bin/vim ] && curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
