@@ -560,7 +560,7 @@
     <group
        id="preferences"
        state="1"
-       page="48" />
+       page="24" />
     <group
        id="gradienteditor" />
     <group
@@ -1068,7 +1068,7 @@
      narrowSpinButton="1"
      preferDarkTheme="1"
      darkTheme="1"
-     symbolicIcons="0"
+     symbolicIcons="1"
      symbolicDefaultBaseColors="1"
      symbolicDefaultHighColors="1"
      menuIcons="0">
@@ -1078,6 +1078,12 @@
        symbolicSuccessColor="10029823"
        symbolicWarningColor="4279865599"
        symbolicErrorColor="10086143" />
+    <group
+       id="Papirus-Dark"
+       symbolicBaseColor="3418341375"
+       symbolicSuccessColor="882433023"
+       symbolicWarningColor="4067964415"
+       symbolicErrorColor="4232132863" />
   </group>
   <group
      id="gradient-edit"
