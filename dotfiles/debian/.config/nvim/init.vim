@@ -1,6 +1,7 @@
 call plug#begin()
 
 Plug 'tpope/vim-sensible'
+Plug 'chrisbra/colorizer'
 Plug 'sheerun/vim-polyglot'
 Plug 'sainnhe/gruvbox-material'
 Plug 'vim-airline/vim-airline'
@@ -42,3 +43,7 @@ let g:gruvbox_material_better_performance = 1
 
 colorscheme gruvbox-material
 let g:airline_theme = 'gruvbox_material'
+
+" Colorizer
+let g:colorizer_auto_color = 1
+
