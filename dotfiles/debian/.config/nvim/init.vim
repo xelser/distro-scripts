@@ -6,16 +6,15 @@ Plug 'vim-airline/vim-airline'
 
 " Settings
 Plug 'tpope/vim-sensible'
-Plug 'chrisbra/colorizer'
 Plug 'sheerun/vim-polyglot'
 
 call plug#end()
 
-filetype plugin indent on   "allow auto-indenting depending on file type
+"filetype plugin indent on   "allow auto-indenting depending on file type
 filetype plugin on
-syntax on                   " syntax highlighting
+"syntax on                   " syntax highlighting
 
-set nocompatible            " disable compatibility to old-time vi
+"set nocompatible            " disable compatibility to old-time vi
 set showmatch               " show matching 
 set ignorecase              " case insensitive 
 set mouse=v                 " middle-click paste with 
@@ -46,7 +45,4 @@ let g:gruvbox_material_better_performance = 1
 
 colorscheme gruvbox-material
 let g:airline_theme = 'gruvbox_material'
-
-" Colorizer
-let g:colorizer_auto_color = 1
 
