@@ -1,10 +1,13 @@
 call plug#begin()
 
+" Themes
+Plug 'sainnhe/gruvbox-material'
+Plug 'vim-airline/vim-airline'
+
+" Settings
 Plug 'tpope/vim-sensible'
 Plug 'chrisbra/colorizer'
 Plug 'sheerun/vim-polyglot'
-Plug 'sainnhe/gruvbox-material'
-Plug 'vim-airline/vim-airline'
 
 call plug#end()
 
