@@ -59,6 +59,7 @@ audio/x-speex=io.bassi.Amberol.desktop;
 audio/x-vorbis=io.bassi.Amberol.desktop;
 audio/x-wavpack=io.bassi.Amberol.desktop;
 image/png=org.gnome.eog.desktop;
+application/json=org.gnome.TextEditor.desktop;
 
 [Default Applications]
 application/x-shellscript=org.gnome.TextEditor.desktop
@@ -121,3 +122,4 @@ audio/x-pn-wav=io.bassi.Amberol.desktop
 audio/x-speex=io.bassi.Amberol.desktop
 audio/x-vorbis=io.bassi.Amberol.desktop
 audio/x-wavpack=io.bassi.Amberol.desktop
+application/json=org.gnome.TextEditor.desktop

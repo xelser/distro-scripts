@@ -264,6 +264,9 @@ elif [[ ${wm_de} == "gnome" ]]; then
 	# Pop-Shell Exceptions
 	save_file /.config/pop-shell/ config.json
 
+	# Forge Exceptions
+	save_folder /.config/forge/config/
+
 	# GDM Settings
 	save_file /.config/ gdm-settings.ini
 	
