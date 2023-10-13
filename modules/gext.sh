@@ -20,7 +20,7 @@ gext --filesystem install 1401 # bluetooth-quick-connect
 gext --filesystem install 3193 # blur-my-shell
 gext --filesystem install 517 # caffeine
 gext --filesystem install 307 # dash-to-dock
-gext --filesystem install 4481 # forge
+#gext --filesystem install 4481 # forge
 gext --filesystem install 4158 # gnome-ui-tune
 gext --filesystem install 3843 # just-perfection
 gext --filesystem install 8 # places-menu
@@ -44,8 +44,8 @@ dconf write /org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size "38"
 dconf write /org/gnome/shell/extensions/dash-to-dock/height-fraction "1.0"
 dconf write /org/gnome/shell/extensions/dash-to-dock/show-mounts "false"
 dconf write /org/gnome/shell/extensions/dash-to-dock/show-trash "false"
-dconf write /org/gnome/shell/extensions/forge/focus-border-toggle "false"
-dconf write /org/gnome/shell/extensions/forge/window-gap-size "3"
+#dconf write /org/gnome/shell/extensions/forge/focus-border-toggle "false"
+#dconf write /org/gnome/shell/extensions/forge/window-gap-size "3"
 dconf write /org/gnome/shell/extensions/gnome-ui-tune/always-show-thumbnails "false"
 #dconf write /org/gnome/shell/extensions/just-perfection/weather "false"
 dconf write /org/gnome/shell/extensions/just-perfection/window-demands-attention-focus "true"
