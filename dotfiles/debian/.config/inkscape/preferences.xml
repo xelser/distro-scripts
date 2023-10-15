@@ -940,11 +940,11 @@
      id="desktop"
      style="fill:#ea6962">
     <group
-       width="640"
-       height="480"
-       x="0"
-       y="0"
-       maximized="1"
+       width="668"
+       height="706"
+       x="688"
+       y="52"
+       maximized="0"
        fullscreen="0"
        id="geometry" />
     <group
