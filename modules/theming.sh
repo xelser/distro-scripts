@@ -24,8 +24,10 @@ fi
 if [[ ! ${wm_de} == "gnome" ]]; then
 	if [ -d /usr/share/themes/${gtk_theme} ]; then
 		theme_dir="/usr/share/themes/${gtk_theme}"
-	else
+	elif [ -d $HOME/.local/share/themes/${gtk_theme} ]; then
 		theme_dir="$HOME/.local/share/themes/${gtk_theme}"
+	else
+		theme_dir="$HOME/.themes/${gtk_theme}"
 	fi
 	
 	# GTK 3
