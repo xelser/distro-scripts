@@ -38,5 +38,5 @@ sed -i 's/JetBrains Mono/FiraCode/g' $HOME/.config/rofi/powermenu/type-1/shared/
 
 # user systemd daemons
 systemctl enable --user mpd
-systemctl enable --user darkman
+#systemctl enable --user darkman
 systemctl enable --user syncthing

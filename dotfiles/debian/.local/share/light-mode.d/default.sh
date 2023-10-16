@@ -12,7 +12,7 @@ cat $HOME/.local/share/light-mode.d/xsettingsd > $HOME/.xsettingsd
 killall -HUP xsettingsd
 
 # nitrogen
-nitrogen --set-zoom-fill /usr/share/backgrounds/gruvbox/cyber-girl-light.png --save
+#nitrogen --set-zoom-fill /usr/share/backgrounds/gruvbox/cyber-girl-light.png --save
 
 # polybar
 cat $HOME/.config/polybar/themes/gruvbox-material-hard-light.ini > $HOME/.config/polybar/current_theme.ini

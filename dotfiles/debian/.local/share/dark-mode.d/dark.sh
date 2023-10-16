@@ -12,7 +12,7 @@ cat $HOME/.local/share/dark-mode.d/xsettingsd > $HOME/.xsettingsd
 killall -HUP xsettingsd
 
 # nitrogen
-nitrogen --set-zoom-fill /usr/share/backgrounds/gruvbox/cyber-girl-dark.png --save
+#nitrogen --set-zoom-fill /usr/share/backgrounds/gruvbox/cyber-girl-dark.png --save
 
 # polybar
 cat $HOME/.config/polybar/themes/gruvbox-material-hard-dark.ini > $HOME/.config/polybar/current_theme.ini
