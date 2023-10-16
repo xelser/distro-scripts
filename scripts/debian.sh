@@ -33,6 +33,9 @@ nala install --assume-yes python3-i3ipc && wget -q -O /usr/bin/autotiling \
   https://raw.githubusercontent.com/nwg-piotr/autotiling/master/autotiling/main.py
 chmod +x /usr/bin/autotiling
 
+# BUILD: darkman
+bash ${source_dir}/modules/darkman.sh
+
 #################################### CONFIG ####################################
 
 # sudo

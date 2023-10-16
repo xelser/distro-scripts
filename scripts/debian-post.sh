@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# user systemd daemons
-systemctl enable --user mpd
-systemctl enable --user syncthing
-
 # themes and fonts
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-gruvbox.sh)"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/fonts-nerd.sh FiraCode)"
@@ -16,10 +12,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
         --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
        
 # Themes and Fonts
-if [ -f /usr/bin/mousepad ]; then
-        dconf write /org/xfce/mousepad/preferences/view/color-scheme "'gruvbox_material_hard_dark'"
-        dconf write /org/xfce/mousepad/preferences/view/font-name "'FiraCode Nerd Font 10'"
-fi
+[ -f /usr/bin/mousepad ] && dconf write /org/xfce/mousepad/preferences/view/font-name "'FiraCode Nerd Font 10'"
 
 if [[ ${wm_de} == "xfce" ]]; then 
         xfconf-query -cn xsettings -pn /Net/ThemeName -t string -s "Gruvbox-Material-Dark"
@@ -42,3 +35,8 @@ sed -i 's/Iosevka/FiraCode/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.r
 sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
 sed -i 's/onedark/gruvbox-material-hard-dark/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
 sed -i 's/JetBrains Mono/FiraCode/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
+
+# user systemd daemons
+systemctl enable --user mpd
+systemctl enable --user darkman
+systemctl enable --user syncthing

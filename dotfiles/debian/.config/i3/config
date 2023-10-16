@@ -204,8 +204,8 @@ exec --no-startup-id pulseeffects --gapplication-service
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id xset s off -dpms
 exec --no-startup-id picom --daemon
-#exec --no-startup-id xsettingsd
-exec --no-startup-id redshift 
+exec --no-startup-id xsettingsd
+#exec --no-startup-id redshift 
 exec --no-startup-id numlockx
 exec --no-startup-id dunst 
 

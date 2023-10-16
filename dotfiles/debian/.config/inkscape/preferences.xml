@@ -1063,8 +1063,8 @@
   <group
      id="theme"
      defaultPreferDarkTheme="0"
-     defaultIconTheme="Papirus-Dark"
-     defaultGtkTheme="Matcha-dark-aliz"
+     defaultIconTheme="Papirus-Light"
+     defaultGtkTheme="Gruvbox-dark-red"
      narrowSpinButton="1"
      preferDarkTheme="1"
      darkTheme="1"
