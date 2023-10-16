@@ -34,7 +34,7 @@ nala install --assume-yes python3-i3ipc && wget -q -O /usr/bin/autotiling \
 chmod +x /usr/bin/autotiling
 
 # BUILD: darkman
-bash ${source_dir}/modules/darkman.sh
+#bash ${source_dir}/modules/darkman.sh
 
 #################################### CONFIG ####################################
 
