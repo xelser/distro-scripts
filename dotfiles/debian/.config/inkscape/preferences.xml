@@ -515,7 +515,7 @@
   </group>
   <group
      id="colorselector"
-     page="0"
+     page="2"
      switcher="1" />
   <group
      id="embedded">
@@ -525,7 +525,7 @@
        panel_mode="1"
        panel_ratio="100"
        panel_wrap="0"
-       palette="Inkscape default" />
+       palette="GNOME HIG Colors" />
   </group>
   <group
      id="dialogs">
@@ -938,7 +938,7 @@
      org.inkscape.output.png.inkscape.png_antialias="2" />
   <group
      id="desktop"
-     style="fill:#d8a657;fill-opacity:0.90196079">
+     style="fill:#2eb398;fill-opacity:0.90196079">
     <group
        width="668"
        height="706"
