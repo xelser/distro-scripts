@@ -125,8 +125,8 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 
 # Geany
 if [ -f /bin/geany ]; then
-	cd /tmp/ && rm -rf geany-themes && git clone https://github.com/xelser/geany-themes/
-	cd geany-themes && sudo ./install.sh 1> /dev/null
+	cd /tmp/ && rm -rf geany-themes && git clone https://github.com/geany/geany-themes
+	cd geany-themes && ./install.sh 1> /dev/null
 fi
 
 # LibreOffice Papirus Icon Theme
