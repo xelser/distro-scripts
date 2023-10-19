@@ -39,6 +39,34 @@
         {
             "wmClass": "org.gnome.Console",
             "mode": "float"
+        },
+        {
+            "wmClass": "org.gnome.Nautilus",
+            "mode": "float"
+        },
+        {
+            "wmClass": "me.dusansimic.DynamicWallpaper",
+            "mode": "float"
+        },
+        {
+            "wmClass": "gnome-multi-writer",
+            "mode": "float"
+        },
+        {
+            "wmClass": "io.github.celluloid_player.Celluloid",
+            "mode": "float"
+        },
+        {
+            "wmClass": "eog",
+            "mode": "float"
+        },
+        {
+            "wmClass": "org.gnome.TextEditor",
+            "mode": "float"
+        },
+        {
+            "wmClass": "io.bassi.Amberol",
+            "mode": "float"
         }
     ]
 }
