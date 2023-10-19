@@ -1,35 +1,35 @@
 
 # package managers
 if   [ -f /usr/bin/nala ]; then
-	alias update="sudo nala upgrade --assume-yes"
+	alias pkgupdate="sudo nala upgrade --assume-yes"
 	alias install="sudo nala install $1"
 	alias uninstall="sudo nala purge $1"
 	alias clean="sudo nala autoremove --purge --assume-yes && sudo nala clean"
 	alias search="sudo nala search $1"
 	alias list="sudo nala list --installed $1"
 elif [ -f /usr/bin/apt ]; then
-	alias update="sudo apt update && sudo apt upgrade --yes"
+	alias pkgupdate="sudo apt update && sudo apt upgrade --yes"
 	alias install="sudo apt install $1"
 	alias uninstall="sudo apt autoremove --purge $1"
 	alias clean="sudo apt autoremove --purge --yes && sudo apt autoclean"
 	alias search="sudo apt search $1"
 	alias list="sudo apt list --installed $1"
 elif [ -f /usr/bin/yay ]; then
-	alias update="yay -Syyu --noconfirm"
+	alias pkgupdate="yay -Syyu --noconfirm"
 	alias install="yay -S $1 --needed"
 	alias uninstall="yay -Rnsu $1"
 	alias clean="yay -Qtdq | yay -Rnsu - --noconfirm 1> /dev/null; yay -Sc --noconfirm"
 	alias search="yay -Ss $1"
 	alias list="yay -Qq $1"
 elif [ -f /usr/bin/pacman ]; then
-	alias update="sudo pacman -Syyu --noconfirm"
+	alias pkgupdate="sudo pacman -Syyu --noconfirm"
 	alias install="sudo pacman -S $1 --needed"
 	alias uninstall="sudo pacman -Rnsu $1"
 	alias clean="sudo pacman -Qtdq | sudo pacman -Rnsu - --noconfirm 1> /dev/null; sudo pacman -Sc --noconfirm"
 	alias search="sudo pacman -Ss $1"
 	alias list="sudo pacman -Qq $1"
 elif [ -f /usr/bin/dnf ]; then
-	alias update="sudo dnf upgrade --assumeyes --best --allowerasing"
+	alias pkgupdate="sudo dnf upgrade --assumeyes --best --allowerasing"
 	alias install="sudo dnf install $1"
 	alias uninstall="sudo dnf autoremove $1"
 	alias clean="sudo dnf autoremove --assumeyes && sudo dnf clean packages"
@@ -80,6 +80,6 @@ if [ -d $HOME/Documents/distro-scripts/ ] ; then
 fi
 
 # others
-alias upall="update ; flatupdate ; [ -f $HOME/.local/bin/gnome-extensions-cli ] && gextup ; [ -d $HOME/Documents/distro-scripts/ ] && gitupdate"
+alias update="pkgupdate ; flatupdate ; [ -f $HOME/.local/bin/gnome-extensions-cli ] && gextup ; [ -d $HOME/Documents/distro-scripts/ ] && gitupdate"
 alias post="bash $HOME/.config/post.sh"
 alias clear="clear && history -c"
