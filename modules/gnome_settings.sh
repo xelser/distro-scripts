@@ -7,7 +7,7 @@ dconf reset -f /org/gnome/desktop/app-folders/ && cat $HOME/.config/app_folders.
 
 # Tweaks
 #gsettings set org.gnome.desktop.wm.preferences button-layout 'appmenu:close'
-gsettings set org.gnome.desktop.wm.preferences focus-mode 'mouse'
+#gsettings set org.gnome.desktop.wm.preferences focus-mode 'mouse'
 gsettings set org.gnome.desktop.interface clock-show-weekday 'true'
 gsettings set org.gnome.desktop.interface clock-show-date 'true'
 gsettings set org.gnome.mutter center-new-windows 'true'
