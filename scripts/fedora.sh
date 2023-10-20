@@ -36,9 +36,9 @@ sudo dnf swap ffmpeg-free ffmpeg --assumeyes --allowerasing
 sudo dnf groupupdate sound-and-video multimedia --assumeyes --exclude=PackageKit-gstreamer-plugin
 
 # INSTALL: Fedora Workstation
-sudo dnf install --assumeyes --skip-broken google-roboto-{fonts,mono-fonts,slab-fonts} gnome-{builder,console,multi-writer,tweaks} \
-  dconf-editor file-roller easyeffects fragments celluloid drawing libheif-tools gnome-shell-extension-pop-shell
-  # inkscape telegram discord video-downloader qt5ct kvantum touchegg google-chrome-stable
+sudo dnf install --assumeyes --skip-broken google-roboto-{fonts,mono-fonts,slab-fonts} dconf-editor libheif-tools \
+  gnome-{builder,console,extensions-app,multi-writer,tweaks}  file-roller easyeffects fragments celluloid drawing \
+  gnome-shell-extension-pop-shell # inkscape telegram discord video-downloader qt5ct kvantum touchegg google-chrome-stable
 
 #################################### CONFIG ####################################
 
