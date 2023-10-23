@@ -7,27 +7,27 @@ read -p "Password: " -s psswrd
 
 ## PARTITIONING ##
 if   [[ ${machine} == "G41T-R3" ]]; then
-        device="sda"
-        root="1"
-        swap="6"
-        grub_target="i386-pc /dev/${device}"
+	device="sda"
+  root="1"
+  swap="6"
+  grub_target="i386-pc /dev/${device}"
 elif [[ ${machine} == "E5-476G" ]]; then
-        device="sda"
-        root="6"
-        swap="3"
-        efi="1"
-        grub_target="x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch"
+  device="sda"
+  root="6"
+  swap="3"
+  efi="1"
+  grub_target="x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch"
 elif [[ ${machine} == "PC" ]]; then # GNOME BOXES
-        device="vda"
+  device="vda"
 
 	dmesg | grep -q "EFI v"; if [ $? -eq 0 ]; then
 		root="3"
-	        swap="2"
+		swap="2"
 		efi="1"
 		grub_target="x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch"
 	else
 		root="2"
-	        swap="1"
+  	swap="1"
 		grub_target="i386-pc /dev/${device}"
 	fi
 else
@@ -145,8 +145,9 @@ echo "arch" > /etc/hostname
 # Base Minimal Packages
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
-pacman -Sy --needed --noconfirm linux grub os-prober base-devel dmidecode inetutils reflector xdg-user-dirs \
-  networkmanager plymouth ttf-fira{-sans,code-nerd} neofetch htop neovim{,-plugins} xclip wl-clipboard git
+pacman -Sy --needed --noconfirm linux linux-firmware grub os-prober btrfs-progs efibootmgr dosfstools {intel,amd}-ucode \
+	base-devel dmidecode inetutils reflector xdg-user-dirs neofetch htop git networkmanager plymouth ttf-fira{-sans,code-nerd} \
+  pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
@@ -172,12 +173,12 @@ EOF
 arch_i3_sway_install () {
 arch-chroot /mnt /bin/bash << EOF
 # packages
-pacman -S --needed --noconfirm linux-firmware btrfs-progs efibootmgr dosfstools {intel,amd}-ucode \
-  pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound \
+pacman -S --needed --noconfirm \
   sddm brightnessctl numlockx gvfs firefox nm-connection-editor qbittorrent timeshift \
   alacritty ranger imv mpv gammastep rofi dunst libnotify wallutils swaybg feh \
   flameshot xdg-desktop-portal-wlr grim qt5ct kvantum lxappearance-gtk3 \
-  xarchiver pcmanfm atril picom i3-wm polybar sway waybar
+  xarchiver pcmanfm atril picom i3-wm polybar sway waybar \
+	neovim{,-plugins} xclip wl-clipboard
 
 # timeshift
 systemctl enable cronie
