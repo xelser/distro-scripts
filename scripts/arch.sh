@@ -112,7 +112,7 @@ elif [[ ${machine} == "PC" ]]; then # GNOME BOXES
 	dmesg | grep -q "EFI v" && create_gpt || create_mbr
         
 	# Format Root
-	btrfs_setup
+	ext4_setup
 	
 	# Format Swap
 	mkswap -f /dev/${device}${swap} -L "Swap" && swapon /dev/${device}${swap}
@@ -174,14 +174,11 @@ arch_i3_sway_install () {
 arch-chroot /mnt /bin/bash << EOF
 # packages
 pacman -S --needed --noconfirm \
-  sddm brightnessctl numlockx gvfs firefox nm-connection-editor qbittorrent timeshift \
+  sddm brightnessctl numlockx gvfs firefox nm-connection-editor qbittorrent \
   alacritty ranger imv mpv gammastep rofi dunst libnotify wallutils swaybg feh \
   flameshot xdg-desktop-portal-wlr grim qt5ct kvantum lxappearance-gtk3 \
   xarchiver pcmanfm atril picom i3-wm polybar sway waybar \
 	neovim{,-plugins} xclip wl-clipboard
-
-# timeshift
-systemctl enable cronie
 
 # sddm
 echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
