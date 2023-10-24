@@ -1,7 +1,13 @@
 #!/bin/bash
 
 # GTK 3, Icon, Cursor, Sans, Mono
-if [[ ${wm_de} == "cinnamon" ]]; then
+if [[ ${wm_de} == "budgie" ]]; then
+	gtk_theme="$(gsettings get org.gnome.desktop.interface gtk-theme | cut -d"'" -f2)"
+	icon_theme="$(gsettings get org.gnome.desktop.interface icon-theme | cut -d"'" -f2)"
+	cursor_theme="$(gsettings get org.gnome.desktop.interface cursor-theme | cut -d"'" -f2)"
+	sans_font="$(gsettings get org.gnome.desktop.interface font-name | cut -d"'" -f2)"
+	mono_font="$(gsettings get org.gnome.desktop.interface monospace-font-name | cut -d"'" -f2)"
+elif [[ ${wm_de} == "cinnamon" ]]; then
 	gtk_theme="$(gsettings get org.cinnamon.desktop.interface gtk-theme | cut -d"'" -f2)"
 	icon_theme="$(gsettings get org.cinnamon.desktop.interface icon-theme | cut -d"'" -f2)"
 	cursor_theme="$(gsettings get org.cinnamon.desktop.interface cursor-theme | cut -d"'" -f2)"
