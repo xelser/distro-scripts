@@ -8,8 +8,11 @@ append_file () {
 
 # INSTALL: Endeavour Base
 reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-	easyeffects warpinator dconf-editor sassc wget ttf-nerd-fonts-symbols{,-mono}
+	easyeffects dconf-editor sassc 
 
+if [[ ${XDG_SESSION_TYPE} == "X11" ]]; then
+	yay -S --needed --noconfirm redshift 
+fi
 
 if [[ ! ${wm_de} == "gnome" ]] && [[ ! ${wm_de} == "kde" ]]; then
 	yay -S --needed --noconfirm geany transmission-gtk vlc darkman redshift blueman plank qt5ct kvantum
@@ -56,13 +59,14 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 case $in_themes in
    y)	if [[ ${wm_de} == "gnome" ]]; then
      		${source_dir}/themes/pack-libadwaita.sh
-		${source_dir}/themes/icon-tela-circle.sh
-		${source_dir}/themes/cursor-bibata.sh
-	elif [[ ${wm_de} == "cinnamon" ]]; then
-		${source_dir}/themes/theme-vimix.sh
-		${source_dir}/themes/icon-vimix.sh
-		${source_dir}/themes/cursor-vimix.sh
-	fi;;
+				${source_dir}/themes/icon-tela-circle.sh
+				${source_dir}/themes/cursor-bibata.sh
+			elif [[ ${wm_de} == "cinnamon" ]]; then
+				${source_dir}/themes/theme-vimix.sh
+				${source_dir}/themes/icon-vimix.sh
+				${source_dir}/themes/cursor-vimix.sh
+			fi
+			;;
    *)	;;
 esac
 
