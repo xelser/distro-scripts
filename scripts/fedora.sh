@@ -42,7 +42,7 @@ sudo systemctl enable htpdate --now
 
 # INSTALL: Fedora Workstation
 sudo dnf install --assumeyes --skip-broken google-roboto-{fonts,mono-fonts,slab-fonts} dconf-editor libheif-tools \
-  gnome-{builder,console,extensions-app,multi-writer,tweaks}  file-roller easyeffects fragments celluloid drawing \
+  gnome-{builder,console,extensions-app,multi-writer,tweaks} file-roller easyeffects fragments celluloid drawing \
   gnome-shell-extension-pop-shell # inkscape telegram discord video-downloader qt5ct kvantum touchegg google-chrome-stable
 
 #################################### CONFIG ####################################
