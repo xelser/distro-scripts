@@ -7,8 +7,8 @@ cd /tmp/ && rm -rf /tmp/Bibata*
 sudo rm -rf /usr/share/icons/Bibata*
 
 # Download
-wget -q https://github.com/ful1e5/Bibata_Cursor/releases/download/${version}/Bibata-Modern-Classic.tar.gz
-wget -q https://github.com/ful1e5/Bibata_Cursor/releases/download/${version}/Bibata-Modern-Ice.tar.gz
+wget -q https://github.com/ful1e5/Bibata_Cursor/releases/download/${version}/Bibata-Modern-Classic.tar.xz
+wget -q https://github.com/ful1e5/Bibata_Cursor/releases/download/${version}/Bibata-Modern-Ice.tar.xz
 
 # Install
 cd /usr/share/icons/
