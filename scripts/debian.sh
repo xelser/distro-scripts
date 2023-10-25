@@ -13,7 +13,8 @@ apt update && apt install nala --yes
 # INSTALL: Debian Base (X11 and PulseAudio)
 nala install --assume-yes htpdate plymouth build-essential alacritty neovim mpv mpd imv \
   dconf-{editor,cli} mugshot at-spi2-core firefox-esr {transmission,syncthing}-gtk \
-  lightdm{,-gtk-greeter-settings} redshift numlockx nitrogen pulseeffects
+  lightdm{,-gtk-greeter-settings} redshift numlockx nitrogen pulseeffects \
+  fonts-ubuntu{,-console}
 
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar nitrogen rofi dunst libnotify-bin \
@@ -25,8 +26,8 @@ wget -q https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -P /
 sudo nala install --assume-yes /tmp/teamviewer_amd64.deb
 
 # INSTALL: Fira Sans (Google fonts)
-wget -q http://bootes.ethz.ch/fonts/deb/fonts-firasans_1.0_all.deb -P /tmp
-sudo nala install --assume-yes /tmp/fonts-firasans_1.0_all.deb
+#wget -q http://bootes.ethz.ch/fonts/deb/fonts-firasans_1.0_all.deb -P /tmp
+#sudo nala install --assume-yes /tmp/fonts-firasans_1.0_all.deb
 
 # BUILD: autotiling
 nala install --assume-yes python3-i3ipc && wget -q -O /usr/bin/autotiling \
