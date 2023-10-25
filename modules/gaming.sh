@@ -5,9 +5,8 @@
 # Install: Proprietary NVIDIA Drivers
 install_nvidia () {
 	if [[ ${distro_id} == "fedora" ]]; then
-		sudo dnf install --assumeyes --allowerasing akmod-nvidia
 		echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /usr/lib/modprobe.d/blacklist-nouveau.conf 1> /dev/null
-		sudo dracut --force
+		sudo dnf install --assumeyes --allowerasing akmod-nvidia && sudo dracut --force
 	elif [[ ${distro_id} == "arch" ]] || [[ ${distro_id} == "endeavouros" ]]; then
 		sudo pacman -S --needed --noconfirm nvidia nvidia-utils lib32-nvidia-utils
 	fi
@@ -17,12 +16,12 @@ install_nvidia () {
 nvidia_prime () {
 	if [[ ${distro_id} == "fedora" ]]; then
 		# http://download.nvidia.com/XFree86/Linux-x86_64/440.31/README/dynamicpowermanagement.html
-		echo "# Enable DynamicPwerManagement
-		options nvidia NVreg_DynamicPowerManagement=0x02
-		" | sudo tee /etc/modprobe.d/nvidia.conf 1> /dev/null
+		#echo "# Enable DynamicPwerManagement
+		#options nvidia NVreg_DynamicPowerManagement=0x02
+		#" | sudo tee /etc/modprobe.d/nvidia.conf 1> /dev/null
 
-		#sudo dnf copr enable sunwire/envycontrol --assumeyes
-		#sudo dnf install python3-envycontrol --assumeyes
+		sudo dnf copr enable sunwire/envycontrol --assumeyes
+		sudo dnf install python3-envycontrol --assumeyes
 	elif [[ ${distro_id} == "manjaro" ]]; then
 		sudo pacman -S --needed --noconfirm optimus-manager optimus-manager-qt
 	elif [[ ${distro_id} == "arch" ]] || [[ ${distro_id} == "endeavouros" ]]; then
