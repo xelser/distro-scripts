@@ -12,8 +12,8 @@ wget -q https://github.com/ful1e5/Bibata_Cursor/releases/download/${version}/Bib
 
 # Install
 cd /usr/share/icons/
-sudo tar -xf /tmp/Bibata-Modern-Classic.tar.gz
-sudo tar -xf /tmp/Bibata-Modern-Ice.tar.gz
+sudo tar -xf /tmp/Bibata-Modern-Classic.tar*
+sudo tar -xf /tmp/Bibata-Modern-Ice.tar*
 
 #sudo dnf copr enable peterwu/rendezvous --assumeyes
 #sudo dnf install bibata-cursor-themes --assumeyes
