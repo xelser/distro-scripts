@@ -35,6 +35,11 @@ sudo dnf upgrade --assumeyes --best --skip-broken --allowerasing # --security --
 sudo dnf swap ffmpeg-free ffmpeg --assumeyes --allowerasing
 sudo dnf groupupdate sound-and-video multimedia --assumeyes --exclude=PackageKit-gstreamer-plugin
 
+# INSTALL: htpdate (COPR)
+sudo dnf copr enable whitehara/htpdate --assumeyes
+sudo dnf install htpdate --assumeyes
+sudo systemctl enable htpdate --now
+
 # INSTALL: Fedora Workstation
 sudo dnf install --assumeyes --skip-broken google-roboto-{fonts,mono-fonts,slab-fonts} dconf-editor libheif-tools \
   gnome-{builder,console,extensions-app,multi-writer,tweaks}  file-roller easyeffects fragments celluloid drawing \
