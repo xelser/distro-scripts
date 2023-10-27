@@ -12,31 +12,32 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
         --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
        
 # Themes and Fonts
-[ -f /usr/bin/gedit ] && dconf write /org/gnome/gedit/preferences/editor/editor-font "'UbuntuMono Nerd Font 10.5'"
-
-if [[ ${wm_de} == "xfce" ]]; then 
-        xfconf-query -cn xsettings -pn /Net/ThemeName -t string -s "Gruvbox-Material-Dark"
-        xfconf-query -cn xsettings -pn /Net/IconThemeName -t string -s "Papirus-Dark"
-        xfconf-query -cn xsettings -pn /Gtk/CursorThemeName -t string -s "phinger-cursors"
-        xfconf-query -cn xsettings -pn /Gtk/CursorThemeSize -t int -s "24"
-        xfconf-query -cn xsettings -pn /Gtk/FontName -t string -s "Ubuntu 10"
-        xfconf-query -cn xsettings -pn /Gtk/MonospaceFontName -t string -s "UbuntuMono Nerd Font 10.5"
-        xfconf-query -cn xfwm4 -pn /general/theme -t string -s "Gruvbox-Material-Dark"
-        xfconf-query -cn xfwm4 -pn /general/title_font -t string -s "Ubuntu Bold 9"
-fi
+[ -f /usr/bin/gedit ] && dconf write /org/gnome/gedit/preferences/editor/editor-font "'UbuntuMono Nerd Font 12'"
 
 # rofi (launcher and powermenu)
 cd /tmp/ && git clone --depth=1 https://github.com/xelser/rofi.git && cd rofi && chmod +x setup.sh && ./setup.sh && cd
 
 sed -i 's/style-1/style-3/g' $HOME/.config/rofi/launchers/type-4/launcher.sh
 sed -i 's/onedark/gruvbox-material-hard-dark/g' $HOME/.config/rofi/launchers/type-4/shared/colors.rasi
-sed -i 's/Iosevka Nerd Font 10/UbuntuMono Nerd Font 10.5/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.rasi
+sed -i 's/Iosevka Nerd Font 10/UbuntuMono Nerd Font 12/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.rasi
 
 sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
 sed -i 's/onedark/gruvbox-material-hard-dark/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
-sed -i 's/JetBrains Mono Nerd Font 10/UbuntuMono Nerd Font 10.5/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
+sed -i 's/JetBrains Mono Nerd Font 10/UbuntuMono Nerd Font 12/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
 
 # user systemd daemons
 systemctl enable --user mpd
 #systemctl enable --user darkman
 systemctl enable --user syncthing
+
+# XFCE 
+if [[ ${wm_de} == "xfce" ]]; then 
+        xfconf-query -cn xsettings -pn /Net/ThemeName -t string -s "Gruvbox-Material-Dark"
+        xfconf-query -cn xsettings -pn /Net/IconThemeName -t string -s "Papirus-Dark"
+        xfconf-query -cn xsettings -pn /Gtk/CursorThemeName -t string -s "phinger-cursors"
+        xfconf-query -cn xsettings -pn /Gtk/CursorThemeSize -t int -s "24"
+        xfconf-query -cn xsettings -pn /Gtk/FontName -t string -s "Ubuntu 10"
+        xfconf-query -cn xsettings -pn /Gtk/MonospaceFontName -t string -s "UbuntuMono Nerd Font 12"
+        xfconf-query -cn xfwm4 -pn /general/theme -t string -s "Gruvbox-Material-Dark"
+        xfconf-query -cn xfwm4 -pn /general/title_font -t string -s "Ubuntu Bold 9"
+fi

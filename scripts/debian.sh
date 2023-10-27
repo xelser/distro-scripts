@@ -19,7 +19,7 @@ nala install --assume-yes htpdate plymouth build-essential alacritty neovim mpv 
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar nitrogen rofi dunst libnotify-bin \
   gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} xarchiver \
-  policykit-1-gnome lxappearance mousepad xfce4-screenshooter
+  policykit-1-gnome lxappearance gedit xfce4-screenshooter
 
 # INSTALL: TeamViewer (deb)
 wget -q https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -P /tmp
