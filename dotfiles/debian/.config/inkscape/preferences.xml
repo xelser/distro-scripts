@@ -525,7 +525,12 @@
        panel_mode="1"
        panel_ratio="100"
        panel_wrap="0"
-       palette="GNOME HIG Colors" />
+       palette="GNOME HIG Colors"
+       tile_size="16"
+       tile_aspect="-0.3"
+       tile_border="1"
+       rows="1"
+       tile_stretch="1" />
   </group>
   <group
      id="dialogs">
@@ -938,7 +943,7 @@
      org.inkscape.output.png.inkscape.png_antialias="2" />
   <group
      id="desktop"
-     style="fill:#f8e45c;fill-opacity:0.90196079">
+     style="fill:#9a9996">
     <group
        width="668"
        height="706"
@@ -1064,7 +1069,7 @@
      id="theme"
      defaultPreferDarkTheme="0"
      defaultIconTheme="Papirus-Dark"
-     defaultGtkTheme="Gruvbox-dark-orange"
+     defaultGtkTheme="Matcha-dark-aliz"
      narrowSpinButton="1"
      preferDarkTheme="1"
      darkTheme="1"

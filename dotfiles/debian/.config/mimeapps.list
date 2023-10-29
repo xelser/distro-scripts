@@ -1,6 +1,6 @@
 [Added Associations]
 application/x-shellscript=org.gnome.gedit.desktop;org.xfce.mousepad.desktop;geany.desktop;
-text/plain=org.xfce.mousepad.desktop;geany.desktop;
+text/plain=org.gnome.gedit.desktop;org.xfce.mousepad.desktop;geany.desktop;
 application/x-desktop=org.xfce.mousepad.desktop;
 image/jpeg=org.xfce.ristretto.desktop;
 x-scheme-handler/http=xfce4-web-browser.desktop;
@@ -11,7 +11,7 @@ application/toml=org.xfce.mousepad.desktop;geany.desktop;
 application/xml=org.xfce.mousepad.desktop;
 image/png=org.xfce.ristretto.desktop;imv.desktop;
 text/x-csrc=org.xfce.mousepad.desktop;
-image/svg+xml=org.inkscape.Inkscape.desktop;org.xfce.mousepad.desktop;
+image/svg+xml=org.inkscape.Inkscape.desktop;org.gnome.gedit.desktop;org.xfce.mousepad.desktop;
 text/x-scss=org.gnome.gedit.desktop;
 
 [Default Applications]
