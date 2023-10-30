@@ -50,6 +50,9 @@ update-grub
 
 # lightdm
 echo -e "\n[Seat:*]
-autologin-user=${user}" >> /etc/lightdm/lightdm.conf
+greeter-setup-script=/usr/bin/numlockx on
+greeter-hide-users=false
+autologin-user=${user}
+" >> /etc/lightdm/lightdm.conf
 systemctl enable lightdm
 
