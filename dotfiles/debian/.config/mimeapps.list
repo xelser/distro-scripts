@@ -11,7 +11,7 @@ application/toml=org.xfce.mousepad.desktop;geany.desktop;
 application/xml=org.xfce.mousepad.desktop;
 image/png=org.xfce.ristretto.desktop;imv.desktop;
 text/x-csrc=org.xfce.mousepad.desktop;
-image/svg+xml=org.inkscape.Inkscape.desktop;org.gnome.gedit.desktop;org.xfce.mousepad.desktop;
+image/svg+xml=org.gnome.gedit.desktop;org.inkscape.Inkscape.desktop;org.xfce.mousepad.desktop;
 text/x-scss=org.gnome.gedit.desktop;
 
 [Default Applications]

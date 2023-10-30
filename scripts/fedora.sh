@@ -37,13 +37,15 @@ sudo dnf groupupdate sound-and-video multimedia --assumeyes --exclude=PackageKit
 
 # INSTALL: htpdate (COPR)
 sudo dnf copr enable whitehara/htpdate --assumeyes
-sudo dnf install htpdate --assumeyes
-sudo systemctl enable htpdate --now
+
+# INSTALL: syncthing-gtk (COPR)
+sudo dnf copr enable mhartgring/syncthing-gtk --assumeyes
 
 # INSTALL: Fedora Workstation
 sudo dnf install --assumeyes --skip-broken google-roboto-{fonts,mono-fonts,slab-fonts} dconf-editor libheif-tools \
   gnome-{builder,console,extensions-app,multi-writer,tweaks} file-roller easyeffects fragments celluloid drawing \
-  gnome-shell-extension-pop-shell # inkscape telegram discord video-downloader qt5ct kvantum touchegg google-chrome-stable
+  gnome-shell-extension-pop-shell htpdate syncthing-gtk 
+  # inkscape telegram discord video-downloader qt5ct kvantum touchegg google-chrome-stable
 
 #################################### CONFIG ####################################
 
@@ -57,6 +59,10 @@ sudo grub2-mkconfig -o /boot/grub2/grub.cfg 1> /dev/null
 
 # Set Hostname
 sudo hostnamectl set-hostname --static "fedora"
+
+# Systemd Daemons
+sudo systemctl enable htpdate --now
+systemctl enable syncthing --now --user
 
 # GDM
 append_file "[daemon]
