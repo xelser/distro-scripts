@@ -93,6 +93,9 @@
     },
     {
       "class": "gnome-text-editor"
+    },
+    {
+      "class": "fragments"
     }
   ],
   "skiptaskbarhidden": [],
