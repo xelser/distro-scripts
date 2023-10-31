@@ -1,5 +1,7 @@
 call plug#begin()
 
+Plug 'ap/vim-css-color'
+
 " Themes
 Plug 'sainnhe/gruvbox-material'
 Plug 'vim-airline/vim-airline'

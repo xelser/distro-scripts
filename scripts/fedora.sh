@@ -38,9 +38,6 @@ sudo dnf groupupdate sound-and-video multimedia --assumeyes --exclude=PackageKit
 # INSTALL: htpdate (COPR)
 sudo dnf copr enable whitehara/htpdate --assumeyes
 
-# INSTALL: syncthing-gtk (COPR)
-sudo dnf copr enable mhartgring/syncthing-gtk --assumeyes
-
 # INSTALL: Fedora Workstation
 sudo dnf install --assumeyes --skip-broken google-roboto-{fonts,mono-fonts,slab-fonts} dconf-editor libheif-tools \
   gnome-{builder,console,extensions-app,multi-writer,tweaks} file-roller easyeffects fragments celluloid drawing \
@@ -62,7 +59,6 @@ sudo hostnamectl set-hostname --static "fedora"
 
 # Systemd Daemons
 sudo systemctl enable htpdate --now
-systemctl enable syncthing --now --user
 
 # GDM
 append_file "[daemon]
