@@ -4,11 +4,7 @@
 
 # INSTALL: Endeavour Base
 reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-	base-devel easyeffects dconf-editor sassc wget htpdate ttf-fira{code-nerd,-sans}
-
-# INSTALL: Endeavour Budgie
-yay -S --needed --noconfirm network-manager-applet lightdm budgie gnome-terminal \
-	nautilus sushi file-roller evince gedit eog totem 
+	plymouth base-devel easyeffects dconf-editor sassc wget htpdate ttf-fira{code-nerd,-sans}
 
 # INSTALL: Bluetooth
 if [[ $(sudo dmesg | grep -q 'Bluetooth') -eq 0 ]]; then
@@ -29,13 +25,6 @@ sudo sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
 sudo sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
-# lightdm
-echo -e "\n[Seat:*]
-greeter-hide-users=false
-autologin-user=${user}
-" | sudo tee -a /etc/lightdm/lightdm.conf
-sudo systemctl enable lightdm
-
 # htpdate
 sudo systemctl enable htpdate
 
@@ -43,6 +32,6 @@ sudo systemctl enable htpdate
 
 # INSTALL: GTK, KDE, Icon, Cursors
 if [ ! -f /.flag ]; then
-	${source_dir}/themes/theme-orchis.sh
-	${source_dir}/themes/icon-papirus.sh
+	${source_dir}/themes/pack-catppuccin.sh
 fi
+
