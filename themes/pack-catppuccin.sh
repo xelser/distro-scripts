@@ -2,14 +2,11 @@
 
 # dependencies
 if [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
-	python-{pip,virtualenv} papirus-icon-theme unzip wget xorg-xrdb \
-	qt5-graphicaleffects qt5-svg qt5-quickcontrols2
+	python-{pip,virtualenv} unzip wget xorg-xrdb 
 elif [ -f /usr/bin/nala ]; then	sudo nala install --assume-yes --no-install-recommends \
-	python3-{pip,virtualenv} papirus-icon-theme unzip wget x11-xserver-utils \
-	qml‑module‑qtquick‑layouts qml‑module‑qtgraphicaleffects qml‑module‑qtquick‑controls2 libqt5svg5
+	python3-{pip,virtualenv} unzip wget x11-xserver-utils 
 elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes \
-	python3-{pip,virtualenv} papirus-icon-theme unzip wget xrdb \
-	qt5‑qtgraphicaleffects qt5‑qtquickcontrols2 qt5‑qtsvg
+	python3-{pip,virtualenv} unzip wget xrdb
 fi
 
 if [ -f /etc/default/grub ]; then
@@ -20,9 +17,17 @@ if [ -f /etc/default/grub ]; then
 fi
 
 if [ -f /etc/sddm.conf ]; then
+	if [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
+		qt5-graphicaleffects qt5-svg qt5-quickcontrols2
+	elif [ -f /usr/bin/nala ]; then	sudo nala install --assume-yes --no-install-recommends \
+		qml‑module‑qtquick‑layouts qml‑module‑qtgraphicaleffects qml‑module‑qtquick‑controls2 libqt5svg5
+	elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes \
+		qt5‑qtgraphicaleffects qt5‑qtquickcontrols2 qt5‑qtsvg
+	fi
+
 	cd /tmp/ && git clone https://github.com/catppuccin/sddm
 	sudo mkdir -p /usr/share/sddm/themes && sudo cp -rf /tmp/sddm/src/* /usr/share/sddm/themes
-	echo -e "\n[Theme]\nCurrent=catppuccin-mocha\nCursorTheme=Catppuccin-Mocha-Sky-Cursors" | sudo tee -a /etc/sddm.conf 1> /dev/null
+	echo -e "\n[Theme]\nCurrent=catppuccin-mocha\nCursorTheme=Catppuccin-Mocha-Lavender-Cursors" | sudo tee -a /etc/sddm.conf 1> /dev/null
 fi
 
 # plymouth
@@ -37,10 +42,11 @@ sudo cp -rf catppuccin-backgrounds/backgrounds /usr/share/
 # gtk
 cd /tmp/ && git clone --recurse-submodules https://github.com/catppuccin/gtk.git
 cd /tmp/gtk/ && virtualenv -p python3 venv && source venv/bin/activate && pip install -r requirements.txt
-sudo python install.py latte -a sky -s compact --tweaks rimless normal -d /usr/share/themes
-sudo python install.py mocha -a sky -s compact --tweaks rimless normal -d /usr/share/themes
+sudo python install.py latte -a lavender -s compact --tweaks rimless normal -d /usr/share/themes
+sudo python install.py mocha -a lavender -s compact --tweaks rimless normal -d /usr/share/themes
 
 # papirus folders
+wget -qO- https://git.io/papirus-icon-theme-install | sh
 cd /tmp/ && git clone https://github.com/catppuccin/papirus-folders
 cd papirus-folders && sudo cp -rf src/* /usr/share/icons/Papirus
 color_folder="cat-mocha-lavender"; papirus_folders=(Papirus Papirus-Dark Papirus-Light ePapirus ePapirus-Dark)
