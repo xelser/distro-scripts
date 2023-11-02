@@ -9,7 +9,7 @@ sudo pacman-mirrors --country Global
 # DEBLOAT/UPDATE/INSTALL: Manjaro Base
 sudo pacman -Rnsc --noconfirm manjaro-hello
 sudo pacman -Syyu --needed --noconfirm plymouth-theme-manjaro mhwd ttf-noto-nerd noto-fonts qt5ct kvantum \
-	power-profiles-daemon dconf-editor redshift warpinator geany transmission-gtk firefox
+	power-profiles-daemon dconf-editor redshift firefox # warpinator geany transmission-gtk
 	
 # INSTALL: Manjaro DE
 if [[ ${wm_de} == "xfce" ]]; then sudo pacman -S --needed --noconfirm \
@@ -19,6 +19,9 @@ elif [[ ${wm_de} == "cinnamon" ]]; then sudo pacman -S --needed --noconfirm \
 elif [[ ${wm_de} == "gnome" ]]; then sudo pacman -S --needed --noconfirm \
 	gnome-{builder,console,extensions-app,multi-writer,tweaks} \
 	file-roller easyeffects fragments celluloid drawing
+elif [[ ${wm_de} == "budgie" ]]; then sudo pacman -S --needed --noconfirm \
+	gnome-{builder,console,multi-writer} file-roller
+	#fragments celluloid drawing easyeffects
 fi
 
 #################################### CONFIG ####################################
