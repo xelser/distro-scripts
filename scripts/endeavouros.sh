@@ -7,8 +7,8 @@ reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuil
 	base-devel easyeffects dconf-editor sassc wget htpdate ttf-fira{code-nerd,-sans}
 
 # INSTALL: Endeavour Budgie
-yay -S --needed --noconfirm lightdm lightdm-settings budgie gnome-terminal \
-	nautilus sushi file-roller evince gedit eog totem network-manager-applet
+yay -S --needed --noconfirm network-manager-applet lightdm budgie gnome-terminal \
+	nautilus sushi file-roller evince gedit eog totem 
 
 # INSTALL: Bluetooth
 if [[ $(sudo dmesg | grep -q 'Bluetooth') -eq 0 ]]; then
