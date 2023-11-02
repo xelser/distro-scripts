@@ -4,7 +4,7 @@
 
 # INSTALL: Endeavour Base
 reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-	plymouth base-devel easyeffects dconf-editor sassc wget htpdate ttf-fira{code-nerd,-sans}
+	plymouth base-devel easyeffects dconf-editor qbittorrent sassc wget htpdate ttf-fira{code-nerd,-sans}
 
 # INSTALL: Bluetooth
 if [[ $(sudo dmesg | grep -q 'Bluetooth') -eq 0 ]]; then
