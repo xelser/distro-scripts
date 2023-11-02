@@ -16,14 +16,14 @@ install_nvidia () {
 nvidia_prime () {
 	if [[ ${distro_id} == "fedora" ]]; then
 		# http://download.nvidia.com/XFree86/Linux-x86_64/440.31/README/dynamicpowermanagement.html
-		#echo "# Enable DynamicPwerManagement
-		#options nvidia NVreg_DynamicPowerManagement=0x02
-		#" | sudo tee /etc/modprobe.d/nvidia.conf 1> /dev/null
+		echo "# Enable DynamicPwerManagement
+		options nvidia NVreg_DynamicPowerManagement=0x02
+		" | sudo tee /etc/modprobe.d/nvidia.conf 1> /dev/null
 
-		sudo dnf copr enable sunwire/envycontrol --assumeyes
-		sudo dnf install python3-envycontrol --assumeyes
+		#sudo dnf copr enable sunwire/envycontrol --assumeyes
+		#sudo dnf install python3-envycontrol --assumeyes
 	elif [[ ${distro_id} == "manjaro" ]]; then
-		sudo pacman -S --needed --noconfirm optimus-manager optimus-manager-qt
+		sudo pacman -S --needed --noconfirm envycontrol
 	elif [[ ${distro_id} == "arch" ]] || [[ ${distro_id} == "endeavouros" ]]; then
 		yay -S --needed --noconfirm envycontrol
 	fi
@@ -34,14 +34,14 @@ nvidia_prime () {
 		#sudo envycontrol --switch nvidia --force-comp
 	fi
 
-	# Optimus Manager
-	if [ -f /usr/share/optimus-manager.conf ]; then
-		sudo cp -rf /usr/share/optimus-manager.conf /etc/optimus-manager/
-		sudo sed -i 's/startup_mode=integrated/startup_mode=hybrid/g' /etc/optimus-manager/optimus-manager.conf
-		sudo sed -i 's/option=overclocking/option=triple_buffer/g' /etc/optimus-manager/optimus-manager.conf
-		sudo sed -i 's/dynamic_power_management=no/dynamic_power_management=fine/g' /etc/optimus-manager/optimus-manager.conf
-		sudo systemctl enable --now optimus-manager
-	fi
+	# Optimus Manager (deprecated)
+	#if [ -f /usr/share/optimus-manager.conf ]; then
+	#	sudo cp -rf /usr/share/optimus-manager.conf /etc/optimus-manager/
+	#	sudo sed -i 's/startup_mode=integrated/startup_mode=hybrid/g' /etc/optimus-manager/optimus-manager.conf
+	#	sudo sed -i 's/option=overclocking/option=triple_buffer/g' /etc/optimus-manager/optimus-manager.conf
+	#	sudo sed -i 's/dynamic_power_management=no/dynamic_power_management=fine/g' /etc/optimus-manager/optimus-manager.conf
+	#	sudo systemctl enable --now optimus-manager
+	#fi
 }
 
 # Autoinstall Recommended Drivers
@@ -65,7 +65,7 @@ fi
 # Install: Lutris & MangoHud
 flatpak install --assumeyes --noninteractive flathub \
 	com.valvesoftware.Steam net.lutris.Lutris \
-	org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/22.08
+	org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/23.08
 	
 #################################### CONFIG ####################################
 
