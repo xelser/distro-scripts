@@ -7,7 +7,7 @@ echo -e "[options]\nVerbosePkgLists\nParallelDownloads = 5\nDisableDownloadTimeo
 sudo pacman-mirrors --country Global
 
 # DEBLOAT/UPDATE/INSTALL: Manjaro Base
-sudo pacman -Rnsc --noconfirm manjaro-hello
+sudo pacman -Rnsc --noconfirm manjaro-hello zsh
 sudo pacman -Syyu --needed --noconfirm plymouth-theme-manjaro mhwd ttf-noto-nerd noto-fonts qt5ct kvantum \
 	power-profiles-daemon dconf-editor redshift firefox # warpinator geany transmission-gtk
 	
