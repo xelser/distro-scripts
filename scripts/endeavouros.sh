@@ -4,7 +4,7 @@
 
 # INSTALL: Endeavour Base
 reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-	base-devel easyeffects dconf-editor sassc ttf-fira{code-nerd,-sans}
+	base-devel easyeffects dconf-editor sassc htpdate ttf-fira{code-nerd,-sans}
 
 # INSTALL: Endeavour Budgie
 yay -S --needed --noconfirm lightdm lightdm-settings budgie gnome-terminal \
@@ -35,6 +35,9 @@ greeter-hide-users=false
 autologin-user=${user}
 " | sudo tee -a /etc/lightdm/lightdm.conf
 sudo systemctl enable lightdm
+
+# htpdate
+sudo systemctl enable htpdate
 
 #################################### THEMES ####################################
 
