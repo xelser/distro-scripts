@@ -567,7 +567,7 @@
     <group
        id="preferences"
        state="1"
-       page="51" />
+       page="49" />
     <group
        id="gradienteditor" />
     <group
@@ -579,7 +579,7 @@
        path="">
       <group
          id="exportarea"
-         value="selection" />
+         value="drawing" />
       <group
          id="defaultxdpi" />
       <group
@@ -591,7 +591,7 @@
        default="org.inkscape.output.svg.inkscape"
        append_extension="1"
        enable_preview="0"
-       path="/home/xelser"
+       path="/home/xelser/Documents/beta_gruvbox-gtk"
        use_current_dir="1"
        enable_svgexport="1" />
     <group
@@ -952,7 +952,7 @@
      org.inkscape.output.png.inkscape.png_antialias="2" />
   <group
      id="desktop"
-     style="fill:#9a9996">
+     style="fill:#f46067">
     <group
        width="668"
        height="706"
@@ -1078,7 +1078,7 @@
      id="theme"
      defaultPreferDarkTheme="0"
      defaultIconTheme="Papirus-Dark"
-     defaultGtkTheme="Beta_Gruvbox-material-hard-dark-red"
+     defaultGtkTheme="Beta_Gruvbox-material-hard-dark-green"
      narrowSpinButton="1"
      preferDarkTheme="1"
      darkTheme="1"
@@ -1095,8 +1095,8 @@
        symbolicErrorColor="10086143" />
     <group
        id="Papirus-Dark"
-       symbolicBaseColor="3150170367"
-       symbolicSuccessColor="783522047"
+       symbolicBaseColor="3418341375"
+       symbolicSuccessColor="882433023"
        symbolicWarningColor="4067964415"
        symbolicErrorColor="4232132863" />
   </group>
