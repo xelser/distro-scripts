@@ -8,8 +8,8 @@ wget -qO- https://git.io/papirus-folders-install | sh
 [[ ${distro_id} == "arch" ]]        && color="darkcyan"
 [[ ${distro_id} == "debian" ]]      && color="red"
 [[ ${distro_id} == "fedora" ]]      && color="adwaita"
-[[ ${distro_id} == "linuxmint" ]]   && color="green"
 [[ ${distro_id} == "manjaro" ]]     && color="teal"
+[[ ${distro_id} == "linuxmint" ]]   && color="green"
 [[ ${distro_id} == "endeavouros" ]] && color="magenta"
 
 # Apply Changes
