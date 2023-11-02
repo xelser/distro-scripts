@@ -4,7 +4,7 @@
 
 # INSTALL: Endeavour Base
 reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-	base-devel easyeffects dconf-editor sassc htpdate ttf-fira{code-nerd,-sans}
+	base-devel easyeffects dconf-editor sassc wget htpdate ttf-fira{code-nerd,-sans}
 
 # INSTALL: Endeavour Budgie
 yay -S --needed --noconfirm lightdm lightdm-settings budgie gnome-terminal \
