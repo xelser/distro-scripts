@@ -7,19 +7,21 @@ echo -e "\n[options]\nVerbosePkgLists\nParallelDownloads = 5\nDisableDownloadTim
 sudo pacman-mirrors --country Global
 
 # COMMON: Debloat
-sudo pacman -Rnsc --noconfirm manjaro-{hello,settings-manager} timeshift zsh
+sudo pacman -Rnsc --noconfirm manjaro-{hello,settings-manager} zsh
 
 # INSTALL: Manjaro DE
 # NOTE: Debloat here also because manjaro isnt consistent with their OOTB packages
 if [[ ${wm_de} == "xfce" ]]; then
-	sudo pacman -S --needed --noconfirm pulseaudio-equalizer-ladspa
+	sudo pacman -Rnsc --noconfirm timeshift
+	sudo pacman -Syyu --needed --noconfirm pulseaudio-equalizer-ladspa
 elif [[ ${wm_de} == "budgie" ]]; then
-	sudo pacman -Rnsc --noconfirm lshw hexchat gthumb gufw imagewriter
+	sudo pacman -Rnsc --noconfirm timeshift lshw hexchat gthumb gufw imagewriter
+	sudo pacman -Syyu --needed --noconfirm easyeffects
 fi
 
 # INSTALL: Manjaro Base
-sudo pacman -Syyu --needed mhwd firefox plymouth-theme-manjaro plymouth base-devel \
-	easyeffects qt5ct kvantum dconf-editor power-profiles-daemon darkman gvfs sassc wget \
+sudo pacman -S --needed mhwd firefox plymouth-theme-manjaro plymouth base-devel \
+	qt5ct kvantum dconf-editor power-profiles-daemon darkman gvfs sassc wget \
 	ttf-fira{code-nerd,-sans}
 
 # BUILD: htpdate
@@ -41,7 +43,7 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 #################################### THEMES ####################################
 
 # INSTALL: GTK, KDE, Icon, Cursors
-if [ ! -f /.flag ]; then
-	${source_dir}/themes/theme-orchis.sh
-	${source_dir}/themes/icon-papirus.sh
-fi
+#if [ ! -f /.flag ]; then
+#	${source_dir}/themes/theme-orchis.sh
+#	${source_dir}/themes/icon-papirus.sh
+#fi
