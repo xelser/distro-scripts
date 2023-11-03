@@ -15,7 +15,6 @@ if [[ ${wm_de} == "xfce" ]]; then
 	sudo pacman -S --needed --noconfirm pulseaudio-equalizer-ladspa
 elif [[ ${wm_de} == "budgie" ]]; then
 	sudo pacman -Rnsc --noconfirm lshw hexchat gthumb gufw imagewriter
-	sudo pacman -Syyu --needed --noconfirm file-roller
 fi
 
 # INSTALL: Manjaro Base
