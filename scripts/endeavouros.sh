@@ -4,7 +4,11 @@
 
 # INSTALL: Endeavour Base
 reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-	plymouth base-devel easyeffects dconf-editor qbittorrent sassc wget htpdate ttf-fira{code-nerd,-sans}
+	plymouth base-devel easyeffects qt5ct kvantum dconf-editor power-profiles-daemon gvfs sassc wget ttf-fira{code-nerd,-sans}
+
+# INSTALL: Endeavour Budgie
+yay -S --needed --noconfirm lightdm{,-slick-greeter,-settings} budige \
+	gnome-terminal nautilus sushi file-roller evince gedit eog totem
 
 # INSTALL: Bluetooth
 if [[ $(sudo dmesg | grep -q 'Bluetooth') -eq 0 ]]; then
@@ -25,13 +29,11 @@ sudo sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
 sudo sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
-# htpdate
-sudo systemctl enable htpdate
-
 #################################### THEMES ####################################
 
 # INSTALL: GTK, KDE, Icon, Cursors
 if [ ! -f /.flag ]; then
-	${source_dir}/themes/pack-catppuccin.sh
+	${source_dir}/themes/theme-orchis.sh
+	${source_dir}/themes/icon-papirus.sh
 fi
 

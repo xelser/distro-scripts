@@ -3,13 +3,13 @@
 ################################### PACKAGES ###################################
 
 # PACKAGE MANAGER: Pacman
-echo -e "[options]\nVerbosePkgLists\nParallelDownloads = 5\nDisableDownloadTimeout\nILoveCandy\nColor" | sudo tee -a /etc/pacman.conf 1> /dev/null
+echo -e "\n[options]\nVerbosePkgLists\nParallelDownloads = 5\nDisableDownloadTimeout\nILoveCandy\nColor" | sudo tee -a /etc/pacman.conf 1> /dev/null
 sudo pacman-mirrors --country Global
 
 # DEBLOAT/UPDATE/INSTALL: Manjaro Base
 sudo pacman -Rnsc --noconfirm manjaro-hello zsh
-sudo pacman -Syyu --needed --noconfirm plymouth-theme-manjaro mhwd ttf-noto-nerd noto-fonts qt5ct kvantum \
-	power-profiles-daemon dconf-editor redshift firefox # warpinator geany transmission-gtk
+sudo pacman -Syyu --needed --noconfirm plymouth-theme-manjaro mhwd firefox \
+	plymouth base-devel easyeffects qt5ct kvantum dconf-editor power-profiles-daemon gvfs sassc wget ttf-fira{code-nerd,-sans}
 	
 # INSTALL: Manjaro DE
 if [[ ${wm_de} == "xfce" ]]; then sudo pacman -S --needed --noconfirm \
@@ -20,8 +20,7 @@ elif [[ ${wm_de} == "gnome" ]]; then sudo pacman -S --needed --noconfirm \
 	gnome-{builder,console,extensions-app,multi-writer,tweaks} \
 	file-roller easyeffects fragments celluloid drawing
 elif [[ ${wm_de} == "budgie" ]]; then sudo pacman -S --needed --noconfirm \
-	gnome-{builder,console,multi-writer} file-roller
-	#fragments celluloid drawing easyeffects
+	file-roller
 fi
 
 #################################### CONFIG ####################################
