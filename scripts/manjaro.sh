@@ -19,7 +19,12 @@ fi
 
 # INSTALL: Manjaro Base
 sudo pacman -Syyu --needed mhwd firefox plymouth-theme-manjaro plymouth base-devel \
-	easyeffects qt5ct kvantum dconf-editor power-profiles-daemon gvfs sassc wget ttf-fira{code-nerd,-sans}
+	easyeffects qt5ct kvantum dconf-editor power-profiles-daemon darkman gvfs sassc wget \
+	ttf-fira{code-nerd,-sans}
+
+# BUILD: htpdate
+cd /tmp && git clone https://github.com/twekkel/htpdate.git
+cd htpdate && make && sudo make install
 
 #################################### CONFIG ####################################
 
