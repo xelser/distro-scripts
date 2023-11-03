@@ -20,7 +20,7 @@ elif [[ ${wm_de} == "budgie" ]]; then
 fi
 
 # INSTALL: Manjaro Base
-sudo pacman -S --needed mhwd firefox plymouth-theme-manjaro plymouth base-devel \
+sudo pacman -S --needed --noconfirm mhwd firefox plymouth-theme-manjaro plymouth base-devel \
 	qt5ct kvantum dconf-editor power-profiles-daemon darkman gvfs sassc wget \
 	ttf-fira{code-nerd,-sans}
 
