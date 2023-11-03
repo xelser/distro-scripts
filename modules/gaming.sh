@@ -57,16 +57,17 @@ nvidia_prime () {
 #bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/lutris_wine_dep.sh)"
 
 # Install: Gamemode
-if [ -f /usr/bin/nala ]; then sudo nala install --assume-yes --no-install-recommends gamemode steam-devices
-elif [ -f /usr/bin/yay ]; then sudo yay -S --needed --noconfirm {lib32-,}gamemode steam-devices-git
-elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes gamemode.{x86_64,i686} steam-devices
+if [ -f /usr/bin/nala ]; then sudo nala install --assume-yes --no-install-recommends gamemode
+elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm {lib32-,}gamemode
+elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes gamemode.{x86_64,i686}
+elif [ -f /usr/bin/yay ]; then yay -S --needed --noconfirm {lib32-,}gamemode
 fi
 
 # Install: Lutris & MangoHud
 flatpak install --assumeyes --noninteractive flathub \
-	com.valvesoftware.Steam net.lutris.Lutris \
-	org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/23.08
-	
+	org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/23.08 \
+	net.lutris.Lutris
+
 #################################### CONFIG ####################################
 
 # MangoHud Config File
