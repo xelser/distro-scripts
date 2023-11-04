@@ -304,7 +304,7 @@
        id="lpetool"
        mode="drag"
        style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;"
-       unit="px"
+       unit="mm"
        show_bbox="1" />
     <eventcontext
        id="text"
@@ -952,7 +952,7 @@
      org.inkscape.output.png.inkscape.png_antialias="2" />
   <group
      id="desktop"
-     style="fill:#f46067">
+     style="fill:#cc575d">
     <group
        width="668"
        height="706"
@@ -1078,7 +1078,7 @@
      id="theme"
      defaultPreferDarkTheme="0"
      defaultIconTheme="Papirus-Dark"
-     defaultGtkTheme="Beta_Gruvbox-material-hard-dark-green"
+     defaultGtkTheme="Matcha-dark-aliz"
      narrowSpinButton="1"
      preferDarkTheme="1"
      darkTheme="1"
