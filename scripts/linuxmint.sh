@@ -49,7 +49,7 @@ sudo e2label /dev/${partition} "Mint"
 if [ ! -f /.flag ]; then
 	sudo nala install --assume-yes sassc
 
-   	${source_dir}/themes/theme-vimix.sh
+	${source_dir}/themes/theme-vimix.sh
 	${source_dir}/themes/icon-vimix.sh
 	${source_dir}/themes/cursor-vimix.sh
 	${source_dir}/themes/fonts-nerd.sh UbuntuMono

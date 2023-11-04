@@ -37,37 +37,19 @@ if [[ $USER == "xelser" ]]; then
 	[ ! -d $HOME/Videos/"xelser's Videos" ]       && ln -sf /run/media/$USER/Media/Videos    $HOME/Videos/"xelser's Videos"
 fi
 
-# Essential Packages
-if [ -f /usr/bin/nala ]; then sudo nala install --assume-yes \
-	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
-  	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf ntfs-3g wget curl git openssh-client \
-  	intel-media-va-driver i965-va-driver webext-ublock-origin-firefox
-elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
-	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
-  	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines ntfs-3g wget curl git openssh \
-  	libva-intel-driver intel-media-driver firefox-ublock-origin
-elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes --skip-broken --allowerasing \
-	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
-  	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines ntfs-3g wget curl git openssh \
-  	libva-intel-driver intel-media-driver mozilla-ublock-origin
-fi
-
-# Flatpak
-sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-sudo flatpak remote-modify --enable flathub && flatpak install --assumeyes --noninteractive flathub com.github.tchx84.Flatseal
-
-# Distro Post Install Script
-[ -f $HOME/.config/${distro_id}-post.sh ] && bash $HOME/.config/${distro_id}-post.sh
-
-# DE Post Install Script
-if [[ ${wm_de} == "gnome" ]] || [[ ${wm_de} == "cinnamon" ]] || [[ ${wm_de} == "xfce" ]]; then
-	bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/${wm_de}_settings.sh)"
-fi
-
-# Fonts
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/x11_fonts.sh)"
-
 # Audio
+if [ -f /usr/bin/pipewire ]; then
+	[ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm easyeffects
+	[ -f /usr/bin/nala ]; then sudo nala install --assume-yes easyeffects
+	[ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes easyeffects
+	[ -f $HOME/.config/easyeffects/output/default.json ] && easyeffects -l default
+elif [ -f /usr/bin/pulseaudio ]; then
+	[ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm pulseeffects
+	[ -f /usr/bin/nala ]; then sudo nala install --assume-yes pulseeffects
+	[ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes pulseeffects
+	[ -f $HOME/.config/PulseEffects/output/default.json ] && pulseeffects -l default
+fi
+
 if [ -f /etc/pulse/daemon.conf ]; then
 	check_flag /etc/pulse/daemon.conf
 
@@ -83,10 +65,44 @@ if [ -f /etc/pulse/daemon.conf ]; then
 	echo "default-sample-rate = 48000" | sudo tee -a /etc/pulse/daemon.conf 1> /dev/null
 fi
 
-if [ -f /usr/bin/pulseeffects ]; then
-	pulseeffects -l default
-elif [ -f /usr/bin/easyeffects ]; then
-	easyeffects -l default
+# Essential Packages
+if [ -f /usr/bin/nala ]; then sudo nala install --assume-yes \
+	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
+  	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf ntfs-3g wget curl git openssh-client \
+  	intel-media-va-driver i965-va-driver webext-ublock-origin-firefox
+elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
+	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
+  	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines ntfs-3g wget curl git openssh \
+  	libva-intel-driver intel-media-driver firefox-ublock-origin
+elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes --skip-broken --allowerasing \
+	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
+  	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines ntfs-3g wget curl git openssh \
+  	libva-intel-driver intel-media-driver mozilla-ublock-origin
+fi
+
+if [[ ! ${wm_de} == "gnome" ]] && [[ ! ${wm_de} == "kde" ]]; then
+	[ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm qt5ct kvantum
+	[ -f /usr/bin/nala ]; then sudo nala install --assume-yes qt5{ct,-style-kvantum}
+	[ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes qt5ct kvantum
+elif [[ ${wm_de} == "kde" ]]; then
+	[ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm kvantum
+	[ -f /usr/bin/nala ]; then sudo nala install --assume-yes qt5-style-kvantum
+	[ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes kvantum
+fi
+
+# Flatpak
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo flatpak remote-modify --enable flathub && flatpak install --assumeyes --noninteractive flathub com.github.tchx84.Flatseal
+
+# Distro Post Install Script
+[ -f $HOME/.config/${distro_id}-post.sh ] && bash $HOME/.config/${distro_id}-post.sh
+
+# Fonts
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/x11_fonts.sh)"
+
+# DE Post Install Script
+if [[ ${wm_de} == "gnome" ]] || [[ ${wm_de} == "cinnamon" ]] || [[ ${wm_de} == "xfce" ]]; then
+	bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/${wm_de}_settings.sh)"
 fi
 
 # Hide Apps
@@ -101,11 +117,6 @@ fi;done
 if [ -f /usr/bin/plank ] && [ -f $HOME/.config/plank/plank.ini ]; then
 	cat $HOME/.config/plank/plank.ini | dconf load /net/launchpad/plank/
 	dconf write /net/launchpad/plank/enabled-docks "['dock2']"
-fi
-
-# MangoHUD
-if [ -f /usr/bin/mangohud ]; then check_flag /etc/environment
-	echo -e "\nexport MANGOHUD=1\nexport MANGOHUD_DLSYM=1\n" | sudo tee -a /etc/environment 1> /dev/null
 fi
 
 # rEFInd
