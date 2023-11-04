@@ -77,6 +77,11 @@ if [[ ${machine} == "E5-476G" ]]; then
 	flatpak override --user --filesystem=/run/media/$USER/Shared:rw
 fi
 
+# MangoHUD
+#if [ -f /usr/bin/mangohud ]; then check_flag /etc/environment
+#	echo -e "\nexport MANGOHUD=1\nexport MANGOHUD_DLSYM=1\n" | sudo tee -a /etc/environment 1> /dev/null
+#fi
+
 echo "
 ################################### FINISHED ###################################"
 echo && read -p "Reboot? (Y/n): " end

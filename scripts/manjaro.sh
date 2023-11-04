@@ -6,21 +6,12 @@
 echo -e "\n[options]\nVerbosePkgLists\nParallelDownloads = 5\nDisableDownloadTimeout\nILoveCandy\nColor" | sudo tee -a /etc/pacman.conf 1> /dev/null
 sudo pacman-mirrors --country Global
 
-# COMMON: Debloat
-sudo pacman -Rnsc --noconfirm manjaro-{hello,settings-manager} zsh
-
-# INSTALL: Manjaro DE
-# NOTE: Debloat here also because manjaro isnt consistent with their OOTB packages
-if [[ ${wm_de} == "xfce" ]]; then
-	sudo pacman -Rnsc --noconfirm timeshift
-	sudo pacman -Syyu --needed --noconfirm pulseaudio-equalizer-ladspa
-elif [[ ${wm_de} == "budgie" ]]; then
-	sudo pacman -Rnsc --noconfirm timeshift lshw hexchat gthumb gufw imagewriter
-	sudo pacman -Syyu --needed --noconfirm easyeffects
-fi
+# DEBLOAT
+bloat=(manjaro-{hello,settings-manager} zsh midori gufw timeshift lshw hexchat gthumb gufw imagewriter)
+for pkgs in "${bloat[@]}"; do sudo pacman -Qq ${pkgs} && sudo pacman -Rnsc --noconfirm ${pkgs}; done
 
 # INSTALL: Manjaro Base
-sudo pacman -S --needed --noconfirm mhwd firefox plymouth-theme-manjaro plymouth base-devel \
+sudo pacman -Syyu --needed --noconfirm mhwd firefox plymouth-theme-manjaro plymouth base-devel \
 	qt5ct kvantum dconf-editor power-profiles-daemon darkman gvfs sassc wget \
 	ttf-fira{code-nerd,-sans}
 
