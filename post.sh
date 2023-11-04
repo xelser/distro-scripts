@@ -37,6 +37,31 @@ if [[ $USER == "xelser" ]]; then
 	[ ! -d $HOME/Videos/"xelser's Videos" ]       && ln -sf /run/media/$USER/Media/Videos    $HOME/Videos/"xelser's Videos"
 fi
 
+# Essential Packages
+if [ -f /usr/bin/nala ]; then sudo nala install --assume-yes \
+	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
+	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf ntfs-3g wget curl git openssh-client \
+	intel-media-va-driver i965-va-driver webext-ublock-origin-firefox lsp-plugins-lv2
+elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
+	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
+	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines ntfs-3g wget curl git openssh \
+	libva-intel-driver intel-media-driver firefox-ublock-origin lsp-plugins-lv2
+elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes --skip-broken --allowerasing \
+	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
+	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines ntfs-3g wget curl git openssh \
+	libva-intel-driver intel-media-driver mozilla-ublock-origin lsp-plugins-lv2
+fi
+
+if [[ ! ${wm_de} == "gnome" ]] && [[ ! ${wm_de} == "kde" ]]; then
+	[ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm qt5ct kvantum
+	[ -f /usr/bin/nala ]; then sudo nala install --assume-yes qt5{ct,-style-kvantum}
+	[ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes qt5ct kvantum
+elif [[ ${wm_de} == "kde" ]]; then
+	[ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm kvantum
+	[ -f /usr/bin/nala ]; then sudo nala install --assume-yes qt5-style-kvantum
+	[ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes kvantum
+fi
+
 # Audio
 if [ -f /usr/bin/pipewire ]; then
 	[ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm easyeffects
@@ -63,31 +88,6 @@ if [ -f /etc/pulse/daemon.conf ]; then
 
 	# Default Sample Rate
 	echo "default-sample-rate = 48000" | sudo tee -a /etc/pulse/daemon.conf 1> /dev/null
-fi
-
-# Essential Packages
-if [ -f /usr/bin/nala ]; then sudo nala install --assume-yes \
-	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
-  	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf ntfs-3g wget curl git openssh-client \
-  	intel-media-va-driver i965-va-driver webext-ublock-origin-firefox
-elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
-	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
-  	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines ntfs-3g wget curl git openssh \
-  	libva-intel-driver intel-media-driver firefox-ublock-origin
-elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes --skip-broken --allowerasing \
-	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
-  	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines ntfs-3g wget curl git openssh \
-  	libva-intel-driver intel-media-driver mozilla-ublock-origin
-fi
-
-if [[ ! ${wm_de} == "gnome" ]] && [[ ! ${wm_de} == "kde" ]]; then
-	[ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm qt5ct kvantum
-	[ -f /usr/bin/nala ]; then sudo nala install --assume-yes qt5{ct,-style-kvantum}
-	[ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes qt5ct kvantum
-elif [[ ${wm_de} == "kde" ]]; then
-	[ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm kvantum
-	[ -f /usr/bin/nala ]; then sudo nala install --assume-yes qt5-style-kvantum
-	[ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes kvantum
 fi
 
 # Flatpak
