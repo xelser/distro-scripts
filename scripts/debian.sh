@@ -13,7 +13,7 @@ apt update && apt install nala --yes
 # INSTALL: Debian Base (X11 and PipeWire)
 nala install --assume-yes htpdate plymouth build-essential alacritty neovim mpv mpd imv \
   dconf-{editor,cli} mugshot at-spi2-core firefox-esr {transmission,syncthing}-gtk \
-  lightdm{,-gtk-greeter-settings} redshift numlockx nitrogen easyeffects \
+  lightdm{,-gtk-greeter-settings} pipewire-audio redshift numlockx nitrogen \
   fonts-ubuntu{,-console}
 
 # INSTALL: Debian i3
