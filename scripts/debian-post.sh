@@ -30,6 +30,9 @@ systemctl enable --user mpd
 #systemctl enable --user darkman
 systemctl enable --user syncthing
 
+# flameshot directory
+mkdir -p $HOME/Pictures/Screenshots
+
 # XFCE 
 if [[ ${wm_de} == "xfce" ]]; then 
         xfconf-query -cn xsettings -pn /Net/ThemeName -t string -s "Gruvbox-Material-Dark"
