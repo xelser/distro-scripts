@@ -213,3 +213,8 @@ exec --no-startup-id dunst
 exec_always --no-startup-id sh $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id xset led on
 exec_always --no-startup-id autotiling
+
+# Screenshot (flameshot)
+exec --no-startup-id flameshot
+bindsym Print exec flameshot full --path /home/xelser/Pictures/Screenshots/
+bindsym Shift+Print exec flameshot gui --path /home/xelser/Pictures/Screenshots/
