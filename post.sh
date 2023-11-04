@@ -73,7 +73,7 @@ elif [ -f /usr/bin/pulseaudio ]; then
 	[ -f /usr/bin/nala ] && sudo nala install --assume-yes pulseeffects
 	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes pulseeffects
 	[ -f $HOME/.config/PulseEffects/output/default.json ] && pulseeffects -l default
-fis
+fi
 
 if [ -f /etc/pulse/daemon.conf ]; then
 	check_flag /etc/pulse/daemon.conf
