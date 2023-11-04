@@ -53,27 +53,27 @@ elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes --skip-broken --allo
 fi
 
 if [[ ! ${wm_de} == "gnome" ]] && [[ ! ${wm_de} == "kde" ]]; then
-	[ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm qt5ct kvantum
-	[ -f /usr/bin/nala ]; then sudo nala install --assume-yes qt5{ct,-style-kvantum}
-	[ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes qt5ct kvantum
+	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm qt5ct kvantum
+	[ -f /usr/bin/nala ] && sudo nala install --assume-yes qt5{ct,-style-kvantum}
+	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes qt5ct kvantum
 elif [[ ${wm_de} == "kde" ]]; then
-	[ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm kvantum
-	[ -f /usr/bin/nala ]; then sudo nala install --assume-yes qt5-style-kvantum
-	[ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes kvantum
+	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm kvantum
+	[ -f /usr/bin/nala ] && sudo nala install --assume-yes qt5-style-kvantum
+	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes kvantum
 fi
 
 # Audio
 if [ -f /usr/bin/pipewire ]; then
-	[ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm easyeffects
-	[ -f /usr/bin/nala ]; then sudo nala install --assume-yes easyeffects
-	[ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes easyeffects
+	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm easyeffects
+	[ -f /usr/bin/nala ] && sudo nala install --assume-yes easyeffects
+	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes easyeffects
 	[ -f $HOME/.config/easyeffects/output/default.json ] && easyeffects -l default
 elif [ -f /usr/bin/pulseaudio ]; then
-	[ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm pulseeffects
-	[ -f /usr/bin/nala ]; then sudo nala install --assume-yes pulseeffects
-	[ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes pulseeffects
+	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm pulseeffects
+	[ -f /usr/bin/nala ] && sudo nala install --assume-yes pulseeffects
+	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes pulseeffects
 	[ -f $HOME/.config/PulseEffects/output/default.json ] && pulseeffects -l default
-fi
+fis
 
 if [ -f /etc/pulse/daemon.conf ]; then
 	check_flag /etc/pulse/daemon.conf
