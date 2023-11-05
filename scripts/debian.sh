@@ -2,12 +2,13 @@
 
 ################################### PACKAGES ###################################
 
-# Debian Non-Free Repos
+# Debian Repos
 sed -i 's/non-free-firmware/non-free-firmware non-free contrib/g' /etc/apt/sources.list
 sed -i 's/non-free non-free/non-free/g' /etc/apt/sources.list
 sed -i 's/contrib contrib/contrib/g' /etc/apt/sources.list
 
 # PACKAGE MANAGER: Nala
+dpkg --add-architecture i386
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base (X11 and PipeWire)
