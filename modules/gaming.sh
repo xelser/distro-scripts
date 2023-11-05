@@ -33,15 +33,6 @@ nvidia_prime () {
 		sudo envycontrol --switch hybrid --rtd3
 		#sudo envycontrol --switch nvidia --force-comp
 	fi
-
-	# Optimus Manager (deprecated)
-	#if [ -f /usr/share/optimus-manager.conf ]; then
-	#	sudo cp -rf /usr/share/optimus-manager.conf /etc/optimus-manager/
-	#	sudo sed -i 's/startup_mode=integrated/startup_mode=hybrid/g' /etc/optimus-manager/optimus-manager.conf
-	#	sudo sed -i 's/option=overclocking/option=triple_buffer/g' /etc/optimus-manager/optimus-manager.conf
-	#	sudo sed -i 's/dynamic_power_management=no/dynamic_power_management=fine/g' /etc/optimus-manager/optimus-manager.conf
-	#	sudo systemctl enable --now optimus-manager
-	#fi
 }
 
 # Autoinstall Recommended Drivers
@@ -57,11 +48,9 @@ nvidia_prime () {
 #bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/lutris_wine_dep.sh)"
 
 # Install: Gamemode
-if [ -f /usr/bin/nala ]; then sudo nala install --assume-yes --no-install-recommends gamemode
-elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm {lib32-,}gamemode
-elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes gamemode.{x86_64,i686}
-elif [ -f /usr/bin/yay ]; then yay -S --needed --noconfirm {lib32-,}gamemode
-fi
+[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm {lib32-,}gamemode
+[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes gamemode.{x86_64,i686}
+[ -f /usr/bin/nala ] && sudo nala install --assume-yes gamemode{,:i386}
 
 # Install: Lutris & MangoHud
 flatpak install --assumeyes --noninteractive flathub \
