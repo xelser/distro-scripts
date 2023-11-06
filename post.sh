@@ -4,7 +4,7 @@ check_flag () {
 	[ ! -f /.flag ] && sudo cp -rf $1 $1.bak || sudo cp -rf $1.bak $1
 }
 
-################################# PREPARATIONS #################################
+################################ PREPARATIONS ################################
 
 # Set to performance
 if [ -f /usr/bin/powerprofilesctl ]; then
@@ -23,7 +23,7 @@ fi
 # Update Time (Enable Network Time)
 sudo timedatectl set-ntp true
 
-################################# POST INSTALL #################################
+################################ POST INSTALL ################################
 
 # Update User Dirs
 [ -f /usr/bin/xdg-user-dirs-update ] && xdg-user-dirs-update
@@ -123,7 +123,7 @@ fi
 [[ ${machine} == "E5-476G" ]] && \
   bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/refind.sh)"
 
-#################################### THEMES ####################################
+################################### THEMES ###################################
 
 # General Theming
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/theming.sh)"
@@ -145,7 +145,7 @@ if [ -f /bin/libreoffice ]; then
 	wget -qO- https://raw.githubusercontent.com/PapirusDevelopmentTeam/papirus-libreoffice-theme/master/install-papirus-root.sh | sh
 fi
 
-###################################### END #####################################
+##################################### END ####################################
 
 # Flag end of installation
 sudo touch /.flag

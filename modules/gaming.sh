@@ -1,12 +1,12 @@
 #!/bin/bash
 
-#################################### DRIVERS ###################################
+################################### DRIVERS ##################################
 
 # Install: Proprietary NVIDIA Drivers
 install_nvidia () {
 	if [[ ${distro_id} == "fedora" ]]; then
 		echo -e "blacklist nouveau\noptions nouveau modeset=0" | sudo tee /usr/lib/modprobe.d/blacklist-nouveau.conf 1> /dev/null
-		sudo dnf install --assumeyes --allowerasing akmod-nvidia && sudo dracut --force
+		sudo dnf install --assumeyes --allowerasing akmod-nvidia #&& sudo dracut --force
 	elif [[ ${distro_id} == "arch" ]] || [[ ${distro_id} == "endeavouros" ]]; then
 		sudo pacman -S --needed --noconfirm nvidia nvidia-utils lib32-nvidia-utils
 	fi
@@ -42,7 +42,7 @@ nvidia_prime () {
 # Specific Machines
 [[ ${machine} == "E5-476G" ]] && install_nvidia ; nvidia_prime
 
-################################### INSTALL ####################################
+################################## INSTALL ###################################
 
 # Install: Wine Dependencies (Source: Lutris Docs)
 #bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/lutris_wine_dep.sh)"
@@ -57,7 +57,7 @@ flatpak install --assumeyes --noninteractive flathub \
 	org.freedesktop.Platform.VulkanLayer.MangoHud/x86_64/23.08 \
 	net.lutris.Lutris
 
-#################################### CONFIG ####################################
+################################### CONFIG ###################################
 
 # MangoHud Config File
 flatpak override --user --filesystem=xdg-config/MangoHud:ro
@@ -72,7 +72,8 @@ fi
 #fi
 
 echo "
-################################### FINISHED ###################################"
+################################## FINISHED ##################################
+"
 echo && read -p "Reboot? (Y/n): " end
 case $end in
    n)	echo "Reboot Cancelled";;

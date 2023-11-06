@@ -1,7 +1,7 @@
 #!/bin/bash
 clear
 
-################################# SET VARIABLES ################################
+################################ SET VARIABLES ###############################
 
 ## ID ##
 [ ${UID} -eq 0 ] && read -p "Username: " user && export user || export user="$USER"
@@ -22,7 +22,7 @@ export dotfiles_dir="${source_dir}/dotfiles/${distro_id}"
 ## For Arch Linux ##
 [[ ${distro_id} == "arch" ]] && export root_mnt="/mnt" || export root_mnt=""
 
-################################# INSTALLATION #################################
+################################ INSTALLATION ################################
 
 ## No password for user ##
 if [[ ! ${distro_id} == "arch" ]]; then
@@ -36,7 +36,7 @@ fi
 
 systemd-inhibit ${source_dir}/scripts/${distro_id}.sh
 
-################################# POST INSTALL #################################
+################################ POST INSTALL ################################
 
 ## Dotfiles ##
 [ -d ${dotfiles_dir}/.config/ ]       && cp -rf ${dotfiles_dir}/.config/       ${root_mnt}/home/${user}/
@@ -83,7 +83,7 @@ else
 fi
 
 ## Reboot ##
-echo "#################################### FINISHED ####################################"
+echo "################################### FINISHED ###################################"
 echo && read -p "Reboot? (Y/n): " end
 case $end in
    n)	echo "Reboot Cancelled";;

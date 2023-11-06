@@ -1,6 +1,6 @@
 #!/bin/bash
 
-################################### PACKAGES ###################################
+################################## PACKAGES ##################################
 
 # Debian Repos
 sed -i 's/non-free-firmware/non-free-firmware non-free contrib/g' /etc/apt/sources.list
@@ -38,7 +38,7 @@ chmod +x /usr/bin/autotiling
 # BUILD: darkman
 #bash ${source_dir}/modules/darkman.sh
 
-#################################### CONFIG ####################################
+################################### CONFIG ###################################
 
 # sudo
 usermod -aG sudo ${user}

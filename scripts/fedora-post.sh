@@ -14,7 +14,7 @@ gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Roboto Medium 10'
 # Remove gnome-terminal
 sudo dnf autoremove --assumeyes gnome-terminal
 
-#################################### FLATPAK ###################################
+################################### FLATPAK ##################################
 
 # INSTALL: Fedora Workstation
 flatpak install --assumeyes --noninteractive flathub org.gtk.Gtk3theme.adw-{gtk3,gtk3-dark} \
