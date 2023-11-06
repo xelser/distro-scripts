@@ -4,7 +4,7 @@ append_file () {
         grep -x "$1" $2 || echo -e "\n$1" | sudo tee -a $2 1> /dev/null
 }
 
-################################### PACKAGES ###################################
+################################## PACKAGES ##################################
 
 # PACKAGE MANAGER: DNF
 append_file "keepcache=True
@@ -44,7 +44,7 @@ sudo dnf install --assumeyes --skip-broken google-roboto-{fonts,mono-fonts,slab-
   gnome-shell-extension-pop-shell htpdate syncthing-gtk 
   # inkscape telegram discord video-downloader touchegg google-chrome-stable
 
-#################################### CONFIG ####################################
+################################### CONFIG ###################################
 
 # Grub
 sudo sed -i 's/quiet/quiet splash/g' /etc/default/grub
@@ -65,12 +65,12 @@ append_file "[daemon]
 AutomaticLogin=${user}
 AutomaticLoginEnable=True" /etc/gdm/custom.conf
 
-#################################### THEMES ####################################
+################################### THEMES ###################################
 
 # INSTALL: GTK, KDE, Icon, Cursors
 if [ ! -f /.flag ]; then
 	${source_dir}/themes/pack-libadwaita.sh
 	${source_dir}/themes/icon-tela-circle.sh
-  ${source_dir}/themes/cursor-bibata.sh
+  	${source_dir}/themes/cursor-bibata.sh
 	${source_dir}/themes/fonts-nerd.sh RobotoMono
 fi
