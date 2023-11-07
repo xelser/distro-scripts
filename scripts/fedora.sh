@@ -40,8 +40,7 @@ sudo dnf copr enable whitehara/htpdate --assumeyes
 
 # INSTALL: Fedora Workstation
 sudo dnf install --assumeyes --skip-broken google-roboto-{fonts,mono-fonts,slab-fonts} dconf-editor libheif-tools \
-  gnome-{builder,console,extensions-app,multi-writer,tweaks} file-roller fragments celluloid drawing \
-  gnome-shell-extension-pop-shell htpdate syncthing-gtk 
+  gnome-{builder,console,extensions-app,multi-writer,tweaks} file-roller fragments celluloid drawing htpdate
   # inkscape telegram discord video-downloader touchegg google-chrome-stable
 
 ################################### CONFIG ###################################
