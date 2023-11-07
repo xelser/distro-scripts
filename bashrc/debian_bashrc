@@ -3,4 +3,11 @@
 ## USER BASH CONFIGS ##
 #######################
 
-PS1=" \[\e[1;31m\]  \[\e[1;33m\]\W \[\e[1;32m\]>\[\e[1;35m\]>\[\e[1;34m\]> \[\e[0;37m\]"
+# colors
+if [[ $(grep "colors:" $HOME/.config/alacritty/gruvbox-material.yml | cut -d'_' -f4) == "dark" ]]; then
+	fg="37"
+elif [[ $(grep "colors:" $HOME/.config/alacritty/gruvbox-material.yml | cut -d'_' -f4) == "light" ]]; then
+	fg="30"
+fi
+
+PS1=" \[\e[1;31m\]  \[\e[1;33m\]\W \[\e[1;32m\]>\[\e[1;35m\]>\[\e[1;34m\]> \[\e[0;${fg}m\]"
