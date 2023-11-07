@@ -33,7 +33,7 @@ if has('termguicolors')
 endif
 
 " For dark version.
-set background=dark
+set background=light
 " For light version.
 "set background=light
 
