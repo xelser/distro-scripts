@@ -25,7 +25,7 @@ gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first 'true'
 
 # Apps
 #gsettings set org.gnome.totem subtitle-font 'Roboto Medium 14'
-gsettings set org.gnome.eog.ui sidebar 'false'
+#gsettings set org.gnome.eog.ui sidebar 'false'
 gsettings set org.gnome.gnome-system-monitor current-tab 'resources'
 gsettings set org.gnome.nautilus.window-state initial-size '(890, 580)'
 gsettings set org.gnome.nautilus.preferences show-delete-permanently 'true'
