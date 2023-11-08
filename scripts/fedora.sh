@@ -36,11 +36,11 @@ sudo dnf swap ffmpeg-free ffmpeg --assumeyes --allowerasing
 sudo dnf groupupdate sound-and-video multimedia --assumeyes --exclude=PackageKit-gstreamer-plugin
 
 # INSTALL: htpdate (COPR)
-sudo dnf copr enable whitehara/htpdate --assumeyes
+#sudo dnf copr enable whitehara/htpdate --assumeyes
 
 # INSTALL: Fedora Workstation
 sudo dnf install --assumeyes --skip-broken google-roboto-{fonts,mono-fonts,slab-fonts} dconf-editor libheif-tools \
-  gnome-{builder,console,extensions-app,multi-writer,tweaks} file-roller fragments celluloid drawing htpdate
+  gnome-{builder,console,extensions-app,multi-writer,tweaks} file-roller fragments celluloid drawing #htpdate
   # inkscape telegram discord video-downloader touchegg google-chrome-stable
 
 ################################### CONFIG ###################################
@@ -57,7 +57,7 @@ sudo grub2-mkconfig -o /boot/grub2/grub.cfg 1> /dev/null
 sudo hostnamectl set-hostname --static "fedora"
 
 # Systemd Daemons
-sudo systemctl enable htpdate --now
+#sudo systemctl enable htpdate --now
 
 # GDM
 append_file "[daemon]
