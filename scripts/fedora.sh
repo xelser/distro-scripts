@@ -26,21 +26,18 @@ sudo dnf autoremove --assumeyes rhythmbox cheese mediawriter fedora-bookmarks li
 sudo dnf list --installed | grep -q "rpmfusion" || \
 sudo dnf install --assumeyes --skip-broken https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
-sudo dnf group update --assumeyes --skip-broken core
 
 # UPDATE
+sudo dnf groupupdate --assumeyes --skip-broken core sound-and-video multimedia --exclude=PackageKit-gstreamer-plugin
 sudo dnf upgrade --assumeyes --best --skip-broken --allowerasing # --security --bugfix --enhancement
 
 # INSTALL: Fedora Multimedia Codecs (from RPM Fusion https://rpmfusion.org/Howto/Multimedia)
-sudo dnf swap ffmpeg-free ffmpeg --assumeyes --allowerasing
-sudo dnf groupupdate sound-and-video multimedia --assumeyes --exclude=PackageKit-gstreamer-plugin
-
-# INSTALL: htpdate (COPR)
-#sudo dnf copr enable whitehara/htpdate --assumeyes
+#sudo dnf swap ffmpeg-free ffmpeg --assumeyes --allowerasing
+#sudo dnf groupupdate sound-and-video multimedia --assumeyes --exclude=PackageKit-gstreamer-plugin
 
 # INSTALL: Fedora Workstation
-sudo dnf install --assumeyes --skip-broken google-roboto-{fonts,mono-fonts,slab-fonts} dconf-editor libheif-tools \
-  gnome-{builder,console,extensions-app,multi-writer,tweaks} file-roller fragments celluloid drawing #htpdate
+sudo dnf install --assumeyes --skip-broken --allowerasing google-roboto-{fonts,mono-fonts,slab-fonts} libheif-tools \
+  gnome-{builder,console,extensions-app,multi-writer,tweaks} file-roller fragments celluloid drawing dconf-editor
   # inkscape telegram discord video-downloader touchegg google-chrome-stable
 
 ################################### CONFIG ###################################
@@ -55,9 +52,6 @@ sudo grub2-mkconfig -o /boot/grub2/grub.cfg 1> /dev/null
 
 # Set Hostname
 sudo hostnamectl set-hostname --static "fedora"
-
-# Systemd Daemons
-#sudo systemctl enable htpdate --now
 
 # GDM
 append_file "[daemon]

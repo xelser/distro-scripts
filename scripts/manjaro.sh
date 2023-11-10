@@ -15,10 +15,6 @@ sudo pacman -Syyu --needed --noconfirm mhwd firefox plymouth-theme-manjaro plymo
 	qt5ct kvantum dconf-editor power-profiles-daemon darkman gvfs sassc wget \
 	ttf-fira{code-nerd,-sans}
 
-# BUILD: htpdate
-cd /tmp && git clone https://github.com/twekkel/htpdate.git
-cd htpdate && make && sudo make install
-
 #################################### CONFIG ####################################
 
 # root label
