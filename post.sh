@@ -120,8 +120,8 @@ if [ -f /usr/bin/plank ] && [ -f $HOME/.config/plank/plank.ini ]; then
 fi
 
 # rEFInd
-sudo dmesg | grep -q "EFI v" && [[ ${machine} == "E5-476G" ]] && \
-	bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/refind.sh)"
+#sudo dmesg | grep -q "EFI v" && [[ ${machine} == "E5-476G" ]] && \
+#	bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/refind.sh)"
 
 ################################### THEMES ###################################
 
