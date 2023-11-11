@@ -75,6 +75,9 @@ if [[ ${machine} == "E5-476G" ]]; then
 	| sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
 fi
 
+## distro-scripts ##
+[[ ${user} == "xelser" ]] && cp -rf ${source_dir}/modules/distro_scripts.sh /home/${user}
+
 ## Permissions ##
 if [[ ${distro_id} == "arch" ]]; then
 	arch-chroot /mnt /bin/bash -c "sudo chown -R ${user} /home/${user}"
