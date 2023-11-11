@@ -46,7 +46,7 @@ elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
 	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
 	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines ntfs-3g wget curl git openssh \
 	libva-intel-driver intel-media-driver firefox-ublock-origin lsp-plugins-lv2
-elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes --skip-broken --allowerasing \
+elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes --best --allowerasing \
 	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
 	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines ntfs-3g wget curl git openssh \
 	libva-intel-driver intel-media-driver mozilla-ublock-origin lsp-plugins-lv2
