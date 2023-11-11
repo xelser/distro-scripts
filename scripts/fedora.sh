@@ -43,12 +43,12 @@ sudo dnf install --assumeyes --skip-broken --allowerasing google-roboto-{fonts,m
 ################################### CONFIG ###################################
 
 # Grub
-sudo sed -i 's/quiet/quiet splash/g' /etc/default/grub
-sudo sed -i 's/splash splash/splash/g' /etc/default/grub
-sudo sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/g' /etc/default/grub
-sudo grub2-mkconfig -o /etc/grub2.cfg 1> /dev/null
-sudo grub2-mkconfig -o /etc/grub2-efi.cfg 1> /dev/null
-sudo grub2-mkconfig -o /boot/grub2/grub.cfg 1> /dev/null
+#sudo sed -i 's/quiet/quiet splash/g' /etc/default/grub
+#sudo sed -i 's/splash splash/splash/g' /etc/default/grub
+#sudo sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/g' /etc/default/grub
+#sudo grub2-mkconfig -o /etc/grub2.cfg 1> /dev/null
+#sudo grub2-mkconfig -o /etc/grub2-efi.cfg 1> /dev/null
+#sudo grub2-mkconfig -o /boot/grub2/grub.cfg 1> /dev/null
 
 # Set Hostname
 sudo hostnamectl set-hostname --static "fedora"
