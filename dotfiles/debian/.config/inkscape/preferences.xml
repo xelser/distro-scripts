@@ -567,7 +567,7 @@
     <group
        id="preferences"
        state="1"
-       page="30" />
+       page="24" />
     <group
        id="gradienteditor" />
     <group
@@ -1078,16 +1078,16 @@
      id="theme"
      defaultPreferDarkTheme="0"
      defaultIconTheme="Papirus-Light"
-     defaultGtkTheme="Beta_Gruvbox-material-hard-light-green"
+     defaultGtkTheme="Materia-light-compact"
      narrowSpinButton="1"
-     preferDarkTheme="0"
-     darkTheme="0"
+     preferDarkTheme="1"
+     darkTheme="1"
      symbolicIcons="1"
      symbolicDefaultBaseColors="1"
      symbolicDefaultHighColors="1"
      menuIcons="0"
      fontscale="100"
-     gtkTheme="Beta_Gruvbox-material-hard-light-blue">
+     gtkTheme="Materia-light">
     <group
        id="multicolor"
        symbolicBaseColor="3958107135"
@@ -1102,10 +1102,10 @@
        symbolicErrorColor="4232132863" />
     <group
        id="Papirus-Light"
-       symbolicBaseColor="842150655"
-       symbolicSuccessColor="882433023"
-       symbolicWarningColor="4067964415"
-       symbolicErrorColor="4232132863" />
+       symbolicBaseColor="4193909247"
+       symbolicSuccessColor="512638719"
+       symbolicWarningColor="4188733695"
+       symbolicErrorColor="3643811327" />
   </group>
   <group
      id="gradient-edit"
