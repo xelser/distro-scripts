@@ -67,6 +67,10 @@
         {
             "wmClass": "io.bassi.Amberol",
             "mode": "float"
+        },
+        {
+            "wmClass": "gnome-system-monitor",
+            "mode": "float"
         }
     ]
 }
