@@ -28,7 +28,7 @@ sudo dnf install --assumeyes --skip-broken https://download1.rpmfusion.org/free/
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # UPDATE
-sudo dnf groupupdate --assumeyes --skip-broken core sound-and-video multimedia --exclude=PackageKit-gstreamer-plugin
+sudo dnf groupupdate --assumeyes --best --skip-broken --allowerasing core sound-and-video multimedia --exclude=PackageKit-gstreamer-plugin
 sudo dnf upgrade --assumeyes --best --skip-broken --allowerasing # --security --bugfix --enhancement
 
 # INSTALL: Fedora Multimedia Codecs (from RPM Fusion https://rpmfusion.org/Howto/Multimedia)
