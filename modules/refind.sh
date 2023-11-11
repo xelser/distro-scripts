@@ -4,9 +4,9 @@
 version="$(curl -qsL "https://sourceforge.net/projects/refind/best_release.json" | sed "s/, /,\n/g" | sed -rn "/release/,/\}/{ /filename/{ 0,//s/([^0-9]*)([0-9\.]+)([^0-9]*.*)/\2/ p }}")"
 
 # Get packages
-[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm shim refind sbsigntools openssl
-[ -f /usr/bin/nala ] && sudo nala install --assume-yes shim-signed refind sbsigntool openssl
-[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes shim rEFInd sbsigntools openssl
+[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm shim refind sbsigntools openssl mokutil
+[ -f /usr/bin/nala ] && sudo nala install --assume-yes shim-signed refind sbsigntool openssl mokutil
+[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes shim rEFInd sbsigntools openssl mokutil
 
 # Install rEFInd
 sudo refind-install --shim /boot/efi/EFI/${distro_id}/shimx64.efi --localkeys
