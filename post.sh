@@ -63,17 +63,22 @@ elif [[ ${wm_de} == "kde" ]]; then
 fi
 
 # Audio
-if [ -f /usr/bin/pipewire ]; then
+in_easyeffects () {
 	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm easyeffects
 	[ -f /usr/bin/nala ] && sudo nala install --assume-yes easyeffects
 	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes easyeffects
 	[ -f $HOME/.config/easyeffects/output/default.json ] && easyeffects -l default
-elif [ -f /usr/bin/pulseaudio ]; then
+}
+
+in_pulseeffects () {
 	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm pulseeffects
 	[ -f /usr/bin/nala ] && sudo nala install --assume-yes pulseeffects
 	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes pulseeffects
 	[ -f $HOME/.config/PulseEffects/output/default.json ] && pulseeffects -l default
-fi
+}
+
+[ -f /usr/bin/pactl ] && pactl info | grep -q "PipeWire" && in_easyeffects || in_pulseeffects
+[ ! -f /usr/bin/pactl ] && [ -f /usr/bin/pipewire ] && in_easyeffects || in_pulseeffects
 
 if [ -f /etc/pulse/daemon.conf ]; then
 	check_flag /etc/pulse/daemon.conf
