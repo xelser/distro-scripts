@@ -53,6 +53,7 @@ echo -e "\n[Seat:*]
 greeter-setup-script=/usr/bin/numlockx on
 greeter-hide-users=false
 autologin-user=${user}
+autologin-session=i3
 " >> /etc/lightdm/lightdm.conf
 systemctl enable lightdm
 
