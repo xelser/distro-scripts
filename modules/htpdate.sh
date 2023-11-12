@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# DEPENDENCIES]
+# DEPENDENCIES
 [ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm make
 [ -f /usr/bin/nala ] && sudo nala install --assume-yes make
 [ -f /usr/bin/dnf ] && sudo dnf install --assumeyes make

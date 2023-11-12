@@ -12,15 +12,14 @@ dpkg --add-architecture i386
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base (X11 and PipeWire)
-nala install --assume-yes htpdate plymouth build-essential alacritty neovim mpv mpd imv \
+nala install --assume-yes htpdate plymouth build-essential fonts-ubuntu{,-console} \
   dconf-{editor,cli} mugshot at-spi2-core firefox-esr {transmission,syncthing}-gtk \
-  lightdm{,-gtk-greeter-settings} pipewire-audio redshift numlockx nitrogen \
-  fonts-ubuntu{,-console}
-
+  lightdm{,-gtk-greeter-settings} pipewire-audio redshift numlockx
+  
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar nitrogen rofi dunst libnotify-bin \
   gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} xarchiver \
-  policykit-1-gnome lxappearance gedit flameshot
+  policykit-1-gnome lxappearance gedit flameshot alacritty neovim mpv mpd imv
 
 # INSTALL: TeamViewer (deb)
 wget -q https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -P /tmp
@@ -57,3 +56,9 @@ autologin-user=${user}
 " >> /etc/lightdm/lightdm.conf
 systemctl enable lightdm
 
+################################### THEMES ###################################
+
+# INSTALL: GTK, KDE, Icon, Cursors
+if [ ! -f /.flag ]; then
+	${source_dir}/themes/fonts-nerd.sh UbuntuMono
+fi
