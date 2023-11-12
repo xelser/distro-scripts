@@ -12,7 +12,7 @@ dpkg --add-architecture i386
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base (X11 and PipeWire)
-nala install --assume-yes htpdate plymouth build-essential fonts-ubuntu{,-console} \
+nala install --assume-yes htpdate plymouth build-essential synaptic fonts-ubuntu{,-console} \
   dconf-{editor,cli} mugshot at-spi2-core firefox-esr {transmission,syncthing}-gtk \
   lightdm{,-gtk-greeter-settings} pipewire-audio redshift numlockx
   
