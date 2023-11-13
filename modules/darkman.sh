@@ -10,4 +10,3 @@ cd /tmp/ && git clone https://gitlab.com/WhyNotHugo/darkman.git
 
 # Build
 cd darkman/ && make && sudo make install
-
