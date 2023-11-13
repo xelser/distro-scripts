@@ -7,13 +7,13 @@ echo -e "\n[options]\nVerbosePkgLists\nParallelDownloads = 5\nDisableDownloadTim
 sudo pacman-mirrors --country Global
 
 # DEBLOAT
-bloat=(manjaro-{hello,pulse,settings-manager} zsh midori gufw timeshift lshw hexchat gthumb gufw imagewriter)
-for pkgs in "${bloat[@]}"; do sudo pacman -Qq ${pkgs} && sudo pacman -Rnsc --noconfirm ${pkgs}; done
+#bloat=(manjaro-{hello,settings-manager} zsh midori gufw timeshift lshw hexchat gthumb gufw imagewriter)
+#for pkgs in "${bloat[@]}"; do sudo pacman -Qq ${pkgs} && sudo pacman -Rnsc --noconfirm ${pkgs}; done
+sudo pacman -Rnsc --noconfirm $(pacman -Ssq manjaro-{hello,settings-manager} zsh midori gufw timeshift lshw hexchat gthumb gufw imagewriter)
 
 # INSTALL: Manjaro Base
 sudo pacman -Syyu --needed --noconfirm mhwd firefox plymouth-theme-manjaro plymouth base-devel \
-	manjaro-pipewire wireplumber ecasound qt5ct kvantum dconf-editor power-profiles-daemon \
-	darkman gvfs ttf-fira{code-nerd,-sans}
+	qt5ct kvantum dconf-editor power-profiles-daemon darkman gvfs ttf-fira{code-nerd,-sans}
 
 ################################### CONFIG ###################################
 
