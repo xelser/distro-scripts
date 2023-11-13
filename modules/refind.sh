@@ -7,8 +7,8 @@ version="$(curl -qsL "https://sourceforge.net/projects/refind/best_release.json"
 if [ ! -f /usr/bin/refind-install ]; then echo Installing refind...
 	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm refind && sudo refind-install --yes
 	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes https://nchc.dl.sourceforge.net/project/refind/${version}/refind-${version}-1.x86_64.rpm
-	[ -f /usr/bin/apt ] && sudo apt install --yes https://nchc.dl.sourceforge.net/project/refind/${version}/refind_${version}-1_amd64.deb \
-		-o APT::Get::AllowUnauthenticated=true
+	[ -f /usr/bin/apt ] && cd /tmp && wget -q https://nchc.dl.sourceforge.net/project/refind/${version}/refind_${version}-1_amd64.deb && \
+		sudo apt install --yes /tmp/refind_${version}-1_amd64.deb
 fi
 
 # Make Root Read/Write and Enable Boot Splash
