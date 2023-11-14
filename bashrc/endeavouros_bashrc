@@ -6,12 +6,12 @@
 # colors
 if [[ $(gsettings get org.gnome.desktop.interface color-scheme) == "prefer-dark" ]]; then
 	bo="1" # gnome-console doesnt support this
-	co="37"
+	fg="37"
 elif [[ $(gsettings get org.gnome.desktop.interface color-scheme) == "default" ]]; then
 	bo="0" # gnome-console doesnt support this
-	co="30"
+	fg="30"
 else
-	co="37"
+	fg="37"
 fi
 
-PS1="\[\e[1;33m\]┌(\[\e[1;32m\]\u\[\e[1;${co}m\]@\[\e[1;31m\]\h\[\e[1;33m\]) \[\e[1;${co}m\]::\[\e[1;36m\] \W \[\e[1;${co}m\]::\n\[\e[1;33m\]└─\[\e[1;35m\]➤\[\e[0;${co}m\]  "
+PS1="\[\e[1;33m\]┌(\[\e[1;32m\]\u\[\e[1;${fg}m\]@\[\e[1;31m\]\h\[\e[1;33m\]) \[\e[1;${fg}m\]::\[\e[1;36m\] \W \[\e[1;${fg}m\]::\n\[\e[1;33m\]└─\[\e[1;35m\]➤\[\e[0;${fg}m\]  "
