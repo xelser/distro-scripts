@@ -71,6 +71,10 @@
         {
             "wmClass": "gnome-system-monitor",
             "mode": "float"
+        },
+        {
+            "wmClass": "gnome-terminal-server",
+            "mode": "float"
         }
     ]
 }
