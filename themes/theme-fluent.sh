@@ -15,7 +15,7 @@ sudo ./install.sh --theme all --tweaks noborder
 }
 
 install_kde () {
-./install.sh --theme all && ./install.sh --theme all
+./install.sh --theme all
 }
 
 install_sddm () {
