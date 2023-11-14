@@ -12,8 +12,8 @@ for pkgs in "${bloat[@]}"; do sudo pacman -Qq ${pkgs} && sudo pacman -Rnsc --noc
 
 # INSTALL: Manjaro Base
 sudo pacman -Syyu --needed --noconfirm mhwd firefox plymouth-theme-manjaro plymouth base-devel \
-	manjaro-pipewire wireplumber ecasound qt5ct kvantum dconf-editor power-profiles-daemon darkman \
-	ttf-fira{code-nerd,-sans}
+	manjaro-pipewire wireplumber ecasound redshift qt5ct kvantum dconf-editor power-profiles-daemon \
+	geany darkman ttf-fira{code-nerd,-sans}
 
 ################################### CONFIG ###################################
 
