@@ -11,15 +11,15 @@ src_dir_kde="Fluent-kde"
 
 # Install Commands
 install_gtk () {
-sudo ./install.sh --theme all --tweaks noborder && sudo ./install.sh --theme all --tweaks round noborder
+sudo ./install.sh --theme all --tweaks noborder
 }
 
 install_kde () {
-./install.sh --theme all && ./install.sh --theme all --round
+./install.sh --theme all && ./install.sh --theme all
 }
 
 install_sddm () {
-sudo ./install.sh -t default && sudo ./install.sh -t purple && sudo ./install.sh -t pink && sudo ./install.sh -t red && sudo ./install.sh -t orange && sudo ./install.sh -t yellow && sudo ./install.sh -t green && sudo ./install.sh -t grey && sudo ./install.sh -t round
+sudo ./install.sh -t default && sudo ./install.sh -t purple && sudo ./install.sh -t pink && sudo ./install.sh -t red && sudo ./install.sh -t orange && sudo ./install.sh -t yellow && sudo ./install.sh -t green && sudo ./install.sh -t grey
 }
 
 # Clean Old Files/Dirs
