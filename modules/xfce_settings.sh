@@ -54,6 +54,47 @@ dconf write /org/xfce/mousepad/preferences/view/match-braces 'true'
 dconf write /org/xfce/mousepad/preferences/view/word-wrap 'true'
 dconf write /org/xfce/mousepad/preferences/window/statusbar-visible 'true'
 
+# Panel: reset
+xfconf-query -c xfce4-panel -p /panels -r -R
+xfconf-query -c xfce4-panel -p /plugins -r -R
+xfce4-panel -r
+
+# Panel: plugins
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-1 -t string -s "showdesktop"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-2 -t string -s "screenshooter"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-3 -t string -s "separator"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-4 -t string -s "tasklist"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-4/flat-buttons -t bool -s "true"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-4/show-handle -t bool -s "false"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-5 -t string -s "separator"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-5/expand -t bool -s "true"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-5/style -t uint -s "0"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-6 -t string -s "systray"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-6/icon-size -t int -s "0"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-6/menu-is-primary -t bool -s "true"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-6/square-icons -t bool -s "true"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-7 -t string -s "pulseaudio"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-8 -t string -s "notification-plugin"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-9 -t string -s "power-manager-plugin"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-10 -t string -s "separator"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-11 -t string -s "clock"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-11/digital-layout -t uint -s "3"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-11/digital-time-font -t string -s "Fira Sans Bold 11"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-11/digital-time-format -t string -s "%I:%M %p"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-12 -t string -s "separator"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-13 -t string -s "actions"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-13/appearance -t uint -s "0"
+xfconf-query -cn xfce4-panel -pn /plugins/plugin-13/items -t string -t string -s "+lock-screen" -s "+logout"
+
+# Panel: settings
+xfconf-query -cn xfce4-panel -pn /panels/panel-1/icon-size -t uint -s "16"
+xfconf-query -cn xfce4-panel -pn /panels/panel-1/length -t uint -s "100"
+xfconf-query -cn xfce4-panel -pn /panels/panel-1/size -t uint -s "30"
+xfconf-query -cn xfce4-panel -pn /panels/panel-1/position -t string -s "p=8;x=0;y=0"
+xfconf-query -cn xfce4-panel -pn /panels/panel-1/position-locked -t bool -s "true"
+xfconf-query -cn xfce4-panel -pn /panels/panel-1/plugin-ids -t int -s "1" -t int -s "2" -t int -s "3" -t int -s "4" -t int -s "5" -t int -s "6" -t int -s "7" -t int -s "8" -t int -s "9" -t int -s "10" -t int -s "11" -t int -s "12" -t int -s "13"
+xfce4-panel -r
+
 if [[ ${machine} == "E5-476G" ]]; then
 	xfconf-query -cn pointers -pn /ELAN050100_04F3305B_Touchpad/Acceleration -t double -s "5.0000"
   xfconf-query -cn pointers -pn /ELAN050100_04F3305B_Touchpad/ReverseScrolling -t bool -s "true"

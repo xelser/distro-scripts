@@ -12,4 +12,3 @@ xfconf-query -cn xsettings -pn /Gtk/MonospaceFontName -t string -s "FiraCode Ner
 #  com.mattjakeman.ExtensionManager me.dusansimic.DynamicWallpaper io.bassi.Amberol com.spotify.Client 
   # com.google.Chrome us.zoom.Zoom com.discordapp.Discord me.kozec.syncthingtk com.rafaelmardojai.Blanket
   # org.telegram.desktop org.gnome.gitlab.YaLTeR.VideoTrimmer org.nickvision.tubeconverter
-
