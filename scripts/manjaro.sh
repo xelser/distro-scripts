@@ -26,4 +26,3 @@ sudo sed -i 's/quiet/quiet splash/g' /etc/default/grub
 sudo sed -i 's/splash splash/splash/g' /etc/default/grub
 sudo sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
-
