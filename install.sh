@@ -41,7 +41,7 @@ systemd-inhibit ${source_dir}/scripts/${distro_id}.sh
 ## Dotfiles ##
 [ -d ${dotfiles_dir}/.config/ ]       && cp -rf ${dotfiles_dir}/.config/       ${root_mnt}/home/${user}/
 [ -d ${dotfiles_dir}/.local/ ] 	      && cp -rf ${dotfiles_dir}/.local/        ${root_mnt}/home/${user}/
-[ -d ${dotfiles_dir}/.var/ ] 	      && cp -rf ${dotfiles_dir}/.var/          ${root_mnt}/home/${user}/
+[ -d ${dotfiles_dir}/.var/ ] 	      	&& cp -rf ${dotfiles_dir}/.var/          ${root_mnt}/home/${user}/
 [ -f ${dotfiles_dir}/.gtk-bookmarks ] && cp -rf ${dotfiles_dir}/.gtk-bookmarks ${root_mnt}/home/${user}/
 [ -f ${dotfiles_dir}/.gtkrc-2.0 ]     && cp -rf ${dotfiles_dir}/.gtkrc-2.0     ${root_mnt}/home/${user}/
 
