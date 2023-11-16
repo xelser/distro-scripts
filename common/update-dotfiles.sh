@@ -219,8 +219,8 @@ if [[ ${wm_de} == "xfce" ]]; then
 	save_file /.config/menus/ xfce-applications.menu	
 
 	# QT day/night cycle (remove clutter)
-	rm -rf ${dest_dir}/.config/Kvantum/
-	rm -rf ${dest_dir}/.config/qt5ct/
+	#rm -rf ${dest_dir}/.config/Kvantum/
+	#rm -rf ${dest_dir}/.config/qt5ct/
 	
 elif [[ ${wm_de} == "cinnamon" ]]; then
 
