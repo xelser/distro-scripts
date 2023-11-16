@@ -307,7 +307,7 @@
         "units": "K",
         "step": 5,
         "description": "Temperature",
-        "value": 5100
+        "value": 4700
     },
     "nightBrightness": {
         "type": "spinbutton",
