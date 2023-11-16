@@ -41,15 +41,15 @@ fi
 if [ -f /usr/bin/nala ]; then sudo nala install --assume-yes \
 	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
 	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf ntfs-3g wget curl git openssh-client \
-	intel-media-va-driver i965-va-driver webext-ublock-origin-firefox lsp-plugins-lv2
+	intel-media-va-driver i965-va-driver webext-ublock-origin-firefox
 elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
 	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
 	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines ntfs-3g wget curl git openssh \
-	libva-intel-driver intel-media-driver firefox-ublock-origin lsp-plugins-lv2
+	libva-intel-driver intel-media-driver firefox-ublock-origin
 elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes --best --allowerasing \
 	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
 	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines ntfs-3g wget curl git openssh \
-	libva-intel-driver intel-media-driver mozilla-ublock-origin lsp-plugins-lv2
+	libva-intel-driver intel-media-driver mozilla-ublock-origin
 fi
 
 if [[ ! ${wm_de} == "gnome" ]] && [[ ! ${wm_de} == "kde" ]]; then
@@ -63,22 +63,17 @@ elif [[ ${wm_de} == "kde" ]]; then
 fi
 
 # Audio
-in_easyeffects () {
-	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm easyeffects
-	[ -f /usr/bin/nala ] && sudo nala install --assume-yes easyeffects
-	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes easyeffects
+if [ -f /usr/bin/pactl ] && pactl info | grep -q "PipeWire" || [ -f /usr/bin/pipewire ]; then
+	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm easyeffects lsp-plugins-lv2
+	[ -f /usr/bin/nala ] && sudo nala install --assume-yes easyeffects lsp-plugins-lv2
+	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes easyeffects lsp-plugins-lv2
 	[ -f $HOME/.config/easyeffects/output/default.json ] && easyeffects -l default
-}
-
-in_pulseeffects () {
+else
 	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm pulseeffects
 	[ -f /usr/bin/nala ] && sudo nala install --assume-yes pulseeffects
 	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes pulseeffects
 	[ -f $HOME/.config/PulseEffects/output/default.json ] && pulseeffects -l default
-}
-
-[ -f /usr/bin/pactl ] && pactl info | grep -q "PipeWire" && in_easyeffects || in_pulseeffects
-[ ! -f /usr/bin/pactl ] && [ -f /usr/bin/pipewire ] && in_easyeffects || in_pulseeffects
+fi
 
 if [ -f /etc/pulse/daemon.conf ]; then
 	check_flag /etc/pulse/daemon.conf

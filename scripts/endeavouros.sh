@@ -4,7 +4,7 @@
 
 # INSTALL: Endeavour Base
 reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-	plymouth base-devel easyeffects qt5ct kvantum dconf-editor power-profiles-daemon gvfs sassc wget ttf-fira{code-nerd,-sans}
+	plymouth base-devel dconf-editor power-profiles-daemon gvfs sassc wget ttf-fira{code-nerd,-sans}
 
 # INSTALL: Endeavour Budgie
 yay -S --needed --noconfirm lightdm{,-slick-greeter,-settings} budige \
