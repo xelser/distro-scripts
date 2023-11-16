@@ -63,7 +63,7 @@ elif [[ ${wm_de} == "kde" ]]; then
 fi
 
 # Audio
-if [ -f /usr/bin/pactl ] && pactl info | grep -q "PipeWire" || [ -f /usr/bin/pipewire ]; then
+if [ -f /usr/bin/pactl ] && pactl info | grep -q "PipeWire"; then
 	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm easyeffects lsp-plugins-lv2
 	[ -f /usr/bin/nala ] && sudo nala install --assume-yes easyeffects lsp-plugins-lv2
 	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes easyeffects lsp-plugins-lv2
