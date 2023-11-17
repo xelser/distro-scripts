@@ -64,7 +64,7 @@ fi
 
 # Audio
 if [ -f /usr/bin/pactl ] && pactl info | grep -q "PipeWire"; then
-	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm easyeffects lsp-plugins-lv2
+	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm easyeffects lsp-plugins-lv2 ecasound
 	[ -f /usr/bin/nala ] && sudo nala install --assume-yes easyeffects lsp-plugins-lv2
 	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes easyeffects lsp-plugins-lv2
 	[ -f $HOME/.config/easyeffects/output/default.json ] && easyeffects -l default
