@@ -6,6 +6,10 @@
 reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
 	plymouth base-devel dconf-editor power-profiles-daemon gvfs ttf-fira{code-nerd,-sans}
 
+# INSTALL: XFCE
+yay -S --needed --noconfirm xfce4{,-goodies} lightdm{,-gtk-greeter-settings}
+sudo systemctl enable lightdm
+
 # INSTALL: Bluetooth
 if [[ $(sudo dmesg | grep -q 'Bluetooth') -eq 0 ]]; then
 	sudo pacman -S --needed --noconfirm bluez-utils
