@@ -56,3 +56,4 @@ if [ -f /usr/bin/kvantummanager ]; then
 	cd /tmp/ && rm -rf ${src_dir_kde} && git clone https://github.com/${auth_kde}/${src_dir_kde}
 	cd ${src_dir_kde} && install_kde ; [[ ${de_wm} == "KDE" ]] && cd sddm && install_sddm
 fi
+
