@@ -8,7 +8,7 @@ src_dir="Fluent-icon-theme"
 
 # Install Commands
 install_icons () {
-sudo ./install.sh --all --black
+sudo ./install.sh --all
 }
 
 install_cursor () {
