@@ -52,15 +52,15 @@ elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes --best --allowerasin
 	libva-intel-driver intel-media-driver mozilla-ublock-origin
 fi
 
-if [[ ! ${wm_de} == "gnome" ]] && [[ ! ${wm_de} == "kde" ]]; then
-	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm qt5ct kvantum
-	[ -f /usr/bin/nala ] && sudo nala install --assume-yes qt5{ct,-style-kvantum}
-	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes qt5ct kvantum
-elif [[ ${wm_de} == "kde" ]]; then
-	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm kvantum
-	[ -f /usr/bin/nala ] && sudo nala install --assume-yes qt5-style-kvantum
-	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes kvantum
-fi
+#if [[ ! ${wm_de} == "gnome" ]] && [[ ! ${wm_de} == "kde" ]]; then
+#	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm qt5ct kvantum
+#	[ -f /usr/bin/nala ] && sudo nala install --assume-yes qt5{ct,-style-kvantum}
+#	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes qt5ct kvantum
+#elif [[ ${wm_de} == "kde" ]]; then
+#	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm kvantum
+#	[ -f /usr/bin/nala ] && sudo nala install --assume-yes qt5-style-kvantum
+#	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes kvantum
+#fi
 
 # Audio
 if [ -f /usr/bin/pactl ] && pactl info | grep -q "PipeWire"; then
