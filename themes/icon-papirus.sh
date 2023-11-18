@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# Dependencies
+[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm wget
+[ -f /usr/bin/nala ] && sudo nala install --assume-yes wget
+[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes wget
+
 # Install
 wget -qO- https://git.io/papirus-icon-theme-install | sh
 wget -qO- https://git.io/papirus-folders-install | sh
