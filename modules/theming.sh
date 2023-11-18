@@ -26,7 +26,6 @@ elif [[ -f $HOME/.config/gtk-3.0/settings.ini ]]; then
 	sans_font="$(cat $HOME/.config/gtk-3.0/settings.ini | grep 'gtk-font-name' | cut -d'=' -f2)"
 fi
 
-# symlink xdg-themes to ~/.themes
 if [ -d /usr/share/themes/${gtk_theme} ]; then
 	theme_dir="/usr/share/themes/${gtk_theme}"
 elif [ -d $HOME/.local/share/themes/${gtk_theme} ]; then
@@ -35,7 +34,8 @@ else
 	exit 1
 fi
 
-mkdir -p $HOME/.themes && ln -sf ${theme_dir} $HOME/.themes/
+# symlink xdg-themes to ~/.themes
+#mkdir -p $HOME/.themes && ln -sf ${theme_dir} $HOME/.themes/
 
 # DEs that is not gnome 
 if [[ ! ${wm_de} == "gnome" ]]; then
