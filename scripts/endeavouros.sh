@@ -8,12 +8,13 @@ reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuil
 
 # INSTALL: XFCE
 sudo pacman -S --needed --noconfirm lightdm{,-gtk-greeter-settings} light-locker \
-	xfce4-{session,settings,power-manager,appfinder,screenshooter} xfwm4 xfdesktop \
-	thunar-{archive-plugin,volman} mousepad parole ristretto
+	xfce4-{session,settings,power-manager,appfinder,screenshooter,pulseaudio-pugin} \
+	xfwm4 xfdesktop thunar-{archive-plugin,volman} mousepad parole ristretto \
+	engrampa gnome-terminal
 
 # INSTALL: Bluetooth
 if [[ $(sudo dmesg | grep -q 'Bluetooth') -eq 0 ]]; then
-	sudo pacman -S --needed --noconfirm bluez-utils
+	sudo pacman -S --needed --noconfirm bluez-utils blueman
 	sudo systemctl enable --now bluetooth
 fi
 
