@@ -4,10 +4,11 @@
 
 # INSTALL: Endeavour Base
 reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-	plymouth base-devel dconf-editor power-profiles-daemon darkman gvfs ttf-fira{code-nerd,-sans}
+	plymouth base-devel dconf-editor power-profiles-daemon darkman htpdate mugshot gvfs ttf-fira{code-nerd,-sans}
+sudo systemctl enable --now htpdate
 
 # INSTALL: XFCE
-sudo pacman -S --needed --noconfirm xfce4{,-goodies} lightdm{,-gtk-greeter-settings} mate-terminal
+sudo pacman -S --needed --noconfirm xfce4{,-goodies} lightdm{,-gtk-greeter-settings} mate-terminal 
 sudo systemctl enable lightdm
 
 # INSTALL: Bluetooth
