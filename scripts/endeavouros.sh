@@ -7,7 +7,7 @@ reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuil
 	plymouth base-devel dconf-editor power-profiles-daemon gvfs ttf-fira{code-nerd,-sans}
 
 # INSTALL: XFCE
-yay -S --needed --noconfirm xfce4{,-goodies} lightdm{,-gtk-greeter-settings}
+sudo pacman -S --needed --noconfirm xfce4{,-goodies} lightdm{,-gtk-greeter-settings} mate-terminal
 sudo systemctl enable lightdm
 
 # INSTALL: Bluetooth
