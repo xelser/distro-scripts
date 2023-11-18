@@ -44,15 +44,15 @@ if [[ ! ${wm_de} == "gnome" ]]; then
 
 	flatpak override --user --filesystem=xdg-data/themes:ro
 	flatpak override --user --env=GTK_THEME=${gtk_theme}
-fi
 
-# GTK 4
-rm -rf 					   "$HOME/.config/gtk-4.0/{assets,gtk.css,gtk-dark.css}"
-mkdir -p 				   "$HOME/.config/gtk-4.0"
-ln -sf "${theme_dir}/gtk-4.0/assets"       "$HOME/.config/gtk-4.0/"
-ln -sf "${theme_dir}/gtk-4.0/gtk.css"      "$HOME/.config/gtk-4.0/gtk.css"
-ln -sf "${theme_dir}/gtk-4.0/gtk-dark.css" "$HOME/.config/gtk-4.0/gtk-dark.css"
-flatpak override --user --filesystem=xdg-config/gtk-4.0
+	# GTK 4
+	rm -rf 					   "$HOME/.config/gtk-4.0/{assets,gtk.css,gtk-dark.css}"
+	mkdir -p 				   "$HOME/.config/gtk-4.0"
+	ln -sf "${theme_dir}/gtk-4.0/assets"       "$HOME/.config/gtk-4.0/"
+	ln -sf "${theme_dir}/gtk-4.0/gtk.css"      "$HOME/.config/gtk-4.0/gtk.css"
+	ln -sf "${theme_dir}/gtk-4.0/gtk-dark.css" "$HOME/.config/gtk-4.0/gtk-dark.css"
+	flatpak override --user --filesystem=xdg-config/gtk-4.0
+fi
 
 # Cursor
 mkdir -p $HOME/.icons/default && echo -e "[Icon Theme]\nInherits=${cursor_theme}" > $HOME/.icons/default/index.theme
