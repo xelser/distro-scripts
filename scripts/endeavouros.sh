@@ -8,7 +8,7 @@ reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuil
 
 # INSTALL: XFCE
 sudo pacman -S --needed --noconfirm lightdm{,-gtk-greeter-settings} light-locker \
-	xfce4-{session,settings,power-manager,appfinder,screenshooter,pulseaudio-pugin} \
+	xfce4-{session,settings,power-manager,appfinder,screenshooter,pulseaudio-plugin} \
 	xfwm4 xfdesktop thunar-{archive-plugin,volman} mousepad parole ristretto \
 	engrampa gnome-terminal
 
