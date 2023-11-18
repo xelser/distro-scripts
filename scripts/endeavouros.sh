@@ -1,10 +1,10 @@
 #!/bin/bash
 
-################################### PACKAGES ###################################
+################################## PACKAGES ##################################
 
 # INSTALL: Endeavour Base
 reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-	plymouth base-devel dconf-editor power-profiles-daemon gvfs ttf-fira{code-nerd,-sans}
+	plymouth base-devel dconf-editor power-profiles-daemon darkman gvfs ttf-fira{code-nerd,-sans}
 
 # INSTALL: XFCE
 sudo pacman -S --needed --noconfirm xfce4{,-goodies} lightdm{,-gtk-greeter-settings} mate-terminal
@@ -16,7 +16,7 @@ if [[ $(sudo dmesg | grep -q 'Bluetooth') -eq 0 ]]; then
 	sudo systemctl enable --now bluetooth
 fi
 
-#################################### CONFIG ####################################
+################################### CONFIG ###################################
 
 # root label
 partition="$(lsblk --raw -o name,mountpoint | grep '^[^/]*/[^/]*$' | cut -d' ' -f1)"
@@ -29,3 +29,10 @@ sudo sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
 sudo sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
 
+################################### THEMES ###################################
+
+# INSTALL: GTK, KDE, Icon, Cursors
+if [ ! -f /.flag ]; then
+	${source_dir}/themes/theme-matcha.sh
+	${source_dir}/themes/icon-papirus.sh
+fi
