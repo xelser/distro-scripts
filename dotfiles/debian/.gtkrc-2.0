@@ -2,8 +2,8 @@
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
 include "/home/xelser/.gtkrc-2.0.mine"
-gtk-theme-name="Beta_Gruvbox-material-hard-dark-aqua"
-gtk-icon-theme-name="Papirus-Dark"
+gtk-theme-name="Beta_Gruvbox-material-hard-light-red"
+gtk-icon-theme-name="Papirus-Light"
 gtk-font-name="Ubuntu 10"
 gtk-cursor-theme-name="phinger-cursors"
 gtk-cursor-theme-size=0
