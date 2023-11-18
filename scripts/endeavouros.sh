@@ -4,11 +4,11 @@
 
 # INSTALL: Endeavour Base
 reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-	plymouth base-devel dconf-editor transmission-gtk geany redshift darkman htpdate power-profiles-daemon gvfs ttf-fira{code-nerd,-sans}
+	plymouth base-devel dconf-editor transmission-gtk geany mugshot redshift darkman htpdate power-profiles-daemon gvfs ttf-fira{code-nerd,-sans}
 
 # INSTALL: XFCE
-sudo pacman -S --needed --noconfirm lightdm{,-gtk-greeter-settings} light-locker \
-	xfce4{,-screenshooter,-pulseaudio-plugin} thunar-{archive-plugin,volman} \
+sudo pacman -S --needed --noconfirm lightdm-gtk-greeter-settings light-locker \
+	xfce4-{screenshooter,pulseaudio-plugin} thunar-{archive-plugin,volman} \
 	mousepad parole ristretto engrampa atril
 
 # INSTALL: Bluetooth
@@ -29,9 +29,6 @@ sudo sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/g' /etc/default/grub
 sudo sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
 sudo sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
-
-# lightdm
-sudo systemctl enable lightdm
 
 ################################### THEMES ###################################
 
