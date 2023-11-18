@@ -26,16 +26,17 @@ elif [[ -f $HOME/.config/gtk-3.0/settings.ini ]]; then
 	sans_font="$(cat $HOME/.config/gtk-3.0/settings.ini | grep 'gtk-font-name' | cut -d'=' -f2)"
 fi
 
+# theme folder
+if [ -d /usr/share/themes/${gtk_theme} ]; then
+	theme_dir="/usr/share/themes/${gtk_theme}"
+elif [ -d $HOME/.local/share/themes/${gtk_theme} ]; then
+	theme_dir="$HOME/.local/share/themes/${gtk_theme}"
+else
+	theme_dir="$HOME/.themes/${gtk_theme}"
+fi
+
 # DEs that is not gnome 
 if [[ ! ${wm_de} == "gnome" ]]; then
-	if [ -d /usr/share/themes/${gtk_theme} ]; then
-		theme_dir="/usr/share/themes/${gtk_theme}"
-	elif [ -d $HOME/.local/share/themes/${gtk_theme} ]; then
-		theme_dir="$HOME/.local/share/themes/${gtk_theme}"
-	else
-		theme_dir="$HOME/.themes/${gtk_theme}"
-	fi
-	
 	# GTK 3
 	if [ ! -d $HOME/.local/share/themes/${gtk_theme} ]; then
 		mkdir -p $HOME/.local/share/themes && cp -rf ${theme_dir} $HOME/.local/share/themes/
