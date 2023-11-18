@@ -26,20 +26,23 @@ elif [[ -f $HOME/.config/gtk-3.0/settings.ini ]]; then
 	sans_font="$(cat $HOME/.config/gtk-3.0/settings.ini | grep 'gtk-font-name' | cut -d'=' -f2)"
 fi
 
-# theme folder
+# symlink xdg-themes to ~/.themes
 if [ -d /usr/share/themes/${gtk_theme} ]; then
 	theme_dir="/usr/share/themes/${gtk_theme}"
 elif [ -d $HOME/.local/share/themes/${gtk_theme} ]; then
 	theme_dir="$HOME/.local/share/themes/${gtk_theme}"
 else
-	theme_dir="$HOME/.themes/${gtk_theme}"
+	exit 1
 fi
+
+mkdir -p $HOME/.themes && ln -sf ${theme_dir} $HOME/.themes/
 
 # DEs that is not gnome 
 if [[ ! ${wm_de} == "gnome" ]]; then
-	# GTK 3
+	
+	# GTK 3 flatpak
 	if [ ! -d $HOME/.local/share/themes/${gtk_theme} ]; then
-		mkdir -p $HOME/.local/share/themes && cp -rf ${theme_dir} $HOME/.local/share/themes/
+		mkdir -p $HOME/.local/share/themes && cp -rf /usr/share/themes/${gtk_theme} $HOME/.local/share/themes/
 	fi
 
 	flatpak override --user --filesystem=xdg-data/themes:ro
