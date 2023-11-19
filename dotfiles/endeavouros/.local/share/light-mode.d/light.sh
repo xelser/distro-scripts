@@ -19,3 +19,4 @@ dconf write /org/gnome/desktop/interface/cursor-theme "'Qogir-cursors'"
 
 # reset panel
 xfce4-panel -r
+killall redshift-gtk && sleep 3 && redshift-gtk & disown
