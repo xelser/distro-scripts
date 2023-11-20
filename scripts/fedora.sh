@@ -38,7 +38,7 @@ sudo dnf upgrade --assumeyes --best --allowerasing # --security --bugfix --enhan
 # INSTALL: Fedora Workstation
 sudo dnf install --assumeyes --skip-broken --allowerasing google-roboto-{fonts,mono-fonts,slab-fonts} libheif-tools \
   gnome-{builder,console,extensions-app,multi-writer,tweaks} file-roller fragments celluloid drawing dconf-editor \
-  pipewire-pulseaudio # inkscape telegram discord video-downloader touchegg google-chrome-stable
+  easyeffects # inkscape telegram discord video-downloader touchegg google-chrome-stable
 
 # INSTALL: htpdate
 sudo dnf copr enable whitehara/htpdate --assumeyes

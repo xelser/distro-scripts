@@ -4,7 +4,8 @@
 
 # INSTALL: Endeavour Base
 reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-	plymouth base-devel dconf-editor transmission-gtk geany mugshot redshift darkman htpdate power-profiles-daemon gvfs ttf-fira{code-nerd,-sans}
+	plymouth base-devel dconf-editor transmission-gtk geany mugshot redshift darkman htpdate power-profiles-daemon \
+	easyeffects lsp-plugins-lv2 ecasound gvfs ttf-fira{code-nerd,-sans}
 
 # INSTALL: XFCE
 sudo pacman -S --needed --noconfirm lightdm-gtk-greeter-settings light-locker \
