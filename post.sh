@@ -63,17 +63,8 @@ fi
 #fi
 
 # Audio
-if [ -f /usr/bin/pactl ] && pactl info | grep -q "PipeWire"; then
-	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm easyeffects lsp-plugins-lv2 ecasound
-	[ -f /usr/bin/nala ] && sudo nala install --assume-yes easyeffects lsp-plugins-lv2
-	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes easyeffects lsp-plugins-lv2
-	[ -f $HOME/.config/easyeffects/output/default.json ] && easyeffects -l default
-else
-	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm pulseeffects
-	[ -f /usr/bin/nala ] && sudo nala install --assume-yes pulseeffects
-	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes pulseeffects
-	[ -f $HOME/.config/PulseEffects/output/default.json ] && pulseeffects -l default
-fi
+[ -f /usr/bin/easyeffects ] && [ -f $HOME/.config/easyeffects/output/default.json ] && easyeffects -l default
+[ -f /usr/bin/pulseeffects ] && [ -f $HOME/.config/PulseEffects/output/default.json ] && pulseeffects -l default
 
 if [ -f /etc/pulse/daemon.conf ]; then
 	check_flag /etc/pulse/daemon.conf
