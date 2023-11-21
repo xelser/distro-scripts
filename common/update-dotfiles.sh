@@ -117,8 +117,8 @@ fi
 #################################### GAMING ####################################
 
 # Lutris
-save_folder /.config/lutris/
-save_folder /.var/app/net.lutris.Lutris/config/lutris/
+#save_folder /.config/lutris/
+#save_folder /.var/app/net.lutris.Lutris/config/lutris/
 
 # MangoHUD
 save_folder /.config/MangoHud/
