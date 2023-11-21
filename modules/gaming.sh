@@ -6,6 +6,14 @@
 install_nvidia () {
 	if [[ ${distro_id} == "fedora" ]]; then
 		sudo dnf install --assumeyes --allowerasing akmod-nvidia
+
+		# NVIDIA DRM
+		if [ -f /boot/refind_linux.conf ]; then
+			nvidia_param="rd.driver.blacklist=nouveau modprobe.blacklist=nouveau nvidia-drm.modeset=1"
+			partition_uuid="$(lsblk --raw -o uuid,mountpoint | grep '^[^/]*/[^/]*$' | cut -d' ' -f1)"
+			head -1 /boot/refind_linux.conf | grep -qw "${nvidia_param}" || \
+			sudo sed -i "1 s/${partition_uuid} /${partition_uuid} ${nvidia_param}/" /boot/refind_linux.conf
+		fi
 	elif [[ ${distro_id} == "arch" ]] || [[ ${distro_id} == "endeavouros" ]]; then
 		sudo pacman -S --needed --noconfirm nvidia nvidia-utils lib32-nvidia-utils
 	fi
@@ -14,13 +22,8 @@ install_nvidia () {
 # Install: Nvidia Prime
 nvidia_prime () {
 	if [[ ${distro_id} == "fedora" ]]; then
-		# http://download.nvidia.com/XFree86/Linux-x86_64/440.31/README/dynamicpowermanagement.html
-		echo "# Enable DynamicPwerManagement
-		options nvidia NVreg_DynamicPowerManagement=0x02
-		" | sudo tee /etc/modprobe.d/nvidia.conf 1> /dev/null
-
-		#sudo dnf copr enable sunwire/envycontrol --assumeyes
-		#sudo dnf install python3-envycontrol --assumeyes
+		# Enable DynamicPwerManagement: http://download.nvidia.com/XFree86/Linux-x86_64/440.31/README/dynamicpowermanagement.html
+		echo "options nvidia NVreg_DynamicPowerManagement=0x02" | sudo tee /etc/modprobe.d/nvidia.conf 1> /dev/null
 	elif [[ ${distro_id} == "manjaro" ]]; then
 		sudo pacman -S --needed --noconfirm envycontrol
 	elif [[ ${distro_id} == "arch" ]] || [[ ${distro_id} == "endeavouros" ]]; then
