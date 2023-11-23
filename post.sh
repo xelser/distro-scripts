@@ -7,9 +7,7 @@ check_flag () {
 ################################ PREPARATIONS ################################
 
 # Set to performance
-if [ -f /usr/bin/powerprofilesctl ]; then
-	powerprofilesctl list | grep -q performance && powerprofilesctl set performance
-fi
+[ -f /usr/bin/powerprofilesctl ] && powerprofilesctl list | grep -q performance && powerprofilesctl set performance
 
 # Connect to Wifi
 wget --spider --quiet http://google.com > /dev/null 2>&1 || if [[ ${machine} == "E5-476G" || "G41T-R3" ]]; then
@@ -66,20 +64,20 @@ fi
 [ -f /usr/bin/easyeffects ] && [ -f $HOME/.config/easyeffects/output/default.json ] && easyeffects -l default
 [ -f /usr/bin/pulseeffects ] && [ -f $HOME/.config/PulseEffects/output/default.json ] && pulseeffects -l default
 
-if [ -f /etc/pulse/daemon.conf ]; then
-	check_flag /etc/pulse/daemon.conf
-
-	# Resample Method
-	echo "resample-method = speex-float-10" | sudo tee -a /etc/pulse/daemon.conf 1> /dev/null
-
-	# Default Sample Format
-	endian="$(lscpu | grep 'Byte Order' | sed 's/ //g' | cut -d':' -f2)"
-	if [[ ${endian} == "LittleEndian" ]]; then echo "default-sample-format = s24le" | sudo tee -a /etc/pulse/daemon.conf 1> /dev/null
-	else echo "default-sample-format = s24be" | sudo tee -a /etc/pulse/daemon.conf 1> /dev/null; fi
-
-	# Default Sample Rate
-	echo "default-sample-rate = 48000" | sudo tee -a /etc/pulse/daemon.conf 1> /dev/null
-fi
+#if [ -f /etc/pulse/daemon.conf ]; then
+#	check_flag /etc/pulse/daemon.conf
+#
+#	# Resample Method
+#	echo "resample-method = speex-float-10" | sudo tee -a /etc/pulse/daemon.conf 1> /dev/null
+#
+#	# Default Sample Format
+#	endian="$(lscpu | grep 'Byte Order' | sed 's/ //g' | cut -d':' -f2)"
+#	if [[ ${endian} == "LittleEndian" ]]; then echo "default-sample-format = s24le" | sudo tee -a /etc/pulse/daemon.conf 1> /dev/null
+#	else echo "default-sample-format = s24be" | sudo tee -a /etc/pulse/daemon.conf 1> /dev/null; fi
+#
+#	# Default Sample Rate
+#	echo "default-sample-rate = 48000" | sudo tee -a /etc/pulse/daemon.conf 1> /dev/null
+#fi
 
 # Flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -92,9 +90,8 @@ sudo flatpak remote-modify --enable flathub && flatpak install --assumeyes --non
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/x11_fonts.sh)"
 
 # DE Post Install Script
-if [[ ${wm_de} == "gnome" ]] || [[ ${wm_de} == "cinnamon" ]] || [[ ${wm_de} == "xfce" ]]; then
+[[ ${wm_de} == "gnome" ]] || [[ ${wm_de} == "cinnamon" ]] || [[ ${wm_de} == "xfce" ]] && \
 	bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/${wm_de}_settings.sh)"
-fi
 
 # Hide Apps
 name=(calf org.gnome.dspy org.gnome.Devhelp org.gnome.Sysprof lstopo mpv htop avahi-discover bssh bvnc stoken-gui stoken-gui-small qv4l2 qvidcap
