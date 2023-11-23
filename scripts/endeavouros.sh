@@ -11,6 +11,7 @@ reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuil
 sudo pacman -S --needed --noconfirm lightdm-gtk-greeter-settings light-locker \
 	xfce4-{screenshooter,pulseaudio-plugin} thunar-{archive-plugin,volman} \
 	mousepad parole ristretto engrampa atril
+sudo systemctl enable lightdm
 
 # INSTALL: Bluetooth
 if [[ $(sudo dmesg | grep -q 'Bluetooth') -eq 0 ]]; then
