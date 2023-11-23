@@ -2,7 +2,7 @@
 
 ################################### PACKAGES ###################################
 
-# PACKAEG MANAGER: APT
+# PACKAGE MANAGER: APT
 sudo sed -i 's/packages.linuxmint.com/mirror.rackspace.com\/linuxmint\/packages/g' /etc/apt/sources.list.d/official-package-repositories.list
 #sudo sed -i 's/archive.ubuntu.com/mirror.rise.ph/g' /etc/apt/sources.list.d/official-package-repositories.list
 
@@ -11,9 +11,6 @@ sudo apt update && sudo apt install nala --yes
 
 # DEBLOAT
 sudo nala remove --purge --assume-yes rhythmbox hypnotix hexchat thunderbird timeshift redshift-gtk # pulseaudio-module-bluetooth
-
-# REPO: Grub Customizer
-#sudo add-apt-repository ppa:danielrichter2007/grub-customizer --yes
 
 # UPDATE
 sudo nala upgrade --fix-broken --assume-yes
