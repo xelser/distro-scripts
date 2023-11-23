@@ -8,9 +8,9 @@ reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuil
 	easyeffects lsp-plugins-lv2 ecasound gvfs ttf-fira{code-nerd,-sans} # darkman
 
 # INSTALL: XFCE
-yay -S --needed --noconfirm lightdm{,-gtk-greeter-settings} light-locker xfce-polkit xfwm4 \
+yay -S --needed --noconfirm lightdm{,-gtk-greeter-settings} xfwm4 xfdesktop xfce-polkit \
 	xfce4-{terminal,appfinder,power-manager,settings,screenshooter,pulseaudio-plugin} \
-	xfdesktop thunar-{archive-plugin,volman} mousepad parole ristretto engrampa atril
+	thunar-{archive-plugin,volman} mousepad parole ristretto engrampa atril
 sudo systemctl enable lightdm
 
 # INSTALL: Bluetooth
