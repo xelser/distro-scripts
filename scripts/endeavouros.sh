@@ -4,8 +4,8 @@
 
 # INSTALL: Endeavour Base
 reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-	plymouth base-devel dconf-editor transmission-gtk geany mugshot redshift darkman htpdate power-profiles-daemon \
-	easyeffects lsp-plugins-lv2 ecasound gvfs ttf-fira{code-nerd,-sans}
+	plymouth base-devel dconf-editor transmission-gtk geany mugshot redshift htpdate power-profiles-daemon \
+	easyeffects lsp-plugins-lv2 ecasound gvfs ttf-fira{code-nerd,-sans} # darkman
 
 # INSTALL: XFCE
 sudo pacman -S --needed --noconfirm lightdm-gtk-greeter-settings light-locker \
@@ -37,4 +37,6 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 if [ ! -f /.flag ]; then
 	${source_dir}/themes/theme-matcha.sh
 	${source_dir}/themes/icon-papirus.sh
+	${source_dir}/themes/cursor-qogir.sh
 fi
+
