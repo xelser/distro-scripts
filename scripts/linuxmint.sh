@@ -20,7 +20,7 @@ sudo nala upgrade --fix-broken --assume-yes
 
 # INSTALL: Linux Mint Cinnamon
 sudo nala install --assume-yes build-essential mint-meta-codecs openoffice.org-hyphenation gpaste gir1.2-gpaste-4.0 \
-  dconf-editor gnome-{builder,disk-utility} lollypop plank power-profiles-daemon gparted pulseeffects
+  power-profiles-daemon pulseeffects plank dconf-editor gnome-{builder,disk-utility} lollypop gparted
   # grub-customizer numlockx
 
 # Install: darkman
