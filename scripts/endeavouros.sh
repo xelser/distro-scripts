@@ -8,9 +8,9 @@ reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuil
 	easyeffects lsp-plugins-lv2 ecasound gvfs ttf-fira{code-nerd,-sans} # darkman
 
 # INSTALL: XFCE
-sudo pacman -S --needed --noconfirm lightdm-gtk-greeter-settings light-locker \
-	xfce4-{screenshooter,pulseaudio-plugin} thunar-{archive-plugin,volman} \
-	mousepad parole ristretto engrampa atril
+sudo pacman -S --needed --noconfirm lightdm{,-gtk-greeter-settings} light-locker xfwm4 xfdesktop \
+	xfce4-{terminal,appfinder,power-manager,settings,screenshooter,pulseaudio-plugin} xfce-polkit \
+	thunar-{archive-plugin,volman} mousepad parole ristretto engrampa atril
 sudo systemctl enable lightdm
 
 # INSTALL: Bluetooth
@@ -40,4 +40,3 @@ if [ ! -f /.flag ]; then
 	${source_dir}/themes/icon-papirus.sh
 	${source_dir}/themes/cursor-qogir.sh
 fi
-
