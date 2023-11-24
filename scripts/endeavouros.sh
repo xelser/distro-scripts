@@ -4,13 +4,13 @@
 
 # INSTALL: Endeavour Base
 reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-	plymouth base-devel dconf-editor transmission-gtk geany redshift mugshot htpdate power-profiles-daemon \
-	easyeffects lsp-plugins-lv2 ecasound gvfs ttf-fira{code-nerd,-sans} # darkman
+	plymouth base-devel dconf-editor transmission-gtk geany gammastep mugshot htpdate power-profiles-daemon darkman \
+	easyeffects lsp-plugins-lv2 ecasound gvfs ttf-fira{code-nerd,-sans}
 
 # INSTALL: XFCE
 sudo pacman -S --needed --noconfirm lightdm{,-gtk-greeter-settings} light-locker \
 	xfce4{,-screenshooter,-pulseaudio-plugin} thunar-{archive-plugin,volman} \
-	mousepad parole ristretto engrampa atril 
+	mousepad parole ristretto engrampa atril xdg-desktop-portal-gtk
 
 # INSTALL: Bluetooth
 if [[ $(sudo dmesg | grep -q 'Bluetooth') -eq 0 ]]; then
