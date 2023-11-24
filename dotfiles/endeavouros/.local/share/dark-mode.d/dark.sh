@@ -11,3 +11,9 @@ gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 gsettings set org.gnome.desktop.interface gtk-theme 'Matcha-dark-azul'
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Dark'
 gsettings set org.gnome.desktop.interface cursor-theme 'Qogir-white-cursors'
+
+# flatpak
+flatpak override --user --env=GTK_THEME=Matcha-dark-azul
+
+# update system
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/theming.sh)"
