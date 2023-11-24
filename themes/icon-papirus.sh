@@ -15,7 +15,7 @@ wget -qO- https://git.io/papirus-folders-install | sh
 [[ ${distro_id} == "fedora" ]]      && color="adwaita"
 [[ ${distro_id} == "manjaro" ]]     && color="teal"
 [[ ${distro_id} == "linuxmint" ]]   && color="green"
-[[ ${distro_id} == "endeavouros" ]] && color="magenta"
+[[ ${distro_id} == "endeavouros" ]] && color="indigo"
 
 # Apply Changes
 if [ ! -z ${color} ]; then
@@ -25,4 +25,3 @@ if [ ! -z ${color} ]; then
 	papirus-folders -u -C ${color} -t ePapirus
 	papirus-folders -u -C ${color} -t ePapirus-Dark
 fi
-

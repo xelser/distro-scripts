@@ -33,6 +33,7 @@ xfconf-query -cn xfce4-notifyd -pn /do-slideout -t bool -s "true"
 xfconf-query -cn xfce4-notifyd -pn /initial-opacity -t double -s "0.95"
 xfconf-query -cn xfce4-notifyd -pn /notify-location -t uint -s "3"
 xfconf-query -cn xfce4-session -pn /general/SaveOnExit -t bool -s "false"
+xfconf-query -cn xfce4-appfinder -pn /sort-by-frecency -t bool -s "true"
 
 # Apps
 xfconf-query -cn thunar -pn /last-location-bar -t string -s "ThunarLocationButtons"

@@ -209,7 +209,7 @@ save_file /.config/yambar/ config.yml
 if [[ ${wm_de} == "xfce" ]]; then
 
 	# XFCE Panel
-	mkdir -p ${dest_dir}/.config/xfce4/panel/
+	#mkdir -p ${dest_dir}/.config/xfce4/panel/
 	#cp -rf $HOME/.config/xfce4/panel/{diskperf,netload}-*.rc ${dest_dir}/.config/xfce4/panel/
 
 	# XCFE Terminal
