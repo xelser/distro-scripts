@@ -3,8 +3,8 @@ call plug#begin()
 Plug 'ap/vim-css-color'
 
 " Themes
-Plug 'navarasu/onedark.nvim'
-Plug 'nvim-lualine/lualine.nvim'
+Plug 'sainnhe/edge'
+Plug 'itchyny/lightline.vim'
 
 " Settings
 Plug 'tpope/vim-sensible'
@@ -28,11 +28,14 @@ set clipboard=unnamedplus   " using system clipboard
 set ttyfast                 " Speed up scrolling in Vim
 
 " theme
-colorscheme onedark
+" Important!!
+if has('termguicolors')
+	set termguicolors
+endif
 
-" lualine
-lua << END
-	require('lualine').setup()
-		options = { theme = 'onedark' }
-END
+" The configuration options should be placed before `colorscheme edge`.
+let g:edge_style = 'aura'
+let g:edge_better_performance = 1
 
+colorscheme edge
+let g:lightline = {'colorscheme' : 'edge'} 
