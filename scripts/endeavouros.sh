@@ -4,12 +4,12 @@
 
 # INSTALL: Endeavour Base
 reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-	plymouth base-devel dconf-editor transmission-gtk geany gammastep mugshot htpdate power-profiles-daemon darkman \
+	plymouth base-devel dconf-editor mugshot transmission-gtk geany gammastep htpdate darkman power-profiles-daemon \
 	easyeffects lsp-plugins-lv2 ecasound gvfs ttf-fira{code-nerd,-sans}
 
 # INSTALL: XFCE
-sudo pacman -S --needed --noconfirm lightdm{,-gtk-greeter-settings} light-locker \
-	xfce4{,-screenshooter,-pulseaudio-plugin} thunar-{archive-plugin,volman} \
+sudo pacman -S --needed --noconfirm lightdm-gtk-greeter-settings light-locker \
+	xfce4-{screenshooter,pulseaudio-plugin} thunar-{archive-plugin,volman} \
 	mousepad parole ristretto engrampa atril xdg-desktop-portal-gtk
 
 # INSTALL: Bluetooth
@@ -33,12 +33,8 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 
 # lightdm
 echo -e "\n[Seat:*]
-autologin-user=${user}
 autologin-session=xfce
 " | sudo tee -a /etc/lightdm/lightdm.conf
-sudo groupadd -r autologin
-sudo gpasswd -a ${user} autologin
-sudo systemctl enable lightdm
 
 ################################### THEMES ###################################
 
@@ -46,26 +42,4 @@ sudo systemctl enable lightdm
 if [ ! -f /.flag ]; then
 	${source_dir}/themes/theme-matcha.sh
 	${source_dir}/themes/cursor-qogir.sh
-fi
-
-# papirus folders
-wget -qO- https://git.io/papirus-icon-theme-install | sh
-cd /tmp/ && git clone https://github.com/catppuccin/papirus-folders
-cd papirus-folders && sudo cp -rf src/* /usr/share/icons/Papirus
-color_folder="cat-mocha-maroon"; papirus_folders=(Papirus Papirus-Dark Papirus-Light ePapirus ePapirus-Dark)
-for icon_theme in "${papirus_folders[@]}"; do ./papirus-folders -u -C ${color_folder} -t ${icon_theme}; done
-
-# gtksourceview
-cd /tmp/ && git clone https://github.com/catppuccin/gedit && mkdir -p $HOME/.local/share/gtksourceview-{3.0,4}/styles
-cp -rf /tmp/gedit/themes/catppuccin-*.xml $HOME/.local/share/gtksourceview-3.0/styles/
-ln -sf $HOME/.local/share/gtksourceview-3.0/styles/catppuccin-*.xml $HOME/.local/share/gtksourceview-4/styles/
-
-if [ -f /usr/bin/xfce4-terminal ]; then 
-	cd /tmp/ && git clone https://github.com/catppuccin/xfce4-terminal && mkdir -p $HOME/.local/share/xfce4/terminal/colorschemes
-	cp -rf /tmp/xfce4-terminal/src/* $HOME/.local/share/xfce4/terminal/colorschemes/
-fi
-
-if [ -f /usr/bin/geany ]; then
-	cd /tmp/ && git clone https://github.com/catppuccin/geany && mkdir -p $HOME/.config/geany/colorschemes
-	cp -rf /tmp/geany/src/*.conf $HOME/.config/geany/colorschemes/
 fi
