@@ -567,7 +567,7 @@
     <group
        id="preferences"
        state="1"
-       page="24" />
+       page="0" />
     <group
        id="gradienteditor" />
     <group
@@ -1077,8 +1077,8 @@
   <group
      id="theme"
      defaultPreferDarkTheme="0"
-     defaultIconTheme="Papirus-Light"
-     defaultGtkTheme="Materia-light-compact"
+     defaultIconTheme="Papirus-Dark"
+     defaultGtkTheme="Matcha-dark-aliz"
      narrowSpinButton="1"
      preferDarkTheme="1"
      darkTheme="1"
@@ -1086,8 +1086,7 @@
      symbolicDefaultBaseColors="1"
      symbolicDefaultHighColors="1"
      menuIcons="0"
-     fontscale="100"
-     gtkTheme="Materia-light">
+     fontscale="100">
     <group
        id="multicolor"
        symbolicBaseColor="3958107135"
