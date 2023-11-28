@@ -212,9 +212,6 @@ if [[ ${wm_de} == "xfce" ]]; then
 	#mkdir -p ${dest_dir}/.config/xfce4/panel/
 	#cp -rf $HOME/.config/xfce4/panel/{diskperf,netload}-*.rc ${dest_dir}/.config/xfce4/panel/
 
-	# XCFE Terminal
-	save_file /.config/xfce4/terminal/ terminalrc
-
 	# Menu Entries
 	save_file /.config/menus/ xfce-applications.menu	
 

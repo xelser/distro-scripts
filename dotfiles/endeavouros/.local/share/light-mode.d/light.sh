@@ -12,6 +12,12 @@ gsettings set org.gnome.desktop.interface gtk-theme 'Matcha-light-azul'
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Light'
 gsettings set org.gnome.desktop.interface cursor-theme 'Qogir-cursors'
 
+# terminal (edge theme)
+xfconf-query -cn xfce4-terminal -pn /color-background -t string -s "#FAFAFA"
+xfconf-query -cn xfce4-terminal -pn /color-foreground -t string -s "#4B505B"
+xfconf-query -cn xfce4-terminal -pn /tab-activity-color -t string -s "#E17373"
+xfconf-query -cn xfce4-terminal -pn /color-palette -t string -s "#4B505B;#D05858;#BE7E05;#608E32;#5079BE;#B05CCC;#3A8B84;#DDE2E7;#4B505B;#D05858;#BE7E05;#608E32;#5079BE;#B05CCC;#3A8B84;#DDE2E7"
+
 # flatpak
 flatpak override --user --env=GTK_THEME=Matcha-light-azul
 
