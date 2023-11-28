@@ -1077,8 +1077,8 @@
   <group
      id="theme"
      defaultPreferDarkTheme="0"
-     defaultIconTheme="Papirus-Dark"
-     defaultGtkTheme="Matcha-dark-azul"
+     defaultIconTheme="Papirus-Light"
+     defaultGtkTheme="Beta_Edge-light-cyan"
      narrowSpinButton="1"
      preferDarkTheme="1"
      darkTheme="1"
