@@ -203,7 +203,6 @@ exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agen
 exec --no-startup-id pulseeffects --gapplication-service
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id xset s off -dpms
-exec --no-startup-id picom --daemon
 #exec --no-startup-id xfsettingsd
 #exec --no-startup-id xsettingsd
 exec --no-startup-id redshift 
@@ -214,6 +213,11 @@ exec --no-startup-id dunst
 exec_always --no-startup-id sh $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id xset led on
 exec_always --no-startup-id autotiling
+
+# Compositor (picom)
+exec --no-startup-id picom --daemon
+bindsym $mod+Shift+p exec killall picom
+bindsym $mod+p exec picom & disown 2>&1/dev/null
 
 # Screenshot (flameshot)
 exec --no-startup-id flameshot
