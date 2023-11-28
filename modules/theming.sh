@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# GTK 2
+mkdir -p $HOME/.local/share/themes && ln -sf $HOME/.themes/* $HOME/.local/share/themes/
+
 # GTK 3, Icon, Cursor, Sans, Mono
 if [[ ${wm_de} == "xfce" ]]; then
 	gtk_theme="$(xfconf-query -c xsettings -p /Net/ThemeName -v)"
@@ -34,21 +37,17 @@ else
 	exit 1
 fi
 
-# symlink xdg-themes to ~/.themes
-#mkdir -p $HOME/.themes && ln -sf ${theme_dir} $HOME/.themes/
+# GTK 3 Flatpak
+if [ ! -d $HOME/.local/share/themes/${gtk_theme} ]; then
+	cp -rf /usr/share/themes/${gtk_theme} $HOME/.local/share/themes/
+fi
 
-# DEs that is not gnome 
+flatpak override --user --filesystem=xdg-data/themes:ro
+flatpak override --user --filesystem=$HOME/.themes:ro
+flatpak override --user --env=GTK_THEME=${gtk_theme}
+
+# GTK 4 
 if [[ ! ${wm_de} == "gnome" ]]; then
-	
-	# GTK 3 flatpak
-	if [ ! -d $HOME/.local/share/themes/${gtk_theme} ]; then
-		mkdir -p $HOME/.local/share/themes && cp -rf /usr/share/themes/${gtk_theme} $HOME/.local/share/themes/
-	fi
-
-	flatpak override --user --filesystem=xdg-data/themes:ro
-	#flatpak override --user --env=GTK_THEME=${gtk_theme}
-
-	# GTK 4
 	rm -rf 					   "$HOME/.config/gtk-4.0/{assets,gtk.css,gtk-dark.css}"
 	mkdir -p 				   "$HOME/.config/gtk-4.0"
 	ln -sf "${theme_dir}/gtk-4.0/assets"       "$HOME/.config/gtk-4.0/"
