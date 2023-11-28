@@ -567,7 +567,7 @@
     <group
        id="preferences"
        state="1"
-       page="0" />
+       page="24" />
     <group
        id="gradienteditor" />
     <group
@@ -1078,7 +1078,7 @@
      id="theme"
      defaultPreferDarkTheme="0"
      defaultIconTheme="Papirus-Light"
-     defaultGtkTheme="Beta_Edge-light-cyan"
+     defaultGtkTheme="Beta_Edge-light-green"
      narrowSpinButton="1"
      preferDarkTheme="1"
      darkTheme="1"
@@ -1101,10 +1101,10 @@
        symbolicErrorColor="4232132863" />
     <group
        id="Papirus-Light"
-       symbolicBaseColor="4193909247"
-       symbolicSuccessColor="512638719"
-       symbolicWarningColor="4188733695"
-       symbolicErrorColor="3643811327" />
+       symbolicBaseColor="4008834303"
+       symbolicSuccessColor="783522047"
+       symbolicWarningColor="4067964415"
+       symbolicErrorColor="4232132863" />
   </group>
   <group
      id="gradient-edit"
