@@ -12,6 +12,9 @@ sudo pacman -S --needed --noconfirm lightdm-gtk-greeter-settings light-locker \
 	xfce4-{screenshooter,pulseaudio-plugin} thunar-{archive-plugin,volman} \
 	mousepad parole ristretto engrampa atril xdg-desktop-portal-gtk
 
+# INSTALL: Extra
+yay -S --needed --noconfirm zoom obs-studio syncthing-gtk teamviewer ventoy-bin
+
 # INSTALL: Bluetooth
 if [[ $(sudo dmesg | grep -q 'Bluetooth') -eq 0 ]]; then
 	sudo pacman -S --needed --noconfirm bluez-utils blueman
