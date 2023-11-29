@@ -576,10 +576,11 @@
        id="export"
        default=""
        append_extension="1"
-       path="">
+       path=""
+       defaultopts="0">
       <group
          id="exportarea"
-         value="drawing" />
+         value="selection" />
       <group
          id="defaultxdpi" />
       <group
@@ -665,7 +666,8 @@
   </group>
   <group
      id="options"
-     rotationlock="1">
+     rotationlock="1"
+     onimport="0">
     <group
        id="renderingcache"
        size="512" />
@@ -952,7 +954,7 @@
      org.inkscape.output.png.inkscape.png_antialias="2" />
   <group
      id="desktop"
-     style="fill:#cc575d">
+     style="fill:#4b505b">
     <group
        width="668"
        height="706"
@@ -1078,7 +1080,7 @@
      id="theme"
      defaultPreferDarkTheme="0"
      defaultIconTheme="Papirus-Light"
-     defaultGtkTheme="Beta_Edge-light-green"
+     defaultGtkTheme="Beta_Edge-light-blue"
      narrowSpinButton="1"
      preferDarkTheme="1"
      darkTheme="1"
