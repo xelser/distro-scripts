@@ -4,13 +4,14 @@
 
 # INSTALL: Endeavour Base
 reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-	plymouth base-devel dconf-editor mugshot transmission-gtk geany gammastep htpdate darkman power-profiles-daemon \
-	easyeffects lsp-plugins-lv2 ecasound gvfs ttf-fira{code-nerd,-sans}
+	plymouth base-devel dconf-editor mugshot transmission-gtk geany gammastep htpdate darkman easyeffects lsp-plugins-lv2 ecasound gvfs
+	
 
 # INSTALL: XFCE
 sudo pacman -S --needed --noconfirm lightdm-gtk-greeter-settings light-locker \
 	xfce4-{screenshooter,pulseaudio-plugin} thunar-{archive-plugin,volman} \
-	mousepad parole ristretto engrampa atril xdg-desktop-portal-gtk
+	mousepad parole ristretto engrampa atril ttf-fira{code-nerd,-sans} \
+	xdg-desktop-portal-gtk network-manager-applet
 
 # INSTALL: Extra
 yay -S --needed --noconfirm zoom obs-studio syncthing-gtk teamviewer ventoy-bin
@@ -19,6 +20,13 @@ yay -S --needed --noconfirm zoom obs-studio syncthing-gtk teamviewer ventoy-bin
 if [[ $(sudo dmesg | grep -q 'Bluetooth') -eq 0 ]]; then
 	sudo pacman -S --needed --noconfirm bluez-utils blueman
 	sudo systemctl enable --now bluetooth
+fi
+
+# INSTALL: Laptop
+if [[ $(sudo dmidecode -s chassis-type) == "Notebook" ]]; then
+	sudo pacman -S --needed --noconfirm acpi{,d} power-profiles-daemon
+	sudo systemctl enable --now acpid power-profiles-daemon
+	sudo systemctl restart --now systemd-logind
 fi
 
 ################################### CONFIG ###################################
