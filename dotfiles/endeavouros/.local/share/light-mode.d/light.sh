@@ -1,14 +1,14 @@
 #!/bin/bash
 
 # xsettings
-xfconf-query -cn xfwm4 -pn /general/theme -t string -s "Edge-light-purple"
-xfconf-query -cn xsettings -pn /Net/ThemeName -t string -s "Edge-light-purple"
+xfconf-query -cn xfwm4 -pn /general/theme -t string -s "Edge-light-blue"
+xfconf-query -cn xsettings -pn /Net/ThemeName -t string -s "Edge-light-blue"
 xfconf-query -cn xsettings -pn /Net/IconThemeName -t string -s "Papirus-Light"
 xfconf-query -cn xsettings -pn /Gtk/CursorThemeName -t string -s "Qogir-cursors"
 
 # gsettings
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
-gsettings set org.gnome.desktop.interface gtk-theme 'Edge-light-purple'
+gsettings set org.gnome.desktop.interface gtk-theme 'Edge-light-blue'
 gsettings set org.gnome.desktop.interface icon-theme 'Papirus-Light'
 gsettings set org.gnome.desktop.interface cursor-theme 'Qogir-cursors'
 
@@ -22,4 +22,4 @@ xfconf-query -cn xfce4-terminal -pn /color-palette -t string -s "#4B505B;#D05858
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/theming.sh)"
 
 # flatpak
-flatpak override --user --env=GTK_THEME=Edge-light-purple
+flatpak override --user --env=GTK_THEME=Edge-light-blue
