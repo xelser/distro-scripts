@@ -51,6 +51,6 @@ autologin-session=xfce
 
 # INSTALL: GTK, KDE, Icon, Cursors
 if [ ! -f /.flag ]; then
-	${source_dir}/themes/theme-matcha.sh
+	${source_dir}/themes/pack-edge.sh
 	${source_dir}/themes/cursor-qogir.sh
 fi
