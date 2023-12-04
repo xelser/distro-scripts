@@ -18,8 +18,8 @@ xfconf-query -cn xfce4-terminal -pn /color-foreground -t string -s "#C5CDD9"
 xfconf-query -cn xfce4-terminal -pn /tab-activity-color -t string -s "#55393D"
 xfconf-query -cn xfce4-terminal -pn /color-palette -t string -s "#202023;#EC7279;#DEB974;#A0C980;#6CB6EB;#D38AEA;#5DBBC1;#C5CDD9;#202023;#EC7279;#DEB974;#A0C980;#6CB6EB;#D38AEA;#5DBBC1;#C5CDD9"
 
-# flatpak
-flatpak override --user --env=GTK_THEME=Edge-dark-purple
-
 # update system
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/theming.sh)"
+
+# flatpak
+flatpak override --user --env=GTK_THEME=Edge-dark-purple
