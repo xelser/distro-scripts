@@ -20,6 +20,3 @@ xfconf-query -cn xfce4-terminal -pn /color-palette -t string -s "#202023;#EC7279
 
 # update system
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/theming.sh)"
-
-# flatpak
-flatpak override --user --env=GTK_THEME=Edge-dark-blue
