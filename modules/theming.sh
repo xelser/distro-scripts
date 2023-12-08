@@ -1,7 +1,10 @@
 #!/bin/bash
 
 # GTK 2
-mkdir -p $HOME/.local/share/themes && ln -sf $HOME/.themes/* $HOME/.local/share/themes/
+if [ -d $HOME/.themes/ ]; then
+	mkdir -p $HOME/.local/share/themes
+	ln -sf $HOME/.themes/* $HOME/.local/share/themes/
+fi
 
 # GTK 3, Icon, Cursor, Sans, Mono
 if [[ ${wm_de} == "xfce" ]]; then
