@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# GTK 2
-if [ -d $HOME/.themes/ ]; then
-	mkdir -p $HOME/.local/share/themes
-	ln -sf $HOME/.themes/* $HOME/.local/share/themes/
-fi
-
 # GTK 3, Icon, Cursor
 if [[ ${wm_de} == "xfce" ]]; then
 	gtk_theme="$(xfconf-query -c xsettings -p /Net/ThemeName -v)"
@@ -27,16 +21,16 @@ fi
 
 if [ -d /usr/share/themes/${gtk_theme} ]; then
 	theme_dir="/usr/share/themes/${gtk_theme}"
-elif [ -d $HOME/.local/share/themes/${gtk_theme} ]; then
-	theme_dir="$HOME/.local/share/themes/${gtk_theme}"
+elif [ -d $HOME/.themes/${gtk_theme} ]; then
+	theme_dir="$HOME/.themes/${gtk_theme}"
 else
-	exit 1
+	exit 1 "theme directory not found"
 fi
 
 # GTK 4 
 if [[ ! ${wm_de} == "gnome" ]]; then
-	rm -rf 					   "$HOME/.config/gtk-4.0/{assets,gtk.css,gtk-dark.css}"
-	mkdir -p 				   "$HOME/.config/gtk-4.0"
+	rm -rf 					 												   "$HOME/.config/gtk-4.0/{assets,gtk.css,gtk-dark.css}"
+	mkdir -p 																   "$HOME/.config/gtk-4.0"
 	ln -sf "${theme_dir}/gtk-4.0/assets"       "$HOME/.config/gtk-4.0/"
 	ln -sf "${theme_dir}/gtk-4.0/gtk.css"      "$HOME/.config/gtk-4.0/gtk.css"
 	ln -sf "${theme_dir}/gtk-4.0/gtk-dark.css" "$HOME/.config/gtk-4.0/gtk-dark.css"
@@ -47,8 +41,7 @@ mkdir -p $HOME/.icons/default && echo -e "[Icon Theme]\nInherits=${cursor_theme}
 echo -e "[Icon Theme]\nInherits=${cursor_theme}" | sudo tee -a /usr/share/icons/default/index.theme 1> /dev/null
 
 # Flatpak
-rm -rf $HOME/.local/share/themes/${gtk_theme}
-cp -rf /usr/share/themes/${gtk_theme} $HOME/.local/share/themes/
+[ ! -d $HOME/.local/share/themes/${gtk_theme} ] && cp -rf ${theme_dir} $HOME/.local/share/themes/
 
 flatpak override --user --filesystem=xdg-config/gtk-3.0
 flatpak override --user --filesystem=xdg-config/gtk-4.0

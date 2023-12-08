@@ -15,3 +15,4 @@ x-scheme-handler/https=xfce4-web-browser.desktop;
 application/x-shellscript=geany.desktop;org.xfce.mousepad.desktop;
 text/plain=org.xfce.mousepad.desktop;
 application/x-theme=org.xfce.mousepad.desktop;
+text/css=org.xfce.mousepad.desktop;
