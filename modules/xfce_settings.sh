@@ -32,6 +32,10 @@ xfconf-query -cn xfce4-keyboard-shortcuts -pn /commands/custom/\<Super\>d -t str
 xfconf-query -cn xfce4-notifyd -pn /do-slideout -t bool -s "true"
 xfconf-query -cn xfce4-notifyd -pn /initial-opacity -t double -s "0.95"
 xfconf-query -cn xfce4-notifyd -pn /notify-location -t uint -s "3"
+xfconf-query -cn xfce4-power-manager -pn /xfce4-power-manager/blank-on-ac -t int -s "0"
+xfconf-query -cn xfce4-power-manager -pn /xfce4-power-manager/lid-action-on-ac -t uint -s "1"
+xfconf-query -cn xfce4-power-manager -pn /xfce4-power-manager/lid-action-on-battery -t uint -s "1"
+xfconf-query -cn xfce4-power-manager -pn /xfce4-power-manager/logind-handle-lid-switch -t bool -s "true"
 xfconf-query -cn xfce4-session -pn /general/SaveOnExit -t bool -s "false"
 xfconf-query -cn xfce4-appfinder -pn /sort-by-frecency -t bool -s "true"
 
