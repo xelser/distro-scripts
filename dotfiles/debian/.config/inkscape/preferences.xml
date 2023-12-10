@@ -577,7 +577,7 @@
        default=""
        append_extension="1"
        path=""
-       defaultopts="0">
+       defaultopts="1">
       <group
          id="exportarea"
          value="selection" />
@@ -954,7 +954,7 @@
      org.inkscape.output.png.inkscape.png_antialias="2" />
   <group
      id="desktop"
-     style="fill:#da4d54">
+     style="fill:#3498db">
     <group
        width="668"
        height="706"
