@@ -18,6 +18,9 @@ xfconf-query -cn xfce4-terminal -pn /color-foreground -t string -s "#4B505B"
 xfconf-query -cn xfce4-terminal -pn /tab-activity-color -t string -s "#E17373"
 xfconf-query -cn xfce4-terminal -pn /color-palette -t string -s "#4B505B;#D05858;#BE7E05;#608E32;#5079BE;#B05CCC;#3A8B84;#DDE2E7;#4B505B;#D05858;#BE7E05;#608E32;#5079BE;#B05CCC;#3A8B84;#DDE2E7"
 
+# gtksourceview (edge theme)
+gsettings set org.xfce.mousepad.preferences.view color-scheme 'edge'
+
 # gtk4
 theme_dir="/usr/share/themes/Edge-light-blue"
 
