@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # backgrounds
-#cd /tmp/ && git clone https://github.com/xelser/gruvbox-backgrounds
-#sudo cp -rf gruvbox-backgrounds/backgrounds /usr/share/
+#cd /tmp/ && git clone https://github.com/xelser/edge-backgrounds
+#sudo cp -rf edge-backgrounds/backgrounds /usr/share/
 
 # gtk
 cd /tmp/ && git clone https://github.com/xelser/edge-gtk
@@ -26,10 +26,10 @@ for icon_theme in "${papirus_folders[@]}"; do
 done
 
 # gtksourceview
-#mkdir -p $HOME/.local/share/gtksourceview-{3.0,4}/styles
-#cd /tmp/ && git clone https://github.com/xelser/gruvbox-gtksourceview
-#cp -rf /tmp/gruvbox-gtksourceview/*.xml $HOME/.local/share/gtksourceview-3.0/styles/
-#ln -sf $HOME/.local/share/gtksourceview-3.0/styles/gruvbox*.xml $HOME/.local/share/gtksourceview-4/styles/
+mkdir -p $HOME/.local/share/gtksourceview-{3.0,4}/styles
+cd /tmp/ && git clone https://github.com/xelser/edge-gtksourceview
+cp -rf /tmp/edge-gtksourceview/*.xml $HOME/.local/share/gtksourceview-3.0/styles/
+ln -sf $HOME/.local/share/gtksourceview-3.0/styles/edge*.xml $HOME/.local/share/gtksourceview-4/styles/
 
 if [ -f /usr/bin/xfce4-terminal ]; then
 	cd /tmp/ && git clone https://github.com/xelser/edge-xfce4-terminal && mkdir -p $HOME/.local/share/xfce4/terminal/colorschemes
