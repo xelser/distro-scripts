@@ -31,5 +31,7 @@ ln -sf "${theme_dir}/gtk-4.0/gtk.css"      "$HOME/.config/gtk-4.0/gtk.css"
 ln -sf "${theme_dir}/gtk-4.0/gtk-dark.css" "$HOME/.config/gtk-4.0/gtk-dark.css"
 
 # flatpak
-[ ! -d $HOME/.local/share/themes/${gtk_theme} ] && cp -rf ${theme_dir} $HOME/.local/share/themes/
+rm -rf $HOME/.local/share/themes/Edge-dark-blue
+cp -rf ${theme_dir} $HOME/.local/share/themes/
+	
 flatpak override --user --env=GTK_THEME=Edge-dark-blue
