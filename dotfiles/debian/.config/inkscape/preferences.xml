@@ -954,7 +954,7 @@
      org.inkscape.output.png.inkscape.png_antialias="2" />
   <group
      id="desktop"
-     style="fill:#222222;fill-opacity:0.11764706">
+     style="fill:#2b2b2b">
     <group
        width="668"
        height="706"
@@ -1080,16 +1080,16 @@
      id="theme"
      defaultPreferDarkTheme="0"
      defaultIconTheme="Papirus-Dark"
-     defaultGtkTheme="Edge-light-green"
+     defaultGtkTheme="Matcha-dark-aliz"
      narrowSpinButton="1"
-     preferDarkTheme="1"
+     preferDarkTheme="0"
      darkTheme="0"
      symbolicIcons="1"
      symbolicDefaultBaseColors="1"
      symbolicDefaultHighColors="1"
      menuIcons="0"
      fontscale="100"
-     gtkTheme="Edge-dark-green">
+     gtkTheme="Edge-light-purple">
     <group
        id="multicolor"
        symbolicBaseColor="3958107135"
@@ -1098,8 +1098,8 @@
        symbolicErrorColor="10086143" />
     <group
        id="Papirus-Dark"
-       symbolicBaseColor="3722635263"
-       symbolicSuccessColor="2579856895"
+       symbolicBaseColor="724384511"
+       symbolicSuccessColor="2697560319"
        symbolicWarningColor="3736696063"
        symbolicErrorColor="3966925311" />
     <group
