@@ -27,7 +27,7 @@ gext --filesystem install 8 # places-menu
 gext --filesystem install 5575 # power-profile-switcher
 gext --filesystem install 352 # middleclickclose
 gext --filesystem install 5237 # rounded-window-corners
-gext --filesystem install 701 # scroll-workspaces
+#gext --filesystem install 701 # scroll-workspaces
 	# pano@elhan.io
 
 # Extensions Configs
