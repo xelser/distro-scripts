@@ -2,7 +2,7 @@
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
 include "/home/xelser/.gtkrc-2.0.mine"
-gtk-theme-name="Edge-light-blue"
+gtk-theme-name="Edge-dark-blue"
 gtk-icon-theme-name="Papirus-Dark"
 gtk-font-name="Ubuntu 10"
 gtk-cursor-theme-name="phinger-cursors"
