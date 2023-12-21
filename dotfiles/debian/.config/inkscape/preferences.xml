@@ -30,7 +30,7 @@
        state="0" />
     <group
        id="scrollbars"
-       state="1" />
+       state="0" />
   </group>
   <group
      id="fullscreen">
@@ -954,7 +954,7 @@
      org.inkscape.output.png.inkscape.png_antialias="2" />
   <group
      id="desktop"
-     style="fill:#2b2b2b">
+     style="fill:#262626;fill-opacity:0.11764706">
     <group
        width="668"
        height="706"
@@ -1080,7 +1080,7 @@
      id="theme"
      defaultPreferDarkTheme="0"
      defaultIconTheme="Papirus-Dark"
-     defaultGtkTheme="Edge-light-cyan"
+     defaultGtkTheme="Edge-light-green"
      narrowSpinButton="1"
      preferDarkTheme="0"
      darkTheme="0"
