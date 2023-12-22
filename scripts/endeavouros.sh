@@ -46,6 +46,16 @@ echo -e "\n[Seat:*]
 autologin-session=xfce
 " | sudo tee -a /etc/lightdm/lightdm.conf
 
+# lightdm-gtk-greeter
+echo -e "[greeter]
+theme-name = Edge-dark-blue
+icon-theme-name = Papirus-Dark
+font-name = Fira Sans 10
+clock-format = %a, %H:%I %p
+indicators = ~host;~spacer;~clock;~spacer;~session;~power
+background = /usr/share/backgrounds/catppuccin/evening-sky.png
+hide-user-image = true" | sudo tee -a /etc/lightdm/lightdm-gtk-greeter.conf
+
 ################################### THEMES ###################################
 
 # INSTALL: GTK, KDE, Icon, Cursors
