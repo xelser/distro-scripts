@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # backgrounds
-#cd /tmp/ && git clone https://github.com/xelser/edge-backgrounds
-#sudo cp -rf edge-backgrounds/backgrounds /usr/share/
+cd /tmp/ && git clone https://github.com/xelser/catppuccin-backgrounds
+sudo cp -rf catppuccin-backgrounds/backgrounds /usr/share/
 
 # gtk
 cd /tmp/ && git clone https://github.com/xelser/edge-gtk
@@ -16,7 +16,7 @@ cd edge-gtk && sudo ./install.sh
 [[ ${distro_id} == "debian" ]]    	&& color="red"
 [[ ${distro_id} == "fedora" ]]    	&& color="blue"
 [[ ${distro_id} == "linuxmint" ]] 	&& color="green"
-[[ ${distro_id} == "endeavouros" ]] 	&& color="purple"
+[[ ${distro_id} == "endeavouros" ]] && color="purple"
 wget -qO- https://git.io/papirus-icon-theme-install | sh
 cd /tmp/ && git clone https://github.com/xelser/edge-papirus-folders
 cd edge-papirus-folders && sudo cp -rf src/* /usr/share/icons/Papirus/
