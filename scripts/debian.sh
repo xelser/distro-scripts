@@ -11,7 +11,7 @@ sed -i 's/contrib contrib/contrib/g' /etc/apt/sources.list
 dpkg --add-architecture i386
 apt update && apt install nala --yes
 
-# INSTALL: Debian Base (X11 and PipeWire)
+# INSTALL: Debian Base (X11 and Pulseaudio)
 nala install --assume-yes htpdate plymouth build-essential synaptic fonts-ubuntu{,-console} \
   dconf-{editor,cli} mugshot at-spi2-core firefox-esr {transmission,syncthing}-gtk \
   lightdm{,-gtk-greeter-settings} pulseeffects redshift numlockx
