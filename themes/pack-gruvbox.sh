@@ -21,7 +21,7 @@ cd /tmp/ && git clone https://github.com/xelser/gruvbox-papirus-folders
 cd gruvbox-papirus-folders && sudo cp -rf src/* /usr/share/icons/Papirus
 papirus_folders=(Papirus Papirus-Dark Papirus-Light ePapirus ePapirus-Dark)
 for icon_theme in "${papirus_folders[@]}"; do 
-	./papirus-folders -u -C gruv-mat-hard-dark-${color} -t ${icon_theme}
+	./papirus-folders -u -C gruvbox-mix-${color} -t ${icon_theme}
 done
 
 # gtksourceview
