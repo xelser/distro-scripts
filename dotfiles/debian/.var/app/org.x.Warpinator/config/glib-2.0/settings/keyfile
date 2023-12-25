@@ -1,0 +1,8 @@
+[org/x/warpinator/preferences]
+connect-id='DEBIAN-E4ABA6540F727196D890'
+ask-for-send-permission=true
+autostart=false
+no-overwrite=true
+receiving-folder='file:///home/xelser/Public'
+group-code='xelser'
+start-with-window=true
