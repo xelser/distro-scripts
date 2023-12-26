@@ -1080,7 +1080,7 @@
      id="theme"
      defaultPreferDarkTheme="0"
      defaultIconTheme="Papirus-Dark"
-     defaultGtkTheme="Edge-light-green"
+     defaultGtkTheme="Edge-dark-red"
      narrowSpinButton="1"
      preferDarkTheme="0"
      darkTheme="0"
