@@ -54,3 +54,10 @@ flatpak override --user --filesystem=xdg-config/gtk-4.0
 flatpak override --user --filesystem=xdg-data/themes:ro
 flatpak override --user --filesystem=$HOME/.themes:ro
 flatpak override --user --env=GTK_THEME=${gtk_theme}
+
+# dconf
+#dconf write /org/gnome/desktop/interface/color-scheme "prefer-dark
+dconf write /org/gnome/desktop/interface/gtk-theme "'${gtk_theme}'"
+dconf write /org/gnome/desktop/interface/icon-theme "'${icon_theme}'"
+dconf write /org/gnome/desktop/interface/cursor-theme "'${cursor_theme}'"
+
