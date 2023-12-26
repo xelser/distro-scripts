@@ -48,7 +48,7 @@ autologin-session=xfce
 
 # lightdm-gtk-greeter
 echo -e "[greeter]
-theme-name = Edge-dark-blue
+theme-name = Edge-blue-dark
 icon-theme-name = Papirus-Dark
 font-name = Fira Sans 10
 clock-format = %a, %H:%I %p

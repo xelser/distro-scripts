@@ -16,3 +16,4 @@ application/x-shellscript=geany.desktop;org.xfce.mousepad.desktop;
 text/plain=org.xfce.mousepad.desktop;
 application/x-theme=org.xfce.mousepad.desktop;
 text/css=org.xfce.mousepad.desktop;
+video/x-matroska=org.xfce.Parole.desktop;
