@@ -25,20 +25,11 @@ elif [ -d $HOME/.themes/${gtk_theme} ]; then
 	theme_dir="$HOME/.themes/${gtk_theme}"
 fi
 
-# GTK 4 
-if [[ ! ${wm_de} == "gnome" ]] && [[ ! -z ${theme_dir} ]]; then
-	rm -rf                                     "$HOME/.config/gtk-4.0/{assets,gtk.css,gtk-dark.css}"
-	mkdir -p                                   "$HOME/.config/gtk-4.0"
-	ln -sf "${theme_dir}/gtk-4.0/assets"       "$HOME/.config/gtk-4.0/"
-	ln -sf "${theme_dir}/gtk-4.0/gtk.css"      "$HOME/.config/gtk-4.0/gtk.css"
-	ln -sf "${theme_dir}/gtk-4.0/gtk-dark.css" "$HOME/.config/gtk-4.0/gtk-dark.css"
-fi
-
-# Cursor
-mkdir -p $HOME/.icons/default && echo -e "[Icon Theme]\nInherits=${cursor_theme}" > $HOME/.icons/default/index.theme
-echo -e "[Icon Theme]\nInherits=${cursor_theme}" | sudo tee -a /usr/share/icons/default/index.theme 1> /dev/null
-
 # Flatpak
+dconf write /org/gnome/desktop/interface/gtk-theme "'${gtk_theme}'"
+dconf write /org/gnome/desktop/interface/icon-theme "'${icon_theme}'"
+dconf write /org/gnome/desktop/interface/cursor-theme "'${cursor_theme}'"
+
 if [ ! -d $HOME/.local/share/themes/${gtk_theme} ] && [ ! -z ${theme_dir} ]; then
 	cp -rf ${theme_dir} $HOME/.local/share/themes/
 fi
@@ -49,15 +40,22 @@ if [ -f /usr/bin/kvantummanager ]; then
 	flatpak override --user --env=QT_STYLE_OVERRIDE=kvantum-dark
 fi
 
-flatpak override --user --filesystem=xdg-config/gtk-3.0
-flatpak override --user --filesystem=xdg-config/gtk-4.0
-flatpak override --user --filesystem=xdg-data/themes:ro
-flatpak override --user --filesystem=$HOME/.themes:ro
-flatpak override --user --env=GTK_THEME=${gtk_theme}
+# GTK 4 
+if [[ ! ${wm_de} == "gnome" ]] && [[ ! -z ${theme_dir} ]]; then
+	rm -rf                                     "$HOME/.config/gtk-4.0/{assets,gtk.css,gtk-dark.css}"
+	mkdir -p                                   "$HOME/.config/gtk-4.0"
+	ln -sf "${theme_dir}/gtk-4.0/assets"       "$HOME/.config/gtk-4.0/"
+	ln -sf "${theme_dir}/gtk-4.0/gtk.css"      "$HOME/.config/gtk-4.0/gtk.css"
+	ln -sf "${theme_dir}/gtk-4.0/gtk-dark.css" "$HOME/.config/gtk-4.0/gtk-dark.css"
 
-# dconf
-#dconf write /org/gnome/desktop/interface/color-scheme "prefer-dark
-dconf write /org/gnome/desktop/interface/gtk-theme "'${gtk_theme}'"
-dconf write /org/gnome/desktop/interface/icon-theme "'${icon_theme}'"
-dconf write /org/gnome/desktop/interface/cursor-theme "'${cursor_theme}'"
+	flatpak override --user --filesystem=xdg-config/gtk-3.0
+	flatpak override --user --filesystem=xdg-config/gtk-4.0
+	flatpak override --user --filesystem=xdg-data/themes:ro
+	flatpak override --user --filesystem=$HOME/.themes:ro
+	flatpak override --user --env=GTK_THEME=${gtk_theme}
+fi
+
+# Cursor
+mkdir -p $HOME/.icons/default && echo -e "[Icon Theme]\nInherits=${cursor_theme}" > $HOME/.icons/default/index.theme
+echo -e "[Icon Theme]\nInherits=${cursor_theme}" | sudo tee -a /usr/share/icons/default/index.theme 1> /dev/null
 
