@@ -43,7 +43,7 @@ sudo dnf install --assumeyes --skip-broken --allowerasing google-roboto-{fonts,m
 # INSTALL: htpdate
 sudo dnf copr enable whitehara/htpdate --assumeyes
 sudo dnf install htpdate --assumeyes
-#sudo systemctl enable htpdate --now
+sudo systemctl enable htpdate --now
 
 ################################### CONFIG ###################################
 
