@@ -67,4 +67,4 @@ dconf write /org/gnome/shell/extensions/nightthemeswitcher/icon-variants/night "
 #dconf write /org/gnome/shell/extensions/pop-shell/tile-by-default "true"
 
 # Install Manually (DBus)
-gext install nightthemeswitcher@romainvigier.fr
+#gext install nightthemeswitcher@romainvigier.fr
