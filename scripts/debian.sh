@@ -57,6 +57,9 @@ autologin-session=i3
 " >> /etc/lightdm/lightdm.conf
 systemctl enable lightdm
 
+# htpdate
+systemctl enable htpdate
+
 ################################### THEMES ###################################
 
 # INSTALL: GTK, KDE, Icon, Cursors
