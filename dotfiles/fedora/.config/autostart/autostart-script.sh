@@ -9,8 +9,10 @@ gsettings set org.gnome.nautilus.window-state initial-size '(790, 580)'
 gsettings set org.gnome.Console last-window-size '(740, 520)'
 
 # update firefox theme
+[ -f /usr/bin/firefox ] && exec_firefox="firefox" || exec_firefox="flatpak run org.mozilla.firefox"
+
 theme_ver="$(curl --silent "https://api.github.com/repos/rafaelmardojai/firefox-gnome-theme/releases/latest" | grep tag_name | cut -d'"' -f4)"
-firefox_ver="v$(flatpak run org.mozilla.firefox --version | cut -d' ' -f3 | cut -d'.' -f1)"
+firefox_ver="v$(${exec_firefox} --version | cut -d' ' -f3 | cut -d'.' -f1)"
 
 if [ ! -z ${firefox_ver} ]; then
 	if [[ ! "${theme_ver}" == "${firefox_ver}" ]]; then
