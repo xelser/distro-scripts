@@ -18,6 +18,6 @@ sudo dnf autoremove --assumeyes gnome-terminal
 
 # INSTALL: Fedora Workstation
 flatpak install --assumeyes --noninteractive flathub org.gtk.Gtk3theme.adw-{gtk3,gtk3-dark} \
-  com.mattjakeman.ExtensionManager me.dusansimic.DynamicWallpaper io.bassi.Amberol com.spotify.Client
+  com.mattjakeman.ExtensionManager me.dusansimic.DynamicWallpaper io.bassi.Amberol com.spotify.Client \
   org.mozilla.firefox # com.google.Chrome  us.zoom.Zoom org.telegram.desktop com.discordapp.Discord
   # me.kozec.syncthingtk com.rafaelmardojai.Blanket org.gnome.gitlab.YaLTeR.VideoTrimmer org.nickvision.tubeconverter
