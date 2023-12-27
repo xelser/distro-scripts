@@ -31,6 +31,7 @@ cd /tmp/ && git clone https://github.com/xelser/edge-gtksourceview
 cp -rf /tmp/edge-gtksourceview/*.xml $HOME/.local/share/gtksourceview-3.0/styles/
 ln -sf $HOME/.local/share/gtksourceview-3.0/styles/edge*.xml $HOME/.local/share/gtksourceview-4/styles/
 
+# terminals
 if [ -f /usr/bin/xfce4-terminal ]; then
 	cd /tmp/ && git clone https://github.com/xelser/edge-xfce4-terminal && mkdir -p $HOME/.local/share/xfce4/terminal/colorschemes
 	cp -rf /tmp/edge-xfce4-terminal/*.theme $HOME/.local/share/xfce4/terminal/colorschemes/
