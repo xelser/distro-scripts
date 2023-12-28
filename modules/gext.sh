@@ -26,8 +26,8 @@ gext --filesystem install 3843 # just-perfection
 gext --filesystem install 8 # places-menu
 gext --filesystem install 5575 # power-profile-switcher
 gext --filesystem install 352 # middleclickclose
-gext --filesystem install 5237 # rounded-window-corners
-#gext --filesystem install 701 # scroll-workspaces
+#gext --filesystem install 5237 # rounded-window-corners (no update)
+#gext --filesystem install 701 # scroll-workspaces (api issues)
 	# pano@elhan.io
 
 # Extensions Configs
@@ -52,7 +52,7 @@ dconf write /org/gnome/shell/extensions/gnome-ui-tune/always-show-thumbnails "fa
 dconf write /org/gnome/shell/extensions/just-perfection/window-demands-attention-focus "true"
 #dconf write /org/gnome/shell/extensions/just-perfection/world-clock "false"
 dconf write /org/gnome/shell/extensions/middleclickclose/close-button "'right'"
-dconf write /org/gnome/shell/extensions/nightthemeswitcher/commands/enabled 'true'
+#dconf write /org/gnome/shell/extensions/nightthemeswitcher/commands/enabled 'true'
 #dconf write /org/gnome/shell/extensions/nightthemeswitcher/commands/sunrise "'bash $HOME/.local/share/light-mode.d/switch.sh'"
 #dconf write /org/gnome/shell/extensions/nightthemeswitcher/commands/sunset "'bash $HOME/.local/share/dark-mode.d/switch.sh'"
 dconf write /org/gnome/shell/extensions/nightthemeswitcher/cursor-variants/enabled "true"
