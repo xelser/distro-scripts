@@ -22,6 +22,7 @@ application/xhtml+xml=firefox-esr.desktop;
 application/x-extension-xhtml=firefox-esr.desktop;
 application/x-extension-xht=firefox-esr.desktop;
 text/x-makefile=org.gnome.gedit.desktop;
+application/vnd.debian.binary-package=org.gnome.gedit.desktop;
 
 [Default Applications]
 image/jpeg=org.xfce.ristretto.desktop

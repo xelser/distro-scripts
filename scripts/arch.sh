@@ -122,7 +122,7 @@ fi
 ################################### INSTALL ##################################
 
 arch_base_install () {
-pacman -Sy archlinux-keyring --needed --noconfirm
+#pacman -Sy archlinux-keyring --needed --noconfirm
 pacstrap /mnt base && genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt /bin/bash << EOF
 
