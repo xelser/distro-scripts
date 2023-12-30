@@ -91,6 +91,11 @@
         {
             "wmClass": "evince",
             "mode": "float"
+        },
+        {
+            "wmClass": "firefox",
+            "wmTitle": "Picture-in-Picture",
+            "mode": "float"
         }
     ]
 }
