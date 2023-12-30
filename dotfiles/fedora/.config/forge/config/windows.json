@@ -79,6 +79,18 @@
         {
             "wmClass": "de.haeckerfelix.Fragments",
             "mode": "float"
+        },
+        {
+            "wmClass": "org.gnome.Loupe",
+            "mode": "float"
+        },
+        {
+            "wmClass": "file-roller",
+            "mode": "float"
+        },
+        {
+            "wmClass": "evince",
+            "mode": "float"
         }
     ]
 }
