@@ -1,16 +1,15 @@
 #!/bin/bash
 
-# themes and fonts
+# themes
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-gruvbox.sh)"
 
-# vim/neovim plug
+# vim/neovim plug (text editors)
 [ -f /usr/bin/vim ] && curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
         https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 [ -f /usr/bin/nvim ] && sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim \
         --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
        
-# Themes and Fonts
 [ -f /usr/bin/gedit ] && dconf write /org/gnome/gedit/preferences/editor/editor-font "'UbuntuMono Nerd Font 12'"
 
 # rofi (launcher and powermenu)
@@ -24,11 +23,18 @@ sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
 sed -i 's/onedark/gruvbox-material-hard-dark/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
 sed -i 's/JetBrains Mono Nerd Font 10/UbuntuMono Nerd Font 12/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
 
+# dunst
+sed -i 's/origin = top-right/origin = bottom-right/g' $HOME/.config/dunst/dunstrc
+sed -i 's/offset = 10x50/offset = 20x20/g' $HOME/.config/dunst/dunstrc
+sed -i 's/font = Monospace 8/font = UbuntuMono Nerd Font 12/g' $HOME/.config/dunst/dunstrc
+sed -i 's/icon_theme = Adwaita/icon_theme = Papirus-Dark/g' $HOME/.config/dunst/dunstrc
+sed -i 's/max_icon_size = 128/max_icon_size = 64/g' $HOME/.config/dunst/dunstrc
+
+# flameshot directory
+mkdir -p $HOME/Pictures/Screenshots
+
 # user systemd daemons
 systemctl enable --user mpd
 #systemctl enable --user darkman
 systemctl enable --user syncthing
-
-# flameshot directory
-mkdir -p $HOME/Pictures/Screenshots
 
