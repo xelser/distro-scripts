@@ -23,6 +23,7 @@ gext --filesystem install 307 # dash-to-dock
 gext --filesystem install 4481 # forge
 gext --filesystem install 4158 # gnome-ui-tune
 gext --filesystem install 3843 # just-perfection
+gext --filesystem install 4691 # pip-on-top
 gext --filesystem install 8 # places-menu
 gext --filesystem install 5575 # power-profile-switcher
 gext --filesystem install 352 # middleclickclose
@@ -63,6 +64,7 @@ dconf write /org/gnome/shell/extensions/nightthemeswitcher/gtk-variants/night "'
 dconf write /org/gnome/shell/extensions/nightthemeswitcher/icon-variants/enabled "true"
 dconf write /org/gnome/shell/extensions/nightthemeswitcher/icon-variants/day "'Tela-circle'"
 dconf write /org/gnome/shell/extensions/nightthemeswitcher/icon-variants/night "'Tela-circle-dark'"
+dconf write /org/gnome/shell/extensions/pip-on-top/stick "true"
 #dconf write /org/gnome/shell/extensions/pop-shell/tile-by-default "true"
 
 # Install Manually (DBus)
