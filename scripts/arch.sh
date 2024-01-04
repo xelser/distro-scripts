@@ -17,7 +17,7 @@ elif [[ ${machine} == "E5-476G" ]]; then
   swap="3"
   efi="1"
   grub_target="x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch"
-elif [[ ${machine} == "PC" ]]; then # GNOME BOXES
+elif [[ ${machine_type} == "Other" ]]; then # GNOME BOXES
   device="vda"
 
 	dmesg | grep -q "EFI v"; if [ $? -eq 0 ]; then
@@ -96,7 +96,7 @@ if   [[ ${machine} == "G41T-R3" ]]; then
 	btrfs_setup && swapon /dev/${device}${swap}
 elif [[ ${machine} == "E5-476G" ]]; then
         ext4_setup && swapon /dev/${device}${swap} ; dmesg | grep -q "EFI v" && format_efi
-elif [[ ${machine} == "PC" ]]; then # GNOME BOXES
+elif [[ ${machine_type} == "Other" ]]; then # GNOME BOXES
 	create_gpt () {
 	        sgdisk /dev/${device} -n 1::1GiB -t 1:ef00
         	sgdisk /dev/${device} -n 2::3GiB -t 1:8200
@@ -167,6 +167,8 @@ systemctl enable NetworkManager
 useradd -mG wheel,video ${user}
 echo -e "root:${psswrd}\n${user}:${psswrd}" | chpasswd
 echo -e "${user} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/${user}
+
+exit
 EOF
 }
 
@@ -184,6 +186,8 @@ pacman -S --needed --noconfirm \
 echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
 echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
 systemctl enable sddm
+
+exit
 EOF
 }
 
@@ -191,8 +195,8 @@ EOF
 clear && echo "INSTALLATION SUMMARY:"
 echo "---------------------"
 echo "Machine: ${machine}"
+echo "Type: ${machine_type}"
 echo "User: ${user}"
-echo "Hostname: arch"
 echo "---------------------"
 lsblk
 echo
@@ -203,9 +207,9 @@ echo "Swap: ${device}${swap}"
 echo "---------------------"
 read -p "Proceed? (Y/n): " confirm
 case $confirm in
-   n)   ;;
- *|Y)   partitioning && arch_base_install
-	[[ ${machine} == "PC" ]] || arch_i3_sway_install
-	;;
+   n)	;;
+ *|Y) partitioning && arch_base_install
+			[[ ${machine_type} == "Other" ]] || arch_i3_sway_install
+			;;
 esac
 
