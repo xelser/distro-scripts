@@ -93,14 +93,6 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 [[ ${wm_de} == "gnome" ]] || [[ ${wm_de} == "cinnamon" ]] || [[ ${wm_de} == "xfce" ]] && \
 	bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/${wm_de}_settings.sh)"
 
-# Hide Apps
-name=(calf org.gnome.dspy org.gnome.Devhelp org.gnome.Sysprof lstopo mpv htop avahi-discover bssh bvnc stoken-gui stoken-gui-small qv4l2 qvidcap
-	pcmanfm-desktop-pref)
-for app in "${name[@]}"; do if [ -f /usr/share/applications/${app}.desktop ]; then mkdir -p $HOME/.local/share/applications/
-	cp -rf /usr/share/applications/${app}.desktop $HOME/.local/share/applications/${app}.desktop
-	echo "NoDisplay=true" >> $HOME/.local/share/applications/${app}.desktop
-fi;done
-
 # Plank
 if [ -f /usr/bin/plank ] && [ -f $HOME/.config/plank/plank.ini ]; then
 	cat $HOME/.config/plank/plank.ini | dconf load /net/launchpad/plank/
@@ -110,6 +102,17 @@ fi
 # rEFInd
 sudo dmesg | grep -q "EFI v" && [[ ${machine} == "E5-476G" ]] && \
 	bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/refind.sh)"
+
+# Hide Apps
+name=(calf org.gnome.dspy org.gnome.Devhelp org.gnome.Sysprof lstopo mpv htop avahi-discover bssh bvnc
+	stoken-gui stoken-gui-small qv4l2 qvidcap pcmanfm-desktop-pref syncthing-ui syncthing-start)
+
+for app in "${name[@]}"; do
+	if [ -f /usr/share/applications/${app}.desktop ]; then mkdir -p $HOME/.local/share/applications/
+		cp -rf /usr/share/applications/${app}.desktop $HOME/.local/share/applications/${app}.desktop
+		echo "NoDisplay=true" >> $HOME/.local/share/applications/${app}.desktop
+	fi
+done
 
 ################################### THEMES ###################################
 
