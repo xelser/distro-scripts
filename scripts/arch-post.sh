@@ -13,8 +13,8 @@ yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload
   syncthing-gtk {chatterino2-dankerino,ventoy}-bin #ulauncher
 
 # BUILD: caffeinate
-sudo pacman -S --needed --noconfirm rustup && rustup default stable
-cargo install --git https://github.com/rschmukler/caffeinate
+#sudo pacman -S --needed --noconfirm rustup && rustup default stable
+#cargo install --git https://github.com/rschmukler/caffeinate
 
 ##################################### POST #####################################
 
