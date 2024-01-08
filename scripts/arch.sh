@@ -163,6 +163,11 @@ grub-install --target=${grub_target}
 # networkmanager
 systemctl enable NetworkManager
 
+# bluetooth
+dmesg | grep -q 'Bluetooth' && \
+	pacman -S --needed --noconfirm blue{man,z-utils} && \
+	systemctl enable bluetooth
+
 # users
 useradd -mG wheel,video ${user}
 echo -e "root:${psswrd}\n${user}:${psswrd}" | chpasswd
