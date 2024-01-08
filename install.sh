@@ -76,7 +76,7 @@ if [[ ${machine} == "E5-476G" ]]; then
 fi
 
 ## distro-scripts ##
-[[ ${user} == "xelser" ]] && cp -rf ${source_dir}/modules/distro_scripts.sh /home/${user}/
+[[ ${user} == "xelser" ]] && cp -rf ${source_dir}/modules/distro_scripts.sh ${root_mnt}/home/${user}/
 
 ## Permissions ##
 if [[ ${distro_id} == "arch" ]]; then
