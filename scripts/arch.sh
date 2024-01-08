@@ -209,7 +209,7 @@ read -p "Proceed? (Y/n): " confirm
 case $confirm in
    n)	;;
  *|Y) partitioning && arch_base_install
-			[[ ${machine_type} == "Other" ]] || arch_i3_sway_install
+	 		arch_i3_sway_install
 			;;
 esac
 
