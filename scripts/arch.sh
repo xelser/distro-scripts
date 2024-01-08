@@ -147,7 +147,8 @@ echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILov
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 pacman -Sy --needed --noconfirm linux linux-firmware grub os-prober btrfs-progs efibootmgr dosfstools {intel,amd}-ucode \
 	base-devel dmidecode inetutils reflector xdg-user-dirs neofetch htop git networkmanager plymouth ttf-fira{-sans,code-nerd} \
-  pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound
+  pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound \
+	gvfs nm-connection-editor firefox qbittorrent neovim{,-plugins} xclip wl-clipboard 
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
@@ -173,26 +174,22 @@ useradd -mG wheel,video ${user}
 echo -e "root:${psswrd}\n${user}:${psswrd}" | chpasswd
 echo -e "${user} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/${user}
 
-exit
 EOF
 }
 
 arch_i3_sway_install () {
 arch-chroot /mnt /bin/bash << EOF
 # packages
-pacman -S --needed --noconfirm \
-  sddm brightnessctl numlockx gvfs firefox nm-connection-editor qbittorrent \
+pacman -S --needed --noconfirm sddm brightnessctl numlockx \
   alacritty ranger imv mpv gammastep rofi dunst libnotify wallutils swaybg feh \
   flameshot xdg-desktop-portal-wlr grim qt5ct kvantum lxappearance-gtk3 \
-  xarchiver pcmanfm atril picom i3-wm polybar sway waybar \
-	neovim{,-plugins} xclip wl-clipboard
+  xarchiver pcmanfm atril picom i3-wm polybar sway waybar
 
 # sddm
 echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
 echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
 systemctl enable sddm
 
-exit
 EOF
 }
 
