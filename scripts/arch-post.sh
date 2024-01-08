@@ -1,6 +1,6 @@
 #!/bin/bash
 
-################################### PACKAGES ###################################
+################################## PACKAGES ##################################
 
 # PACKAGE MANAGER: YAY
 if [ ! -f /usr/bin/yay ]; then
@@ -16,15 +16,10 @@ yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload
 #sudo pacman -S --needed --noconfirm rustup && rustup default stable
 #cargo install --git https://github.com/rschmukler/caffeinate
 
-##################################### POST #####################################
+#################################### POST ####################################
 
 # flameshot directory
 mkdir -p $HOME/Pictures/Screenshots
-
-# bluetooth
-sudo dmesg | grep -q 'Bluetooth' && \
-	sudo pacman -S --needed --noconfirm blue{man,z-utils} && \
-	sudo systemctl enable bluetooth
 
 # touchpad
 #if [[ ${machine_type} == "notebook" ]]; then
@@ -38,7 +33,7 @@ sudo dmesg | grep -q 'Bluetooth' && \
 # syncthing
 [ -f /usr/bin/syncthing ] && systemctl enable --user syncthing
 
-#################################### THEMES ####################################
+################################### THEMES ###################################
 
 # catppuccin
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-catppuccin.sh)"
