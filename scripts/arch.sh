@@ -8,7 +8,7 @@ read -p "Password: " -s psswrd
 ## PARTITIONING ##
 if   [[ ${machine} == "G41T-R3" ]]; then
 	device="sda"
-  root="1"
+  root="2"
   swap="6"
   grub_target="i386-pc /dev/${device}"
 elif [[ ${machine} == "E5-476G" ]]; then
@@ -93,9 +93,9 @@ format_swap () {
 partitioning () {
 umount -R /mnt >&/dev/null ; swapoff -a
 if   [[ ${machine} == "G41T-R3" ]]; then
-	btrfs_setup && swapon /dev/${device}${swap}
+	ext4_setup && swapon /dev/${device}${swap}
 elif [[ ${machine} == "E5-476G" ]]; then
-        ext4_setup && swapon /dev/${device}${swap} ; dmesg | grep -q "EFI v" && format_efi
+  ext4_setup && swapon /dev/${device}${swap} ; dmesg | grep -q "EFI v" && format_efi
 elif [[ ${machine_type} == "Other" ]]; then # GNOME BOXES
 	create_gpt () {
 	        sgdisk /dev/${device} -n 1::1GiB -t 1:ef00
