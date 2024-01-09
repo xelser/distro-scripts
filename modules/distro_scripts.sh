@@ -30,5 +30,5 @@ else
 fi
 
 # Delete files
-rm $HOME/tmp $HOME/distro_scripts.sh
+rm $HOME/tmp
 

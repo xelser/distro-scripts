@@ -16,8 +16,8 @@ sudo pacman -Syyu --needed --noconfirm ttf-fira{code-nerd,-sans} \
 	manjaro-pipewire wireplumber ecasound easyeffects 
 
 # INSTALL: Development
-sudo pacman -S --needed --noconfirm base-devel npm meson cmake \
-	sassc parallel gpick inkscape gtk3-demos
+sudo pacman -S --needed --noconfirm base-devel \
+	npm meson parallel sassc gpick inkscape gtk3-demos
 
 ################################### CONFIG ###################################
 
