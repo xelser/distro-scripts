@@ -7,16 +7,23 @@ echo -e "\n[options]\nVerbosePkgLists\nParallelDownloads = 5\nDisableDownloadTim
 sudo pacman-mirrors --country Global
 
 # DEBLOAT
-bloat=(manjaro-{hello,pulse} pulseaudio zsh midori gufw timeshift lshw hexchat gthumb gufw imagewriter)
+bloat=(manjaro-{hello,pulse} pulseaudio zsh midori gufw timeshift lshw hexchat gthumb gufw imagewriter gcolor3 evince)
 for pkgs in "${bloat[@]}"; do sudo pacman -Qq ${pkgs} && sudo pacman -Rnsc --noconfirm ${pkgs}; done
 
-# INSTALL: Manjaro Base
-sudo pacman -Syyu --needed --noconfirm base-devel mhwd firefox \
-	redshift dconf-editor power-profiles-daemon darkman \
-	geany transmission-gtk ttf-fira{code-nerd,-sans} \
-	plymouth-theme-manjaro plymouth
+# INSTALL: Manjaro XFCE 
+sudo pacman -Syyu --needed --noconfirm ttf-fira{code-nerd,-sans} \
+	firefox geany transmission-gtk redshift dconf-editor darkman \
+	manjaro-pipewire wireplumber ecasound easyeffects 
+
+# INSTALL: Development
+sudo pacman -S --needed --noconfirm base-devel npm meson cmake \
+	sassc parallel gpick inkscape gtk3-demos
 
 ################################### CONFIG ###################################
+
+# gtk3 widget factory
+cp /usr/share/applications/gtk3-widget-factory.desktop .local/share/applications/
+sed -i 's/NoDisplay=true//g' $HOME/.local/share/applications/gtk3-widget-factory.desktop
 
 # root label
 partition="$(lsblk --raw -o name,mountpoint | grep '^[^/]*/[^/]*$' | cut -d' ' -f1)"
@@ -25,5 +32,4 @@ sudo e2label /dev/${partition} "Manjaro"
 # grub
 sudo sed -i 's/quiet/quiet splash/g' /etc/default/grub
 sudo sed -i 's/splash splash/splash/g' /etc/default/grub
-sudo sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
