@@ -11,9 +11,10 @@ bloat=(manjaro-{hello,pulse} pulseaudio zsh midori gufw timeshift lshw hexchat g
 for pkgs in "${bloat[@]}"; do sudo pacman -Qq ${pkgs} && sudo pacman -Rnsc --noconfirm ${pkgs}; done
 
 # INSTALL: Manjaro Base
-sudo pacman -Syyu --needed --noconfirm mhwd firefox plymouth-theme-manjaro plymouth base-devel \
-	manjaro-pipewire wireplumber ecasound redshift dconf-editor power-profiles-daemon darkman \
-	geany transmission-gtk ttf-fira{code-nerd,-sans}
+sudo pacman -Syyu --needed --noconfirm base-devel mhwd firefox \
+	redshift dconf-editor power-profiles-daemon darkman \
+	geany transmission-gtk ttf-fira{code-nerd,-sans} \
+	plymouth-theme-manjaro plymouth
 
 ################################### CONFIG ###################################
 
