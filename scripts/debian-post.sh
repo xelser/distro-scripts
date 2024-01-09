@@ -34,6 +34,10 @@ sed -i 's/font = Monospace 8/font = UbuntuMono Nerd Font 12/g' $HOME/.config/dun
 sed -i 's/icon_theme = Adwaita/icon_theme = Papirus-Dark/g' $HOME/.config/dunst/dunstrc
 sed -i 's/max_icon_size = 128/max_icon_size = 64/g' $HOME/.config/dunst/dunstrc
 
+# set fonts
+dconf write /org/gnome/desktop/interface/font-name "'Ubuntu 10'"
+dconf write /org/gnome/desktop/interface/monospace-font-name "'UbuntuMono Nerd Font 12'"
+
 # flameshot directory
 mkdir -p $HOME/Pictures/Screenshots
 
