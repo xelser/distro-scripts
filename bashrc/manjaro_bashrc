@@ -4,6 +4,10 @@
 #######################
 
 # colors
-xfconf-query -c xsettings -p /Net/ThemeName -v | grep -q "dark" && fg="37" || fg="30"
+if [[ $(gsettings get org.gnome.desktop.interface color-scheme) == "prefer-light" ]]; then
+	fg="30"
+elif [[ $(gsettings get org.gnome.desktop.interface color-scheme) == "prefer-dark" ]]; then
+	fg="37"
+fi
 
 PS1=" \[\e[1;32m\]󱘊  \[\e[1;33m\]\W \[\e[1;31m\]>\[\e[1;35m\]>\[\e[1;34m\]> \[\e[0;${fg}m\]"
