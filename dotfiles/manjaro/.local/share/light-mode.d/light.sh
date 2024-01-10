@@ -3,7 +3,7 @@
 # xsettings
 xfconf-query -cn xfwm4 -pn /general/theme -t string -s "Edge-cyan-light"
 xfconf-query -cn xsettings -pn /Net/ThemeName -t string -s "Edge-cyan-light"
-xfconf-query -cn xsettings -pn /Net/IconThemeName -t string -s "Papirus-Light-Maia"
+xfconf-query -cn xsettings -pn /Net/IconThemeName -t string -s "Papirus-Light"
 xfconf-query -cn xsettings -pn /Gtk/CursorThemeName -t string -s "Qogir-manjaro-cursors"
 
 # gsettings
