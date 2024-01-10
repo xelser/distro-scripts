@@ -16,7 +16,7 @@ gsettings set org.gnome.desktop.interface cursor-theme 'Qogir-manjaro-cursors'
 xfconf-query -cn xfce4-terminal -pn /color-background -t string -s "#FAFAFA"
 xfconf-query -cn xfce4-terminal -pn /color-foreground -t string -s "#4B505B"
 xfconf-query -cn xfce4-terminal -pn /tab-activity-color -t string -s "#E17373"
-xfconf-query -cn xfce4-terminal -pn /color-palette -t string -s "#4B505B;#D05858;#608E32;#BE7E05;#5079BE;#B05CCC;#3A8B84;#DDE2E7;#4B505B;#D05858;#608E32;#BE7E05;#5079BE;#B05CCC;#3A8B84;#DDE2E7"
+xfconf-query -cn xfce4-terminal -pn /color-palette -t string -s "#4B505B;#D05858;#608E32;#BE7E05;#5079BE;#B05CCC;#3A8B84;#BAC3CB;#8790A0;#D05858;#608E32;#BE7E05;#5079BE;#B05CCC;#3A8B84;#DDE2E7"
 
 # gtksourceview (edge theme)
 gsettings set org.xfce.mousepad.preferences.view color-scheme 'edge'
