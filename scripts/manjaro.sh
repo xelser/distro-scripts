@@ -33,3 +33,11 @@ sudo e2label /dev/${partition} "Manjaro"
 sudo sed -i 's/quiet/quiet splash/g' /etc/default/grub
 sudo sed -i 's/splash splash/splash/g' /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+################################### THEMES ###################################
+
+# INSTALL: GTK, KDE, Icon, Cursors
+if [ ! -f /.flag ]; then
+	${source_dir}/themes/pack-edge.sh
+	${source_dir}/themes/cursor-qogir.sh
+fi
