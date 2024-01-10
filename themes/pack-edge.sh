@@ -15,6 +15,7 @@ cd edge-gtk && sudo ./install.sh
 [[ ${distro_id} == "arch" ]]      	&& color="cyan"
 [[ ${distro_id} == "debian" ]]    	&& color="red"
 [[ ${distro_id} == "fedora" ]]    	&& color="blue"
+[[ ${distro_id} == "manjaro" ]] 	  && color="cyan"
 [[ ${distro_id} == "linuxmint" ]] 	&& color="green"
 [[ ${distro_id} == "endeavouros" ]] && color="purple"
 wget -qO- https://git.io/papirus-icon-theme-install | sh

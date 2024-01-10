@@ -7,7 +7,7 @@ echo -e "\n[options]\nVerbosePkgLists\nParallelDownloads = 5\nDisableDownloadTim
 sudo pacman-mirrors --country Global
 
 # DEBLOAT
-bloat=(manjaro-{hello,pulse} pulseaudio zsh midori gufw timeshift lshw hexchat gthumb gufw imagewriter gcolor3 evince)
+bloat=(manjaro-{hello,pulse,xfce-minimal-settings} pulseaudio zsh midori gufw timeshift lshw hexchat gthumb gufw imagewriter gcolor3 evince)
 for pkgs in "${bloat[@]}"; do sudo pacman -Qq ${pkgs} && sudo pacman -Rnsc --noconfirm ${pkgs}; done
 
 # INSTALL: Manjaro XFCE 
@@ -17,7 +17,7 @@ sudo pacman -Syyu --needed --noconfirm ttf-fira{code-nerd,-sans} \
 
 # INSTALL: Development
 sudo pacman -S --needed --noconfirm base-devel \
-	npm meson parallel sassc gpick inkscape gtk3-demos
+	npm meson parallel sassc gpick inkscape gtk{3,4}-demos
 
 ################################### CONFIG ###################################
 
