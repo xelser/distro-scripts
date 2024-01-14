@@ -5,7 +5,10 @@
 # INSTALL: Endeavour Base
 reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
 	plymouth base-devel dconf-editor mugshot transmission-gtk geany gammastep htpdate darkman easyeffects lsp-plugins-lv2 ecasound gvfs
-	
+
+# INSTALL: Kernel (LTS)
+sudo pacman -S --needed --noconfirm linux-lts && sudo pacman -Rnsc --noconfirm linux
+
 # INSTALL: XFCE
 sudo pacman -S --needed --noconfirm lightdm{,-gtk-greeter-settings} light-locker \
 	xfce4{,-screenshooter,-pulseaudio-plugin} thunar-{archive-plugin,volman} \
