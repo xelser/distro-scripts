@@ -65,6 +65,7 @@ dconf write /org/mate/Atril/Default/show-toolbar 'false'
 dconf write /org/xfce/mousepad/preferences/view/auto-indent 'true'
 dconf write /org/xfce/mousepad/preferences/view/highlight-current-line 'true'
 dconf write /org/xfce/mousepad/preferences/view/match-braces 'true'
+dconf write /org/xfce/mousepad/preferences/view/tab-width '2'
 dconf write /org/xfce/mousepad/preferences/view/word-wrap 'true'
 dconf write /org/xfce/mousepad/preferences/window/statusbar-visible 'true'
 
