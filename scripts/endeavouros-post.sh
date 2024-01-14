@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# themes
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-gruvbox.sh)"
-
 # Set Fonts
 if [ -f /usr/bin/xfconf-query ]; then	
 	xfconf-query -cn xfwm4 -pn /general/title_font -t string -s "Fira Sans Bold 10"

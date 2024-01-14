@@ -16,10 +16,9 @@ sudo pacman -S --needed --noconfirm lightdm{,-gtk-greeter-settings} light-locker
 yay -S --needed --noconfirm zoom obs-studio syncthing-gtk teamviewer ventoy-bin inkscape resvg
 
 # INSTALL: Bluetooth
-if [[ $(sudo dmesg | grep -q 'Bluetooth') -eq 0 ]]; then
-	sudo pacman -S --needed --noconfirm bluez-utils blueman
-	sudo systemctl enable --now bluetooth
-fi
+sudo dmesg | grep -q 'Bluetooth' && \
+	pacman -S --needed --noconfirm blue{man,z-utils} && \
+	systemctl enable bluetooth
 
 # INSTALL: Laptop
 if [[ $(sudo dmidecode -s chassis-type) == "Notebook" ]]; then
@@ -44,9 +43,8 @@ sudo grub-mkconfig -o /boot/grub/grub.cfg
 # lightdm
 echo -e "\n[Seat:*]
 autologin-user=${user}
-autologin-session=xfce
-" | sudo tee -a /etc/lightdm/lightdm.conf
-sudo groupadd -r autologin && sudo gpasswd -a ${user} autologin
+autologin-session=xfce" | sudo tee -a /etc/lightdm/lightdm.conf
+sudo groupadd -r autologin ; sudo gpasswd -a ${user} autologin
 sudo systemctl enable lightdm
 
 # lightdm-gtk-greeter
