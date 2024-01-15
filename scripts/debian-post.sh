@@ -43,8 +43,6 @@ mkdir -p $HOME/Pictures/Screenshots
 
 # user systemd daemons
 systemctl enable --user mpd
-#systemctl enable --user darkman
-systemctl enable --user syncthing
 
 # debloat
 sudo nala purge --assume-yes zutty
