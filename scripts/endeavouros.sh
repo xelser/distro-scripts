@@ -7,7 +7,7 @@ reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuil
 	plymouth base-devel dconf-editor mugshot transmission-gtk geany gammastep htpdate darkman easyeffects lsp-plugins-lv2 ecasound gvfs
 
 # INSTALL: Kernel (LTS)
-sudo pacman -S --needed --noconfirm linux-lts && sudo pacman -Rnsc --noconfirm linux
+sudo pacman -S --needed --noconfirm linux-lts{,-headers} && sudo pacman -Rnsc --noconfirm linux{,-headers}
 
 # INSTALL: XFCE
 sudo pacman -S --needed --noconfirm lightdm{,-gtk-greeter-settings} light-locker \
