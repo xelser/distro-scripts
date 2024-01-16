@@ -16,7 +16,7 @@ sudo pacman -S --needed --noconfirm lightdm{,-gtk-greeter-settings} light-locker
 	xdg-desktop-portal-gtk network-manager-applet
 
 # INSTALL: Extra
-yay -S --needed --noconfirm zoom obs-studio syncthing-gtk teamviewer ventoy-bin inkscape resvg
+yay -S --needed --noconfirm zoom obs-studio syncthing-gtk teamviewer ventoy-bin
 
 # INSTALL: Bluetooth
 sudo dmesg | grep -q 'Bluetooth' && \
