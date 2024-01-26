@@ -42,8 +42,8 @@ sudo cp -rf catppuccin-backgrounds/backgrounds /usr/share/
 # gtk
 cd /tmp/ && git clone --recurse-submodules https://github.com/catppuccin/gtk.git
 cd /tmp/gtk/ && virtualenv -p python3 venv && source venv/bin/activate && pip install -r requirements.txt
-sudo python install.py latte -a lavender -s compact --tweaks rimless normal -d /usr/share/themes
-sudo python install.py mocha -a lavender -s compact --tweaks rimless normal -d /usr/share/themes
+sudo python install.py latte -a sky -s compact --tweaks rimless -d /usr/share/themes
+sudo python install.py mocha -a sky -s compact --tweaks rimless -d /usr/share/themes
 
 # papirus folders
 wget -qO- https://git.io/papirus-icon-theme-install | sh
