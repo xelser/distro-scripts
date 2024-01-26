@@ -106,8 +106,8 @@ if [ -f /usr/bin/dunst ]; then
 	cat /etc/dunst/dunstrc > $HOME/.config/dunst/dunstrc ; cat /tmp/dunst/src/mocha.conf >> $HOME/.config/dunst/dunstrc
 	sed -i 's/origin = top-right/origin = bottom-right/g' $HOME/.config/dunst/dunstrc
 	sed -i 's/offset = 10x50/offset = 20x20/g' $HOME/.config/dunst/dunstrc
-	sed -i 's/font = Monospace 8/font = FiraCode Nerd Font 10/g' $HOME/.config/dunst/dunstrc
 	sed -i 's/icon_theme = Adwaita/icon_theme = Papirus-Dark/g' $HOME/.config/dunst/dunstrc
+	sed -i 's/max_icon_size = 128/max_icon_size = 64/g' $HOME/.config/dunst/dunstrc
 fi
 
 #if [ -f /usr/bin/rofi ]; then
