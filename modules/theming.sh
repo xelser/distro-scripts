@@ -36,7 +36,7 @@ fi
 
 # Flatpak
 if [ ! -d $HOME/.local/share/themes/${gtk_theme} ] && [ ! -z ${theme_dir} ]; then
-	cp -rf ${theme_dir} $HOME/.local/share/themes/
+	mkdir -p $HOME/.local/share/themes/ && cp -rf ${theme_dir} $HOME/.local/share/themes/
 fi
 
 if [[ ! ${wm_de} == "gnome" ]]; then
@@ -52,7 +52,7 @@ if [[ ! ${wm_de} == "gnome" ]]; then
 fi
 
 if [ -f /usr/bin/kvantummanager ]; then
-	flatpak install --assumeyes --noninteractive flathub org.kde.KStyle.Kvantum/x86_64/5.15-22.08
+	flatpak install --assumeyes --noninteractive flathub org.kde.KStyle.Kvantum/x86_64/5.15-22.08 2> /dev/null 
 	flatpak override --user --filesystem=xdg-config/Kvantum:ro
 	flatpak override --user --env=QT_STYLE_OVERRIDE=kvantum-dark
 fi
