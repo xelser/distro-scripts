@@ -28,13 +28,11 @@ exec --no-startup-id dex --autostart --environment i3
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-#exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --socket "/tmp/xidlehook.sock" \
-	--timer "3600" "betterlockscreen --time-format '%I:%M %p' -l dim" ""
+# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
-#exec --no-startup-id nm-applet
+# exec --no-startup-id nm-applet
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
@@ -60,7 +58,9 @@ bindsym $mod+Return exec alacritty
 # kill focused window
 bindsym $mod+Shift+q kill
 
-# start program launcher
+# start dmenu (a program launcher)
+# bindsym $mod+d exec --no-startup-id dmenu_run
+# bindsym $mod+d exec --no-startup-id rofi -show drun
 bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-4/launcher.sh
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
@@ -198,23 +198,26 @@ default_border none
 gaps inner 10
 gaps top 42
 
-# Autostart (Global)
-exec_always --no-startup-id setrandom /usr/share/backgrounds/catppuccin/
-exec --no-startup-id easyeffects --gapplication-service
+# Autostart (Once)
 exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
-exec --no-startup-id sudo timedatectl set-ntp true
+exec --no-startup-id easyeffects --gapplication-service
+exec --no-startup-id xset s off -dpms
+#exec --no-startup-id xfsettingsd
+#exec --no-startup-id xsettingsd
 exec --no-startup-id pcmanfm -d
-exec --no-startup-id dunst
+exec --no-startup-id numlockx
+exec --no-startup-id dunst 
 
-# Autostart (for X11)
-exec_always --no-startup-id betterlockscreen -u "/usr/share/backgrounds/catppuccin" --fx dim 50
-exec_always --no-startup-id sh $HOME/.config/polybar/launch.sh
+# Autostart (Always)
+exec_always --no-startup-id setrandom /usr/share/backgrounds/catppuccin/
+exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id xset led on
-exec_always --no-startup-id numlockx on
-exec_always --no-startup-id picom
-
-# Autostart (for i3)
 exec_always --no-startup-id autotiling
+
+# Compositor (picom)
+exec --no-startup-id picom --daemon
+bindsym $mod+Shift+p exec killall picom
+bindsym $mod+p exec picom & disown 2>&1/dev/null
 
 # Screenshot (flameshot)
 exec --no-startup-id flameshot
@@ -225,7 +228,16 @@ bindsym Shift+Print exec flameshot gui --path /home/xelser/Pictures/Screenshots/
 exec --no-startup-id sh $HOME/.config/gammastep/launch.sh
 bindsym $mod+o exec sh $HOME/.config/gammastep/toggle.sh
 
-# Inhibit
-bindsym $mod+i exec caffeinate & disown && notify-send "Inhibit: caffeinate 󰅶 enable"
-bindsym $mod+shift+i exec killall caffeinate && notify-send "Inhibit: caffeinate 󰛊 disbled" || notify-send "caffeinate 󰾫 is not running"
+## Laptops ##
+#exec --no-startup-id xset s on +dpms
 
+# Screensaver (betterlockscreen)
+#exec_always --no-startup-id betterlockscreen -u "/usr/share/backgrounds/catppuccin" --fx dim 50
+
+# Power Management (xidlehook)
+#exec --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --socket "/tmp/xidlehook.sock" \
+#	--timer "3600" "betterlockscreen --time-format '%I:%M %p' -l dim" ""
+
+# Inhibit (caffeinate)
+#bindsym $mod+i exec caffeinate & disown && notify-send "Inhibit: caffeinate 󰅶 enable"
+#bindsym $mod+shift+i exec killall caffeinate && notify-send "Inhibit: caffeinate 󰛊 disbled" || notify-send "caffeinate 󰾫 is not running"
