@@ -202,20 +202,22 @@ default_border none
 gaps inner 10
 gaps top 42
 
-# Autostart (Once)
-exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
+# Autostart (Global)
+exec_always --no-startup-id setrandom /usr/share/backgrounds/catppuccin/
 exec --no-startup-id easyeffects --gapplication-service
+exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
+exec --no-startup-id pcmanfm -d
+exec --no-startup-id dunst
+
+# Autostart (for X11)
+exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id xset led on
 exec --no-startup-id xset s off -dpms
 #exec --no-startup-id xfsettingsd
 #exec --no-startup-id xsettingsd
-exec --no-startup-id pcmanfm -d
 exec --no-startup-id numlockx
-exec --no-startup-id dunst 
 
-# Autostart (Always)
-exec_always --no-startup-id setrandom /usr/share/backgrounds/catppuccin/
-exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
-exec_always --no-startup-id xset led on
+# Autostart (for i3)
 exec_always --no-startup-id autotiling
 
 # Compositor (picom)
