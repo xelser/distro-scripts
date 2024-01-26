@@ -51,4 +51,3 @@ sed -i 's/JetBrains Mono/Fira Code/g' $HOME/.config/rofi/powermenu/type-1/shared
 
 # betterlockscreen
 [ -f /usr/bin/betterlockscreen ] && betterlockscreen --update "/usr/share/backgrounds/catppuccin" --fx dim 50
-
