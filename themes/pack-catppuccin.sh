@@ -74,7 +74,7 @@ fi
 
 if [ -f /usr/bin/alacritty ]; then
 	cd /tmp/ && git clone https://github.com/catppuccin/alacritty && mkdir -p $HOME/.config/alacritty/catppuccin
-	cp -rf /tmp/alacritty/*.yml $HOME/.config/alacritty/catppuccin/
+	cp -rf /tmp/alacritty/*.toml $HOME/.config/alacritty/catppuccin/
 fi
 
 if [ -f /usr/bin/foot ]; then
