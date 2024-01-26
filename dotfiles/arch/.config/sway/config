@@ -232,7 +232,6 @@ gaps inner 10
 exec_always --no-startup-id setrandom /usr/share/backgrounds/catppuccin/
 exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
-exec --no-startup-id sudo timedatectl set-ntp true
 exec --no-startup-id pcmanfm -d
 exec --no-startup-id dunst
 
