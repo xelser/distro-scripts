@@ -101,6 +101,16 @@
             "wmClass": "firefox",
             "wmTitle": "Messenger call — Mozilla Firefox",
             "mode": "float"
+        },
+        {
+            "wmClass": "Google-chrome",
+            "wmTitle": "Messenger call - Google Chrome",
+            "mode": "float"
+        },
+        {
+            "wmClass": "Caprine",
+            "wmTitle": "Messenger call",
+            "mode": "float"
         }
     ]
 }
