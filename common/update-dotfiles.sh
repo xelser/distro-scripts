@@ -29,15 +29,6 @@ save_file /.config/ mimeapps.list
 save_file / .gtk-bookmarks
 save_file /.config/gtk-3.0/ bookmarks
 
-# Vim
-save_file / .vimrc
-
-# NeoVim
-save_file /.config/nvim/ init.vim
-
-# Ranger 
-save_file /.config/ranger/ rc.conf
-
 # Libfm
 save_file /.config/libfm/ libfm.conf
 
@@ -183,6 +174,15 @@ save_folder /.config/picom/
 
 # Nitrogen
 save_folder /.config/nitrogen/
+
+# Vim
+save_file / .vimrc
+
+# NeoVim
+save_file /.config/nvim/ init.vim
+
+# Ranger 
+save_file /.config/ranger/ rc.conf
 
 # Ulauncher
 save_file /.config/ulauncher/ settings.json
