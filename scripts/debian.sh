@@ -25,10 +25,6 @@ nala install --assume-yes i3-wm picom polybar nitrogen rofi dunst libnotify-bin 
 wget -q https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -P /tmp
 sudo nala install --assume-yes /tmp/teamviewer_amd64.deb
 
-# INSTALL: Fira Sans (Google fonts)
-#wget -q http://bootes.ethz.ch/fonts/deb/fonts-firasans_1.0_all.deb -P /tmp
-#sudo nala install --assume-yes /tmp/fonts-firasans_1.0_all.deb
-
 # BUILD: autotiling
 nala install --assume-yes python3-i3ipc && wget -q -O /usr/bin/autotiling \
   https://raw.githubusercontent.com/nwg-piotr/autotiling/master/autotiling/main.py
