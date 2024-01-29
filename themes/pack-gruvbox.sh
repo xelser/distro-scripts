@@ -1,12 +1,12 @@
 #!/bin/bash
 
 # backgrounds
-cd /tmp/ && git clone https://github.com/xelser/gruvbox-backgrounds
+cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-backgrounds
 sudo cp -rf gruvbox-backgrounds/backgrounds /usr/share/
 
 # gtk
-cd /tmp/ && git clone https://github.com/TheGreatMcPain/gruvbox-material-gtk.git
-sudo cp -rf gruvbox-material-gtk/themes /usr/share/
+#cd /tmp/ && git clone --depth 1 https://github.com/TheGreatMcPain/gruvbox-material-gtk.git
+#sudo cp -rf gruvbox-material-gtk/themes /usr/share/
 
 # cursors
 cd /tmp/ && wget -cO- https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2 | sudo tar xfj - -C /usr/share/icons
@@ -17,7 +17,7 @@ cd /tmp/ && wget -cO- https://github.com/phisch/phinger-cursors/releases/latest/
 [[ ${distro_id} == "fedora" ]]    && color="blue"
 [[ ${distro_id} == "linuxmint" ]] && color="green"
 wget -qO- https://git.io/papirus-icon-theme-install | sh
-cd /tmp/ && git clone https://github.com/xelser/gruvbox-papirus-folders
+cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-papirus-folders
 cd gruvbox-papirus-folders && sudo cp -rf src/* /usr/share/icons/Papirus
 papirus_folders=(Papirus Papirus-Dark Papirus-Light ePapirus ePapirus-Dark)
 for icon_theme in "${papirus_folders[@]}"; do 
@@ -26,7 +26,7 @@ done
 
 # gtksourceview
 mkdir -p $HOME/.local/share/gtksourceview-{3.0,4}/styles
-cd /tmp/ && git clone https://github.com/xelser/gruvbox-gtksourceview
+cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-gtksourceview
 cp -rf /tmp/gruvbox-gtksourceview/*.xml $HOME/.local/share/gtksourceview-3.0/styles/
 ln -sf $HOME/.local/share/gtksourceview-3.0/styles/gruvbox*.xml $HOME/.local/share/gtksourceview-4/styles/
 
@@ -36,17 +36,17 @@ if [ -f /usr/bin/alacritty ]; then
 fi
 
 if [ -f /usr/bin/xfce4-terminal ]; then
-	cd /tmp/ && git clone https://github.com/xelser/gruvbox-xfce4-terminal && mkdir -p $HOME/.local/share/xfce4/terminal/colorschemes
+	cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-xfce4-terminal && mkdir -p $HOME/.local/share/xfce4/terminal/colorschemes
 	cp -rf /tmp/gruvbox-xfce4-terminal/*.theme $HOME/.local/share/xfce4/terminal/colorschemes/
 fi
 
 if [ -f /usr/bin/polybar ]; then
-	cd /tmp/ && git clone https://github.com/xelser/gruvbox-polybar && mkdir -p $HOME/.config/polybar/themes/
+	cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-polybar && mkdir -p $HOME/.config/polybar/themes/
 	cp -rf /tmp/gruvbox-polybar/*.ini $HOME/.config/polybar/themes/
 fi
 
 if [ -f /usr/bin/dunst ] && [ ! -f $HOME/.config/dunst/dunstrc ]; then
-	cd /tmp/ && git clone https://github.com/xelser/gruvbox-dunst
+	cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-dunst
 	mkdir -p $HOME/.config/dunst ; cat /etc/xdg/dunst/dunstrc > $HOME/.config/dunst/dunstrc
 	cat /tmp/gruvbox-dunst/gruvbox-material-hard-dark.conf >> $HOME/.config/dunst/dunstrc
 	sed -i 's/origin = top-right/origin = bottom-right/g' $HOME/.config/dunst/dunstrc
@@ -56,17 +56,17 @@ if [ -f /usr/bin/dunst ] && [ ! -f $HOME/.config/dunst/dunstrc ]; then
 fi
 
 if [ -f /usr/bin/kvantummanager ]; then
-	cd /tmp/ && git clone https://github.com/sachnr/gruvbox-kvantum-themes.git
+	cd /tmp/ && git clone --depth 1 https://github.com/sachnr/gruvbox-kvantum-themes.git
 	sudo cp -rf gruvbox-kvantum-themes/Gruvbox* /usr/share/Kvantum/
 fi
 
 if [ -f /usr/bin/openbox ]; then
-	cd /tmp/ && git clone https://github.com/nathanielevan/gruvbox-material-openbox
+	cd /tmp/ && git clone --depth 1 https://github.com/nathanielevan/gruvbox-material-openbox
 	sudo cp -rf gruvbox-material-openbox/gruvbox-material-* /usr/share/themes/
 fi
 
 if [ -f /usr/bin/geany ]; then
-	cd /tmp/ && git clone https://github.com/kdnfgc/gruvbox-material-geany.git
+	cd /tmp/ && git clone --depth 1 https://github.com/kdnfgc/gruvbox-material-geany.git
 	sudo cp -rf gruvbox-material-geany/gruvbox-material-dark.conf /usr/share/geany/colorschemes/
 fi
 
