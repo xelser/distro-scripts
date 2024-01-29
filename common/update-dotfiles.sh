@@ -143,6 +143,7 @@ fi
 ################################ WINDOW MANAGERS ###############################
 
 # Alacritty
+save_file /.config/alacritty/ alacritty.yml
 save_file /.config/alacritty/ alacritty.toml
 
 # Foot 
