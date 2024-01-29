@@ -107,7 +107,7 @@ sudo dmesg | grep -q "EFI v" && [[ ${machine} == "E5-476G" ]] && \
 [ -f /usr/bin/syncthing ] && systemctl --user enable syncthing
 
 # Hide Apps
-name=(calf org.gnome.dspy org.gnome.Devhelp org.gnome.Sysprof lstopo mpv htop avahi-discover bssh bvnc
+name=(calf org.gnome.dspy org.gnome.Devhelp org.gnome.Sysprof lstopo htop avahi-discover bssh bvnc
 	stoken-gui stoken-gui-small qv4l2 qvidcap pcmanfm-desktop-pref syncthing-ui syncthing-start)
 
 for app in "${name[@]}"; do
