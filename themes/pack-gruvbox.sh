@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # backgrounds
-cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-backgrounds
-sudo cp -rf gruvbox-backgrounds/backgrounds /usr/share/
+#cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-backgrounds
+#sudo cp -rf gruvbox-backgrounds/backgrounds /usr/share/
 
 # gtk
 #cd /tmp/ && git clone --depth 1 https://github.com/TheGreatMcPain/gruvbox-material-gtk.git
