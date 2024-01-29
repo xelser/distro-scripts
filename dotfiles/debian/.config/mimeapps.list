@@ -2,7 +2,7 @@
 application/x-shellscript=org.gnome.gedit.desktop;org.xfce.mousepad.desktop;geany.desktop;
 text/plain=org.gnome.gedit.desktop;org.xfce.mousepad.desktop;geany.desktop;
 application/x-desktop=org.xfce.mousepad.desktop;
-image/jpeg=org.xfce.ristretto.desktop;
+image/jpeg=org.xfce.ristretto.desktop;imv-folder.desktop;
 x-scheme-handler/http=xfce4-web-browser.desktop;firefox-esr.desktop;
 x-scheme-handler/https=xfce4-web-browser.desktop;firefox-esr.desktop;
 inode/directory=xfce4-file-manager.desktop;
@@ -26,7 +26,7 @@ application/vnd.debian.binary-package=org.gnome.gedit.desktop;
 application/json=org.gnome.gedit.desktop;
 
 [Default Applications]
-image/jpeg=org.xfce.ristretto.desktop
+image/jpeg=imv-folder.desktop
 x-scheme-handler/http=firefox-esr.desktop
 x-scheme-handler/https=firefox-esr.desktop
 inode/directory=xfce4-file-manager.desktop
