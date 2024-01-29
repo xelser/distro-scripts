@@ -6,7 +6,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 # fonts
 dconf write /org/gnome/desktop/interface/font-name "'Ubuntu 10'"
 dconf write /org/gnome/desktop/interface/monospace-font-name "'Ubuntu Mono 12'"
-sed -i 's/font = Monospace 8/font = Ubuntu Mono 11/g' $HOME/.config/dunst/dunstrc
+sed -i 's/font = Monospace 8/font = Ubuntu Mono 12/g' $HOME/.config/dunst/dunstrc
 
 # vim/neovim plug (text editors)
 [ -f /usr/bin/vim ] && curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
@@ -26,11 +26,11 @@ cd /tmp/ && git clone --depth 1 https://github.com/xelser/rofi.git && cd rofi &&
 
 sed -i 's/style-1/style-3/g' $HOME/.config/rofi/launchers/type-4/launcher.sh
 sed -i 's/onedark/gruvbox-material-hard-dark/g' $HOME/.config/rofi/launchers/type-4/shared/colors.rasi
-sed -i 's/Iosevka Nerd Font 10/Ubuntu Mono 11/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.rasi
+sed -i 's/Iosevka Nerd Font 10/Ubuntu Mono 12/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.rasi
 
 sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
 sed -i 's/onedark/gruvbox-material-hard-dark/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
-sed -i 's/JetBrains Mono Nerd Font 10/Ubuntu Mono 11/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
+sed -i 's/JetBrains Mono Nerd Font 10/Ubuntu Mono 12/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
 
 # flameshot directory
 mkdir -p $HOME/Pictures/Screenshots
