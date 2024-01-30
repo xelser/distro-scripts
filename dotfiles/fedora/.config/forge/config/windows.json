@@ -111,6 +111,11 @@
             "wmClass": "Caprine",
             "wmTitle": "Messenger call",
             "mode": "float"
+        },
+        {
+            "wmClass": "org.mozilla.firefox",
+            "wmTitle": "Messenger call — Mozilla Firefox",
+            "mode": "float"
         }
     ]
 }
