@@ -17,9 +17,8 @@ color=always
 
 # DEBLOAT
 sudo dnf groupremove --assumeyes "Guest Desktop Agents" "Container Management" "LibreOffice"
-sudo dnf autoremove --assumeyes rhythmbox cheese mediawriter fedora-bookmarks libreoffice-\* \
-  gnome-{contacts,characters,connections,font-viewer,photos,tour,clocks,weather,maps} totem \
-  firefox gnome-shell-extension-\*
+sudo dnf autoremove --assumeyes rhythmbox cheese mediawriter fedora-bookmarks libreoffice-\* totem \
+  gnome-{contacts,characters,connections,font-viewer,photos,tour,clocks,weather,maps} gnome-shell-extension-\*
 
 # REPO: Google Chrome | RPMFUSION
 #sudo dnf config-manager --set-enabled --assumeyes google-chrome
