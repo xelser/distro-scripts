@@ -7,8 +7,8 @@ echo -e "\n[options]\nVerbosePkgLists\nParallelDownloads = 5\nDisableDownloadTim
 sudo pacman-mirrors --country Global
 
 # DEBLOAT
-pamac remove --no-confirm manjaro-{hello,pulse} pulseaudio zsh midori \
-	gufw timeshift lshw hexchat gthumb gufw imagewriter gcolor3 evince
+pamac remove --no-confirm manjaro-hello zsh midori gufw timeshift lshw \
+	hexchat gthumb gufw imagewriter gcolor3 evince
 
 # INSTALL: Manjaro XFCE 
 pamac install --no-confirm ttf-fira{code-nerd,-sans} \
