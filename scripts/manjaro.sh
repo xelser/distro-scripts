@@ -15,14 +15,14 @@ sudo pacman -Syyu --needed --noconfirm ttf-fira{code-nerd,-sans} \
 	firefox geany transmission-gtk redshift dconf-editor darkman \
 	manjaro-pipewire wireplumber ecasound easyeffects 
 
-# INSTALL: Development
-sudo pacman -S --needed --noconfirm base-devel \
-	npm meson parallel sassc gpick inkscape gtk{3,4}-demos
+# INSTALL: Others
+sudo pacman -S --needed --noconfirm obs-studio ventoy \
+	base-devel npm meson parallel sassc gpick inkscape gtk{3,4}-demos
 
 ################################### CONFIG ###################################
 
 # gtk3 widget factory
-cp /usr/share/applications/gtk3-widget-factory.desktop .local/share/applications/
+cp /usr/share/applications/gtk3-widget-factory.desktop $HOME/.local/share/applications/
 sed -i 's/NoDisplay=true//g' $HOME/.local/share/applications/gtk3-widget-factory.desktop
 
 # root label
@@ -33,11 +33,3 @@ sudo e2label /dev/${partition} "Manjaro"
 sudo sed -i 's/quiet/quiet splash/g' /etc/default/grub
 sudo sed -i 's/splash splash/splash/g' /etc/default/grub
 sudo grub-mkconfig -o /boot/grub/grub.cfg
-
-################################### THEMES ###################################
-
-# INSTALL: GTK, KDE, Icon, Cursors
-if [ ! -f /.flag ]; then
-	${source_dir}/themes/pack-edge.sh
-	${source_dir}/themes/cursor-qogir.sh
-fi
