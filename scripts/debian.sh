@@ -39,7 +39,7 @@ chmod +x /usr/bin/autotiling
 usermod -aG sudo ${user}
 
 # grub
-sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
+sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/g' /etc/default/grub
 sed -i 's/quiet/quiet splash/g' /etc/default/grub
 sed -i 's/splash splash/splash/g' /etc/default/grub
 update-grub
