@@ -7,17 +7,20 @@ echo -e "\n[options]\nVerbosePkgLists\nParallelDownloads = 5\nDisableDownloadTim
 sudo pacman-mirrors --country Global
 
 # DEBLOAT
-bloat=(manjaro-{hello,pulse,xfce-minimal-settings} pulseaudio zsh midori gufw timeshift lshw hexchat gthumb gufw imagewriter gcolor3 evince)
-for pkgs in "${bloat[@]}"; do sudo pacman -Qq ${pkgs} && sudo pacman -Rnsc --noconfirm ${pkgs}; done
+pamac remove --no-confirm manjaro-{hello,pulse} pulseaudio zsh midori \
+	gufw timeshift lshw hexchat gthumb gufw imagewriter gcolor3 evince
 
 # INSTALL: Manjaro XFCE 
-sudo pacman -Syyu --needed --noconfirm ttf-fira{code-nerd,-sans} \
+pamac install --no-confirm ttf-fira{code-nerd,-sans} \
 	firefox geany transmission-gtk redshift dconf-editor darkman \
 	manjaro-pipewire wireplumber ecasound easyeffects 
 
 # INSTALL: Others
-sudo pacman -S --needed --noconfirm obs-studio ventoy \
+pamac install --no-confirm obs-studio ventoy \
 	base-devel npm meson parallel sassc gpick inkscape gtk{3,4}-demos
+
+# BUILD: AUR
+pamac build --no-confirm teamviewer zoom
 
 ################################### CONFIG ###################################
 
