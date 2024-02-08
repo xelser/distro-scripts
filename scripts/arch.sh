@@ -145,10 +145,10 @@ echo "arch" > /etc/hostname
 # Base Minimal Packages
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
-pacman -Sy --needed --noconfirm linux linux-firmware grub os-prober btrfs-progs efibootmgr dosfstools {intel,amd}-ucode \
-	base-devel dmidecode inetutils reflector xdg-user-dirs neofetch htop git networkmanager plymouth ttf-fira{-sans,code-nerd} \
-  pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound \
-	gvfs nm-connection-editor firefox qbittorrent neovim{,-plugins} xclip wl-clipboard ranger
+pacman -Sy --needed --noconfirm linux linux-firmware grub os-prober btrfs-progs efibootmgr dosfstools {intel,amd}-ucode base-devel \
+	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound neovim{,-plugins} xclip wl-clipboard \
+	plymouth dmidecode inetutils reflector xdg-user-dirs neofetch htop git networkmanager nm-connection-editor gvfs ranger \
+	firefox qbittorrent ttf-fira{-sans,code-nerd}
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
@@ -173,6 +173,19 @@ dmesg | grep -q 'Bluetooth' && \
 useradd -mG wheel,video ${user}
 echo -e "root:${psswrd}\n${user}:${psswrd}" | chpasswd
 echo -e "${user} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/${user}
+
+EOF
+}
+
+arch_hyprland_install () {
+arch-chroot /mnt /bin/bash << EOF
+# packages
+pacman -S --needed --noconfirm hyprland xdg-desktop-portal-hyprland polkit-kde-agent sddm \
+  kitty gammastep brightnessctl imv mpv wallutils swaybg feh flameshot grim dunst libnotify
+
+# sddm
+echo -e "[Autologin]\nUser=${user}" >> /etc/sddm.conf
+systemctl enable sddm
 
 EOF
 }
@@ -211,7 +224,7 @@ read -p "Proceed? (Y/n): " confirm
 case $confirm in
    n)	;;
  *|Y) partitioning && arch_base_install
-	 		arch_i3_sway_install
+	 		arch_hyprland_install
 			;;
 esac
 
