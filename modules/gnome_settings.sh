@@ -47,6 +47,7 @@ gsettings set org.gnome.builder.editor highlight-current-line 'true'
 gsettings set org.gnome.builder.editor highlight-matching-brackets 'true'
 gsettings set org.gnome.builder.editor style-scheme-name 'builder-dark'
 gsettings set org.gnome.builder.editor wrap-text 'always'
+gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/sh/ tab-width '2'
 gsettings set org.gnome.builder.spelling check-spelling "false"
 gsettings set org.gnome.builder.terminal font-name 'Roboto Mono 10'
 gsettings set io.github.celluloid-player.Celluloid dark-theme-enable 'false'

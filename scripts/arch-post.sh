@@ -9,12 +9,12 @@ fi
 
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-  mugshot {zscroll,polybar-scripts}-git neovim-{plug,symlinks} xfce-polkit autotiling betterlockscreen xidlehook #ulauncher
+  mugshot neovim-{plug,symlinks} ulauncher # {zscroll,polybar-scripts}-git
 
 # INSTALL: Extra
 yay -S --needed --noconfirm dconf-editor meld gnome-boxes syncthing-gtk {chatterino2-dankerino,ventoy}-bin \
   zoom obs-studio teamviewer
-
+d
 # BUILD: caffeinate
 #sudo pacman -S --needed --noconfirm rustup && rustup default stable
 #cargo install --git https://github.com/rschmukler/caffeinate
@@ -39,7 +39,7 @@ mkdir -p $HOME/Pictures/Screenshots
 ################################### THEMES ###################################
 
 # catppuccin
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-catppuccin.sh)"
+#bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-catppuccin.sh)"
 
 # set fonts
 dconf write /org/gnome/desktop/interface/font-name "'Fira Sans 10'"
@@ -47,15 +47,15 @@ dconf write /org/gnome/desktop/interface/monospace-font-name "'FiraCode Nerd Fon
 sed -i 's/font = Monospace 8/font = FiraCode Nerd Font 10/g' $HOME/.config/dunst/dunstrc
 
 # rofi (launcher and powermenu)
-cd /tmp/ && git clone --depth=1 https://github.com/xelser/rofi.git && cd rofi && chmod +x setup.sh && ./setup.sh && cd
+#cd /tmp/ && git clone --depth=1 https://github.com/xelser/rofi.git && cd rofi && chmod +x setup.sh && ./setup.sh && cd
 
-sed -i 's/style-1/style-3/g' $HOME/.config/rofi/launchers/type-4/launcher.sh
-sed -i 's/onedark/catppuccin-mocha/g' $HOME/.config/rofi/launchers/type-4/shared/colors.rasi
-sed -i 's/Iosevka/FiraCode/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.rasi
+#sed -i 's/style-1/style-3/g' $HOME/.config/rofi/launchers/type-4/launcher.sh
+#sed -i 's/onedark/catppuccin-mocha/g' $HOME/.config/rofi/launchers/type-4/shared/colors.rasi
+#sed -i 's/Iosevka/FiraCode/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.rasi
 
-sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
-sed -i 's/onedark/catppuccin-mocha/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
-sed -i 's/JetBrains Mono/FiraCode/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
+#sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
+#sed -i 's/onedark/catppuccin-mocha/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
+#sed -i 's/JetBrains Mono/FiraCode/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
 
 # betterlockscreen
 #[ -f /usr/bin/betterlockscreen ] && betterlockscreen --update "/usr/share/backgrounds/catppuccin" --fx dim 50
