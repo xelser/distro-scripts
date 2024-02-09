@@ -2,28 +2,26 @@
 
 ################################## PACKAGES ##################################
 
-# Debian Repos
-sed -i 's/non-free-firmware/non-free-firmware non-free contrib/g' /etc/apt/sources.list
-sed -i 's/non-free non-free/non-free/g' /etc/apt/sources.list
-sed -i 's/contrib contrib/contrib/g' /etc/apt/sources.list
-
-# PACKAGE MANAGER: Nala
-dpkg --add-architecture i386
+# PACKAGE MANAGER: Nala and Debian Repos
+sed -i 's/non-free-firmware/non-free-firmware non-free contrib/g' \
+  /etc/apt/sources.list && dpkg --add-architecture i386
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base (X11 and Pulseaudio)
-nala install --assume-yes htpdate plymouth build-essential synaptic fonts-ubuntu{,-console} \
-  dconf-{editor,cli} libglib2.0-bin mugshot at-spi2-core redshift numlockx \
-  firefox-esr {transmission,syncthing}-gtk lightdm{,-settings} pulseeffects 
-  
+nala install --assume-yes lightdm{,-settings} fonts-ubuntu{,-console} \
+  dconf-{editor,cli} libglib2.0-bin redshift numlockx gvfs htpdate plymouth \
+  firefox-esr {transmission,syncthing}-gtk pulseeffects build-essential 
+  # mugshot at-spi2-core
+
 # INSTALL: Debian i3
-nala install --assume-yes i3-wm picom polybar nitrogen rofi dunst libnotify-bin \
-  gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} xarchiver \
-  policykit-1-gnome lxappearance gedit flameshot alacritty neovim mpv mpd imv
+nala install --assume-yes i3-wm picom polybar alacritty neovim mpv mpd imv \
+  policykit-1-gnome lxappearance gedit nitrogen rofi dunst libnotify-bin \
+  pcmanfm xarchiver flameshot  
+  # gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} 
 
 # INSTALL: TeamViewer (deb)
 wget -q https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -P /tmp
-sudo nala install --assume-yes /tmp/teamviewer_amd64.deb
+nala install --assume-yes /tmp/teamviewer_amd64.deb
 
 # BUILD: autotiling
 nala install --assume-yes python3-i3ipc && wget -q -O /usr/bin/autotiling \
@@ -39,9 +37,8 @@ chmod +x /usr/bin/autotiling
 usermod -aG sudo ${user}
 
 # grub
-sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/g' /etc/default/grub
 sed -i 's/quiet/quiet splash/g' /etc/default/grub
-sed -i 's/splash splash/splash/g' /etc/default/grub
+sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/g' /etc/default/grub
 update-grub
 
 # lightdm
