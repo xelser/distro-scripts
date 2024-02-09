@@ -8,10 +8,10 @@ sed -i 's/non-free-firmware/non-free-firmware non-free contrib/g' \
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base (X11 and Pulseaudio)
-nala install --assume-yes lightdm{,-settings} fonts-ubuntu{,-console} \
-  dconf-{editor,cli} libglib2.0-bin redshift numlockx gvfs htpdate plymouth \
-  firefox-esr {transmission,syncthing}-gtk pulseeffects build-essential 
-  # mugshot at-spi2-core
+nala install --assume-yes plymouth lightdm slick-greeter build-essential \
+  dconf-{editor,cli} libglib2.0-bin redshift numlockx pulseeffects \
+  firefox-esr {transmission,syncthing}-gtk htpdate \
+  fonts-ubuntu{,-console} # mugshot at-spi2-core
 
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar alacritty neovim mpv mpd imv \
@@ -38,17 +38,24 @@ usermod -aG sudo ${user}
 
 # grub
 sed -i 's/quiet/quiet splash/g' /etc/default/grub
-sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/g' /etc/default/grub
+sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
 update-grub
 
 # lightdm
 echo -e "\n[Seat:*]
-greeter-setup-script=/usr/bin/numlockx on
-greeter-hide-users=false
 autologin-user=${user}
 autologin-session=i3
 " >> /etc/lightdm/lightdm.conf
 systemctl enable lightdm
+
+# slick greeter
+echo "[Greeter]
+theme-name=Adwaita-dark
+icon-theme-name=Papirus-Dark
+cursor-theme-name=phinger-cursors
+activate-numlock=true
+clock-format=%I:%M %p
+" > /etc/lightdm/slick-greeter.conf
 
 # htpdate
 systemctl enable htpdate
