@@ -37,15 +37,15 @@ fi
 
 # Essential Packages
 if [ -f /usr/bin/nala ]; then sudo nala install --assume-yes \
-	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
+	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs \
 	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf ntfs-3g wget curl git openssh-client \
 	intel-media-va-driver i965-va-driver
 elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
-	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
+	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs \
 	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines ntfs-3g wget curl git openssh \
 	libva-intel-driver intel-media-driver
 elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes --best --allowerasing \
-	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler sassc \
+	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs \
 	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines ntfs-3g wget curl git openssh \
 	libva-intel-driver intel-media-driver
 fi
