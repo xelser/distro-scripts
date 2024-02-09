@@ -6,7 +6,7 @@
 read -p "Password: " -s psswrd
 
 ## PARTITIONING ##
-if   [[ ${machine} == "G41T-R3" ]]; then
+if [[ ${machine} == "G41T-R3" ]]; then
 	device="sda"
   root="1"
   swap="6"
@@ -92,7 +92,7 @@ format_swap () {
 
 partitioning () {
 umount -R /mnt >&/dev/null ; swapoff -a
-if   [[ ${machine} == "G41T-R3" ]]; then
+if [[ ${machine} == "G41T-R3" ]]; then
 	ext4_setup && swapon /dev/${device}${swap}
 elif [[ ${machine} == "E5-476G" ]]; then
   ext4_setup && swapon /dev/${device}${swap} ; dmesg | grep -q "EFI v" && format_efi
@@ -146,7 +146,7 @@ echo "arch" > /etc/hostname
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 pacman -Sy --needed --noconfirm linux linux-firmware grub os-prober btrfs-progs efibootmgr dosfstools {intel,amd}-ucode base-devel \
-	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound neovim{,-plugins} xclip wl-clipboard \
+	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound neovim{,-plugins} wl-clipboard \
 	plymouth dmidecode inetutils reflector xdg-user-dirs neofetch htop git networkmanager nm-connection-editor gvfs ranger \
 	firefox qbittorrent ttf-fira{-sans,code-nerd}
 
@@ -181,7 +181,7 @@ arch_hyprland_install () {
 arch-chroot /mnt /bin/bash << EOF
 # packages
 pacman -S --needed --noconfirm hyprland xdg-desktop-portal-hyprland polkit-kde-agent sddm \
-  kitty gammastep brightnessctl imv mpv wallutils swaybg feh flameshot grim dunst libnotify
+  kitty gammastep brightnessctl imv mpv wallutils swaybg flameshot grim dunst libnotify
 
 # sddm
 echo -e "[Autologin]\nUser=${user}" >> /etc/sddm.conf
@@ -193,7 +193,7 @@ EOF
 arch_i3_sway_install () {
 arch-chroot /mnt /bin/bash << EOF
 # packages
-pacman -S --needed --noconfirm sddm brightnessctl numlockx \
+pacman -S --needed --noconfirm sddm brightnessctl numlockx xclip \
   alacritty imv mpv gammastep rofi dunst libnotify wallutils swaybg feh \
   flameshot xdg-desktop-portal-wlr grim qt5ct kvantum lxappearance-gtk3 \
   xarchiver pcmanfm atril picom i3-wm polybar sway waybar
