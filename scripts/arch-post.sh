@@ -12,9 +12,9 @@ yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload
   mugshot neovim-{plug,symlinks} ulauncher # {zscroll,polybar-scripts}-git
 
 # INSTALL: Extra
-yay -S --needed --noconfirm dconf-editor meld gnome-boxes syncthing-gtk {chatterino2-dankerino,ventoy}-bin \
-  zoom obs-studio teamviewer
-d
+yay -S --needed --noconfirm dconf-editor meld gnome-boxes {chatterino2-dankerino,ventoy}-bin obs-studio
+ # syncthing-gtk teamviewer zoom
+
 # BUILD: caffeinate
 #sudo pacman -S --needed --noconfirm rustup && rustup default stable
 #cargo install --git https://github.com/rschmukler/caffeinate
@@ -30,10 +30,8 @@ mkdir -p $HOME/Pictures/Screenshots
 #		https://raw.githubusercontent.com/xelser/distro-scripts/main/common/30-touchpad.conf
 #fi
 
-# ulauncher
+# daemons
 [ -f /usr/bin/ulauncher ] && systemctl enable --user ulauncher
-
-# syncthing
 [ -f /usr/bin/syncthing ] && systemctl enable --user syncthing
 
 ################################### THEMES ###################################
