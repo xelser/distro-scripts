@@ -46,6 +46,7 @@ update-grub
 echo -e "\n[Seat:*]
 autologin-user=${user}
 autologin-session=i3
+greeter-hide-users=false
 " >> /etc/lightdm/lightdm.conf
 systemctl enable lightdm
 
