@@ -13,10 +13,9 @@ nala install --assume-yes plymouth lightdm slick-greeter build-essential \
   firefox-esr {transmission,syncthing}-gtk htpdate \
   fonts-ubuntu{,-console} # mugshot at-spi2-core
 
-
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar alacritty neovim mpv mpd imv \
-  policykit-1-gnome lxappearance gedit nitrogen rofi dunst libnotify-bin \
+  mate-polkit lxappearance gedit nitrogen rofi dunst libnotify-bin \
   pcmanfm xarchiver flameshot  
   # gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} 
 
