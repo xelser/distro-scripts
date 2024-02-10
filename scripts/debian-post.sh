@@ -40,3 +40,6 @@ systemctl enable --user mpd
 
 # debloat
 sudo nala purge --assume-yes zutty
+
+# numlock
+#dconf write /org/gnome/desktop/peripherals/keyboard/numlock-state "true"
