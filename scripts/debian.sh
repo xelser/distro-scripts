@@ -10,7 +10,7 @@ apt update && apt install nala --yes
 # INSTALL: Debian Base (X11 and Pulseaudio)
 nala install --assume-yes plymouth lightdm slick-greeter build-essential \
   dconf-{editor,cli} libglib2.0-bin redshift numlockx pulseeffects \
-  firefox-esr transmission-{gtk,daemon} syncthing-gtk htpdate \
+  firefox-esr {transmission,syncthing}-gtk htpdate \
   fonts-ubuntu{,-console} # mugshot at-spi2-core
 
 
