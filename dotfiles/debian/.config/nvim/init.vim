@@ -7,7 +7,9 @@ Plug 'sainnhe/gruvbox-material'
 Plug 'vim-airline/vim-airline'
 
 " Settings
+Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
 Plug 'sheerun/vim-polyglot'
 
 call plug#end()
