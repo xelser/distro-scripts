@@ -190,13 +190,26 @@ systemctl enable sddm
 EOF
 }
 
-arch_i3_sway_install () {
+arch_sway_install () {
 arch-chroot /mnt /bin/bash << EOF
 # packages
-pacman -S --needed --noconfirm sddm brightnessctl numlockx xclip \
-  alacritty imv mpv gammastep rofi dunst libnotify wallutils swaybg feh \
-  flameshot xdg-desktop-portal-wlr grim qt5ct kvantum lxappearance-gtk3 \
-  xarchiver pcmanfm atril picom i3-wm polybar sway waybar
+pacman -S --needed --noconfirm sddm brightnessctl xdg-desktop-portal-gtk \
+	sway foot mako waybar imv mpv gammastep wallutils swaybg \
+	flameshot xdg-desktop-portal-wlr grim 
+
+# sddm
+echo -e "[Autologin]\nUser=${user}\nSession=sway" >> /etc/sddm.conf
+systemctl enable sddm
+
+EOF
+}
+
+arch_i3_install () {
+arch-chroot /mnt /bin/bash << EOF
+# packages
+pacman -S --needed --noconfirm sddm brightnessctl numlockx xclip lxappearance-gtk3 \
+  i3-wm picom polybar alacritty imv mpv gammastep rofi dunst libnotify wallutils feh \
+  flameshot qt5ct kvantum xarchiver pcmanfm atril  
 
 # sddm
 echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
@@ -224,7 +237,7 @@ read -p "Proceed? (Y/n): " confirm
 case $confirm in
    n)	;;
  *|Y) partitioning && arch_base_install
-	 		arch_hyprland_install
+	 		arch_sway_install
 			;;
 esac
 

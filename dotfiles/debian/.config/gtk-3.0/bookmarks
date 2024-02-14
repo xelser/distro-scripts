@@ -8,5 +8,6 @@ file:///home/xelser/.config .config
 file:///home/xelser/.local .local
 file:///home/xelser/Documents/distro-scripts distro-scripts
 file:///home/xelser/Downloads/xelser's%20Downloads/ISOs ISOs
-file:///home/xelser/Documents/beta_gruvbox-material-gtk beta_gruvbox-material-gtk
-file:///home/xelser/rc_gruvbox-material-gtk rc_gruvbox-material-gtk
+file:///home/xelser/Documents/gruvbox-material-gtk gruvbox-material-gtk
+file:///home/xelser/rc_gruvbox-material rc_gruvbox-material
+file:///home/xelser/Documents/beta_gruvbox-material beta_gruvbox-material
