@@ -12,7 +12,7 @@ cd /tmp/ && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && mak
 
 # INSTALL: Arch Base
 yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-	ttf-fira{-sans,code-nerd} neovim-{plug,symlinks}
+	ttf-fira{-sans,code-nerd} neovim{,-plug,-symlinks} wl-clipboard
 	#linux linux-firmware btrfs-progs {intel,amd}-ucode base-devel plymouth dmidecode inetutils \
 	#pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound neovim{,-plugins} wl-clipboard \
 	#reflector xdg-user-dirs neofetch htop git networkmanager nm-connection-editor gvfs ranger firefox qbittorrent \
