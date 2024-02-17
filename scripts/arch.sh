@@ -10,13 +10,11 @@ if [[ ${machine} == "G41T-R3" ]]; then
 	device="sda"
   root="1"
   swap="6"
-  grub_target="i386-pc /dev/${device}"
 elif [[ ${machine} == "E5-476G" ]]; then
   device="sda"
   root="6"
   swap="3"
   efi="1"
-  grub_target="x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch"
 elif [[ ${machine_type} == "Other" ]]; then # GNOME BOXES
   device="vda"
 
@@ -24,23 +22,16 @@ elif [[ ${machine_type} == "Other" ]]; then # GNOME BOXES
 		root="3"
 		swap="2"
 		efi="1"
-		grub_target="x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch"
 	else
 		root="2"
   	swap="1"
-		grub_target="i386-pc /dev/${device}"
 	fi
 else
 	clear && cfdisk && clear && lsblk && echo
 
 	# Set Partition Variables
 	read -p "Device (ex. sda): " device
-	dmesg | grep -q "EFI v"; if [ $? -eq 0 ]; then read -p "EFI Partition (#): " efi
-		grub_target="x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch"
-	else
-		grub_target="i386-pc /dev/${device}"
-	fi
-
+	dmesg | grep -q "EFI v" && read -p "EFI Partition (#): " efi
 	read -p "Swap Partition (#): " swap
 	read -p "Root Partition (#): " root
 fi
@@ -145,21 +136,13 @@ echo "arch" > /etc/hostname
 # Base Minimal Packages
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
-pacman -Sy --needed --noconfirm linux linux-firmware grub os-prober btrfs-progs efibootmgr dosfstools {intel,amd}-ucode base-devel \
+pacman -Sy --needed --noconfirm linux linux-firmware btrfs-progs {intel,amd}-ucode base-devel plymouth dmidecode inetutils \
 	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound neovim{,-plugins} wl-clipboard \
-	plymouth dmidecode inetutils reflector xdg-user-dirs neofetch htop git networkmanager nm-connection-editor gvfs ranger \
-	firefox qbittorrent ttf-fira{-sans,code-nerd}
+	reflector xdg-user-dirs neofetch htop git networkmanager nm-connection-editor gvfs ranger firefox qbittorrent \
+	ttf-fira{-sans,code-nerd}
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
-
-# grub
-sed -i 's/quiet/quiet splash/g' /etc/default/grub
-#sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/g' /etc/default/grub
-sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
-#sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
-mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
-grub-install --target=${grub_target}
 
 # networkmanager
 systemctl enable NetworkManager
@@ -176,6 +159,25 @@ echo -e "${user} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/${user}
 
 EOF
 }
+
+bootloader_install () {
+arch-chroot /mnt /bin/bash << EOF
+	dmesg | grep -q "EFI v"; if [ $? -eq 0 ]; then
+		bootctl install
+	else
+		pacman -S --needed --noconfirm grub os-prober efibootmgr dosfstools
+
+		sed -i 's/quiet/quiet splash/g' /etc/default/grub
+		#sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/g' /etc/default/grub
+		sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
+		#sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
+		mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
+		grub-install --target=i386-pc /dev/${device}
+	fi
+EOF
+}
+
+## DESKTOPS/WINDOW MANAGERS ##
 
 arch_hyprland_install () {
 arch-chroot /mnt /bin/bash << EOF
@@ -236,7 +238,7 @@ echo "---------------------"
 read -p "Proceed? (Y/n): " confirm
 case $confirm in
    n)	;;
- *|Y) partitioning && arch_base_install
+ *|Y) partitioning && arch_base_install && bootloader_install
 	 		arch_sway_install
 			;;
 esac
