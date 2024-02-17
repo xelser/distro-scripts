@@ -1119,7 +1119,7 @@
      id="theme"
      defaultPreferDarkTheme="0"
      defaultIconTheme="Papirus-Dark"
-     defaultGtkTheme="gruvbox-original-hard-dark"
+     defaultGtkTheme="gruvbox-material-hard-dark"
      narrowSpinButton="1"
      preferDarkTheme="1"
      darkTheme="1"
