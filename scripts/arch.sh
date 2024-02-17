@@ -5,12 +5,13 @@
 # PACKAGE MANAGER: Pacman
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | sudo tee -a /etc/pacman.conf 1>/dev/null
+reflector && sudo pacman -Syyu
 
 # PACKAGE MANAGER: yay
 cd /tmp/ && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sirc --noconfirm
 
 # INSTALL: Arch Base
-reflector && yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
+yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
 	ttf-fira{-sans,code-nerd} neovim-{plug,symlinks}
 	#linux linux-firmware btrfs-progs {intel,amd}-ucode base-devel plymouth dmidecode inetutils \
 	#pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound neovim{,-plugins} wl-clipboard \
