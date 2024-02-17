@@ -34,7 +34,7 @@ if [ -f /usr/bin/powerprofilesctl ]; then
 	powerprofilesctl list | grep -q performance && powerprofilesctl set performance
 fi
 
-systemd-inhibit ${source_dir}/scripts/${distro_id}.sh
+[ -f /usr/bin/systemd-inhibit ] && systemd-inhibit ${source_dir}/scripts/${distro_id}.sh
 
 ################################ POST INSTALL ################################
 

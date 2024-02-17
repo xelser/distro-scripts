@@ -12,7 +12,7 @@ yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload
   mugshot neovim-{plug,symlinks} ulauncher # {zscroll,polybar-scripts}-git
 
 # INSTALL: Extra
-yay -S --needed --noconfirm dconf-editor meld gnome-boxes {chatterino2-dankerino,ventoy}-bin obs-studio
+yay -S --needed --noconfirm dconf-editor meld gnome-boxes ventoy-bin obs-studio
  # syncthing-gtk teamviewer zoom
 
 # BUILD: caffeinate
@@ -42,7 +42,7 @@ mkdir -p $HOME/Pictures/Screenshots
 # set fonts
 dconf write /org/gnome/desktop/interface/font-name "'Fira Sans 10'"
 dconf write /org/gnome/desktop/interface/monospace-font-name "'FiraCode Nerd Font 10'"
-sed -i 's/font = Monospace 8/font = FiraCode Nerd Font 10/g' $HOME/.config/dunst/dunstrc
+#sed -i 's/font = Monospace 8/font = FiraCode Nerd Font 10/g' $HOME/.config/dunst/dunstrc
 
 # rofi (launcher and powermenu)
 #cd /tmp/ && git clone --depth=1 https://github.com/xelser/rofi.git && cd rofi && chmod +x setup.sh && ./setup.sh && cd
