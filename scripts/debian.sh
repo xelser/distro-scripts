@@ -8,15 +8,18 @@ sed -i 's/non-free-firmware/non-free-firmware non-free contrib/g' \
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base (X11 and Pulseaudio)
-nala install --assume-yes plymouth lightdm slick-greeter build-essential \
+nala install --assume-yes plymouth lightdm build-essential htpdate \
   dconf-{editor,cli} libglib2.0-bin redshift numlockx pulseeffects \
-  firefox-esr {transmission,syncthing}-gtk htpdate \
-  fonts-ubuntu{,-console} # mugshot at-spi2-core
+  firefox-esr {transmission,syncthing}-gtk fonts-ubuntu{,-console}
+
+# INSTALL: Debian XFCE
+nala install --assume-yes lightdm-gtk-greeter-settings \
+  mugshot at-spi2-core gvfs-{backends,fuse}
 
 # INSTALL: Debian i3
-nala install --assume-yes i3-wm picom polybar alacritty neovim mpv mpd imv \
-  mate-polkit lxappearance gedit nitrogen rofi dunst libnotify-bin \
-  pcmanfm xarchiver flameshot  
+#nala install --assume-yes i3-wm picom polybar alacritty neovim mpv mpd imv \
+#  mate-polkit lxappearance gedit nitrogen rofi dunst libnotify-bin \
+#  pcmanfm xarchiver flameshot slick-greeter
   # gvfs-{backends,fuse} thunar-{volman,archive-plugin,media-tags-plugin} 
 
 # INSTALL: TeamViewer (deb)
@@ -24,9 +27,9 @@ wget -q https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -P /
 nala install --assume-yes /tmp/teamviewer_amd64.deb
 
 # BUILD: autotiling
-nala install --assume-yes python3-i3ipc && wget -q -O /usr/bin/autotiling \
-  https://raw.githubusercontent.com/nwg-piotr/autotiling/master/autotiling/main.py
-chmod +x /usr/bin/autotiling
+#nala install --assume-yes python3-i3ipc && wget -q -O /usr/bin/autotiling \
+#  https://raw.githubusercontent.com/nwg-piotr/autotiling/master/autotiling/main.py
+#chmod +x /usr/bin/autotiling
 
 # BUILD: darkman
 #bash ${source_dir}/modules/darkman.sh
@@ -44,19 +47,9 @@ update-grub
 # lightdm
 echo -e "\n[Seat:*]
 autologin-user=${user}
-autologin-session=i3
 greeter-hide-users=false
 " >> /etc/lightdm/lightdm.conf
 systemctl enable lightdm
-
-# slick greeter
-echo "[Greeter]
-theme-name=Adwaita-dark
-icon-theme-name=Papirus-Dark
-cursor-theme-name=phinger-cursors
-activate-numlock=true
-clock-format=%I:%M %p
-" > /etc/lightdm/slick-greeter.conf
 
 # htpdate
 systemctl enable htpdate
