@@ -6,7 +6,9 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 # fonts
 dconf write /org/gnome/desktop/interface/font-name "'Ubuntu 10'"
 dconf write /org/gnome/desktop/interface/monospace-font-name "'Ubuntu Mono 12'"
-sed -i 's/font = Monospace 8/font = Ubuntu Mono 12/g' $HOME/.config/dunst/dunstrc
+
+[ -f $HOME/.config/dunst/dunstrc ] && \
+        sed -i 's/font = Monospace 8/font = Ubuntu Mono 12/g' $HOME/.config/dunst/dunstrc
 
 # vim/neovim plug (text editors)
 [ -f /usr/bin/vim ] && curl -fLo ~/.vim/autoload/plug.vim --create-dirs \

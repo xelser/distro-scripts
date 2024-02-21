@@ -1,13 +1,13 @@
 [Default Applications]
 image/png=imv-folder.desktop
-text/plain=org.gnome.gedit.desktop
+text/plain=org.xfce.mousepad.desktop
 application/x-shellscript=org.gnome.gedit.desktop
 image/jpeg=imv-folder.desktop
 image/svg+xml=org.inkscape.Inkscape.desktop
 
 [Added Associations]
 image/png=imv-folder.desktop;
-text/plain=org.gnome.gedit.desktop;
+text/plain=org.gnome.gedit.desktop;org.xfce.mousepad.desktop;
 application/x-shellscript=org.gnome.gedit.desktop;
 image/jpeg=imv-folder.desktop;
-image/svg+xml=org.inkscape.Inkscape.desktop;
+image/svg+xml=org.xfce.mousepad.desktop;org.inkscape.Inkscape.desktop;
