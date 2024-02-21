@@ -29,7 +29,7 @@ if [ ${wm_de} = "i3" ]; then
 
 	sed -i 's/style-1/style-3/g' $HOME/.config/rofi/launchers/type-4/launcher.sh
 	sed -i 's/onedark/gruvbox-material-hard-dark/g' $HOME/.config/rofi/launchers/type-4/shared/colors.rasi
-	sed -i 's/Iosevka Nerd Font 10/UbuntuMono Nerd Font 11/g' $HOME/.confi/rofi/launchers/type-4/shared/fonts.rasi
+	sed -i 's/Iosevka Nerd Font 10/UbuntuMono Nerd Font 11/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.rasi
 
 	sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
 	sed -i 's/onedark/gruvbox-material-hard-dark/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
