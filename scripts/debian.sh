@@ -13,8 +13,11 @@ nala install --assume-yes plymouth lightdm build-essential htpdate \
   firefox-esr {transmission,syncthing}-gtk fonts-ubuntu{,-console}
 
 # INSTALL: Debian XFCE
-nala install --assume-yes lightdm-gtk-greeter-settings redshift-gtk \
-  mugshot at-spi2-core gvfs-{backends,fuse}
+nala install --assume-yes lightdm-gtk-greeter-settings light-locker \
+  xfce4{,-screenshooter,-notifyd,-power-manager,-terminal} mousepad \
+  thunar-{archive-plugin,volman} gvfs-{backends,fuse} redshift-gtk \
+  mugshot at-spi2-core parole ristretto engrampa atril
+  #xdg-desktop-portal-gtk \
 
 # INSTALL: Debian i3
 #nala install --assume-yes i3-wm picom polybar alacritty neovim mpv mpd imv \
