@@ -13,25 +13,25 @@ nala install --assume-yes plymouth lightdm build-essential htpdate \
   firefox-esr {transmission,syncthing}-gtk fonts-ubuntu{,-console}
 
 # INSTALL: Debian XFCE
-nala install --assume-yes lightdm-gtk-greeter-settings light-locker \
-  xfce4{,-screenshooter,-notifyd,-power-manager,-terminal} mousepad \
-  thunar-{archive-plugin,volman} gvfs-{backends,fuse} redshift-gtk \
-  mugshot at-spi2-core parole ristretto engrampa atril
+#nala install --assume-yes lightdm-gtk-greeter-settings light-locker \
+#  xfce4{,-screenshooter,-notifyd,-power-manager,-terminal} mousepad \
+#  thunar-{archive-plugin,volman} gvfs-{backends,fuse} redshift-gtk \
+#  mugshot at-spi2-core parole ristretto engrampa atril
   #xdg-desktop-portal-gtk \
 
 # INSTALL: Debian i3
-#nala install --assume-yes i3-wm picom polybar alacritty neovim mpv mpd imv \
-#  mate-polkit lxappearance gedit nitrogen rofi dunst libnotify-bin \
-#  pcmanfm xarchiver flameshot slick-greeter
+nala install --assume-yes i3-wm picom polybar alacritty neovim mpv mpd imv \
+  mate-polkit lxappearance gedit nitrogen rofi dunst libnotify-bin \
+  pcmanfm xarchiver flameshot slick-greeter
 
 # INSTALL: TeamViewer (deb)
 wget -q https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -P /tmp
 nala install --assume-yes /tmp/teamviewer_amd64.deb
 
 # BUILD: autotiling
-#nala install --assume-yes python3-i3ipc && wget -q -O /usr/bin/autotiling \
-#  https://raw.githubusercontent.com/nwg-piotr/autotiling/master/autotiling/main.py
-#chmod +x /usr/bin/autotiling
+nala install --assume-yes python3-i3ipc && wget -q -O /usr/bin/autotiling \
+  https://raw.githubusercontent.com/nwg-piotr/autotiling/master/autotiling/main.py
+chmod +x /usr/bin/autotiling
 
 # BUILD: darkman
 #bash ${source_dir}/modules/darkman.sh
