@@ -23,7 +23,7 @@ set showmatch               " show matching
 set ignorecase              " case insensitive 
 set mouse=v                 " middle-click paste with 
 set hlsearch                " highlight search 
-set incsearch               " incremental search
+"set incsearch               " incremental search
 set number                  " add line numbers
 set mouse=a                 " enable mouse click
 set clipboard=unnamedplus   " using system clipboard
