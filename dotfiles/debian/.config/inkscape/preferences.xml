@@ -625,7 +625,7 @@
        default="org.inkscape.output.svg.inkscape"
        append_extension="1"
        enable_preview="0"
-       path="/home/xelser"
+       path="/home/xelser/Documents/matcha-gtk/src/xfwm4"
        use_current_dir="1"
        enable_svgexport="1" />
     <group
@@ -993,12 +993,12 @@
      org.inkscape.output.png.inkscape.png_antialias="2" />
   <group
      id="desktop"
-     style="fill:#262626;fill-opacity:0.11764706">
+     style="fill:#ffffff">
     <group
        width="1346"
-       height="706"
+       height="688"
        x="10"
-       y="52"
+       y="10"
        maximized="1"
        fullscreen="0"
        id="geometry" />
@@ -1119,7 +1119,7 @@
      id="theme"
      defaultPreferDarkTheme="0"
      defaultIconTheme="Papirus-Dark"
-     defaultGtkTheme="gruvbox-material-hard-dark"
+     defaultGtkTheme="Matcha-dark-aliz"
      narrowSpinButton="1"
      preferDarkTheme="1"
      darkTheme="1"
