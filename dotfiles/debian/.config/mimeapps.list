@@ -3,9 +3,11 @@ text/plain=org.gnome.gedit.desktop
 image/jpeg=imv-folder.desktop
 image/png=imv-folder.desktop
 application/xml=org.gnome.gedit.desktop
+image/svg+xml=org.inkscape.Inkscape.desktop
 
 [Added Associations]
 text/plain=org.gnome.gedit.desktop;
 image/jpeg=imv-folder.desktop;
 image/png=imv-folder.desktop;
 application/xml=org.gnome.gedit.desktop;
+image/svg+xml=org.inkscape.Inkscape.desktop;
