@@ -4,6 +4,7 @@ image/jpeg=imv-folder.desktop
 image/png=imv-folder.desktop
 application/xml=org.gnome.gedit.desktop
 image/svg+xml=org.inkscape.Inkscape.desktop
+application/x-shellscript=org.gnome.gedit.desktop
 
 [Added Associations]
 text/plain=org.gnome.gedit.desktop;
@@ -11,3 +12,4 @@ image/jpeg=imv-folder.desktop;
 image/png=imv-folder.desktop;
 application/xml=org.gnome.gedit.desktop;
 image/svg+xml=org.inkscape.Inkscape.desktop;
+application/x-shellscript=org.gnome.gedit.desktop;
