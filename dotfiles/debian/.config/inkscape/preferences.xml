@@ -27,7 +27,7 @@
        state="1" />
     <group
        id="rulers"
-       state="0" />
+       state="1" />
     <group
        id="scrollbars"
        state="0" />
@@ -689,7 +689,8 @@
        id="undo-history" />
     <group
        id="objects"
-       expand_to_layer="1" />
+       expand_to_layer="1"
+       layers_only="0" />
   </group>
   <group
      id="printing">
@@ -993,7 +994,7 @@
      org.inkscape.output.png.inkscape.png_antialias="2" />
   <group
      id="desktop"
-     style="fill:#ffffff">
+     style="fill:#000000">
     <group
        width="1346"
        height="688"
@@ -1119,7 +1120,7 @@
      id="theme"
      defaultPreferDarkTheme="0"
      defaultIconTheme="Papirus-Dark"
-     defaultGtkTheme="Adapta-Cyan-Nokto-Eta"
+     defaultGtkTheme="Layan-Dark-Solid"
      narrowSpinButton="1"
      preferDarkTheme="1"
      darkTheme="1"
