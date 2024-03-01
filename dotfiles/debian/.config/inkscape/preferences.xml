@@ -619,6 +619,9 @@
       <group
          id="batchexportarea"
          value="layer" />
+      <group
+         id="defaultdpi"
+         value="90" />
     </group>
     <group
        id="save_as"
@@ -996,10 +999,10 @@
      id="desktop"
      style="fill:#000000">
     <group
-       width="1346"
-       height="688"
-       x="10"
-       y="10"
+       width="668"
+       height="706"
+       x="688"
+       y="52"
        maximized="1"
        fullscreen="0"
        id="geometry" />
@@ -1120,7 +1123,7 @@
      id="theme"
      defaultPreferDarkTheme="0"
      defaultIconTheme="Papirus-Dark"
-     defaultGtkTheme="Layan-Dark-Solid"
+     defaultGtkTheme="Graphite-blue-Dark-compact"
      narrowSpinButton="1"
      preferDarkTheme="1"
      darkTheme="1"
