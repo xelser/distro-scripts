@@ -64,9 +64,9 @@ sudo DESTDIR=$PWD/install ninja install
 sudo hostnamectl set-hostname --static "fedora"
 
 # GDM
-append_file "[daemon]
-AutomaticLogin=${user}
-AutomaticLoginEnable=True" /etc/gdm/custom.conf
+#append_file "[daemon]
+#AutomaticLogin=${user}
+#AutomaticLoginEnable=True" /etc/gdm/custom.conf
 
 ################################### THEMES ###################################
 
