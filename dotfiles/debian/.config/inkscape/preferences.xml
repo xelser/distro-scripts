@@ -1123,7 +1123,7 @@
      id="theme"
      defaultPreferDarkTheme="0"
      defaultIconTheme="Papirus-Dark"
-     defaultGtkTheme="Graphite-blue-Dark-compact"
+     defaultGtkTheme="Colloid-Dark-Compact"
      narrowSpinButton="1"
      preferDarkTheme="1"
      darkTheme="1"
