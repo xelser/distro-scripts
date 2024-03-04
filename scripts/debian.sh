@@ -22,7 +22,7 @@ nala install --assume-yes plymouth lightdm build-essential htpdate \
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar alacritty neovim mpv mpd imv \
   mate-polkit lxappearance gedit nitrogen rofi dunst libnotify-bin \
-  pcmanfm xarchiver flameshot slick-greeter
+  pcmanfm xarchiver flameshot lightdm-gtk-greeter-settings
 
 # INSTALL: TeamViewer (deb)
 wget -q https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -P /tmp
