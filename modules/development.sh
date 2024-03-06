@@ -2,10 +2,10 @@
 
 if [ -f /usr/bin/nala ]; then sudo nala install --assume-yes \
 	gtk-3-examples gtk-4-examples libadwaita-1-examples \
-	meson npm parallel sassc optipng inkscape rename
+	meson npm parallel sassc optipng inkscape meld gpick rename
 elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
 	gtk3-demos gtk4-demos libadwaita-demos \
-	meson npm parallel sassc optipng inkscape
+	meson npm parallel sassc optipng inkscape meld
 fi
 
 # show .desktop
