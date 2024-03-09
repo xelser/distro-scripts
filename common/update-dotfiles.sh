@@ -10,14 +10,16 @@ mkdir -p ${dest_dir}/.local/
 mkdir -p ${dest_dir}/.var/
 
 save_folder () {
-	[[ -d $HOME$1 ]] && mkdir -p ${dest_dir}$1 && cp -rf $HOME$1* ${dest_dir}$1
+	[[ -d $HOME$1 ]] && mkdir -p ${dest_dir}$1 && \
+		cp -rf $HOME$1* ${dest_dir}$1
 }
 
 save_file () {
-	[[ -f $HOME$1$2 ]] && mkdir -p ${dest_dir}$1 && cp -rf $HOME$1$2 ${dest_dir}$1
+	[[ -f $HOME$1$2 ]] && mkdir -p ${dest_dir}$1 && \
+		cp -rf $HOME$1$2 ${dest_dir}$1
 }
 
-#################################### COMMON ####################################
+################################### COMMON ###################################
 
 # Autostart
 save_folder /.config/autostart/
@@ -34,6 +36,9 @@ save_file /.config/libfm/ libfm.conf
 
 # PCmanFm
 save_file /.config/pcmanfm/default/ pcmanfm.conf
+
+# Thunar
+save_file /.config/xfce4/ helpers.rc
 
 # Leafpad
 save_file /.config/leafpad/ leafpadrc
@@ -79,7 +84,7 @@ if [ -f $HOME/.config/geany/geany.conf ]; then
 	sed '223,$d' $HOME/.config/geany/geany.conf > ${dest_dir}/.config/geany/geany.conf
 fi
 
-#################################### THEMING ###################################
+################################### THEMING ##################################
 
 # GTK2
 save_file / .gtkrc-2.0
@@ -105,7 +110,7 @@ if [ -f /usr/bin/plank ]; then save_folder /.config/plank/dock2/
 	dconf dump /net/launchpad/plank/ > ${dest_dir}/.config/plank/plank.ini
 fi
 
-#################################### GAMING ####################################
+################################### GAMING ###################################
 
 # Lutris
 #save_folder /.config/lutris/
@@ -120,7 +125,7 @@ save_folder /.config/MangoHud/
 # GOverlay
 #save_file /.config/goverlay/ MangoHud.conf
 
-#################################### AUDIO #####################################
+################################### AUDIO ####################################
 
 # Pulseaudio Equalizer Ladspa
 if [ -f /usr/bin/pulseaudio-equalizer-gtk ] && [ -d $HOME/.config/pulse/presets/ ]; then
@@ -140,7 +145,7 @@ if [ -f /usr/bin/easyeffects ]; then
 	save_folder /.config/easyeffects/
 fi
 
-################################ WINDOW MANAGERS ###############################
+############################### WINDOW MANAGERS ##############################
 
 # Alacritty
 save_file /.config/alacritty/ alacritty.yml
@@ -205,13 +210,9 @@ save_file /.config/waybar/ launch.sh
 # Yambar
 save_file /.config/yambar/ config.yml
 
-############################# DESKTOP ENVIRONMENTS #############################
+############################ DESKTOP ENVIRONMENTS ############################
 
 if [[ ${wm_de} == "xfce" ]]; then
-
-	# XFCE Panel
-	#mkdir -p ${dest_dir}/.config/xfce4/panel/
-	#cp -rf $HOME/.config/xfce4/panel/{diskperf,netload}-*.rc ${dest_dir}/.config/xfce4/panel/
 
 	# Menu Entries
 	save_file /.config/menus/ xfce-applications.menu	
@@ -223,22 +224,22 @@ if [[ ${wm_de} == "xfce" ]]; then
 elif [[ ${wm_de} == "cinnamon" ]]; then
 
 	# Cinnamon Panel
-	dconf dump /org/cinnamon/ > 						/tmp/cinnamon_panel_beta.ini
-	sed 1q /tmp/cinnamon_panel_beta.ini >					${dest_dir}/.config/panel.ini
-	grep "enabled-applets" /tmp/cinnamon_panel_beta.ini >> 			${dest_dir}/.config/panel.ini
-	grep "panels-autohide" /tmp/cinnamon_panel_beta.ini >> 			${dest_dir}/.config/panel.ini
-	grep "enabled-extensions" /tmp/cinnamon_panel_beta.ini >>		${dest_dir}/.config/panel.ini
-	grep "panels-enabled" /tmp/cinnamon_panel_beta.ini >>			${dest_dir}/.config/panel.ini
-	grep "panels-height" /tmp/cinnamon_panel_beta.ini >>			${dest_dir}/.config/panel.ini
-	grep "panels-hide-delay" /tmp/cinnamon_panel_beta.ini >>		${dest_dir}/.config/panel.ini
-	grep "panels-show-delay" /tmp/cinnamon_panel_beta.ini >>		${dest_dir}/.config/panel.ini
-	grep "panel-zone-icon-sizes" /tmp/cinnamon_panel_beta.ini >>		${dest_dir}/.config/panel.ini
-	grep "panel-zone-symbolic-icon-sizes" /tmp/cinnamon_panel_beta.ini >> 	${dest_dir}/.config/panel.ini
-	grep "panel-zone-text-sizes" /tmp/cinnamon_panel_beta.ini >> 		${dest_dir}/.config/panel.ini
+	dconf dump /org/cinnamon/ > 																					/tmp/cinnamon_panel_beta.ini
+	sed 1q /tmp/cinnamon_panel_beta.ini >																	${dest_dir}/.config/panel.ini
+	grep "enabled-applets" /tmp/cinnamon_panel_beta.ini >> 								${dest_dir}/.config/panel.ini
+	grep "panels-autohide" /tmp/cinnamon_panel_beta.ini >> 								${dest_dir}/.config/panel.ini
+	grep "enabled-extensions" /tmp/cinnamon_panel_beta.ini >>							${dest_dir}/.config/panel.ini
+	grep "panels-enabled" /tmp/cinnamon_panel_beta.ini >>									${dest_dir}/.config/panel.ini
+	grep "panels-height" /tmp/cinnamon_panel_beta.ini >>									${dest_dir}/.config/panel.ini
+	grep "panels-hide-delay" /tmp/cinnamon_panel_beta.ini >>							${dest_dir}/.config/panel.ini
+	grep "panels-show-delay" /tmp/cinnamon_panel_beta.ini >>							${dest_dir}/.config/panel.ini
+	grep "panel-zone-icon-sizes" /tmp/cinnamon_panel_beta.ini >>					${dest_dir}/.config/panel.ini
+	grep "panel-zone-symbolic-icon-sizes" /tmp/cinnamon_panel_beta.ini >> ${dest_dir}/.config/panel.ini
+	grep "panel-zone-text-sizes" /tmp/cinnamon_panel_beta.ini >> 					${dest_dir}/.config/panel.ini
 
 	# GNOME Terminal
-	dconf dump /org/gnome/terminal/legacy/profiles:/ > 			/tmp/gnome-terminal-profile.ini
-	sed '4d' /tmp/gnome-terminal-profile.ini >				${dest_dir}/.config/gnome-terminal-profile
+	dconf dump /org/gnome/terminal/legacy/profiles:/ > 	/tmp/gnome-terminal-profile.ini
+	sed '4d' /tmp/gnome-terminal-profile.ini > 					${dest_dir}/.config/gnome-terminal-profile
 
 	# Applets, Desklets, Extensions
 	save_folder /.config/cinnamon/
@@ -257,11 +258,11 @@ elif [[ ${wm_de} == "cinnamon" ]]; then
 elif [[ ${wm_de} == "gnome" ]]; then
 
 	# GNOME Shell
-	dconf dump /org/gnome/shell/ > 						/tmp/shell_beta.ini
-	sed 1q /tmp/shell_beta.ini >						${dest_dir}/.config/fav_apps.ini
-	grep "favorite-apps" /tmp/shell_beta.ini >> 				${dest_dir}/.config/fav_apps.ini
-	dconf dump /org/gnome/desktop/app-folders/ > 				${dest_dir}/.config/app_folders.ini
-	#dconf dump /org/gnome/shell/extensions/ >				${dest_dir}/.config/extensions.ini
+	dconf dump /org/gnome/shell/ > 								/tmp/shell_beta.ini
+	sed 1q /tmp/shell_beta.ini >									${dest_dir}/.config/fav_apps.ini
+	grep "favorite-apps" /tmp/shell_beta.ini >> 	${dest_dir}/.config/fav_apps.ini
+	dconf dump /org/gnome/desktop/app-folders/ > 	${dest_dir}/.config/app_folders.ini
+	#dconf dump /org/gnome/shell/extensions/ > 		${dest_dir}/.config/extensions.ini
 	
 	# Pop-Shell Exceptions
 	save_file /.config/pop-shell/ config.json
@@ -288,7 +289,7 @@ elif [[ ${wm_de} == "kde" ]]; then
 
 fi
 
-############################ DISTROBUTION SPECIFICS ############################
+########################### DISTROBUTION SPECIFICS ###########################
 
 if [[ ${distro_id} == "linuxmint" ]]; then
 
