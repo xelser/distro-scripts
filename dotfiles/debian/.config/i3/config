@@ -228,3 +228,6 @@ bindsym $mod+p exec picom & disown 2>&1/dev/null
 exec --no-startup-id flameshot
 bindsym Print exec flameshot full --path /home/xelser/Pictures/Screenshots/
 bindsym Shift+Print exec flameshot gui --path /home/xelser/Pictures/Screenshots/
+
+# Screensaver (betterlockscreen)
+exec_always --no-startup-id betterlockscreen -u "/run/media/xelser/Media/Pictures/Gruvbox" --fx dim 50

@@ -33,6 +33,16 @@ nala install --assume-yes python3-i3ipc && wget -q -O /usr/bin/autotiling \
   https://raw.githubusercontent.com/nwg-piotr/autotiling/master/autotiling/main.py
 chmod +x /usr/bin/autotiling
 
+# BUILD: i3lock-color and betterlockscreen
+nala install --assume-yes autoconf gcc make pkg-config libpam0g-dev \
+  libcairo2-dev libfontconfig1-dev libxcb-composite0-dev libev-dev \
+  libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev \
+  libxcb-image0-dev libxcb-util0-dev libxcb-xrm-dev libxkbcommon-dev \
+  libxkbcommon-x11-dev libjpeg-dev
+cd /tmp/ && git clone https://github.com/Raymo111/i3lock-color
+cd i3lock-color && ./install-i3lock-color.sh && \
+  wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | sudo bash -s system
+
 # BUILD: darkman
 #bash ${source_dir}/modules/darkman.sh
 
@@ -40,6 +50,9 @@ chmod +x /usr/bin/autotiling
 
 # sudo
 usermod -aG sudo ${user}
+
+# htpdate
+systemctl enable htpdate
 
 # grub
 sed -i 's/quiet/quiet splash/g' /etc/default/grub
@@ -54,8 +67,8 @@ greeter-hide-users=false
 " >> /etc/lightdm/lightdm.conf
 systemctl enable lightdm
 
-# htpdate
-systemctl enable htpdate
+# betterlockscreen
+betterlockscreen -u "/run/media/xelser/Media/Pictures/Gruvbox" --fx dim 50
 
 ################################### THEMES ###################################
 
