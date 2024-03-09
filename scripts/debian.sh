@@ -8,9 +8,9 @@ sed -i 's/non-free-firmware/non-free-firmware non-free contrib/g' \
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base (X11 and Pulseaudio)
-nala install --assume-yes xorg lightdm{,-gtk-greeter-settings} redshift \
-  pulseeffects build-essential synaptic htpdate plymouth firefox-esr \
-  dconf-{editor,cli} libglib2.0-bin mugshot at-spi2-core numlockx \
+nala install --assume-yes xorg lightdm{,-gtk-greeter-settings} numlockx \
+  redshift pulseeffects build-essential synaptic plymouth firefox-esr \
+  htpdate dconf-{editor,cli} libglib2.0-bin mugshot at-spi2-core \
   atril {transmission,syncthing}-gtk fonts-ubuntu{,-console} \
   thunar-{archive-plugin,volman} gvfs-{backends,fuse}
 
@@ -42,6 +42,7 @@ nala install --assume-yes autoconf gcc make pkg-config libpam0g-dev \
 cd /tmp/ && git clone https://github.com/Raymo111/i3lock-color
 cd i3lock-color && ./install-i3lock-color.sh && \
   wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | sudo bash -s system
+ln -sf /usr/local/bin/betterlockscreen /usr/bin/
 
 # BUILD: darkman
 #bash ${source_dir}/modules/darkman.sh
