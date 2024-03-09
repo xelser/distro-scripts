@@ -205,7 +205,6 @@ gaps top 42
 # Autostart (Once)
 exec --no-startup-id /usr/libexec/polkit-mate-authentication-agent-1
 exec --no-startup-id pulseeffects --gapplication-service
-exec --no-startup-id nitrogen --restore
 exec --no-startup-id xset s off -dpms
 #exec --no-startup-id xfsettingsd
 #exec --no-startup-id xsettingsd
@@ -214,6 +213,7 @@ exec --no-startup-id numlockx
 exec --no-startup-id dunst 
 
 # Autostart (Always)
+exec_always --no-startup-id feh --bg-fill --randomize --no-fehbg /run/media/xelser/Media/Pictures/Gruvbox/
 exec_always --no-startup-id bash $HOME/.config/autostart/autostart-script.sh
 exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id xset led on
