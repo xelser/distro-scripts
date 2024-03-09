@@ -8,21 +8,21 @@ sed -i 's/non-free-firmware/non-free-firmware non-free contrib/g' \
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base (X11 and Pulseaudio)
-nala install --assume-yes plymouth lightdm build-essential htpdate \
-  dconf-{editor,cli} libglib2.0-bin redshift numlockx pulseeffects \
-  firefox-esr {transmission,syncthing}-gtk fonts-ubuntu{,-console}
-
-# INSTALL: Debian i3
-nala install --assume-yes lightdm-gtk-greeter-settings i3-wm picom feh \
-  polybar alacritty neovim imv mpv rofi dunst libnotify-bin flameshot \
-  mugshot at-spi2-core mate-polkit lxappearance xarchiver gedit atril \
+nala install --assume-yes xorg lightdm{,-gtk-greeter-settings} redshift \
+  pulseeffects build-essential synaptic htpdate plymouth firefox-esr \
+  dconf-{editor,cli} libglib2.0-bin mugshot at-spi2-core numlockx \
+  atril {transmission,syncthing}-gtk fonts-ubuntu{,-console} \
   thunar-{archive-plugin,volman} gvfs-{backends,fuse}
 
+# INSTALL: Debian i3
+nala install --assume-yes i3-wm picom feh polybar alacritty neovim \
+  imv mpv rofi dunst libnotify-bin mate-polkit lxappearance \
+  xarchiver gedit flameshot
+
 # INSTALL: Debian XFCE
-#nala install --assume-yes lightdm-gtk-greeter-settings light-locker \
-#  xfce4{,-screenshooter,-notifyd,-power-manager,-terminal} mousepad \
-#  thunar-{archive-plugin,volman} gvfs-{backends,fuse} redshift-gtk \
-#  mugshot at-spi2-core parole ristretto engrampa atril
+#nala install --assume-yes mousepad parole ristretto engrampa \
+#  xfce4{,-screenshooter,-notifyd,-power-manager,-terminal} \
+#  light-locker redshift-gtk
 
 # INSTALL: TeamViewer (deb)
 wget -q https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -P /tmp
