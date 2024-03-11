@@ -91,7 +91,9 @@ bootloader_bios () {
 	grub-install --target=i386-pc /dev/${device}
 }
 
-bootloader_efi () { bootctl install }
+bootloader_efi () { 
+	bootctl install 
+}
 
 partitioning () {
 umount -R /mnt >&/dev/null ; swapoff -a
@@ -237,7 +239,6 @@ read -p "Proceed? (Y/n): " confirm
 case $confirm in
    n)	;;
  *|Y) partitioning && arch_base_install
-	 		arch_sway_install
 			;;
 esac
 
