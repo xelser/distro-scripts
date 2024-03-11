@@ -81,6 +81,18 @@ format_swap () {
 	esac
 }
 
+bootloader_bios () {
+	pacman -S --needed --noconfirm grub os-prober efibootmgr dosfstools
+
+	sed -i 's/quiet/quiet splash/g' /etc/default/grub
+	sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
+	sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
+	mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
+	grub-install --target=i386-pc /dev/${device}
+}
+
+bootloader_efi () { bootctl install }
+
 partitioning () {
 umount -R /mnt >&/dev/null ; swapoff -a
 if [[ ${machine} == "G41T-R3" ]]; then
@@ -136,7 +148,7 @@ echo "arch" > /etc/hostname
 # Base Minimal Packages
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
-pacman -Sy --needed --noconfirm linux linux-firmware btrfs-progs {intel,amd}-ucode base-devel plymouth dmidecode inetutils \
+pacman -Sy --needed --noconfirm linux linux-firmware btrfs-progs {intel,amd}-ucode plymouth base-devel dmidecode inetutils \
 	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound neovim{,-plugins} wl-clipboard \
 	reflector xdg-user-dirs neofetch htop git networkmanager nm-connection-editor gvfs ranger firefox qbittorrent \
 	ttf-fira{-sans,code-nerd}
@@ -158,17 +170,7 @@ echo -e "root:${psswrd}\n${user}:${psswrd}" | chpasswd
 echo -e "${user} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/${user}
 
 # bootloader
-dmesg | grep -q "EFI v"; if [ $? -eq 0 ]; then
-	bootctl install
-else
-	pacman -S --needed --noconfirm grub os-prober efibootmgr dosfstools
-
-	sed -i 's/quiet/quiet splash/g' /etc/default/grub
-	sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
-	sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
-	mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
-	grub-install --target=i386-pc /dev/${device}
-fi
+dmesg | grep -q "EFI v" && bootloader_efi || bootloader_bios
 
 EOF
 }
