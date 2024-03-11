@@ -182,9 +182,9 @@ logout () {
 if [[ ${wm_de} == "gnome" ]]; then	
 	gnome-session-quit --force
 elif [[ ${wm_de} == "cinnamon" ]]; then
-	cinnamon-session-quit --force
+	cinnamon-session-quit --logout --force
 elif [[ ${wm_de} == "xfce" ]]; then
-	xfce4-session-logout --fast --logout
+	xfce4-session-logout --logout --fast 
 elif [[ ${wm_de} == "kde" ]]; then
 	qdbus org.kde.ksmserver /KSMServer logout 0 0 2
 elif [[ ${wm_de} == "i3" ]]; then
