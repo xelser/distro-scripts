@@ -164,9 +164,8 @@ else
 	pacman -S --needed --noconfirm grub os-prober efibootmgr dosfstools
 
 	sed -i 's/quiet/quiet splash/g' /etc/default/grub
-	#sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/g' /etc/default/grub
 	sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
-	#sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
+	sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
 	mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 	grub-install --target=i386-pc /dev/${device}
 fi
