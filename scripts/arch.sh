@@ -36,6 +36,13 @@ else
 	read -p "Root Partition (#): " root
 fi
 
+## BOOTLOADER ##
+dmesg | grep -q "EFI v"; if [ $? -eq 0 ]; then
+	grub_target="x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch"
+else
+	grub_target="i386-pc /dev/${device}"
+fi
+
 ################################# FORMATTING #################################
 
 ext4_setup () {
@@ -79,20 +86,6 @@ format_swap () {
 	   n)   ;;
 	 *|Y)   mkswap -f /dev/${device}${swap} -L "Swap";;
 	esac
-}
-
-bootloader_bios () {
-	pacman -S --needed --noconfirm grub os-prober efibootmgr dosfstools
-
-	sed -i 's/quiet/quiet splash/g' /etc/default/grub
-	sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
-	sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
-	mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
-	grub-install --target=i386-pc /dev/${device}
-}
-
-bootloader_efi () { 
-	bootctl install 
 }
 
 partitioning () {
@@ -150,10 +143,10 @@ echo "arch" > /etc/hostname
 # Base Minimal Packages
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
-pacman -Sy --needed --noconfirm linux linux-firmware btrfs-progs {intel,amd}-ucode plymouth base-devel dmidecode inetutils \
-	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound neovim{,-plugins} wl-clipboard \
-	reflector xdg-user-dirs neofetch htop git networkmanager nm-connection-editor gvfs ranger firefox qbittorrent \
-	ttf-fira{-sans,code-nerd}
+pacman -Sy --needed --noconfirm linux linux-firmware btrfs-progs {intel,amd}-ucode plymouth grub os-prober efibootmgr dosfstools \
+	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound base-devel dmidecode inetutils \
+	reflector xdg-user-dirs neofetch htop git networkmanager nm-connection-editor gvfs ranger neovim{,-plugins} wl-clipboard \
+	firefox qbittorrent ttf-fira{-sans,code-nerd} 
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
@@ -171,8 +164,13 @@ useradd -mG wheel,video ${user}
 echo -e "root:${psswrd}\n${user}:${psswrd}" | chpasswd
 echo -e "${user} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/${user}
 
-# bootloader
-dmesg | grep -q "EFI v" && bootloader_efi || bootloader_bios
+# grub
+sed -i 's/quiet/quiet splash/g' /etc/default/grub
+#sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/g' /etc/default/grub
+sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
+sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
+mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
+grub-install --target=${grub_target}
 
 EOF
 }
