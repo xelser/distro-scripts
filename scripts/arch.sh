@@ -112,6 +112,9 @@ elif [[ ${machine_type} == "Other" ]]; then # GNOME BOXES
 	# Format Root
 	ext4_setup
 	
+	# Format EFI
+	dmesg | grep -q "EFI v" && format_efi
+
 	# Format Swap
 	mkswap -f /dev/${device}${swap} -L "Swap" && swapon /dev/${device}${swap}
 fi
@@ -146,7 +149,7 @@ echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILov
 pacman -Sy --needed --noconfirm linux linux-firmware btrfs-progs {intel,amd}-ucode plymouth grub os-prober efibootmgr dosfstools \
 	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound base-devel dmidecode inetutils \
 	reflector xdg-user-dirs neofetch htop git networkmanager nm-connection-editor gvfs ranger neovim{,-plugins} wl-clipboard \
-	firefox qbittorrent ttf-fira{-sans,code-nerd} 
+	firefox qbittorrent ttf-fira{-sans,code-nerd}
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
