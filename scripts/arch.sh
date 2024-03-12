@@ -17,12 +17,12 @@ elif [[ ${machine} == "E5-476G" ]]; then
   efi="1"
 elif [[ ${machine_type} == "Other" ]]; then # GNOME BOXES
 	dmesg | grep -q "EFI v"; if [ $? -eq 0 ]; then
-  	device="sda"
+  	device="vda"
 		root="3"
 		swap="2"
 		efi="1"
 	else
-  	device="vda"
+  	device="sda"
 		root="2"
   	swap="1"
 	fi
