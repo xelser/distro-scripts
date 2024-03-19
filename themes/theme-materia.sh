@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Dependencies
-[ -f /usr/bin/dnf] && sudo dnf install --assumeyes parallel sassc inkscape meson npm
+[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes parallel sassc inkscape meson npm
 [ -f /usr/bin/nala ] && sudo nala install --assume-yes parallel sassc inkscape meson npm
 
 # Delete old files

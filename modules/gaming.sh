@@ -73,7 +73,7 @@ fi
 #	echo -e "\nexport MANGOHUD=1\nexport MANGOHUD_DLSYM=1\n" | sudo tee -a /etc/environment 1> /dev/null
 #fi
 
-echo "
+sleep 900 && echo "
 ################################## FINISHED ##################################
 "
 echo && read -p "Reboot? (Y/n): " end
