@@ -1,7 +1,7 @@
 #!/bin/bash
 
 append_file () {
-        grep -x "$1" $2 || echo -e "\n$1" | sudo tee -a $2 1> /dev/null
+	grep -x "$1" $2 || echo -e "\n$1" | sudo tee -a $2 1> /dev/null
 }
 
 ################################## PACKAGES ##################################
