@@ -37,7 +37,7 @@ dconf write /org/gnome/shell/extensions/bluetooth-quick-connect/refresh-button-o
 dconf write /org/gnome/shell/extensions/blur-my-shell/brightness "0.4"
 dconf write /org/gnome/shell/extensions/blur-my-shell/sigma "20"
 dconf write /org/gnome/shell/extensions/blur-my-shell/panel/override-background-dynamically "true"
-dconf write /org/gnome/shell/extensions/caffeine/inhibit-apps "['org.mozilla.firefox.desktop', 'io.github.celluloid_player.Celluloid.desktop']"
+dconf write /org/gnome/shell/extensions/caffeine/inhibit-apps "['io.github.celluloid_player.Celluloid.desktop', 'firefox.desktop', 'com.google.Chrome.desktop']"
 dconf write /org/gnome/shell/extensions/caffeine/show-notifications "false"
 dconf write /org/gnome/shell/extensions/dash-to-dock/apply-custom-theme "true"
 dconf write /org/gnome/shell/extensions/dash-to-dock/custom-theme-shrink "true"
