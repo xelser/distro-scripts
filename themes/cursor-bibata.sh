@@ -1,6 +1,10 @@
 #!/bin/bash
 
-version="$(curl --silent "https://api.github.com/repos/ful1e5/Bibata_Cursor/releases/latest" | grep tag_name | cut -d'"' -f4)"
+if [ -z $1 ]; then
+	version="$(curl --silent "https://api.github.com/repos/ful1e5/Bibata_Cursor/releases/latest" | grep tag_name | cut -d'"' -f4)"
+else
+	version="$1"
+fi
 
 # Clean
 cd /tmp/ && rm -rf /tmp/Bibata*
