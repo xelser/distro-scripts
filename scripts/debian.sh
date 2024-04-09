@@ -8,11 +8,12 @@ sed -i 's/non-free-firmware/non-free-firmware non-free contrib/g' \
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base (X11 and Pulseaudio)
-nala install --assume-yes xorg lightdm{,-gtk-greeter-settings} numlockx \
-  redshift pulseeffects build-essential synaptic plymouth firefox-esr \
-  htpdate dconf-{editor,cli} libglib2.0-bin mugshot at-spi2-core \
-  atril {transmission,syncthing}-gtk fonts-ubuntu{,-console} \
-  thunar-{archive-plugin,volman} gvfs-{backends,fuse}
+nala install --assume-yes pulseeffects xorg lightdm{,-gtk-greeter-settings} \
+  plymouth numlockx redshift build-essential synaptic htpdate \
+  dconf-{editor,cli} libglib2.0-bin mugshot at-spi2-core \
+  thunar-{archive-plugin,volman} gvfs-{backends,fuse} \
+  firefox-esr atril {transmission,syncthing}-gtk \
+  fonts-ubuntu{,-console} network-manager
 
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar alacritty neovim \
