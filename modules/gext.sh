@@ -17,6 +17,7 @@ gext --filesystem install 4269 # AlphabeticalAppGrid
 #gext --filesystem install 615 # appindicator
 gext --filesystem install 595 # autohide-battery
 #gext --filesystem install 3928 # autoselectheadset
+gext --filesystem install 6670 # bluetooth-battery-meter
 gext --filesystem install 1401 # bluetooth-quick-connect
 #gext --filesystem install 3193 # blur-my-shell
 #gext --filesystem install 517 # caffeine
