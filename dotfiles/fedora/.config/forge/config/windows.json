@@ -116,6 +116,10 @@
             "wmClass": "org.mozilla.firefox",
             "wmTitle": "Messenger call — Mozilla Firefox",
             "mode": "float"
+        },
+        {
+            "wmClass": "org.gnome.FileRoller",
+            "mode": "float"
         }
     ]
 }
