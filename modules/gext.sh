@@ -13,20 +13,23 @@ fi
 pipx ensurepath && bash -c "pipx install gnome-extensions-cli --system-site-packages --force"
 
 # Install Extensions
-gext --filesystem install 4269 # AlphabeticalAppGrid
 gext --filesystem install 595 # autohide-battery
 #gext --filesystem install 3928 # autoselectheadset
 gext --filesystem install 6670 # bluetooth-battery-meter
-gext --filesystem install 1401 # bluetooth-quick-connect
 gext --filesystem install 4158 # gnome-ui-tune
 #gext --filesystem install 4691 # pip-on-top
-gext --filesystem install 5575 # power-profile-switcher
-gext --filesystem install 352 # middleclickclose
 #gext --filesystem install 5237 # rounded-window-corners (no update)
 #gext --filesystem install 701 # scroll-workspaces (api issues)
 	# pano@elhan.io
 
-# Can be installed via packagem manager
+# Install Manually (DBus)
+gext install 1401 # bluetooth-quick-connect
+gext install 4269 # AlphabeticalAppGrid
+gext install 2236 # night-theme-switcher
+gext install 5575 # power-profile-switcher
+gext install 352 # middleclickclose
+
+# Can be installed via package manager
 #gext --filesystem install 615 # appindicator
 #gext --filesystem install 3193 # blur-my-shell
 #gext --filesystem install 517 # caffeine
@@ -64,6 +67,3 @@ dconf write /org/gnome/shell/extensions/nightthemeswitcher/commands/sunrise "'ba
 dconf write /org/gnome/shell/extensions/nightthemeswitcher/commands/sunset "'bash $HOME/.local/share/dark-mode.d/dark.sh'"
 #dconf write /org/gnome/shell/extensions/pip-on-top/stick "true"
 #dconf write /org/gnome/shell/extensions/pop-shell/tile-by-default "true"
-
-# Install Manually (DBus)
-#gext install nightthemeswitcher@romainvigier.fr
