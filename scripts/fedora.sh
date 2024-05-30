@@ -37,7 +37,8 @@ sudo dnf upgrade --assumeyes --best --allowerasing # --security --bugfix --enhan
 # INSTALL: Fedora Workstation
 sudo dnf install --assumeyes --skip-broken --allowerasing google-roboto-{fonts,mono-fonts,slab-fonts} dconf-editor libheif-tools \
   gnome-{builder,console,extensions-app,multi-writer,tweaks} file-roller fragments celluloid drawing easyeffects \
-  gnome-shell-extension-{appindicator,blur-my-shell,caffeine,dash-to-dock,forge,just-perfection,places-menu}
+  gnome-shell-extension-{appindicator,blur-my-shell,caffeine,dash-to-dock,forge,just-perfection,places-menu} \
+  plymouth
   # inkscape telegram discord video-downloader touchegg google-chrome-stable
   # gnome-shell-extension-{light-style,user-theme}
 
