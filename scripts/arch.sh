@@ -147,9 +147,10 @@ echo "arch" > /etc/hostname
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 pacman -Sy --needed --noconfirm linux linux-firmware btrfs-progs {intel,amd}-ucode plymouth grub os-prober efibootmgr dosfstools \
-	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound base-devel dmidecode inetutils \
-	reflector xdg-user-dirs neofetch htop git networkmanager nm-connection-editor gvfs ranger neovim{,-plugins} wl-clipboard \
-	firefox qbittorrent ttf-fira{-sans,code-nerd}
+	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound networkmanager nm-connection-editor \
+	base-devel dmidecode inetutils reflector xdg-user-dirs neofetch htop git gvfs neovim{,-plugins} xclip wl-clipboard imv mpv mpd \
+	gammastep brightnessctl wallutils feh swaybg flameshot xdg-desktop-portal-wlr grim alacritty dunst ranger picom rofi numlockx \
+	firefox qt5ct kvantum lxappearance-gtk3 qbittorrent xarchiver pcmanfm atril ttf-fira{-sans,code-nerd}
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
@@ -169,7 +170,7 @@ echo -e "${user} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/${user}
 
 # grub
 sed -i 's/quiet/quiet splash/g' /etc/default/grub
-#sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/g' /etc/default/grub
+sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/g' /etc/default/grub
 sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
 sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
 mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
@@ -183,8 +184,7 @@ EOF
 arch_hyprland_install () {
 arch-chroot /mnt /bin/bash << EOF
 # packages
-pacman -S --needed --noconfirm hyprland xdg-desktop-portal-hyprland polkit-kde-agent sddm \
-  kitty gammastep brightnessctl imv mpv wallutils swaybg flameshot grim dunst libnotify
+pacman -S --needed --noconfirm hyprland xdg-desktop-portal-hyprland polkit-kde-agent sddm kitty
 
 # sddm
 echo -e "[Autologin]\nUser=${user}" >> /etc/sddm.conf
@@ -196,9 +196,7 @@ EOF
 arch_sway_install () {
 arch-chroot /mnt /bin/bash << EOF
 # packages
-pacman -S --needed --noconfirm sddm brightnessctl xdg-desktop-portal-gtk \
-	sway foot mako waybar imv mpv gammastep wallutils swaybg \
-	flameshot xdg-desktop-portal-wlr grim 
+pacman -S --needed --noconfirm sddm xdg-desktop-portal-gtk sway foot mako waybar
 
 # sddm
 echo -e "[Autologin]\nUser=${user}\nSession=sway" >> /etc/sddm.conf
@@ -210,9 +208,7 @@ EOF
 arch_i3_install () {
 arch-chroot /mnt /bin/bash << EOF
 # packages
-pacman -S --needed --noconfirm sddm brightnessctl numlockx xclip lxappearance-gtk3 \
-  i3-wm picom polybar alacritty imv mpv gammastep rofi dunst libnotify wallutils feh \
-  flameshot qt5ct kvantum xarchiver pcmanfm atril  
+pacman -S --needed --noconfirm sddm i3-wm polybar 
 
 # sddm
 echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
