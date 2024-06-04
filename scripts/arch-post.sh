@@ -9,14 +9,8 @@ fi
 
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-  mugshot betterlockscreen neovim-{plug,symlinks} # ulauncher {zscroll,polybar-scripts}-git
-
-# INSTALL: AUR PACKAGES FOR WM
-[ -f /bin/openbox ] && yay -S --needed --noconfirm obmenu-generator
-
-# INSTALL: Extra
-yay -S --needed --noconfirm dconf-editor meld gnome-boxes ventoy-bin htpdate
- # syncthing-gtk teamviewer zoom obs-studio
+  mugshot dconf-editor ventoy-bin htpdate betterlockscreen autotiling obmenu-generator neovim-{plug,symlinks}
+  # ulauncher {zscroll,polybar-scripts}-git syncthing-gtk teamviewer zoom obs-studio meld gnome-boxes 
 
 # BUILD: caffeinate
 #sudo pacman -S --needed --noconfirm rustup && rustup default stable
