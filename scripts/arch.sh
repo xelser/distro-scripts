@@ -149,8 +149,15 @@ echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILov
 pacman -Sy --needed --noconfirm linux linux-firmware btrfs-progs {intel,amd}-ucode plymouth grub os-prober efibootmgr dosfstools \
 	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound networkmanager nm-connection-editor \
 	base-devel dmidecode inetutils reflector xdg-user-dirs neofetch htop git gvfs neovim{,-plugins} xclip wl-clipboard imv mpv mpd \
-	gammastep brightnessctl wallutils feh swaybg flameshot xdg-desktop-portal-wlr grim alacritty dunst ranger picom rofi numlockx \
-	firefox qt5ct kvantum lxappearance-gtk3 qbittorrent xarchiver pcmanfm atril ttf-fira{-sans,code-nerd}
+	gammastep brightnessctl wallutils feh swaybg flameshot grim alacritty dunst ranger picom polybar rofi numlockx i3-wm \
+	sddm firefox qt5ct kvantum lxappearance-gtk3 qbittorrent xarchiver pcmanfm atril ttf-fira{-sans,code-nerd} \
+	openbox obconf tint2 sway foot mako waybar hyprland polkit-kde-agent kitty \
+	xdg-desktop-portal-{wlr,gtk,hyprland}
+
+# sddm
+echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
+echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
+systemctl enable sddm
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
@@ -175,45 +182,6 @@ sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
 sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
 mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=${grub_target}
-
-EOF
-}
-
-## DESKTOPS/WINDOW MANAGERS ##
-
-arch_hyprland_install () {
-arch-chroot /mnt /bin/bash << EOF
-# packages
-pacman -S --needed --noconfirm hyprland xdg-desktop-portal-hyprland polkit-kde-agent sddm kitty
-
-# sddm
-echo -e "[Autologin]\nUser=${user}" >> /etc/sddm.conf
-systemctl enable sddm
-
-EOF
-}
-
-arch_sway_install () {
-arch-chroot /mnt /bin/bash << EOF
-# packages
-pacman -S --needed --noconfirm sddm xdg-desktop-portal-gtk sway foot mako waybar
-
-# sddm
-echo -e "[Autologin]\nUser=${user}\nSession=sway" >> /etc/sddm.conf
-systemctl enable sddm
-
-EOF
-}
-
-arch_i3_install () {
-arch-chroot /mnt /bin/bash << EOF
-# packages
-pacman -S --needed --noconfirm sddm i3-wm polybar 
-
-# sddm
-echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
-echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
-systemctl enable sddm
 
 EOF
 }
