@@ -3,8 +3,9 @@ call plug#begin()
 Plug 'ap/vim-css-color'
 
 " Themes
-Plug 'catppuccin/nvim', { 'as': 'catppuccin' }
-Plug 'itchyny/lightline.vim'
+Plug 'navarasu/onedark.nvim'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'nvim-tree/nvim-web-devicons'
 
 " Settings
 Plug 'tpope/vim-sensible'
@@ -27,5 +28,8 @@ set mouse=a                 " enable mouse click
 set clipboard=unnamedplus   " using system clipboard
 set ttyfast                 " Speed up scrolling in Vim
 
-let g:lightline = {'colorscheme': 'catppuccin'}
-colorscheme catppuccin-mocha
+colorscheme onedark
+
+lua << END
+require('lualine').setup { options = { theme = 'onedark' }}
+END
