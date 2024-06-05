@@ -9,8 +9,8 @@ fi
 
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-  mugshot dconf-editor ventoy-bin htpdate betterlockscreen autotiling obmenu-generator neovim-{plug,symlinks}
-  # ulauncher {zscroll,polybar-scripts}-git syncthing-gtk teamviewer zoom obs-studio meld gnome-boxes 
+  mugshot waypaper dconf-editor ventoy-bin htpdate autotiling obmenu-generator neovim-{plug,symlinks}
+  # ulauncher {zscroll,polybar-scripts}-git syncthing-gtk teamviewer zoom obs-studio meld gnome-boxes betterlockscreen 
 
 # BUILD: caffeinate
 #sudo pacman -S --needed --noconfirm rustup && rustup default stable
@@ -20,6 +20,9 @@ yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload
 
 # flameshot directory
 mkdir -p $HOME/Pictures/Screenshots
+
+# wallpaper (waypaper)
+[ -f /bin/wallpaper ] && waypaper --restore
 
 # openbox menu
 [ -f /bin/obmenu-generator ] && obmenu-generator -p -i -u -d -c
