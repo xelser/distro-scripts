@@ -45,15 +45,13 @@ dconf write /org/gnome/desktop/interface/monospace-font-name "'FiraCode Nerd Fon
 #sed -i 's/font = Monospace 8/font = FiraCode Nerd Font 10/g' $HOME/.config/dunst/dunstrc
 
 # rofi (launcher and powermenu)
-#cd /tmp/ && git clone --depth=1 https://github.com/xelser/rofi.git && cd rofi && chmod +x setup.sh && ./setup.sh && cd
+cd /tmp/ && git clone --depth=1 https://github.com/xelser/rofi.git && cd rofi && chmod +x setup.sh && ./setup.sh && cd
 
-#sed -i 's/style-1/style-3/g' $HOME/.config/rofi/launchers/type-4/launcher.sh
-#sed -i 's/onedark/catppuccin-mocha/g' $HOME/.config/rofi/launchers/type-4/shared/colors.rasi
-#sed -i 's/Iosevka/FiraCode/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.rasi
+sed -i 's/style-1/style-3/g' $HOME/.config/rofi/launchers/type-4/launcher.sh
+sed -i 's/Iosevka/FiraCode/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.rasi
 
-#sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
-#sed -i 's/onedark/catppuccin-mocha/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
-#sed -i 's/JetBrains Mono/FiraCode/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
+sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
+sed -i 's/JetBrains Mono/FiraCode/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
 
 # betterlockscreen
 #[ -f /usr/bin/betterlockscreen ] && betterlockscreen --update "/usr/share/backgrounds/catppuccin" --fx dim 50
