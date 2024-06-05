@@ -149,8 +149,8 @@ echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILov
 pacman -Sy --needed --noconfirm linux linux-firmware btrfs-progs {intel,amd}-ucode plymouth grub os-prober efibootmgr dosfstools \
 	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound networkmanager nm-connection-editor \
 	base-devel dmidecode inetutils reflector xdg-user-dirs neofetch htop git gvfs neovim{,-plugins} xclip wl-clipboard imv mpv mpd \
-	sddm gammastep brightnessctl wallutils ngw-look flameshot grim firefox nemo alacritty dunst ranger picom polybar rofi numlockx \
-	qt5ct kvantum qbittorrent xarchiver atril ttf-fira{-sans,code-nerd} xdg-desktop-portal-{wlr,gtk,hyprland} \
+	sddm gammastep brightnessctl wallutils feh ngw-look flameshot grim firefox alacritty dunst ranger picom polybar rofi numlockx \
+	qt5ct kvantum qbittorrent xarchiver nemo atril ttf-fira{-sans,code-nerd} xdg-desktop-portal-{wlr,gtk,hyprland} \
 	i3-wm openbox obconf tint2 sway foot mako waybar hyprland polkit-kde-agent kitty
 
 # sddm

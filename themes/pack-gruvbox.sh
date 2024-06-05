@@ -46,8 +46,8 @@ if [ -f /usr/bin/polybar ]; then
 fi
 
 if [ -f /usr/bin/dunst ] && [ ! -f $HOME/.config/dunst/dunstrc ]; then
-	cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-dunst
-	mkdir -p $HOME/.config/dunst ; cat /etc/xdg/dunst/dunstrc > $HOME/.config/dunst/dunstrc
+	cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-dunst && mkdir -p $HOME/.config/dunst
+	cat $(find /etc/ -name "dunstrc" 2> /dev/null) > $HOME/.config/dunst/dunstrc
 	cat /tmp/gruvbox-dunst/gruvbox-material-hard-dark.conf >> $HOME/.config/dunst/dunstrc
 	sed -i 's/origin = top-right/origin = bottom-right/g' $HOME/.config/dunst/dunstrc
 	sed -i 's/offset = 10x50/offset = 20x20/g' $HOME/.config/dunst/dunstrc
