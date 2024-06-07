@@ -39,8 +39,8 @@ mkdir -p $HOME/Pictures/Screenshots
 
 ################################### THEMES ###################################
 
-# catppuccin
-#bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-catppuccin.sh)"
+# main
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-edge.sh)"
 
 # set fonts
 dconf write /org/gnome/desktop/interface/font-name "'Fira Sans 10'"
