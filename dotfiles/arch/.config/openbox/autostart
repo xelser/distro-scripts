@@ -1,1 +1,22 @@
-bash $HOME/.config/autostart/arch-autostart.sh
+# Autostart (Global)
+easyeffects --gapplication-service &
+/usr/lib/xfce-polkit/xfce-polkit &
+waypaper --restore &
+dunst &
+
+# Autostart (for X11)
+bash $HOME/.config/polybar/launch.sh &
+xset s off -dpms &
+xset led on &
+#xfsettingsd
+#xsettingsd 
+numlockx &
+
+# Compositor (picom)
+picom --daemon &
+
+# Screenshot (flameshot)
+flameshot &
+
+# Night light (gammastep)
+sh $HOME/.config/gammastep/launch.sh &
