@@ -4,8 +4,6 @@
 #
 # Read `man 5 sway` for a complete reference.
 
-include catppuccin-mocha
-
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -229,9 +227,9 @@ default_border none
 gaps inner 10
 
 # Autostart (Global)
-exec_always --no-startup-id setrandom /usr/share/backgrounds/catppuccin/
 exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
+exec --no-startup-id waypaper --restore
 exec --no-startup-id pcmanfm -d
 exec --no-startup-id dunst
 
