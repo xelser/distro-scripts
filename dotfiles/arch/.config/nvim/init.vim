@@ -3,9 +3,8 @@ call plug#begin()
 Plug 'ap/vim-css-color'
 
 " Themes
-Plug 'navarasu/onedark.nvim'
-Plug 'nvim-lualine/lualine.nvim'
-Plug 'nvim-tree/nvim-web-devicons'
+Plug 'sainnhe/edge'
+Plug 'vim-airline/vim-airline'
 
 " Settings
 Plug 'tpope/vim-repeat'
@@ -30,8 +29,14 @@ set mouse=a                 " enable mouse click
 set clipboard=unnamedplus   " using system clipboard
 set ttyfast                 " Speed up scrolling in Vim
 
-colorscheme onedark
+" Important!!
+if has('termguicolors')
+  set termguicolors
+endif
 
-lua << END
-require('lualine').setup { options = { theme = 'onedark' }}
-END
+" The configuration options should be placed before `colorscheme edge`.
+let g:edge_style = 'aura'
+let g:edge_better_performance = 1
+
+colorscheme edge
+let g:airline_theme = 'edge'
