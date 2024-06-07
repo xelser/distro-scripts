@@ -24,6 +24,12 @@ mkdir -p $HOME/Pictures/Screenshots
 # wallpaper (waypaper)
 [ -f /bin/wallpaper ] && waypaper --restore
 
+# text editor (pluma)
+dconf write /org/mate/pluma/color-scheme "'edge-aura'"
+dconf write /org/mate/pluma/display-line-numbers 'true' 
+dconf write /org/mate/pluma/highlight-current-line 'true' 
+dconf write /org/mate/pluma/toolbar-visible 'false' 
+
 # openbox menu
 [ -f /bin/obmenu-generator ] && obmenu-generator -p -i -u -d -c
 
