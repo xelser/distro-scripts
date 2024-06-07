@@ -38,3 +38,27 @@ if [ -f /usr/bin/xfce4-terminal ]; then
 	cp -rf /tmp/edge-xfce4-terminal/*.theme $HOME/.local/share/xfce4/terminal/colorschemes/
 fi
 
+if [ -f /usr/bin/alacritty ]; then
+	cd /tmp/ && git clone --depth 1 https://github.com/xelser/edge-alacritty
+	cp -rf /tmp/edge-alacritty/*.toml $HOME/.config/alacritty/
+fi
+
+# apps
+if [ -f /usr/bin/polybar ]; then
+	cd /tmp/ && git clone --depth 1 https://github.com/xelser/edge-polybar && mkdir -p $HOME/.config/polybar/themes/
+	cp -rf /tmp/edge-polybar/*.ini $HOME/.config/polybar/themes/
+fi
+
+if [ -f /usr/bin/dunst ] && [ ! -f $HOME/.config/dunst/dunstrc ]; then
+	cd /tmp/ && git clone --depth 1 https://github.com/xelser/edge-dunst && mkdir -p $HOME/.config/dunst
+	cat $(find /etc/ -name "dunstrc" 2> /dev/null) > $HOME/.config/dunst/dunstrc
+	
+	# Using Aura variant
+	cat /tmp/edge-dunst/aura.conf >> $HOME/.config/dunst/dunstrc
+
+	# Config Dunst
+	sed -i 's/origin = top-right/origin = bottom-right/g' $HOME/.config/dunst/dunstrc
+	sed -i 's/offset = 10x50/offset = 20x20/g' $HOME/.config/dunst/dunstrc
+	sed -i 's/icon_theme = Adwaita/icon_theme = Papirus-Dark/g' $HOME/.config/dunst/dunstrc
+	sed -i 's/max_icon_size = 128/max_icon_size = 64/g' $HOME/.config/dunst/dunstrc
+fi
