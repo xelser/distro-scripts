@@ -8,8 +8,8 @@ sed -i 's/non-free-firmware/non-free-firmware non-free contrib/g' \
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base (X11 and Pulseaudio)
-nala install --assume-yes build-essential pulseeffects xorg lightdm \
-  plymouth numlockx redshift synaptic htpdate \
+nala install --assume-yes xorg lightdm numlockx redshift \
+  plymouth build-essential synaptic htpdate pulseeffects \
   dconf-{editor,cli} libglib2.0-bin mugshot at-spi2-core \
   thunar-{archive-plugin,volman} gvfs-{backends,fuse} \
   firefox-esr atril {transmission,syncthing}-gtk \
@@ -17,8 +17,8 @@ nala install --assume-yes build-essential pulseeffects xorg lightdm \
 
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar alacritty neovim \
-  imv mpv rofi dunst libnotify-bin mate-polkit lxappearance \
-  xarchiver pluma flameshot
+  imv mpv rofi dunst lxappearance xarchiver pluma flameshot \
+  mate-polkit
 
 # INSTALL: Debian XFCE
 #nala install --assume-yes mousepad parole ristretto engrampa \
