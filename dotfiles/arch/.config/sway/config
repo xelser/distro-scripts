@@ -235,7 +235,7 @@ exec --no-startup-id dunst
 
 # Autostart (for Wayland)
 exec --no-startup-id sh $HOME/.config/waybar/launch.sh
-exec --no-startup-id sh $HOME/.config/autostart/wayland_xset_led.sh
+#exec --no-startup-id sh $HOME/.config/autostart/wayland_xset_led.sh
 
 # Autostart (for sway)
 exec --no-startup-id sh $HOME/.config/autostart/sway-gtk.sh
