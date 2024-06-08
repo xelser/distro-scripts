@@ -5,7 +5,7 @@
 # PACKAGE MANAGER: Nala and Debian Repos
 sed -i 's/non-free-firmware/non-free-firmware non-free contrib/g' \
   /etc/apt/sources.list && dpkg --add-architecture i386
-apt update && apt install nala --yes
+apt update && apt install nala curl --yes
 
 # INSTALL: Debian Base (X11 and Pulseaudio)
 nala install --assume-yes xorg lightdm numlockx redshift \
