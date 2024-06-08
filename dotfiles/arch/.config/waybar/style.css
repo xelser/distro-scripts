@@ -1,14 +1,14 @@
-@import "mocha.css";
+@import "edge-aura.css";
 
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: JetBrainsMono Nerd Font;
+    font-family: FiraCode Nerd Font;
     font-weight: bold;
-    color: @text;
+    color: @fg0;
 }
 
 window#waybar {
-    background-color: @crust;
+    background-color: @bg_dim;
     /*border-bottom: 3px solid @sky;*/
     transition-property: background-color;
     transition-duration: .5s;
