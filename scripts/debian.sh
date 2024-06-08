@@ -8,8 +8,8 @@ sed -i 's/non-free-firmware/non-free-firmware non-free contrib/g' \
 apt update && apt install nala --yes
 
 # INSTALL: Debian Base (X11 and Pulseaudio)
-nala install --assume-yes pulseeffects xorg lightdm{,-gtk-greeter-settings} \
-  plymouth numlockx redshift build-essential synaptic htpdate \
+nala install --assume-yes build-essential pulseeffects xorg lightdm \
+  plymouth numlockx redshift synaptic htpdate \
   dconf-{editor,cli} libglib2.0-bin mugshot at-spi2-core \
   thunar-{archive-plugin,volman} gvfs-{backends,fuse} \
   firefox-esr atril {transmission,syncthing}-gtk \
@@ -18,12 +18,17 @@ nala install --assume-yes pulseeffects xorg lightdm{,-gtk-greeter-settings} \
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar alacritty neovim \
   imv mpv rofi dunst libnotify-bin mate-polkit lxappearance \
-  xarchiver gedit flameshot
+  xarchiver pluma flameshot
 
 # INSTALL: Debian XFCE
 #nala install --assume-yes mousepad parole ristretto engrampa \
 #  xfce4{,-screenshooter,-notifyd,-power-manager,-terminal} \
 #  light-locker redshift-gtk
+
+# INSTALL: LightDM Web Greeter (deb)
+version="$(curl --silent "https://api.github.com/repos/JezerM/web-greeter/releases/latest" | grep tag_name | cut -d'"' -f4 | cut -d'v' -f2)"
+wget -q https://github.com/JezerM/web-greeter/releases/download/${version}/web-greeter-${version}-debian.deb -P /tmp
+nala install --assume-yes /tmp/web-greeter-${version}-debian.deb
 
 # INSTALL: TeamViewer (deb)
 wget -q https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -P /tmp
@@ -65,6 +70,7 @@ update-grub
 echo -e "\n[Seat:*]
 autologin-user=${user}
 autologin-session=i3
+greeter-session=web-greeter
 greeter-hide-users=false
 " >> /etc/lightdm/lightdm.conf
 systemctl enable lightdm

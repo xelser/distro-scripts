@@ -10,7 +10,7 @@ dconf write /org/gnome/desktop/interface/monospace-font-name "'Ubuntu Mono 12'"
 [ -f $HOME/.config/dunst/dunstrc ] && \
 	sed -i 's/font = Monospace 8/font = Ubuntu Mono 12/g' $HOME/.config/dunst/dunstrc
 
-# vim/neovim plug (text editors)
+# text editors
 [ -f /usr/bin/vim ] && curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
@@ -21,6 +21,13 @@ if [ -f /usr/bin/gedit ]; then
 	dconf write /org/gnome/gedit/preferences/editor/scheme "'gruvbox-material-hard-dark'"
 	dconf write /org/gnome/gedit/preferences/editor/editor-font "'UbuntuMono Nerd Font 12'"
 	dconf write /org/gnome/gedit/preferences/editor/use-default-font "false"
+fi
+
+if [ -f /usr/bin/pluma ]; then
+	gsettings set org.mate.pluma color-scheme 'gruvbox-material-hard-dark'
+	gsettings set org.mate.pluma display-line-numbers true
+	gsettings set org.mate.pluma highlight-current-line true
+	gsettings set org.mate.pluma toolbar-visible false
 fi
 
 # rofi (launcher and powermenu)
