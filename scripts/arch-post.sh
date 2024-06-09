@@ -9,8 +9,8 @@ fi
 
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-  mugshot waypaper dconf-editor ventoy-bin htpdate autotiling obmenu-generator neovim-{plug,symlinks}
-  # ulauncher {zscroll,polybar-scripts}-git syncthing-gtk teamviewer zoom obs-studio meld gnome-boxes betterlockscreen 
+  mugshot waypaper dconf-editor ventoy-bin htpdate autotiling obmenu-generator neovim-{plug,symlinks} \
+  syncthing-gtk teamviewer # ulauncher {zscroll,polybar-scripts}-git zoom obs-studio meld gnome-boxes betterlockscreen 
 
 # BUILD: caffeinate
 #sudo pacman -S --needed --noconfirm rustup && rustup default stable
@@ -48,7 +48,7 @@ gsettings set org.mate.pluma highlight-current-line true
 gsettings set org.mate.pluma toolbar-visible false
 gsettings set org.mate.pluma use-default-font false
 
-# flameshot directory
+# screenshot directory (flameshot)
 mkdir -p $HOME/Pictures/Screenshots
 
 # wallpaper (waypaper)
