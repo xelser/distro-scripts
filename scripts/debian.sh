@@ -11,14 +11,13 @@ apt update && apt install nala curl --yes
 nala install --assume-yes xorg lightdm numlockx redshift \
   plymouth build-essential synaptic htpdate pulseeffects \
   dconf-{editor,cli} libglib2.0-bin mugshot at-spi2-core \
-  thunar-{archive-plugin,volman} gvfs-{backends,fuse} \
   firefox-esr atril {transmission,syncthing}-gtk \
   fonts-ubuntu{,-console} network-manager
 
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar alacritty neovim \
-  imv mpv rofi dunst lxappearance xarchiver pluma flameshot \
-  mate-polkit
+  imv mpv rofi dunst lxappearance pcmanfm xarchiver pluma \
+  flameshot mate-polkit
 
 # INSTALL: Debian XFCE
 #nala install --assume-yes mousepad parole ristretto engrampa \
@@ -40,7 +39,7 @@ nala install --assume-yes python3-i3ipc && wget -q -O /usr/bin/autotiling \
 chmod +x /usr/bin/autotiling
 
 # BUILD: i3lock-color and betterlockscreen
-nala install --assume-yes autoconf gcc make pkg-config libpam0g-dev \
+nala install --assume-yes bc autoconf gcc make pkg-config libpam0g-dev \
   libcairo2-dev libfontconfig1-dev libxcb-composite0-dev libev-dev \
   libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev \
   libxcb-image0-dev libxcb-util0-dev libxcb-xrm-dev libxkbcommon-dev \

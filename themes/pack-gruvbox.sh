@@ -9,7 +9,7 @@
 #sudo cp -rf gruvbox-material-gtk/themes /usr/share/
 
 # cursors
-cd /tmp/ && wget -cO- https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2 | sudo tar xfj - -C /usr/share/icons
+#cd /tmp/ && wget -cO- https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2 | sudo tar xfj - -C /usr/share/icons
 
 # papirus folders
 [[ ${distro_id} == "arch" ]]      && color="aqua"
