@@ -302,7 +302,7 @@
        id="lpetool"
        mode="drag"
        style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;"
-       unit="px"
+       unit="mm"
        show_bbox="1" />
     <eventcontext
        id="text"
@@ -944,7 +944,12 @@
        unitType="2" />
     <group
        id="boot"
-       theme="colorful" />
+       theme="system"
+       enabled="0">
+      <group
+         id="shown"
+         ver1.3.2="1" />
+    </group>
     <group
        id="rendering" />
     <group
@@ -994,7 +999,7 @@
        icononly="1"
        small="0"
        iconsize="16"
-       width="30">
+       width="32">
       <group
          id="buttons" />
     </group>
@@ -1081,12 +1086,19 @@
      id="theme"
      defaultPreferDarkTheme="0"
      defaultIconTheme="Papirus-Dark"
-     defaultGtkTheme="Catppuccin-Mocha-Compact-Sky-Dark"
+     defaultGtkTheme="Edge-cyan-dark"
      narrowSpinButton="1"
      preferDarkTheme="1"
      darkTheme="1"
-     symbolicIcons="1"
+     symbolicIcons="0"
      symbolicDefaultBaseColors="1"
-     symbolicDefaultHighColors="0"
-     syntax-color-theme="inkscape-dark" />
+     symbolicDefaultHighColors="1"
+     syntax-color-theme="inkscape-dark">
+    <group
+       id="multicolor"
+       symbolicBaseColor="3958107135"
+       symbolicSuccessColor="10029823"
+       symbolicWarningColor="4279865599"
+       symbolicErrorColor="10086143" />
+  </group>
 </inkscape>
