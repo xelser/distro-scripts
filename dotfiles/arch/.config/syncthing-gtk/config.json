@@ -11,7 +11,7 @@
     "language": "None",
     "last_updatecheck": "1970-01-01T08:00:01",
     "max_cpus": 0,
-    "minimize_on_start": true,
+    "minimize_on_start": false,
     "notification_for_error": true,
     "notification_for_folder": false,
     "notification_for_update": true,
