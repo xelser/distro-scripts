@@ -181,6 +181,9 @@ save_folder /.config/picom/
 # Nitrogen
 save_folder /.config/nitrogen/
 
+# Waypaper
+save_file /.config/waypaper/ config.ini
+
 # Vim
 save_file / .vimrc
 

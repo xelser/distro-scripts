@@ -150,7 +150,7 @@ pacman -Sy --needed --noconfirm linux linux-firmware btrfs-progs {intel,amd}-uco
 	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound networkmanager nm-connection-editor \
 	base-devel dmidecode inetutils reflector xdg-user-dirs neofetch htop git gvfs neovim{,-plugins} xclip wl-clipboard imv mpv mpd \
 	sddm gammastep brightnessctl wallutils feh swaybg nwg-look flameshot grim firefox alacritty dunst rofi picom polybar numlockx \
-	transmission-gtk xarchiver nemo atril pluma ttf-fira{-sans,code-nerd} xdg-desktop-portal-{wlr,gtk,hyprland} \
+	transmission-gtk xarchiver pcmanfm atril pluma ttf-fira{-sans,code-nerd} xdg-desktop-portal-{wlr,gtk,hyprland} \
 	i3-wm openbox obconf tint2 sway waybar hyprland polkit-kde-agent
 
 # sddm
