@@ -302,7 +302,7 @@
        id="lpetool"
        mode="drag"
        style="fill:#ff0000;fill-opacity:1;fill-rule:nonzero;stroke:none;"
-       unit="mm"
+       unit="px"
        show_bbox="1" />
     <eventcontext
        id="text"
@@ -386,7 +386,8 @@
     <eventcontext
        id="connector"
        style="fill:none;fill-rule:evenodd;stroke:black;stroke-opacity:1;stroke-linejoin:miter;stroke-width:1px;stroke-linecap:butt;"
-       selcue="1" />
+       selcue="1"
+       curvature="0" />
     <eventcontext
        id="paintbucket"
        style="fill:#a0a0a0;stroke:none;"
@@ -1101,4 +1102,7 @@
        symbolicWarningColor="4279865599"
        symbolicErrorColor="10086143" />
   </group>
+  <group
+     id="gradient-edit"
+     stoplist="1" />
 </inkscape>
