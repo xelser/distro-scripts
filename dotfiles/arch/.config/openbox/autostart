@@ -1,22 +1,10 @@
 # Autostart (Global)
-easyeffects --gapplication-service &
-/usr/lib/xfce-polkit/xfce-polkit &
-waypaper --restore &
-dunst &
+setwallpaper $(cat ~/.config/waypaper/config.ini | grep "wallpaper" | cut -d'=' -f2) &
+/usr/lib/mate-polkit/polkit-mate-authentication-agent-1 &
 
-# Autostart (for X11)
-bash $HOME/.config/polybar/launch.sh &
-xset s off -dpms &
+# Autostart (X11)
 xset led on &
-#xfsettingsd
-#xsettingsd 
-numlockx &
+#picom &
 
-# Compositor (picom)
-picom --daemon &
-
-# Screenshot (flameshot)
-flameshot &
-
-# Night light (gammastep)
-sh $HOME/.config/gammastep/launch.sh &
+# Autostart (for openbox)
+tint2 &
