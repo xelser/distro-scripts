@@ -9,8 +9,8 @@ fi
 
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-  mugshot waypaper dconf-editor ventoy-bin htpdate autotiling obmenu-generator neovim-{plug,symlinks} \
-  syncthing-gtk teamviewer # ulauncher {zscroll,polybar-scripts}-git zoom obs-studio meld gnome-boxes betterlockscreen 
+  mugshot waypaper ventoy-bin htpdate autotiling xidlehook betterlockscreen obmenu-generator neovim-{plug,symlinks} \
+  syncthing-gtk teamviewer # ulauncher {zscroll,polybar-scripts}-git zoom obs-studio gnome-boxes
 
 # BUILD: caffeinate
 #sudo pacman -S --needed --noconfirm rustup && rustup default stable
@@ -29,9 +29,6 @@ sed -i 's/Iosevka/FiraCode/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.r
 
 sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
 sed -i 's/JetBrains Mono/FiraCode/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
-
-# betterlockscreen
-#[ -f /usr/bin/betterlockscreen ] && betterlockscreen --update "/usr/share/backgrounds/catppuccin" --fx dim 50
 
 #################################### POST ####################################
 
