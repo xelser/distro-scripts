@@ -148,10 +148,10 @@ echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILov
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 pacman -Sy --needed --noconfirm linux linux-firmware btrfs-progs {intel,amd}-ucode plymouth grub os-prober efibootmgr dosfstools \
 	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound networkmanager nm-connection-editor \
-	base-devel dmidecode inetutils reflector xdg-user-dirs neofetch htop git gvfs neovim{,-plugins} xclip wl-clipboard imv mpv mpd \
-	sddm nwg-look kvantum-qt5 qt5ct firefox alacritty dunst rofi transmission-gtk xarchiver pcmanfm atril pluma dconf-editor meld \
-	mate-polkit gammastep brightnessctl wallutils feh swaybg flameshot grim picom numlockx xdg-desktop-portal-{wlr,gtk,hyprland} \
-	i3-wm polybar openbox obconf tint2 sway waybar hyprland ttf-fira{-sans,code-nerd} 
+	base-devel man-{db,pages} dmidecode inetutils reflector gvfs xdg-user-dirs xdg-desktop-portal-{wlr,gtk,hyprland} dconf-editor \
+	mate-polkit nwg-look kvantum-qt5 qt5ct alacritty firefox transmission-gtk xarchiver pcmanfm atril pluma neofetch htop git \
+	neovim{,-plugins} xclip wl-clipboard imv mpv dunst rofi gammastep brightnessctl wallutils feh swaybg flameshot grim \
+	sddm picom numlockx i3-wm polybar openbox obconf tint2 sway waybar hyprland ttf-fira{-sans,code-nerd}
 
 # sddm
 echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf

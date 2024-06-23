@@ -206,21 +206,21 @@ gaps top 42
 exec --no-startup-id setwallpaper $(cat ~/.config/waypaper/config.ini | grep "wallpaper" | cut -d'=' -f2)
 exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 exec --no-startup-id easyeffects --gapplication-service
-exec --no-startup-id pcmanfm -d
+exec --no-startup-id pcmanfm --daemon-mode
 exec --no-startup-id dunst
 
 # Autostart (for X11)
-exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id xset led on
 #exec --no-startup-id xfsettingsd
 #exec --no-startup-id xsettingsd
 exec --no-startup-id numlockx
+exec --no-startup-id picom
 
 # Autostart (for i3)
+exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id autotiling
 
 # Compositor (picom)
-exec --no-startup-id picom --daemon
 bindsym $mod+Shift+p exec killall picom
 bindsym $mod+p exec picom & disown 2>&1/dev/null
 
@@ -238,8 +238,8 @@ exec --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | c
 
 # Power Management (xidlehook)
 exec --no-startup-id xset s 1800
-exec --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --timer "$(xset q | grep timeout | cut -d' ' -f5)" \
-  --socket "/tmp/xidlehook.sock" "betterlockscreen --time-format '%I:%M %p' -l dimblur" "xset led on"
+exec --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --socket "/tmp/xidlehook.sock" \
+  --timer "$(xset q | grep timeout | cut -d' ' -f5)" "betterlockscreen --time-format '%I:%M %p' -l dimblur" "xset led on"
 
 # Inhibit (caffeinate)
 #bindsym $mod+i exec caffeinate & disown && notify-send "Inhibit: caffeinate 󰅶 enable"
