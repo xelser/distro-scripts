@@ -238,7 +238,7 @@ exec --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | c
 
 # Power Management (xidlehook)
 exec --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --socket "/tmp/xidlehook.sock" \
-	--timer "3600" "betterlockscreen --time-format '%I:%M %p' -l dimblur" ""
+	--timer "1800" "betterlockscreen --time-format '%I:%M %p' -l dimblur" "xset led on"
 
 # Inhibit (caffeinate)
 #bindsym $mod+i exec caffeinate & disown && notify-send "Inhibit: caffeinate 󰅶 enable"
