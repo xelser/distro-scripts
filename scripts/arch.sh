@@ -149,9 +149,9 @@ echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILov
 pacman -Sy --needed --noconfirm linux linux-firmware btrfs-progs {intel,amd}-ucode plymouth grub os-prober efibootmgr dosfstools \
 	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound networkmanager nm-connection-editor \
 	base-devel dmidecode inetutils reflector xdg-user-dirs neofetch htop git gvfs neovim{,-plugins} xclip wl-clipboard imv mpv mpd \
-	sddm mate-polkit gammastep brightnessctl wallutils feh swaybg flameshot grim firefox alacritty dunst rofi picom numlockx \
-	nwg-look kvantum-qt5 qt5ct transmission-gtk xarchiver pcmanfm atril pluma xdg-desktop-portal-{wlr,gtk,hyprland} \
-	ttf-fira{-sans,code-nerd} i3-wm polybar openbox obconf tint2 sway waybar hyprland
+	sddm nwg-look kvantum-qt5 qt5ct firefox alacritty dunst rofi transmission-gtk xarchiver pcmanfm atril pluma dconf-editor meld \
+	mate-polkit gammastep brightnessctl wallutils feh swaybg flameshot grim picom numlockx xdg-desktop-portal-{wlr,gtk,hyprland} \
+	i3-wm polybar openbox obconf tint2 sway waybar hyprland ttf-fira{-sans,code-nerd} 
 
 # sddm
 echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
