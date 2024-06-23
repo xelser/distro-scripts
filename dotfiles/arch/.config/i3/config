@@ -237,8 +237,7 @@ bindsym $mod+o exec sh $HOME/.config/gammastep/toggle.sh
 exec --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f2)" --fx dimblur
 
 # Power Management (xidlehook)
-exec --no-startup-id xset s 1800
-exec --no-startup-id xidlehook --not-when-fullscreen --not-when-audio --socket "/tmp/xidlehook.sock" \
+exec --no-startup-id xset s 1800 1800 && xidlehook --not-when-fullscreen --not-when-audio --socket "/tmp/xidlehook.sock" \
   --timer "$(xset q | grep timeout | cut -d' ' -f5)" "betterlockscreen --time-format '%I:%M %p' -l dimblur" "xset led on"
 
 # Inhibit (caffeinate)
