@@ -190,8 +190,8 @@ EOF
 arch_plasma () { arch-chroot /mnt /bin/bash << EOF
 
 # KDE Plasma Packages
-pacman -S --needed --noconfirm plasma-{pa,nm,desktop} sddm-kcm kscreen \
-	konsole dolphin
+pacman -S --needed --noconfirm plasma-{desktop,pa,nm} {flatpak,plymouth,sddm}-kcm {blue,power}devil kscreen \
+	konsole dolphin ark kate kwrite gwenview okular elisa filelight ktorrent spectacle discover 
 
 # sddm
 systemctl enable sddm
