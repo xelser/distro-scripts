@@ -209,8 +209,9 @@ echo
 echo "----------------------------------------------"
 read -p "Select which DE or WM you want to install (#): " selected_gui
 case $selected_gui in
-		2) gui="KDE Plasma";;
-	*|1) gui="i3/Sway/Openbox/Hyprland";;
+	1) gui="i3/Sway/Openbox/Hyprland";;
+	2) gui="KDE Plasma";;
+	*) gui="TTY (Base)";;
 esac
 
 ## CONFIRMATION ##
@@ -234,8 +235,9 @@ case $confirm in
    n)	;;
  *|Y) partitioning && arch_base
 			case $selected_gui in
-					2) arch_plasma;;
-				*|1) arch_wm;;
+				1) arch_wm;;
+				2) arch_plasma;;
+				*) ;;
 			esac
 			;;
 esac
