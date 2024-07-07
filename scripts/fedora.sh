@@ -6,7 +6,7 @@ append_file () {
 
 ################################## PACKAGES ##################################
 
-# PACKAGE MANAGER: DNF
+# PACKAGE MANAGER: DNF(5)
 append_file "keepcache=True
 defaultyes=True
 install_weak_deps=False
@@ -14,6 +14,8 @@ max_parallel_downloads=5
 color=always
 #fastestmirror=True
 #assumeyes=True" /etc/dnf/dnf.conf
+sudo dnf install --assumeyes dnf5
+sudo ln -s /usr/bin/dnf5 /usr/local/bin/dnf
 
 # DEBLOAT
 sudo dnf groupremove --assumeyes "Guest Desktop Agents" "Container Management" "LibreOffice"
@@ -35,7 +37,7 @@ sudo dnf upgrade --assumeyes --best --allowerasing # --security --bugfix --enhan
 #sudo dnf groupupdate sound-and-video multimedia --assumeyes --exclude=PackageKit-gstreamer-plugin
 
 # INSTALL: Fedora Workstation
-sudo dnf install --assumeyes --skip-broken --allowerasing google-roboto-{fonts,mono-fonts,slab-fonts} dconf-editor libheif-tools \
+sudo dnf install --assumeyes --skip-broken --allowerasing google-roboto-{fonts,mono-fonts,slab-fonts} libheif-tools \
   gnome-{builder,console,extensions-app,multi-writer,tweaks} file-roller fragments celluloid drawing easyeffects \
   gnome-shell-extension-{appindicator,blur-my-shell,caffeine,dash-to-dock,forge,just-perfection,places-menu} \
   plymouth
