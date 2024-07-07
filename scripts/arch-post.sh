@@ -9,16 +9,42 @@ fi
 
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-  mugshot waypaper ventoy-bin htpdate autotiling xidlehook betterlockscreen obmenu-generator neovim-{plug,symlinks} \
-  syncthing-gtk teamviewer # ulauncher {zscroll,polybar-scripts}-git zoom obs-studio gnome-boxes
+  ventoy-bin htpdate syncthing-gtk teamviewer # zoom obs-studio gnome-boxes
+
+#################################### POST ####################################
+
+# set fonts
+dconf write /org/gnome/desktop/interface/font-name "'Fira Sans 10'"
+dconf write /org/gnome/desktop/interface/monospace-font-name "'FiraCode Nerd Font 10'"
+
+# touchpad
+#if [[ ${machine_type} == "notebook" ]]; then
+#	sudo wget -qO /etc/X11/xorg.conf.d/30-touchpad.conf \
+#		https://raw.githubusercontent.com/xelser/distro-scripts/main/common/30-touchpad.conf
+#fi
+
+# daemons
+[ -f /usr/bin/ulauncher ] && systemctl enable --user ulauncher
+[ -f /usr/bin/syncthing ] && systemctl enable --user syncthing
+
+# bluetooth
+sudo dmesg | grep -q 'Bluetooth' && \
+	sudo pacman -S --needed --noconfirm bluez-utils && \
+	sudo systemctl enable bluetooth --now
+
+################################### WM/DE ####################################
+
+setup_wm () {
+# INSTALL: AUR PACKAGES
+yay -S --needed --noconfirm \
+	mugshot waypaper autotiling xidlehook betterlockscreen obmenu-generator neovim-{plug,symlinks}
+  # ulauncher {zscroll,polybar-scripts}-git
 
 # BUILD: caffeinate
 #sudo pacman -S --needed --noconfirm rustup && rustup default stable
 #cargo install --git https://github.com/rschmukler/caffeinate
 
-################################### THEMES ###################################
-
-# main
+# theme 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-edge.sh)"
 
 # rofi (launcher and powermenu)
@@ -30,11 +56,7 @@ sed -i 's/Iosevka/FiraCode/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.r
 sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
 sed -i 's/JetBrains Mono/FiraCode/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
 
-#################################### POST ####################################
-
-# set fonts
-dconf write /org/gnome/desktop/interface/font-name "'Fira Sans 10'"
-dconf write /org/gnome/desktop/interface/monospace-font-name "'FiraCode Nerd Font 10'"
+# dunst
 sed -i 's/font = Monospace 8/font = FiraCode Nerd Font 10/g' $HOME/.config/dunst/dunstrc
 
 # text editor (pluma)
@@ -54,17 +76,12 @@ mkdir -p $HOME/Pictures/Screenshots
 # openbox menu
 [ -f /bin/obmenu-generator ] && obmenu-generator -p -i -u -d -c
 
-# touchpad
-#if [[ ${machine_type} == "notebook" ]]; then
-#	sudo wget -qO /etc/X11/xorg.conf.d/30-touchpad.conf \
-#		https://raw.githubusercontent.com/xelser/distro-scripts/main/common/30-touchpad.conf
-#fi
+}
 
-# daemons
-[ -f /usr/bin/ulauncher ] && systemctl enable --user ulauncher
-[ -f /usr/bin/syncthing ] && systemctl enable --user syncthing
+setup_plasma () { }
 
-# bluetooth
-sudo dmesg | grep -q 'Bluetooth' && \
-	sudo pacman -S --needed --noconfirm blue{man,z-utils} && \
-	sudo systemctl enable bluetooth --now
+if [[ ${wm_de} == "kde" ]]; then
+	setup_plasma
+else
+	setup_wm
+fi
