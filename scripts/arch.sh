@@ -234,8 +234,8 @@ case $confirm in
    n)	;;
  *|Y) partitioning && arch_base
 			case $selected_gui in
-				*|1) arch_wm;;
 					2) arch_plasma;;
+				*|1) arch_wm;;
 			esac
 			;;
 esac
