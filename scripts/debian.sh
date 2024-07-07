@@ -10,13 +10,14 @@ apt update && apt install nala curl --yes
 # INSTALL: Debian Base (X11 and Pulseaudio)
 nala install --assume-yes xorg lightdm numlockx redshift \
   plymouth build-essential synaptic htpdate pulseeffects \
-  firefox-esr atril {transmission,syncthing}-gtk \
   dconf-cli libglib2.0-bin mugshot at-spi2-core \
+  firefox-esr {transmission,syncthing}-gtk \
   fonts-ubuntu{,-console} network-manager
 
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar alacritty neovim \
-  imv mpv rofi dunst lxappearance pcmanfm xarchiver pluma \
+  imv mpv rofi dunst lxappearance engrampa pluma atril \
+  thunar-{volman,archive-plugin} gvfs-backends \
   flameshot mate-polkit nitrogen
 
 # INSTALL: Debian XFCE

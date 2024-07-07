@@ -206,6 +206,7 @@ gaps top 42
 exec --no-startup-id /usr/libexec/polkit-mate-authentication-agent-1
 exec --no-startup-id pulseeffects --gapplication-service
 exec --no-startup-id xset s off -dpms
+exec --no-startup-id thunar --daemon
 #exec --no-startup-id xfsettingsd
 #exec --no-startup-id xsettingsd
 exec --no-startup-id redshift 
@@ -213,6 +214,7 @@ exec --no-startup-id numlockx
 exec --no-startup-id dunst 
 
 # Autostart (Always)
+exec_always --no-startup-id feh --bg-fill --randomize /run/media/xelser/Media/Pictures/Gruvbox/*
 exec_always --no-startup-id bash $HOME/.config/autostart/autostart-script.sh
 exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id xset led on
@@ -228,7 +230,6 @@ exec --no-startup-id flameshot
 bindsym Print exec flameshot full --path /home/xelser/Pictures/Screenshots/
 bindsym Shift+Print exec flameshot gui --path /home/xelser/Pictures/Screenshots/
 
-# Screensaver and Wallpaper (betterlockscreen)
-exec_always --no-startup-id betterlockscreen -u "/run/media/xelser/Media/Pictures/Gruvbox" --fx dimblur && betterlockscreen --wall
-#betterlockscreen --time-format "%I:%M %p" --lock dimblur
+# Screensaver (betterlockscreen)
+#exec --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f2)" --fx dimblur
 
