@@ -17,7 +17,7 @@ nala install --assume-yes xorg lightdm numlockx redshift \
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar alacritty neovim \
   imv mpv rofi dunst lxappearance pcmanfm xarchiver pluma \
-  flameshot mate-polkit
+  flameshot mate-polkit nitrogen
 
 # INSTALL: Debian XFCE
 #nala install --assume-yes mousepad parole ristretto engrampa \
