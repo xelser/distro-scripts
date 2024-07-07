@@ -64,3 +64,7 @@ mkdir -p $HOME/Pictures/Screenshots
 [ -f /usr/bin/ulauncher ] && systemctl enable --user ulauncher
 [ -f /usr/bin/syncthing ] && systemctl enable --user syncthing
 
+# bluetooth
+sudo dmesg | grep -q 'Bluetooth' && \
+	sudo pacman -S --needed --noconfirm blue{man,z-utils} && \
+	sudo systemctl enable bluetooth --now
