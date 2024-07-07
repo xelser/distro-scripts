@@ -12,7 +12,7 @@ if [[ ${machine} == "G41T-R3" ]]; then
   swap="6"
 elif [[ ${machine} == "E5-476G" ]]; then
   device="sda"
-  root="6"
+  root="5"
   swap="3"
   efi="1"
 elif [[ ${machine_type} == "Other" ]]; then # GNOME BOXES
@@ -146,9 +146,9 @@ echo "arch" > /etc/hostname
 # Base Minimal Packages
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
-pacman -Sy --needed --noconfirm linux linux-firmware btrfs-progs {intel,amd}-ucode plymouth grub os-prober efibootmgr dosfstools \
+pacman -Sy --needed --noconfirm linux linux-firmware btrfs-progs ntfs-3g {intel,amd}-ucode grub os-prober efibootmgr dosfstools \
 	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound networkmanager nm-connection-editor \
-	base-devel man-{db,pages} dmidecode inetutils reflector numlockx firefox ttf-fira{-sans,code-nerd}
+	plymouth base-devel man-{db,pages} dmidecode inetutils reflector numlockx firefox ttf-fira{-sans,code-nerd}
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
