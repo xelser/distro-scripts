@@ -190,7 +190,7 @@ EOF
 arch_plasma () { arch-chroot /mnt /bin/bash << EOF
 
 # KDE Plasma Packages
-pacman -S --needed --noconfirm plasma
+pacman -S --needed --noconfirm plasma-{pa,nm,desktop} kscreen konsole dolphin
 
 # sddm
 systemctl enable sddm
@@ -233,8 +233,9 @@ read -p "Proceed? (Y/n): " confirm
 case $confirm in
    n)	;;
  *|Y) partitioning && arch_base
-	 		
-	 		[ ${gui} == "i3/Sway/Openbox/Hyprland" ] && arch_wm
-	 		[ ${gui} == "KDE Plasma" ] && arch_plasma
+			case $selected_gui in
+				*|1) arch_wm;;
+					2) arch_plasma;;
+			esac
 			;;
 esac
