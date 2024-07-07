@@ -78,16 +78,20 @@ mkdir -p $HOME/Pictures/Screenshots
 
 }
 
-setup_plasma () { 
+setup_kde () { 
+# INSTALL: AUR PACKAGES
+yay -S --needed --noconfirm konsave
 
 # theme 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/theme-fluent.sh)"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/icon-fluent.sh)"
 
+# apply configs (konsave)
+[ -f /usr/bin/konsave ] && konsave -a defaults 2>/dev/null
 }
 
 if [[ ${wm_de} == "kde" ]]; then
-	setup_plasma
+	setup_kde
 else
 	setup_wm
 fi
