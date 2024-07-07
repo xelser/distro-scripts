@@ -9,7 +9,7 @@ fi
 
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-  ventoy-bin htpdate syncthing-gtk teamviewer # zoom obs-studio gnome-boxes
+  ventoy-bin htpdate syncthing-gtk # teamviewer zoom obs-studio gnome-boxes
 
 #################################### POST ####################################
 
@@ -78,7 +78,13 @@ mkdir -p $HOME/Pictures/Screenshots
 
 }
 
-setup_plasma () { }
+setup_plasma () { 
+
+# theme 
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/theme-fluent.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/icon-fluent.sh)"
+
+}
 
 if [[ ${wm_de} == "kde" ]]; then
 	setup_plasma
