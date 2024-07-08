@@ -213,7 +213,7 @@ exec --no-startup-id numlockx
 exec --no-startup-id dunst 
 
 # Autostart (Always)
-exec_always --no-startup-id feh --bg-fill --randomize /run/media/xelser/Media/Pictures/Gruvbox/*
+exec_always --no-startup-id nitrogen --set-zoom-fill --random /run/media/xelser/Media/Pictures/Gruvbox/
 exec_always --no-startup-id bash $HOME/.config/autostart/autostart-script.sh
 exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id xset led on

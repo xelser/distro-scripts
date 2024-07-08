@@ -7,12 +7,13 @@ sed -i 's/non-free-firmware/non-free-firmware non-free contrib/g' \
   /etc/apt/sources.list && dpkg --add-architecture i386
 apt update && apt install nala curl --yes
 
-# INSTALL: Debian Base (X11 and Pulseaudio)
-nala install --assume-yes xorg lightdm numlockx redshift \
-  plymouth build-essential synaptic htpdate pulseeffects \
+# INSTALL: Debian Base
+nala install --assume-yes xorg lightdm numlockx gammastep \
+  plymouth build-essential synaptic htpdate easyeffects \
   dconf-cli libglib2.0-bin mugshot at-spi2-core \
   firefox-esr {transmission,syncthing}-gtk \
-  fonts-ubuntu{,-console} network-manager
+  fonts-ubuntu{,-console} network-manager \
+  lightdm-gtk-greeter-settings
 
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar alacritty neovim \
@@ -26,9 +27,9 @@ nala install --assume-yes i3-wm picom polybar alacritty neovim \
 #  light-locker redshift-gtk
 
 # INSTALL: LightDM Web Greeter (deb)
-version="$(curl --silent "https://api.github.com/repos/JezerM/web-greeter/releases/latest" | grep tag_name | cut -d'"' -f4 | cut -d'v' -f2)"
-wget -q https://github.com/JezerM/web-greeter/releases/download/${version}/web-greeter-${version}-debian.deb -P /tmp
-nala install --assume-yes /tmp/web-greeter-${version}-debian.deb
+#version="$(curl --silent "https://api.github.com/repos/JezerM/web-greeter/releases/latest" | grep tag_name | cut -d'"' -f4 | cut -d'v' -f2)"
+#wget -q https://github.com/JezerM/web-greeter/releases/download/${version}/web-greeter-${version}-debian.deb -P /tmp
+#nala install --assume-yes /tmp/web-greeter-${version}-debian.deb
 
 # INSTALL: TeamViewer (deb)
 wget -q https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -P /tmp
@@ -40,15 +41,15 @@ nala install --assume-yes python3-i3ipc && wget -q -O /usr/bin/autotiling \
 chmod +x /usr/bin/autotiling
 
 # BUILD: i3lock-color and betterlockscreen
-nala install --assume-yes bc autoconf gcc make pkg-config libpam0g-dev \
-  libcairo2-dev libfontconfig1-dev libxcb-composite0-dev libev-dev \
-  libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev \
-  libxcb-image0-dev libxcb-util0-dev libxcb-xrm-dev libxkbcommon-dev \
-  libxkbcommon-x11-dev libjpeg-dev imagemagick feh
-cd /tmp/ && git clone https://github.com/Raymo111/i3lock-color
-cd i3lock-color && ./install-i3lock-color.sh && \
-  wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | sudo bash -s system
-ln -sf /usr/local/bin/betterlockscreen /usr/bin/
+#nala install --assume-yes bc autoconf gcc make pkg-config libpam0g-dev \
+#  libcairo2-dev libfontconfig1-dev libxcb-composite0-dev libev-dev \
+#  libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev \
+#  libxcb-image0-dev libxcb-util0-dev libxcb-xrm-dev libxkbcommon-dev \
+#  libxkbcommon-x11-dev libjpeg-dev imagemagick feh
+#cd /tmp/ && git clone https://github.com/Raymo111/i3lock-color
+#cd i3lock-color && ./install-i3lock-color.sh && \
+#  wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | sudo bash -s system
+#ln -sf /usr/local/bin/betterlockscreen /usr/bin/
 
 # BUILD: darkman
 #bash ${source_dir}/modules/darkman.sh
@@ -70,7 +71,7 @@ update-grub
 echo -e "\n[Seat:*]
 autologin-user=${user}
 autologin-session=i3
-greeter-session=web-greeter
+#greeter-session=web-greeter
 greeter-hide-users=false
 " >> /etc/lightdm/lightdm.conf
 systemctl enable lightdm

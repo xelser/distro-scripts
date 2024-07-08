@@ -190,9 +190,9 @@ EOF
 arch_plasma () { arch-chroot /mnt /bin/bash << EOF
 
 # KDE Plasma Packages
-pacman -S --needed --noconfirm plasma-{desktop,pa,nm} {flatpak,plymouth,sddm}-kcm \
-	konsole dolphin ark kate kwrite gwenview okular elisa filelight ktorrent spectacle \
-	{blue,power}devil k{screen,infocenter} power-profiles-daemon kde-gtk-config kvantum-qt5
+pacman -S --needed --noconfirm plasma-{desktop,pa,nm} {flatpak,plymouth,sddm}-kcm k{screen,infocenter} qt5-tools \
+	konsole dolphin ark kate kwrite gwenview okular elisa filelight ktorrent spectacle {blue,power}devil \
+	power-profiles-daemon kde-gtk-config kvantum-qt5
 
 # sddm
 systemctl enable sddm
