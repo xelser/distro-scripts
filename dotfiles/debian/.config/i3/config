@@ -209,7 +209,6 @@ exec --no-startup-id xset s off -dpms
 exec --no-startup-id thunar --daemon
 #exec --no-startup-id xfsettingsd
 #exec --no-startup-id xsettingsd
-exec --no-startup-id redshift 
 exec --no-startup-id numlockx
 exec --no-startup-id dunst 
 
@@ -229,6 +228,10 @@ bindsym $mod+p exec picom & disown 2>&1/dev/null
 exec --no-startup-id flameshot
 bindsym Print exec flameshot full --path /home/xelser/Pictures/Screenshots/
 bindsym Shift+Print exec flameshot gui --path /home/xelser/Pictures/Screenshots/
+
+# Night light (gammastep)
+exec --no-startup-id sh $HOME/.config/gammastep/launch.sh
+bindsym $mod+o exec sh $HOME/.config/gammastep/toggle.sh
 
 # Screensaver (betterlockscreen)
 #exec --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f2)" --fx dimblur
