@@ -8,12 +8,12 @@ sed -i 's/non-free-firmware/non-free-firmware non-free contrib/g' \
 apt update && apt install nala curl --yes
 
 # INSTALL: Debian Base
-nala install --assume-yes xorg lightdm numlockx gammastep \
-  plymouth build-essential synaptic htpdate easyeffects \
+nala install --assume-yes xorg lightdm build-essential synaptic \
+  pipewire pipewire-audio easyeffects lsp-plugins-lv2 \
+  plymouth htpdate network-manager numlockx gammastep \
   dconf-cli libglib2.0-bin mugshot at-spi2-core \
   firefox-esr {transmission,syncthing}-gtk \
-  fonts-ubuntu{,-console} network-manager \
-  lightdm-gtk-greeter-settings
+  fonts-ubuntu{,-console} lightdm-gtk-greeter-settings
 
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar alacritty neovim \

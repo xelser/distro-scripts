@@ -81,6 +81,7 @@ fi
 
 # others
 alias update="pkgupdate ; flatupdate ; [ -f $HOME/.local/bin/gnome-extensions-cli ] && gextup ; [ -d $HOME/Documents/distro-scripts/ ] && gitupdate"
+alias fetch="[ -f /bin/fastfetch ] && fastfetch || neofetch"
 alias post="bash $HOME/.config/post.sh"
 alias refresh="source $HOME/.bashrc"
 alias clear="clear && history -c"
