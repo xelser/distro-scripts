@@ -1,17 +1,9 @@
 [Default Applications]
-text/plain=org.gnome.gedit.desktop
+text/plain=pluma.desktop
 image/jpeg=imv-folder.desktop
 image/png=imv-folder.desktop
-application/xml=org.gnome.gedit.desktop
-image/svg+xml=org.inkscape.Inkscape.desktop
-application/x-shellscript=org.gnome.gedit.desktop
-application/pdf=atril.desktop
 
 [Added Associations]
-text/plain=org.gnome.gedit.desktop;
-image/jpeg=imv-folder.desktop;
+text/plain=pluma.desktop;
+image/jpeg=imv.desktop;imv-folder.desktop;
 image/png=imv-folder.desktop;
-application/xml=org.gnome.gedit.desktop;
-image/svg+xml=org.inkscape.Inkscape.desktop;
-application/x-shellscript=org.gnome.gedit.desktop;
-application/pdf=atril.desktop;
