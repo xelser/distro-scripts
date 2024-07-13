@@ -25,8 +25,9 @@ fi
 
 if [ -f /usr/bin/pluma ]; then
 	gsettings set org.mate.pluma color-scheme 'gruvbox-material-hard-dark'
-	gsettings set org.mate.pluma display-line-numbers true
+	gsettings set org.mate.pluma editor-font 'UbuntuMono Nerd Font 12'
 	gsettings set org.mate.pluma highlight-current-line true
+	gsettings set org.mate.pluma display-line-numbers true
 	gsettings set org.mate.pluma toolbar-visible false
 fi
 
