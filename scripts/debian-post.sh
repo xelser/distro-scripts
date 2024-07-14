@@ -29,6 +29,7 @@ if [ -f /usr/bin/pluma ]; then
 	gsettings set org.mate.pluma highlight-current-line true
 	gsettings set org.mate.pluma display-line-numbers true
 	gsettings set org.mate.pluma toolbar-visible false
+	gsettings set org.mate.pluma tabs-size 2
 fi
 
 # rofi (launcher and powermenu)
