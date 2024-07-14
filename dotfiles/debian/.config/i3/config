@@ -214,8 +214,8 @@ exec --no-startup-id dunst
 
 # Autostart (Always)
 exec_always --no-startup-id nitrogen --set-zoom-fill --random /run/media/xelser/Media/Pictures/Gruvbox/
-exec_always --no-startup-id bash $HOME/.config/autostart/autostart-script.sh
-exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.config/autostart/autostart-script.sh
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id xset led on
 exec_always --no-startup-id autotiling
 

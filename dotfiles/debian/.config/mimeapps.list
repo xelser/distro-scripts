@@ -2,8 +2,10 @@
 text/plain=pluma.desktop
 image/jpeg=imv-folder.desktop
 image/png=imv-folder.desktop
+application/x-shellscript=pluma.desktop
 
 [Added Associations]
 text/plain=pluma.desktop;
 image/jpeg=imv.desktop;imv-folder.desktop;
 image/png=imv-folder.desktop;
+application/x-shellscript=pluma.desktop;
