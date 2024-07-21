@@ -30,7 +30,3 @@ if [ -f /usr/bin/kvantummanager ]; then
 	cd /tmp/ && rm -rf KvLibadwaita $HOME/.config/Kvantum/KvLibadwaita && sudo rm -rf /usr/share/Kvantum/KvLibadwaita
 	git clone https://github.com/GabePoel/KvLibadwaita.git && cd KvLibadwaita && echo -e "y" | sudo ./install.sh
 fi
-
-# Firefox GNOME Theme
-firefox --headless >&/dev/null & disown && sleep 10 && killall firefox
-curl -s -o- https://raw.githubusercontent.com/rafaelmardojai/firefox-gnome-theme/master/scripts/install-by-curl.sh | bash
