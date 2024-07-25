@@ -79,7 +79,7 @@ AutomaticLoginEnable=True" /etc/gdm/custom.conf
 if [ ! -f /.flag ]; then
 	${source_dir}/themes/pack-libadwaita.sh
 	${source_dir}/themes/icon-tela-circle.sh
-	${source_dir}/themes/cursor-bibata.sh v2.0.4
+	${source_dir}/themes/cursor-bibata.sh
 	${source_dir}/themes/firefox-gnome.sh
   ${source_dir}/themes/fonts-nerd.sh RobotoMono
 fi
