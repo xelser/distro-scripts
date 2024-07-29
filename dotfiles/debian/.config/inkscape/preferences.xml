@@ -1002,10 +1002,10 @@
      id="desktop"
      style="fill:#000000;stroke-linejoin:round">
     <group
-       width="668"
-       height="706"
-       x="688"
-       y="52"
+       width="676"
+       height="721"
+       x="685"
+       y="42"
        maximized="1"
        fullscreen="0"
        id="geometry" />
@@ -1126,7 +1126,7 @@
      id="theme"
      defaultPreferDarkTheme="0"
      defaultIconTheme="Papirus-Dark"
-     defaultGtkTheme="Colloid-Dark-Compact-Gruvbox"
+     defaultGtkTheme="Graphite-yellow-Dark-compact"
      narrowSpinButton="1"
      preferDarkTheme="1"
      darkTheme="1"
