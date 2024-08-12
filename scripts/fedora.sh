@@ -44,7 +44,7 @@ sudo dnf install --assumeyes --skip-broken --allowerasing google-roboto-{fonts,m
   # gnome-shell-extension-{light-style,user-theme}
 
 # INSTALL: htpdate
-sudo dnf copr enable whitehara/htpdate --assumeyes
+sudo /usr/local/bin/dnf copr enable whitehara/htpdate --assumeyes
 sudo dnf install htpdate --assumeyes
 sudo systemctl enable htpdate --now
 
