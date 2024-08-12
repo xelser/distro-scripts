@@ -8,7 +8,7 @@ src_dir="Tela-circle-icon-theme"
 
 # Install Commands
 install_icons () {
-sudo ./install.sh -a
+sudo ./install.sh $1
 }
 
 # Clean Old Files/Dirs
