@@ -205,6 +205,7 @@ gaps top 37
 # Autostart (Once)
 exec --no-startup-id /usr/libexec/polkit-mate-authentication-agent-1
 exec --no-startup-id pulseeffects --gapplication-service
+exec --no-startup-id transmission-gtk --minimized
 exec --no-startup-id xset s off -dpms
 exec --no-startup-id thunar --daemon
 #exec --no-startup-id xfsettingsd
