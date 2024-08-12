@@ -13,7 +13,7 @@
     "blocklist-url": "http://www.example.com/blocklist",
     "cache-size-mb": 4,
     "compact-view": true,
-    "details-window-height": 500,
+    "details-window-height": 518,
     "details-window-width": 700,
     "dht-enabled": true,
     "download-dir": "/home/xelser/Downloads",
