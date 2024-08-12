@@ -18,8 +18,8 @@ sudo dnf install --assumeyes dnf5
 sudo ln -s /usr/bin/dnf5 /usr/local/bin/dnf
 
 # DEBLOAT
-sudo dnf groupremove --assumeyes "Guest Desktop Agents" "Container Management" "LibreOffice"
-sudo dnf autoremove --assumeyes rhythmbox cheese mediawriter fedora-bookmarks libreoffice-\* totem \
+sudo /usr/bin/dnf groupremove --assumeyes "Guest Desktop Agents" "Container Management" "LibreOffice"
+sudo /usr/bin/dnf autoremove --assumeyes rhythmbox cheese mediawriter fedora-bookmarks libreoffice-\* totem \
   gnome-{boxes,contacts,characters,connections,font-viewer,photos,tour,clocks,weather,maps} gnome-shell-extension-\*
 
 # REPO: Google Chrome | RPMFUSION
