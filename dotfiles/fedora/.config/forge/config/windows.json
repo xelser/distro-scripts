@@ -120,6 +120,10 @@
         {
             "wmClass": "org.gnome.FileRoller",
             "mode": "float"
+        },
+        {
+            "wmClass": "org.gnome.SystemMonitor",
+            "mode": "float"
         }
     ]
 }
