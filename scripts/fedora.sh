@@ -15,37 +15,36 @@ color=always
 #fastestmirror=True
 #assumeyes=True" /etc/dnf/dnf.conf
 sudo dnf install --assumeyes dnf5
-sudo ln -s /usr/bin/dnf5 /usr/local/bin/dnf
 
 # DEBLOAT
-sudo /usr/bin/dnf groupremove --assumeyes "Guest Desktop Agents" "Container Management" "LibreOffice"
-sudo /usr/bin/dnf autoremove --assumeyes rhythmbox cheese mediawriter fedora-bookmarks libreoffice-\* totem \
+sudo dnf groupremove --assumeyes "Guest Desktop Agents" "Container Management" "LibreOffice"
+sudo dnf autoremove --assumeyes rhythmbox cheese mediawriter fedora-bookmarks libreoffice-\* totem \
   gnome-{boxes,contacts,characters,connections,font-viewer,photos,tour,clocks,weather,maps} gnome-shell-extension-\*
 
 # REPO: Google Chrome | RPMFUSION
 #sudo dnf config-manager --set-enabled --assumeyes google-chrome
-sudo dnf list --installed | grep -q "rpmfusion" || sudo dnf install --assumeyes --skip-broken \
+sudo dnf5 list --installed | grep -q "rpmfusion" || sudo dnf install --assumeyes --skip-broken \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # UPDATE
-sudo dnf groupupdate --assumeyes --best --allowerasing core sound-and-video multimedia --exclude=PackageKit-gstreamer-plugin
-sudo dnf upgrade --assumeyes --best --allowerasing # --security --bugfix --enhancement
+sudo dnf5 groupupdate --assumeyes --best --allowerasing core sound-and-video multimedia --exclude=PackageKit-gstreamer-plugin
+sudo dnf5 upgrade --assumeyes --best --allowerasing # --security --bugfix --enhancement
 
 # INSTALL: Fedora Multimedia Codecs (from RPM Fusion https://rpmfusion.org/Howto/Multimedia)
 #sudo dnf swap ffmpeg-free ffmpeg --assumeyes --allowerasing
 #sudo dnf groupupdate sound-and-video multimedia --assumeyes --exclude=PackageKit-gstreamer-plugin
 
 # INSTALL: Fedora Workstation
-sudo dnf install --assumeyes --skip-broken --allowerasing google-roboto-{fonts,mono-fonts,slab-fonts} libheif-tools \
+sudo dnf5 install --assumeyes --skip-broken --allowerasing google-roboto-{fonts,mono-fonts,slab-fonts} libheif-tools \
   gnome-{builder,console,extensions-app,multi-writer,tweaks} file-roller fragments celluloid drawing easyeffects \
   gnome-shell-extension-{appindicator,blur-my-shell,caffeine,dash-to-dock,forge,just-perfection,places-menu}
   # inkscape telegram discord video-downloader touchegg google-chrome-stable
   # gnome-shell-extension-{light-style,user-theme}
 
 # INSTALL: htpdate
-sudo /usr/bin/dnf copr enable whitehara/htpdate --assumeyes
-sudo dnf install htpdate --assumeyes
+sudo dnf copr enable whitehara/htpdate --assumeyes
+sudo dnf5 install htpdate --assumeyes
 sudo systemctl enable htpdate --now
 
 # BUILD: syncthing-gtk
