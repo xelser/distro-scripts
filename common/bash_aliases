@@ -28,6 +28,13 @@ elif [ -f /usr/bin/pacman ]; then
 	alias clean="sudo pacman -Qtdq | sudo pacman -Rnsu - --noconfirm 1> /dev/null; sudo pacman -Sc --noconfirm"
 	alias search="sudo pacman -Ss $1"
 	alias list="sudo pacman -Qq $1"
+elif [ -f /usr/bin/dnf5 ]; then
+	alias pkgupdate="sudo dnf5 upgrade --assumeyes --best --allowerasing"
+	alias install="sudo dnf5 install $1"
+	alias uninstall="sudo dnf5 remove $1"
+	alias clean="sudo dnf5 remove --assumeyes && sudo dnf clean packages"
+	alias search="sudo dnf5 search $1"
+	alias list="sudo dnf5 list --installed $1"
 elif [ -f /usr/bin/dnf ]; then
 	alias pkgupdate="sudo dnf upgrade --assumeyes --best --allowerasing"
 	alias install="sudo dnf install $1"
