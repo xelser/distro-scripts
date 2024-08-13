@@ -28,7 +28,7 @@ sudo dnf5 list --installed | grep -q "rpmfusion" || sudo dnf install --assumeyes
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # UPDATE
-sudo dnf5 groupupdate --assumeyes --best --allowerasing core sound-and-video multimedia --exclude=PackageKit-gstreamer-plugin
+sudo dnf groupupdate --assumeyes --best --allowerasing core sound-and-video multimedia --exclude=PackageKit-gstreamer-plugin
 sudo dnf5 upgrade --assumeyes --best --allowerasing # --security --bugfix --enhancement
 
 # INSTALL: Fedora Multimedia Codecs (from RPM Fusion https://rpmfusion.org/Howto/Multimedia)
