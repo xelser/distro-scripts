@@ -15,20 +15,21 @@ color=always
 #fastestmirror=True
 #assumeyes=True" /etc/dnf/dnf.conf
 sudo dnf install --assumeyes dnf5
+#ln -s /usr/bin/dnf5 /usr/local/bin/dnf
 
 # DEBLOAT
-sudo dnf groupremove --assumeyes "Guest Desktop Agents" "Container Management" "LibreOffice"
-sudo dnf autoremove --assumeyes rhythmbox cheese mediawriter fedora-bookmarks libreoffice-\* totem \
+sudo dnf group remove --assumeyes "Guest Desktop Agents" "Container Management" "LibreOffice"
+sudo dnf5 remove --assumeyes rhythmbox cheese mediawriter fedora-bookmarks libreoffice-\* totem \
   gnome-{boxes,contacts,characters,connections,font-viewer,photos,tour,clocks,weather,maps} gnome-shell-extension-\*
 
 # REPO: Google Chrome | RPMFUSION
 #sudo dnf config-manager --set-enabled --assumeyes google-chrome
-sudo dnf5 list --installed | grep -q "rpmfusion" || sudo dnf install --assumeyes --skip-broken \
+sudo dnf5 list --installed | grep -q "rpmfusion" || sudo dnf5 install --assumeyes --skip-broken \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # UPDATE
-sudo dnf groupupdate --assumeyes --best --allowerasing core sound-and-video multimedia --exclude=PackageKit-gstreamer-plugin
+sudo dnf group update --assumeyes --best --allowerasing core sound-and-video multimedia --exclude=PackageKit-gstreamer-plugin
 sudo dnf5 upgrade --assumeyes --best --allowerasing # --security --bugfix --enhancement
 
 # INSTALL: Fedora Multimedia Codecs (from RPM Fusion https://rpmfusion.org/Howto/Multimedia)

@@ -12,7 +12,7 @@ gsettings set org.gnome.desktop.interface monospace-font-name 'Roboto Mono 10'
 gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Roboto Medium 10'
 
 # Remove gnome-terminal
-sudo dnf autoremove --assumeyes gnome-terminal
+sudo dnf5 remove --assumeyes gnome-terminal
 
 ################################### FLATPAK ##################################
 
