@@ -13,7 +13,6 @@ fi
 pipx ensurepath && bash -c "pipx install gnome-extensions-cli --system-site-packages --force"
 
 # Install Extensions
-gext --filesystem install 595 # autohide-battery
 #gext --filesystem install 3928 # autoselectheadset
 gext --filesystem install 6670 # bluetooth-battery-meter
 gext --filesystem install 4158 # gnome-ui-tune
@@ -23,6 +22,7 @@ gext --filesystem install 4158 # gnome-ui-tune
 	# pano@elhan.io
 
 # Install Manually (DBus)
+gext install 595 # autohide-battery
 gext install 1401 # bluetooth-quick-connect
 gext install 4269 # AlphabeticalAppGrid
 gext install 2236 # night-theme-switcher
