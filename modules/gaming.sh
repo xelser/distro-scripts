@@ -5,7 +5,7 @@
 # Install: Proprietary NVIDIA Drivers
 install_nvidia () {
 	if [[ ${distro_id} == "fedora" ]]; then
-		sudo dnf install --assumeyes --allowerasing akmod-nvidia
+		sudo dnf install --assumeyes --allowerasing akmod-nvidia && sleep 300
 
 		# NVIDIA DRM
 		if [ -f /boot/refind_linux.conf ]; then
@@ -15,7 +15,7 @@ install_nvidia () {
 			sudo sed -i "1 s/${partition_uuid} /${partition_uuid} ${nvidia_param}/" /boot/refind_linux.conf
 		fi
 	elif [[ ${distro_id} == "arch" ]] || [[ ${distro_id} == "endeavouros" ]]; then
-		yay -S --needed --noconfirm nvidia nvidia-utils lib32-nvidia-utils nvidia-pacman-hook
+		yay -S --needed --noconfirm nvidia lib32-nvidia-utils nvidia-pacman-hook
 	fi
 }
 
@@ -54,17 +54,10 @@ nvidia_prime () {
 # Install: Wine Dependencies (Source: Lutris Docs)
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/lutris_wine_dep.sh)"
 
-# Install: Gamemode, Lutris & MangoHud
-[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm {lib32-,}gamemode {lib32-,}mangohud lutris
-[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes gamemode.{x86_64,i686} mangohud.{x86_64,i686} lutris
-[ -f /usr/bin/nala ] && sudo nala install --assume-yes gamemode{,:i386} mangohud lutris
-
-################################### CONFIG ###################################
-
-# MangoHUD
-#if [ -f /usr/bin/mangohud ]; then check_flag /etc/environment
-#	echo -e "\nexport MANGOHUD=1\nexport MANGOHUD_DLSYM=1\n" | sudo tee -a /etc/environment 1> /dev/null
-#fi
+# Install: Steam, Lutris, Gamemode & MangoHud
+[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm {lib32-,}gamemode {lib32-,}mangohud lutris steam
+[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes gamemode.{x86_64,i686} mangohud.{x86_64,i686} lutris steam
+[ -f /usr/bin/nala ] && sudo nala install --assume-yes gamemode{,:i386} mangohud lutris steam
 
 ################################### FLATPAK ##################################
 
@@ -80,7 +73,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 #	flatpak override --user --filesystem=/run/media/$USER/Shared:rw
 #fi
 
-sleep 900 && echo "
+echo "
 ################################## FINISHED ##################################
 "
 echo && read -p "Reboot? (Y/n): " end
