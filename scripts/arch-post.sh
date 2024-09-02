@@ -76,6 +76,9 @@ gsettings set org.gnome.desktop.interface document-font-name 'Roboto Slab 10'
 gsettings set org.gnome.desktop.interface monospace-font-name 'Roboto Mono Nerd Font 10'
 gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Roboto Medium 10'
 
+# Clean
+rm -rf $HOME/underfined.bak
+
 }
 
 setup_kde () { 
