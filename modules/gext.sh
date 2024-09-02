@@ -1,16 +1,16 @@
 #!/bin/bash
 
 # Install PipX
-if [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
-	python-pipx libappindicator-gtk{2,3} libgda
-elif [ -f /usr/bin/nala ]; then sudo nala install --assume-yes \
-	pipx libayatana-appindicator3-1 gir1.2-{gda-5,gsound-1}.0
-elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes \
-	pipx libappindicator-gtk3 libgda{,-sqlite}
-fi
+if [ -f /usr/bin/gext ]; then
+	if [ -f /usr/bin/nala ]; then sudo nala install --assume-yes \
+		pipx libayatana-appindicator3-1 gir1.2-{gda-5,gsound-1}.0
+	elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes \
+		pipx libappindicator-gtk3 libgda{,-sqlite}
+	fi
 
-# Install gnome-extensions-cli
-pipx ensurepath && bash -c "pipx install gnome-extensions-cli --system-site-packages --force"
+	# Install gnome-extensions-cli
+	pipx ensurepath && bash -c "pipx install gnome-extensions-cli --system-site-packages --force"
+fi
 
 # Install Extensions
 gext --filesystem install 615 # appindicator

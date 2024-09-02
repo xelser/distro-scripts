@@ -11,24 +11,6 @@ fi
 yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
   ventoy-bin htpdate syncthing-gtk # teamviewer zoom obs-studio gnome-boxes
 
-#################################### POST ####################################
-
-# touchpad
-#if [[ ${machine_type} == "notebook" ]]; then
-#	sudo wget -qO /etc/X11/xorg.conf.d/30-touchpad.conf \
-#		https://raw.githubusercontent.com/xelser/distro-scripts/main/common/30-touchpad.conf
-#fi
-
-# daemons
-[ -f /usr/bin/ulauncher ] && systemctl enable --user ulauncher
-[ -f /usr/bin/syncthing ] && systemctl enable --user syncthing
-[ -f /usr/bin/transmission-daemon] && systemctl enable --user transmission
-
-# bluetooth
-sudo dmesg | grep -q 'Bluetooth' && \
-	sudo pacman -S --needed --noconfirm bluez-utils && \
-	sudo systemctl enable bluetooth --now
-
 ################################### WM/DE ####################################
 
 setup_wm () {
@@ -71,17 +53,16 @@ gsettings set org.mate.pluma use-default-font false
 # screenshot directory (flameshot)
 mkdir -p $HOME/Pictures/Screenshots
 
-# wallpaper (waypaper)
-[ -f /bin/wallpaper ] && waypaper --restore
-
-# openbox menu
-[ -f /bin/obmenu-generator ] && obmenu-generator -p -i -u -d -c
-
 }
 
 setup_gnome () { 
+
+# INSTALL: Arch GNOME (Flatpak)
+flatpak install --assumeyes --noninteractive flathub org.gtk.Gtk3theme.adw-{gtk3,gtk3-dark} \
+  com.mattjakeman.ExtensionManager me.dusansimic.DynamicWallpaper io.bassi.Amberol
+
 # INSTALL: AUR PACKAGES
-yay -S --needed --noconfirm extension-manager
+yay -S --needed --noconfirm ttf-roboto{,-slab,-mono-nerd} google-chrome gnome-extensions-cli 
 
 # theme 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-libadwaita.sh)"
@@ -95,9 +76,10 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 ext_list=($(gnome-extensions list)); for ext in "${ext_list[@]}"; do gnome-extensions enable ${ext}; done
 
 # Set Fonts
-gsettings set org.gnome.desktop.interface font-name 'Inter 10'
-gsettings set org.gnome.desktop.interface monospace-font-name 'Jetbrains Mono Nerd Font 10'
-gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Inter 10'
+gsettings set org.gnome.desktop.interface font-name 'Roboto 10'
+gsettings set org.gnome.desktop.interface document-font-name 'Roboto Slab 10'
+gsettings set org.gnome.desktop.interface monospace-font-name 'Roboto Mono 10'
+gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Roboto Medium 10'
 
 }
 
@@ -109,8 +91,6 @@ yay -S --needed --noconfirm konsave
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/theme-fluent.sh)"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/icon-fluent.sh)"
 
-# apply configs (konsave)
-[ -f /usr/bin/konsave ] && konsave -a defaults 2>/dev/null
 }
 
 if [[ ${wm_de} == "gnome" ]]; then
@@ -120,3 +100,16 @@ elif [[ ${wm_de} == "kde" ]]; then
 else
 	setup_wm
 fi
+
+#################################### POST ####################################
+
+# touchpad
+#if [[ ${machine_type} == "notebook" ]]; then
+#	sudo wget -qO /etc/X11/xorg.conf.d/30-touchpad.conf \
+#		https://raw.githubusercontent.com/xelser/distro-scripts/main/common/30-touchpad.conf
+#fi
+
+# bluetooth
+sudo dmesg | grep -q 'Bluetooth' && \
+	sudo pacman -S --needed --noconfirm bluez-utils && \
+	sudo systemctl enable bluetooth --now
