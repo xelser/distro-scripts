@@ -197,6 +197,7 @@ pacman -S --needed --noconfirm gdm xdg-{desktop-portal-gnome,user-dirs-gtk} gst-
 	evince nautilus sushi file-roller loupe celluloid baobab fragments 
 
 # Display Manager
+echo -e "[daemon]\nAutomaticLogin=${user}\nAutomaticLoginEnable=True" >> /etc/gdm/custom.conf
 systemctl enable gdm
 
 EOF
