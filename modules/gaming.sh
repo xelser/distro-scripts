@@ -15,7 +15,7 @@ install_nvidia () {
 			sudo sed -i "1 s/${partition_uuid} /${partition_uuid} ${nvidia_param}/" /boot/refind_linux.conf
 		fi
 	elif [[ ${distro_id} == "arch" ]] || [[ ${distro_id} == "endeavouros" ]]; then
-		sudo pacman -S --needed --noconfirm nvidia nvidia-utils lib32-nvidia-utils
+		yay -S --needed --noconfirm nvidia nvidia-utils lib32-nvidia-utils nvidia-pacman-hook
 	fi
 }
 
