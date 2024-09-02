@@ -55,8 +55,7 @@ fi
 [ -f /usr/bin/pulseeffects ] && [ -f $HOME/.config/PulseEffects/output/default.json ] && pulseeffects -l default
 
 # Flatpak
-sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-sudo flatpak remote-modify --enable flathub && flatpak install --assumeyes --noninteractive flathub com.github.tchx84.Flatseal
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/flatpak.sh)"
 
 # Distro Post Install Script
 [ -f $HOME/.config/${distro_id}-post.sh ] && bash $HOME/.config/${distro_id}-post.sh

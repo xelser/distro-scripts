@@ -56,11 +56,6 @@ mkdir -p $HOME/Pictures/Screenshots
 }
 
 setup_gnome () { 
-
-# INSTALL: Arch GNOME (Flatpak)
-flatpak install --assumeyes --noninteractive flathub org.gtk.Gtk3theme.adw-{gtk3,gtk3-dark} \
-  com.mattjakeman.ExtensionManager me.dusansimic.DynamicWallpaper
-
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm ttf-roboto{,-slab,-mono-nerd} google-chrome gnome-extensions-cli 
 

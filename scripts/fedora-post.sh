@@ -17,8 +17,6 @@ sudo dnf5 remove --assumeyes gnome-terminal
 ################################### FLATPAK ##################################
 
 # INSTALL: Fedora Workstation
-flatpak install --assumeyes --noninteractive flathub org.gtk.Gtk3theme.adw-{gtk3,gtk3-dark} \
-  com.mattjakeman.ExtensionManager me.dusansimic.DynamicWallpaper io.bassi.Amberol \
-  me.kozec.syncthingtk com.google.Chrome
+flatpak install --assumeyes --noninteractive flathub me.kozec.syncthingtk com.google.Chrome
   # org.mozilla.firefox com.spotify.Client us.zoom.Zoom org.telegram.desktop com.discordapp.Discord
   # com.rafaelmardojai.Blanket org.gnome.gitlab.YaLTeR.VideoTrimmer org.nickvision.tubeconverter
