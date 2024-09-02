@@ -148,7 +148,7 @@ echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILov
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 pacman -Sy --needed --noconfirm linux linux-firmware btrfs-progs ntfs-3g {intel,amd}-ucode grub os-prober efibootmgr dosfstools \
 	base-devel pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound networkmanager \
-	plymouth man-{db,pages} dmidecode inetutils reflector numlockx firefox ttf-fira{-sans,code-nerd}
+	plymouth man-{db,pages} dmidecode inetutils reflector numlockx firefox
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
@@ -176,7 +176,7 @@ arch_wm () { arch-chroot /mnt /bin/bash << EOF
 
 # Window Manager Packages
 pacman -S --needed --noconfirm i3-wm polybar openbox obconf tint2 sway waybar hyprland xdg-desktop-portal-{wlr,gtk,hyprland} \
-	sddm mate-polkit nwg-look nm-connection-editor
+	sddm mate-polkit nwg-look nm-connection-editor ttf-fira{-sans,code-nerd}
 
 	#kvantum-qt5 qt5ct alacritty transmission-gtk xarchiver pcmanfm atril pluma dunst rofi picom \
 	#imv mpv neovim{,-plugins} xclip wl-clipboard wallutils feh swaybg flameshot grim brightnessctl gammastep \
@@ -194,7 +194,7 @@ arch_gnome () { arch-chroot /mnt /bin/bash << EOF
 # GNOME Packages
 pacman -S --needed --noconfirm gdm xdg-{desktop-portal-gnome,user-dirs-gtk} gst-plugin-pipewire \
 	gnome-{session,shell,control-center,bluetooth-3.0,console,text-editor,calendar,disk-utility,system-monitor,builder,tweaks} \
-	evince nautilus sushi file-roller loupe celluloid baobab fragments
+	evince nautilus sushi file-roller loupe celluloid baobab fragments inter-font ttf-jetbrains-mono-nerd
 
 # Display Manager
 systemctl enable gdm
