@@ -275,8 +275,8 @@ fi
 ################################### GAMING ###################################
 
 # Lutris
-#save_folder /.config/lutris/
-#save_folder /.var/app/net.lutris.Lutris/config/lutris/
+save_folder /.config/lutris/
+save_folder /.var/app/net.lutris.Lutris/config/lutris/
 
 # MangoHUD
 save_folder /.config/MangoHud/
@@ -307,3 +307,20 @@ if [ -f /usr/bin/easyeffects ]; then
 	save_folder /.config/easyeffects/
 fi
 
+################################## CUSTOM ####################################
+
+if [[ ${wm_de} == "gnome" ]]; then
+
+	# QT day/night cycle (remove clutter)
+	rm -rf ${dest_dir}/.config/Kvantum/
+	rm -rf ${dest_dir}/.config/qt5ct/
+
+elif [[ ${wm_de} == "cinnamon" ]]; then
+
+	# QT day/night cycle (remove clutter)
+	rm -rf ${dest_dir}/.config/Kvantum/
+	rm -rf ${dest_dir}/.config/qt5ct/
+	
+	# GTK3 Settings and Bookmarks (remove clutter)
+	rm -rf ${dest_dir}/.config/gtk-3.0/
+fi
