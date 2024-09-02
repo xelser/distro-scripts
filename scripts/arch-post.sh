@@ -13,10 +13,6 @@ yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload
 
 #################################### POST ####################################
 
-# set fonts
-dconf write /org/gnome/desktop/interface/font-name "'Fira Sans 10'"
-dconf write /org/gnome/desktop/interface/monospace-font-name "'FiraCode Nerd Font 10'"
-
 # touchpad
 #if [[ ${machine_type} == "notebook" ]]; then
 #	sudo wget -qO /etc/X11/xorg.conf.d/30-touchpad.conf \
@@ -26,6 +22,7 @@ dconf write /org/gnome/desktop/interface/monospace-font-name "'FiraCode Nerd Fon
 # daemons
 [ -f /usr/bin/ulauncher ] && systemctl enable --user ulauncher
 [ -f /usr/bin/syncthing ] && systemctl enable --user syncthing
+[ -f /usr/bin/transmission-daemon] && systemctl enable --user transmission
 
 # bluetooth
 sudo dmesg | grep -q 'Bluetooth' && \
@@ -46,6 +43,10 @@ yay -S --needed --noconfirm \
 
 # theme 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-edge.sh)"
+
+# set fonts
+dconf write /org/gnome/desktop/interface/font-name "'Fira Sans 10'"
+dconf write /org/gnome/desktop/interface/monospace-font-name "'FiraCode Nerd Font 10'"
 
 # rofi (launcher and powermenu)
 cd /tmp/ && git clone --depth=1 https://github.com/xelser/rofi.git && cd rofi && chmod +x setup.sh && ./setup.sh && cd
@@ -78,6 +79,28 @@ mkdir -p $HOME/Pictures/Screenshots
 
 }
 
+setup_gnome () { 
+# INSTALL: AUR PACKAGES
+yay -S --needed --noconfirm extension-manager
+
+# theme 
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-libadwaita.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/icon-tela-circle.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/cursor-bibata.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/firefox-gnome.sh)"
+
+# GNOME Shell Extensions
+gsettings set org.gnome.shell enabled-extensions []
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/gext.sh)"
+ext_list=($(gnome-extensions list)); for ext in "${ext_list[@]}"; do gnome-extensions enable ${ext}; done
+
+# Set Fonts
+gsettings set org.gnome.desktop.interface font-name 'Inter 10'
+gsettings set org.gnome.desktop.interface monospace-font-name 'Jetbrains Mono Nerd Font 10'
+gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Inter 10'
+
+}
+
 setup_kde () { 
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm konsave
@@ -90,7 +113,9 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 [ -f /usr/bin/konsave ] && konsave -a defaults 2>/dev/null
 }
 
-if [[ ${wm_de} == "kde" ]]; then
+if [[ ${wm_de} == "gnome" ]]; then
+	setup_gnome
+elif [[ ${wm_de} == "kde" ]]; then
 	setup_kde
 else
 	setup_wm

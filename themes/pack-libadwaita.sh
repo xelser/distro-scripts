@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # GTK
-if [ -f /usr/bin/yay ]; then
-	yay -S --needed --noconfirm adw-gtk3-git
+if [ -f /usr/bin/pacman ]; then
+	sudo pacman -S --needed --noconfirm adw-gtk-theme
 elif [ -f /usr/bin/dnf ]; then
 	sudo dnf install --assumeyes adw-gtk3-theme
 else
