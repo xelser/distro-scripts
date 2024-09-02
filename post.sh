@@ -50,34 +50,9 @@ elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes --best --allowerasin
 	libva-intel-driver intel-media-driver
 fi
 
-#if [[ ! ${wm_de} == "gnome" ]] && [[ ! ${wm_de} == "kde" ]]; then
-#	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm qt5ct kvantum
-#	[ -f /usr/bin/nala ] && sudo nala install --assume-yes qt5{ct,-style-kvantum}
-#	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes qt5ct kvantum
-#elif [[ ${wm_de} == "kde" ]]; then
-#	[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm kvantum
-#	[ -f /usr/bin/nala ] && sudo nala install --assume-yes qt5-style-kvantum
-#	[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes kvantum
-#fi
-
 # Audio
 [ -f /usr/bin/easyeffects ] && [ -f $HOME/.config/easyeffects/output/default.json ] && easyeffects -l default
 [ -f /usr/bin/pulseeffects ] && [ -f $HOME/.config/PulseEffects/output/default.json ] && pulseeffects -l default
-
-#if [ -f /etc/pulse/daemon.conf ]; then
-#	check_flag /etc/pulse/daemon.conf
-#
-#	# Resample Method
-#	echo "resample-method = speex-float-10" | sudo tee -a /etc/pulse/daemon.conf 1> /dev/null
-#
-#	# Default Sample Format
-#	endian="$(lscpu | grep 'Byte Order' | sed 's/ //g' | cut -d':' -f2)"
-#	if [[ ${endian} == "LittleEndian" ]]; then echo "default-sample-format = s24le" | sudo tee -a /etc/pulse/daemon.conf 1> /dev/null
-#	else echo "default-sample-format = s24be" | sudo tee -a /etc/pulse/daemon.conf 1> /dev/null; fi
-#
-#	# Default Sample Rate
-#	echo "default-sample-rate = 48000" | sudo tee -a /etc/pulse/daemon.conf 1> /dev/null
-#fi
 
 # Flatpak
 sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
@@ -93,18 +68,12 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 [[ ${wm_de} == "gnome" ]] || [[ ${wm_de} == "cinnamon" ]] || [[ ${wm_de} == "xfce" ]] && \
 	bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/${wm_de}_settings.sh)"
 
-# Plank
-if [ -f /usr/bin/plank ] && [ -f $HOME/.config/plank/plank.ini ]; then
-	cat $HOME/.config/plank/plank.ini | dconf load /net/launchpad/plank/
-	dconf write /net/launchpad/plank/enabled-docks "['dock2']"
-fi
-
 # rEFInd
 #sudo dmesg | grep -q "EFI v" && [[ ${machine} == "E5-476G" ]] && \
 #	bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/refind.sh)"
 
-# syncthing
-[ -f /usr/bin/syncthing ] && systemctl --user enable syncthing
+# openbox menu
+[ -f /bin/obmenu-generator ] && obmenu-generator -p -i -u -d -c
 
 # Hide Apps
 name=(calf org.gnome.dspy org.gnome.Devhelp org.gnome.Sysprof lstopo htop avahi-discover bssh bvnc
@@ -117,6 +86,11 @@ for app in "${name[@]}"; do
 	fi
 done
 
+# daemons
+[ -f /usr/bin/ulauncher ] && systemctl enable --user ulauncher
+[ -f /usr/bin/syncthing ] && systemctl enable --user syncthing
+[ -f /usr/bin/transmission-daemon ] && transmission-daemon
+
 ################################### THEMES ###################################
 
 # General Theming
@@ -125,8 +99,20 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 # Darkman
 [ -f /usr/bin/darkman ] && systemctl --user enable --now darkman
 
+# KDE configs (konsave)
+[ -f /usr/bin/konsave ] && konsave -a defaults 2>/dev/null
+
 # Nitrogen
 [ -f /bin/nitrogen ] && nitrogen --restore
+
+# Waypaper
+[ -f /bin/waypaper ] && waypaper --restore
+
+# Plank
+if [ -f /usr/bin/plank ] && [ -f $HOME/.config/plank/plank.ini ]; then
+	cat $HOME/.config/plank/plank.ini | dconf load /net/launchpad/plank/
+	dconf write /net/launchpad/plank/enabled-docks "['dock2']"
+fi
 
 # Geany
 if [ -f /bin/geany ]; then
