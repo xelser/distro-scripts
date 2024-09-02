@@ -34,6 +34,11 @@ nvidia_prime () {
 	if [ -f /usr/bin/envycontrol ]; then
 		sudo envycontrol --switch hybrid --rtd3
 		#sudo envycontrol --switch nvidia --force-comp
+
+		if [ -f /usr/bin/gdm ]; then
+			sudo systemctl enable nvidia-{suspend,resume,hibernate}
+			sudo ln -s /dev/null /etc/udev/rules.d/61-gdm.rules
+		fi
 	fi
 }
 
