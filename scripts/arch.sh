@@ -221,7 +221,8 @@ echo "---------------------"
 echo "Available Desktop Environment and Window Managers:"
 echo
 echo "1. i3/Sway/Openbox/Hyprland"
-echo "2. KDE Plasma"
+echo "2. GNOME"
+echo "3. KDE Plasma"
 echo
 echo "----------------------------------------------"
 read -p "Select which DE or WM you want to install (#): " selected_gui
