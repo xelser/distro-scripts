@@ -73,7 +73,7 @@ ext_list=($(gnome-extensions list)); for ext in "${ext_list[@]}"; do gnome-exten
 # Set Fonts
 gsettings set org.gnome.desktop.interface font-name 'Roboto 10'
 gsettings set org.gnome.desktop.interface document-font-name 'Roboto Slab 10'
-gsettings set org.gnome.desktop.interface monospace-font-name 'Roboto Mono 10'
+gsettings set org.gnome.desktop.interface monospace-font-name 'Roboto Mono Nerd Font 10'
 gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Roboto Medium 10'
 
 }

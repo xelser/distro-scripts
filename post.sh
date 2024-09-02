@@ -76,7 +76,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 
 # Hide Apps
 name=(calf org.gnome.dspy org.gnome.Devhelp org.gnome.Sysprof lstopo htop avahi-discover bssh bvnc
-	stoken-gui stoken-gui-small qv4l2 qvidcap pcmanfm-desktop-pref syncthing-start)
+	stoken-gui stoken-gui-small qv4l2 qvidcap pcmanfm-desktop-pref syncthing-start mpv)
 
 for app in "${name[@]}"; do
 	if [ -f /usr/share/applications/${app}.desktop ]; then mkdir -p $HOME/.local/share/applications/
@@ -153,7 +153,7 @@ fi
 if [[ ${wm_de} == "cinnamon" ]]; then
 	cinnamon-settings user >&/dev/null
 elif [[ ${wm_de} == "gnome" ]]; then
-	gnome-control-center user-accounts >&/dev/null
+	gnome-control-center system >&/dev/null
 	cp -rf /var/lib/AccountsService/icons/$USER $HOME/.face
 elif [[ ${wm_de} == "kde" ]]; then
 	systemsettings kcm_users >&/dev/null
