@@ -9,7 +9,7 @@ if [ -f /usr/bin/gext ]; then
 	fi
 
 	# Install gnome-extensions-cli
-	pipx ensurepath && bash -c "pipx install gnome-extensions-cli --system-site-packages --force"
+	[ -f /usr/bin/pipx ] && pipx ensurepath && bash -c "pipx install gnome-extensions-cli --system-site-packages --force"
 fi
 
 # Install Extensions

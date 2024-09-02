@@ -17,7 +17,7 @@ fi
 
 ## Directories ##
 [ -f ./install.sh ] && export source_dir="$(pwd)" || export source_dir="$(pwd)/distro-scripts"
-export dotfiles_dir="${source_dir}/dotfiles/${distro_id}"
+export dotfiles_dir="${source_dir}/dotfiles/${distro_id}-${wm_de}"
 
 ## For Arch Linux ##
 [[ ${distro_id} == "arch" ]] && export root_mnt="/mnt" || export root_mnt=""
