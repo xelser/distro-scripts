@@ -2,7 +2,12 @@
 
 gaming_dir="$HOME/Documents/distro-scripts/gaming"
 common_dir="$HOME/Documents/distro-scripts/common"
-dest_dir="$HOME/Documents/distro-scripts/dotfiles/${distro_id}"
+
+if [ ! -z ${wm_de} ]; then
+	dest_dir="$HOME/Documents/distro-scripts/dotfiles/${distro_id}-${wm_de}"
+else
+	dest_dir="$HOME/Documents/distro-scripts/dotfiles/${distro_id}"
+fi
 
 rm -rf ${dest_dir}
 mkdir -p ${dest_dir}/.config/
