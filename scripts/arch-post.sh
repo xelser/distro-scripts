@@ -57,7 +57,7 @@ mkdir -p $HOME/Pictures/Screenshots
 
 setup_gnome () { 
 # INSTALL: AUR PACKAGES
-yay -S --needed --noconfirm ttf-roboto{,-slab,-mono-nerd} google-chrome gnome-extensions-cli 
+yay -S --needed --noconfirm ttf-roboto{,-slab,-mono,-mono-nerd} google-chrome gnome-extensions-cli
 
 # theme 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-libadwaita.sh)"
