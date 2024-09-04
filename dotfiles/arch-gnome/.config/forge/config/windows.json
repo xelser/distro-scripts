@@ -135,6 +135,10 @@
         {
             "wmClass": "org.gnome.TextEditor",
             "mode": "float"
+        },
+        {
+            "wmClass": "steam",
+            "mode": "float"
         }
     ]
 }
