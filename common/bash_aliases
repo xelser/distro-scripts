@@ -53,9 +53,7 @@ if [ -f /usr/bin/flatpak ]; then
 fi
 
 # GNOME Shell Extensions
-if [ -f $HOME/.local/bin/gnome-extensions-cli ]; then
-	alias gextup="gext update --user --install"
-fi
+which gext > /dev/null && alias gextup="gext update --user --install"
 
 # editors
 if [[ ${wm_de} == "gnome" ]] || [[ ${wm_de} == "budgie" ]]; then
