@@ -63,11 +63,11 @@ fi
 
 ## Fstab ##
 if [[ ${user} == "xelser" ]] && [[ ! ${machine} == "PC" ]]; then
-	echo -e "\nLABEL=Media /run/media/${user}/Media ext4 defaults,user 0 0" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
+	echo -e "\nLABEL=Media /run/media/${user}/Media ext4 defaults 0 0" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
 fi
 
 if [[ ${machine} == "E5-476G" ]]; then
-	echo -e "LABEL=Games /run/media/${user}/Games ext4 defaults,user 0 0" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
+	echo -e "LABEL=Games /run/media/${user}/Games ext4 defaults 0 0" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
 	echo -e "LABEL=Shared /run/media/${user}/Shared ntfs umask=000,uid=1000,gid=1000,rw,user,exec,windows_names,prealloc 0 0" \
 	| sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
 fi
