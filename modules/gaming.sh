@@ -5,7 +5,7 @@
 # Install: Proprietary NVIDIA Drivers
 install_nvidia () {
 	if [[ ${distro_id} == "fedora" ]]; then
-		sudo dnf5 install --assumeyes --allowerasing akmod-nvidia && sleep 300
+		sudo dnf5 install --assumeyes --allowerasing kernel akmod-nvidia && sleep 300
 	elif [[ ${distro_id} == "arch" ]] || [[ ${distro_id} == "endeavouros" ]]; then
 		yay -S --needed --noconfirm nvidia lib32-nvidia-utils nvidia-pacman-hook
 	fi
