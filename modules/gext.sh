@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Install PipX
-if [ -f /usr/bin/gext ]; then
+if [ ! -f /usr/bin/gext ]; then
 	if [ -f /usr/bin/nala ]; then sudo nala install --assume-yes \
 		pipx libayatana-appindicator3-1 gir1.2-{gda-5,gsound-1}.0
 	elif [ -f /usr/bin/dnf ]; then sudo dnf install --assumeyes \
@@ -19,12 +19,11 @@ gext --filesystem install 517 # caffeine
 gext --filesystem install 307 # dash-to-dock
 gext --filesystem install 4481 # forge
 gext --filesystem install 4158 # gnome-ui-tune
+gext --filesystem install 4691 # pip-on-top
 gext --filesystem install 8 # places-menu
 
 #gext --filesystem install 3928 # autoselectheadset
-#gext --filesystem install 4691 # pip-on-top
 #gext --filesystem install 5237 # rounded-window-corners (no update)
-#gext --filesystem install 701 # scroll-workspaces (api issues)
 	# pano@elhan.io
 
 # Install Manually (DBus)
