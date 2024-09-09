@@ -18,9 +18,9 @@ sudo dnf install --assumeyes dnf5
 #ln -s /usr/bin/dnf5 /usr/local/bin/dnf
 
 # DEBLOAT
-sudo dnf group remove --assumeyes "Guest Desktop Agents" "Container Management" "LibreOffice"
-sudo dnf5 remove --assumeyes rhythmbox cheese mediawriter fedora-bookmarks libreoffice-\* totem \
-  gnome-{boxes,contacts,characters,connections,font-viewer,photos,tour,clocks,weather,maps} gnome-shell-extension-\*
+sudo dnf5 group remove --assumeyes "Guest Desktop Agents" "Container Management" "LibreOffice"
+sudo dnf5 remove --assumeyes rhythmbox mediawriter simple-scan fedora-bookmarks totem libreoffice-\* \
+  gnome-shell-extension-\* gnome-{boxes,contacts,characters,connections,font-viewer,tour,clocks,weather,maps}
 
 # REPO: Google Chrome | RPMFUSION
 #sudo dnf config-manager --set-enabled --assumeyes google-chrome
@@ -29,8 +29,7 @@ sudo dnf5 list --installed | grep -q "rpmfusion" || sudo dnf5 install --assumeye
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # UPDATE
-sudo dnf group update --assumeyes --best --allowerasing core sound-and-video multimedia --exclude=PackageKit-gstreamer-plugin
-sudo dnf5 upgrade --assumeyes --best --allowerasing # --security --bugfix --enhancement
+sudo dnf5 upgrade @core @sound-and-video @multimedia --exclude=PackageKit-gstreamer-plugin --assumeyes --best --allowerasing --skip-unavailable 
 
 # INSTALL: Fedora Multimedia Codecs (from RPM Fusion https://rpmfusion.org/Howto/Multimedia)
 #sudo dnf swap ffmpeg-free ffmpeg --assumeyes --allowerasing
@@ -46,12 +45,6 @@ sudo dnf5 install --assumeyes --skip-broken --allowerasing google-roboto-{fonts,
 sudo dnf copr enable whitehara/htpdate --assumeyes
 sudo dnf5 install htpdate --assumeyes
 sudo systemctl enable htpdate --now
-
-# BUILD: syncthing-gtk
-#sudo dnf install --assumeyes syncthing gtk3 python3 python-{bcrypt,cairo,dateutil,gobject} meson libnotify psmisc
-#cd /tmp && git clone https://github.com/syncthing-gtk/syncthing-gtk && cd syncthing-gtk
-#meson setup _build --prefix=/usr ; cd _build ; ninja
-#sudo DESTDIR=$PWD/install ninja install
 
 ################################### CONFIG ###################################
 
