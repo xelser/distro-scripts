@@ -47,7 +47,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 
 # Install: Steam, Lutris, Gamemode & MangoHud
 [ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm {lib32-,}gamemode {lib32-,}mangohud lutris steam vulkan-tools mesa-demos
-[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes gamemode.{x86_64,i686} mangohud.{x86_64,i686} lutris steam vulkan-tools mesa-demos
+[ -f /usr/bin/dnf5 ] && sudo dnf5 install --assumeyes gamemode.{x86_64,i686} mangohud.{x86_64,i686} lutris steam vulkan-tools mesa-demos
 [ -f /usr/bin/nala ] && sudo nala install --assume-yes gamemode{,:i386} mangohud lutris steam vulkan-tools mesa-utils-bin
 
 ################################### FLATPAK ##################################
