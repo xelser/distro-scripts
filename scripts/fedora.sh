@@ -38,8 +38,7 @@ sudo dnf5 upgrade --assumeyes --best --allowerasing # --security --bugfix --enha
 
 # INSTALL: Fedora Workstation
 sudo dnf5 install --assumeyes --skip-broken --allowerasing google-roboto-{fonts,mono-fonts,slab-fonts} libheif-tools \
-  gnome-{builder,console,extensions-app,multi-writer,tweaks} file-roller fragments celluloid drawing easyeffects \
-  gnome-shell-extension-{appindicator,blur-my-shell,caffeine,dash-to-dock,forge,just-perfection,places-menu}
+  gnome-{builder,console,extensions-app,multi-writer,tweaks} file-roller fragments celluloid drawing easyeffects
   # inkscape telegram discord video-downloader touchegg google-chrome-stable
   # gnome-shell-extension-{light-style,user-theme}
 
