@@ -17,10 +17,11 @@ gext --filesystem install 615 # appindicator
 gext --filesystem install 6670 # bluetooth-battery-meter
 gext --filesystem install 517 # caffeine
 gext --filesystem install 307 # dash-to-dock
-gext --filesystem install 4481 # forge (unmaintained)
+#gext --filesystem install 4481 # forge (unmaintained)
 gext --filesystem install 4158 # gnome-ui-tune
 gext --filesystem install 4691 # pip-on-top
 gext --filesystem install 8 # places-menu
+gext --filesystem install 7065 # tiling-shell
 
 #gext --filesystem install 3928 # autoselectheadset
 #gext --filesystem install 5237 # rounded-window-corners (no update)
@@ -51,10 +52,10 @@ dconf write /org/gnome/shell/extensions/dash-to-dock/dash-max-icon-size "38"
 dconf write /org/gnome/shell/extensions/dash-to-dock/height-fraction "1.0"
 dconf write /org/gnome/shell/extensions/dash-to-dock/show-mounts "false"
 dconf write /org/gnome/shell/extensions/dash-to-dock/show-trash "false"
-dconf write /org/gnome/shell/extensions/forge/float-always-on-top-enabled "false"
-dconf write /org/gnome/shell/extensions/forge/focus-border-toggle "false"
-dconf write /org/gnome/shell/extensions/forge/move-pointer-focus-enabled "false"
-dconf write /org/gnome/shell/extensions/forge/window-gap-size "3"
+#dconf write /org/gnome/shell/extensions/forge/float-always-on-top-enabled "false"
+#dconf write /org/gnome/shell/extensions/forge/focus-border-toggle "false"
+#dconf write /org/gnome/shell/extensions/forge/move-pointer-focus-enabled "false"
+#dconf write /org/gnome/shell/extensions/forge/window-gap-size "3"
 dconf write /org/gnome/shell/extensions/gnome-ui-tune/always-show-thumbnails "false"
 #dconf write /org/gnome/shell/extensions/just-perfection/weather "false"
 dconf write /org/gnome/shell/extensions/just-perfection/window-demands-attention-focus "true"
