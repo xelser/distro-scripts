@@ -17,7 +17,7 @@ gext --filesystem install 615 # appindicator
 gext --filesystem install 6670 # bluetooth-battery-meter
 gext --filesystem install 517 # caffeine
 gext --filesystem install 307 # dash-to-dock
-gext --filesystem install 4481 # forge
+gext --filesystem install 4481 # forge (unmaintained)
 gext --filesystem install 4158 # gnome-ui-tune
 gext --filesystem install 4691 # pip-on-top
 gext --filesystem install 8 # places-menu
@@ -63,5 +63,5 @@ dconf write /org/gnome/shell/extensions/middleclickclose/close-button "'right'"
 dconf write /org/gnome/shell/extensions/nightthemeswitcher/commands/enabled 'true'
 dconf write /org/gnome/shell/extensions/nightthemeswitcher/commands/sunrise "'bash $HOME/.local/share/light-mode.d/light.sh'"
 dconf write /org/gnome/shell/extensions/nightthemeswitcher/commands/sunset "'bash $HOME/.local/share/dark-mode.d/dark.sh'"
-#dconf write /org/gnome/shell/extensions/pip-on-top/stick "true"
+dconf write /org/gnome/shell/extensions/pip-on-top/stick "true"
 #dconf write /org/gnome/shell/extensions/pop-shell/tile-by-default "true"
