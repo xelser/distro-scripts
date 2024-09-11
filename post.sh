@@ -11,7 +11,7 @@ check_flag () {
 
 # Connect to Wifi
 wget --spider --quiet http://google.com > /dev/null 2>&1 || if [[ ${machine} == "E5-476G" || "G41T-R3" ]]; then
-	export wifidevice="58:AE:F1:36:7E:BC password A3jW3GBX"
+	export wifidevice="GlobeAtHome_67eb8_5 password A3jW3GBX"
 
 	[ -f /usr/bin/nmcli ] && sudo nmcli device wifi connect ${wifidevice}
 else
