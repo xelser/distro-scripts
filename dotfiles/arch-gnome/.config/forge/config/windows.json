@@ -119,6 +119,10 @@
         {
             "wmClass": "org.gnome.Console",
             "mode": "float"
+        },
+        {
+            "wmClass": "org.gnome.Nautilus",
+            "mode": "float"
         }
     ]
 }
