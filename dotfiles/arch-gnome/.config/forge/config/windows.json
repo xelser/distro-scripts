@@ -115,30 +115,6 @@
             "wmClass": "org.mozilla.Thunderbird.desktop",
             "wmTitle": "!Mozilla Thunderbird",
             "mode": "float"
-        },
-        {
-            "wmClass": "org.gnome.Console",
-            "mode": "float"
-        },
-        {
-            "wmClass": "org.gnome.Loupe",
-            "mode": "float"
-        },
-        {
-            "wmClass": "org.gnome.SystemMonitor",
-            "mode": "float"
-        },
-        {
-            "wmClass": "org.gnome.Nautilus",
-            "mode": "float"
-        },
-        {
-            "wmClass": "org.gnome.TextEditor",
-            "mode": "float"
-        },
-        {
-            "wmClass": "steam",
-            "mode": "float"
         }
     ]
 }
