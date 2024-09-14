@@ -4,7 +4,7 @@
 
 # PACKAGE MANAGER: YAY
 if [ ! -f /usr/bin/yay ]; then
-	cd /tmp/ && git clone https://aur.archlinux.org/yay-bin.git && cd yay-bin && makepkg -sirc --noconfirm
+	cd /tmp/ && git clone https://aur.archlinux.org/yay && cd yay && makepkg -sirc --noconfirm
 fi
 
 # INSTALL: AUR PACKAGES
