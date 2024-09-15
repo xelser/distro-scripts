@@ -21,8 +21,7 @@ gext --filesystem install 4481 # forge (unmaintained)
 gext --filesystem install 4158 # gnome-ui-tune
 gext --filesystem install 4691 # pip-on-top
 gext --filesystem install 8 # places-menu
-gext --filesystem install 7065 # tiling-shell
-
+#gext --filesystem install 7065 # tiling-shell
 #gext --filesystem install 3928 # autoselectheadset
 #gext --filesystem install 5237 # rounded-window-corners (no update)
 	# pano@elhan.io
