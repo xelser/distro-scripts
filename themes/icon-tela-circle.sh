@@ -3,8 +3,8 @@
 # Variables
 theme_name="Tela"
 
-auth="vinceliuice"
-src_dir="Tela-circle-icon-theme"
+auth="xelser"
+src_dir="tela-circle-icon"
 
 # Install Commands
 install_icons () {
