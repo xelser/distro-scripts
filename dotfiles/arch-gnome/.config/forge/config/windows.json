@@ -123,6 +123,10 @@
         {
             "wmClass": "org.gnome.Nautilus",
             "mode": "float"
+        },
+        {
+            "wmClass": "org.gnome.TextEditor",
+            "mode": "float"
         }
     ]
 }
