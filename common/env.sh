@@ -5,11 +5,6 @@ if [[ ${XDG_SESSION_TYPE} == "wayland" ]]; then
 	export OBS_USE_EGL=1
 fi
 
-# Gaming
-if [ -f /usr/bin/mangohud ]; then
-	export MANGOHUD=1
-fi
-
 # QT/Kvantum theme
 if [ -f /usr/bin/qt5ct ]; then
 	export QT_QPA_PLATFORM="xcb"
