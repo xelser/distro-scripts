@@ -127,6 +127,14 @@
         {
             "wmClass": "org.gnome.TextEditor",
             "mode": "float"
+        },
+        {
+            "wmClass": "org.gnome.SystemMonitor",
+            "mode": "float"
+        },
+        {
+            "wmClass": "de.haeckerfelix.Fragments",
+            "mode": "float"
         }
     ]
 }
