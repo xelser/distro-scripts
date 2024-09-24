@@ -135,6 +135,10 @@
         {
             "wmClass": "de.haeckerfelix.Fragments",
             "mode": "float"
+        },
+        {
+            "wmClass": "io.missioncenter.MissionCenter",
+            "mode": "float"
         }
     ]
 }
