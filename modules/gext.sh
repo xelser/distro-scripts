@@ -18,7 +18,7 @@ gext --filesystem install 6670 # bluetooth-battery-meter
 gext --filesystem install 517 # caffeine
 gext --filesystem install 307 # dash-to-dock
 gext --filesystem install 4481 # forge (unmaintained)
-gext --filesystem install 4158 # gnome-ui-tune
+gext --filesystem install 4158 # gnome-ui-tune (not important)
 gext --filesystem install 4691 # pip-on-top
 gext --filesystem install 8 # places-menu
 #gext --filesystem install 7065 # tiling-shell
@@ -28,7 +28,7 @@ gext --filesystem install 8 # places-menu
 
 # Install Manually (DBus)
 gext install 595 # autohide-battery
-gext install 1401 # bluetooth-quick-connect
+#gext install 1401 # bluetooth-quick-connect (redundant)
 gext install 3193 # blur-my-shell
 gext install 4269 # AlphabeticalAppGrid
 gext install 3843 # just-perfection
@@ -37,7 +37,7 @@ gext install 5575 # power-profile-switcher
 gext install 352 # middleclickclose
 
 # Extensions Configs
-dconf write /org/gnome/shell/extensions/bluetooth-quick-connect/refresh-button-on "true"
+#dconf write /org/gnome/shell/extensions/bluetooth-quick-connect/refresh-button-on "true"
 dconf write /org/gnome/shell/extensions/blur-my-shell/brightness "0.4"
 dconf write /org/gnome/shell/extensions/blur-my-shell/sigma "20"
 dconf write /org/gnome/shell/extensions/blur-my-shell/dash-to-dock/blur "false"
