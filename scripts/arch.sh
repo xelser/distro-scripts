@@ -149,7 +149,7 @@ echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILov
 pacman -Sy --needed --noconfirm linux linux-{headers,firmware} man-{db,pages} base-devel reflector \
 	plymouth btrfs-progs ntfs-3g {intel,amd}-ucode grub os-prober efibootmgr dosfstools inetutils dmidecode \
 	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound networkmanager \
-	numlockx firefox
+	firefox neovim{,-plugins} xclip wl-clipboard numlockx
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
@@ -180,7 +180,7 @@ pacman -S --needed --noconfirm i3-wm polybar openbox obconf tint2 sway waybar hy
 	sddm mate-polkit nwg-look nm-connection-editor ttf-fira{-sans,code-nerd}
 
 	#kvantum-qt5 qt5ct alacritty transmission-gtk xarchiver pcmanfm atril pluma dunst rofi picom \
-	#imv mpv neovim{,-plugins} xclip wl-clipboard wallutils feh swaybg flameshot grim brightnessctl gammastep \
+	#imv mpv wallutils feh swaybg flameshot grim brightnessctl gammastep \
 
 # sddm
 echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf

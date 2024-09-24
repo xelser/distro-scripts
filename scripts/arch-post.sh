@@ -9,14 +9,14 @@ fi
 
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-  ventoy-bin htpdate grub-hook update-grub # teamviewer zoom obs-studio gnome-boxes syncthing-gtk
+  ventoy-bin htpdate grub-hook update-grub neovim-{plug,symlinks} # teamviewer zoom obs-studio gnome-boxes syncthing-gtk
 
 ################################### WM/DE ####################################
 
 setup_wm () {
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm \
-	mugshot waypaper autotiling xidlehook betterlockscreen obmenu-generator neovim-{plug,symlinks}
+	mugshot waypaper autotiling xidlehook betterlockscreen obmenu-generator
   # ulauncher {zscroll,polybar-scripts}-git
 
 # BUILD: caffeinate
