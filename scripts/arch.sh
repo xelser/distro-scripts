@@ -146,9 +146,10 @@ echo "arch" > /etc/hostname
 # Base Minimal Packages
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
-pacman -Sy --needed --noconfirm linux linux-firmware btrfs-progs ntfs-3g {intel,amd}-ucode grub os-prober efibootmgr dosfstools \
-	base-devel pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound networkmanager \
-	plymouth man-{db,pages} dmidecode inetutils reflector numlockx firefox
+pacman -Sy --needed --noconfirm linux linux-{headers,firmware} man-{db,pages} base-devel reflector \
+	plymouth btrfs-progs ntfs-3g {intel,amd}-ucode grub os-prober efibootmgr dosfstools inetutils dmidecode \
+	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound networkmanager \
+	numlockx firefox
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf

@@ -28,7 +28,8 @@ gext --filesystem install 8 # places-menu
 
 # Install Manually (DBus)
 gext install 595 # autohide-battery
-#gext install 1401 # bluetooth-quick-connect (redundant)
+gext install 5724 # battery-health-charging
+#gext install 1401 # bluetooth-quick-connect (minor conflict with battery meter)
 gext install 3193 # blur-my-shell
 gext install 4269 # AlphabeticalAppGrid
 gext install 3843 # just-perfection
