@@ -137,12 +137,6 @@ else
 	# Waypaper
 	save_file /.config/waypaper/ config.ini
 
-	# Vim
-	save_file / .vimrc
-
-	# NeoVim
-	save_file /.config/nvim/ init.vim
-
 	# Ranger 
 	save_file /.config/ranger/ rc.conf
 
@@ -204,6 +198,12 @@ save_file /.config/xfce4/ helpers.rc
 
 # Leafpad
 save_file /.config/leafpad/ leafpadrc
+
+# Vim
+save_file / .vimrc
+
+# NeoVim
+save_file /.config/nvim/ init.vim
 
 # mpv
 save_file /.config/mpv/ mpv.conf
