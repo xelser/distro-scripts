@@ -18,7 +18,7 @@ gext --filesystem install 6670 # bluetooth-battery-meter
 gext --filesystem install 517 # caffeine
 gext --filesystem install 307 # dash-to-dock
 gext --filesystem install 4481 # forge (unmaintained)
-gext --filesystem install 4158 # gnome-ui-tune (not important)
+gext --filesystem install 4158 # gnome-ui-tune
 gext --filesystem install 4691 # pip-on-top
 gext --filesystem install 8 # places-menu
 #gext --filesystem install 7065 # tiling-shell
