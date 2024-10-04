@@ -29,22 +29,22 @@ gext --filesystem install 8 # places-menu
 # Install Manually (DBus)
 gext install 595 # autohide-battery
 gext install 5724 # battery-health-charging
-#gext install 1401 # bluetooth-quick-connect (minor conflict with battery meter)
+gext install 1401 # bluetooth-quick-connect (minor conflict with battery meter)
 gext install 3193 # blur-my-shell
 gext install 4269 # AlphabeticalAppGrid
 gext install 3843 # just-perfection
-#gext install 2236 # night-theme-switcher (bugged)
+gext install 2236 # night-theme-switcher
 gext install 5575 # power-profile-switcher
 gext install 352 # middleclickclose
 
 # Extensions Configs
-#dconf write /org/gnome/shell/extensions/bluetooth-quick-connect/refresh-button-on "true"
+dconf write /org/gnome/shell/extensions/bluetooth-quick-connect/refresh-button-on "true"
 dconf write /org/gnome/shell/extensions/blur-my-shell/brightness "0.4"
 dconf write /org/gnome/shell/extensions/blur-my-shell/sigma "20"
 dconf write /org/gnome/shell/extensions/blur-my-shell/dash-to-dock/blur "false"
 dconf write /org/gnome/shell/extensions/blur-my-shell/panel/force-light-text "true"
 dconf write /org/gnome/shell/extensions/blur-my-shell/panel/override-background-dynamically "true"
-dconf write /org/gnome/shell/extensions/caffeine/inhibit-apps "['io.github.celluloid_player.Celluloid.desktop', 'firefox.desktop']"
+dconf write /org/gnome/shell/extensions/caffeine/inhibit-apps "['io.github.celluloid_player.Celluloid.desktop', 'firefox.desktop', 'google-chrome.desktop']"
 dconf write /org/gnome/shell/extensions/caffeine/show-notifications "false"
 dconf write /org/gnome/shell/extensions/dash-to-dock/apply-custom-theme "true"
 dconf write /org/gnome/shell/extensions/dash-to-dock/custom-theme-shrink "true"
@@ -64,5 +64,6 @@ dconf write /org/gnome/shell/extensions/middleclickclose/close-button "'right'"
 dconf write /org/gnome/shell/extensions/nightthemeswitcher/commands/enabled 'true'
 dconf write /org/gnome/shell/extensions/nightthemeswitcher/commands/sunrise "'bash $HOME/.local/share/light-mode.d/light.sh'"
 dconf write /org/gnome/shell/extensions/nightthemeswitcher/commands/sunset "'bash $HOME/.local/share/dark-mode.d/dark.sh'"
+dconf write /org/gnome/shell/extensions/nightthemeswitcher/time/manual-schedule 'false'
 dconf write /org/gnome/shell/extensions/pip-on-top/stick "true"
 #dconf write /org/gnome/shell/extensions/pop-shell/tile-by-default "true"

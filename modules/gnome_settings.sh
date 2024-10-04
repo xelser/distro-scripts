@@ -19,9 +19,11 @@ gsettings set org.gnome.desktop.privacy remove-old-temp-files 'true'
 gsettings set org.gnome.desktop.privacy remove-old-trash-files 'true'
 gsettings set org.gnome.desktop.peripherals.touchpad tap-to-click 'true'
 gsettings set org.gnome.settings-daemon.plugins.color night-light-enabled 'true'
-gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature '4700'
+gsettings set org.gnome.settings-daemon.plugins.color night-light-temperature '5250'
 gsettings set org.gtk.gtk4.Settings.FileChooser show-hidden 'false'
 gsettings set org.gtk.gtk4.Settings.FileChooser sort-directories-first 'true'
+gsettings set org.gnome.desktop.datetime automatic-timezone 'true'
+gsettings set org.gnome.shell.weather automatic-location 'true'
 
 # Apps
 #gsettings set org.gnome.totem subtitle-font 'Roboto Medium 14'
