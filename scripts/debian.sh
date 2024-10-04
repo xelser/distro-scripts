@@ -31,6 +31,10 @@ nala install --assume-yes i3-wm picom polybar alacritty neovim \
 #wget -q https://github.com/JezerM/web-greeter/releases/download/${version}/web-greeter-${version}-debian.deb -P /tmp
 #nala install --assume-yes /tmp/web-greeter-${version}-debian.deb
 
+# INSTALL: Google Chrome (deb)
+wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -P /tmp
+nala install --assume-yes /tmp/google-chrome-stable_current_amd64.deb
+
 # INSTALL: TeamViewer (deb)
 wget -q https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -P /tmp
 nala install --assume-yes /tmp/teamviewer_amd64.deb
