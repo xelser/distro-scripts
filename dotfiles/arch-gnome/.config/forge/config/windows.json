@@ -139,6 +139,10 @@
         {
             "wmClass": "io.missioncenter.MissionCenter",
             "mode": "float"
+        },
+        {
+            "wmClass": "org.gnome.Loupe",
+            "mode": "float"
         }
     ]
 }
