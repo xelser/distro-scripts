@@ -23,6 +23,7 @@ image/heic=org.gnome.Loupe.desktop
 image/jxl=org.gnome.Loupe.desktop
 application/pdf=org.gnome.Evince.desktop
 x-scheme-handler/mailto=google-chrome.desktop
+application/x-desktop=org.gnome.TextEditor.desktop
 
 [Added Associations]
 image/png=org.gnome.Loupe.desktop;
@@ -47,3 +48,4 @@ image/avif=org.gnome.Loupe.desktop;
 image/heic=org.gnome.Loupe.desktop;
 image/jxl=org.gnome.Loupe.desktop;
 application/pdf=org.gnome.Evince.desktop;
+application/x-desktop=org.gnome.TextEditor.desktop;
