@@ -64,6 +64,11 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 #	flatpak override --user --filesystem=/run/media/$USER/Shared:rw
 #fi
 
+################################### CONFIG ###################################
+
+# Gamemode
+sudo usermod -aG gamemode $(whoami)
+
 echo "
 ################################## FINISHED ##################################
 "
