@@ -67,6 +67,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 ################################### CONFIG ###################################
 
 # Steam (Background)
+cp -r /usr/share/applications/steam.desktop $HOME/.local/share/applications/
 sed -i s"/steam-runtime/steam-runtime -silent/"g $HOME/.local/share/applications/steam.desktop
 
 # Gamemode
