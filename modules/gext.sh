@@ -27,11 +27,12 @@ gext --filesystem install 8 # places-menu
 	# pano@elhan.io
 
 # Install Manually (DBus)
+gext install 4269 # AlphabeticalAppGrid
 gext install 595 # autohide-battery
 #gext install 5724 # battery-health-charging
 #gext install 1401 # bluetooth-quick-connect (minor conflict with battery meter)
 gext install 3193 # blur-my-shell
-gext install 4269 # AlphabeticalAppGrid
+gext install 7074 # gamemode-shell
 gext install 3843 # just-perfection
 gext install 2236 # night-theme-switcher
 gext install 5575 # power-profile-switcher
@@ -44,6 +45,7 @@ dconf write /org/gnome/shell/extensions/blur-my-shell/sigma "20"
 dconf write /org/gnome/shell/extensions/blur-my-shell/dash-to-dock/blur "false"
 dconf write /org/gnome/shell/extensions/blur-my-shell/panel/force-light-text "true"
 dconf write /org/gnome/shell/extensions/blur-my-shell/panel/override-background-dynamically "true"
+dconf write /org/gnome/shell/extensions/gamemodeshellextension/show-icon-only-when-active "true"
 dconf write /org/gnome/shell/extensions/caffeine/inhibit-apps "['io.github.celluloid_player.Celluloid.desktop', 'firefox.desktop', 'google-chrome.desktop']"
 dconf write /org/gnome/shell/extensions/caffeine/show-notifications "false"
 dconf write /org/gnome/shell/extensions/dash-to-dock/apply-custom-theme "true"
