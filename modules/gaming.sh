@@ -69,7 +69,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 
 ################################### CONFIG ###################################
 
-# Steam (Background)
+# Steam with GameMode, MangoHud and silent launch
 cp -r /usr/share/applications/steam.desktop $HOME/.local/share/applications/
 sed -i s"/\/usr\/bin\/steam-runtime/mangohud gamemoderun \/usr\/bin\/steam-runtime -silent/"g $HOME/.local/share/applications/steam.desktop
 
