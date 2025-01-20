@@ -195,7 +195,7 @@ arch_gnome () { arch-chroot /mnt /bin/bash << EOF
 # GNOME Packages
 pacman -S --needed --noconfirm gdm xdg-{desktop-portal-gnome,user-dirs-gtk} gst-plugin-pipewire \
 	gnome-{session,shell,control-center,bluetooth-3.0,console,text-editor,calendar,disk-utility,system-monitor,builder,tweaks} \
-	evince nautilus sushi file-roller loupe celluloid baobab fragments 
+	evince nautilus sushi file-roller loupe celluloid baobab fragments power-profiles-daemon
 
 # Display Manager
 echo -e "[daemon]\nAutomaticLogin=${user}\nAutomaticLoginEnable=True" >> /etc/gdm/custom.conf
