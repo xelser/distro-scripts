@@ -71,10 +71,8 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 ext_list=($(gnome-extensions list)); for ext in "${ext_list[@]}"; do gnome-extensions enable ${ext}; done
 
 # Set Fonts
-gsettings set org.gnome.desktop.interface font-name 'Roboto 10'
-gsettings set org.gnome.desktop.interface document-font-name 'Roboto Slab 10'
-gsettings set org.gnome.desktop.interface monospace-font-name 'Roboto Mono Nerd Font 10'
-gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Roboto Medium 10'
+gsettings set org.gnome.desktop.interface font-name 'Adwaita Sans 10'
+gsettings set org.gnome.desktop.interface monospace-font-name 'Adwaita Mono 10'
 
 # Clean
 rm -rf $HOME/underfined.bak
