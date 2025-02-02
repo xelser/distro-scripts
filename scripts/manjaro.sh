@@ -11,9 +11,13 @@ bloat=(manjaro-hello zsh midori gufw timeshift lshw hexchat gthumb gufw imagewri
 for pkgs in "${bloat[@]}"; do sudo pacman -Qq ${pkgs} && sudo pacman -Rnsc --noconfirm ${pkgs}; done
 
 # INSTALL: Manjaro XFCE 
-sudo pacman -Syyu --needed --noconfirm ttf-fira{code-nerd,-sans} \
-	firefox geany transmission-gtk redshift dconf-editor darkman \
-	manjaro-pipewire wireplumber ecasound easyeffects 
+if [[ ${wm_de} == "xfce" ]]; then
+	sudo pacman -Syyu --needed --noconfirm ttf-fira{code-nerd,-sans} \
+		firefox geany transmission-gtk redshift dconf-editor darkman \
+		manjaro-pipewire wireplumber ecasound easyeffects
+elif [[ ${wm_de} == "kde" ]]; then
+	sudo pacman -S --needed --noconfirm ktorrent 
+fi
 
 # INSTALL: Others
 sudo pacman -Syyu --needed --noconfirm obs-studio ventoy \
