@@ -69,9 +69,9 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 
 ################################### CONFIG ###################################
 
-# Steam with MangoHud
-cp -r /usr/share/applications/steam.desktop $HOME/.local/share/applications/
-sed -i s"/\/usr\/bin\/steam-runtime/mangohud \/usr\/bin\/steam-runtime/"g $HOME/.local/share/applications/steam.desktop
+# Steam with MangoHud (some games may not launch at all)
+#cp -r /usr/share/applications/steam.desktop $HOME/.local/share/applications/
+#sed -i s"/\/usr\/bin\/steam-runtime/mangohud \/usr\/bin\/steam-runtime/"g $HOME/.local/share/applications/steam.desktop
 
 # Gamemode
 sudo usermod -aG gamemode $(whoami)
