@@ -143,6 +143,10 @@
         {
             "wmClass": "org.gnome.Loupe",
             "mode": "float"
+        },
+        {
+            "wmClass": "steam",
+            "mode": "float"
         }
     ]
 }
