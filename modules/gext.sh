@@ -30,13 +30,14 @@ gext --filesystem install 8 # places-menu
 gext install 4269 # AlphabeticalAppGrid
 gext install 595 # autohide-battery
 #gext install 5724 # battery-health-charging
-#gext install 1401 # bluetooth-quick-connect (minor conflict with battery meter)
+gext install 1401 # bluetooth-quick-connect (minor conflict with battery meter)
 gext install 3193 # blur-my-shell
 gext install 7074 # gamemode-shell
 gext install 3843 # just-perfection
 gext install 2236 # night-theme-switcher
 gext install 5575 # power-profile-switcher
 gext install 352 # middleclickclose
+gext install 7215 # restart-to
 
 # Extensions Configs
 dconf write /org/gnome/shell/extensions/bluetooth-quick-connect/refresh-button-on "true"
