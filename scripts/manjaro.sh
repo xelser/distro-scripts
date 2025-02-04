@@ -10,11 +10,14 @@ sudo pacman-mirrors --country Global
 bloat=(manjaro-hello zsh midori gufw timeshift lshw hexchat gthumb gufw imagewriter gcolor3 evince)
 for pkgs in "${bloat[@]}"; do sudo pacman -Qq ${pkgs} && sudo pacman -Rnsc --noconfirm ${pkgs}; done
 
-# INSTALL: Manjaro XFCE 
+# INSTALL: Manjaro Base
+sudo pacman -Syyu --needed --noconfirm firefox dconf-editor \
+		manjaro-pipewire wireplumber ecasound easyeffects
+
+# INSTALL: Manjaro DE/WM
 if [[ ${wm_de} == "xfce" ]]; then
 	sudo pacman -Syyu --needed --noconfirm ttf-fira{code-nerd,-sans} \
-		firefox geany transmission-gtk redshift dconf-editor darkman \
-		manjaro-pipewire wireplumber ecasound easyeffects
+		geany transmission-gtk redshift darkman
 elif [[ ${wm_de} == "kde" ]]; then
 	sudo pacman -S --needed --noconfirm ktorrent 
 fi

@@ -57,7 +57,7 @@ mkdir -p $HOME/Pictures/Screenshots
 
 setup_gnome () { 
 # INSTALL: AUR PACKAGES
-yay -S --needed --noconfirm ttf-roboto{,-slab,-mono,-mono-nerd} google-chrome gnome-extensions-cli # acer-wmi-battery-dkms
+yay -S --needed --noconfirm google-chrome gnome-extensions-cli # ttf-roboto{,-slab,-mono,-mono-nerd} acer-wmi-battery-dkms
 
 # theme 
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-libadwaita.sh)"
