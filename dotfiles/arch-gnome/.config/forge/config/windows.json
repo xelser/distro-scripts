@@ -147,6 +147,10 @@
         {
             "wmClass": "steam",
             "mode": "float"
+        },
+        {
+            "wmClass": "org.gnome.Snapshot",
+            "mode": "float"
         }
     ]
 }
