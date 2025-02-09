@@ -40,7 +40,7 @@ sudo dnf5 upgrade @core @sound-and-video @multimedia --exclude=PackageKit-gstrea
 
 # INSTALL: Fedora Workstation
 sudo dnf5 install --assumeyes --skip-broken --allowerasing gnome-{builder,console,extensions-app,tweaks} \
-  file-roller fragments celluloid drawing easyeffects syncthing nvim wl-clipboard xclip libheif-tools 
+  file-roller fragments celluloid drawing easyeffects lsp-plugins-lv2 syncthing nvim wl-clipboard xclip libheif-tools 
 
   # inkscape telegram discord video-downloader touchegg google-chrome-stable
   # gnome-shell-extension-{light-style,user-theme} google-roboto-{fonts,mono-fonts,slab-fonts}
