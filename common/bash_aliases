@@ -6,14 +6,14 @@ if   [ -f /usr/bin/nala ]; then
 	alias uninstall="sudo nala purge $1"
 	alias clean="sudo nala autoremove --purge --assume-yes && sudo nala clean"
 	alias search="sudo nala search $1"
-	alias list="sudo nala list --installed | grep $1"
+	alias list="sudo apt list --installed | cut -d '/' -f1 | grep $1"
 elif [ -f /usr/bin/apt ]; then
 	alias pkgupdate="sudo apt update && sudo apt upgrade --yes"
 	alias install="sudo apt install $1"
 	alias uninstall="sudo apt autoremove --purge $1"
 	alias clean="sudo apt autoremove --purge --yes && sudo apt autoclean"
 	alias search="sudo apt search $1"
-	alias list="sudo apt list --installed | grep $1"
+	alias list="sudo apt list --installed | cut -d '/' -f1 | grep $1"
 elif [ -f /usr/bin/yay ]; then
 	alias pkgupdate="yay -Syyu --noconfirm"
 	alias install="yay -S $1 --needed"
