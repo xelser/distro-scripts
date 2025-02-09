@@ -6,6 +6,9 @@ append_file () {
 
 ################################## PACKAGES ##################################
 
+# DISABLE SUSPEND ON AC
+gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "nothing"
+
 # PACKAGE MANAGER: DNF(5)
 append_file "keepcache=True
 defaultyes=True
