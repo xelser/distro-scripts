@@ -14,8 +14,8 @@ fi
 
 # Install Extensions
 gext --filesystem install 615 # appindicator
+gext --filesystem install 6583 # auto-power-profile
 gext --filesystem install 6670 # bluetooth-battery-meter
-gext --filesystem install 517 # caffeine
 gext --filesystem install 307 # dash-to-dock
 gext --filesystem install 4481 # forge (unmaintained)
 gext --filesystem install 4158 # gnome-ui-tune
@@ -29,6 +29,7 @@ gext --filesystem install 8 # places-menu
 # Install Manually (DBus)
 gext install 4269 # AlphabeticalAppGrid
 gext install 595 # autohide-battery
+#gext install 6583 # auto-power-profile
 #gext install 5724 # battery-health-charging
 gext install 1401 # bluetooth-quick-connect (minor conflict with battery meter)
 gext install 3193 # blur-my-shell
@@ -36,7 +37,6 @@ gext install 517 # caffeine
 gext install 7074 # gamemode-shell
 gext install 3843 # just-perfection
 gext install 2236 # night-theme-switcher
-gext install 5575 # power-profile-switcher
 gext install 352 # middleclickclose
 gext install 7215 # restart-to
 
