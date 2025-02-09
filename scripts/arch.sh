@@ -149,7 +149,7 @@ echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILov
 pacman -Sy --needed --noconfirm linux linux-{headers,firmware} man-{db,pages} base-devel reflector \
 	plymouth btrfs-progs ntfs-3g {intel,amd}-ucode grub os-prober efibootmgr dosfstools inetutils dmidecode \
 	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound networkmanager \
-	ttf-nerd-fonts-symbols{,-mono} firefox neovim{,-plugins} xclip wl-clipboard numlockx syncthing
+	firefox neovim{,-plugins} xclip wl-clipboard numlockx syncthing
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
