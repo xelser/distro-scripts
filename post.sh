@@ -58,6 +58,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 [ -f $HOME/.config/${distro_id}-post.sh ] && bash $HOME/.config/${distro_id}-post.sh
 
 # Fonts
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/fonts-nerd.sh Noto)"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/x11_fonts.sh)"
 
 # DE Post Install Script

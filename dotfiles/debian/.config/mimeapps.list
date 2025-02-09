@@ -11,3 +11,4 @@ image/jpeg=imv.desktop;imv-folder.desktop;
 image/png=imv-folder.desktop;
 application/x-shellscript=pluma.desktop;
 inode/symlink=pluma.desktop;
+application/xml=pluma.desktop;

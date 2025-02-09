@@ -36,10 +36,11 @@ sudo dnf5 upgrade @core @sound-and-video @multimedia --exclude=PackageKit-gstrea
 #sudo dnf groupupdate sound-and-video multimedia --assumeyes --exclude=PackageKit-gstreamer-plugin
 
 # INSTALL: Fedora Workstation
-sudo dnf5 install --assumeyes --skip-broken --allowerasing google-roboto-{fonts,mono-fonts,slab-fonts} libheif-tools \
-  gnome-{builder,console,extensions-app,multi-writer,tweaks} file-roller fragments celluloid drawing easyeffects
+sudo dnf5 install --assumeyes --skip-broken --allowerasing gnome-{builder,console,extensions-app,multi-writer,tweaks} \
+  file-roller fragments celluloid drawing easyeffects libheif-tools 
+
   # inkscape telegram discord video-downloader touchegg google-chrome-stable
-  # gnome-shell-extension-{light-style,user-theme}
+  # gnome-shell-extension-{light-style,user-theme} google-roboto-{fonts,mono-fonts,slab-fonts}
 
 # INSTALL: htpdate
 sudo dnf copr enable whitehara/htpdate --assumeyes
@@ -72,5 +73,5 @@ if [ ! -f /.flag ]; then
 	${source_dir}/themes/icon-tela-circle.sh
 	${source_dir}/themes/cursor-bibata.sh
 	${source_dir}/themes/firefox-gnome.sh
-  ${source_dir}/themes/fonts-nerd.sh RobotoMono
+  ${source_dir}/themes/fonts-adwaita.sh 48
 fi
