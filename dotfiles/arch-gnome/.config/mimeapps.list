@@ -85,6 +85,7 @@ video/x-nsv=io.github.celluloid_player.Celluloid.desktop
 video/x-theora=io.github.celluloid_player.Celluloid.desktop
 video/x-theora+ogg=io.github.celluloid_player.Celluloid.desktop
 text/plain=org.gnome.TextEditor.desktop
+inode/directory=org.gnome.Nautilus.desktop
 
 [Added Associations]
 image/png=org.gnome.Loupe.desktop;
@@ -167,3 +168,4 @@ video/x-nsv=io.github.celluloid_player.Celluloid.desktop;
 video/x-theora=io.github.celluloid_player.Celluloid.desktop;
 video/x-theora+ogg=io.github.celluloid_player.Celluloid.desktop;
 text/plain=org.gnome.TextEditor.desktop;
+inode/directory=org.gnome.Nautilus.desktop;
