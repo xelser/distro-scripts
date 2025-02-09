@@ -27,7 +27,9 @@ nvidia_prime () {
 		#sudo envycontrol --switch nvidia --force-comp
 
 		if [[ ${wm_de} == "gnome" ]]; then
-			sudo systemctl enable nvidia-{suspend,resume,hibernate}
+			sudo systemctl enable nvidia-resume
+			sudo systemctl enable nvidia-suspend
+			sudo systemctl enable nvidia-hibernate
 			sudo ln -s /dev/null /etc/udev/rules.d/61-gdm.rules
 		fi
 	fi
