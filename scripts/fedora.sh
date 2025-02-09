@@ -62,7 +62,7 @@ sudo hostnamectl set-hostname --static "fedora"
 
 # Plymouth fix
 sudo plymouth-set-default-theme -R bgrt
-sudo grubby --update-kernel=ALL --args=“plymouth.use-simpledrm”
+#sudo grubby --update-kernel=ALL --args=“plymouth.use-simpledrm”
 
 # GDM
 append_file "[daemon]

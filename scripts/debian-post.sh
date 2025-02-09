@@ -12,12 +12,6 @@ dconf write /org/gnome/desktop/interface/monospace-font-name "'Ubuntu Mono 12'"
 	sed -i 's/font = Monospace 8/font = Ubuntu Mono 12/g' $HOME/.config/dunst/dunstrc
 
 # text editors
-[ -f /usr/bin/vim ] && curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-	https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-[ -f /usr/bin/nvim ] && sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim \
-	--create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-       
 if [ -f /usr/bin/gedit ]; then
 	dconf write /org/gnome/gedit/preferences/editor/scheme "'gruvbox-material-hard-dark'"
 	dconf write /org/gnome/gedit/preferences/editor/editor-font "'Ubuntu Mono 12'"
