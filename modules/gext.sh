@@ -32,6 +32,7 @@ gext install 595 # autohide-battery
 #gext install 5724 # battery-health-charging
 gext install 1401 # bluetooth-quick-connect (minor conflict with battery meter)
 gext install 3193 # blur-my-shell
+gext install 517 # caffeine
 gext install 7074 # gamemode-shell
 gext install 3843 # just-perfection
 gext install 2236 # night-theme-switcher

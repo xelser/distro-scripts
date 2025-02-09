@@ -140,9 +140,12 @@ elif [ -f /usr/bin/nala ]; then
 elif [ -f /usr/bin/apt ]; then
 	sudo apt autoremove --purge --yes
 	sudo apt autoclean
+elif [ -f /usr/bin/dnf5 ]; then
+	sudo dnf5 remove --assumeyes
+	sudo dnf clean packages
 elif [ -f /usr/bin/dnf ]; then
 	sudo dnf autoremove --assumeyes
-	sudo dnf clean all
+	sudo dnf clean packages
 fi
 
 [ -f /usr/bin/flatpak ] && flatpak uninstall --unused --delete-data --assumeyes
