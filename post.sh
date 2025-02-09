@@ -37,13 +37,13 @@ fi
 
 # Essential Packages
 if [ -f /usr/bin/nala ]; then sudo nala install --assume-yes ntfs-3g \
-	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
+	flatpak fastfetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
 	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf wget curl git openssh-client intel-media-va-driver i965-va-driver
 elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm ntfs-3g \
-	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
+	flatpak fastfetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
 	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines wget curl git openssh libva-intel-driver intel-media-driver
 elif [ -f /usr/bin/dnf5 ]; then sudo dnf5 install --assumeyes --best --allowerasing ntfs-3g \
-	flatpak neofetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
+	flatpak fastfetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
 	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines wget curl git openssh libva-intel-driver intel-media-driver
 fi
 
