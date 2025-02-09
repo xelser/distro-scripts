@@ -36,16 +36,16 @@ sudo dnf5 upgrade @core @sound-and-video @multimedia --exclude=PackageKit-gstrea
 #sudo dnf groupupdate sound-and-video multimedia --assumeyes --exclude=PackageKit-gstreamer-plugin
 
 # INSTALL: Fedora Workstation
-sudo dnf5 install --assumeyes --skip-broken --allowerasing gnome-{builder,console,extensions-app,multi-writer,tweaks} \
-  file-roller fragments celluloid drawing easyeffects libheif-tools 
+sudo dnf5 install --assumeyes --skip-broken --allowerasing gnome-{builder,console,extensions-app,tweaks} \
+  file-roller fragments celluloid drawing easyeffects nvim syncthing libheif-tools 
 
   # inkscape telegram discord video-downloader touchegg google-chrome-stable
   # gnome-shell-extension-{light-style,user-theme} google-roboto-{fonts,mono-fonts,slab-fonts}
 
 # INSTALL: htpdate
-sudo dnf copr enable whitehara/htpdate --assumeyes
-sudo dnf5 install htpdate --assumeyes
-sudo systemctl enable htpdate --now
+#sudo dnf copr enable whitehara/htpdate --assumeyes
+#sudo dnf5 install htpdate --assumeyes
+#sudo systemctl enable htpdate --now
 
 ################################### CONFIG ###################################
 
@@ -59,6 +59,10 @@ sudo grub2-mkconfig -o /boot/grub2/grub.cfg
 
 # Set Hostname
 sudo hostnamectl set-hostname --static "fedora"
+
+# Plymouth fix
+sudo plymouth-set-default-theme -R bgrt
+sudo grubby --update-kernel=ALL --args=“plymouth.use-simpledrm”
 
 # GDM
 append_file "[daemon]
