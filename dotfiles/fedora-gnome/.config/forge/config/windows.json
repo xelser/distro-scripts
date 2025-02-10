@@ -139,6 +139,14 @@
         {
             "wmClass": "org.gnome.TextEditor",
             "mode": "float"
+        },
+        {
+            "wmClass": "me.dusansimic.DynamicWallpaper",
+            "mode": "float"
+        },
+        {
+            "wmClass": "org.gnome.FileRoller",
+            "mode": "float"
         }
     ]
 }
