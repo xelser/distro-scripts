@@ -13,14 +13,24 @@ if [ ! -f /usr/bin/gext ]; then
 fi
 
 # Install Extensions
-gext --filesystem install 615 # appindicator
+if [[ ${distro_id} == "fedora" ]]; then sudo dnf5 install \
+	gnome-shell-extension-{appindicator,blur-my-shell,caffeine,dash-to-dock,forge,gamemode,just-perfection,places-menu}
+else
+	gext install 615 # appindicator
+	gext install 3193 # blur-my-shell
+	gext install 517 # caffeine
+	gext install 307 # dash-to-dock
+	gext install 4481 # forge (unmaintained)
+	gext install 7074 # gamemode-shell
+	gext install 3843 # just-perfection
+	gext install 8 # places-menu
+fi
+
+# Install Extensions
 gext --filesystem install 6670 # bluetooth-battery-meter
-gext --filesystem install 307 # dash-to-dock
 gext --filesystem install 7379 # dm-theme-changer
-gext --filesystem install 4481 # forge (unmaintained)
 gext --filesystem install 4158 # gnome-ui-tune
 gext --filesystem install 4691 # pip-on-top
-gext --filesystem install 8 # places-menu
 #gext --filesystem install 7065 # tiling-shell
 #gext --filesystem install 3928 # autoselectheadset
 #gext --filesystem install 5237 # rounded-window-corners (no update)
@@ -32,10 +42,6 @@ gext install 595 # autohide-battery
 gext install 6583 # auto-power-profile
 #gext install 5724 # battery-health-charging
 gext install 1401 # bluetooth-quick-connect (minor conflict with battery meter)
-gext install 3193 # blur-my-shell
-gext install 517 # caffeine
-gext install 7074 # gamemode-shell
-gext install 3843 # just-perfection
 gext install 2236 # night-theme-switcher
 gext install 352 # middleclickclose
 gext install 7215 # restart-to

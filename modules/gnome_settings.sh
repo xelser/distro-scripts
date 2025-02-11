@@ -40,21 +40,21 @@ gsettings set org.gnome.TextEditor style-scheme 'builder-dark'
 gsettings set org.gnome.TextEditor tab-width '2'
 gsettings set org.gnome.Console last-window-size '(737, 520)'
 gsettings set org.gnome.Console theme 'auto'
-gsettings set org.gnome.MultiWriter blank-drive 'false'
-gsettings set org.gnome.MultiWriter enable-verify 'false'
+#gsettings set org.gnome.MultiWriter blank-drive 'false'
+#gsettings set org.gnome.MultiWriter enable-verify 'false'
 gsettings set org.gnome.software download-updates 'false'
 gsettings set org.gnome.software download-updates-notify 'false'
 gsettings set org.gnome.builder window-maximized 'false'
-#gsettings set org.gnome.builder.editor font-name 'Roboto Mono 10'
+#gsettings set org.gnome.builder.editor font-name 'Adwaita Mono 10'
 gsettings set org.gnome.builder.editor highlight-current-line 'true'
 gsettings set org.gnome.builder.editor highlight-matching-brackets 'true'
 gsettings set org.gnome.builder.editor style-scheme-name 'builder-dark'
 gsettings set org.gnome.builder.editor wrap-text 'always'
 gsettings set org.gnome.builder.editor.language:/org/gnome/builder/editor/language/sh/ tab-width '2'
 gsettings set org.gnome.builder.spelling check-spelling "false"
-#gsettings set org.gnome.builder.terminal font-name 'Roboto Mono 10'
+#gsettings set org.gnome.builder.terminal font-name 'Adwaita Mono 10'
 gsettings set io.github.celluloid-player.Celluloid dark-theme-enable 'false'
-gsettings set io.github.celluloid-player.Celluloid mpv-options "hwdec=auto-safe sub-font='Roboto Mono' sub-font-size=30 sub-color='#FFFF00' slang=en,eng"
+gsettings set io.github.celluloid-player.Celluloid mpv-options "hwdec=auto-safe sub-font='Adwaita Mono' sub-font-size=30 sub-color='#FFFF00' slang=en,eng"
 
 # GNOME Settings
 gnome-control-center background
