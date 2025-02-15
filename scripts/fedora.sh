@@ -49,8 +49,7 @@ sudo dnf5 install htpdate --assumeyes
 sudo systemctl enable htpdate --now
 
 # INSTALL: TeamViewer (rpm)
-wget -q https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm -P /tmp
-sudo dnf5 install --assumeyes /tmp/teamviewer.x86_64.rpm
+sudo dnf5 install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
 
 ################################### CONFIG ###################################
 
