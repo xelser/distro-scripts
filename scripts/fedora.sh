@@ -9,30 +9,30 @@ append_file () {
 # DISABLE SUSPEND ON AC
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "nothing"
 
-# PACKAGE MANAGER: DNF(5)
+# PACKAGE MANAGER: DNF
 echo -e "[main]\nkeepcache=True\ndefaultyes=True\ninstall_weak_deps=False\nmax_parallel_downloads=5
 color=always" | sudo tee /etc/dnf/libdnf5.conf.d/20-user-settings.conf 1> /dev/null
 
 # DEBLOAT
-sudo dnf5 remove --assumeyes @guest-desktop-agents @container-management @libreoffice \
+sudo dnf remove --assumeyes @guest-desktop-agents @container-management @libreoffice \
   rhythmbox mediawriter simple-scan fedora-bookmarks totem libreoffice-\* gnome-shell-extension-\* \
   gnome-{boxes,contacts,characters,connections,font-viewer,tour,clocks,weather,maps}
 
 # REPO: Google Chrome | RPMFUSION
 #sudo dnf config-manager --set-enabled --assumeyes google-chrome
-sudo dnf5 list --installed | grep -q "rpmfusion" || sudo dnf5 install --assumeyes --skip-broken \
+sudo dnf list --installed | grep -q "rpmfusion" || sudo dnf5 install --assumeyes --skip-broken \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # UPDATE
-sudo dnf5 upgrade @core @sound-and-video @multimedia --exclude=PackageKit-gstreamer-plugin --assumeyes --best --allowerasing --skip-unavailable 
+sudo dnf upgrade @core @sound-and-video @multimedia --exclude=PackageKit-gstreamer-plugin --assumeyes --best --allowerasing --skip-unavailable 
 
 # INSTALL: Fedora Multimedia Codecs (from RPM Fusion https://rpmfusion.org/Howto/Multimedia)
 #sudo dnf swap ffmpeg-free ffmpeg --assumeyes --allowerasing
 #sudo dnf groupupdate sound-and-video multimedia --assumeyes --exclude=PackageKit-gstreamer-plugin
 
 # INSTALL: Fedora Workstation
-sudo dnf5 install --assumeyes --skip-broken --allowerasing gnome-{builder,console,extensions-app,tweaks} \
+sudo dnf install --assumeyes --skip-broken --allowerasing gnome-{builder,console,extensions-app,tweaks} \
   file-roller fragments celluloid drawing easyeffects lsp-plugins-lv2 nvim wl-clipboard syncthing libheif-tools 
 
   # inkscape telegram discord video-downloader touchegg google-chrome-stable
@@ -40,11 +40,11 @@ sudo dnf5 install --assumeyes --skip-broken --allowerasing gnome-{builder,consol
 
 # INSTALL: htpdate
 sudo dnf copr enable whitehara/htpdate --assumeyes
-sudo dnf5 install htpdate --assumeyes
+sudo dnf install htpdate --assumeyes
 sudo systemctl enable htpdate --now
 
 # INSTALL: TeamViewer (rpm)
-sudo dnf5 install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
+sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
 
 ################################### CONFIG ###################################
 

@@ -13,7 +13,7 @@ if [ ! -f /usr/bin/gext ]; then
 fi
 
 # Install Extensions
-if [[ ${distro_id} == "fedora" ]]; then sudo dnf5 install \
+if [[ ${distro_id} == "fedora" ]]; then sudo dnf install \
 	gnome-shell-extension-{appindicator,blur-my-shell,caffeine,dash-to-dock,forge,gamemode,just-perfection,places-menu}
 else
 	gext install 615 # appindicator
