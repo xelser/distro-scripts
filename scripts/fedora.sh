@@ -17,13 +17,11 @@ max_parallel_downloads=5
 color=always
 #fastestmirror=True
 #assumeyes=True" /etc/dnf/dnf.conf
-sudo dnf install --assumeyes dnf5
-#ln -s /usr/bin/dnf5 /usr/local/bin/dnf
 
 # DEBLOAT
-sudo dnf5 group remove --assumeyes "Guest Desktop Agents" "Container Management" "LibreOffice"
-sudo dnf5 remove --assumeyes rhythmbox mediawriter simple-scan fedora-bookmarks totem libreoffice-\* \
-  gnome-shell-extension-\* gnome-{boxes,contacts,characters,connections,font-viewer,tour,clocks,weather,maps}
+sudo dnf5 remove --assumeyes @guest-desktop-agents @container-management @libreoffice \
+  rhythmbox mediawriter simple-scan fedora-bookmarks totem libreoffice-\* gnome-shell-extension-\* \
+  gnome-{boxes,contacts,characters,connections,font-viewer,tour,clocks,weather,maps}
 
 # REPO: Google Chrome | RPMFUSION
 #sudo dnf config-manager --set-enabled --assumeyes google-chrome
