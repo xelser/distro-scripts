@@ -5,7 +5,7 @@
 # Install: Proprietary NVIDIA Drivers
 install_nvidia () {
 	if [[ ${distro_id} == "fedora" ]]; then
-		sudo dnf5 install --assumeyes --allowerasing kernel akmod-nvidia && sleep 300
+		sudo dnf install --assumeyes --allowerasing kernel akmod-nvidia && sleep 300
 	elif [[ ${distro_id} == "arch" ]] || [[ ${distro_id} == "endeavouros" ]]; then
 		yay -S --needed --noconfirm nvidia lib32-nvidia-utils nvidia-pacman-hook
 	fi
@@ -14,7 +14,7 @@ install_nvidia () {
 # Install: Nvidia Prime
 nvidia_prime () {
 	if [[ ${distro_id} == "fedora" ]]; then
-		sudo dnf copr enable sunwire/envycontrol --assumeyes && sudo dnf5 install python3-envycontrol --assumeyes
+		sudo dnf copr enable sunwire/envycontrol --assumeyes && sudo dnf install python3-envycontrol --assumeyes
 	elif [[ ${distro_id} == "manjaro" ]]; then
 		sudo pacman -S --needed --noconfirm envycontrol
 	elif [[ ${distro_id} == "arch" ]] || [[ ${distro_id} == "endeavouros" ]]; then
@@ -50,10 +50,10 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 # Install: Steam, Lutris, Gamemode & MangoHud
 [ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm steam lutris libayatana-appindicator \
 	{lib32-,}gamemode {lib32-,}mangohud vulkan-tools mesa-demos
-[ -f /usr/bin/dnf5 ] && sudo dnf5 install --assumeyes steam lutris libayatana-appindicator-gtk3 \
-	gamemode.{x86_64,i686} mangohud.{x86_64,i686} vulkan-tools mesa-demos
 [ -f /usr/bin/nala ] && sudo nala install --assume-yes steam lutris libayatana-appindicator3 \
 	gamemode{,:i386} mangohud vulkan-tools mesa-utils-bin
+[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes steam lutris libayatana-appindicator-gtk3 \
+	gamemode.{x86_64,i686} mangohud.{x86_64,i686} vulkan-tools mesa-demos
 
 ################################### FLATPAK ##################################
 
