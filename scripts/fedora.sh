@@ -10,13 +10,8 @@ append_file () {
 gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "nothing"
 
 # PACKAGE MANAGER: DNF(5)
-append_file "keepcache=True
-defaultyes=True
-install_weak_deps=False
-max_parallel_downloads=5
-color=always
-#fastestmirror=True
-#assumeyes=True" /etc/dnf/dnf.conf
+echo -e "[main]\nkeepcache=True\ndefaultyes=True\ninstall_weak_deps=False\nmax_parallel_downloads=5
+color=always" | sudo tee /etc/dnf/libdnf5.conf.d/20-user-settings.conf 1> /dev/null
 
 # DEBLOAT
 sudo dnf5 remove --assumeyes @guest-desktop-agents @container-management @libreoffice \
