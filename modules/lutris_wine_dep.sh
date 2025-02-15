@@ -1,7 +1,7 @@
 #!/bin/bash
 
-if [ -f /usr/bin/dnf5 ]; then
-	sudo dnf5 install --assumeyes wine-core{,.i686}
+if [ -f /usr/bin/dnf ]; then
+	sudo dnf install --assumeyes wine-core{,.i686}
 elif [ -f /usr/bin/apt ]; then
 	sudo dpkg --add-architecture i386 && sudo apt update
 	if [ -f /usr/bin/nala ]; then
