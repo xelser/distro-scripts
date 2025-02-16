@@ -177,18 +177,21 @@ arch_wm () { arch-chroot /mnt /bin/bash << EOF
 
 # Window Manager Packages
 pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk,hyprland} ttf-fira{-sans,code-nerd} \
-	sddm mate-polkit nwg-look nm-connection-editor brightnessctl gammastep flameshot grim \
-	picom alacritty dunst rofi imv mpv wallutils feh swaybg atril pluma pcmanfm xarchiver \
-	i3-wm polybar
+	greetd gtkgreet mate-polkit nwg-look nm-connection-editor flameshot grim wallutils feh swaybg imv mpv \
+	brightnessctl gammastep alacritty dunst rofi atril pluma engrampa nemo i3-wm polybar picom
 
-	#openbox obconf tint2 sway waybar hyprland
-	#kvantum-qt5 qt5ct transmission-gtk \
-	#imv mpv wallutils feh swaybg \
+	#openbox obconf tint2 sway waybar hyprland kvantum-qt5 qt5ct
 
 # sddm
-echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
-echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
-systemctl enable sddm
+#echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
+#echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
+#systemctl enable sddm
+
+# greetd
+echo -e '[terminal]\nvt = 1\n\n[greeter]\ntype = "gtkgreet"\n
+[session]\ncommand = "/usr/bin/i3-with-shmlog"
+user = "xelser"' > /etc/greetd/greetd.conf
+systemctl enable greetd
 
 EOF
 }
