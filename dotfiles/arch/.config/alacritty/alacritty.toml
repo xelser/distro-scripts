@@ -1,4 +1,3 @@
-import = ["/home/xelser/.config/alacritty/edge-aura.toml"]
 
 [env]
 TERM = "xterm-256color"
@@ -33,3 +32,6 @@ opacity = 0.95
 [window.padding]
 x = 5
 y = 5
+
+[general]
+import = ["/home/xelser/.config/alacritty/edge-aura.toml"]
