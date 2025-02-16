@@ -5,13 +5,13 @@ Plug 'ap/vim-css-color'
 " Themes
 Plug 'Mofiqul/adwaita.nvim'
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'nvim-tree/nvim-web-devicons'
 
 " Settings
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'sheerun/vim-polyglot'
+Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
@@ -31,6 +31,8 @@ set mouse=a                 " enable mouse click
 set clipboard=unnamedplus   " using system clipboard
 set ttyfast                 " Speed up scrolling in Vim
 
+colorscheme adwaita
+
 lua << END
 	require("lualine").setup({
 		options = {
@@ -39,4 +41,3 @@ lua << END
 	})
 END
 
-colorscheme adwaita

@@ -63,7 +63,7 @@ if [ -f /usr/bin/dunst ] && [ ! -f $HOME/.config/dunst/dunstrc ]; then
 
 	# Config Dunst
 	sed -i 's/origin = top-right/origin = bottom-right/g' $HOME/.config/dunst/dunstrc
-	sed -i 's/offset = 10x50/offset = 20x20/g' $HOME/.config/dunst/dunstrc
+	sed -i 's/offset = (10, 50)/offset = (20, 20)/g' $HOME/.config/dunst/dunstrc
 	sed -i 's/icon_theme = Adwaita/icon_theme = Papirus-Dark/g' $HOME/.config/dunst/dunstrc
 	sed -i 's/max_icon_size = 128/max_icon_size = 64/g' $HOME/.config/dunst/dunstrc
 fi
