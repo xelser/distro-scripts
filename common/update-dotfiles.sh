@@ -5,9 +5,9 @@ common_dir="$HOME/Documents/distro-scripts/common"
 dest_dir="$HOME/Documents/distro-scripts/dotfiles/${distro_id}-${wm_de}"
 
 rm -rf ${dest_dir}
-#mkdir -p ${dest_dir}/.config/
-#mkdir -p ${dest_dir}/.local/
-#mkdir -p ${dest_dir}/.var/
+mkdir -p ${dest_dir}/.config/
+mkdir -p ${dest_dir}/.local/
+mkdir -p ${dest_dir}/.var/
 
 save_folder () {
 	[[ -d $HOME$1 ]] && mkdir -p ${dest_dir}$1 && \
