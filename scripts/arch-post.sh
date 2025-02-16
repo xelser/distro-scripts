@@ -16,7 +16,7 @@ yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload
 setup_wm () {
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm \
-	mugshot waypaper autotiling xidlehook betterlockscreen obmenu-generator transmission-gtk3
+	mugshot waypaper autotiling xidlehook betterlockscreen obmenu-generator
   # ulauncher {zscroll,polybar-scripts}-git
 
 # BUILD: caffeinate
