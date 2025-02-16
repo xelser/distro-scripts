@@ -176,11 +176,14 @@ EOF
 arch_wm () { arch-chroot /mnt /bin/bash << EOF
 
 # Window Manager Packages
-pacman -S --needed --noconfirm i3-wm polybar openbox obconf tint2 sway waybar hyprland xdg-desktop-portal-{wlr,gtk,hyprland} \
-	sddm mate-polkit nwg-look nm-connection-editor ttf-fira{-sans,code-nerd}
+pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk,hyprland} ttf-fira{-sans,code-nerd} \
+	sddm mate-polkit nwg-look nm-connection-editor brightnessctl gammastep flameshot grim \
+	picom alacritty dunst rofi imv mpv wallutils feh swaybg atril pluma pcmanfm xarchiver \
+	i3-wm polybar
 
-	#kvantum-qt5 qt5ct alacritty transmission-gtk xarchiver pcmanfm atril pluma dunst rofi picom \
-	#imv mpv wallutils feh swaybg flameshot grim brightnessctl gammastep \
+	#openbox obconf tint2 sway waybar hyprland
+	#kvantum-qt5 qt5ct transmission-gtk \
+	#imv mpv wallutils feh swaybg \
 
 # sddm
 echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf

@@ -13,7 +13,7 @@ nala install --assume-yes xorg lightdm build-essential synaptic \
   plymouth htpdate network-manager numlockx gammastep \
   dconf-cli libglib2.0-bin mugshot at-spi2-core \
   firefox-esr {transmission,syncthing}-gtk \
-  fonts-ubuntu{,-console} lightdm-gtk-greeter-settings
+  fonts-roboto{,-slab} lightdm-gtk-greeter-settings
 
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar alacritty neovim \
@@ -84,5 +84,5 @@ systemctl enable lightdm
 
 # INSTALL: GTK, KDE, Icon, Cursors
 if [ ! -f /.flag ]; then
-	${source_dir}/themes/fonts-nerd.sh UbuntuMono
+	${source_dir}/themes/fonts-nerd.sh RobotoMono
 fi
