@@ -75,6 +75,7 @@ fi
 # others
 alias update="pkgupdate ; flatupdate ; [ -d $HOME/Documents/distro-scripts/ ] && gitupdate"
 alias fetch="[ -f /bin/fastfetch ] && fastfetch || neofetch"
+alias lock="[ -f /usr/bin/betterlockscreen ] && betterlockscreen --time-format '%I:%M %p' -l dimblur >1 /dev/null"
 alias post="bash $HOME/.config/post.sh"
 alias refresh="source $HOME/.bashrc"
 alias clear="clear && history -c"
