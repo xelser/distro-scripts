@@ -4,10 +4,7 @@ Plug 'ap/vim-css-color'
 
 " Themes
 Plug 'sainnhe/edge'
-
-" Line
-" Plug 'vim-airline/vim-airline'
-Plug 'nvim-lualine/lualine.nvim'
+Plug 'vim-airline/vim-airline'
 
 " Settings
 Plug 'tpope/vim-repeat'
@@ -44,11 +41,6 @@ let g:edge_style = 'aura'
 let g:edge_better_performance = 1
 colorscheme edge
 
-lua << END
-  require("lualine").setup({
-    options = {
-      theme = "edge",
-    },
-  })
-END
+" Airline
+let g:airline_theme = 'edge'
 
