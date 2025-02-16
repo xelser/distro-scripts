@@ -6,7 +6,7 @@ Plug 'ap/vim-css-color'
 Plug 'sainnhe/edge'
 
 " Line
-Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline'
 Plug 'nvim-lualine/lualine.nvim'
 
 " Settings
