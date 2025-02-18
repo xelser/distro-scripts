@@ -130,7 +130,10 @@ else
 
 	# Picom
 	save_folder /.config/picom/
-
+	
+	# Betterlockscreen
+	save_file /.config/betterlockscreen/ betterlockscreenrc
+	
 	# Nitrogen
 	save_folder /.config/nitrogen/
 
