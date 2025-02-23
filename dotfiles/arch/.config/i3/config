@@ -240,7 +240,7 @@ exec --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | c
 
 # Power Management (xidlehook)
 exec --no-startup-id xset s 3600 3600 -dpms && xidlehook --not-when-fullscreen --not-when-audio --socket "/tmp/xidlehook.sock" \
-  --timer "$(xset q | grep timeout | cut -d' ' -f5)" "betterlockscreen --time-format '%I:%M %p' -l dimblur" "xset led on"
+  --timer "$(xset q | grep timeout | cut -d' ' -f5)" "betterlockscreen -l dimblur" "xset led on"
 
 # Inhibit (caffeinate)
 #bindsym $mod+i exec caffeinate & disown && notify-send "Inhibit: caffeinate 󰅶 enable"
