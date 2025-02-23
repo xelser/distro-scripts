@@ -145,10 +145,10 @@ echo "arch" > /etc/hostname
 # Base Minimal Packages
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
-pacman -Sy --needed --noconfirm linux linux-{headers,firmware} man-{db,pages} base-devel reflector \
-	plymouth btrfs-progs ntfs-3g {intel,amd}-ucode grub os-prober efibootmgr dosfstools inetutils dmidecode \
-	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound networkmanager \
-	firefox neovim{,-plugins} xclip wl-clipboard numlockx syncthing
+pacman -Sy --needed --noconfirm linux linux-{headers,firmware} man-{db,pages} base-devel reflector inetutils dmidecode \
+	plymouth btrfs-progs ntfs-3g {intel,amd}-ucode grub os-prober efibootmgr dosfstools networkmanager gvfs numlockx \
+	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound \
+	firefox neovim{,-plugins} xclip wl-clipboard syncthing
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
@@ -176,8 +176,8 @@ arch_wm () { arch-chroot /mnt /bin/bash << EOF
 
 # Window Manager Packages
 pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk,hyprland} ttf-fira{-sans,code-nerd} \
-	brightnessctl gammastep alacritty wallutils feh swaybg rofi atril pluma engrampa pcmanfm-gtk3 \
-	sddm mate-polkit nwg-look nm-connection-editor flameshot dunst libnotify grim imv mpv \
+	brightnessctl gammastep alacritty wallutils feh swaybg rofi atril pluma engrampa caja \
+	sddm mate-polkit nwg-look nm-connection-editor flameshot grim dunst libnotify imv mpv \
 	i3-wm polybar picom
 
 	#openbox obconf tint2 sway waybar hyprland kvantum-qt5 qt5ct greetd{,-gtkgreet} 
