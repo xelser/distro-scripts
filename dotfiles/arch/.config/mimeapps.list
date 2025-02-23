@@ -4,6 +4,11 @@ image/jpeg=imv.desktop
 image/png=imv.desktop
 text/markdown=pluma.desktop
 text/plain=pluma.desktop
+text/html=google-chrome.desktop
+x-scheme-handler/http=google-chrome.desktop
+x-scheme-handler/https=google-chrome.desktop
+x-scheme-handler/about=google-chrome.desktop
+x-scheme-handler/unknown=google-chrome.desktop
 
 [Added Associations]
 application/x-shellscript=geany.desktop;org.xfce.mousepad.desktop;nvim.desktop;leafpad.desktop;pluma.desktop;

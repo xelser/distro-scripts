@@ -9,7 +9,9 @@ fi
 
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-  ventoy-bin htpdate grub-hook update-grub neovim-symlinks # teamviewer zoom obs-studio gnome-boxes syncthing-gtk
+  ventoy-bin htpdate grub-hook update-grub neovim-symlinks syncthing-desktop-entries 
+
+	# teamviewer zoom obs-studio gnome-boxes syncthing-gtk
 
 ################################### WM/DE ####################################
 
@@ -49,6 +51,11 @@ gsettings set org.mate.pluma editor-font 'FiraCode Nerd Font 10'
 gsettings set org.mate.pluma highlight-current-line true
 gsettings set org.mate.pluma toolbar-visible false
 gsettings set org.mate.pluma use-default-font false
+
+# file manager (caja)
+cp -rf /usr/share/applications/caja.desktop $HOME/.local/share/applications/
+sed -i 's/OnlyShowIn=MATE;//g' $HOME/.local/share/applications/caja.desktop
+sed -i 's/NoDisplay=true//g' $HOME/.local/share/applications/caja.desktop
 
 # screenshot directory (flameshot)
 mkdir -p $HOME/Pictures/Screenshots
