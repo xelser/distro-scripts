@@ -32,7 +32,7 @@ elif [ -f /usr/bin/dnf ]; then
 	alias pkgupdate="sudo dnf upgrade --assumeyes --best --allowerasing"
 	alias install="sudo dnf install $1"
 	alias uninstall="sudo dnf remove $1"
-	alias clean="sudo dnf remove --assumeyes && sudo dnf clean packages"
+	alias clean="sudo dnf autoremove --assumeyes && sudo dnf clean all"
 	alias search="sudo dnf search $1"
 	alias list="sudo dnf list --installed $1"
 fi
