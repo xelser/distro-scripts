@@ -19,7 +19,7 @@ sudo dnf remove --assumeyes @guest-desktop-agents @container-management @libreof
   gnome-{boxes,contacts,characters,connections,font-viewer,tour,clocks,weather,maps}
 
 # ADD REPO: RPMFUSION
-sudo dnf list --installed | grep -q "rpmfusion" || sudo dnf5 install --assumeyes --skip-broken \
+sudo dnf list --installed | grep -q "rpmfusion" || sudo dnf install --assumeyes --skip-broken \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
@@ -86,6 +86,5 @@ if [ ! -f /.flag ]; then
 	${source_dir}/themes/pack-libadwaita.sh
 	${source_dir}/themes/icon-tela-circle.sh
 	${source_dir}/themes/cursor-bibata.sh
-	${source_dir}/themes/firefox-gnome.sh
   ${source_dir}/themes/fonts-adwaita.sh 48
 fi
