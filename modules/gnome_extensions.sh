@@ -41,6 +41,7 @@ gext install 4269 # AlphabeticalAppGrid
 gext install 595 # autohide-battery
 gext install 6583 # auto-power-profile
 #gext install 5724 # battery-health-charging
+gext install 6670 # bluetooth-battery-meter
 gext install 1401 # bluetooth-quick-connect (minor conflict with battery meter)
 gext install 2236 # night-theme-switcher
 gext install 352 # middleclickclose
