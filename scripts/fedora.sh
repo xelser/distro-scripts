@@ -23,6 +23,9 @@ sudo dnf list --installed | grep -q "rpmfusion" || sudo dnf install --assumeyes 
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
+# UPDATE
+sudo dnf upgrade @core @sound-and-video @multimedia --exclude=PackageKit-gstreamer-plugin --assumeyes --best --allowerasing --skip-unavailable
+
 # ADD REPO: htpdate (COPR)
 sudo dnf copr enable whitehara/htpdate --assumeyes
 
@@ -38,16 +41,13 @@ sudo dnf copr enable whitehara/htpdate --assumeyes
 # INSTALL: Fedora Workstation
 sudo dnf install --assumeyes --skip-broken --allowerasing gnome-{builder,console,extensions-app,tweaks} \
   file-roller fragments celluloid drawing easyeffects lsp-plugins-lv2 nvim wl-clipboard syncthing libheif-tools \
-  htpdate google-chrome-stable brave-browser
+  htpdate google-chrome-stable brave-browser \
 
   # inkscape telegram discord video-downloader touchegg
   # gnome-shell-extension-{light-style,user-theme} google-roboto-{fonts,mono-fonts,slab-fonts}
 
 # INSTALL: TeamViewer
 sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
-
-# FINAL UPDATE
-sudo dnf upgrade @core @sound-and-video @multimedia --exclude=PackageKit-gstreamer-plugin --assumeyes --best --allowerasing --skip-unavailable 
 
 # INSTALL: Fedora Multimedia Codecs (from RPM Fusion https://rpmfusion.org/Howto/Multimedia)
 #sudo dnf swap ffmpeg-free ffmpeg --assumeyes --allowerasing
