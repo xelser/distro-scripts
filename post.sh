@@ -148,7 +148,7 @@ elif [ -f /usr/bin/apt ]; then
 	sudo apt autoremove --purge --yes
 	sudo apt autoclean
 elif [ -f /usr/bin/dnf ]; then
-	sudo dnf remove --assumeyes
+	sudo dnf autoremove --assumeyes
 	sudo dnf clean packages
 fi
 
