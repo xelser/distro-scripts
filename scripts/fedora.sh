@@ -33,7 +33,7 @@ sudo dnf copr enable whitehara/htpdate --assumeyes
 sudo dnf config-manager setopt google-chrome.enabled=1
 
 # ADD REPO: Brave Browser
-sudo dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo --assumeyes 
+sudo dnf config-manager addrepo --from-repofile=https://brave-browser-rpm-release.s3.brave.com/brave-browser.repo --assumeyes
 
 # ADD REPO: htpdate (COPR)
 sudo dnf copr enable whitehara/htpdate --assumeyes
@@ -41,7 +41,7 @@ sudo dnf copr enable whitehara/htpdate --assumeyes
 # INSTALL: Fedora Workstation
 sudo dnf install --assumeyes --skip-broken --allowerasing gnome-{builder,console,extensions-app,tweaks} \
   file-roller fragments celluloid drawing easyeffects lsp-plugins-lv2 nvim wl-clipboard syncthing libheif-tools \
-  htpdate google-chrome-stable brave-browser \
+  htpdate google-chrome-stable brave-browser
 
   # inkscape telegram discord video-downloader touchegg
   # gnome-shell-extension-{light-style,user-theme} google-roboto-{fonts,mono-fonts,slab-fonts}
