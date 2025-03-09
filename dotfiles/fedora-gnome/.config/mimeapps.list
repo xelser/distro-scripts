@@ -1,12 +1,14 @@
 [Default Applications]
-x-scheme-handler/http=com.google.Chrome.desktop
-text/html=com.google.Chrome.desktop
+x-scheme-handler/http=google-chrome.desktop
+text/html=google-chrome.desktop
 application/xhtml+xml=com.google.Chrome.desktop
-x-scheme-handler/https=com.google.Chrome.desktop
+x-scheme-handler/https=google-chrome.desktop
 application/x-shellscript=org.gnome.TextEditor.desktop
 text/css=org.gnome.TextEditor.desktop
 application/json=org.gnome.TextEditor.desktop
 application/x-desktop=org.gnome.TextEditor.desktop
+x-scheme-handler/about=google-chrome.desktop
+x-scheme-handler/unknown=google-chrome.desktop
 
 [Added Associations]
 x-scheme-handler/http=org.mozilla.firefox.desktop;com.google.Chrome.desktop;
