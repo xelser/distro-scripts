@@ -1,8 +1,5 @@
 #!/bin/bash
 
-[ -f /usr/bin/firefox ] && export exec_firefox="firefox" \
-	|| export exec_firefox="flatpak run org.mozilla.firefox"
-
 # Remove old Keys
 rm -rf $HOME/.ssh/
 
@@ -17,7 +14,9 @@ if [ ! -f $HOME/.ssh/id_ed25519.pub ]; then
 	eval "$(ssh-agent -s)" >&/dev/null && ssh-add $HOME/.ssh/id_ed25519 >&/dev/null
 	echo -e "${distro_id}@${machine}\n" > $HOME/tmp
 	cat $HOME/.ssh/id_ed25519.pub >> $HOME/tmp
-	${exec_firefox} https://github.com/settings/keys $HOME/tmp > /tmp/distro_scripts.pid
+	xdg-open https://github.com/settings/keys > /dev/null
+	edit $HOME/tmp > /dev/null
+	clear
 fi
 
 # Update Local Repo
