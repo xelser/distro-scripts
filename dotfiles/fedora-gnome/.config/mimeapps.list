@@ -9,6 +9,7 @@ application/json=org.gnome.TextEditor.desktop
 application/x-desktop=org.gnome.TextEditor.desktop
 x-scheme-handler/about=google-chrome.desktop
 x-scheme-handler/unknown=google-chrome.desktop
+text/markdown=org.gnome.TextEditor.desktop
 
 [Added Associations]
 x-scheme-handler/http=org.mozilla.firefox.desktop;com.google.Chrome.desktop;
@@ -19,3 +20,4 @@ application/x-shellscript=org.gnome.TextEditor.desktop;
 text/css=org.gnome.TextEditor.desktop;
 application/json=org.gnome.TextEditor.desktop;
 application/x-desktop=org.gnome.TextEditor.desktop;
+text/markdown=org.gnome.TextEditor.desktop;

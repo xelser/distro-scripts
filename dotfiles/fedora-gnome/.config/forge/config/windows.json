@@ -151,6 +151,14 @@
         {
             "wmClass": "org.gnome.Snapshot",
             "mode": "float"
+        },
+        {
+            "wmClass": "org.gnome.Console",
+            "mode": "float"
+        },
+        {
+            "wmClass": "org.gnome.Ptyxis",
+            "mode": "float"
         }
     ]
 }
