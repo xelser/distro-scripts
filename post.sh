@@ -23,18 +23,6 @@ sudo timedatectl set-ntp true
 
 ################################ POST INSTALL ################################
 
-# Update User Dirs
-[ -f /usr/bin/xdg-user-dirs-update ] && xdg-user-dirs-update
- 
-# Create Symlinks
-if [[ $USER == "xelser" ]]; then
-	[ ! -d $HOME/Documents/"xelser's Documents" ] && ln -sf /run/media/$USER/Media/Documents $HOME/Documents/"xelser's Documents"
-	[ ! -d $HOME/Downloads/"xelser's Downloads" ] && ln -sf /run/media/$USER/Media/Downloads $HOME/Downloads/"xelser's Downloads"
-	[ ! -d $HOME/Music/"xelser's Music" ]         && ln -sf /run/media/$USER/Media/Music     $HOME/Music/"xelser's Music"
-	[ ! -d $HOME/Pictures/"xelser's Pictures" ]   && ln -sf /run/media/$USER/Media/Pictures  $HOME/Pictures/"xelser's Pictures"
-	[ ! -d $HOME/Videos/"xelser's Videos" ]       && ln -sf /run/media/$USER/Media/Videos    $HOME/Videos/"xelser's Videos"
-fi
-
 # Essential Packages
 if [ -f /usr/bin/nala ]; then sudo nala install --assume-yes ntfs-3g \
 	flatpak fastfetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
@@ -45,6 +33,18 @@ elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm ntfs-3g \
 elif [ -f /usr/bin/dnf5 ]; then sudo dnf5 install --assumeyes --best --allowerasing ntfs-3g \
 	flatpak fastfetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
 	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines wget curl git openssh libva-intel-driver intel-media-driver
+fi
+
+# Update User Dirs
+[ -f /usr/bin/xdg-user-dirs-update ] && xdg-user-dirs-update
+ 
+# Create Symlinks
+if [[ $USER == "xelser" ]]; then
+	[ ! -d $HOME/Documents/"xelser's Documents" ] && ln -sf /run/media/$USER/Media/Documents $HOME/Documents/"xelser's Documents"
+	[ ! -d $HOME/Downloads/"xelser's Downloads" ] && ln -sf /run/media/$USER/Media/Downloads $HOME/Downloads/"xelser's Downloads"
+	[ ! -d $HOME/Music/"xelser's Music" ]         && ln -sf /run/media/$USER/Media/Music     $HOME/Music/"xelser's Music"
+	[ ! -d $HOME/Pictures/"xelser's Pictures" ]   && ln -sf /run/media/$USER/Media/Pictures  $HOME/Pictures/"xelser's Pictures"
+	[ ! -d $HOME/Videos/"xelser's Videos" ]       && ln -sf /run/media/$USER/Media/Videos    $HOME/Videos/"xelser's Videos"
 fi
 
 # Audio
