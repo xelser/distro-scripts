@@ -37,7 +37,7 @@ fi
 
 ## BOOTLOADER ##
 dmesg | grep -q "EFI v"; if [ $? -eq 0 ]; then
-	grub_target="x86_64-efi --efi-directory=/boot/efi --bootloader-id=arc --modules="tpm" --disable-shim-lock"
+	grub_target="x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch --modules="tpm" --disable-shim-lock"
 else
 	grub_target="i386-pc /dev/${device}"
 fi

@@ -29,7 +29,7 @@ elif [ -f /usr/bin/pacman ]; then
 	alias search="sudo pacman -Ss $1"
 	alias list="sudo pacman -Qq $1"
 elif [ -f /usr/bin/dnf ]; then
-	alias pkgupdate="sudo dnf upgrade --assumeyes --best --allowerasing"
+	alias pkgupdate="sudo dnf upgrade --assumeyes --allowerasing"
 	alias install="sudo dnf install $1"
 	alias uninstall="sudo dnf remove $1"
 	alias clean="sudo dnf autoremove --assumeyes && sudo dnf clean all"

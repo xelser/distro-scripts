@@ -9,7 +9,7 @@ fi
 
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-  ventoy-bin htpdate grub-hook update-grub neovim-symlinks syncthing-desktop-entries 
+  ventoy-bin htpdate grub-hook update-grub neovim-symlinks syncthing-desktop-entries
 
 	# teamviewer zoom obs-studio gnome-boxes syncthing-gtk
 
