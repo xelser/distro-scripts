@@ -159,6 +159,10 @@
         {
             "wmClass": "org.gnome.Ptyxis",
             "mode": "float"
+        },
+        {
+            "wmClass": "io.github.celluloid_player.Celluloid",
+            "mode": "float"
         }
     ]
 }
