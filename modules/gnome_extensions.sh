@@ -56,7 +56,7 @@ dconf write /org/gnome/shell/extensions/blur-my-shell/panel/force-light-text "tr
 dconf write /org/gnome/shell/extensions/blur-my-shell/panel/override-background-dynamically "true"
 dconf write /org/gnome/shell/extensions/gamemodeshellextension/show-icon-only-when-active "true"
 dconf write /org/gnome/shell/extensions/gamemodeshellextension/show-launch-notification "false"
-dconf write /org/gnome/shell/extensions/caffeine/inhibit-apps "['io.github.celluloid_player.Celluloid.desktop', 'firefox.desktop', 'org.mozilla.firefox.desktop', 'com.google.Chrome.desktop', 'google-chrome.desktop']"
+dconf write /org/gnome/shell/extensions/caffeine/inhibit-apps "['io.github.celluloid_player.Celluloid.desktop', 'org.mozilla.firefox.desktop', 'firefox.desktop', 'com.google.Chrome.desktop', 'google-chrome.desktop', 'org.gnome.Console.desktop']"
 dconf write /org/gnome/shell/extensions/caffeine/show-notifications "false"
 dconf write /org/gnome/shell/extensions/dash-to-dock/apply-custom-theme "true"
 dconf write /org/gnome/shell/extensions/dash-to-dock/custom-theme-shrink "true"
