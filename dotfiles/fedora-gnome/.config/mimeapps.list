@@ -1,8 +1,8 @@
 [Default Applications]
-x-scheme-handler/http=com.google.Chrome.desktop
-text/html=com.google.Chrome.desktop
-application/xhtml+xml=com.google.Chrome.desktop
-x-scheme-handler/https=com.google.Chrome.desktop
+x-scheme-handler/http=org.gnome.Epiphany.desktop
+text/html=org.gnome.Epiphany.desktop
+application/xhtml+xml=org.gnome.Epiphany.desktop
+x-scheme-handler/https=org.gnome.Epiphany.desktop
 application/x-shellscript=org.gnome.TextEditor.desktop
 text/css=org.gnome.TextEditor.desktop
 application/json=org.gnome.TextEditor.desktop
@@ -12,10 +12,10 @@ x-scheme-handler/unknown=google-chrome.desktop
 text/markdown=org.gnome.TextEditor.desktop
 
 [Added Associations]
-x-scheme-handler/http=org.mozilla.firefox.desktop;com.google.Chrome.desktop;
-text/html=org.mozilla.firefox.desktop;com.google.Chrome.desktop;
-application/xhtml+xml=org.mozilla.firefox.desktop;
-x-scheme-handler/https=org.mozilla.firefox.desktop;com.google.Chrome.desktop;
+x-scheme-handler/http=org.mozilla.firefox.desktop;com.google.Chrome.desktop;org.gnome.Epiphany.desktop;
+text/html=org.mozilla.firefox.desktop;com.google.Chrome.desktop;org.gnome.Epiphany.desktop;
+application/xhtml+xml=org.mozilla.firefox.desktop;org.gnome.Epiphany.desktop;
+x-scheme-handler/https=org.mozilla.firefox.desktop;com.google.Chrome.desktop;org.gnome.Epiphany.desktop;
 application/x-shellscript=org.gnome.TextEditor.desktop;
 text/css=org.gnome.TextEditor.desktop;
 application/json=org.gnome.TextEditor.desktop;
