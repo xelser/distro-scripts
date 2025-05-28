@@ -40,7 +40,7 @@ sudo dnf install htpdate --assumeyes
 sudo systemctl enable htpdate --now
 
 # INSTALL: TeamViewer
-sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
+#sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
 
 # INSTALL: Fedora Multimedia Codecs (from RPM Fusion https://rpmfusion.org/Howto/Multimedia)
 #sudo dnf swap ffmpeg-free ffmpeg --assumeyes --allowerasing
