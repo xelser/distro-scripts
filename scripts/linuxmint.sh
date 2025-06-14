@@ -7,7 +7,7 @@ sudo sed -i 's/packages.linuxmint.com/mirror.rackspace.com\/linuxmint\/packages/
 #sudo sed -i 's/archive.ubuntu.com/mirror.rise.ph/g' /etc/apt/sources.list.d/official-package-repositories.list
 
 # PACKAGE MANAGER: Nala
-sudo apt update && sudo apt install nala --yes
+#sudo apt update && sudo apt install nala --yes
 
 # DEBLOAT
 sudo nala remove --purge --assume-yes rhythmbox hypnotix hexchat thunderbird timeshift redshift-gtk # pulseaudio-module-bluetooth
@@ -16,9 +16,9 @@ sudo nala remove --purge --assume-yes rhythmbox hypnotix hexchat thunderbird tim
 sudo nala upgrade --fix-broken --assume-yes
 
 # INSTALL: Linux Mint Cinnamon
-sudo nala install --assume-yes build-essential mint-meta-codecs openoffice.org-hyphenation \
-  power-profiles-daemon pulseeffects plank dconf-editor gnome-{builder,disk-utility} lollypop gparted
-  # grub-customizer numlockx gpaste gir1.2-gpaste-4.0 
+sudo nala install --assume-yes build-essential mint-meta-codecs power-profiles-daemon \
+  pulseeffects plank dconf-editor gnome-{builder,disk-utility} gparted
+  # grub-customizer numlockx gpaste gir1.2-gpaste-4.0 openoffice.org-hyphenation
 
 # Install: darkman
 #bash ${source_dir}/modules/darkman.sh
