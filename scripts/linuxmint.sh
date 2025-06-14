@@ -10,13 +10,13 @@ sudo sed -i 's/packages.linuxmint.com/mirror.rackspace.com\/linuxmint\/packages/
 #sudo apt update && sudo apt install nala --yes
 
 # DEBLOAT
-sudo nala remove --purge --assume-yes rhythmbox hypnotix hexchat thunderbird timeshift redshift-gtk # pulseaudio-module-bluetooth
+sudo apt autoremove --purge --yes rhythmbox hypnotix hexchat thunderbird timeshift redshift-gtk # pulseaudio-module-bluetooth
 
 # UPDATE
-sudo nala upgrade --fix-broken --assume-yes
+sudo apt update && sudo apt upgrade --yes
 
 # INSTALL: Linux Mint Cinnamon
-sudo nala install --assume-yes build-essential mint-meta-codecs power-profiles-daemon \
+sudo apt install --yes build-essential mint-meta-codecs power-profiles-daemon \
   pulseeffects plank dconf-editor gnome-{builder,disk-utility} gparted
   # grub-customizer numlockx gpaste gir1.2-gpaste-4.0 openoffice.org-hyphenation
 
