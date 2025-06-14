@@ -16,25 +16,25 @@ sudo nala remove --purge --assume-yes rhythmbox hypnotix hexchat thunderbird tim
 sudo nala upgrade --fix-broken --assume-yes
 
 # INSTALL: Linux Mint Cinnamon
-sudo nala install --assume-yes build-essential mint-meta-codecs openoffice.org-hyphenation gpaste gir1.2-gpaste-4.0 \
+sudo nala install --assume-yes build-essential mint-meta-codecs openoffice.org-hyphenation \
   power-profiles-daemon pulseeffects plank dconf-editor gnome-{builder,disk-utility} lollypop gparted
-  # grub-customizer numlockx
+  # grub-customizer numlockx gpaste gir1.2-gpaste-4.0 
 
 # Install: darkman
-bash ${source_dir}/modules/darkman.sh
+#bash ${source_dir}/modules/darkman.sh
 
 #################################### CONFIG ####################################
 
 # lightdm slick greeter
-echo "[Greeter]
-background=/usr/share/backgrounds/linuxmint-victoria/pczerwinski_turquoise.jpg
-theme-name=vimix-light-compact-jade
-icon-theme-name=Vimix-jade
-cursor-theme-name=Vimix-cursors
-activate-numlock=false
-clock-format=%I:%M %p
-draw-user-backgrounds=false
-" | sudo tee /etc/lightdm/slick-greeter.conf 1> /dev/null
+#echo "[Greeter]
+#background=/usr/share/backgrounds/linuxmint-victoria/pczerwinski_turquoise.jpg
+#theme-name=vimix-light-compact-jade
+#icon-theme-name=Vimix-jade
+#cursor-theme-name=Vimix-cursors
+#activate-numlock=false
+#clock-format=%I:%M %p
+#draw-user-backgrounds=false
+#" | sudo tee /etc/lightdm/slick-greeter.conf 1> /dev/null
 
 # Rename Root Label
 partition="$(lsblk --raw -o name,mountpoint | grep '^[^/]*/[^/]*$' | cut -d' ' -f1)"
@@ -43,11 +43,11 @@ sudo e2label /dev/${partition} "Mint"
 #################################### THEMES ####################################
 
 # INSTALL: GTK, KDE, Icon, Cursors
-if [ ! -f /.flag ]; then
-	sudo nala install --assume-yes sassc
+#if [ ! -f /.flag ]; then
+#	sudo nala install --assume-yes sassc
 
-	${source_dir}/themes/theme-vimix.sh
-	${source_dir}/themes/icon-vimix.sh
-	${source_dir}/themes/cursor-vimix.sh
-	${source_dir}/themes/fonts-nerd.sh UbuntuMono
-fi
+#	${source_dir}/themes/theme-vimix.sh
+#	${source_dir}/themes/icon-vimix.sh
+#	${source_dir}/themes/cursor-vimix.sh
+#	${source_dir}/themes/fonts-nerd.sh UbuntuMono
+#fi
