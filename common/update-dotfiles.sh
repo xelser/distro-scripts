@@ -181,7 +181,7 @@ fi
 ################################### COMMON ###################################
 
 # Autostart
-save_folder /.config/autostart/
+[ -f $HOME/.config/autostart/* ] && save_folder /.config/autostart/
 
 # Default Apps (MIMEAPPS)
 save_file /.config/ mimeapps.list
