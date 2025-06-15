@@ -359,7 +359,8 @@
         "value": [
             "org.gnome.Terminal.desktop",
             "nemo.desktop",
-            "google-chrome.desktop"
+            "google-chrome.desktop",
+            "Zoom.desktop"
         ]
     },
     "__md5__": "b7d0a7558cf87c22c50195c9d408485f"

@@ -11,6 +11,8 @@ gsettings set org.cinnamon.desktop.screensaver time-format '%I:%M %p'
 gsettings set org.cinnamon.desktop.wm.preferences button-layout ':minimize,maximize,close'
 gsettings set org.cinnamon.muffin placement-mode 'center'
 gsettings set org.cinnamon.settings-daemon.peripherals.keyboard numlock-state 'on'
+gsettings set org.cinnamon.settings-daemon.plugins.color night-light-enabled 'true'
+gsettings set org.cinnamon.settings-daemon.plugins.color night-light-temperature '4700'
 
 # Apps
 gsettings set org.cinnamon.recorder file-extension 'mp4'
