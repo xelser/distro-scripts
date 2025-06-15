@@ -23,7 +23,7 @@ sudo apt install --yes build-essential mint-meta-codecs power-profiles-daemon \
   # grub-customizer numlockx gpaste gir1.2-gpaste-4.0 openoffice.org-hyphenation 
 
 # INSTALL: .deb Files
-sudo nala install --assume-yes \
+sudo nala install --assume-yes -o APT::Get::AllowUnauthenticated=true \
   https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
   https://cdn.zoom.us/prod/6.4.13.2309/zoom_amd64.deb
 
