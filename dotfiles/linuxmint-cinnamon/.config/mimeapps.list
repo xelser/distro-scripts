@@ -1,0 +1,5 @@
+[Default Applications]
+application/x-shellscript=org.x.editor.desktop
+
+[Added Associations]
+application/x-shellscript=org.x.editor.desktop;
