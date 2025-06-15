@@ -16,9 +16,11 @@ sudo apt autoremove --purge --yes rhythmbox hypnotix thunderbird timeshift papir
 sudo apt update && sudo apt upgrade --yes
 
 # INSTALL: Linux Mint Cinnamon
-sudo apt install --yes build-essential mint-meta-codecs power-profiles-daemon easyeffects \
+sudo apt install --yes build-essential mint-meta-codecs power-profiles-daemon \
   dconf-editor gnome-{builder,disk-utility} gparted nala neovim
-  # grub-customizer numlockx gpaste gir1.2-gpaste-4.0 openoffice.org-hyphenation plank 
+  
+  # plank easyeffects
+  # grub-customizer numlockx gpaste gir1.2-gpaste-4.0 openoffice.org-hyphenation 
 
 # INSTALL: .deb Files
 sudo nala install --assume-yes \
