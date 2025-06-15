@@ -20,8 +20,10 @@ sudo apt install --yes build-essential mint-meta-codecs power-profiles-daemon ea
   dconf-editor gnome-{builder,disk-utility} gparted nala neovim
   # grub-customizer numlockx gpaste gir1.2-gpaste-4.0 openoffice.org-hyphenation plank 
 
-# INSTALL: Google Chrome
-sudo nala install --assume-yes https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+# INSTALL: .deb Files
+sudo nala install --assume-yes \
+  https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+  https://cdn.zoom.us/prod/6.4.13.2309/zoom_amd64.deb
 
 # Install: darkman
 #bash ${source_dir}/modules/darkman.sh
