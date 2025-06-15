@@ -3,4 +3,7 @@ cache/
 caches/
 
 *.po
-obmenu-generator/icons/*.png
+*.svg
+*.jpg
+*.png
+
