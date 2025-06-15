@@ -40,10 +40,6 @@ if [ -f /usr/bin/xfce4-terminal ]; then
 	cp -rf /tmp/gruvbox-xfce4-terminal/*.theme $HOME/.local/share/xfce4/terminal/colorschemes/
 fi
 
-if [ -f /usr/bin/gnome-terminal ]; then
-	gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:f88d909b-c11c-4795-b01e-421076a0ba56/ palette "['#282828', '#ea6962', '#a9b665', '#d8a657', '#7daea3', '#d3869b', '#89b482', '#a89984', '#7c6f64', '#ea6962', '#a9b665', '#d8a657', '#7daea3', '#d3869b', '#89b482', '#ddc7a1']"
-fi
-
 if [ -f /usr/bin/polybar ]; then
 	cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-polybar && mkdir -p $HOME/.config/polybar/themes/
 	cp -rf /tmp/gruvbox-polybar/*.ini $HOME/.config/polybar/themes/
