@@ -48,7 +48,7 @@ elif [[ ${wm_de} == "cinnamon" ]]; then
 
 	# GNOME Terminal
 	dconf dump /org/gnome/terminal/legacy/profiles:/ > $HOME/.config/gnome-terminal-profile
-	save_file config/ gnome-terminal-profile
+	save_file /.config/ gnome-terminal-profile
 
 	# Applets, Desklets, Extensions
 	save_folder /.config/cinnamon/
