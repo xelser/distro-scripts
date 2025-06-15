@@ -46,8 +46,8 @@ gsettings set io.github.celluloid-player.Celluloid mpv-options "hwdec=auto-safe 
 #EOF
 
 # GNOME Backgrounds
-cd /tmp/ && git clone https://github.com/xelser/gnome-backgrounds-day-night
-cp -rf gnome-backgrounds-day-night/{backgrounds,gnome-background-properties} $HOME/.local/share/
+#cd /tmp/ && git clone https://github.com/xelser/gnome-backgrounds-day-night
+#cp -rf gnome-backgrounds-day-night/{backgrounds,gnome-background-properties} $HOME/.local/share/
 
 # GNOME Terminal Profile
 cat $HOME/.config/gnome-terminal-profile | dconf load /org/gnome/terminal/legacy/profiles:/
@@ -55,5 +55,3 @@ cat $HOME/.config/gnome-terminal-profile | dconf load /org/gnome/terminal/legacy
 # Cinnamon Panel
 cat $HOME/.config/panel.ini | dconf load /org/cinnamon/
 
-# Cinnamon Sound Settings
-cinnamon-settings sound

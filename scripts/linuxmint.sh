@@ -22,6 +22,9 @@ sudo apt install --yes build-essential mint-meta-codecs power-profiles-daemon \
   # plank easyeffects
   # grub-customizer numlockx gpaste gir1.2-gpaste-4.0 openoffice.org-hyphenation 
 
+# INSTALL: PPA
+sudo add-apt-repository ppa:zhangsongcui3371/fastfetch --yes && sudo apt update
+
 # INSTALL: .deb Files
 sudo nala install --assume-yes -o APT::Get::AllowUnauthenticated=true \
   https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
@@ -51,6 +54,8 @@ sudo e2label /dev/${partition} "Mint"
 
 # INSTALL: GTK, KDE, Icon, Cursors
 if [ ! -f /.flag ]; then
+  sudo apt install sassc --yes
+
 	${source_dir}/themes/pack-gruvbox.sh
 	${source_dir}/themes/fonts-nerd.sh UbuntuMono
 fi
