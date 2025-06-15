@@ -51,16 +51,6 @@ fi
 # editors
 alias edit="nvim"
 
-if [[ ${wm_de} == "gnome" ]] || [[ ${wm_de} == "budgie" ]]; then
-	alias edit="gnome-text-editor"
-elif [[ ${wm_de} == "cinnamon" ]]; then
-	alias edit="xed"
-elif [[ ${wm_de} == "xfce" ]]; then
-	alias edit="mousepad"
-elif [[ ${wm_de} == "kde" ]]; then
-	alias edit="kwrite"
-fi
-
 # dotfiles
 if [ -d $HOME/Documents/distro-scripts/ ] ; then
 	alias bashaliasesup="cat $HOME/Documents/distro-scripts/common/bash_aliases > $HOME/.bash_aliases && source $HOME/.bash_aliases"

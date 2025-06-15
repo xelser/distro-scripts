@@ -5,8 +5,8 @@
 #sudo cp -rf gruvbox-backgrounds/backgrounds /usr/share/
 
 # gtk
-#cd /tmp/ && git clone --depth 1 https://github.com/TheGreatMcPain/gruvbox-material-gtk.git
-#sudo cp -rf gruvbox-material-gtk/themes /usr/share/
+cd /tmp/ && git clone https://github.com/vinceliuice/Colloid-gtk-theme.git
+cd /tmp/Colloid-gtk-theme/ && sudo ./install.sh -t all --tweaks gruvbox rimless
 
 # cursors
 #cd /tmp/ && wget -cO- https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2 | sudo tar xfj - -C /usr/share/icons
@@ -21,7 +21,7 @@ cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-papirus-folder
 cd gruvbox-papirus-folders && sudo cp -rf src/* /usr/share/icons/Papirus
 papirus_folders=(Papirus Papirus-Dark Papirus-Light ePapirus ePapirus-Dark)
 for icon_theme in "${papirus_folders[@]}"; do 
-	./papirus-folders -u -C gruvbox-material-${color} -t ${icon_theme}
+	./papirus-folders -u -C gruvbox-mix-${color} -t ${icon_theme}
 done
 
 # gtksourceview

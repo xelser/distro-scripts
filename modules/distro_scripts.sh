@@ -14,15 +14,11 @@ if [ ! -f $HOME/.ssh/id_ed25519.pub ]; then
 	eval "$(ssh-agent -s)" >&/dev/null && ssh-add $HOME/.ssh/id_ed25519 >&/dev/null
 	echo -e "${distro_id}@${machine}\n" > $HOME/tmp
 	cat $HOME/.ssh/id_ed25519.pub >> $HOME/tmp
-	xdg-open https://github.com/settings/keys
-	xdg-open $HOME/tmp
+	killall firefox && firefox https://github.com/settings/keys $HOME/tmp
 fi
 
 # Update Local Repo
-if [ -d $HOME/Documents/distro-scripts ]; then
-	cd $HOME/Documents/distro-scripts && git fetch && git pull && git add .
-	git commit -m "auto-update @ $(hostname)" && git push
-else
+if [ -d ! $HOME/Documents/distro-scripts ]; then
 	echo -e "StrictHostKeyChecking no\n" > $HOME/.ssh/config
 	cd $HOME/Documents && git clone git@github.com:xelser/distro-scripts.git
 fi
