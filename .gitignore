@@ -3,7 +3,6 @@ cache/
 caches/
 
 *.po
-*.svg
 *.jpg
 *.png
 
