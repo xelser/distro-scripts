@@ -17,8 +17,8 @@ sudo apt update && sudo apt upgrade --yes
 
 # INSTALL: Linux Mint Cinnamon
 sudo apt install --yes build-essential mint-meta-codecs power-profiles-daemon easyeffects \
-  plank dconf-editor gnome-{builder,disk-utility} gparted nala neovim
-  # grub-customizer numlockx gpaste gir1.2-gpaste-4.0 openoffice.org-hyphenation
+  dconf-editor gnome-{builder,disk-utility} gparted nala neovim
+  # grub-customizer numlockx gpaste gir1.2-gpaste-4.0 openoffice.org-hyphenation plank 
 
 # INSTALL: Google Chrome
 sudo nala install --assume-yes https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
