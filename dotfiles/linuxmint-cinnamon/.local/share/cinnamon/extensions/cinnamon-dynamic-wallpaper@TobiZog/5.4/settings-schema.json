@@ -1,0 +1,138 @@
+{
+  "first_start": {
+    "type": "generic",
+    "default": true
+  },
+  "picture_aspect": {
+    "type": "generic",
+    "default": "zoom"
+  },
+  "dynamic_background_color": {
+    "type": "generic",
+    "default": true
+  },
+  "image_source": {
+    "type": "generic",
+    "default": "image_set"
+  },
+  "selected_image_set": {
+    "type": "generic",
+    "default": "lakeside"
+  },
+  "source_folder": {
+    "type": "generic",
+    "default": ""
+  },
+  "period_0_image": {
+    "type": "generic",
+    "default": "9.jpg"
+  },
+  "period_1_image": {
+    "type": "generic",
+    "default": "1.jpg"
+  },
+  "period_2_image": {
+    "type": "generic",
+    "default": "2.jpg"
+  },
+  "period_3_image": {
+    "type": "generic",
+    "default": "3.jpg"
+  },
+  "period_4_image": {
+    "type": "generic",
+    "default": "4.jpg"
+  },
+  "period_5_image": {
+    "type": "generic",
+    "default": "5.jpg"
+  },
+  "period_6_image": {
+    "type": "generic",
+    "default": "6.jpg"
+  },
+  "period_7_image": {
+    "type": "generic",
+    "default": "7.jpg"
+  },
+  "period_8_image": {
+    "type": "generic",
+    "default": "8.jpg"
+  },
+  "period_9_image": {
+    "type": "generic",
+    "default": "9.jpg"
+  },
+  "period_source": {
+    "type": "generic",
+    "default": "network_location"
+  },
+  "location_refresh_intervals": {
+    "type": "generic",
+    "default": 15
+  },
+  "network_location_provider": {
+    "type": "generic",
+    "default": "geojs.io"
+  },
+  "latitude_auto": {
+    "type": "generic",
+    "default": 0
+  },
+  "longitude_auto": {
+    "type": "generic",
+    "default": 0
+  },
+  "latitude_custom": {
+    "type": "generic",
+    "default": 0
+  },
+  "longitude_custom": {
+    "type": "generic",
+    "default": 0
+  },
+  "period_0_custom_start_time": {
+    "type": "generic",
+    "default": "00:00"
+  },
+  "period_1_custom_start_time": {
+    "type": "generic",
+    "default": "05:00"
+  },
+  "period_2_custom_start_time": {
+    "type": "generic",
+    "default": "07:00"
+  },
+  "period_3_custom_start_time": {
+    "type": "generic",
+    "default": "09:00"
+  },
+  "period_4_custom_start_time": {
+    "type": "generic",
+    "default": "11:00"
+  },
+  "period_5_custom_start_time": {
+    "type": "generic",
+    "default": "13:00"
+  },
+  "period_6_custom_start_time": {
+    "type": "generic",
+    "default": "15:00"
+  },
+  "period_7_custom_start_time": {
+    "type": "generic",
+    "default": "17:00"
+  },
+  "period_8_custom_start_time": {
+    "type": "generic",
+    "default": "19:00"
+  },
+  "period_9_custom_start_time": {
+    "type": "generic",
+    "default": "21:00"
+  },
+  "login_image": {
+    "type": "generic",
+    "default": false
+  }
+}

@@ -13,7 +13,7 @@
             "Semi-transparent": "panel-semi-transparent"
         },
         "tooltip": "Choose the type of transparency you want.",
-        "value": "panel-semi-transparent"
+        "value": "panel-transparent-with-shadow"
     },
     "theme-defined": {
         "type": "switch",

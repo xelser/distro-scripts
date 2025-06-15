@@ -10,7 +10,7 @@ sudo sed -i 's/packages.linuxmint.com/mirror.rackspace.com\/linuxmint\/packages/
 #sudo apt update && sudo apt install nala --yes
 
 # DEBLOAT
-sudo apt autoremove --purge --yes rhythmbox hypnotix thunderbird timeshift papirus-icon-theme libreoffice-*
+sudo apt autoremove --purge --yes rhythmbox hypnotix timeshift papirus-icon-theme libreoffice-*
 
 # UPDATE
 sudo apt update && sudo apt upgrade --yes
