@@ -55,7 +55,7 @@ elif [[ ${wm_de} == "cinnamon" ]]; then
 	save_folder /.local/share/cinnamon/
 
 	# Nemo Scripts
-	[ -d $HOME/.local/share/nemo/scripts/ ] && save_folder /.local/share/nemo/scripts/
+	[ -f $HOME/.local/share/nemo/scripts/*.sh ] && save_folder /.local/share/nemo/scripts/
 
 	# QT day/night cycle (remove clutter)
 	rm -rf ${dest_dir}/.config/Kvantum/
