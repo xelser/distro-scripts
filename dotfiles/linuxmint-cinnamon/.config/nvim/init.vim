@@ -5,6 +5,7 @@ Plug 'ap/vim-css-color'
 " Themes
 Plug 'sainnhe/gruvbox-material'
 Plug 'nvim-lualine/lualine.nvim'
+Plug 'vim-airline/vim-airline'
 
 " Settings
 Plug 'tpope/vim-repeat'
@@ -47,12 +48,7 @@ let g:gruvbox_material_background = 'hard'
 " For better performance
 let g:gruvbox_material_better_performance = 1
 
-lua << END
-	require("lualine").setup({
-		options = {
-			theme = 'gruvbox-material'
-		},
-	})
-END
+" airline theme
+let g:airline_theme = 'gruvbox_material'
 
 colorscheme gruvbox-material
