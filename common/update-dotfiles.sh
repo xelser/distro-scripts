@@ -47,7 +47,8 @@ elif [[ ${wm_de} == "cinnamon" ]]; then
 	grep "panel-zone-text-sizes" /tmp/cinnamon_panel_beta.ini >> 					${dest_dir}/.config/panel.ini
 
 	# GNOME Terminal
-	dconf dump /org/gnome/terminal/legacy/profiles:/ > ${dest_dir}/.config/gnome-terminal-profile
+	dconf dump /org/gnome/terminal/legacy/profiles:/ > $HOME/.config/gnome-terminal-profile
+	save_file config/ gnome-terminal-profile
 
 	# Applets, Desklets, Extensions
 	save_folder /.config/cinnamon/
