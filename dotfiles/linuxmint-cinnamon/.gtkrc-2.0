@@ -1,0 +1,10 @@
+
+###############################################
+# Created by cinnamon-settings - please do not edit or reformat.
+#
+style "cs-scrollbar-style" {
+
+}
+
+class "GtkScrollbar" style "cs-scrollbar-style"
+###############################################

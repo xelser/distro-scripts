@@ -49,6 +49,8 @@ fi
 [ -f $HOME/.local/bin/gext ] && alias gextup="gext update --user --install"
 
 # editors
+alias edit="nvim"
+
 if [[ ${wm_de} == "gnome" ]] || [[ ${wm_de} == "budgie" ]]; then
 	alias edit="gnome-text-editor"
 elif [[ ${wm_de} == "cinnamon" ]]; then
@@ -57,8 +59,6 @@ elif [[ ${wm_de} == "xfce" ]]; then
 	alias edit="mousepad"
 elif [[ ${wm_de} == "kde" ]]; then
 	alias edit="kwrite"
-else
-	alias edit="nvim"
 fi
 
 # dotfiles
