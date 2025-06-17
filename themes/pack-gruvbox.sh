@@ -8,9 +8,6 @@
 cd /tmp/ && git clone https://github.com/vinceliuice/Colloid-gtk-theme.git
 cd /tmp/Colloid-gtk-theme/ && sudo ./install.sh -t all --tweaks gruvbox rimless
 
-# cursors
-#cd /tmp/ && wget -cO- https://github.com/phisch/phinger-cursors/releases/latest/download/phinger-cursors-variants.tar.bz2 | sudo tar xfj - -C /usr/share/icons
-
 # papirus folders
 [[ ${distro_id} == "arch" ]]      && color="aqua"
 [[ ${distro_id} == "debian" ]]    && color="red"

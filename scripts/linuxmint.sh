@@ -57,5 +57,6 @@ if [ ! -f /.flag ]; then
   sudo apt install sassc --yes
 
 	${source_dir}/themes/pack-gruvbox.sh
+	${source_dir}/themes/cursor-sainnhe-capitaine.sh 
 	${source_dir}/themes/fonts-nerd.sh UbuntuMono
 fi
