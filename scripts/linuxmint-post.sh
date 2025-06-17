@@ -5,11 +5,11 @@ gsettings set com.linuxmint.updates hide-systray 'true'
 gsettings set com.linuxmint.updates hide-window-after-update 'true'
 
 # Set Cinnamon Desktop Themes
-gsettings set org.cinnamon.desktop.interface cursor-theme 'Bibata-Modern-Classic'
-gsettings set org.cinnamon.desktop.interface icon-theme 'Papirus-Dark'
-gsettings set org.cinnamon.desktop.interface gtk-theme 'Colloid-Green-Dark-Gruvbox'
-gsettings set org.cinnamon.desktop.wm.preferences theme 'Colloid-Green-Dark-Gruvbox'
 gsettings set org.cinnamon.theme name 'Colloid-Green-Dark-Gruvbox'
+gsettings set org.cinnamon.desktop.wm.preferences theme 'Colloid-Green-Dark-Gruvbox'
+gsettings set org.cinnamon.desktop.interface gtk-theme 'Colloid-Green-Dark-Gruvbox'
+gsettings set org.cinnamon.desktop.interface icon-theme 'Papirus-Dark'
+gsettings set org.cinnamon.desktop.interface cursor-theme 'Capitaine Cursors (Gruvbox)'
 
 # Set Monospaced font
 gsettings set org.gnome.desktop.interface monospace-font-name "Ubuntu Mono 11"
@@ -19,4 +19,3 @@ sudo rm -rf /usr/share/applications/com.google.Chrome.desktop
 
 # Remove Warpinator Folder
 rm -rf $HOME/Warpinator/
-
