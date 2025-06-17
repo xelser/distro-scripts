@@ -41,7 +41,8 @@
             "banshee",
             "vlc",
             "rhythmbox",
-            "io.github.celluloid_player.Celluloid"
+            "io.github.celluloid_player.Celluloid",
+            "firefox"
         ]
     },
     "section2": {
