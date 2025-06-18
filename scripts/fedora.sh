@@ -16,7 +16,7 @@ color=always" | sudo tee /etc/dnf/libdnf5.conf.d/20-user-settings.conf 1> /dev/n
 # DEBLOAT
 sudo dnf remove --assumeyes @guest-desktop-agents @container-management @libreoffice \
   rhythmbox mediawriter simple-scan fedora-bookmarks totem libreoffice-\* gnome-shell-extension-\* \
-  gnome-{contacts,characters,connections,font-viewer,tour,clocks,weather,maps}
+  ptyxis gnome-{contacts,characters,connections,font-viewer,tour,clocks,weather,maps}
 
 # ADD REPO: RPMFUSION
 sudo dnf list --installed | grep -q "rpmfusion" || sudo dnf install --assumeyes --skip-broken \
