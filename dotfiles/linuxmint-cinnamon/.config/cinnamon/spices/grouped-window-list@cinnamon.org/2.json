@@ -357,6 +357,7 @@
             "org.gnome.Terminal.desktop"
         ],
         "value": [
+            "firefox.desktop",
             "org.gnome.Terminal.desktop",
             "nemo.desktop",
             "google-chrome.desktop",
