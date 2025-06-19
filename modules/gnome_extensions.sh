@@ -14,14 +14,13 @@ fi
 
 # Install Extensions
 if [[ ${distro_id} == "fedora" ]]; then sudo dnf install \
-	gnome-shell-extension-{appindicator,blur-my-shell,caffeine,dash-to-dock,forge,gamemode,just-perfection,places-menu}
+	gnome-shell-extension-{appindicator,blur-my-shell,caffeine,dash-to-dock,forge,just-perfection,places-menu}
 else
 	gext install 615 # appindicator
 	gext install 3193 # blur-my-shell
 	gext install 517 # caffeine
 	gext install 307 # dash-to-dock
 	gext install 4481 # forge (unmaintained)
-	gext install 7074 # gamemode-shell
 	gext install 3843 # just-perfection
 	gext install 8 # places-menu
 fi
@@ -54,8 +53,8 @@ dconf write /org/gnome/shell/extensions/blur-my-shell/sigma "20"
 dconf write /org/gnome/shell/extensions/blur-my-shell/dash-to-dock/blur "false"
 dconf write /org/gnome/shell/extensions/blur-my-shell/panel/force-light-text "true"
 dconf write /org/gnome/shell/extensions/blur-my-shell/panel/override-background-dynamically "true"
-dconf write /org/gnome/shell/extensions/gamemodeshellextension/show-icon-only-when-active "true"
-dconf write /org/gnome/shell/extensions/gamemodeshellextension/show-launch-notification "false"
+#dconf write /org/gnome/shell/extensions/gamemodeshellextension/show-icon-only-when-active "true"
+#dconf write /org/gnome/shell/extensions/gamemodeshellextension/show-launch-notification "false"
 dconf write /org/gnome/shell/extensions/caffeine/inhibit-apps "['io.github.celluloid_player.Celluloid.desktop', 'org.mozilla.firefox.desktop', 'firefox.desktop', 'com.google.Chrome.desktop', 'google-chrome.desktop', 'org.gnome.Console.desktop']"
 dconf write /org/gnome/shell/extensions/caffeine/show-notifications "false"
 dconf write /org/gnome/shell/extensions/dash-to-dock/apply-custom-theme "true"
