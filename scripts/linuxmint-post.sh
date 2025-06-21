@@ -19,3 +19,8 @@ sudo rm -rf /usr/share/applications/com.google.Chrome.desktop
 
 # Remove Warpinator Folder
 rm -rf $HOME/Warpinator/
+
+################################### FLATPAK ##################################
+
+# INSTALL: Linux Mint
+flatpak install --assumeyes --noninteractive flathub com.bitwarden.desktop io.missioncenter.MissionCenter
