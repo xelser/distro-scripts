@@ -17,10 +17,9 @@ sudo apt update && sudo apt upgrade --yes
 
 # INSTALL: Linux Mint Cinnamon
 sudo apt install --yes build-essential mint-meta-codecs power-profiles-daemon \
-  dconf-editor gnome-{builder,disk-utility} gparted nala neovim
+  easyeffects dconf-editor gnome-{builder,disk-utility} gparted nala neovim
   
-  # plank easyeffects
-  # grub-customizer numlockx gpaste gir1.2-gpaste-4.0 openoffice.org-hyphenation 
+  # plank grub-customizer numlockx gpaste gir1.2-gpaste-4.0 openoffice.org-hyphenation 
 
 # INSTALL: PPA
 sudo add-apt-repository ppa:zhangsongcui3371/fastfetch --yes && sudo apt update
