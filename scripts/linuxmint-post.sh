@@ -3,6 +3,7 @@
 # Linux Mint Apps
 gsettings set com.linuxmint.updates hide-systray 'true'
 gsettings set com.linuxmint.updates hide-window-after-update 'true'
+gsettings set com.linuxmint.updates refresh-schedule-enabled 'false'
 
 # Set Cinnamon Desktop Themes
 gsettings set org.cinnamon.theme name 'Colloid-Green-Dark-Gruvbox'
