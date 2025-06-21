@@ -1,6 +1,12 @@
 {
-  "updates": {},
+  "updates": {
+    "linux-meta": {
+      "type": "kernel",
+      "since": "2025.06.21",
+      "days": 1
+    }
+  },
   "version": 1,
-  "checked": "2025.06.20",
+  "checked": "2025.06.21",
   "notified": "2025.06.16"
 }
