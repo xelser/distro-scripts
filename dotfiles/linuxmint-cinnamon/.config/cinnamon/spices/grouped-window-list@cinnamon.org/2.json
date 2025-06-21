@@ -357,11 +357,13 @@
             "org.gnome.Terminal.desktop"
         ],
         "value": [
+            "com.bitwarden.desktop.desktop:flatpak",
             "firefox.desktop",
             "org.gnome.Terminal.desktop",
             "nemo.desktop",
             "google-chrome.desktop",
-            "Zoom.desktop"
+            "Zoom.desktop",
+            "io.missioncenter.MissionCenter.desktop:flatpak"
         ]
     },
     "__md5__": "b7d0a7558cf87c22c50195c9d408485f"
