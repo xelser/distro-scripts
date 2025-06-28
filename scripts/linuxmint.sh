@@ -20,7 +20,7 @@ sudo nala install --assume-yes build-essential mint-meta-codecs power-profiles-d
   numlockx syncthing easyeffects transmission-daemon dconf-editor neovim \
   gnome-{builder,disk-utility} gparted
   
-  # plank grub-customizer numlockx gpaste gir1.2-gpaste-4.0 openoffice.org-hyphenation 
+  # plank grub-customizer gpaste gir1.2-gpaste-4.0 openoffice.org-hyphenation 
 
 # INSTALL: PPA
 sudo add-apt-repository ppa:zhangsongcui3371/fastfetch --yes && sudo apt update
