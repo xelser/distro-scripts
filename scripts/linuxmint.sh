@@ -17,7 +17,7 @@ sudo nala upgrade --assume-yes
 
 # INSTALL: Linux Mint Cinnamon
 sudo nala install --assume-yes build-essential mint-meta-codecs power-profiles-daemon \
-  syncthing easyeffects transmission-daemon dconf-editor neovim \
+  numlockx syncthing easyeffects transmission-daemon dconf-editor neovim \
   gnome-{builder,disk-utility} gparted
   
   # plank grub-customizer numlockx gpaste gir1.2-gpaste-4.0 openoffice.org-hyphenation 
