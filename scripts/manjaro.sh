@@ -16,7 +16,9 @@ sudo pacman -Syyu --needed --noconfirm base-devel yay firefox dconf-editor numlo
 
 # INSTALL: Manjaro DE/WM
 if [[ ${wm_de} == "xfce" ]]; then
-	sudo pacman -S --needed --noconfirm ttf-fira{code-nerd,-sans} transmission-gtk redshift # darkman
+	sudo pacman -S --needed --noconfirm xfce4-{panel-profiles,systemload-plugin} \
+		ttf-fira{code-nerd,-sans} transmission-gtk redshift # darkman
+
 elif [[ ${wm_de} == "kde" ]]; then
 	sudo pacman -S --needed --noconfirm ktorrent 
 fi
