@@ -18,7 +18,7 @@ sudo nala upgrade --assume-yes
 # INSTALL: Linux Mint Cinnamon
 sudo nala install --assume-yes build-essential mint-meta-codecs power-profiles-daemon \
   numlockx syncthing easyeffects transmission-daemon dconf-editor neovim \
-  gnome-{builder,disk-utility} gparted
+  gnome-disk-utility gparted
   
   # plank grub-customizer gpaste gir1.2-gpaste-4.0 openoffice.org-hyphenation 
 
@@ -57,6 +57,6 @@ if [ ! -f /.flag ]; then
   sudo apt install sassc --yes
 
 	${source_dir}/themes/pack-gruvbox.sh
-	${source_dir}/themes/cursor-sainnhe-capitaine.sh 
+	${source_dir}/themes/cursor-sainnhe-capitaine.sh
 	${source_dir}/themes/fonts-nerd.sh UbuntuMono
 fi
