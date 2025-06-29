@@ -27,7 +27,7 @@ sudo pacman -Syyu --needed --noconfirm obs-studio ventoy \
 	base-devel npm meson parallel sassc gpick inkscape gtk{3,4}-demos
 
 # BUILD: AUR
-pamac build --no-confirm teamviewer zoom
+#pamac build --no-confirm teamviewer zoom
 
 ################################### CONFIG ###################################
 
