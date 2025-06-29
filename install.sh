@@ -20,7 +20,7 @@ fi
 
 if [ -d ${source_dir}/dotfiles/${distro_id}-${wm_de} ]; then
 	export dotfiles_dir="${source_dir}/dotfiles/${distro_id}-${wm_de}"
-else
+elif [ -d ${source_dir}/dotfiles/${distro_id} ]; then
 	export dotfiles_dir="${source_dir}/dotfiles/${distro_id}"
 fi
 
@@ -36,7 +36,7 @@ fi
 
 ## Install ##
 [ -f /usr/bin/powerprofilesctl ] && powerprofilesctl list | grep -q performance && powerprofilesctl set performance
-[ -f /usr/bin/systemd-inhibit ] && systemd-inhibit ${source_dir}/scripts/${distro_id}.sh
+[ -f /usr/bin/systemd-inhibit ] && [ -f ${source_dir}/scripts/${distro_id}.sh ] && systemd-inhibit ${source_dir}/scripts/${distro_id}.sh
 
 ################################ POST INSTALL ################################
 
