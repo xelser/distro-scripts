@@ -24,7 +24,12 @@ save_file () {
 if [[ ${wm_de} == "xfce" ]]; then
 
 	# Menu Entries
-	save_file /.config/menus/ xfce-applications.menu	
+	save_file /.config/menus/ xfce-applications.menu
+
+	# Panel Settings
+	mkdir -p "$HOME/.config/xfce4-panel-backups"
+	xfce4-panel-profiles save "$HOME/.config/xfce4-panel-backups/my-panel.tar.bz2"
+	save_file /.config/xfce4-panel-backups/ /my-panel.tar.bz2
 
 	# QT day/night cycle (remove clutter)
 	#rm -rf ${dest_dir}/.config/Kvantum/
