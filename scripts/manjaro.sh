@@ -7,7 +7,9 @@ echo -e "\n[options]\nVerbosePkgLists\nParallelDownloads = 5\nDisableDownloadTim
 sudo pacman-mirrors --country Global
 
 # DEBLOAT
-bloat=(manjaro-hello zsh midori gufw timeshift lshw hexchat gthumb gufw imagewriter gcolor3 evince)
+bloat=(manjaro-{hello,application-utility} manjaro-settings-manager{,-notifier} pamac-{cli,gtk3} 
+	kvantum{,-theme-matcha} manjaro-xfce-minimal-settings zsh midori gufw timeshift lshw hexchat 
+	gthumb gufw imagewriter gcolor3 evince)
 for pkgs in "${bloat[@]}"; do sudo pacman -Qq ${pkgs} && sudo pacman -Rnsc --noconfirm ${pkgs}; done
 
 # INSTALL: Manjaro Base
