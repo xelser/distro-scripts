@@ -57,7 +57,7 @@ elif [[ ${wm_de} == "cinnamon" ]]; then
 
 	# Applets, Desklets, Extensions
 	save_folder /.config/cinnamon/
-	save_folder /.local/share/cinnamon/
+	#save_folder /.local/share/cinnamon/
 
 	# Nemo Scripts
 	[ -f $HOME/.local/share/nemo/scripts/*.sh ] && save_folder /.local/share/nemo/scripts/
