@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Remove old Keys
-rm -rf $HOME/.ssh/
+rm -rf "$HOME/.ssh/"
 
 # Profile for git
 git config --global user.email "dkzenzuri@gmail.com"
@@ -24,5 +24,5 @@ if [ ! -d $HOME/Documents/distro-scripts ]; then
 fi
 
 # Delete files
-rm $HOME/tmp
+rm "$HOME/{tmp,distro_scripts.sh}"
 
