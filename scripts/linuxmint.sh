@@ -1,9 +1,10 @@
 #!/bin/bash
+set -e
 
 ################################### PACKAGES ###################################
 
 # PACKAGE MANAGER: APT
-sudo sed -i 's/packages.linuxmint.com/mirror.rackspace.com\/linuxmint\/packages/g' /etc/apt/sources.list.d/official-package-repositories.list
+#sudo sed -i 's/packages.linuxmint.com/mirror.rackspace.com\/linuxmint\/packages/g' /etc/apt/sources.list.d/official-package-repositories.list
 #sudo sed -i 's/archive.ubuntu.com/mirror.rise.ph/g' /etc/apt/sources.list.d/official-package-repositories.list
 
 # PACKAGE MANAGER: Nala
@@ -12,23 +13,28 @@ sudo apt update && sudo apt install nala --yes
 # DEBLOAT
 sudo nala remove --purge --assume-yes rhythmbox hypnotix papirus-icon-theme libreoffice-*
 
+# ADD REPO: Google Chrome
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | \
+sudo tee /etc/apt/sources.list.d/google-chrome.list
+
 # UPDATE
 sudo nala upgrade --assume-yes
 
 # INSTALL: Linux Mint Cinnamon
 sudo nala install --assume-yes build-essential mint-meta-codecs power-profiles-daemon \
   numlockx syncthing easyeffects transmission-daemon dconf-editor neovim \
-  gnome-disk-utility gparted
+  google-chrome-stable gnome-disk-utility gparted
   
   # plank grub-customizer gpaste gir1.2-gpaste-4.0 openoffice.org-hyphenation 
 
-# INSTALL: PPA
+# INSTALL: Fastfetch (PPA)
 sudo add-apt-repository ppa:zhangsongcui3371/fastfetch --yes && sudo apt update
 
-# INSTALL: .deb Files
-sudo nala install --assume-yes -o APT::Get::AllowUnauthenticated=true \
-  https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-  https://cdn.zoom.us/prod/6.4.13.2309/zoom_amd64.deb
+# INSTALL: Zoom
+wget -O /tmp/zoom_amd64.deb https://zoom.us/client/latest/zoom_amd64.deb
+sudo apt install --yes /tmp/zoom_amd64.deb
+rm /tmp/zoom_amd64.deb
 
 # Install: darkman
 #bash ${source_dir}/modules/darkman.sh
