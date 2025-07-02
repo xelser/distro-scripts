@@ -3,41 +3,31 @@
 ################################## PACKAGES ##################################
 
 # PACKAGE MANAGER: Nala and Debian Repos
-sed -i 's/non-free-firmware/non-free-firmware non-free contrib/g' \
-  /etc/apt/sources.list && dpkg --add-architecture i386
-apt update && apt install nala curl --yes
+sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
+sudo sed -i -E 's/(bookworm|stable)/sid/g; s/non-free-firmware/non-free-firmware non-free contrib/g' /etc/apt/sources.list
+apt update && apt full-upgrade
+apt install curl nala apt-listbugs apt-listchanges --yes
 
 # INSTALL: Debian Base
-nala install --assume-yes xorg lightdm build-essential synaptic \
+nala install --assume-yes xorg plymouth build-essential synaptic \
   pipewire pipewire-audio easyeffects lsp-plugins-lv2 \
-  plymouth htpdate network-manager numlockx gammastep \
-  dconf-cli libglib2.0-bin mugshot at-spi2-core \
-  firefox-esr {transmission,syncthing}-gtk \
-  fonts-roboto{,-slab} lightdm-gtk-greeter-settings
+  htpdate dconf-cli libglib2.0-bin numlockx \
+  firefox-esr transmission-{gtk,cli} \
+  fonts-roboto{,-slab}
 
+  # lightdm lightdm-gtk-greeter-settings mugshot at-spi2-core network-manager gammastep
+
+install_cinnamon () {
+nala install --assume-yes cinnamon-core slick-greeter \
+  blueman gedit eog evince xdg-user-dirs-gtk neovim
+}
+
+install_i3 () {
 # INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar alacritty neovim \
   imv mpv rofi dunst lxappearance engrampa pluma atril \
   thunar-{volman,archive-plugin} gvfs-backends \
   flameshot mate-polkit nitrogen
-
-# INSTALL: Debian XFCE
-#nala install --assume-yes mousepad parole ristretto engrampa \
-#  xfce4{,-screenshooter,-notifyd,-power-manager,-terminal} \
-#  light-locker redshift-gtk
-
-# INSTALL: LightDM Web Greeter (deb)
-#version="$(curl --silent "https://api.github.com/repos/JezerM/web-greeter/releases/latest" | grep tag_name | cut -d'"' -f4 | cut -d'v' -f2)"
-#wget -q https://github.com/JezerM/web-greeter/releases/download/${version}/web-greeter-${version}-debian.deb -P /tmp
-#nala install --assume-yes /tmp/web-greeter-${version}-debian.deb
-
-# INSTALL: Google Chrome (deb)
-wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -P /tmp
-nala install --assume-yes /tmp/google-chrome-stable_current_amd64.deb
-
-# INSTALL: TeamViewer (deb)
-wget -q https://download.teamviewer.com/download/linux/teamviewer_amd64.deb -P /tmp
-nala install --assume-yes /tmp/teamviewer_amd64.deb
 
 # BUILD: autotiling
 nala install --assume-yes python3-i3ipc && wget -q -O /usr/bin/autotiling \
@@ -45,15 +35,42 @@ nala install --assume-yes python3-i3ipc && wget -q -O /usr/bin/autotiling \
 chmod +x /usr/bin/autotiling
 
 # BUILD: i3lock-color and betterlockscreen
-#nala install --assume-yes bc autoconf gcc make pkg-config libpam0g-dev \
-#  libcairo2-dev libfontconfig1-dev libxcb-composite0-dev libev-dev \
-#  libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev \
-#  libxcb-image0-dev libxcb-util0-dev libxcb-xrm-dev libxkbcommon-dev \
-#  libxkbcommon-x11-dev libjpeg-dev imagemagick feh
-#cd /tmp/ && git clone https://github.com/Raymo111/i3lock-color
-#cd i3lock-color && ./install-i3lock-color.sh && \
-#  wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | sudo bash -s system
-#ln -sf /usr/local/bin/betterlockscreen /usr/bin/
+nala install --assume-yes bc autoconf gcc make pkg-config libpam0g-dev \
+  libcairo2-dev libfontconfig1-dev libxcb-composite0-dev libev-dev \
+  libx11-xcb-dev libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev \
+  libxcb-image0-dev libxcb-util0-dev libxcb-xrm-dev libxkbcommon-dev \
+  libxkbcommon-x11-dev libjpeg-dev imagemagick feh
+
+cd /tmp/ && git clone https://github.com/Raymo111/i3lock-color && cd i3lock-color && ./install-i3lock-color.sh && \
+  wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | sudo bash -s system
+ln -sf /usr/local/bin/betterlockscreen /usr/bin/
+
+# lightdm
+echo -e "\n[Seat:*]
+autologin-user=${user}
+autologin-session=i3
+greeter-session=web-greeter
+greeter-hide-users=false
+" >> /etc/lightdm/lightdm.conf
+systemctl enable lightdm
+
+}
+
+install_xfce () {
+# INSTALL: Debian XFCE
+nala install --assume-yes mousepad parole ristretto engrampa \
+  xfce4{,-screenshooter,-notifyd,-power-manager,-terminal} \
+  light-locker redshift-gtk
+}
+
+# INSTALL: LightDM Web Greeter (deb)
+#version="$(curl --silent "https://api.github.com/repos/JezerM/web-greeter/releases/latest" | grep tag_name | cut -d'"' -f4 | cut -d'v' -f2)"
+#wget -q https://github.com/JezerM/web-greeter/releases/download/${version}/web-greeter-${version}-debian.deb -P /tmp
+#nala install --assume-yes /tmp/web-greeter-${version}-debian.deb
+
+# INSTALL: Google Chrome (deb)
+#wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -P /tmp
+#nala install --assume-yes /tmp/google-chrome-stable_current_amd64.deb
 
 # BUILD: darkman
 #bash ${source_dir}/modules/darkman.sh
@@ -68,16 +85,10 @@ systemctl enable htpdate
 
 # grub
 sed -i 's/quiet/quiet splash/g' /etc/default/grub
-sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
+#sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
 update-grub
 
 # lightdm
-echo -e "\n[Seat:*]
-autologin-user=${user}
-autologin-session=i3
-#greeter-session=web-greeter
-greeter-hide-users=false
-" >> /etc/lightdm/lightdm.conf
 systemctl enable lightdm
 
 ################################### THEMES ###################################
