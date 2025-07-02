@@ -24,5 +24,6 @@ if [ ! -d $HOME/Documents/distro-scripts ]; then
 fi
 
 # Delete files
-rm "$HOME/{tmp,distro_scripts.sh}"
+rm "$HOME/tmp"
+rm "$HOME/distro_scripts.sh
 
