@@ -5,17 +5,22 @@
 # PACKAGE MANAGER: Nala and Debian Repos
 sudo cp /etc/apt/sources.list /etc/apt/sources.list.bak
 sudo sed -i -E 's/(bookworm|stable)/sid/g; s/non-free-firmware/non-free-firmware non-free contrib/g' /etc/apt/sources.list
-apt update && apt full-upgrade
-apt install curl nala apt-listbugs apt-listchanges --yes
+apt update && apt full-upgrade --yes && apt install curl nala apt-listbugs apt-listchanges --yes
+
+# ADD REPO: Google Chrome
+sudo mkdir -p /etc/apt/keyrings
+curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor | sudo tee /etc/apt/keyrings/google-chrome.gpg > /dev/null
+echo "deb [arch=amd64 signed-by=/etc/apt/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" | \
+  sudo tee /etc/apt/sources.list.d/google-chrome.list
+sudo apt update
 
 # INSTALL: Debian Base
-nala install --assume-yes xorg plymouth build-essential synaptic \
-  pipewire pipewire-audio easyeffects lsp-plugins-lv2 \
-  htpdate dconf-cli libglib2.0-bin numlockx \
-  firefox-esr transmission-{gtk,cli} \
-  fonts-roboto{,-slab}
+nala install --assume-yes xorg plymouth lightdm build-essential synaptic \
+  htpdate dconf-cli libglib2.0-bin numlockx fonts-roboto{,-slab} \
+  firefox-esr google-chrome-stable transmission-{gtk,cli} \
+  pipewire pipewire-audio easyeffects lsp-plugins-lv2
 
-  # lightdm lightdm-gtk-greeter-settings mugshot at-spi2-core network-manager gammastep
+  # lightdm-gtk-greeter-settings mugshot at-spi2-core network-manager gammastep
 
 install_cinnamon () {
 nala install --assume-yes cinnamon-core slick-greeter \
@@ -23,7 +28,6 @@ nala install --assume-yes cinnamon-core slick-greeter \
 }
 
 install_i3 () {
-# INSTALL: Debian i3
 nala install --assume-yes i3-wm picom polybar alacritty neovim \
   imv mpv rofi dunst lxappearance engrampa pluma atril \
   thunar-{volman,archive-plugin} gvfs-backends \
@@ -52,12 +56,9 @@ autologin-session=i3
 greeter-session=web-greeter
 greeter-hide-users=false
 " >> /etc/lightdm/lightdm.conf
-systemctl enable lightdm
-
 }
 
 install_xfce () {
-# INSTALL: Debian XFCE
 nala install --assume-yes mousepad parole ristretto engrampa \
   xfce4{,-screenshooter,-notifyd,-power-manager,-terminal} \
   light-locker redshift-gtk
@@ -68,12 +69,11 @@ nala install --assume-yes mousepad parole ristretto engrampa \
 #wget -q https://github.com/JezerM/web-greeter/releases/download/${version}/web-greeter-${version}-debian.deb -P /tmp
 #nala install --assume-yes /tmp/web-greeter-${version}-debian.deb
 
-# INSTALL: Google Chrome (deb)
-#wget -q https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -P /tmp
-#nala install --assume-yes /tmp/google-chrome-stable_current_amd64.deb
-
 # BUILD: darkman
 #bash ${source_dir}/modules/darkman.sh
+
+# INSTALL DE
+install_cinnamon
 
 ################################### CONFIG ###################################
 
