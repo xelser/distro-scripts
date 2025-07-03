@@ -25,5 +25,5 @@ fi
 
 # Delete files
 rm "$HOME/tmp"
-rm "$HOME/distro_scripts.sh
+rm "$HOME/distro_scripts.sh"
 

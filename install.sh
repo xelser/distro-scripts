@@ -97,4 +97,3 @@ case $end in
 	rm -rf $HOME/distro-scripts*
 	sudo reboot;;
 esac
-

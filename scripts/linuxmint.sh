@@ -14,9 +14,9 @@ sudo apt update && sudo apt install nala --yes
 sudo nala remove --purge --assume-yes rhythmbox hypnotix papirus-icon-theme libreoffice-*
 
 # ADD REPO: Google Chrome
-wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | \
-sudo tee /etc/apt/sources.list.d/google-chrome.list
+#wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+#echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | \
+#sudo tee /etc/apt/sources.list.d/google-chrome.list
 
 # UPDATE
 sudo nala upgrade --assume-yes
@@ -24,17 +24,17 @@ sudo nala upgrade --assume-yes
 # INSTALL: Linux Mint Cinnamon
 sudo nala install --assume-yes build-essential mint-meta-codecs power-profiles-daemon \
   numlockx syncthing easyeffects transmission-daemon dconf-editor neovim \
-  google-chrome-stable gnome-disk-utility gparted
+  gnome-disk-utility gparted
   
-  # plank grub-customizer gpaste gir1.2-gpaste-4.0 openoffice.org-hyphenation 
+  # plank grub-customizer gpaste gir1.2-gpaste-4.0 openoffice.org-hyphenation google-chrome-stable
 
 # INSTALL: Fastfetch (PPA)
 sudo add-apt-repository ppa:zhangsongcui3371/fastfetch --yes && sudo apt update
 
 # INSTALL: Zoom
-wget -O /tmp/zoom_amd64.deb https://zoom.us/client/latest/zoom_amd64.deb
-sudo apt install --yes /tmp/zoom_amd64.deb
-rm /tmp/zoom_amd64.deb
+#wget -O /tmp/zoom_amd64.deb https://zoom.us/client/latest/zoom_amd64.deb
+#sudo apt install --yes /tmp/zoom_amd64.deb
+#rm /tmp/zoom_amd64.deb
 
 # Install: darkman
 #bash ${source_dir}/modules/darkman.sh

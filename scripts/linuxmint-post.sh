@@ -16,7 +16,7 @@ gsettings set org.cinnamon.desktop.interface cursor-theme 'Capitaine Cursors (Gr
 gsettings set org.gnome.desktop.interface monospace-font-name "Ubuntu Mono 11"
 
 # Remove Duplicate Chrome .desktop file
-sudo rm -rf /usr/share/applications/com.google.Chrome.desktop
+#sudo rm -rf /usr/share/applications/com.google.Chrome.desktop
 
 # Remove Warpinator Folder
 rm -rf $HOME/Warpinator/
@@ -24,4 +24,8 @@ rm -rf $HOME/Warpinator/
 ################################### FLATPAK ##################################
 
 # INSTALL: Linux Mint
-flatpak install --assumeyes --noninteractive flathub com.bitwarden.desktop io.missioncenter.MissionCenter
+flatpak install --assumeyes --noninteractive flathub com.google.Chrome com.bitwarden.desktop \
+	io.missioncenter.MissionCenter us.zoom.Zoom
+
+  # org.mozilla.firefox com.spotify.Client org.telegram.desktop com.discordapp.Discord
+  # com.rafaelmardojai.Blanket org.gnome.gitlab.YaLTeR.VideoTrimmer org.nickvision.tubeconverter
