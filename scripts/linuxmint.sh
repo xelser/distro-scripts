@@ -4,14 +4,11 @@ set -e
 ################################### PACKAGES ###################################
 
 # PACKAGE MANAGER: APT
-#sudo sed -i 's/packages.linuxmint.com/mirror.rackspace.com\/linuxmint\/packages/g' /etc/apt/sources.list.d/official-package-repositories.list
-#sudo sed -i 's/archive.ubuntu.com/mirror.rise.ph/g' /etc/apt/sources.list.d/official-package-repositories.list
-
-# PACKAGE MANAGER: Nala
-sudo apt update && sudo apt install nala --yes
+sudo sed -i 's/packages.linuxmint.com/mirror.rackspace.com\/linuxmint\/packages/g' /etc/apt/sources.list.d/official-package-repositories.list
+sudo sed -i 's/archive.ubuntu.com/mirror.rise.ph/g' /etc/apt/sources.list.d/official-package-repositories.list
 
 # DEBLOAT
-sudo nala remove --purge --assume-yes rhythmbox hypnotix papirus-icon-theme libreoffice-*
+sudo apt autoremove --purge rhythmbox hypnotix papirus-icon-theme libreoffice-*
 
 # ADD REPO: Google Chrome
 #wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
@@ -19,10 +16,10 @@ sudo nala remove --purge --assume-yes rhythmbox hypnotix papirus-icon-theme libr
 #sudo tee /etc/apt/sources.list.d/google-chrome.list
 
 # UPDATE
-sudo nala upgrade --assume-yes
+sudo apt update && sudo apt upgrade --yes
 
 # INSTALL: Linux Mint Cinnamon
-sudo nala install --assume-yes build-essential mint-meta-codecs power-profiles-daemon \
+sudo apt install --yes build-essential mint-meta-codecs power-profiles-daemon \
   numlockx syncthing easyeffects transmission-daemon dconf-editor neovim \
   gnome-disk-utility gparted
   
