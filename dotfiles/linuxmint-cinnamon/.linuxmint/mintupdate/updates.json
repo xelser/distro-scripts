@@ -1,6 +1,12 @@
 {
-  "updates": {},
+  "updates": {
+    "org.gnome.Platform": {
+      "type": "flatpak",
+      "since": "2025.07.06",
+      "days": 1
+    }
+  },
   "version": 1,
-  "checked": "2025.07.04",
+  "checked": "2025.07.06",
   "notified": "2025.07.03"
 }

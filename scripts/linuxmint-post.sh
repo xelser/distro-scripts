@@ -13,7 +13,7 @@ gsettings set org.cinnamon.desktop.interface icon-theme 'Papirus-Dark'
 gsettings set org.cinnamon.desktop.interface cursor-theme 'Capitaine Cursors (Gruvbox)'
 
 # Set Monospaced font
-gsettings set org.gnome.desktop.interface monospace-font-name "Ubuntu Mono 11"
+gsettings set org.gnome.desktop.interface monospace-font-name "Ubuntu Mono 10"
 
 # Remove Duplicate Chrome .desktop file
 #sudo rm -rf /usr/share/applications/com.google.Chrome.desktop
