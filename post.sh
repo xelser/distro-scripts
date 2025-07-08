@@ -40,11 +40,11 @@ fi
  
 # Create Symlinks
 if [[ $USER == "xelser" ]]; then
-	[ ! -d $HOME/Documents/"xelser's Documents" ] && ln -sf /run/media/$USER/Media/Documents $HOME/Documents/"xelser's Documents"
-	[ ! -d $HOME/Downloads/"xelser's Downloads" ] && ln -sf /run/media/$USER/Media/Downloads $HOME/Downloads/"xelser's Downloads"
-	[ ! -d $HOME/Music/"xelser's Music" ]         && ln -sf /run/media/$USER/Media/Music     $HOME/Music/"xelser's Music"
-	[ ! -d $HOME/Pictures/"xelser's Pictures" ]   && ln -sf /run/media/$USER/Media/Pictures  $HOME/Pictures/"xelser's Pictures"
-	[ ! -d $HOME/Videos/"xelser's Videos" ]       && ln -sf /run/media/$USER/Media/Videos    $HOME/Videos/"xelser's Videos"
+	[ ! -d $HOME/Documents/"xelser's Documents" ] && ln -sf /run/media/$USER/Home/Documents $HOME/Documents/"xelser's Documents"
+	[ ! -d $HOME/Downloads/"xelser's Downloads" ] && ln -sf /run/media/$USER/Home/Downloads $HOME/Downloads/"xelser's Downloads"
+	[ ! -d $HOME/Music/"xelser's Music" ]         && ln -sf /run/media/$USER/Home/Music     $HOME/Music/"xelser's Music"
+	[ ! -d $HOME/Pictures/"xelser's Pictures" ]   && ln -sf /run/media/$USER/Home/Pictures  $HOME/Pictures/"xelser's Pictures"
+	[ ! -d $HOME/Videos/"xelser's Videos" ]       && ln -sf /run/media/$USER/Home/Videos    $HOME/Videos/"xelser's Videos"
 fi
 
 # Audio
