@@ -73,7 +73,7 @@ fi
 
 if [[ ${machine} == "E5-476G" ]]; then
 	echo -e "LABEL=Games /run/media/${user}/Games ext4 defaults 0 0" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
-	echo -e "LABEL=Media /run/media/${user}/Media xfs defaults,noatime,nodiratime,logbufs=8,logsize=256k,allocsize=1m,inode64 0 0" \
+	echo -e "LABEL=Media /run/media/${user}/Media xfs defaults,noatime,nodiratime,logbufs=8,logbsize=256k,allocsize=1m,inode64 0 0" \
 	| sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
 fi
 
