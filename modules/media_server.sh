@@ -35,7 +35,7 @@ setup_media_group_access() {
 
     echo "[*] Applying group permissions to $MEDIA_DIR..."
     sudo chgrp -R "$GROUP_NAME" "$MEDIA_DIR"
-    sudo chmod -R 750 "$MEDIA_DIR"
+    sudo chmod -R 775 "$MEDIA_DIR"
     sudo chmod g+s "$MEDIA_DIR"
 
     echo "[✓] Group permissions applied. You may need to reboot for group changes to take effect."
