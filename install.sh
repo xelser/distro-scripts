@@ -68,13 +68,12 @@ fi
 
 ## Fstab ##
 if [[ ${user} == "xelser" ]] && [[ ! ${machine} == "PC" ]]; then
-	echo -e "\nLABEL=Home /run/media/${user}/Home ext4 defaults 0 0" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
+	echo -e "\nLABEL=Home /mnt/Home ext4 defaults,noatime 0 2" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
 fi
 
 if [[ ${machine} == "E5-476G" ]]; then
-	echo -e "LABEL=Games /run/media/${user}/Games ext4 defaults 0 0" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
-	echo -e "LABEL=Media /run/media/${user}/Media xfs defaults,noatime,nodiratime,logbufs=8,logbsize=256k,allocsize=1m,inode64 0 0" \
-	| sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
+	echo -e "LABEL=Games /mnt/Games ext4 defaults,noatime 0 2" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
+	echo -e "LABEL=Media /mnt/Media xfs defaults,noatime,nodiratime,logbufs=8,logbsize=256k,allocsize=1m,inode64 0 0" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
 fi
 
 ## distro-scripts ##
