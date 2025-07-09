@@ -148,7 +148,7 @@ main() {
 
     echo
     echo "🎉 Both Jellyfin and Plex are installed!"
-    echo "🔗 Jellyfin: http://localhost:8096"
+    echo "🔗 Jellyfin: http://localhost:8096/web"
     echo "🔗 Plex:     http://localhost:32400/web"
     echo "📁 Media directory: $MEDIA_DIR"
     echo "🔐 Ensure ports 8096 and 32400 are open in your firewall for remote access."
