@@ -43,7 +43,7 @@
         "step": 0.1,
         "description": "Scale factor for font size",
         "tooltip": "Increase or decrease this value to change the font size scale (1.2 = 120%)",
-        "value": 0.9999999999999999
+        "value": 1.0
     },
     "font_color": {
         "type": "colorchooser",
@@ -68,7 +68,7 @@
         "units": "px",
         "description": "Fixed width for the desklet",
         "tooltip": "Increase or decrease this value to set the boundary width of the desklet",
-        "value": 300
+        "value": 90.0
     },
     "show_decorations": {
         "type": "checkbox",

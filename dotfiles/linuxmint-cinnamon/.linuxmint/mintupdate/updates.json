@@ -1,17 +1,6 @@
 {
-  "updates": {
-    "djvulibre": {
-      "type": "package",
-      "since": "2025.07.10",
-      "days": 1
-    },
-    "protobuf": {
-      "type": "package",
-      "since": "2025.07.10",
-      "days": 1
-    }
-  },
+  "updates": {},
   "version": 1,
-  "checked": "2025.07.10",
+  "checked": "2025.07.11",
   "notified": "2025.07.03"
 }
