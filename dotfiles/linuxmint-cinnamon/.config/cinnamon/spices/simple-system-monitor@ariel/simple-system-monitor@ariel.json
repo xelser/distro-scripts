@@ -68,7 +68,7 @@
         "units": "px",
         "description": "Fixed width for the desklet",
         "tooltip": "Increase or decrease this value to set the boundary width of the desklet",
-        "value": 90.0
+        "value": 150.0
     },
     "show_decorations": {
         "type": "checkbox",
