@@ -1,6 +1,17 @@
 {
-  "updates": {},
+  "updates": {
+    "com.google.Chrome": {
+      "type": "flatpak",
+      "since": "2025.07.19",
+      "days": 1
+    },
+    "us.zoom.Zoom": {
+      "type": "flatpak",
+      "since": "2025.07.19",
+      "days": 1
+    }
+  },
   "version": 1,
-  "checked": "2025.07.13",
+  "checked": "2025.07.19",
   "notified": "2025.07.03"
 }
