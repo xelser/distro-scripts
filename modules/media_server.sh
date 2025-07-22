@@ -25,20 +25,30 @@ setup_media_group_access() {
     local service_user="$1"
     echo "[*] Setting up group-based access for $service_user..."
 
+    # Create group if missing
     if ! getent group "$GROUP_NAME" > /dev/null; then
         echo "[+] Creating group '$GROUP_NAME'..."
         sudo groupadd "$GROUP_NAME"
     fi
 
-    sudo usermod -aG "$GROUP_NAME" "$service_user"
-    sudo usermod -aG "$GROUP_NAME" xelser
+    # Add users to group
+    for user in "$service_user" xelser; do
+        if ! id -nG "$user" | grep -qw "$GROUP_NAME"; then
+            echo "[+] Adding $user to $GROUP_NAME..."
+            sudo usermod -aG "$GROUP_NAME" "$user"
+        fi
+    done
 
-    echo "[*] Applying group permissions to $MEDIA_DIR..."
-    sudo chgrp -R "$GROUP_NAME" "$MEDIA_DIR"
-    sudo chmod -R 775 "$MEDIA_DIR"
-    sudo chmod g+s "$MEDIA_DIR"
+    # Apply ownership & permissions
+    echo "[*] Assigning group ownership to $MEDIA_DIR..."
+    sudo chown -R :"$GROUP_NAME" "$MEDIA_DIR"
 
-    echo "[✓] Group permissions applied. You may need to reboot for group changes to take effect."
+    echo "[*] Setting permissions on media files and folders..."
+    sudo find "$MEDIA_DIR" -type f -exec chmod 664 {} +
+    sudo find "$MEDIA_DIR" -type d -exec chmod 775 {} +
+    sudo find "$MEDIA_DIR" -type d -exec chmod g+s {} +
+
+    echo "[✓] Group permissions applied. Log out and back in for group changes to take effect."
 }
 
 # 📦 Install Jellyfin
@@ -64,7 +74,7 @@ install_jellyfin() {
         echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/jellyfin.gpg] https://repo.jellyfin.org/debian $codename main" \
             | sudo tee /etc/apt/sources.list.d/jellyfin.list
         sudo apt update
-        sudo apt install -y jellyfin-server jellyfin-ffmpeg
+        sudo apt install -y jellyfin-server jellyfin-ffmpeg7
 
     elif [[ "$ID" == "arch" ]]; then
         if ! command -v yay &> /dev/null; then

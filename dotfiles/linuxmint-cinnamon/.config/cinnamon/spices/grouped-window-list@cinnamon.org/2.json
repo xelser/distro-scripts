@@ -362,8 +362,7 @@
             "firefox.desktop",
             "org.gnome.Terminal.desktop",
             "nemo.desktop",
-            "transmission-gtk.desktop",
-            "io.missioncenter.MissionCenter.desktop:flatpak"
+            "transmission-gtk.desktop"
         ]
     },
     "__md5__": "b7d0a7558cf87c22c50195c9d408485f"
