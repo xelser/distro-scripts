@@ -1,6 +1,12 @@
 {
-  "updates": {},
+  "updates": {
+    "gdk-pixbuf": {
+      "type": "security",
+      "since": "2025.07.24",
+      "days": 1
+    }
+  },
   "version": 1,
-  "checked": "2025.07.23",
+  "checked": "2025.07.24",
   "notified": "2025.07.03"
 }

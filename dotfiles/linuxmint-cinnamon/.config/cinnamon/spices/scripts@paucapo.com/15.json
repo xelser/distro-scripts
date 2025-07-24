@@ -57,7 +57,7 @@
             "Ask what to do": "ask"
         },
         "default": "executeSilently",
-        "value": "executeSilently"
+        "value": "executeInTerminal"
     },
     "rightClickBehavior": {
         "type": "combobox",
@@ -70,7 +70,7 @@
             "Ask what to do": "ask"
         },
         "default": "ask",
-        "value": "ask"
+        "value": "edit"
     },
     "findTerminalAutomatically": {
         "type": "switch",
