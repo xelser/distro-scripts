@@ -359,6 +359,7 @@
         "value": [
             "com.bitwarden.desktop.desktop:flatpak",
             "com.google.Chrome.desktop:flatpak",
+            "com.brave.Browser.desktop:flatpak",
             "firefox.desktop",
             "org.gnome.Terminal.desktop",
             "nemo.desktop",
