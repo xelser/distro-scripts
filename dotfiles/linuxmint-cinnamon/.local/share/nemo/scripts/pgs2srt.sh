@@ -32,8 +32,8 @@ log_success() { echo -e "${COLOR_GREEN}[DONE]${COLOR_RESET} $*"; }
 log_error() { echo -e "${COLOR_RED}[ERROR]${COLOR_RESET} $*" >&2; }
 # Log a debug message (Magenta) - uncomment the echo line to enable
 log_debug() {
-    echo -e "${COLOR_MAGENTA}[DEBUG]${COLOR_RESET} $*"
-    # : # Do nothing by default if debug is off
+    # echo -e "${COLOR_MAGENTA}[DEBUG]${COLOR_RESET} $*" # Uncomment to enable debug logging
+    : # Do nothing by default if debug is off
 }
 
 # Check if a required command-line tool is installed
@@ -53,15 +53,33 @@ check_dependencies() {
     check_dependency "mkvextract" # For extracting PGS tracks
     check_dependency "jq"         # For parsing mkvmerge JSON output
     check_dependency "sup2srt"    # For OCR (PGS to SRT conversion)
+    check_dependency "stat"       # For checking file ownership
     log_info "All required tools found."
 }
 
-# Determine if a file/path should be excluded based on EXCLUDE_FILE
+# Determine if a file/path should be excluded based on EXCLUDE_FILE or owner
+# This function is now used for both MKV files (in OCR phase) and SRT files (in cleanup phase)
 should_exclude() {
     local full_path="$1"
-    [[ -f "$EXCLUDE_FILE" ]] || return 1 # No exclude file, so nothing is excluded
+    local file_owner=""
 
-    # Read each exclusion pattern from the file
+    # Get the owner of the file
+    # Redirect stderr to /dev/null to suppress 'stat: cannot stat...' errors
+    file_owner=$(stat -c %U "$full_path" 2>/dev/null)
+    if [[ $? -ne 0 ]]; then
+        log_error "Failed to get owner for '$full_path'. Treating as excluded for safety."
+        return 0 # Exclude
+    fi
+
+    # Check if the file owner is 'jellyfin'
+    if [[ "$file_owner" == "jellyfin" ]]; then
+        log_skip "Excluding '$full_path': Owned by 'jellyfin'."
+        return 0 # Exclude
+    fi
+
+    # Existing exclusion logic based on EXCLUDE_FILE patterns
+    [[ -f "$EXCLUDE_FILE" ]] || return 1 # No exclude file, so nothing else is excluded by pattern
+
     while IFS= read -r exclude_pattern; do
         # Skip empty lines or lines starting with '#' (comments)
         [[ -z "$exclude_pattern" || "${exclude_pattern:0:1}" == "#" ]] && continue
@@ -73,11 +91,12 @@ should_exclude() {
         # This allows excluding based on folder names like "Featurettes", "Specials",
         # or full directory paths.
         if [[ "$full_path" == *"$exclude_pattern"* ]]; then
-            return 0 # Exclude (return 0 for true in bash)
+            log_skip "Excluding '$full_path': Matches pattern '$exclude_pattern' in '$EXCLUDE_FILE'."
+            return 0 # Exclude
         fi
-    done < "$EXCLUDE_FILE" # Redirect EXCLUDE_FILE into the while loop
+    done < "$EXCLUDE_FILE"
 
-    return 1 # Do not exclude (return 1 for false in bash)
+    return 1 # Do not exclude
 }
 
 # --- Main Script Logic ---
@@ -94,21 +113,30 @@ find "$ROOT" -type f -name "*.mkv" -print0 | while IFS= read -r -d $'\0' FILE; d
     BASENAME="$(basename "$FILE" .mkv)" # Extract filename without extension
     SRT_PATH="$(dirname "$FILE")/${BASENAME}.eng.srt" # Define the output SRT path (original behavior)
 
-    # Check if the file (or its path) should be excluded
+    # Check if the MKV file (or its path) should be excluded (e.g., if MKV itself is jellyfin-owned)
     if should_exclude "$FILE"; then
-        log_skip "OCR excluded (matches exclude pattern) → $BASENAME"
+        # The should_exclude function now logs its own skip message, no need for redundancy here
         continue # Skip this file and move to the next if excluded
     fi
 
-    # Check if an SRT file already exists and contains the signature
-    # If it does, it means this script already processed it, so skip
+    # Check if an SRT file already exists
     if [[ -f "$SRT_PATH" ]]; then
+        # Check if it's our script's SRT (by signature)
         if tail -n 10 "$SRT_PATH" | grep -qF "$STATIC_SIGNATURE_PREFIX"; then
             log_skip "Already processed (signature found) → $SRT_PATH"
             continue # Skip this file entirely if already processed and tagged
         fi
-        # If an SRT file exists but *doesn't* have our signature, it's considered an external/orphan.
-        # The script will proceed to overwrite it with the new OCR'd one.
+
+        # NEW: If an SRT file exists but *doesn't* have our signature, check its ownership.
+        # If it's owned by 'jellyfin', skip processing this MKV to avoid overwriting.
+        local existing_srt_owner=$(stat -c %U "$SRT_PATH" 2>/dev/null)
+        if [[ "$existing_srt_owner" == "jellyfin" ]]; then
+            log_skip "Skipping OCR for '$BASENAME': Existing SRT is untagged and owned by 'jellyfin'."
+            continue # Skip this MKV if its associated SRT is jellyfin-owned
+        fi
+
+        # If an SRT file exists, *doesn't* have our signature, AND is *not* jellyfin-owned,
+        # then it's considered an untagged external/orphan. The script will proceed to overwrite it.
         log_info "Existing untagged SRT found for $BASENAME. Will overwrite with OCR'd version."
     fi
 
@@ -209,9 +237,9 @@ log_info "Checking for orphaned SRT subtitles..."
 # Find all SRT files (regardless of origin)
 find "$ROOT" -type f -name "*.srt" -print0 | while IFS= read -r -d $'\0' SRT_FILE; do
     # First, check if the SRT file (or its path) should be excluded.
-    # If it is, we explicitly keep it, assuming it's torrent-managed.
+    # This now includes the 'jellyfin' owner check for SRTs.
     if should_exclude "$SRT_FILE"; then
-        log_success "Keeping SRT (matches exclude pattern) → $SRT_FILE"
+        log_success "Keeping SRT (matches exclude pattern or owned by 'jellyfin') → $SRT_FILE"
         continue # Skip to the next SRT
     fi
 
