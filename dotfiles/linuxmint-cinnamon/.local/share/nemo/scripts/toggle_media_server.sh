@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Service names
-SERVICES=("jellyfin" "plexmediaserver")
+SERVICES=("jellyfin") # "plexmediaserver"
 
 # Function to check if service is active
 is_active() {
