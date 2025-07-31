@@ -79,7 +79,7 @@
         "default": true,
         "description": "Use a custom icon and label",
         "tooltip": "Check this to specify a custom icon and label",
-        "value": true
+        "value": false
     },
     "menu-icon": {
         "type": "iconfilechooser",
