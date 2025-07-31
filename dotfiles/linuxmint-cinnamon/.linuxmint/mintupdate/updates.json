@@ -1,12 +1,6 @@
 {
-  "updates": {
-    "com.bitwarden.desktop": {
-      "type": "flatpak",
-      "since": "2025.07.31",
-      "days": 1
-    }
-  },
+  "updates": {},
   "version": 1,
-  "checked": "2025.07.31",
+  "checked": "2025.08.01",
   "notified": "2025.07.03"
 }

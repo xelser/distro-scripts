@@ -358,12 +358,12 @@
         ],
         "value": [
             "com.bitwarden.desktop.desktop:flatpak",
-            "com.google.Chrome.desktop:flatpak",
             "firefox.desktop",
             "com.brave.Browser.desktop:flatpak",
             "org.gnome.Terminal.desktop",
             "nemo.desktop",
-            "transmission-gtk.desktop"
+            "transmission-gtk.desktop",
+            "nl.jknaapen.fladder.desktop:flatpak"
         ]
     },
     "__md5__": "b7d0a7558cf87c22c50195c9d408485f"
