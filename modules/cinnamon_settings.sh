@@ -12,7 +12,7 @@ gsettings set org.cinnamon.desktop.wm.preferences button-layout ':minimize,maxim
 gsettings set org.cinnamon.muffin placement-mode 'center'
 gsettings set org.cinnamon.settings-daemon.peripherals.keyboard numlock-state 'on'
 gsettings set org.cinnamon.settings-daemon.plugins.color night-light-enabled 'true'
-gsettings set org.cinnamon.settings-daemon.plugins.color night-light-temperature '4700'
+gsettings set org.cinnamon.settings-daemon.plugins.color night-light-temperature '5800'
 
 # Apps
 gsettings set org.cinnamon.recorder file-extension 'mp4'
