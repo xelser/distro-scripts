@@ -28,6 +28,9 @@ sudo apt install --yes build-essential mint-meta-codecs power-profiles-daemon \
 # INSTALL: Fastfetch (PPA)
 sudo add-apt-repository ppa:zhangsongcui3371/fastfetch --yes && sudo apt update
 
+# INSTALL: Brave Browser
+curl -fsS https://dl.brave.com/install.sh | sh
+
 # INSTALL: Zoom
 #wget -O /tmp/zoom_amd64.deb https://zoom.us/client/latest/zoom_amd64.deb
 #sudo apt install --yes /tmp/zoom_amd64.deb
