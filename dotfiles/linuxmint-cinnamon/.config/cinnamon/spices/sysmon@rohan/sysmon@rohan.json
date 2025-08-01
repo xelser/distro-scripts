@@ -1,0 +1,31 @@
+{
+    "displayCpu": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show CPU usage",
+        "value": true
+    },
+    "displayRam": {
+        "type": "checkbox",
+        "default": true,
+        "description": "Show RAM usage",
+        "value": true
+    },
+    "toggleRam": {
+        "type": "checkbox",
+        "default": false,
+        "description": "Display RAM usage in Bytes",
+        "value": true
+    },
+    "updateInterval": {
+        "type": "spinbutton",
+        "default": 2,
+        "min": 0,
+        "max": 60,
+        "step": 1,
+        "units": "seconds",
+        "description": "Update Interval:",
+        "value": 2
+    },
+    "__md5__": "33b6e4144096f2610e5d0586b06095e8"
+}

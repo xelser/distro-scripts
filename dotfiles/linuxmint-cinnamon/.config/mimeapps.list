@@ -5,7 +5,7 @@ x-scheme-handler/http=brave-browser.desktop
 x-scheme-handler/https=brave-browser.desktop
 x-scheme-handler/about=brave-browser.desktop
 x-scheme-handler/unknown=brave-browser.desktop
-x-scheme-handler/mailto=google-chrome.desktop
+x-scheme-handler/mailto=brave-browser.desktop
 
 [Added Associations]
 application/x-shellscript=org.x.editor.desktop;
