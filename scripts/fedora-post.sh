@@ -12,7 +12,7 @@ gsettings set org.gnome.desktop.interface monospace-font-name "Adwaita Mono 10"
 ################################### FLATPAK ##################################
 
 # INSTALL: Fedora Workstation
-flatpak install --assumeyes --noninteractive flathub com.google.Chrome net.nokyan.Resources
+flatpak install --assumeyes --noninteractive flathub net.nokyan.Resources
 
   # org.mozilla.firefox com.spotify.Client us.zoom.Zoom org.telegram.desktop com.discordapp.Discord
   # com.rafaelmardojai.Blanket org.gnome.gitlab.YaLTeR.VideoTrimmer org.nickvision.tubeconverter io.missioncenter.MissionCenter

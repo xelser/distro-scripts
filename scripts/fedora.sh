@@ -15,8 +15,9 @@ color=always" | sudo tee /etc/dnf/libdnf5.conf.d/20-user-settings.conf 1> /dev/n
 
 # DEBLOAT
 sudo dnf remove --assumeyes @guest-desktop-agents @container-management @libreoffice \
-  rhythmbox mediawriter simple-scan fedora-bookmarks totem libreoffice-\* gnome-shell-extension-\* \
-  ptyxis gnome-{contacts,characters,connections,font-viewer,tour,clocks,weather,maps}
+  rhythmbox mediawriter simple-scan fedora-bookmarks totem ptyxis libreoffice-\* \
+  gnome-{contacts,characters,connections,font-viewer,tour,clocks,weather,maps} \
+  gnome-shell-extension-\*
 
 # ADD REPO: RPMFUSION
 sudo dnf list --installed | grep -q "rpmfusion" || sudo dnf install --assumeyes --skip-broken \
@@ -27,8 +28,9 @@ sudo dnf list --installed | grep -q "rpmfusion" || sudo dnf install --assumeyes 
 sudo dnf upgrade @core @sound-and-video @multimedia --exclude=PackageKit-gstreamer-plugin --assumeyes --best --allowerasing --skip-unavailable
 
 # INSTALL: Fedora Workstation
-sudo dnf install --assumeyes --skip-broken --allowerasing gnome-{builder,console,extensions-app,tweaks} \
-  file-roller fragments celluloid drawing easyeffects lsp-plugins-lv2 nvim wl-clipboard libheif-tools
+sudo dnf install --assumeyes --skip-broken --allowerasing easyeffects lsp-plugins-lv2 \
+  gnome-{builder,console,extensions-app,tweaks} file-roller fragments celluloid drawing \
+  nvim wl-clipboard libheif-tools
   
   # inkscape telegram discord video-downloader syncthing touchegg
   # gnome-shell-extension-{light-style,user-theme} google-roboto-{fonts,mono-fonts,slab-fonts}
@@ -38,8 +40,8 @@ sudo dnf copr enable whitehara/htpdate --assumeyes
 sudo dnf install htpdate --assumeyes
 sudo systemctl enable htpdate --now
 
-# INSTALL: TeamViewer
-#sudo dnf install --assumeyes https://download.teamviewer.com/download/linux/teamviewer.x86_64.rpm
+# INSTALL: Brave Browser
+curl -fsS https://dl.brave.com/install.sh | sh
 
 # INSTALL: Fedora Multimedia Codecs (from RPM Fusion https://rpmfusion.org/Howto/Multimedia)
 #sudo dnf swap ffmpeg-free ffmpeg --assumeyes --allowerasing
