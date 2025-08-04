@@ -26,8 +26,5 @@ rm -rf $HOME/Warpinator/
 ################################### FLATPAK ##################################
 
 # INSTALL: Linux Mint
-flatpak install --assumeyes --noninteractive flathub com.bitwarden.desktop \
-	io.missioncenter.MissionCenter us.zoom.Zoom
-
-  # org.mozilla.firefox com.spotify.Client org.telegram.desktop com.discordapp.Discord
-  # com.rafaelmardojai.Blanket org.gnome.gitlab.YaLTeR.VideoTrimmer org.nickvision.tubeconverter
+flatpak install --assumeyes --noninteractive flathub \
+  com.bitwarden.desktop io.missioncenter.MissionCenter

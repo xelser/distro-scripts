@@ -4,8 +4,10 @@ set -e
 ################################### PACKAGES ###################################
 
 # PACKAGE MANAGER: APT
-sudo sed -i 's/packages.linuxmint.com/mirror.rackspace.com\/linuxmint\/packages/g' /etc/apt/sources.list.d/official-package-repositories.list
-sudo sed -i 's/archive.ubuntu.com/mirror.rise.ph/g' /etc/apt/sources.list.d/official-package-repositories.list
+sudo sed -i 's/packages.linuxmint.com/mirror.rackspace.com\/linuxmint\/packages/g' \
+  /etc/apt/sources.list.d/official-package-repositories.list
+sudo sed -i 's/archive.ubuntu.com/mirror.rise.ph/g' \
+  /etc/apt/sources.list.d/official-package-repositories.list
 
 # DEBLOAT
 sudo apt autoremove --purge rhythmbox hypnotix papirus-icon-theme libreoffice-*
@@ -32,9 +34,8 @@ sudo add-apt-repository ppa:zhangsongcui3371/fastfetch --yes && sudo apt update
 curl -fsS https://dl.brave.com/install.sh | sh
 
 # INSTALL: Zoom
-#wget -O /tmp/zoom_amd64.deb https://zoom.us/client/latest/zoom_amd64.deb
-#sudo apt install --yes /tmp/zoom_amd64.deb
-#rm /tmp/zoom_amd64.deb
+wget -O /tmp/zoom_amd64.deb https://zoom.us/client/latest/zoom_amd64.deb && \
+  sudo apt install --yes /tmp/zoom_amd64.deb && rm /tmp/zoom_amd64.deb
 
 # Install: darkman
 #bash ${source_dir}/modules/darkman.sh
