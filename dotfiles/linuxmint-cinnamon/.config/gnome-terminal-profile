@@ -7,5 +7,5 @@ palette=['rgb(40,40,40)', 'rgb(242,89,75)', 'rgb(176,184,70)', 'rgb(233,177,67)'
 scrollback-unlimited=false
 scrollbar-policy='never'
 use-system-font=true
-use-theme-transparency=false
+use-theme-transparency=true
 use-transparent-background=true
