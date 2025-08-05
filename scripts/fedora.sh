@@ -25,7 +25,8 @@ sudo dnf list --installed | grep -q "rpmfusion" || sudo dnf install --assumeyes 
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # UPDATE
-sudo dnf upgrade @core @sound-and-video @multimedia --exclude=PackageKit-gstreamer-plugin --assumeyes --best --allowerasing --skip-unavailable
+sudo dnf upgrade @core @sound-and-video @multimedia --assumeyes --best --allowerasing \
+  --skip-unavailable --exclude=PackageKit-gstreamer-plugin
 
 # INSTALL: Fedora Workstation
 sudo dnf install --assumeyes --skip-broken --allowerasing easyeffects lsp-plugins-lv2 \
