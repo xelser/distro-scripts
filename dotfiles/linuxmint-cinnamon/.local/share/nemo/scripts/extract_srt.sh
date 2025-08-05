@@ -4,7 +4,7 @@
 # --- Configuration ---
 ROOT="${1:-.}" # Root directory to start scanning from, defaults to current directory
 EXCLUDE_FILE="/mnt/Media/srt_exclude_dirs.txt" # Path to your exclusion file
-WORKDIR="./_subs_temp" # Temporary working directory for SUP files
+WORKDIR="./_subs_temp" # Temporary working directory is not needed for extraction, but kept for consistency
 
 # Define the static part of the signature for checking (without the date)
 STATIC_SIGNATURE_PREFIX="[PGS→OCR] Processed on"
@@ -24,6 +24,7 @@ COLOR_CYAN='\e[36m'
 log_info() { echo -e "${COLOR_CYAN}[INFO]${COLOR_RESET} $*"; }
 log_skip() { echo -e "${COLOR_YELLOW}[SKIP]${COLOR_RESET} $*"; }
 log_success() { echo -e "${COLOR_GREEN}[DONE]${COLOR_RESET} $*"; }
+log_extract() { echo -e "${COLOR_BLUE}[EXTRACT]${COLOR_RESET} $*"; }
 log_error() { echo -e "${COLOR_RED}[ERROR]${COLOR_RESET} $*" >&2; }
 log_debug() { :; }
 
@@ -41,7 +42,6 @@ check_dependencies() {
     check_dependency "mkvmerge"
     check_dependency "mkvextract"
     check_dependency "jq"
-    check_dependency "sup2srt"
     check_dependency "stat"
     log_info "All required tools found."
 }
@@ -72,8 +72,7 @@ should_exclude() {
 
 # --- Main Script Logic ---
 check_dependencies
-log_info "Starting PGS to SRT OCR process. Working directory: '$WORKDIR'"
-mkdir -p "$WORKDIR" || { log_error "Failed to create working directory: $WORKDIR"; exit 1; }
+log_info "Starting text-based subtitle extraction process."
 
 find "$ROOT" -type f -name "*.mkv" -print0 | while IFS= read -r -d $'\0' FILE; do
     BASENAME="$(basename "$FILE" .mkv)"
@@ -97,42 +96,50 @@ find "$ROOT" -type f -name "*.mkv" -print0 | while IFS= read -r -d $'\0' FILE; d
             select(
                 .type == "subtitles" and
                 .properties.language == "eng" and
-                .properties.codec_id == "S_HDMV/PGS"
+                (.properties.codec_id | test("^(S_TEXT/UTF8|S_TEXT/ASS)$"))
             ) |
             "\(.id)|\(.properties.codec_id)|\(.properties.num_index_entries // 0)|\(.properties.track_name // "")|\(.properties.forced_track)|\(.properties.default_track)|\(.properties.hearing_impaired)"
         '
     )
     
     if [[ ${#SUB_TRACKS[@]} -eq 0 ]]; then
-        log_skip "No suitable PGS tracks found for: $BASENAME."
+        log_skip "No suitable text-based subtitle tracks found for: $BASENAME."
         continue
     fi
-
-    BEST_PGS_ID=""
-    BEST_PGS_COUNT=-1
-    BEST_PGS_NAME=""
-    PGS_IS_FORCED=false
-    PGS_IS_DEFAULT=false
-    PGS_IS_HI=false
-
+    
+    BEST_TEXT_ID=""
+    BEST_TEXT_COUNT=-1
+    BEST_TEXT_CODEC=""
+    BEST_TEXT_NAME=""
+    TEXT_IS_FORCED=false
+    TEXT_IS_DEFAULT=false
+    TEXT_IS_HI=false
+    
     for DETAIL_STRING in "${SUB_TRACKS[@]}"; do
         IFS='|' read -r current_id codec_id current_count track_name forced_track default_track hearing_impaired <<< "$DETAIL_STRING"
-        if [[ "$current_count" -gt "$BEST_PGS_COUNT" ]]; then
-            BEST_PGS_ID="$current_id"
-            BEST_PGS_COUNT="$current_count"
-            BEST_PGS_NAME="$track_name"
-            [[ "$forced_track" == "true" ]] && PGS_IS_FORCED=true || PGS_IS_FORCED=false
-            [[ "$default_track" == "true" ]] && PGS_IS_DEFAULT=true || PGS_IS_DEFAULT=false
-            [[ "$hearing_impaired" == "true" || "${track_name^^}" == *"SDH"* || "${track_name^^}" == *"HI"* ]] && PGS_IS_HI=true || PGS_IS_HI=false
+        if [[ "$current_count" -gt "$BEST_TEXT_COUNT" ]]; then
+            BEST_TEXT_ID="$current_id"
+            BEST_TEXT_COUNT="$current_count"
+            BEST_TEXT_CODEC="$codec_id"
+            BEST_TEXT_NAME="$track_name"
+            [[ "$forced_track" == "true" ]] && TEXT_IS_FORCED=true || TEXT_IS_FORCED=false
+            [[ "$default_track" == "true" ]] && TEXT_IS_DEFAULT=true || TEXT_IS_DEFAULT=false
+            [[ "$hearing_impaired" == "true" || "${track_name^^}" == *"SDH"* || "${track_name^^}" == *"HI"* ]] && TEXT_IS_HI=true || TEXT_IS_HI=false
         fi
     done
     
+    OUTPUT_EXT=""
+    case "$BEST_TEXT_CODEC" in
+        "S_TEXT/UTF8") OUTPUT_EXT="srt";;
+        "S_TEXT/ASS")  OUTPUT_EXT="ass";;
+    esac
+    
     FILENAME_SUFFIX=""
-    $PGS_IS_FORCED && FILENAME_SUFFIX="${FILENAME_SUFFIX}.forced"
-    $PGS_IS_DEFAULT && FILENAME_SUFFIX="${FILENAME_SUFFIX}.default"
-    $PGS_IS_HI && FILENAME_SUFFIX="${FILENAME_SUFFIX}.sdh"
+    $TEXT_IS_FORCED && FILENAME_SUFFIX="${FILENAME_SUFFIX}.forced"
+    $TEXT_IS_DEFAULT && FILENAME_SUFFIX="${FILENAME_SUFFIX}.default"
+    $TEXT_IS_HI && FILENAME_SUFFIX="${FILENAME_SUFFIX}.sdh"
 
-    OUTPUT_PATH="${DIRNAME}/${BASENAME}.eng${FILENAME_SUFFIX}.srt"
+    OUTPUT_PATH="${DIRNAME}/${BASENAME}.eng${FILENAME_SUFFIX}.${OUTPUT_EXT}"
     
     if [[ -f "$OUTPUT_PATH" ]]; then
         if tail -n 10 "$OUTPUT_PATH" | grep -qF "$STATIC_SIGNATURE_PREFIX"; then
@@ -147,26 +154,15 @@ find "$ROOT" -type f -name "*.mkv" -print0 | while IFS= read -r -d $'\0' FILE; d
         log_info "Existing untagged file found for $BASENAME. Will overwrite with new version."
     fi
     
-    SUP_FILE="$WORKDIR/${BASENAME}_track${BEST_PGS_ID}.sup"
-    log_info "Extracting PGS to temporary SUP file: $SUP_FILE"
-    if ! mkvextract tracks "$FILE" "${BEST_PGS_ID}:${SUP_FILE}"; then
-        log_error "Extraction failed for $BASENAME (Track $BEST_PGS_ID). Removing temporary SUP file."
-        rm -f "$SUP_FILE"
+    log_extract "Extracting text-based subtitle track $BEST_TEXT_ID with tags '${FILENAME_SUFFIX}' to: $OUTPUT_PATH"
+    if ! mkvextract tracks "$FILE" "${BEST_TEXT_ID}:${OUTPUT_PATH}"; then
+        log_error "Extraction failed for $BASENAME (Track $BEST_TEXT_ID)."
+        rm -f "$OUTPUT_PATH"
     else
-        log_info "Performing OCR to SRT for: $BASENAME with tags '${FILENAME_SUFFIX}'"
-        if ! sup2srt -l eng -o "$OUTPUT_PATH" "$SUP_FILE"; then
-            log_error "OCR failed for $BASENAME. Removing temporary SUP file."
-            rm -f "$SUP_FILE"
-        else
-            echo "$SIGNATURE" >> "$OUTPUT_PATH"
-            log_success "OCR completed and saved → $OUTPUT_PATH"
-        fi
-        rm -f "$SUP_FILE"
+        echo "$SIGNATURE" >> "$OUTPUT_PATH"
+        log_success "Extraction completed and saved → $OUTPUT_PATH"
     fi
 done
-
-log_info "OCR phase complete. Cleaning up working directory: '$WORKDIR'"
-rm -rf "$WORKDIR" || log_error "Failed to remove working directory: '$WORKDIR'"
 
 ### Cleanup Phase
 log_info "Checking for orphaned SRT/ASS subtitles..."
@@ -183,4 +179,4 @@ find "$ROOT" -type f -name "*.srt" -o -name "*.ass" -print0 | while IFS= read -r
     fi
 done
 
-log_success "Subtitle processing complete."
+log_success "Text-based subtitle processing complete."
