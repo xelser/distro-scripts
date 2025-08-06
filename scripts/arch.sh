@@ -148,7 +148,12 @@ echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILov
 pacman -Sy --needed --noconfirm linux linux-{headers,firmware} man-{db,pages} base-devel reflector inetutils dmidecode \
 	plymouth btrfs-progs ntfs-3g {intel,amd}-ucode grub os-prober efibootmgr dosfstools networkmanager gvfs numlockx \
 	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound \
-	firefox neovim{,-plugins} xclip wl-clipboard syncthing
+	xdg-desktop-portal profile-sync-daemon zram-generator
+	firefox neovim{,-plugins} xclip wl-clipboard
+
+# swap/zram
+echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
+systemctl enable systemd-zram-setup@zram0
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
@@ -176,22 +181,21 @@ arch_wm () { arch-chroot /mnt /bin/bash << EOF
 
 # Window Manager Packages
 pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk,hyprland} ttf-fira{-sans,code-nerd} \
-	brightnessctl gammastep alacritty wallutils feh swaybg rofi atril pluma engrampa caja mugshot \
-	sddm mate-polkit nwg-look nm-connection-editor flameshot grim dunst libnotify imv mpv \
-	i3-wm autotiling polybar picom
+	brightnessctl gammastep alacritty imv mpv wallutils feh swaybg dunst libnotify rofi nwg-look \
+	mate-polkit atril pluma engrampa caja mugshot flameshot grim slurp \
+	greetd{,-gtkgreet} i3-wm autotiling polybar picom
 
-	#openbox obconf tint2 sway waybar hyprland kvantum-qt5 qt5ct greetd{,-gtkgreet} 
+	#openbox obconf tint2 sway waybar hyprland kvantum-qt5 qt5ct sddm
 
 # sddm
-echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
-echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
-systemctl enable sddm
+#echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
+#echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
+#systemctl enable sddm
 
 # greetd
-#echo -e "[terminal]\nvt = 1\n\n[greeter]\ntype = 'gtkgreet'\n
-#[session]\ncommand = '/usr/bin/i3-with-shmlog'
-#user = 'xelser'" > /etc/greetd/greetd.conf
-#systemctl enable greetd
+mkdir -p /etc/greetd/
+echo -e "[terminal]\nvt = 1\n\n[default_session]\ncommand = \"gtkgreet --cmd 'i3'\"\nuser = \"${user}\"" > /etc/greetd/config.toml
+systemctl enable greetd
 
 EOF
 }
