@@ -1,27 +1,6 @@
 {
-  "updates": {
-    "language-pack-en": {
-      "type": "package",
-      "since": "2025.08.06",
-      "days": 1
-    },
-    "language-pack-en-base": {
-      "type": "package",
-      "since": "2025.08.06",
-      "days": 1
-    },
-    "linux-firmware": {
-      "type": "package",
-      "since": "2025.08.06",
-      "days": 1
-    },
-    "mesa": {
-      "type": "package",
-      "since": "2025.08.06",
-      "days": 1
-    }
-  },
+  "updates": {},
   "version": 1,
-  "checked": "2025.08.06",
+  "checked": "2025.08.07",
   "notified": "2025.07.03"
 }

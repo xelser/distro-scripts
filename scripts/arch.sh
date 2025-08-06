@@ -152,7 +152,7 @@ pacman -Sy --needed --noconfirm linux linux-{headers,firmware} man-{db,pages} ba
 
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
-systemctl enable systemd-zram-setup@zram0
+#systemctl enable systemd-zram-setup@zram0
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
@@ -193,7 +193,7 @@ pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk,hyprland} ttf-fira{-s
 
 # greetd
 mkdir -p /etc/greetd/
-echo -e "[terminal]\nvt = 1\n\n[default_session]\ncommand = \"gtkgreet --cmd 'i3'\"\nuser = \"${user}\"" > /etc/greetd/config.toml
+echo -e "[terminal]\nvt = 1\n\n[default_session]\ncommand = \"i3\"\nuser = \"${user}\"" > /etc/greetd/config.toml
 systemctl enable greetd
 
 EOF
