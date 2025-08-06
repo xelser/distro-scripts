@@ -182,7 +182,7 @@ arch_wm () { arch-chroot /mnt /bin/bash << EOF
 pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk,hyprland} ttf-fira{-sans,code-nerd} \
 	brightnessctl gammastep alacritty imv mpv wallutils feh swaybg dunst libnotify rofi nwg-look \
 	mate-polkit atril pluma engrampa caja mugshot flameshot grim slurp transmission-{cli,gtk} \
-	greetd{,-regreet} cage i3-wm autotiling polybar picom
+	greetd{,-gtkgreet} cage i3-wm autotiling polybar picom
 
 	#openbox obconf tint2 sway waybar hyprland kvantum-qt5 qt5ct sddm
 
