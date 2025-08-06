@@ -12,8 +12,8 @@ if [[ ${machine} == "G41T-R3" ]]; then
   swap="6"
 elif [[ ${machine} == "E5-476G" ]]; then
   device="sda"
-  root="6"
-  swap="3"
+  root="3"
+  swap="2"
   efi="1"
 elif [[ ${machine_type} == "Other" ]]; then # GNOME BOXES
  	device="vda"
