@@ -182,7 +182,7 @@ arch_wm () { arch-chroot /mnt /bin/bash << EOF
 pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk,hyprland} ttf-fira{-sans,code-nerd} \
 	brightnessctl gammastep alacritty imv mpv wallutils feh swaybg dunst libnotify rofi nwg-look \
 	mate-polkit atril pluma engrampa caja mugshot flameshot grim slurp transmission-{cli,gtk} \
-	greetd{,-gtkgreet} i3-wm autotiling polybar picom
+	greetd{,-regreet} cage i3-wm autotiling polybar picom
 
 	#openbox obconf tint2 sway waybar hyprland kvantum-qt5 qt5ct sddm
 
@@ -193,7 +193,8 @@ pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk,hyprland} ttf-fira{-s
 
 # greetd
 mkdir -p /etc/greetd/
-echo -e "[terminal]\nvt = 1\n\n[default_session]\ncommand = \"i3\"\nuser = \"${user}\"" > /etc/greetd/config.toml
+echo -e "[terminal]\nvt = 1\n\n[initial_session]\ncommand = \"i3\"\nuser = \"${user}\"" > /etc/greetd/config.toml
+echo -e "\n[default_session]\nuser = \"greeter\"\ncommand = \"cage -s -- gtkgreet\"" >> /etc/greetd/config.toml
 systemctl enable greetd
 
 EOF
