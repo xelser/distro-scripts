@@ -147,9 +147,8 @@ echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILov
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 pacman -Sy --needed --noconfirm linux linux-{headers,firmware} man-{db,pages} base-devel reflector inetutils dmidecode \
 	plymouth btrfs-progs ntfs-3g {intel,amd}-ucode grub os-prober efibootmgr dosfstools networkmanager gvfs numlockx \
-	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound \
-	xdg-desktop-portal profile-sync-daemon zram-generator
-	firefox neovim{,-plugins} xclip wl-clipboard
+	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound xdg-desktop-portal \
+	profile-sync-daemon zram-generator neovim{,-plugins} xclip wl-clipboard firefox gparted
 
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
@@ -182,7 +181,7 @@ arch_wm () { arch-chroot /mnt /bin/bash << EOF
 # Window Manager Packages
 pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk,hyprland} ttf-fira{-sans,code-nerd} \
 	brightnessctl gammastep alacritty imv mpv wallutils feh swaybg dunst libnotify rofi nwg-look \
-	mate-polkit atril pluma engrampa caja mugshot flameshot grim slurp \
+	mate-polkit atril pluma engrampa caja mugshot flameshot grim slurp transmission-{daemon,gtk} \
 	greetd{,-gtkgreet} i3-wm autotiling polybar picom
 
 	#openbox obconf tint2 sway waybar hyprland kvantum-qt5 qt5ct sddm
