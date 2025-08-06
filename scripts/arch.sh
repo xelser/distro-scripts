@@ -182,20 +182,20 @@ arch_wm () { arch-chroot /mnt /bin/bash << EOF
 pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk,hyprland} ttf-fira{-sans,code-nerd} \
 	brightnessctl gammastep alacritty imv mpv wallutils feh swaybg dunst libnotify rofi nwg-look \
 	mate-polkit atril pluma engrampa caja mugshot flameshot grim slurp transmission-{cli,gtk} \
-	greetd{,-gtkgreet} cage i3-wm autotiling polybar picom
+	sddm i3-wm autotiling polybar picom
 
-	#openbox obconf tint2 sway waybar hyprland kvantum-qt5 qt5ct sddm
+	#openbox obconf tint2 sway waybar hyprland kvantum-qt5 qt5ct greetd{,-gtkgreet} cage
 
 # sddm
-#echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
-#echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
-#systemctl enable sddm
+echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
+echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
+systemctl enable sddm
 
 # greetd
-mkdir -p /etc/greetd/
-echo -e "[terminal]\nvt = 1\n\n[initial_session]\ncommand = \"i3\"\nuser = \"${user}\"" > /etc/greetd/config.toml
-echo -e "\n[default_session]\nuser = \"greeter\"\ncommand = \"cage -s -- gtkgreet\"" >> /etc/greetd/config.toml
-systemctl enable greetd
+#mkdir -p /etc/greetd/
+#echo -e "[terminal]\nvt = 1\n\n[initial_session]\ncommand = \"i3\"\nuser = \"${user}\"" > /etc/greetd/config.toml
+#echo -e "\n[default_session]\nuser = \"greeter\"\ncommand = \"cage -s -- gtkgreet\"" >> /etc/greetd/config.toml
+#systemctl enable greetd
 
 EOF
 }
