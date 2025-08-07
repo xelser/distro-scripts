@@ -152,7 +152,6 @@ pacman -Sy --needed --noconfirm linux linux-{headers,firmware} man-{db,pages} ba
 
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
-#systemctl enable systemd-zram-setup@zram0
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
@@ -176,20 +175,33 @@ grub-install --target=${grub_target}
 EOF
 }
 
-arch_wm () { arch-chroot /mnt /bin/bash << EOF
+arch_i3 () { arch-chroot /mnt /bin/bash << EOF
 
 # Window Manager Packages
-pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk,hyprland} ttf-fira{-sans,code-nerd} \
-	brightnessctl gammastep alacritty imv mpv wallutils feh swaybg dunst libnotify rofi nwg-look \
-	mate-polkit atril pluma engrampa caja mugshot flameshot grim slurp transmission-{cli,gtk} \
+pacman -S --needed --noconfirm xdg-desktop-portal-gtk ttf-fira{-sans,code-nerd} \
+	brightnessctl gammastep alacritty imv mpv wallutils feh dunst libnotify rofi nwg-look \
+	mate-polkit atril pluma engrampa caja mugshot flameshot transmission-{cli,gtk} \
 	sddm i3-wm autotiling polybar picom
 
-	#openbox obconf tint2 sway waybar hyprland kvantum-qt5 qt5ct greetd{,-gtkgreet} cage
+	#openbox obconf tint2
 
 # sddm
 echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
 echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
 systemctl enable sddm
+
+EOF
+}
+
+arch_sway () { arch-chroot /mnt /bin/bash << EOF
+
+# Window Manager Packages
+pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk} ttf-fira{-sans,code-nerd} \
+	brightnessctl gammastep alacritty imv mpv wallutils dunst libnotify rofi-wayland nwg-look \
+	mate-polkit atril pluma engrampa caja mugshot flameshot grim slurp transmission-{cli,gtk} \
+	sway waybar greetd{,-gtkgreet} cage
+
+	#hyprland kvantum-qt5 qt5ct
 
 # greetd
 #mkdir -p /etc/greetd/
@@ -239,9 +251,10 @@ echo
 echo "----------------------------------------------"
 read -p "Select which DE or WM you want to install (#): " selected_gui
 case $selected_gui in
-	1) gui="i3/Sway/Openbox/Hyprland";;
-	2) gui="GNOME";;
-	3) gui="KDE Plasma";;
+	1) gui="i3";;
+	2) gui="Sway";;
+	3) gui="GNOME";;
+	4) gui="KDE Plasma";;
 	*) gui="TTY (Base)";;
 esac
 
@@ -266,9 +279,10 @@ case $confirm in
    n)	;;
  *|Y) partitioning && arch_base
 			case $selected_gui in
-				1) arch_wm;;
-				2) arch_gnome;;
-				3) arch_plasma;;
+				1) arch_i3;;
+				2) arch_sway;;
+				3) arch_gnome;;
+				4) arch_plasma;;
 				*) ;;
 			esac
 			;;
