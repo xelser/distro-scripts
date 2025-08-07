@@ -7,4 +7,4 @@ killall -q polybar
 
 # Launch Polybar, using default config location ~/.config/polybar/config.ini
 
-polybar default-${machine} || polybar default 2>&1 | tee -a /tmp/polybar.log & disown
+polybar default-${USER} || polybar default 2>&1 | tee -a /tmp/polybar.log & disown

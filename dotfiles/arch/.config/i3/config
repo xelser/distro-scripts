@@ -201,8 +201,8 @@ bindsym $mod+r mode "resize"
 # i3 Windows Config
 default_floating_border none
 default_border none
-gaps inner 5
-gaps top 37
+gaps inner 10
+gaps top 42
 
 # Autostart (Global)
 exec --no-startup-id setwallpaper $(cat ~/.config/waypaper/config.ini | grep "wallpaper" | cut -d'=' -f2)
