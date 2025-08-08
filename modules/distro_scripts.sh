@@ -1,29 +1,42 @@
 #!/bin/bash
 
-# Remove old Keys
-rm -rf "$HOME/.ssh/"
+# === CONFIGURATION ===
+GITHUB_DIR="/mnt/Home/Documents/Github"
+SSH_DIR="$HOME/.ssh"
+PRIVATE_KEY="$GITHUB_DIR/id_ed25519"
+PUBLIC_KEY="$GITHUB_DIR/id_ed25519.pub"
+TOKEN_FILE="$GITHUB_DIR/token.txt"
 
-# Profile for git
-git config --global user.email "dkzenzuri@gmail.com"
-git config --global user.name "$USER"
-git config --global pull.rebase false
+# === STEP 1: Create ~/.ssh and Symlink Keys ===
+echo "🔗 Setting up SSH key symlinks..."
+mkdir -p "$SSH_DIR"
+ln -sf "$PRIVATE_KEY" "$SSH_DIR/id_ed25519"
+ln -sf "$PUBLIC_KEY" "$SSH_DIR/id_ed25519.pub"
+chmod 700 "$SSH_DIR"
+chmod 600 "$SSH_DIR/id_ed25519"
+chmod 644 "$SSH_DIR/id_ed25519.pub"
 
-# Create/Add SSH Key
-if [ ! -f $HOME/.ssh/id_ed25519.pub ]; then
-	ssh-keygen -t ed25519 -C "dkzenzuri@gmail.com" -N "" -f $HOME/.ssh/id_ed25519 >&/dev/null
-	eval "$(ssh-agent -s)" >&/dev/null && ssh-add $HOME/.ssh/id_ed25519 >&/dev/null
-	echo -e "${distro_id}@${machine}\n" > $HOME/tmp
-	cat $HOME/.ssh/id_ed25519.pub >> $HOME/tmp
-	killall firefox || firefox https://github.com/settings/keys $HOME/tmp
+# === STEP 2: Start SSH Agent and Add Key ===
+echo "🚀 Starting ssh-agent and adding key..."
+eval "$(ssh-agent -s)"
+ssh-add "$SSH_DIR/id_ed25519"
+
+# === STEP 3: Authenticate with GitHub CLI ===
+echo "🔐 Authenticating with GitHub CLI..."
+if ! gh auth status &>/dev/null; then
+    if [ -f "$TOKEN_FILE" ]; then
+        gh auth login --with-token < "$TOKEN_FILE"
+    else
+        echo "❌ Token file not found at $TOKEN_FILE"
+        exit 1
+    fi
+else
+    echo "✅ GitHub CLI already authenticated."
 fi
 
-# Update Local Repo
-if [ ! -d $HOME/Documents/distro-scripts ]; then
-	echo -e "StrictHostKeyChecking no\n" > $HOME/.ssh/config
-	cd $HOME/Documents && git clone git@github.com:xelser/distro-scripts.git
-fi
+# === STEP 4: Test SSH Connection to GitHub ===
+echo "🧪 Testing SSH connection to GitHub..."
+ssh -T git@github.com
 
-# Delete files
-rm "$HOME/tmp"
-rm "$HOME/distro_scripts.sh"
+echo "🎉 Setup complete! You can now use git over SSH."
 

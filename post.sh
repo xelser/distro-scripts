@@ -10,13 +10,13 @@ check_flag () {
 [ -f /usr/bin/powerprofilesctl ] && powerprofilesctl list | grep -q performance && powerprofilesctl set performance
 
 # Connect to Wifi
-wget --spider --quiet http://google.com > /dev/null 2>&1 || if [[ ${machine} == "E5-476G" || "G41T-R3" ]]; then
-	export wifidevice="GlobeAtHome_67eb8_5 password A3jW3GBX"
+#wget --spider --quiet http://google.com > /dev/null 2>&1 || if [[ ${machine} == "E5-476G" || "G41T-R3" ]]; then
+#	export wifidevice="GlobeAtHome_67eb8_5 password A3jW3GBX"
 
-	[ -f /usr/bin/nmcli ] && sudo nmcli device wifi connect ${wifidevice}
-else
-	[ -f /usr/bin/nmtui ] && sudo nmtui
-fi
+#	[ -f /usr/bin/nmcli ] && sudo nmcli device wifi connect ${wifidevice}
+#else
+#	[ -f /usr/bin/nmtui ] && sudo nmtui
+#fi
 
 # Update Time (Enable Network Time)
 sudo timedatectl set-ntp true
@@ -24,15 +24,18 @@ sudo timedatectl set-ntp true
 ################################ POST INSTALL ################################
 
 # Essential Packages
-if [ -f /usr/bin/apt ]; then sudo apt install --yes ntfs-3g sassc \
-	flatpak fastfetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
-	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf wget curl git openssh-client intel-media-va-driver i965-va-driver
-elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm ntfs-3g sassc \
-	flatpak fastfetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
-	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines wget curl git openssh libva-intel-driver intel-media-driver
-elif [ -f /usr/bin/dnf5 ]; then sudo dnf5 install --assumeyes --best --allowerasing ntfs-3g sassc \
-	flatpak fastfetch nano htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
-	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines wget curl git openssh libva-intel-driver intel-media-driver
+if [ -f /usr/bin/apt ]; then sudo apt install --yes \
+	flatpak fastfetch htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
+	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf wget curl git gh openssh-client \
+	intel-media-va-driver i965-va-driver
+elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
+	flatpak fastfetch htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
+	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines wget curl git gh openssh \
+	libva-intel-driver intel-media-driver
+elif [ -f /usr/bin/dnf5 ]; then sudo dnf5 install --assumeyes --best --allowerasing \
+	flatpak fastfetch htop zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
+	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines wget curl git github-cli openssh \
+	libva-intel-driver intel-media-driver
 fi
 
 # Update User Dirs
