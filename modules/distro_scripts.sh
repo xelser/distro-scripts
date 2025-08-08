@@ -46,4 +46,4 @@ echo "🎉 Setup complete! You can now use git over SSH."
 
 ########
 
-cd $HOME/Documents && git clone git@github.com:xelser/distro-scripts && rm $HOME/distro-scripts.sh
+cd $HOME/Documents && git clone git@github.com:xelser/distro-scripts && rm $HOME/distro_scripts.sh
