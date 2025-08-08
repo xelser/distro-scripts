@@ -11,6 +11,7 @@ x-scheme-handler/about=brave-browser.desktop
 x-scheme-handler/unknown=brave-browser.desktop
 video/x-matroska=mpv.desktop
 audio/mpeg=mpv.desktop
+x-scheme-handler/mailto=brave-browser.desktop
 
 [Added Associations]
 application/x-shellscript=geany.desktop;org.xfce.mousepad.desktop;nvim.desktop;leafpad.desktop;pluma.desktop;
