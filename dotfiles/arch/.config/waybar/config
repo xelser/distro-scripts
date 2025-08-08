@@ -18,18 +18,17 @@
         "custom/media"
     ],
     "modules-right": [
-        "mpd",
         "idle_inhibitor",
         "pulseaudio",
         "network",
-        "power-profiles-daemon",
         "backlight",
         "clock",
         "custom/power"
     ],
 
     // Available Modules
-    // "keyboard-state", "sway/language", "battery", "battery#bat2", "temperature", "tray"
+    // "keyboard-state", "sway/language", "battery", "battery#bat2", "temperature", 
+    // "tray", "power-profiles-daemon", "mpd"
 
     // Modules configuration
     // "sway/workspaces": {
@@ -56,6 +55,9 @@
             "locked": "",
             "unlocked": ""
         }
+    },
+    "sway/window": {
+        "format": "{app_id}"
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
