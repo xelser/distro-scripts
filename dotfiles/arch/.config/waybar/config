@@ -167,8 +167,8 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "  Wi-Fi: {ifname} ({signalStrength}%)",
-        "format-ethernet": " Eth: {ifname}",
+        "format-wifi": "  WiFi: {ifname} ({signalStrength}%)",
+        "format-ethernet": " Ethernet: {ifname}",
         "tooltip-format": " Down: {bandwidthDownBytes} |  Up: {bandwidthUpBytes}",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
