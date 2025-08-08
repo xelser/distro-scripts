@@ -148,7 +148,7 @@ echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILov
 pacman -Sy --needed --noconfirm linux linux-{headers,firmware} man-{db,pages} base-devel reflector inetutils dmidecode \
 	plymouth xfsprogs btrfs-progs ntfs-3g {intel,amd}-ucode grub os-prober efibootmgr dosfstools networkmanager gvfs \
 	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound bluez{,-utils} \
-	xdg-desktop-portal profile-sync-daemon zram-generator neovim{,-plugins} xclip wl-clipboard numlockx \
+	xdg-desktop-portal profile-sync-daemon zram-generator neovim{,-plugins} \
 	firefox gparted
 
 # swap/zram
@@ -185,7 +185,7 @@ arch_i3 () { arch-chroot /mnt /bin/bash << EOF
 pacman -S --needed --noconfirm xdg-desktop-portal-gtk ttf-fira{-sans,code-nerd} \
 	brightnessctl gammastep alacritty imv mpv wallutils dunst libnotify nwg-look \
 	mate-polkit atril pluma engrampa caja mugshot transmission-{cli,gtk} blueman \
-	sddm i3-wm autotiling polybar picom feh rofi flameshot
+	sddm i3-wm autotiling polybar picom feh rofi flameshot xclip numlockx
 
 	#openbox obconf tint2
 
@@ -203,15 +203,14 @@ arch_sway () { arch-chroot /mnt /bin/bash << EOF
 pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk} ttf-fira{-sans,code-nerd} \
 	brightnessctl gammastep alacritty imv mpv wallutils dunst libnotify nwg-look \
 	mate-polkit atril pluma engrampa caja mugshot transmission-{cli,gtk} blueman \
-	sway waybar greetd{,-gtkgreet} cage rofi-wayland grim slurp
+	sway waybar greetd{,-gtkgreet} cage rofi-wayland grim slurp wl-clipboard
 
 	#hyprland kvantum-qt5 qt5ct
 
 # greetd
-#mkdir -p /etc/greetd/
-#echo -e "[terminal]\nvt = 1\n\n[initial_session]\ncommand = \"i3\"\nuser = \"${user}\"" > /etc/greetd/config.toml
-#echo -e "\n[default_session]\nuser = \"greeter\"\ncommand = \"cage -s -- gtkgreet\"" >> /etc/greetd/config.toml
-#systemctl enable greetd
+sed -i 's|command = "agreety --cmd /bin/sh"|command = "sway -c /etc/nwg-hello/sway-config"|g' /etc/greetd/config.toml
+echo -e "\n[initial_session]\ncommand = \"sway\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
+systemctl enable greetd
 
 EOF
 }
@@ -248,9 +247,10 @@ clear && echo "INSTALL GUI (DE/WM):"
 echo "---------------------"
 echo "Available Desktop Environment and Window Managers:"
 echo
-echo "1. i3/Sway/Openbox/Hyprland"
-echo "2. GNOME"
-echo "3. KDE Plasma"
+echo "1. i3"
+echo "2. Sway"
+echo "3. GNOME"
+echo "4. KDE Plasma"
 echo
 echo "----------------------------------------------"
 read -p "Select which DE or WM you want to install (#): " selected_gui
