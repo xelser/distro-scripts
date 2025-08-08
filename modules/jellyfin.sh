@@ -77,7 +77,7 @@ install_jellyfin() {
         sudo apt install -y jellyfin-server jellyfin-ffmpeg7
 
     elif [[ "$ID" == "arch" ]]; then
-        sudo pacman -S --noconfirm jellyfin-{server,ffmpeg,web} vpl-gpu-rt
+        sudo pacman -S --noconfirm jellyfin-{server,ffmpeg,web} vpl-gpu-rt libva-utils
 
     elif [[ "$ID" == "fedora" ]]; then
         sudo tee /etc/yum.repos.d/jellyfin.repo > /dev/null <<EOF
@@ -93,6 +93,10 @@ EOF
         echo "[✗] Unsupported distro for Jellyfin."
         exit 1
     fi
+
+    # For Hardware Transcoding
+    sudo gpasswd -a jellyfin render
+    sudo gpasswd -a jellyfin video
 
     start_and_check_service jellyfin
     setup_media_group_access jellyfin
