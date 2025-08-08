@@ -205,6 +205,7 @@ gaps inner 10
 gaps top 42
 
 # Autostart (Global)
+exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
 exec --no-startup-id setwallpaper $(cat ~/.config/waypaper/config.ini | grep "wallpaper" | cut -d'=' -f2)
 exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 exec --no-startup-id easyeffects --gapplication-service
