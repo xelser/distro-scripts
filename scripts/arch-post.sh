@@ -17,9 +17,8 @@ yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload
 
 setup_wm () {
 # INSTALL: AUR PACKAGES
-yay -S --needed --noconfirm \
-	waypaper xidlehook betterlockscreen obmenu-generator wlogout overskride
-  # ulauncher {zscroll,polybar-scripts}-git
+yay -S --needed --noconfirm waypaper overskride wlogout
+  # ulauncher {zscroll,polybar-scripts}-git xidlehook betterlockscreen obmenu-generator
 
 # BUILD: caffeinate
 #sudo pacman -S --needed --noconfirm rustup && rustup default stable
@@ -104,10 +103,3 @@ else
 	setup_wm
 fi
 
-#################################### POST ####################################
-
-# touchpad
-#if [[ ${machine_type} == "notebook" ]]; then
-#	sudo wget -qO /etc/X11/xorg.conf.d/30-touchpad.conf \
-#		https://raw.githubusercontent.com/xelser/distro-scripts/main/common/30-touchpad.conf
-#fi
