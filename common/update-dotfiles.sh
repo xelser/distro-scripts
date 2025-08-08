@@ -151,6 +151,9 @@ else
 	# Ulauncher
 	save_file /.config/ulauncher/ settings.json
 
+	# Flameshot
+	save_file /.config/flameshot/ flameshot.ini
+	
 	# EWW
 	save_folder /.config/eww/
 

@@ -228,10 +228,9 @@ gaps inner 10
 
 # Autostart (Global)
 exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
+exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 exec --no-startup-id easyeffects --gapplication-service
-exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
 exec --no-startup-id waypaper --restore
-exec --no-startup-id pcmanfm -d
 exec --no-startup-id dunst
 
 # Autostart (for Wayland)
