@@ -7,7 +7,7 @@ blinking = "On"
 shape = "Underline"
 
 [font]
-size = 9
+size = 10
 
 [font.bold]
 family = "FiraCode Nerd Font"
