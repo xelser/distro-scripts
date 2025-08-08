@@ -9,9 +9,9 @@ fi
 
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-  ventoy-bin htpdate grub-hook update-grub neovim-symlinks syncthing-desktop-entries
+  brave-bin ventoy-bin htpdate grub-hook update-grub neovim-symlinks
 
-	# teamviewer zoom obs-studio gnome-boxes syncthing-gtk
+	# teamviewer zoom obs-studio gnome-boxes syncthing-{gtk,desktop-entries}
 
 ################################### WM/DE ####################################
 
@@ -111,8 +111,3 @@ fi
 #	sudo wget -qO /etc/X11/xorg.conf.d/30-touchpad.conf \
 #		https://raw.githubusercontent.com/xelser/distro-scripts/main/common/30-touchpad.conf
 #fi
-
-# bluetooth
-sudo dmesg | grep -q 'Bluetooth' && \
-	sudo pacman -S --needed --noconfirm bluez-utils && \
-	sudo systemctl enable bluetooth --now
