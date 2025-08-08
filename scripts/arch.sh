@@ -179,9 +179,9 @@ arch_i3 () { arch-chroot /mnt /bin/bash << EOF
 
 # Window Manager Packages
 pacman -S --needed --noconfirm xdg-desktop-portal-gtk ttf-fira{-sans,code-nerd} \
-	brightnessctl gammastep alacritty imv mpv wallutils feh dunst libnotify rofi nwg-look \
-	mate-polkit atril pluma engrampa caja mugshot flameshot transmission-{cli,gtk} \
-	sddm i3-wm autotiling polybar picom
+	brightnessctl gammastep alacritty imv mpv wallutils dunst libnotify nwg-look \
+	mate-polkit atril pluma engrampa caja mugshot transmission-{cli,gtk} \
+	sddm i3-wm autotiling polybar picom feh rofi flameshot
 
 	#openbox obconf tint2
 
@@ -197,9 +197,9 @@ arch_sway () { arch-chroot /mnt /bin/bash << EOF
 
 # Window Manager Packages
 pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk} ttf-fira{-sans,code-nerd} \
-	brightnessctl gammastep alacritty imv mpv wallutils dunst libnotify rofi-wayland nwg-look \
-	mate-polkit atril pluma engrampa caja mugshot flameshot grim slurp transmission-{cli,gtk} \
-	sway waybar greetd{,-gtkgreet} cage
+	brightnessctl gammastep alacritty imv mpv wallutils dunst libnotify nwg-look \
+	mate-polkit atril pluma engrampa caja mugshot transmission-{cli,gtk} \
+	sway waybar greetd{,-gtkgreet} cage rofi-wayland grim slurp
 
 	#hyprland kvantum-qt5 qt5ct
 
