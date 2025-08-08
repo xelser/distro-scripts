@@ -184,7 +184,7 @@ arch_i3 () { arch-chroot /mnt /bin/bash << EOF
 # Window Manager Packages
 pacman -S --needed --noconfirm xdg-desktop-portal-gtk ttf-fira{-sans,code-nerd} \
 	brightnessctl gammastep alacritty imv mpv wallutils dunst libnotify nwg-look \
-	mate-polkit atril pluma engrampa caja mugshot transmission-{cli,gtk} blueman \
+	mate-polkit atril pluma engrampa caja mugshot transmission-{cli,gtk} flameshot \
 	sddm i3-wm autotiling polybar picom feh rofi flameshot xclip numlockx
 
 	#openbox obconf tint2
@@ -202,10 +202,10 @@ arch_sway () { arch-chroot /mnt /bin/bash << EOF
 # Window Manager Packages
 pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk} ttf-fira{-sans,code-nerd} \
 	brightnessctl gammastep alacritty imv mpv wallutils dunst libnotify nwg-look \
-	mate-polkit atril pluma engrampa caja mugshot transmission-{cli,gtk} blueman \
-	sway waybar greetd{,-gtkgreet} cage rofi-wayland grim slurp wl-clipboard
+	mate-polkit atril pluma engrampa caja mugshot transmission-{cli,gtk} flameshot \
+	greetd nwg-hello sway autotiling waybar rofi-wayland wl-clipboard grim
 
-	#hyprland kvantum-qt5 qt5ct
+	#hyprland kvantum-qt5 qt5ct slurp
 
 # greetd
 sed -i 's|command = "agreety --cmd /bin/sh"|command = "sway -c /etc/nwg-hello/sway-config"|g' /etc/greetd/config.toml

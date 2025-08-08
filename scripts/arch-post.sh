@@ -18,7 +18,7 @@ yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload
 setup_wm () {
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm \
-	waypaper xidlehook betterlockscreen obmenu-generator wlogout
+	waypaper xidlehook betterlockscreen obmenu-generator wlogout overskride
   # ulauncher {zscroll,polybar-scripts}-git
 
 # BUILD: caffeinate
@@ -53,9 +53,9 @@ gsettings set org.mate.pluma toolbar-visible false
 gsettings set org.mate.pluma use-default-font false
 
 # file manager (caja)
-cp -rf /usr/share/applications/caja.desktop $HOME/.local/share/applications/
-sed -i 's/OnlyShowIn=MATE;//g' $HOME/.local/share/applications/caja.desktop
-sed -i 's/NoDisplay=true//g' $HOME/.local/share/applications/caja.desktop
+#cp -rf /usr/share/applications/caja.desktop $HOME/.local/share/applications/
+#sed -i 's/OnlyShowIn=MATE;//g' $HOME/.local/share/applications/caja.desktop
+#sed -i 's/NoDisplay=true//g' $HOME/.local/share/applications/caja.desktop
 
 # screenshot directory (flameshot)
 mkdir -p $HOME/Pictures/Screenshots
