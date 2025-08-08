@@ -55,7 +55,7 @@
         }
     },
     "sway/window": {
-        "format": "{app_id}"
+        "format": "{title}"
     },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"

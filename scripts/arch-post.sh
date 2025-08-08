@@ -25,7 +25,8 @@ yay -S --needed --noconfirm waypaper overskride wlogout alacritty-theme-git
 #cargo install --git https://github.com/rschmukler/caffeinate
 
 # theme 
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-edge.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-gruvbox.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/cursor-sainnhe-capitaine.sh)"
 
 # set fonts
 dconf write /org/gnome/desktop/interface/font-name "'Fira Sans 10'"
@@ -44,7 +45,7 @@ sed -i 's/JetBrains Mono/FiraCode/g' $HOME/.config/rofi/powermenu/type-1/shared/
 sed -i 's/font = Monospace 8/font = FiraCode Nerd Font 10/g' $HOME/.config/dunst/dunstrc
 
 # text editor (pluma)
-gsettings set org.mate.pluma color-scheme 'edge-aura'
+gsettings set org.mate.pluma color-scheme 'gruvbox-material-medium-dark'
 gsettings set org.mate.pluma display-line-numbers true
 gsettings set org.mate.pluma editor-font 'FiraCode Nerd Font 10'
 gsettings set org.mate.pluma highlight-current-line true
