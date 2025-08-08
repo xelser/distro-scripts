@@ -3,7 +3,8 @@ call plug#begin()
 Plug 'ap/vim-css-color'
 
 " Themes
-Plug 'sainnhe/edge'
+Plug 'sainnhe/gruvbox-material'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'vim-airline/vim-airline'
 
 " Settings
@@ -33,14 +34,23 @@ set ttyfast                 " Speed up scrolling in Vim
 
 " Important!!
 if has('termguicolors')
-  set termguicolors
+	set termguicolors
 endif
 
-" The configuration options should be placed before `colorscheme edge`.
-let g:edge_style = 'aura'
-let g:edge_better_performance = 1
-colorscheme edge
+" For dark version.
+set background=dark
+" For light version.
+"set background=light
 
-" Airline
-let g:airline_theme = 'edge'
+" Set contrast.
+" This configuration option should be placed before `colorscheme gruvbox-material`.
+" Available values: 'hard', 'medium'(default), 'soft'
+let g:gruvbox_material_background = 'medium'
 
+" For better performance
+let g:gruvbox_material_better_performance = 1
+
+" airline theme
+let g:airline_theme = 'gruvbox_material'
+
+colorscheme gruvbox-material

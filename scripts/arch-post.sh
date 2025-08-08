@@ -17,7 +17,7 @@ yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload
 
 setup_wm () {
 # INSTALL: AUR PACKAGES
-yay -S --needed --noconfirm waypaper overskride wlogout
+yay -S --needed --noconfirm waypaper overskride wlogout alacritty-theme-git
   # ulauncher {zscroll,polybar-scripts}-git xidlehook betterlockscreen obmenu-generator
 
 # BUILD: caffeinate

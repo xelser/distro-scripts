@@ -34,4 +34,4 @@ x = 5
 y = 5
 
 [general]
-import = ["/home/xelser/.config/alacritty/edge-aura.toml"]
+import = ["/usr/share/alacritty/themes/gruvbox_material_medium_dark.toml"]
