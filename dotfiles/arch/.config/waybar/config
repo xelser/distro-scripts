@@ -7,13 +7,15 @@
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
     "modules-left": [
+        "cpu",
+        "memory",
         "sway/workspaces",
+        "sway/window",
         "sway/mode",
-        "sway/scratchpad",
-        "custom/media"
+        "sway/scratchpad"
     ],
     "modules-center": [
-        "sway/window"
+        "custom/media"
     ],
     "modules-right": [
         "mpd",
@@ -21,18 +23,14 @@
         "pulseaudio",
         "network",
         "power-profiles-daemon",
-        "cpu",
-        "memory",
-        "temperature",
         "backlight",
-        "keyboard-state",
-        "sway/language",
-        "battery",
-        "battery#bat2",
         "clock",
-        "tray",
         "custom/power"
     ],
+
+    // Available Modules
+    // "keyboard-state", "sway/language", "battery", "battery#bat2", "temperature", "tray"
+
     // Modules configuration
     // "sway/workspaces": {
     //     "disable-scroll": true,
@@ -113,14 +111,17 @@
     "clock": {
         // "timezone": "America/New_York",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
+        "format": "󰥔 {:%I:%M %p}",
+        "format-alt": "󰃭 {:%Y-%m-%d}"
     },
     "cpu": {
-        "format": "{usage}% ",
-        "tooltip": false
+        "format": " {usage}%",
+        "tooltip-format": "{avg_frequency}"
+
     },
     "memory": {
-        "format": "{}% "
+        "format": " {}%",
+        "tooltip-format": "{used:0.1f} GiB / {total:0.1f} GiB"
     },
     "temperature": {
         // "thermal-zone": 2,
@@ -132,8 +133,8 @@
     },
     "backlight": {
         // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
+        "format": "{icon} {percent}%",
+        "format-icons": ["󱩎", "󱩏", "󱩐", "󱩑", "󱩒", "󱩓", "󱩔", "󱩕", "󱩖", "󰛨"]
     },
     "battery": {
         "states": {
@@ -166,20 +167,20 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-wifi": "  Wi-Fi: {ifname} ({signalStrength}%)",
+        "format-ethernet": " Eth: {ifname}",
+        "tooltip-format": " Down: {bandwidthDownBytes} |  Up: {bandwidthUpBytes}",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "format-alt": "  IP: {ipaddr}/{cidr}"
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
+        "format": "{icon} {volume}% {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
+        "format-source": "  {volume}%",
         "format-source-muted": "",
         "format-icons": {
             "headphone": "",
@@ -188,9 +189,9 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", "", ""]
+            "default": [" ", " ", " "]
         },
-        "on-click": "pavucontrol"
+        "on-click": "easyeffects"
     },
     "custom/media": {
         "format": "{icon} {text}",
