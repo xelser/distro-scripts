@@ -82,7 +82,7 @@ exec swayidle -w \
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec ~/.config/rofi/powermenu/type-1/powermenu.sh
+    bindsym $mod+Shift+e exec wlogout
 #
 # Moving around:
 #

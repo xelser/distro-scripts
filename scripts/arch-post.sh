@@ -18,7 +18,7 @@ yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload
 setup_wm () {
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm \
-	waypaper xidlehook betterlockscreen obmenu-generator
+	waypaper xidlehook betterlockscreen obmenu-generator wlogout
   # ulauncher {zscroll,polybar-scripts}-git
 
 # BUILD: caffeinate
