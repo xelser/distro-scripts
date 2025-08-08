@@ -40,3 +40,6 @@ ssh -T git@github.com
 
 echo "🎉 Setup complete! You can now use git over SSH."
 
+########
+
+cd $HOME/Documents && git clone git@github.com:xelser/distro-scripts
