@@ -227,6 +227,7 @@ default_border none
 gaps inner 10
 
 # Autostart (Global)
+exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
 exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id /usr/lib/xfce-polkit/xfce-polkit
 exec --no-startup-id waypaper --restore
@@ -234,11 +235,11 @@ exec --no-startup-id pcmanfm -d
 exec --no-startup-id dunst
 
 # Autostart (for Wayland)
-exec --no-startup-id sh $HOME/.config/waybar/launch.sh
+exec --no-startup-id bash $HOME/.config/waybar/launch.sh
 #exec --no-startup-id sh $HOME/.config/autostart/wayland_xset_led.sh
 
 # Autostart (for sway)
-exec --no-startup-id sh $HOME/.config/autostart/sway-gtk.sh
+exec --no-startup-id bash $HOME/.config/autostart/sway-gtk.sh
 exec_always --no-startup-id autotiling
 
 # Screenshot (flameshot)
@@ -247,6 +248,6 @@ bindsym Print exec flameshot full --path /home/xelser/Pictures/Screenshots/
 bindsym Shift+Print exec flameshot gui --path /home/xelser/Pictures/Screenshots/
 
 # Night light (gammastep)
-exec --no-startup-id sh $HOME/.config/gammastep/launch.sh
-bindsym $mod+o exec sh $HOME/.config/gammastep/toggle.sh
+exec --no-startup-id bash $HOME/.config/gammastep/launch.sh
+bindsym $mod+o exec bash $HOME/.config/gammastep/toggle.sh
 

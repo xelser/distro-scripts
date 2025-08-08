@@ -235,6 +235,9 @@ save_file /.config/qBittorrent/ qBittorrent.conf
 # Inkscape
 save_file /.config/inkscape/ preferences.xml
 
+# Brave Browser
+save_file /.config/ brave-flags.conf
+
 # LibreOffice
 save_file /.config/libreoffice/4/user/ registrymodifications.xcu
 
