@@ -215,6 +215,9 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 bindsym XF86Search exec $menu
 
+# NumLock
+input type:keyboard xkb_numlock enabled
+
 # TouchPad
 input type:touchpad {
     tap enabled

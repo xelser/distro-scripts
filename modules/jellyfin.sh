@@ -77,11 +77,7 @@ install_jellyfin() {
         sudo apt install -y jellyfin-server jellyfin-ffmpeg7
 
     elif [[ "$ID" == "arch" ]]; then
-        if ! command -v yay &> /dev/null; then
-            echo "[✗] 'yay' AUR helper not found. Please install it first."
-            exit 1
-        fi
-        yay -S --noconfirm jellyfin jellyfin-ffmpeg
+        sudo pacman -S --noconfirm jellyfin-server jellyfin-ffmpeg vpl-gpu-rt
 
     elif [[ "$ID" == "fedora" ]]; then
         sudo tee /etc/yum.repos.d/jellyfin.repo > /dev/null <<EOF
