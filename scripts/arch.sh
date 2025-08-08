@@ -203,7 +203,7 @@ arch_sway () { arch-chroot /mnt /bin/bash << EOF
 pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk} ttf-fira{-sans,code-nerd} \
 	brightnessctl gammastep alacritty imv mpv wallutils dunst libnotify nwg-look \
 	mate-polkit atril pluma engrampa caja mugshot transmission-{cli,gtk} flameshot \
-	greetd nwg-hello sway autotiling waybar rofi-wayland wl-clipboard grim
+	greetd nwg-hello sway{,bg} waybar autotiling rofi-wayland wl-clipboard grim
 
 	#hyprland kvantum-qt5 qt5ct slurp
 

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+git config --global user.email "dkzenzuri@gmail.com"
+git config --global user.name "${USER}"
+
 # === CONFIGURATION ===
 GITHUB_DIR="/mnt/Home/Documents/Github"
 SSH_DIR="$HOME/.ssh"
@@ -36,10 +39,11 @@ fi
 
 # === STEP 4: Test SSH Connection to GitHub ===
 echo "🧪 Testing SSH connection to GitHub..."
+ssh-keyscan github.com >> "$SSH_DIR/known_hosts"
 ssh -T git@github.com
 
 echo "🎉 Setup complete! You can now use git over SSH."
 
 ########
 
-cd $HOME/Documents && git clone git@github.com:xelser/distro-scripts
+cd $HOME/Documents && git clone git@github.com:xelser/distro-scripts && rm $HOME/distro-scripts.sh
