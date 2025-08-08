@@ -15,20 +15,18 @@
         "sway/scratchpad"
     ],
     "modules-center": [
-        "custom/media"
     ],
     "modules-right": [
-        "idle_inhibitor",
         "pulseaudio",
         "network",
         "backlight",
-        "clock",
-        "custom/power"
+        "clock"
     ],
 
     // Available Modules
     // "keyboard-state", "sway/language", "battery", "battery#bat2", "temperature", 
-    // "tray", "power-profiles-daemon", "mpd"
+    // "tray", "power-profiles-daemon", "mpd", "idle_inhibitor", "custom/media"
+    // "custom/power", 
 
     // Modules configuration
     // "sway/workspaces": {
