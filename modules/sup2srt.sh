@@ -12,7 +12,11 @@ trap 'cd "$HOME" && rm -rf /tmp/sup2srt' EXIT
 
 echo "🔧 Detecting package manager to install dependencies..."
 
-# --- Distro-Agnostic Dependency Installation ---
+# --- Distro-Agnostic Dependency Installation & Tesseract Configuration ---
+
+# Define TESSDATA directories and prefix based on the package manager
+TESSDATA_DIR=""
+TESSDATA_PREFIX=""
 
 # Check for apt (Debian/Ubuntu)
 if command -v apt &> /dev/null; then
@@ -21,6 +25,8 @@ if command -v apt &> /dev/null; then
     sudo apt install -y build-essential git wget cmake \
         libtiff-dev libleptonica-dev libtesseract-dev \
         libavcodec-dev libavformat-dev libavutil-dev tesseract-ocr
+    TESSDATA_DIR="/usr/share/tesseract-ocr/5/tessdata"
+    TESSDATA_PREFIX="/usr/share/tesseract-ocr/5/"
 
 # Check for yay (Arch-based distros)
 elif command -v yay &> /dev/null; then
@@ -30,6 +36,8 @@ elif command -v yay &> /dev/null; then
         libtiff leptonica tesseract ffmpeg
     # Install cmake as a build dependency.
     yay -S --needed --noconfirm --asdeps cmake
+    TESSDATA_DIR="/usr/share/tessdata"
+    TESSDATA_PREFIX="/usr/share/"
     
 # Check for pacman (Arch Linux)
 elif command -v pacman &> /dev/null; then
@@ -39,6 +47,8 @@ elif command -v pacman &> /dev/null; then
         libtiff leptonica tesseract ffmpeg
     # Install cmake as a build dependency.
     sudo pacman -S --needed --noconfirm --asdeps cmake
+    TESSDATA_DIR="/usr/share/tessdata"
+    TESSDATA_PREFIX="/usr/share/"
 
 # Fallback for unsupported systems
 else
@@ -49,7 +59,6 @@ fi
 
 # --- Tesseract 'best' Model Installation (Distro-Agnostic) ---
 echo "📦 Swapping in Tesseract 'best' English model..."
-TESSDATA_DIR="/usr/share/tesseract-ocr/5/tessdata"
 BEST_MODEL_URL="https://raw.githubusercontent.com/tesseract-ocr/tessdata_best/main/eng.traineddata"
 TARGET_MODEL="$TESSDATA_DIR/eng.traineddata"
 BACKUP_MODEL="$TESSDATA_DIR/eng.traineddata.bak"
@@ -70,6 +79,9 @@ sudo wget -O "$TARGET_MODEL" "$BEST_MODEL_URL"
 # --- Main Sup2srt Build Logic (Distro-Agnostic) ---
 echo "📁 Cloning sup2srt repository to /tmp..."
 git clone https://github.com/retrontology/sup2srt.git /tmp/sup2srt
+
+# Set the TESSDATA_PREFIX environment variable so Tesseract can find the data
+export TESSDATA_PREFIX
 
 echo "🏗️ Creating build directory..."
 cd /tmp/sup2srt
