@@ -168,16 +168,16 @@
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "  WiFi: {ifname} ({signalStrength}%)",
-        "format-ethernet": " Ethernet: {ifname}",
-        "tooltip-format": " Down: {bandwidthDownBytes} |  Up: {bandwidthUpBytes}",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        "format-alt": "  IP: {ipaddr}/{cidr}"
+        "format-wifi": "  Wi-Fi",
+        "format-ethernet": "  Ethernet",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+        "format-disconnected": "󰈂 󰖪  Disconnected",
+        "tooltip-format-disconnected": "󱘖 Please connect to available networks!",
+        "format-alt": " Down: {bandwidthDownBytes} |  Up: {bandwidthUpBytes}"
     },
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{icon} {volume}%",
+        "scroll-step": 5, // %, can be a float
+        "format": "{icon}{volume}%",
         "format-bluetooth": "{icon} {volume}%",
         "format-bluetooth-muted": " {icon}",
         "format-muted": " {format_source}",
@@ -198,11 +198,7 @@
         "format": " {status}",
         "format-connected": " {device_alias}",
         "format-connected-battery": " {device_alias} {device_battery_percentage}%",
-        // "format-device-preference": [ "device1", "device2" ], // preference list deciding the displayed device
-        "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
-        "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
-        "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-        "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+        "on-click": "overskride"
     },
     "custom/media": {
         "format": "{icon} {text}",

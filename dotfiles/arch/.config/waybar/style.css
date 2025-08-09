@@ -1,15 +1,18 @@
 @import "edge-aura.css";
 
 * {
-    /* `otf-font-awesome` is required to be installed for icons */
+    border: none;
+    border-radius: 0;
     font-family: FiraCode Nerd Font;
+    font-size: 14px;
     font-weight: bold;
-    color: @fg0;
+    min-height: 0;
 }
 
 window#waybar {
-    background-color: @bg_dim;
-    /*border-bottom: 3px solid @sky;*/
+    background: @theme_bg_color;
+    color: @theme_text_color;
+    border-bottom: 1px solid @unfocused_borders;
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -26,15 +29,6 @@ window#waybar.solo {
     background-color: #FFFFFF;
 }
 */
-
-window#waybar.termite {
-    background-color: #3F3F3F;
-}
-
-window#waybar.chromium {
-    background-color: #000000;
-    border: none;
-}
 
 button {
     /* Use box-shadow instead of border so the text isn't offset */
@@ -137,9 +131,7 @@ label:focus {
     background-color: #964B00;
 }
 
-#backlight {
-    background-color: #90b1b1;
-}
+#backlight
 
 #wireplumber {
     background-color: #fff0f5;
