@@ -254,4 +254,3 @@ bindsym Shift+Print exec flameshot gui --path /home/xelser/Pictures/Screenshots/
 # Night light (gammastep)
 exec --no-startup-id bash $HOME/.config/gammastep/launch.sh
 bindsym $mod+o exec bash $HOME/.config/gammastep/toggle.sh
-

@@ -27,8 +27,8 @@ fi
 
 # GTK 4
 if [[ ! ${wm_de} == "gnome" ]]; then
-	rm -rf 					   												 "$HOME/.config/gtk-4.0/{assets,gtk.css,gtk-dark.css}"
-	mkdir -p 				   												 "$HOME/.config/gtk-4.0"
+	rm -rf                                     "$HOME/.config/gtk-4.0/{assets,gtk.css,gtk-dark.css}"
+	mkdir -p                                   "$HOME/.config/gtk-4.0"
 	ln -sf "${theme_dir}/gtk-4.0/assets"       "$HOME/.config/gtk-4.0/"
 	ln -sf "${theme_dir}/gtk-4.0/gtk.css"      "$HOME/.config/gtk-4.0/gtk.css"
 	ln -sf "${theme_dir}/gtk-4.0/gtk-dark.css" "$HOME/.config/gtk-4.0/gtk-dark.css"
@@ -58,8 +58,11 @@ if [ -f /usr/bin/kvantummanager ]; then
 fi
 
 # Cursor
-mkdir -p $HOME/.icons/default && echo -e "[Icon Theme]\nInherits=${cursor_theme}" > $HOME/.icons/default/index.theme
-echo -e "[Icon Theme]\nInherits=${cursor_theme}" | sudo tee -a /usr/share/icons/default/index.theme 1> /dev/null
+sudo rm -rf /usr/share/icons/default
+sudo ln -sf "/usr/share/icons/${cursor_theme}" /usr/share/icons/default
+
+#mkdir -p $HOME/.icons/default && echo -e "[Icon Theme]\nInherits=${cursor_theme}" > $HOME/.icons/default/index.theme
+#echo -e "[Icon Theme]\nInherits=${cursor_theme}" | sudo tee -a /usr/share/icons/default/index.theme 1> /dev/null
 
 flatpak override --user --filesystem=/home/$USER/.icons/:ro
 flatpak override --user --filesystem=/usr/share/icons/:ro
