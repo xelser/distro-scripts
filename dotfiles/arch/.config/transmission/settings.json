@@ -83,7 +83,7 @@
     "show-backup-trackers": false,
     "show-extra-peer-details": false,
     "show-filterbar": true,
-    "show-notification-area-icon": false,
+    "show-notification-area-icon": true,
     "show-options-window": true,
     "show-statusbar": true,
     "show-toolbar": false,
