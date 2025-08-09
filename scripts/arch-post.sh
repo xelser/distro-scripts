@@ -52,6 +52,11 @@ gsettings set org.mate.pluma highlight-current-line true
 gsettings set org.mate.pluma toolbar-visible false
 gsettings set org.mate.pluma use-default-font false
 
+# file manager (caja)
+gsettings set org.mate.caja.icon-view default-use-tighter-layout 'true'
+gsettings set org.mate.caja.window-state start-with-toolbar 'false'
+gsettings set org.mate.caja.preferences enable-delete 'true'
+
 # screenshot directory (flameshot)
 mkdir -p $HOME/Pictures/Screenshots
 
