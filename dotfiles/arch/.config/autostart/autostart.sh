@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Theming
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/refs/heads/main/modules/theming.sh)"
+
 # 🖥️ Run xrandr only if in X11
 if [ "$XDG_SESSION_TYPE" = "x11" ]; then
     xrandr --output eDP-1 --primary --pos 1366x0 \

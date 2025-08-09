@@ -23,7 +23,7 @@
     "dht-enabled": true,
     "download-dir": "/home/xelser/Downloads",
     "download-queue-enabled": true,
-    "download-queue-size": 5,
+    "download-queue-size": 10,
     "encryption": 1,
     "idle-seeding-limit": 30,
     "idle-seeding-limit-enabled": false,
