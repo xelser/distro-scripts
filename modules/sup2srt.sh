@@ -6,6 +6,10 @@
 
 set -e
 
+# A trap to clean up the temporary directory even if the script fails
+# The 'cd' command in the trap ensures it doesn't try to remove a directory that doesn't exist
+trap 'cd "$HOME" && rm -rf /tmp/sup2srt' EXIT
+
 echo "🔧 Detecting package manager to install dependencies..."
 
 # --- Distro-Agnostic Dependency Installation ---
@@ -64,11 +68,11 @@ echo "⬇️ Downloading 'best' model..."
 sudo wget -O "$TARGET_MODEL" "$BEST_MODEL_URL"
 
 # --- Main Sup2srt Build Logic (Distro-Agnostic) ---
-echo "📁 Cloning sup2srt repository..."
-git clone https://github.com/retrontology/sup2srt.git
-cd sup2srt
+echo "📁 Cloning sup2srt repository to /tmp..."
+git clone https://github.com/retrontology/sup2srt.git /tmp/sup2srt
 
 echo "🏗️ Creating build directory..."
+cd /tmp/sup2srt
 mkdir -p build
 cd build
 
