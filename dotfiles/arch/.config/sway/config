@@ -36,9 +36,8 @@ set $menu ~/.config/rofi/launchers/type-4/launcher.sh
 # Example configuration:
 #
 exec swayidle -w \
-         timeout 300 'swaylock -f --font Inter --font-size 14 -i /media/Media/Pictures/evening-sky.png' \
-         timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
-         before-sleep 'swaylock -f --font Inter --font-size 14 -i /media/Media/Pictures/evening-sky.png'
+         timeout 600 'swaymsg "output * dpms off"' \
+         resume 'swaymsg "output * dpms on"'
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
