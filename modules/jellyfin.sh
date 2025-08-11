@@ -77,7 +77,7 @@ install_jellyfin() {
         sudo apt install -y jellyfin-server jellyfin-ffmpeg7
 
     elif [[ "$ID" == "arch" ]]; then
-        sudo pacman -S --noconfirm jellyfin-{server,ffmpeg,web} vpl-gpu-rt libva-utils
+        sudo pacman -S --noconfirm jellyfin-{server,ffmpeg,web}
 
     elif [[ "$ID" == "fedora" ]]; then
         sudo tee /etc/yum.repos.d/jellyfin.repo > /dev/null <<EOF
