@@ -12,11 +12,3 @@ else
     echo "⚠️ Skipping xrandr — not in X11 session."
 fi
 
-# SwayFX Settings
-if pgrep swayfx >/dev/null; then
-  echo "SwayFX detected — applying visual tweaks"
-  swaymsg 'blur enable'
-  swaymsg 'blur_radius 8'
-  swaymsg 'corner_radius 10'
-fi
-
