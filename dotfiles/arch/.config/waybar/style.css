@@ -1,24 +1,26 @@
-@import "edge-aura.css";
+@import "gruvbox-material.css";
 
 * {
     border: none;
     border-radius: 0;
     font-family: FiraCode Nerd Font;
-    font-size: 14px;
+    /* font-size: 14px; */
     font-weight: bold;
     min-height: 0;
+    padding: 0 5px;
 }
 
 window#waybar {
-    background: @theme_bg_color;
-    color: @theme_text_color;
-    border-bottom: 1px solid @unfocused_borders;
-    transition-property: background-color;
-    transition-duration: .5s;
+    background: @bg_dim;
+    color: @fg0;
 }
 
-window#waybar.hidden {
-    opacity: 0.2;
+tooltip {
+    background: @bg0;
+}
+
+tooltip label {
+    color: @fg1;
 }
 
 /*
@@ -27,6 +29,9 @@ window#waybar.empty {
 }
 window#waybar.solo {
     background-color: #FFFFFF;
+}
+window#waybar.hidden {
+    opacity: 0.2;
 }
 */
 
@@ -44,7 +49,6 @@ button:hover {
 }
 
 #workspaces button {
-    padding: 0 5px;
     background-color: transparent;
 }
 
@@ -66,15 +70,38 @@ button:hover {
     border-bottom: 3px solid #ffffff;
 }
 
-#clock,
+/* xelser */
+#cpu {
+    color: @orange;
+}
+
+#memory {
+    color: @aqua;
+}
+
+#bluetooth {
+    color: @blue;
+}
+
+#pulseaudio {
+    color: @green;
+}
+
+#backlight {
+    color: @yellow;
+}
+
+#network {
+    color: @purple;
+}
+
+#clock {
+    color: @red;
+}
+
 #battery,
-#cpu,
-#memory,
 #disk,
 #temperature,
-#backlight,
-#network,
-#pulseaudio,
 #wireplumber,
 #custom-media,
 #tray,
@@ -86,9 +113,7 @@ button:hover {
 }
 
 #window,
-#workspaces {
-    margin: 0 4px;
-}
+#workspaces,
 
 /* If workspaces is the leftmost module, omit left margin */
 .modules-left > widget:first-child > #workspaces {
@@ -130,8 +155,6 @@ label:focus {
 #disk {
     background-color: #964B00;
 }
-
-#backlight
 
 #wireplumber {
     background-color: #fff0f5;

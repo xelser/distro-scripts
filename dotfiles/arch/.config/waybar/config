@@ -19,8 +19,8 @@
     "modules-right": [
         "bluetooth",
         "pulseaudio",
-        "network",
         "backlight",
+        "network",
         "clock"
     ],
 
@@ -46,15 +46,7 @@
     //         "default": ""
     //     }
     // },
-    "keyboard-state": {
-        "numlock": true,
-        "capslock": true,
-        "format": "{name} {icon}",
-        "format-icons": {
-            "locked": "",
-            "unlocked": ""
-        }
-    },
+
     "sway/window": {
         "format": "{title}"
     },
@@ -68,6 +60,70 @@
         "tooltip": true,
         "tooltip-format": "{app}: {title}"
     },
+    "pulseaudio": {
+        "scroll-step": 5, // %, can be a float
+        "format": "{icon}{volume}%",
+        "format-bluetooth": "{icon} {volume}%",
+        "format-bluetooth-muted": " {icon}",
+        "format-muted": " {format_source}",
+        "format-source": "  {volume}%",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": " ",
+            "hands-free": "󱡏 ",
+            "headset": " ",
+            "phone": " ",
+            "portable": " ",
+            "car": " ",
+            "default": [" ", " ", " "]
+        },
+        "on-click": "pavucontrol"
+    },
+    "bluetooth": {
+        "format": " {status}",
+        "format-connected": " {device_alias}",
+        "format-connected-battery": " {device_alias} 󰁹 {device_battery_percentage}%",
+        "on-click": "overskride"
+    },
+    "network": {
+
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "  Wi-Fi",
+        "format-ethernet": "  Ethernet",
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+        "format-disconnected": "󱘖 Disconnected",
+        "tooltip-format-disconnected": "󰇧 Please connect to available networks!",
+        "format-alt": " Down: {bandwidthDownBytes} |  Up: {bandwidthUpBytes}"
+    },
+
+    "clock": {
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format": "󰥔 {:%I:%M %p}",
+        "format-alt": "󰃭 {:%Y-%m-%d}"
+    },
+    "cpu": {
+        "format": "  {usage}%",
+        "tooltip-format": "{avg_frequency}"
+
+    },
+    "memory": {
+        "format": "  {}%",
+        "tooltip-format": "{used:0.1f} GiB / {total:0.1f} GiB"
+    },
+
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{icon} {percent}%",
+        "format-icons": ["󱩎", "󱩏", "󱩐", "󱩑", "󱩒", "󱩓", "󱩔", "󱩕", "󱩖", "󰛨"]
+    },
+
+
+
+
+
+
+
     "mpd": {
         "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
         "format-disconnected": "Disconnected ",
@@ -109,21 +165,6 @@
         //   "TelegramDesktop": "$HOME/.local/share/icons/hicolor/16x16/apps/telegram.png"
         // }
     },
-    "clock": {
-        // "timezone": "America/New_York",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format": "󰥔 {:%I:%M %p}",
-        "format-alt": "󰃭 {:%Y-%m-%d}"
-    },
-    "cpu": {
-        "format": " {usage}%",
-        "tooltip-format": "{avg_frequency}"
-
-    },
-    "memory": {
-        "format": " {}%",
-        "tooltip-format": "{used:0.1f} GiB / {total:0.1f} GiB"
-    },
     "temperature": {
         // "thermal-zone": 2,
         // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
@@ -131,11 +172,6 @@
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
         "format-icons": ["", "", ""]
-    },
-    "backlight": {
-        // "device": "acpi_video1",
-        "format": "{icon} {percent}%",
-        "format-icons": ["󱩎", "󱩏", "󱩐", "󱩑", "󱩒", "󱩓", "󱩔", "󱩕", "󱩖", "󰛨"]
     },
     "battery": {
         "states": {
@@ -166,39 +202,14 @@
         "power-saver": ""
       }
     },
-    "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "  Wi-Fi",
-        "format-ethernet": "  Ethernet",
-        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
-        "format-disconnected": "󰈂 󰖪  Disconnected",
-        "tooltip-format-disconnected": "󱘖 Please connect to available networks!",
-        "format-alt": " Down: {bandwidthDownBytes} |  Up: {bandwidthUpBytes}"
-    },
-    "pulseaudio": {
-        "scroll-step": 5, // %, can be a float
-        "format": "{icon}{volume}%",
-        "format-bluetooth": "{icon} {volume}%",
-        "format-bluetooth-muted": " {icon}",
-        "format-muted": " {format_source}",
-        "format-source": "  {volume}%",
-        "format-source-muted": "",
+    "keyboard-state": {
+        "numlock": true,
+        "capslock": true,
+        "format": "{name} {icon}",
         "format-icons": {
-            "headphone": " ",
-            "hands-free": "󱡏 ",
-            "headset": " ",
-            "phone": " ",
-            "portable": " ",
-            "car": " ",
-            "default": [" ", " ", " "]
-        },
-        "on-click": "pavucontrol"
-    },
-    "bluetooth": {
-        "format": " {status}",
-        "format-connected": " {device_alias}",
-        "format-connected-battery": " {device_alias} {device_battery_percentage}%",
-        "on-click": "overskride"
+            "locked": "",
+            "unlocked": ""
+        }
     },
     "custom/media": {
         "format": "{icon} {text}",
