@@ -17,8 +17,16 @@ yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload
 
 setup_wm () {
 # INSTALL: AUR PACKAGES
-yay -S --needed --noconfirm waypaper overskride wlogout alacritty-theme-git
-  # ulauncher {zscroll,polybar-scripts}-git xidlehook betterlockscreen obmenu-generator
+yay -S --needed --noconfirm waypaper overskride alacritty-theme-git
+  # ulauncher {zscroll,polybar-scripts}-git
+
+	if [[ ${wm_de} == "sway" ]]; then
+		yay -S --needed --noconfirm swayfx wlogout
+	elif [[ ${wm_de} == "i3" ]]; then
+		yay -S --needed --noconfirm xidlehook betterlockscreen
+	elif [[ ${wm_de} == "openbox" ]]; then
+		yay -S --needed --noconfirm obmenu-generator
+	fi
 
 # BUILD: caffeinate
 #sudo pacman -S --needed --noconfirm rustup && rustup default stable

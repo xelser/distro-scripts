@@ -178,24 +178,6 @@ grub-install --target=${grub_target}
 EOF
 }
 
-arch_i3 () { arch-chroot /mnt /bin/bash << EOF
-
-# Window Manager Packages
-pacman -S --needed --noconfirm xdg-desktop-portal-gtk ttf-fira{-sans,code-nerd} \
-	brightnessctl gammastep alacritty imv mpv wallutils dunst libnotify nwg-look pavucontrol \
-	mate-polkit atril pluma engrampa caja mugshot transmission-gtk flameshot \
-	sddm i3-wm autotiling polybar picom feh rofi flameshot xclip numlockx
-
-	#openbox obconf tint2
-
-# sddm
-echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
-echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
-systemctl enable sddm
-
-EOF
-}
-
 arch_sway () { arch-chroot /mnt /bin/bash << EOF
 
 # Window Manager Packages
@@ -210,6 +192,24 @@ pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk} ttf-fira{-sans,code-
 sed -i 's|command = "agreety --cmd /bin/sh"|command = "sway -c /etc/nwg-hello/sway-config"|g' /etc/greetd/config.toml
 echo -e "\n[initial_session]\ncommand = \"sway\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
 systemctl enable greetd
+
+EOF
+}
+
+arch_i3 () { arch-chroot /mnt /bin/bash << EOF
+
+# Window Manager Packages
+pacman -S --needed --noconfirm xdg-desktop-portal-gtk ttf-fira{-sans,code-nerd} \
+	brightnessctl gammastep alacritty imv mpv wallutils dunst libnotify nwg-look pavucontrol \
+	mate-polkit atril pluma engrampa caja mugshot transmission-gtk flameshot \
+	sddm i3-wm autotiling polybar picom feh rofi flameshot xclip numlockx
+
+	#openbox obconf tint2
+
+# sddm
+echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
+echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
+systemctl enable sddm
 
 EOF
 }
