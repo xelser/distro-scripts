@@ -14,8 +14,8 @@ if check_swayfx; then
     # Global settings for all windows
     swaymsg 'corner_radius 10'
     swaymsg 'shadows enable'
-    swaymsg 'blur enable'
-    swaymsg 'default_dim_inactive 0.4'
+    #swaymsg 'blur enable'
+    #swaymsg 'default_dim_inactive 0.4'
 
     # Configuration for waybar
     swaymsg 'layer_effects "waybar" blur enable'
@@ -25,7 +25,6 @@ if check_swayfx; then
 
     # Configuration for specific apps
     swaymsg 'for_window [app_id="Alacritty"] blur enable'
-    swaymsg 'for_window [app_id="nvim"] blur enable'
 else
     notify-send "Sway" "Vanilla Sway detected. Skipping aesthetic settings."
 fi
