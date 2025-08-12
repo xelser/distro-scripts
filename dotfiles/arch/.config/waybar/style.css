@@ -72,11 +72,11 @@ button:hover {
 
 /* xelser */
 #cpu {
-    color: @orange;
+    color: @aqua;
 }
 
 #memory {
-    color: @aqua;
+    color: @orange;
 }
 
 #bluetooth {

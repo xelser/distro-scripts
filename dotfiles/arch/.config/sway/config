@@ -232,8 +232,6 @@ gaps inner 10
 exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
 exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 exec --no-startup-id easyeffects --gapplication-service
-exec --no-startup-id transmission-gtk --minimized
-exec --no-startup-id caja --no-default-window
 exec --no-startup-id waypaper --restore
 exec --no-startup-id dunst
 
@@ -254,3 +252,7 @@ bindsym Shift+Print exec flameshot gui --path /home/xelser/Pictures/Screenshots/
 # Night light (gammastep)
 exec --no-startup-id bash $HOME/.config/gammastep/launch.sh
 bindsym $mod+o exec bash $HOME/.config/gammastep/toggle.sh
+
+# Apps
+exec --no-startup-id transmission-gtk --minimized
+exec --no-startup-id caja --no-default-window

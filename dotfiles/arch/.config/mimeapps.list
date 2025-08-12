@@ -11,7 +11,13 @@ x-scheme-handler/about=brave-browser.desktop
 x-scheme-handler/unknown=brave-browser.desktop
 video/x-matroska=mpv.desktop
 audio/mpeg=mpv.desktop
-x-scheme-handler/mailto=brave-browser.desktop
+x-scheme-handler/mailto=userapp-Thunderbird-MJ37A3.desktop
+message/rfc822=userapp-Thunderbird-MJ37A3.desktop
+x-scheme-handler/mid=userapp-Thunderbird-MJ37A3.desktop
+x-scheme-handler/webcal=userapp-Thunderbird-FVG4A3.desktop
+text/calendar=userapp-Thunderbird-FVG4A3.desktop
+application/x-extension-ics=userapp-Thunderbird-FVG4A3.desktop
+x-scheme-handler/webcals=userapp-Thunderbird-FVG4A3.desktop
 
 [Added Associations]
 application/x-shellscript=geany.desktop;org.xfce.mousepad.desktop;nvim.desktop;leafpad.desktop;pluma.desktop;
@@ -21,3 +27,7 @@ text/markdown=org.gnome.gedit.desktop;pluma.desktop;
 text/plain=org.gnome.gedit.desktop;pluma.desktop;
 video/x-matroska=mpv.desktop;
 audio/mpeg=mpv.desktop;
+x-scheme-handler/mailto=userapp-Thunderbird-MJ37A3.desktop;
+x-scheme-handler/mid=userapp-Thunderbird-MJ37A3.desktop;
+x-scheme-handler/webcal=userapp-Thunderbird-FVG4A3.desktop;
+x-scheme-handler/webcals=userapp-Thunderbird-FVG4A3.desktop;
