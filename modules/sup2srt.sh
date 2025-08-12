@@ -24,7 +24,7 @@ if command -v apt &> /dev/null; then
     sudo apt update
     sudo apt install -y build-essential git wget cmake \
         libtiff-dev libleptonica-dev libtesseract-dev \
-        libavcodec-dev libavformat-dev libavutil-dev tesseract-ocr
+        libavcodec-dev libavformat-dev libavutil-dev tesseract-ocr tesseract-ocr-eng
     TESSDATA_DIR="/usr/share/tesseract-ocr/5/tessdata"
     TESSDATA_PREFIX="/usr/share/tesseract-ocr/5/"
 
@@ -33,7 +33,7 @@ elif command -v yay &> /dev/null; then
     echo "📦 Detected yay. Installing dependencies..."
     # Install foundational and runtime dependencies normally.
     yay -S --needed --noconfirm git base-devel wget \
-        libtiff leptonica tesseract ffmpeg
+        libtiff leptonica tesseract tesseract-data-eng ffmpeg
     # Install cmake as a build dependency.
     yay -S --needed --noconfirm --asdeps cmake
     TESSDATA_DIR="/usr/share/tessdata"
@@ -44,7 +44,7 @@ elif command -v pacman &> /dev/null; then
     echo "📦 Detected pacman. Installing dependencies..."
     # Install foundational and runtime dependencies normally.
     sudo pacman -S --needed --noconfirm git base-devel wget \
-        libtiff leptonica tesseract ffmpeg
+        libtiff leptonica tesseract tesseract-data-eng ffmpeg
     # Install cmake as a build dependency.
     sudo pacman -S --needed --noconfirm --asdeps cmake
     TESSDATA_DIR="/usr/share/tessdata"
