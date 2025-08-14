@@ -26,15 +26,15 @@ sudo timedatectl set-ntp true
 # Essential Packages
 if [ -f /usr/bin/apt ]; then sudo apt install --yes \
 	flatpak fastfetch htop inxi zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
-	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf wget curl git gh openssh-client \
+	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf wget curl git gh openssh-client linux-cpupower \
 	intel-media-va-driver i965-va-driver
 elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
 	flatpak fastfetch htop inxi zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
-	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines wget curl git github-cli openssh \
+	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines wget curl git github-cli openssh cpupower \
 	libva-intel-driver intel-media-driver
 elif [ -f /usr/bin/dnf5 ]; then sudo dnf5 install --assumeyes --best --allowerasing \
 	flatpak fastfetch htop inxi zip un{zip,rar} tar ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
-	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines wget curl git gh openssh \
+	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines wget curl git gh openssh kernel-tools \
 	libva-intel-driver intel-media-driver
 fi
 
@@ -49,6 +49,10 @@ if [[ $USER == "xelser" ]]; then
 	[ ! -d $HOME/Pictures/"xelser's Pictures" ]   && ln -sf /mnt/Home/Pictures  $HOME/Pictures/"xelser's Pictures"
 	[ ! -d $HOME/Videos/"xelser's Videos" ]       && ln -sf /mnt/Home/Videos    $HOME/Videos/"xelser's Videos"
 fi
+
+# CPU
+sudo cpupower frequency-set -g performance
+sudo systemctl enable --now cpupower
 
 # Audio
 [ -f /usr/bin/easyeffects ] && [ -f $HOME/.config/easyeffects/output/default.json ] && easyeffects -l default
@@ -94,9 +98,9 @@ for app in "${name[@]}"; do
 done
 
 # daemons
+[ -f /usr/bin/cpupower ] && sudo systemctl enable --now cpupower
 [ -f /usr/bin/ulauncher ] && systemctl enable --user ulauncher
 [ -f /usr/bin/syncthing ] && systemctl enable --user syncthing
-[ -f /usr/bin/transmission-daemon ] && transmission-daemon
 
 ################################### THEMES ###################################
 
