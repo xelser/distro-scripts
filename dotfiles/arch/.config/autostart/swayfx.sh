@@ -20,11 +20,12 @@ if check_swayfx; then
     # Configuration for waybar
     swaymsg 'layer_effects "waybar" blur enable'
     swaymsg 'layer_effects "waybar" blur_xray enable'
-    swaymsg 'layer_effects "waybar" blur_ignore_transparent enable'
+    #swaymsg 'layer_effects "waybar" blur_ignore_transparent enable'
     swaymsg 'layer_effects "waybar" shadows enable'
 
     # Configuration for specific apps
     swaymsg 'for_window [app_id="Alacritty"] blur enable'
+    swaymsg 'for_window [app_id="Alacritty"] shadows enable'
 else
     notify-send "Sway" "Vanilla Sway detected. Skipping aesthetic settings."
 fi
