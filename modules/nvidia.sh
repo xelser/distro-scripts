@@ -5,7 +5,7 @@ install_nvidia () {
 	if [[ ${distro_id} == "fedora" ]]; then
 		sudo dnf install --assumeyes --allowerasing kernel akmod-nvidia && sleep 300
 	elif [[ ${distro_id} == "arch" ]] || [[ ${distro_id} == "endeavouros" ]]; then
-		yay -S --needed --noconfirm nvidia lib32-nvidia-utils nvidia-pacman-hook
+		yay -S --needed --noconfirm nvidia lib32-nvidia-utils #nvidia-pacman-hook
 	fi
 }
 
@@ -16,7 +16,7 @@ nvidia_prime () {
 	elif [[ ${distro_id} == "manjaro" ]]; then
 		sudo pacman -S --needed --noconfirm envycontrol
 	elif [[ ${distro_id} == "arch" ]] || [[ ${distro_id} == "endeavouros" ]]; then
-		yay -S --needed --noconfirm envycontrol
+		yay -S --needed --noconfirm envycontrol nvidia-prime
 	elif [[ ${distro_id} == "ubuntu" ]] || [[ ${distro_id} == "linuxmint" ]]; then
 		# Remove nvidia-prime to avoid conflicts
 		sudo nala remove --purge --assume-yes nvidia-prime

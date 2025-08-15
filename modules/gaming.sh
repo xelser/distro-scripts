@@ -4,12 +4,14 @@
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/lutris_wine_dep.sh)"
 
 # Install: Steam, Lutris, Gamemode & MangoHud
-[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm steam lutris libayatana-appindicator \
-	{lib32-,}gamemode {lib32-,}mangohud vulkan-tools mesa-demos
-[ -f /usr/bin/nala ] && sudo nala install --assume-yes steam lutris libayatana-appindicator3 \
-	gamemode{,:i386} mangohud vulkan-tools mesa-utils-bin
-[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes steam lutris libayatana-appindicator-gtk3 \
-	gamemode.{x86_64,i686} mangohud.{x86_64,i686} vulkan-tools mesa-demos
+[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm steam lutris {lib32-,}gamemode {lib32-,}mangohud \
+	gamescope libayatana-appindicator vulkan-tools mesa-demos
+		
+[ -f /usr/bin/apt ] && sudo apt install --yes steam lutris gamemode{,:i386} mangohud \
+	gamescope libayatana-appindicator3 vulkan-tools mesa-utils-bin
+	
+[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes steam lutris gamemode.{x86_64,i686} mangohud.{x86_64,i686} \
+	gamescope libayatana-appindicator-gtk3 vulkan-tools mesa-demos 
 
 ################################### FLATPAK ##################################
 
@@ -34,12 +36,3 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 # Gamemode
 sudo usermod -aG gamemode $(whoami)
 
-echo "
-################################## FINISHED ##################################
-"
-echo && read -p "Reboot? (Y/n): " end
-case $end in
-   n)	echo "Reboot Cancelled";;
-   *)	echo "Rebooting... "
-	sudo reboot;;
-esac
