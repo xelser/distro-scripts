@@ -21,7 +21,7 @@ yay -S --needed --noconfirm waypaper overskride alacritty-theme-git
   # ulauncher {zscroll,polybar-scripts}-git
 
 	if [[ ${wm_de} == "sway" ]]; then
-		yay -S --needed --noconfirm swayfx wlogout
+		yay -S --needed --noconfirm wlogout
 	elif [[ ${wm_de} == "i3" ]]; then
 		yay -S --needed --noconfirm xidlehook betterlockscreen
 	elif [[ ${wm_de} == "openbox" ]]; then
