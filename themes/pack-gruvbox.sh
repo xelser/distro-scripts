@@ -38,6 +38,11 @@ if [ -f /usr/bin/polybar ]; then
 	cp -rf /tmp/gruvbox-polybar/*.ini $HOME/.config/polybar/themes/
 fi
 
+if [ -f /usr/bin/waybar ]; then
+	cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-material-waybar && mkdir -p $HOME/.config/waybar/
+	cp -rf /tmp/gruvbox-material-waybar/*.css $HOME/.config/waybar/
+fi
+
 if [ -f /usr/bin/dunst ] && [ ! -f $HOME/.config/dunst/dunstrc ]; then
 	cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-dunst && mkdir -p $HOME/.config/dunst
 	cat $(find /etc/ -name "dunstrc" 2> /dev/null) > $HOME/.config/dunst/dunstrc

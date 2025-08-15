@@ -71,10 +71,10 @@ btrfs_setup () {
 }
 
 format_efi () {
-	echo && read -p "Format EFI Partition? (Y/n): " format_efi
+	echo && read -p "Format EFI Partition? (y/N): " format_efi
 	case $format_efi in
-	   n)   ;;
-	 *|Y)   mkfs.fat -F 32 /dev/${device}${efi};;
+	   y)   mkfs.fat -F 32 /dev/${device}${efi};;
+	 *|N)   ;;
 	esac
 	mkdir -p /mnt/boot/efi && mount /dev/${device}${efi} /mnt/boot/efi
 }
