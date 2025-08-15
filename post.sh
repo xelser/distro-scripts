@@ -51,8 +51,7 @@ if [[ $USER == "xelser" ]]; then
 fi
 
 # CPU
-sudo cpupower frequency-set -g performance
-sudo systemctl enable --now cpupower
+[ -f /usr/bin/cpupower ] && sudo cpupower frequency-set -g performance
 
 # Audio
 [ -f /usr/bin/easyeffects ] && [ -f $HOME/.config/easyeffects/output/default.json ] && easyeffects -l default
