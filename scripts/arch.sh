@@ -145,10 +145,10 @@ echo "arch" > /etc/hostname
 # Base Minimal Packages
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
-pacman -Sy --needed --noconfirm linux linux-{headers,firmware} man-{db,pages} base-devel reflector inetutils dmidecode \
-	plymouth xfsprogs btrfs-progs ntfs-3g {intel,amd}-ucode grub os-prober efibootmgr dosfstools networkmanager gvfs \
-	pipewire-{alsa,audio,jack,pulse,zeroconf} wireplumber easyeffects lsp-plugins-lv2 ecasound bluez{,-utils} \
-	xdg-desktop-portal zram-generator neovim{,-plugins}
+pacman -Sy --needed --noconfirm linux linux-{headers,firmware} base-devel reflector inetutils dmidecode \
+	plymouth xfsprogs {intel,amd}-ucode grub os-prober efibootmgr dosfstools networkmanager gvfs \
+	pipewire-{alsa,audio,jack,pulse} wireplumber easyeffects lsp-plugins-lv2 ecasound \
+	bluez{,-utils} xdg-desktop-portal zram-generator neovim{,-plugins}
 
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
@@ -183,13 +183,12 @@ arch_sway () { arch-chroot /mnt /bin/bash << EOF
 # Window Manager Packages
 pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk} ttf-fira{-sans,code-nerd} \
 	brightnessctl gammastep alacritty imv mpv wallutils dunst libnotify nwg-look pavucontrol \
-	mate-polkit atril pluma engrampa caja mugshot transmission-gtk flameshot \
-	greetd nwg-hello sway{,bg,idle} waybar autotiling rofi-wayland wl-clipboard grim
+	mate-polkit atril pluma engrampa caja mugshot transmission-gtk flameshot grim \
+	greetd sway{,bg,idle} waybar autotiling rofi-wayland wl-clipboard
 
 	#hyprland kvantum-qt5 qt5ct slurp
 
 # greetd
-sed -i 's|command = "agreety --cmd /bin/sh"|command = "sway -c /etc/nwg-hello/sway-config"|g' /etc/greetd/config.toml
 echo -e "\n[initial_session]\ncommand = \"sway\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
 systemctl enable greetd
 
