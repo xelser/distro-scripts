@@ -20,11 +20,11 @@ setup_wm () {
 yay -S --needed --noconfirm waypaper overskride alacritty-theme-git
   # ulauncher {zscroll,polybar-scripts}-git
 
-	if [[ ${wm_de} == "sway" ]]; then
+	if [[ ${wm_de} == "Sway" ]]; then
 		yay -S --needed --noconfirm wlogout
 	elif [[ ${wm_de} == "i3" ]]; then
 		yay -S --needed --noconfirm xidlehook betterlockscreen
-	elif [[ ${wm_de} == "openbox" ]]; then
+	elif [[ ${wm_de} == "Openbox" ]]; then
 		yay -S --needed --noconfirm obmenu-generator
 	fi
 
