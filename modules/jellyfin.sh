@@ -47,6 +47,8 @@ setup_media_group_access() {
     sudo find "$MEDIA_DIR" -type f -exec chmod 664 {} +
     sudo find "$MEDIA_DIR" -type d -exec chmod 775 {} +
     sudo find "$MEDIA_DIR" -type d -exec chmod g+s {} +
+    sudo setfacl -R -m g:"$GROUP_NAME":rwX "$MEDIA_DIR"
+    sudo setfacl -R -d -m g:"$GROUP_NAME":rwX "$MEDIA_DIR"
 
     echo "[✓] Group permissions applied. Log out and back in for group changes to take effect."
 }
