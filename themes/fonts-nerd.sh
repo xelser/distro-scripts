@@ -2,8 +2,8 @@
 
 # Dependencies
 [ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm curl wget tar
-[ -f /usr/bin/nala ] && sudo nala install --assume-yes curl wget tar
 [ -f /usr/bin/dnf ] && sudo dnf install --assumeyes curl wget tar
+[ -f /usr/bin/apt ] && sudo apt install --yes curl wget tar
 
 # get version
 version="$(curl --silent "https://api.github.com/repos/ryanoasis/nerd-fonts/releases/latest" | grep tag_name | cut -d'"' -f4)"

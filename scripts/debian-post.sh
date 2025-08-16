@@ -44,7 +44,7 @@ fi
 mkdir -p $HOME/Pictures/Screenshots
 
 # debloat
-sudo nala purge --assume-yes zutty xterm
+sudo apt autoremove --yes zutty
 
 # numlock
 #dconf write /org/gnome/desktop/peripherals/keyboard/numlock-state "true"

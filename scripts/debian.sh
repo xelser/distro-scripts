@@ -8,7 +8,7 @@ sed -i -E 's/non-free-firmware/non-free-firmware non-free contrib/g' /etc/apt/so
 apt update && apt full-upgrade --yes
 
 # INSTALL: Base
-apt install --yes plymouth build-essential synaptic htpdate dconf-cli libglib2.0-bin \
+apt install --yes build-essential synaptic htpdate dconf-cli libglib2.0-bin \
   pipewire pipewire-audio bluez systemd-zram-generator xfsprogs xdg-desktop-portal \
   firefox-esr neovim easyeffects lsp-plugins-lv2 fonts-roboto{,-slab}
 
