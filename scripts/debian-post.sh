@@ -3,6 +3,7 @@
 
 # themes
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-gruvbox.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/cursor-sainnhe-capitaine.sh)"
 
 # fonts
 dconf write /org/gnome/desktop/interface/font-name "'Roboto 10'"
@@ -44,7 +45,7 @@ fi
 mkdir -p $HOME/Pictures/Screenshots
 
 # debloat
-sudo apt autoremove --yes zutty
+sudo apt autoremove --purge --yes zutty
 
 # numlock
 #dconf write /org/gnome/desktop/peripherals/keyboard/numlock-state "true"

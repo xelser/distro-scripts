@@ -235,8 +235,6 @@ bindsym $mod+r mode "resize"
 #    }
 #}
 
-include /etc/sway/config.d/*
-
 #
 # User Configs:
 #
@@ -271,7 +269,7 @@ exec_always --no-startup-id bash $HOME/.config/waybar/launch.sh
 
 # Autostart (for sway)
 #exec --no-startup-id bash $HOME/.config/autostart/sway-gtk.sh
-#exec_always --no-startup-id bash $HOME/.config/autostart/swayfx.sh
+exec_always --no-startup-id bash $HOME/.config/autostart/swayfx.sh
 exec_always --no-startup-id autotiling
 
 # Screenshot (flameshot)
@@ -286,3 +284,6 @@ bindsym $mod+o exec bash $HOME/.config/gammastep/toggle.sh
 # Apps
 exec --no-startup-id transmission-gtk --minimized
 exec --no-startup-id caja --no-default-window
+
+include /etc/sway/config.d/*
+

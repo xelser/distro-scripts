@@ -15,11 +15,11 @@ apt install --yes build-essential synaptic htpdate dconf-cli libglib2.0-bin \
 # INSTALL: WM (X11/Wayland)
 apt install --yes xdg-desktop-portal-gtk alacritty mpv imv brightnessctl gammastep \
   dunst libnotify-bin mugshot at-spi2-core transmission-gtk nwg-look flameshot \
-  mate-polkit caja engrampa pluma atril pavucontrol blueman
+  xwayland mate-polkit caja engrampa pluma atril pavucontrol blueman rofi
 
 # INSTALL: Sway
 apt install --yes greetd sway{,bg,idle} xdg-desktop-portal-wlr wl-clipboard grim \
-  waybar autotiling wofi wlogout
+  waybar autotiling wlogout
 
 # waypaper, overskride, swayfx
 
@@ -36,9 +36,9 @@ echo -e "\n[initial_session]\ncommand = \"sway\"\nuser = \"${user}\"" >> /etc/gr
 systemctl enable greetd
 
 # grub
-sed -i 's/quiet/quiet splash/g' /etc/default/grub
+#sed -i 's/quiet/quiet splash/g' /etc/default/grub
 #sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
-update-grub
+#update-grub
 
 # htpdate
 systemctl enable htpdate
