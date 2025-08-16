@@ -23,7 +23,7 @@ if command -v apt &> /dev/null; then
     echo "📦 Detected apt. Installing dependencies..."
     sudo apt update
     sudo apt install -y build-essential git wget cmake \
-        libtiff-dev libleptonica-dev libtesseract-dev \
+        libtiff-dev libleptonica-dev libtesseract-dev libavdevice-dev \
         libavcodec-dev libavformat-dev libavutil-dev tesseract-ocr tesseract-ocr-eng
     TESSDATA_DIR="/usr/share/tesseract-ocr/5/tessdata"
     TESSDATA_PREFIX="/usr/share/tesseract-ocr/5/"
