@@ -1,9 +1,18 @@
 #!/bin/bash
 
-set -e
+# A script to install Jellyfin Media Server and configure permissions.
+# It sets up a shared group for media access and installs dependencies
+# for Intel-based hardware transcoding (VA-API/QSV).
 
+set -e -o pipefail
+
+# --- Configuration ---
+# Set the path to your media directory.
 MEDIA_DIR="/mnt/Media"
+# Set the name of the group that will have access to the media.
 GROUP_NAME="mediaaccess"
+
+# --- Functions ---
 
 # 🔧 Enable and verify a systemd service
 start_and_check_service() {
@@ -15,7 +24,7 @@ start_and_check_service() {
     if systemctl is-active --quiet "$service_name"; then
         echo "[✓] $service_name is running."
     else
-        echo "[✗] $service_name failed to start. Check logs via: sudo journalctl -u $service_name"
+        echo "[✗] $service_name failed to start. Check logs with: sudo journalctl -u $service_name"
         exit 1
     fi
 }
@@ -23,65 +32,82 @@ start_and_check_service() {
 # 🔐 Set up shared group access to media directory
 setup_media_group_access() {
     local service_user="$1"
-    echo "[*] Setting up group-based access for $service_user..."
+    # The current user running the script. Add more usernames here if needed.
+    local current_user="$USER"
 
-    # Create group if missing
+    echo "[*] Setting up group-based access for '$service_user' and '$current_user'..."
+
+    # Create group if it doesn't exist
     if ! getent group "$GROUP_NAME" > /dev/null; then
         echo "[+] Creating group '$GROUP_NAME'..."
         sudo groupadd "$GROUP_NAME"
     fi
 
-    # Add users to group
-    for user in "$service_user" xelser; do
+    # Add service user and current user to the media group
+    for user in "$service_user" "$current_user"; do
         if ! id -nG "$user" | grep -qw "$GROUP_NAME"; then
-            echo "[+] Adding $user to $GROUP_NAME..."
+            echo "[+] Adding '$user' to '$GROUP_NAME'..."
             sudo usermod -aG "$GROUP_NAME" "$user"
         fi
     done
 
-    # Apply ownership & permissions
-    echo "[*] Assigning group ownership to $MEDIA_DIR..."
-    sudo chown -R :"$GROUP_NAME" "$MEDIA_DIR"
+    echo "[*] Setting ownership and permissions for $MEDIA_DIR..."
+    # Set group ownership recursively
+    sudo chown -R root:"$GROUP_NAME" "$MEDIA_DIR"
 
-    echo "[*] Setting permissions on media files and folders..."
-    sudo find "$MEDIA_DIR" -type f -exec chmod 664 {} +
+    # Set base permissions: 775 for directories, 664 for files
     sudo find "$MEDIA_DIR" -type d -exec chmod 775 {} +
-    sudo find "$MEDIA_DIR" -type d -exec chmod g+s {} +
-    sudo setfacl -R -m g:"$GROUP_NAME":rwX "$MEDIA_DIR"
-    sudo setfacl -R -d -m g:"$GROUP_NAME":rwX "$MEDIA_DIR"
+    sudo find "$MEDIA_DIR" -type f -exec chmod 664 {} +
 
-    echo "[✓] Group permissions applied. Log out and back in for group changes to take effect."
+    # Set SGID on directories to ensure new files/folders inherit the group
+    sudo find "$MEDIA_DIR" -type d -exec chmod g+s {} +
+
+    # Set Access Control Lists (ACLs) for robust permissions
+    # -R: recursive, -m: modify
+    # This ensures members of the group can read/write/execute(X)
+    sudo setfacl -R -m g:"$GROUP_NAME":rwX "$MEDIA_DIR"
+    # -d: default ACLs
+    # This ensures new items created in the directory get the correct group permissions
+    sudo setfacl -d -m g:"$GROUP_NAME":rwX "$MEDIA_DIR"
+
+    echo "[✓] Group permissions applied. You may need to log out and back in for changes to take effect."
 }
 
-# 📦 Install Jellyfin
+# 📦 Install Jellyfin and configure hardware transcoding
 install_jellyfin() {
-    echo "[*] Installing Jellyfin..."
+    # This variable is set from /etc/os-release in main()
+    echo "[*] Starting Jellyfin installation for OS: $ID..."
 
-    if [[ "$ID" == "ubuntu" || "$ID" == "linuxmint" ]]; then
-        sudo apt install -y curl gnupg2 apt-transport-https ca-certificates
-        curl -fsSL https://repo.jellyfin.org/ubuntu/jellyfin_team.gpg.key \
-            | gpg --dearmor \
-            | sudo tee /usr/share/keyrings/jellyfin.gpg > /dev/null
-        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/jellyfin.gpg] https://repo.jellyfin.org/ubuntu noble main" \
-            | sudo tee /etc/apt/sources.list.d/jellyfin.list
-        sudo apt update
-        sudo apt install -y jellyfin-server jellyfin-ffmpeg7
-
-    elif [[ "$ID" == "debian" ]]; then
-        codename=$(lsb_release -cs)
-        sudo apt install -y curl gnupg2 apt-transport-https ca-certificates
-        curl -fsSL https://repo.jellyfin.org/debian/jellyfin_team.gpg.key \
-            | gpg --dearmor \
-            | sudo tee /usr/share/keyrings/jellyfin.gpg > /dev/null
-        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/jellyfin.gpg] https://repo.jellyfin.org/debian $codename main" \
-            | sudo tee /etc/apt/sources.list.d/jellyfin.list
-        sudo apt update
-        sudo apt install -y jellyfin-server jellyfin-ffmpeg7
+    if [[ "$ID" == "ubuntu" || "$ID" == "linuxmint" || "$ID" == "debian" ]]; then
+        # --- Debian, Ubuntu, & Mint ---
+        local repo_distro="$ID"
+        # Linux Mint uses the Ubuntu repositories
+        [[ "$ID" == "linuxmint" ]] && repo_distro="ubuntu"
+        
+        sudo apt-get update
+        sudo apt-get install -y curl gpg apt-transport-https ca-certificates
+        
+        curl -fssl "https://repo.jellyfin.org/${repo_distro}/jellyfin_team.gpg.key" | \
+            sudo gpg --dearmor -o /usr/share/keyrings/jellyfin.gpg
+        
+        echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/jellyfin.gpg] https://repo.jellyfin.org/${repo_distro} $(lsb_release -cs) main" | \
+            sudo tee /etc/apt/sources.list.d/jellyfin.list
+        
+        sudo apt-get update
+        echo "[*] Installing Jellyfin and Intel VAAPI/QSV packages..."
+        sudo apt-get install -y jellyfin-server jellyfin-ffmpeg7 \
+            intel-media-va-driver-non-free libvpl2
 
     elif [[ "$ID" == "arch" ]]; then
-        sudo pacman -S --noconfirm jellyfin-{server,ffmpeg,web}
+        # --- Arch Linux ---
+        echo "[*] Installing Jellyfin and Intel VAAPI/QSV packages..."
+        sudo pacman -Syu --noconfirm --needed \
+            jellyfin-server jellyfin-ffmpeg jellyfin-web \
+            intel-media-driver libvpl vpl-gpu-rt
 
     elif [[ "$ID" == "fedora" ]]; then
+        # --- Fedora ---
+        echo "[*] Adding Jellyfin repository..."
         sudo tee /etc/yum.repos.d/jellyfin.repo > /dev/null <<EOF
 [Jellyfin]
 name=Jellyfin Repository
@@ -90,39 +116,49 @@ enabled=1
 gpgcheck=1
 gpgkey=https://repo.jellyfin.org/jellyfin_team.gpg.key
 EOF
-        sudo dnf install -y jellyfin-server jellyfin-ffmpeg
+        echo "[*] Installing Jellyfin and Intel VAAPI/QSV packages..."
+        sudo dnf install -y jellyfin-server jellyfin-ffmpeg \
+            libva-intel-media-driver libvpl intel-vpl-gpu-rt
     else
-        echo "[✗] Unsupported distro for Jellyfin."
+        echo "[✗] Unsupported distro for Jellyfin: '$ID'"
         exit 1
     fi
 
-    # For Hardware Transcoding
-    sudo gpasswd -a jellyfin render
-    sudo gpasswd -a jellyfin video
+    # --- Common Post-Installation Steps ---
+    echo "[*] Adding 'jellyfin' user to hardware access groups ('render', 'video')..."
+    for group in render video; do
+        if getent group "$group" >/dev/null; then
+            echo "[+] Adding jellyfin to group '$group'."
+            sudo gpasswd -a jellyfin "$group"
+        else
+            echo "[!] Warning: Group '$group' not found. Skipping."
+        fi
+    done
 
     start_and_check_service jellyfin
     setup_media_group_access jellyfin
 }
 
-# 🚀 Entry point
+# 🚀 Script Entry Point
 main() {
     if [ ! -f /etc/os-release ]; then
-        echo "[✗] Cannot detect OS. /etc/os-release not found."
+        echo "[✗] Cannot detect OS: /etc/os-release not found."
         exit 1
     fi
 
+    # Source the os-release file to get the $ID variable
+    # shellcheck source=/dev/null
     . /etc/os-release
 
     echo "[*] Detected OS: $PRETTY_NAME"
-    echo "[*] Installing Jellyfin Media Server..."
-
     install_jellyfin
 
     echo
-    echo "🎉 Jellyfin is installed!"
-    echo "🔗 Web UI: http://localhost:8096/web"
-    echo "📁 Media directory: $MEDIA_DIR"
-    echo "🔐 Ensure port 8096 is open in your firewall for remote access."
+    echo "🎉 Jellyfin installation complete!"
+    echo "🔗 Access the web UI at: http://$(hostname -I | awk '{print $1'}):8096"
+    echo "📁 Media directory is configured at: $MEDIA_DIR"
+    echo "🔐 Remember to open port 8096 in your firewall for remote access."
 }
 
-main
+# Execute the main function, passing all script arguments
+main "$@"
