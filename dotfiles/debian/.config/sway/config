@@ -258,7 +258,7 @@ input type:touchpad {
 }
 
 # Autostart (Global)
-#exec_always --no-startup-id waypaper --random
+exec_always --no-startup-id waytrogen --restore
 #exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
 exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 exec --no-startup-id easyeffects --gapplication-service

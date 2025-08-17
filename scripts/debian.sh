@@ -18,10 +18,25 @@ apt install --yes xdg-desktop-portal-gtk alacritty mpv imv brightnessctl gammast
   xwayland mate-polkit caja engrampa pluma atril pavucontrol blueman rofi
 
 # INSTALL: Sway
-apt install --yes greetd sway{,bg,idle} xdg-desktop-portal-wlr wl-clipboard grim \
+apt install --yes greetd sway{,idle} xdg-desktop-portal-wlr wl-clipboard grim \
   waybar autotiling wlogout
 
-# waypaper, overskride, swayfx
+# overskride, swayfx
+
+################################### BUILD ####################################
+
+# wallutils
+#apt install --yes golang imagemagick libx11-dev libxcursor-dev libxmu-dev \
+#  libwayland-dev libxpm-dev xbitmaps libxmu-headers libheif-dev make
+#cd /tmp && git clone https://github.com/xyproto/wallutils
+#cd wallutils && make && sudo make PREFIX=/usr/local install
+
+# waytrogen
+apt install --yes libgtk-4-1 openssl libsqlite3-0 libsqlite3-dev libglib2.0-dev \
+  sqlite3 libgtk-4-dev meson ninja-build cargo
+cd /tmp && git clone https://github.com/nikolaizombie1/waytrogen 
+cd waytrogen && meson setup builddir --prefix=/usr && meson compile -C builddir && \
+  meson install -C builddir
 
 ################################### CONFIG ###################################
  

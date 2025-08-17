@@ -83,7 +83,7 @@
         "format": " {status}",
         "format-connected": " {device_alias}",
         "format-connected-battery": " {device_alias} 󰁹 {device_battery_percentage}%",
-        "on-click": "overskride"
+        "on-click": "blueman-manager"
     },
     "network": {
 
