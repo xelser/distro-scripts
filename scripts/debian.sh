@@ -40,7 +40,7 @@ cd waytrogen && meson setup builddir --prefix=/usr && meson compile -C builddir 
 
 # swayfx
 apt install --yes meson wayland-protocols wayland-utils libpcre2-dev libjson-c-dev \
-  libpango-1.0-0 libcairo2-dev libdrm-dev
+  libpango-1.0-0 libcairo2-dev libdrm-dev libwlroots-0.18-dev cmake
 cd /tmp && mkdir -p swayfx-build
 
 cd /tmp/swayfx-build/ && scenefx_ver="0.3" # based on wlroots 0.18
