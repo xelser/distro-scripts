@@ -43,12 +43,12 @@ apt install --yes meson wayland-protocols wayland-utils libpcre2-dev libjson-c-d
   libpango-1.0-0 libcairo2-dev libdrm-dev
 cd /tmp && mkdir -p swayfx-build
 
-cd /tmp/swayfx-build/ && scenefx_ver="0.2.1" # based on wlroots 0.18
+cd /tmp/swayfx-build/ && scenefx_ver="0.3" # based on wlroots 0.18
 wget -q "https://github.com/wlrfx/scenefx/archive/refs/tags/${scenefx_ver}.tar.gz" \
   && tar -xf "${scenefx_ver}.tar.gz" && cd scenefx-${scenefx_ver} && meson build/ && \
   ninja -C build/ && ninja -C build/ install
 
-cd /tmp/swayfx-build/ && swayfx_ver="0.5" # based on sway 0.10.1 and scenefx 0.2
+cd /tmp/swayfx-build/ && swayfx_ver="0.5.1" # based on sway 1.10.1 and scenefx 0.3
 wget -q "https://github.com/WillPower3309/swayfx/archive/refs/tags/${swayfx_ver}.tar.gz" \
   && tar -xf "${swayfx_ver}.tar.gz" && cd swayfx-${swayfx_ver} && meson build/ && \
   ninja -C build/ && ninja -C build/ install

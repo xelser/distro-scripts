@@ -25,17 +25,20 @@ sudo timedatectl set-ntp true
 
 # Essential Packages
 if [ -f /usr/bin/apt ]; then sudo apt install --yes \
-	flatpak fastfetch htop inxi zip un{zip,rar} tar sassc ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
-	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf wget curl git gh openssh-client linux-cpupower \
-	intel-media-va-driver-non-free
+	flatpak fastfetch htop inxi zip un{zip,rar} tar ffmpeg ffmpegthumbnailer \
+	tumbler gvfs xdg-user-dirs dconf-editor wget curl git sassc \
+	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf gh openssh-client \
+	intel-media-va-driver-non-free linux-cpupower
 elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
-	flatpak fastfetch htop inxi zip un{zip,rar} tar sassc ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
-	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines wget curl git github-cli openssh cpupower \
-	intel-media-driver
+	flatpak fastfetch htop inxi zip un{zip,rar} tar ffmpeg ffmpegthumbnailer \
+	tumbler gvfs xdg-user-dirs dconf-editor wget curl git sassc \
+	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines github-cli openssh \
+	intel-media-driver cpupower
 elif [ -f /usr/bin/dnf5 ]; then sudo dnf5 install --assumeyes --best --allowerasing \
-	flatpak fastfetch htop inxi zip un{zip,rar} tar sassc ffmpeg ffmpegthumbnailer tumbler gvfs xdg-user-dirs dconf-editor \
-	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines wget curl git gh openssh kernel-tools \
-	libva-intel-media-driver
+	flatpak fastfetch htop inxi zip un{zip,rar} tar ffmpeg ffmpegthumbnailer \
+	tumbler gvfs xdg-user-dirs dconf-editor wget curl git sassc \
+	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines gh openssh \
+	libva-intel-media-driver kernel-tools
 fi
 
 # Update User Dirs
@@ -49,9 +52,6 @@ if [[ $USER == "xelser" ]]; then
 	[ ! -d $HOME/Pictures/"xelser's Pictures" ]   && ln -sf /mnt/Home/Pictures  $HOME/Pictures/"xelser's Pictures"
 	[ ! -d $HOME/Videos/"xelser's Videos" ]       && ln -sf /mnt/Home/Videos    $HOME/Videos/"xelser's Videos"
 fi
-
-# CPU
-[ -f /usr/bin/cpupower ] && sudo cpupower frequency-set -g performance
 
 # Audio
 [ -f /usr/bin/easyeffects ] && [ -f $HOME/.config/easyeffects/output/default.json ] && easyeffects -l default
@@ -97,7 +97,6 @@ for app in "${name[@]}"; do
 done
 
 # daemons
-[ -f /usr/bin/cpupower ] && sudo systemctl enable --now cpupower
 [ -f /usr/bin/ulauncher ] && systemctl enable --user ulauncher
 [ -f /usr/bin/syncthing ] && systemctl enable --user syncthing
 
