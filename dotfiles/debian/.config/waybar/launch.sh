@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Terminate already running bar instances
-pkill -q waybar
+pkill waybar
 # If all your bars have ipc enabled, you can also use
 # waybar-msg cmd quit
 

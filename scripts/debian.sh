@@ -19,7 +19,7 @@ apt install --yes xdg-desktop-portal-gtk alacritty mpv imv brightnessctl gammast
 
 # INSTALL: Sway
 apt install --yes greetd sway{,idle} xdg-desktop-portal-wlr wl-clipboard grim \
-  waybar autotiling wlogout wofi
+  waybar autotiling wlogout
 
 ################################### BUILD ####################################
 
