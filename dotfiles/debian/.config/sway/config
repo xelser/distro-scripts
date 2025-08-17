@@ -16,8 +16,9 @@ set $right l
 # Your preferred terminal emulator
 set $term alacritty
 # Your preferred application launcher
-set $menu ~/.config/rofi/launchers/type-4/launcher.sh
+#set $menu ~/.config/rofi/launchers/type-4/launcher.sh
 #set $menu wmenu-run
+set $menu wofi --show drun
 
 include /etc/sway/config-vars.d/*
 
@@ -240,9 +241,6 @@ bindsym $mod+r mode "resize"
 # User Configs:
 #
 
-# XWayland
-xwayland enable
-
 # Windows
 default_floating_border none
 default_border none
@@ -258,19 +256,15 @@ input type:touchpad {
 }
 
 # Autostart (Global)
-exec_always --no-startup-id waytrogen --restore
 exec --no-startup-id bash $HOME/.config/autostart/autostart-script.sh
-exec --no-startup-id /usr/libexec/polkit-mate-authentication-agent-1
 exec --no-startup-id easyeffects --gapplication-service
+exec --no-startup-id /usr/bin/lxpolkit
 exec --no-startup-id dunst
 
-# Autostart (for Wayland)
-exec_always --no-startup-id bash $HOME/.config/waybar/launch.sh
-#exec --no-startup-id sh $HOME/.config/autostart/wayland_xset_led.sh
-
 # Autostart (for sway)
-#exec --no-startup-id bash $HOME/.config/autostart/sway-gtk.sh
 exec_always --no-startup-id bash $HOME/.config/autostart/swayfx.sh
+exec_always --no-startup-id bash $HOME/.config/waybar/launch.sh
+exec_always --no-startup-id waytrogen --restore
 exec_always --no-startup-id autotiling
 
 # Screenshot (flameshot)
@@ -284,7 +278,7 @@ bindsym $mod+o exec bash $HOME/.config/gammastep/toggle.sh
 
 # Apps
 exec --no-startup-id transmission-gtk --minimized
-exec --no-startup-id caja --no-default-window
+exec --no-startup-id thunar --daemon
 
 include /etc/sway/config.d/*
 
