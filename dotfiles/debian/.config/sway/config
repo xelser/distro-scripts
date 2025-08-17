@@ -17,8 +17,8 @@ set $right l
 set $term alacritty
 # Your preferred application launcher
 #set $menu ~/.config/rofi/launchers/type-4/launcher.sh
-#set $menu wmenu-run
-set $menu wofi --show drun
+set $menu wmenu-run
+#set $menu wofi --show drun
 
 include /etc/sway/config-vars.d/*
 
