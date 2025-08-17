@@ -6,7 +6,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/cursor-sainnhe-capitaine.sh)"
 
 # fonts
-dconf write /org/gnome/desktop/interface/font-name "'Roboto 10'"
+dconf write /org/gnome/desktop/interface/font-name "'Roboto Medium 10'"
 dconf write /org/gnome/desktop/interface/monospace-font-name "'RobotoMono Nerd Font 10'"
 
 [ -f $HOME/.config/dunst/dunstrc ] && \
