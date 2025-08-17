@@ -142,6 +142,9 @@ else
 	# Nitrogen
 	save_folder /.config/nitrogen/
 
+	# Waytrogen
+	save_file /.config/waytrogen/ config.json
+	
 	# Waypaper
 	save_file /.config/waypaper/ config.ini
 
