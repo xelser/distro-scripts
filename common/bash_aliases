@@ -51,6 +51,11 @@ fi
 # editors
 alias edit="nvim"
 
+# apps
+if [ -f /usr/bin/brave-browser ] && [ "$XDG_SESSION_TYPE" = "wayland" ]; then
+	alias brave="brave-browser --enable-features=UseOzonePlatform,VaapiVideoDecoder --ozone-platform=wayland --enable-gpu-rasterization --enable-zero-copy --ignore-gpu-blocklist --password-store=basic"
+fi
+
 # dotfiles
 if [ -d $HOME/Documents/distro-scripts/ ] ; then
 	alias bashaliasesup="cat $HOME/Documents/distro-scripts/common/bash_aliases > $HOME/.bash_aliases && source $HOME/.bash_aliases"
