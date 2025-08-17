@@ -145,10 +145,11 @@ echo "arch" > /etc/hostname
 # Base Minimal Packages
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
-pacman -Sy --needed --noconfirm linux linux-{headers,firmware} base-devel reflector inetutils dmidecode \
-	plymouth xfsprogs {intel,amd}-ucode grub os-prober efibootmgr dosfstools networkmanager gvfs \
+pacman -Sy --needed --noconfirm linux linux-{headers,firmware} base-devel reflector \
+	xfsprogs {intel,amd}-ucode grub os-prober efibootmgr dosfstools networkmanager gvfs \
 	pipewire-{alsa,audio,jack,pulse} wireplumber easyeffects lsp-plugins-lv2 ecasound \
-	bluez{,-utils} xdg-desktop-portal cpupower zram-generator neovim{,-plugins}
+	bluez{,-utils} xdg-desktop-portal cpupower zram-generator inetutils dmidecode \
+	neovim{,-plugins} plymouth 
 
 # cpu
 cpupower frequency-set -g performance
@@ -186,11 +187,11 @@ arch_sway () { arch-chroot /mnt /bin/bash << EOF
 
 # Window Manager Packages
 pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk} ttf-fira{-sans,code-nerd} \
-	brightnessctl gammastep alacritty imv mpv wallutils dunst libnotify nwg-look pavucontrol \
+	brightnessctl gammastep alacritty imv mpv dunst libnotify nwg-look pavucontrol \
 	mate-polkit atril pluma engrampa caja mugshot transmission-gtk flameshot grim \
 	greetd sway{,bg,idle} waybar autotiling rofi-wayland wl-clipboard
 
-	#hyprland kvantum-qt5 qt5ct slurp
+	#hyprland kvantum-qt5 qt5ct slurp wallutils 
 
 # greetd
 echo -e "\n[initial_session]\ncommand = \"sway\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
@@ -203,11 +204,11 @@ arch_i3 () { arch-chroot /mnt /bin/bash << EOF
 
 # Window Manager Packages
 pacman -S --needed --noconfirm xdg-desktop-portal-gtk ttf-fira{-sans,code-nerd} \
-	brightnessctl gammastep alacritty imv mpv wallutils dunst libnotify nwg-look pavucontrol \
+	brightnessctl gammastep alacritty imv mpv dunst libnotify nwg-look pavucontrol \
 	mate-polkit atril pluma engrampa caja mugshot transmission-gtk flameshot \
 	sddm i3-wm autotiling polybar picom feh rofi flameshot xclip numlockx
 
-	#openbox obconf tint2
+	#openbox obconf tint2 wallutils 
 
 # sddm
 echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
