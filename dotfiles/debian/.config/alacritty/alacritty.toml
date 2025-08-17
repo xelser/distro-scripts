@@ -16,19 +16,19 @@ style = "Bold Italic"
 
 [font.italic]
 family = "RobotoMono Nerd Font"
-style = "Italic"
+style = "Medium Italic"
 
 [font.normal]
 family = "RobotoMono Nerd Font"
-style = "Regular"
+style = "Medium"
 
 [window]
 dynamic_padding = true
-opacity = 0.975
+opacity = 0.6
 
 [window.padding]
 x = 5
 y = 5
 
 [general]
-import = ["/home/xelser/.config/alacritty/gruvbox-material.toml"]
+import = ["~/.config/alacritty/themes/themes/gruvbox_material_hard_dark.toml"]
