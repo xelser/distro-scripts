@@ -11,12 +11,6 @@ check_swayfx() {
 if check_swayfx; then
     notify-send "SwayFX" "Applying aesthetic settings..."
 
-    # Global settings for all windows
-    swaymsg 'corner_radius 10'
-    swaymsg 'shadows enable'
-    #swaymsg 'blur enable'
-    #swaymsg 'default_dim_inactive 0.4'
-
     # Configuration for waybar
     swaymsg 'layer_effects "waybar" blur enable'
     swaymsg 'layer_effects "waybar" blur_xray enable'
@@ -26,6 +20,12 @@ if check_swayfx; then
     # Configuration for specific apps
     swaymsg 'for_window [app_id="Alacritty"] blur enable'
     swaymsg 'for_window [app_id="Alacritty"] shadows enable'
+
+    # Global settings for all windows
+    swaymsg 'corner_radius 10'
+    swaymsg 'shadows enable'
+    #swaymsg 'blur enable'
+    #swaymsg 'default_dim_inactive 0.4'
 else
     notify-send "Sway" "Vanilla Sway detected. Skipping aesthetic settings."
 fi
