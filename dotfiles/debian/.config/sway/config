@@ -241,6 +241,9 @@ bindsym $mod+r mode "resize"
 # User Configs:
 #
 
+# XWayland
+xwayland disable
+
 # Windows
 default_floating_border none
 default_border none
