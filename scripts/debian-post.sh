@@ -7,25 +7,25 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 
 # fonts
 dconf write /org/gnome/desktop/interface/font-name "'Roboto Medium 10'"
-dconf write /org/gnome/desktop/interface/monospace-font-name "'RobotoMono Nerd Font 10'"
+dconf write /org/gnome/desktop/interface/monospace-font-name "'RobotoMono Nerd Font Medium 9'"
 
 [ -f $HOME/.config/dunst/dunstrc ] && \
 	sed -i 's/font = Monospace 8/font = RobotoMono Nerd Font 10/g' $HOME/.config/dunst/dunstrc
 
 # text editors
-if [ -f /usr/bin/gedit ]; then
-	dconf write /org/gnome/gedit/preferences/editor/scheme "'gruvbox-material-hard-dark'"
-	dconf write /org/gnome/gedit/preferences/editor/editor-font "'RobotoMono Nerd Font 10'"
-	dconf write /org/gnome/gedit/preferences/editor/use-default-font "false"
-fi
-
 if [ -f /usr/bin/pluma ]; then
 	gsettings set org.mate.pluma color-scheme 'gruvbox-material-hard-dark'
-	gsettings set org.mate.pluma editor-font 'RobotoMono Nerd Font 10'
+	gsettings set org.mate.pluma editor-font 'RobotoMono Nerd Font Medium 9'
 	gsettings set org.mate.pluma highlight-current-line true
 	gsettings set org.mate.pluma display-line-numbers true
 	gsettings set org.mate.pluma toolbar-visible false
 	gsettings set org.mate.pluma tabs-size 2
+fi
+
+if [ -f /usr/bin/gedit ]; then
+	dconf write /org/gnome/gedit/preferences/editor/scheme "'gruvbox-material-hard-dark'"
+	dconf write /org/gnome/gedit/preferences/editor/editor-font "'RobotoMono Nerd Font 10'"
+	dconf write /org/gnome/gedit/preferences/editor/use-default-font "false"
 fi
 
 # rofi (launcher and powermenu)
