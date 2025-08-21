@@ -20,3 +20,4 @@ application/x-shellscript=pluma.desktop;
 inode/symlink=pluma.desktop;
 application/xml=pluma.desktop;
 application/x-zerosize=pluma.desktop;
+application/pdf=atril.desktop;

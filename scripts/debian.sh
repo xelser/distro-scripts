@@ -15,7 +15,8 @@ apt install --yes build-essential synaptic htpdate dconf-cli libglib2.0-bin \
 # INSTALL: WM (X11/Wayland)
 apt install --yes xdg-desktop-portal-gtk alacritty mpv imv brightnessctl gammastep \
   dunst libnotify-bin mugshot at-spi2-core transmission-gtk nwg-look flameshot \
-  lxpolkit thunar engrampa pluma atril pavucontrol blueman
+  lxpolkit engrampa pluma atril pavucontrol blueman \
+  thunar{,-archive-plugin} gvfs-{backends,fuse}
 
 # INSTALL: Sway
 apt install --yes greetd sway{,idle} xdg-desktop-portal-wlr wl-clipboard grim \
