@@ -15,7 +15,6 @@ if [ -f $HOME/.config/dunst/dunstrc ]; then
 	sed -i 's/origin = top-right/origin = bottom-right/g' $HOME/.config/dunst/dunstrc
 	sed -i 's/max_icon_size = 128/max_icon_size = 64/g' $HOME/.config/dunst/dunstrc
 	sed -i 's/offset = (10, 50)/offset = (20, 30)/g' $HOME/.config/dunst/dunstrc
-	sed -i 's/follow = none/follow = mouse/g' $HOME/.config/dunst/dunstrc
 fi
 
 # text editors
