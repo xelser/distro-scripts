@@ -9,8 +9,14 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 dconf write /org/gnome/desktop/interface/font-name "'Roboto Medium 10'"
 dconf write /org/gnome/desktop/interface/monospace-font-name "'RobotoMono Nerd Font Medium 9'"
 
-[ -f $HOME/.config/dunst/dunstrc ] && \
+# notification
+if [ -f $HOME/.config/dunst/dunstrc ]; then
 	sed -i 's/font = Monospace 8/font = RobotoMono Nerd Font 10/g' $HOME/.config/dunst/dunstrc
+	sed -i 's/origin = top-right/origin = bottom-right/g' $HOME/.config/dunst/dunstrc
+	sed -i 's/max_icon_size = 128/max_icon_size = 64/g' $HOME/.config/dunst/dunstrc
+	sed -i 's/offset = (10, 50)/offset = (20, 30)/g' $HOME/.config/dunst/dunstrc
+	sed -i 's/follow = none/follow = mouse/g' $HOME/.config/dunst/dunstrc
+fi
 
 # text editors
 if [ -f /usr/bin/pluma ]; then

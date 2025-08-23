@@ -46,10 +46,7 @@ if [ -f /usr/bin/dunst ] && [ ! -f $HOME/.config/dunst/dunstrc ]; then
 	cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-dunst && mkdir -p $HOME/.config/dunst
 	cat $(find /etc/ -name "dunstrc" 2> /dev/null) > $HOME/.config/dunst/dunstrc
 	cat /tmp/gruvbox-dunst/gruvbox-material-hard-dark.conf >> $HOME/.config/dunst/dunstrc
-	sed -i 's/origin = top-right/origin = bottom-center/g' $HOME/.config/dunst/dunstrc
-	sed -i 's/offset = (10, 50)/offset = (20, 30)/g' $HOME/.config/dunst/dunstrc
 	sed -i 's/icon_theme = Adwaita/icon_theme = Papirus-Dark/g' $HOME/.config/dunst/dunstrc
-	sed -i 's/max_icon_size = 128/max_icon_size = 64/g' $HOME/.config/dunst/dunstrc
 fi
 
 if [ -f /usr/bin/kvantummanager ]; then
