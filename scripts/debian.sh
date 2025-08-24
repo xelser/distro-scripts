@@ -15,7 +15,7 @@ apt install --yes build-essential synaptic htpdate dconf-cli libglib2.0-bin \
 # INSTALL: WM (X11/Wayland)
 apt install --yes xdg-desktop-portal-gtk alacritty mpv imv brightnessctl gammastep \
   mugshot at-spi2-core transmission-gtk nwg-look flameshot libnotify-bin \
-  lxpolkit engrampa pluma atril pavucontrol blueman \
+  seatd lxpolkit engrampa pluma atril pavucontrol blueman \
   thunar{,-archive-plugin} gvfs-{backends,fuse}
 
 # INSTALL: Sway
@@ -65,6 +65,9 @@ echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priori
 # greetd
 echo -e "\n[initial_session]\ncommand = \"sway\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
 systemctl enable greetd
+
+# seatd
+systemctl enable seatd
 
 # grub
 #sed -i 's/quiet/quiet splash/g' /etc/default/grub
