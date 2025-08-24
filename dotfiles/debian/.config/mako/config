@@ -51,7 +51,7 @@ ignore-timeout=1
 max-visible=20
 
 # Show notifications over fullscreen applications.
-layer=top
+layer=overlay
 
 # =========================================================================
 # ICONS
@@ -60,7 +60,7 @@ layer=top
 icons=1
 icon-path=/usr/share/icons/Papirus-Dark
 icon-location=left
-max-icon-size=128
+max-icon-size=64
 
 # =========================================================================
 # ACTIONS AND HISTORY

@@ -17,9 +17,6 @@ if check_swayfx; then
     #swaymsg 'layer_effects "waybar" blur_ignore_transparent enable'
     swaymsg 'layer_effects "waybar" shadows enable'
 
-    # Configuration for mako
-    swaymsg 'layer_effects "mako" shadows enable'
-
     # Configuration for specific apps
     swaymsg 'for_window [app_id="Alacritty"] blur enable'
     swaymsg 'for_window [app_id="Alacritty"] shadows enable'

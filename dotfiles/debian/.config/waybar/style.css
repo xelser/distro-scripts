@@ -16,7 +16,7 @@ window {
 }
 
 tooltip {
-    background: @bg0;
+    background: @bg1;
 }
 
 tooltip label {
