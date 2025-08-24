@@ -157,6 +157,9 @@ else
 	# Ulauncher
 	save_file /.config/ulauncher/ settings.json
 
+	# Wofi
+	save_folder /.config/wofi/
+
 	# Flameshot
 	save_file /.config/flameshot/ flameshot.ini
 	

@@ -19,8 +19,8 @@ apt install --yes xdg-desktop-portal-gtk alacritty mpv imv brightnessctl gammast
   thunar{,-archive-plugin} gvfs-{backends,fuse}
 
 # INSTALL: Sway
-apt install --yes greetd sway{,idle} waybar mako-notifier autotiling wlogout \
-  wl-clipboard grim xdg-desktop-portal-wlr 
+apt install --yes greetd sway{,idle} waybar wofi mako-notifier wlogout \
+  autotiling wl-clipboard grim xdg-desktop-portal-wlr 
 
 ################################### BUILD ####################################
 
