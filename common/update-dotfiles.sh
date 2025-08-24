@@ -139,9 +139,12 @@ else
 	# Betterlockscreen
 	save_file /.config/betterlockscreen/ betterlockscreenrc
 	
+	# Mako
+	save_file /.config/mako/ config
+	
 	# Nitrogen
 	save_folder /.config/nitrogen/
-
+	
 	# Waytrogen
 	save_file /.config/waytrogen/ config.json
 	

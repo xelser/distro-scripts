@@ -1,0 +1,100 @@
+# =========================================================================
+# GENERAL
+# =========================================================================
+# The maximum number of notifications to keep in the history buffer.
+max-history=20
+
+# Sort notifications by time (+time) or priority (+priority).
+# Corresponds to `dunst`'s `sort` setting.
+sort=+time
+
+# Position of the notification window.
+output=eDP-1
+anchor=bottom-right
+outer-margin=20
+margin=10
+
+# The width and height of the notification window.
+width=400
+height=300
+
+# The padding inside the notification window.
+padding=8
+
+# The size of the border around each notification.
+border-size=3
+
+# Notifications can have rounded corners.
+border-radius=0
+
+# The font used for the notification text.
+font=RobotoMono Nerd Font Bold 10
+
+# Markup parsing.
+# Both configs have this enabled implicitly or explicitly.
+markup=1
+
+# Format for the notification text.
+# Both configs have the same format string.
+format=<b>%s</b>\n%b
+
+# Text alignment.
+text-alignment=center
+
+# The default duration a notification is shown (in milliseconds).
+default-timeout=10000
+
+# Ignore the timeout.
+ignore-timeout=1
+
+# Maximum number of visible notifications.
+max-visible=20
+
+# Show notifications over fullscreen applications.
+layer=top
+
+# =========================================================================
+# ICONS
+# =========================================================================
+# Mako handles icon theming by default, as long as `icons` is enabled.
+icons=1
+icon-path=/usr/share/icons/Papirus-Dark
+icon-location=left
+max-icon-size=128
+
+# =========================================================================
+# ACTIONS AND HISTORY
+# ============================================:=============================
+
+on-button-left=invoke-default-action
+on-button-middle=dismiss-group
+on-button-right=dismiss
+on-touch=invoke-default-action
+
+on-notify=exec mpv /usr/share/sounds/freedesktop/stereo/message.oga
+history=1
+actions=1
+
+# =========================================================================
+# COLORS
+# =========================================================================
+
+background-color=#1d2021
+text-color=#d4be98
+border-color=#1d2021
+progress-color=over #0b1c1c
+
+# =========================================================================
+# URGENCY LEVELS
+# =========================================================================
+
+[urgency=low]
+border-color=#1d2021
+
+[urgency=normal]
+border-color=#7daea3
+
+[urgency=high]
+border-color=#ea6962
+default-timeout=0
+

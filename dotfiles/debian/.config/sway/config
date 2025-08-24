@@ -228,6 +228,7 @@ bindsym $mod+r mode "resize"
 #
 # Status Bar:
 #
+
 # Read `man 5 sway-bar` for more information about this section.
 #bar {
 #    position top
@@ -246,6 +247,9 @@ bindsym $mod+r mode "resize"
 #
 # User Configs:
 #
+
+# Sway Bar: Waybar
+bar swaybar_command waybar
 
 # XWayland
 xwayland disable
@@ -268,13 +272,13 @@ input type:touchpad {
 exec --no-startup-id bash $HOME/.config/autostart/autostart-script.sh
 exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id /usr/bin/lxpolkit
-exec --no-startup-id dunst
+#exec --no-startup-id dunst
 
 # Autostart (for sway)
 exec_always --no-startup-id bash $HOME/.config/autostart/swayfx.sh
-exec_always --no-startup-id bash $HOME/.config/waybar/launch.sh
-exec_always --no-startup-id waytrogen --restore
-exec_always --no-startup-id autotiling
+exec --no-startup-id waytrogen --restore
+exec --no-startup-id autotiling
+#exec --no-startup-id mako
 
 # Screenshot (flameshot)
 #exec --no-startup-id flameshot
@@ -282,12 +286,11 @@ exec_always --no-startup-id autotiling
 #bindsym Shift+Print exec flameshot gui --path /home/xelser/Pictures/Screenshots/
 
 # Night light (gammastep)
-exec --no-startup-id bash $HOME/.config/gammastep/launch.sh
-bindsym $mod+o exec bash $HOME/.config/gammastep/toggle.sh
+#exec --no-startup-id bash $HOME/.config/gammastep/launch.sh
+#bindsym $mod+o exec bash $HOME/.config/gammastep/toggle.sh
 
 # Apps
 exec --no-startup-id transmission-gtk --minimized
 exec --no-startup-id thunar --daemon
 
 include /etc/sway/config.d/*
-

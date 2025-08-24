@@ -10,9 +10,7 @@
         "cpu",
         "memory",
         "sway/workspaces",
-        "sway/window",
         "sway/mode",
-        "sway/scratchpad"
     ],
     "modules-center": [
     ],
