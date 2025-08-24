@@ -29,7 +29,10 @@ if check_swayfx; then
     ## wofi
     swaymsg 'layer_effects "wofi" shadows enable'
     swaymsg 'layer_effects "wofi" corner_radius 10'
-
+    
+    ## wlogout
+    swaymsg 'layer_effects "logout_dialog" blur enable'
+    
     # Configuration for specific apps
     swaymsg 'for_window [app_id="Alacritty"] blur enable'
     swaymsg 'for_window [app_id="Alacritty"] shadows enable'

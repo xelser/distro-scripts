@@ -159,6 +159,9 @@ else
 
 	# Wofi
 	save_folder /.config/wofi/
+	
+	# Wlogout
+	save_folder /.config/wlogout/
 
 	# Flameshot
 	save_file /.config/flameshot/ flameshot.ini
