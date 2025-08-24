@@ -18,7 +18,12 @@ wget -q https://github.com/DonutWare/Fladder/releases/download/v${version}/Fladd
 # Install
 echo "Installing..."
 unzip -qqo /tmp/fladder.zip -d $HOME/.local/bin/
-chmod +x $HOME/.local/bin/Fladder
+mkdir -p $HOME/.local/share/icons/
+
+ln -sf $HOME/.local/bin/Fladder $HOME/.local/bin/fladder
+ln -sf $HOME/.local/bin/data/flutter_assets/icons/fladder_icon.svg $HOME/.local/share/icons/fladder.svg
+
+chmod +x $HOME/.local/bin/fladder
 
 # Create a .desktop file
 mkdir -p $HOME/.local/share/applications
@@ -30,7 +35,7 @@ Comment=A Simple Jellyfin frontend built on top of Flutter
 Type=Application
 Icon=fladder
 Terminal=false
-Exec=/home/xelser/.local/bin/Fladder
+Exec=fladder
 Categories=Video;AudioVideo;TV;Player;
 EOF
 

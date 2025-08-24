@@ -18,7 +18,7 @@ set $term alacritty
 # Your preferred application launcher
 #set $menu ~/.config/rofi/launchers/type-4/launcher.sh
 #set $menu wmenu-run
-set $menu wofi --no-actions
+set $menu wofi --no-actions --cache-file /tmp/wofi-drun-cache
 
 include /etc/sway/config-vars.d/*
 
