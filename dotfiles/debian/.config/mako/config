@@ -79,10 +79,10 @@ actions=1
 # COLORS
 # =========================================================================
 
-background-color=#1d2021
+background-color=#141617
 text-color=#d4be98
 border-color=#1d2021
-progress-color=over #0b1c1c
+progress-color=over #3c3836
 
 # =========================================================================
 # URGENCY LEVELS
