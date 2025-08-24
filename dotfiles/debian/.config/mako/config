@@ -15,7 +15,7 @@ outer-margin=20
 margin=10
 
 # The width and height of the notification window.
-width=400
+width=300
 height=300
 
 # The padding inside the notification window.
@@ -28,7 +28,7 @@ border-size=3
 border-radius=0
 
 # The font used for the notification text.
-font=RobotoMono Nerd Font Bold 10
+font=RobotoMono Nerd Font 10
 
 # Markup parsing.
 # Both configs have this enabled implicitly or explicitly.
@@ -36,6 +36,7 @@ markup=1
 
 # Format for the notification text.
 # Both configs have the same format string.
+#format=<b>%s</b>\n──────────\n%b
 format=<b>%s</b>\n%b
 
 # Text alignment.
@@ -90,11 +91,13 @@ progress-color=over #3c3836
 
 [urgency=low]
 border-color=#1d2021
+default-timeout=5000
 
 [urgency=normal]
-border-color=#7daea3
+border-color=#504945
 
 [urgency=high]
+background-color=#3c1f1e
 border-color=#ea6962
 default-timeout=0
 

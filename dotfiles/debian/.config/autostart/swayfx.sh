@@ -9,7 +9,7 @@ check_swayfx() {
 
 # Apply settings if SwayFX is installed
 if check_swayfx; then
-    notify-send "SwayFX" "Applying aesthetic settings..."
+    notify-send "SwayFX" "Applying aesthetic settings..." -i dialog-information
     
     # Global settings for all windows
     swaymsg 'corner_radius 10'
@@ -37,5 +37,5 @@ if check_swayfx; then
     swaymsg 'for_window [app_id="Alacritty"] blur enable'
     swaymsg 'for_window [app_id="Alacritty"] shadows enable'
 else
-    notify-send "Sway" "Vanilla Sway detected. Skipping aesthetic settings."
+    notify-send "Sway" "Vanilla Sway detected. Skipping aesthetic settings." -i dialog-information
 fi
