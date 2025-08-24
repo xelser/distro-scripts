@@ -21,6 +21,7 @@ tooltip {
 
 tooltip label {
     color: @fg1;
+    padding: 5px 5px;
 }
 
 /*
