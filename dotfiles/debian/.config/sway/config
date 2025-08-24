@@ -272,13 +272,11 @@ input type:touchpad {
 exec --no-startup-id bash $HOME/.config/autostart/autostart-script.sh
 exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id /usr/bin/lxpolkit
-#exec --no-startup-id dunst
 
 # Autostart (for sway)
 exec_always --no-startup-id bash $HOME/.config/autostart/swayfx.sh
 exec --no-startup-id waytrogen --restore
 exec --no-startup-id autotiling
-#exec --no-startup-id mako
 
 # Screenshot (flameshot)
 #exec --no-startup-id flameshot

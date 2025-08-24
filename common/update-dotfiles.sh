@@ -141,7 +141,7 @@ else
 	
 	# Mako
 	save_file /.config/mako/ config
-	
+
 	# Nitrogen
 	save_folder /.config/nitrogen/
 	

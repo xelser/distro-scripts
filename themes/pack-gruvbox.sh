@@ -12,7 +12,7 @@ cd /tmp/Colloid-gtk-theme/ && sudo ./install.sh -t all --tweaks gruvbox rimless
 wget -qO- https://git.io/papirus-icon-theme-install | sh
 cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-papirus-folders
 cd gruvbox-papirus-folders && sudo cp -rf src/* /usr/share/icons/Papirus
-papirus_folders=(Papirus Papirus-Dark Papirus-Light ePapirus ePapirus-Dark)
+papirus_folders=(Papirus Papirus-Dark Papirus-Light)
 for icon_theme in "${papirus_folders[@]}"; do 
 	./papirus-folders -u -C gruvbox-mix-yellow -t ${icon_theme}
 done
