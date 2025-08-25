@@ -77,6 +77,9 @@ systemctl enable seatd
 # htpdate
 systemctl enable htpdate
 
+# sleep/suspend/hibernate
+systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+
 ################################### THEMES ###################################
 
 # INSTALL: GTK, KDE, Icon, Cursors

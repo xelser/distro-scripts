@@ -50,9 +50,6 @@ exec swayidle -w \
     timeout 600 'swaymsg "output * dpms off"' \
     resume 'swaymsg "output * dpms on"'
 
-# Start a persistent idle inhibitor so system won't suspend on lid close
-exec swaymsg "inhibit_idle open"
-
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
