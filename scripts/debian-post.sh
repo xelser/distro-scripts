@@ -46,12 +46,6 @@ if [ -f /usr/bin/rofi ]; then
 	sed -i 's/JetBrains Mono Nerd Font 10/RobotoMono Nerd Font 10/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
 fi
 
-# flameshot directory
-mkdir -p $HOME/Pictures/Screenshots
-
 # debloat
 sudo apt autoremove --purge --yes zutty foot
-
-# numlock
-#dconf write /org/gnome/desktop/peripherals/keyboard/numlock-state "true"
 

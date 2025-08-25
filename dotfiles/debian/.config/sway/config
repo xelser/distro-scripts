@@ -163,21 +163,21 @@ exec swayidle -w \
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
 
-    # Toggle the current focus between tiling and floating mode
+# Toggle the current focus between tiling and floating mode
     bindsym $mod+Shift+space floating toggle
 
-    # Swap focus between the tiling area and the floating area
+# Swap focus between the tiling area and the floating area
     bindsym $mod+space focus mode_toggle
 
-    # Move focus to the parent container
+# Move focus to the parent container
     bindsym $mod+a focus parent
 #
 # Scratchpad:
 #
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
 
-    # Move the currently focused window to the scratchpad
+# Move the currently focused window to the scratchpad
     bindsym $mod+Shift+minus move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
@@ -274,10 +274,8 @@ exec_always --no-startup-id bash $HOME/.config/autostart/swayfx.sh
 exec --no-startup-id waytrogen --restore
 exec --no-startup-id autotiling
 
-# Screenshot (flameshot)
-#exec --no-startup-id flameshot
-#bindsym Print exec flameshot full --path /home/xelser/Pictures/Screenshots/
-#bindsym Shift+Print exec flameshot gui --path /home/xelser/Pictures/Screenshots/
+# Screenshot (grimshot)
+bindsym $mod+Shift+s exec grimshot savecopy anything --notify --cursor
 
 # Night light (gammastep)
 #exec --no-startup-id bash $HOME/.config/gammastep/launch.sh
