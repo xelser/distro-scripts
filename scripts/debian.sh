@@ -14,13 +14,12 @@ apt install --yes build-essential synaptic htpdate dconf-cli libglib2.0-bin \
 
 # INSTALL: WM (X11/Wayland)
 apt install --yes xdg-desktop-portal-gtk alacritty mpv imv brightnessctl gammastep \
-  mugshot at-spi2-core transmission-gtk nwg-look flameshot libnotify-bin \
-  lxpolkit engrampa pluma atril pavucontrol blueman \
-  thunar{,-archive-plugin} gvfs-{backends,fuse}
+  mugshot at-spi2-core transmission-gtk nwg-look pavucontrol blueman libnotify-bin \
+  lxpolkit engrampa pluma atril thunar{,-archive-plugin} gvfs-{backends,fuse}
 
 # INSTALL: Sway
-apt install --yes greetd sway{,idle} waybar wofi wlogout mako-notifier \
-  autotiling grimshot wl-clipboard xdg-desktop-portal-wlr seatd
+apt install --yes greetd seatd sway{,idle} waybar wofi wlogout mako-notifier \
+  autotiling grimshot wl-clipboard xdg-desktop-portal-wlr
 
 ################################### BUILD ####################################
 
