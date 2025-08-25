@@ -9,8 +9,9 @@ apt update && apt full-upgrade --yes
 
 # INSTALL: Base
 apt install --yes build-essential synaptic htpdate dconf-cli libglib2.0-bin \
-  pipewire pipewire-audio bluez systemd-zram-generator xfsprogs xdg-desktop-portal \
-  firefox-esr neovim easyeffects lsp-plugins-lv2 fonts-roboto{,-slab}
+  pipewire pipewire-audio pulseaudio-utils easyeffects lsp-plugins-lv2 \
+  bluez systemd-zram-generator xfsprogs xdg-desktop-portal \
+  firefox-esr neovim fonts-roboto{,-slab}
 
 # INSTALL: WM (X11/Wayland)
 apt install --yes xdg-desktop-portal-gtk alacritty mpv imv brightnessctl gammastep \
