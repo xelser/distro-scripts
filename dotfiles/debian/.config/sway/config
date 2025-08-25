@@ -275,7 +275,7 @@ exec --no-startup-id waytrogen --restore
 exec --no-startup-id autotiling
 
 # Screenshot (grimshot)
-bindsym $mod+Shift+s exec grimshot savecopy anything --notify --cursor
+bindsym $mod+Shift+s exec grimshot savecopy anything --notify
 
 # Night light (gammastep)
 #exec --no-startup-id bash $HOME/.config/gammastep/launch.sh
