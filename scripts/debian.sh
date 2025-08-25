@@ -61,23 +61,21 @@ usermod -aG sudo ${user}
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
 
-# greetd
+# greetd user autologin
 echo -e "\n[initial_session]\ncommand = \"sway\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
-systemctl enable greetd
 
-# seatd
-systemctl enable seatd
+# disable sleep/suspend/hibernate
+systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+
+# enable systemd daemons
+for service in greetd seatd htpdate; do
+  systemctl enable $service
+done
 
 # grub
 #sed -i 's/quiet/quiet splash/g' /etc/default/grub
 #sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub
 #update-grub
-
-# htpdate
-systemctl enable htpdate
-
-# sleep/suspend/hibernate
-systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
 ################################### THEMES ###################################
 

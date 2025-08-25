@@ -163,21 +163,21 @@ exec swayidle -w \
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
 
-# Toggle the current focus between tiling and floating mode
+    # Toggle the current focus between tiling and floating mode
     bindsym $mod+Shift+space floating toggle
 
-# Swap focus between the tiling area and the floating area
+    # Swap focus between the tiling area and the floating area
     bindsym $mod+space focus mode_toggle
 
-# Move focus to the parent container
+    # Move focus to the parent container
     bindsym $mod+a focus parent
 #
 # Scratchpad:
 #
 # Sway has a "scratchpad", which is a bag of holding for windows.
 # You can send windows there and get them back later.
-
-# Move the currently focused window to the scratchpad
+    
+    # Move the currently focused window to the scratchpad
     bindsym $mod+Shift+minus move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
@@ -207,6 +207,7 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
 #
 # Utilities:
 #
@@ -218,7 +219,8 @@ bindsym $mod+r mode "resize"
     # Special keys to adjust brightness via brightnessctl
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
-    # Special key to take a screenshot with grim
+    # Special key to take a screenshot with grim, slurp and grimshot
+    bindsym $mod+Shift+s exec grimshot savecopy anything --notify
     bindsym Print exec grim
 
 #
@@ -273,9 +275,6 @@ exec --no-startup-id /usr/bin/lxpolkit
 exec_always --no-startup-id bash $HOME/.config/autostart/swayfx.sh
 exec --no-startup-id waytrogen --restore
 exec --no-startup-id autotiling
-
-# Screenshot (grimshot)
-bindsym $mod+Shift+s exec grimshot savecopy anything --notify
 
 # Night light (gammastep)
 #exec --no-startup-id bash $HOME/.config/gammastep/launch.sh
