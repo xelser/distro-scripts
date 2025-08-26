@@ -9,8 +9,8 @@ max-history=20
 sort=+time
 
 # Position of the notification window.
-output=eDP-1
-anchor=bottom-right
+#output=DP-1
+anchor=top-center
 outer-margin=20
 margin=10
 
