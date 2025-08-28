@@ -3,7 +3,6 @@
 set -e
 
 MEDIA_DIR="/mnt/Media"
-GROUP_NAME="mediaaccess"
 
 # 🔧 Enable and verify a systemd service
 start_and_check_service() {
@@ -20,47 +19,20 @@ start_and_check_service() {
     fi
 }
 
-# 🔐 Set up shared group access to media directory
-setup_media_group_access() {
-    local service_user="$1"
-    echo "[*] Setting up group-based access for $service_user..."
-
-    # Create group if missing
-    if ! getent group "$GROUP_NAME" > /dev/null; then
-        echo "[+] Creating group '$GROUP_NAME'..."
-        sudo groupadd "$GROUP_NAME"
-    fi
-
-    # Add users to group
-    for user in "$service_user" xelser; do
-        if ! id -nG "$user" | grep -qw "$GROUP_NAME"; then
-            echo "[+] Adding $user to $GROUP_NAME..."
-            sudo usermod -aG "$GROUP_NAME" "$user"
-        fi
-    done
-
-    # Apply ownership & permissions
-    echo "[*] Assigning group ownership to $MEDIA_DIR..."
-    sudo chown -R :"$GROUP_NAME" "$MEDIA_DIR"
-
-    echo "[*] Setting permissions on media files and folders..."
-    sudo find "$MEDIA_DIR" -type f -exec chmod 664 {} +
-    sudo find "$MEDIA_DIR" -type d -exec chmod 775 {} +
-    sudo find "$MEDIA_DIR" -type d -exec chmod g+s {} +
-
-    echo "[✓] Group permissions applied. Log out and back in for group changes to take effect."
-}
-
 # 📦 Install Plex
 install_plex() {
     echo "[*] Installing Plex Media Server..."
 
-    if [[ "$ID" == "ubuntu" || "$ID" == "linuxmint" || "$ID" == "debian" ]]; then
-        curl -fsSL https://downloads.plex.tv/plex-keys/PlexSign.key \
-            | gpg --dearmor \
-            | sudo tee /usr/share/keyrings/plex.gpg > /dev/null
-        echo "deb [signed-by=/usr/share/keyrings/plex.gpg] https://downloads.plex.tv/repo/deb public main" \
-            | sudo tee /etc/apt/sources.list.d/plexmediaserver.list
+    if [[ "$ID" == "debian" ]]; then
+        # Use the official Plex repository for Debian
+        curl -fsSL https://downloads.plex.tv/plex-keys/PlexSign.key | gpg --dearmor | sudo tee /usr/share/keyrings/plex.gpg > /dev/null
+        echo "deb [signed-by=/usr/share/keyrings/plex.gpg] https://downloads.plex.tv/repo/deb public main" | sudo tee /etc/apt/sources.list.d/plexmediaserver.list > /dev/null
+        sudo apt update
+        sudo apt install -y plexmediaserver
+
+    elif [[ "$ID" == "ubuntu" || "$ID" == "linuxmint" ]]; then
+        curl -fsSL https://downloads.plex.tv/plex-keys/PlexSign.key | gpg --dearmor | sudo tee /usr/share/keyrings/plex.gpg > /dev/null
+        echo "deb [signed-by=/usr/share/keyrings/plex.gpg] https://downloads.plex.tv/repo/deb public main" | sudo tee /etc/apt/sources.list.d/plexmediaserver.list
         sudo apt update
         sudo apt install -y plexmediaserver
 
@@ -87,7 +59,16 @@ EOF
     fi
 
     start_and_check_service plexmediaserver
-    setup_media_group_access plex
+}
+
+# 🛠 Configure Plex permissions
+configure_plex() {
+    echo "[*] Setting up permissions for Plex..."
+    sudo chown -R plex:plex "$MEDIA_DIR"
+    sudo chmod -R 755 "$MEDIA_DIR"
+
+    echo "[*] Restarting plexmediaserver to apply changes..."
+    sudo systemctl restart plexmediaserver
 }
 
 # 🚀 Entry point
@@ -100,12 +81,12 @@ main() {
     . /etc/os-release
 
     echo "[*] Detected OS: $PRETTY_NAME"
-    echo "[*] Installing Plex Media Server..."
 
     install_plex
+    configure_plex
 
     echo
-    echo "🎉 Plex is installed!"
+    echo "🎉 Plex is installed and configured!"
     echo "🔗 Web UI: http://localhost:32400/web"
     echo "📁 Media directory: $MEDIA_DIR"
     echo "🔐 Ensure port 32400 is open in your firewall for remote access."
