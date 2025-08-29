@@ -61,16 +61,6 @@ EOF
     start_and_check_service plexmediaserver
 }
 
-# 🛠 Configure Plex permissions
-configure_plex() {
-    echo "[*] Setting up permissions for Plex..."
-    sudo chown -R plex:plex "$MEDIA_DIR"
-    sudo chmod -R 755 "$MEDIA_DIR"
-
-    echo "[*] Restarting plexmediaserver to apply changes..."
-    sudo systemctl restart plexmediaserver
-}
-
 # 🚀 Entry point
 main() {
     if [ ! -f /etc/os-release ]; then
