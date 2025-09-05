@@ -8,15 +8,16 @@ sed -i -E 's/non-free-firmware/non-free-firmware non-free contrib/g' /etc/apt/so
 apt update && apt full-upgrade --yes
 
 # INSTALL: Base
-apt install --yes build-essential synaptic htpdate dconf-cli libglib2.0-bin \
+apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
   pipewire pipewire-audio pulseaudio-utils easyeffects lsp-plugins-lv2 \
-  bluez systemd-zram-generator xfsprogs xdg-desktop-portal \
+  bluez systemd-zram-generator xfsprogs xdg-desktop-portal libnotify-bin \
   firefox-esr neovim fonts-roboto{,-slab}
 
 # INSTALL: WM (X11/Wayland)
-apt install --yes xdg-desktop-portal-gtk alacritty mpv imv brightnessctl gammastep \
-  mugshot at-spi2-core transmission-gtk nwg-look pavucontrol blueman libnotify-bin \
-  lxpolkit engrampa pluma atril thunar{,-archive-plugin} gvfs-{backends,fuse}
+apt install --yes xdg-desktop-portal-gtk alacritty mpv imv brightnessctl \
+  mugshot at-spi2-core transmission-gtk nwg-look pavucontrol blueman lxpolkit \
+  engrampa pluma atril thunar{,-archive-plugin} gvfs-{backends,fuse}
+  # gammastep
 
 # INSTALL: Sway
 apt install --yes greetd seatd sway{,idle} waybar wofi wlogout mako-notifier \
