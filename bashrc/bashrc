@@ -1,0 +1,65 @@
+#!/bin/bash
+# ~/.bashrc: Distro-Agnostic Bash Configuration
+
+# If not running interactively, don't do anything
+case $- in
+    *i*) ;;
+    *) return;;
+esac
+
+## Core Bash Settings ##
+
+# Don't put duplicate lines or lines starting with space in the history.
+HISTCONTROL=ignoreboth
+shopt -s histappend
+
+# For setting history length see HISTSIZE and HISTFILESIZE in bash(1)
+HISTSIZE=1000
+HISTFILESIZE=2000
+
+# Check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# Make `less` more friendly for non-text input files
+if [ -x /usr/bin/lesspipe ]; then
+    eval "$(SHELL=/bin/sh lesspipe)"
+fi
+
+## Bash Completion ##
+
+# Enable programmable completion features.
+# This is a standard check for the bash_completion script.
+if ! shopt -oq posix; then
+  if [ -f /usr/share/bash-completion/bash_completion ]; then
+    . /usr/share/bash-completion/bash_completion
+  elif [ -f /etc/bash_completion ]; then
+    . /etc/bash_completion
+  fi
+fi
+
+## Color Enhancements ##
+
+# Enable color support of ls and also add handy aliases for colored output.
+# You can move these to your ~/.bash_aliases if you prefer to have all aliases in one place.
+if [ -x /usr/bin/dircolors ]; then
+    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    # The default ls alias on most systems.
+    alias ls='ls --color=auto'
+    
+    # Aliases for colorized output of other common commands
+    alias grep='grep --color=auto'
+    alias egrep='egrep --color=auto'
+    alias fgrep='fgrep --color=auto'
+    alias ip='ip -c'
+    alias dmesg='dmesg -L --color=always'
+    alias diff='diff --color=always'
+    alias less='less -r' # enables raw color characters in `less`
+fi
+
+## Sourcing Personal Files ##
+
+# Source user-specific aliases
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi

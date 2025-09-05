@@ -51,7 +51,7 @@ fi
 sudo cp -rf ${source_dir}/common/env.sh ${root_mnt}/etc/profile.d/
 
 ## Bash Configs ##
-cp -rf ${root_mnt}/etc/skel/.bashrc ${root_mnt}/home/${user}/.bashrc
+cat ${source_dir}/bashrc/bashrc > ${root_mnt}/home/${user}/.bashrc
 cat ${source_dir}/bashrc/${distro_id}_bashrc >> ${root_mnt}/home/${user}/.bashrc
 cat ${source_dir}/common/bash_profile > ${root_mnt}/home/${user}/.bash_profile
 cat ${source_dir}/common/bash_aliases > ${root_mnt}/home/${user}/.bash_aliases
