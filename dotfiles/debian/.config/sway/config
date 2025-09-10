@@ -246,6 +246,10 @@ bindsym $mod+r mode "resize"
 # User Configs:
 #
 
+# Custom Keybinds
+bindsym $mod+Shift+f exec thunar
+bindsym $mod+Shift+w exec brave
+
 # Sway Bar: Waybar
 bar swaybar_command waybar
 
