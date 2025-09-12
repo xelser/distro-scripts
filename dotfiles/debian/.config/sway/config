@@ -246,21 +246,6 @@ bindsym $mod+r mode "resize"
 # User Configs:
 #
 
-# Custom Keybinds
-bindsym $mod+Shift+f exec thunar
-bindsym $mod+Shift+w exec brave
-
-# Sway Bar: Waybar
-bar swaybar_command waybar
-
-# XWayland
-xwayland disable
-
-# Windows
-default_floating_border none
-default_border none
-gaps inner 10
-
 # NumLock
 input type:keyboard xkb_numlock enabled
 
@@ -270,13 +255,45 @@ input type:touchpad {
     natural_scroll enabled
 }
 
+# Custom Keybinds
+bindsym $mod+Shift+f exec thunar
+bindsym $mod+Shift+w exec brave
+
+# XWayland
+xwayland disable
+
+# Windows
+default_floating_border none
+default_border none
+gaps inner 10
+
+# Sway Bar: Waybar
+bar swaybar_command waybar
+
+# SwayFX
+corner_radius 10
+shadows enable
+blur enable
+
+layer_effects "logout_dialog" blur enable
+
+layer_effects "waybar" {
+    blur enable;
+    blur_xray enable;
+    shadows enable;
+}
+
+layer_effects "wofi" {
+    corner_radius 10;
+    shadows enable;
+}
+
 # Autostart (Global)
 exec --no-startup-id bash $HOME/.config/autostart/autostart-script.sh
 exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id /usr/bin/lxpolkit
 
 # Autostart (for sway)
-exec_always --no-startup-id bash $HOME/.config/autostart/swayfx.sh
 exec --no-startup-id waytrogen --restore
 exec --no-startup-id autotiling
 
