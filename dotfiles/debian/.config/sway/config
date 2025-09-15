@@ -267,6 +267,11 @@ default_floating_border none
 default_border none
 gaps inner 10
 
+# Floating Windows
+for_window [title="Compress"] floating enable
+for_window [title="Picture in picture"] floating enable
+for_window [title="File Operation Progress"] floating enable
+
 # Sway Bar: Waybar
 bar swaybar_command waybar
 
