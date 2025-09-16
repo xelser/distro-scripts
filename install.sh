@@ -52,13 +52,18 @@ sudo cp -rf ${source_dir}/common/env.sh ${root_mnt}/etc/profile.d/
 
 ## Bash Configs ##
 cat ${source_dir}/bashrc/bashrc > ${root_mnt}/home/${user}/.bashrc
-cat ${source_dir}/bashrc/${distro_id}_bashrc >> ${root_mnt}/home/${user}/.bashrc
+
+if [ -f ${source_dir}/bashrc/${distro_id}_bashrc ]; then
+	cat ${source_dir}/bashrc/${distro_id}_bashrc >> ${root_mnt}/home/${user}/.bashrc
+fi
+
 cat ${source_dir}/common/bash_profile > ${root_mnt}/home/${user}/.bash_profile
 cat ${source_dir}/common/bash_aliases > ${root_mnt}/home/${user}/.bash_aliases
 
 ## Post Install Script ##
 mkdir -p ${root_mnt}/home/${user}/.config
 cp -rf ${source_dir}/post.sh ${root_mnt}/home/${user}/.config/post.sh
+
 if [ -f ${source_dir}/scripts/${distro_id}-post.sh ]; then
 	cp -rf ${source_dir}/scripts/${distro_id}-post.sh \
 	${root_mnt}/home/${user}/.config/${distro_id}-post.sh

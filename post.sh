@@ -25,20 +25,14 @@ sudo timedatectl set-ntp true
 
 # Essential Packages
 if [ -f /usr/bin/apt ]; then sudo apt install --yes \
-	flatpak fastfetch htop inxi zip un{zip,rar} tar ffmpeg ffmpegthumbnailer \
-	tumbler gvfs xdg-user-dirs dconf-editor wget curl git sassc \
-	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf gh openssh-client \
-	intel-media-va-driver-non-free linux-cpupower
+	flatpak fastfetch htop inxi zip un{zip,rar} tar ffmpeg ffmpegthumbnailer gvfs xdg-user-dirs dconf-editor wget curl git sassc \
+	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf gh openssh-client intel-media-va-driver-non-free linux-cpupower
 elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
-	flatpak fastfetch htop inxi zip un{zip,rar} tar ffmpeg ffmpegthumbnailer \
-	tumbler gvfs xdg-user-dirs dconf-editor wget curl git sassc \
-	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines github-cli openssh \
-	intel-media-driver cpupower
+	flatpak fastfetch htop inxi zip un{zip,rar} tar ffmpeg ffmpegthumbnailer gvfs xdg-user-dirs dconf-editor wget curl git sassc \
+	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines github-cli openssh intel-media-driver cpupower
 elif [ -f /usr/bin/dnf5 ]; then sudo dnf5 install --assumeyes --best --allowerasing \
-	flatpak fastfetch htop inxi zip un{zip,rar} tar ffmpeg ffmpegthumbnailer \
-	tumbler gvfs xdg-user-dirs dconf-editor wget curl git sassc \
-	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines gh openssh \
-	libva-intel-media-driver kernel-tools
+	flatpak fastfetch htop inxi zip un{zip,rar} tar ffmpeg ffmpegthumbnailer gvfs xdg-user-dirs dconf-editor wget curl git sassc \
+	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines gh openssh libva-intel-media-driver kernel-tools
 fi
 
 # Update User Dirs
