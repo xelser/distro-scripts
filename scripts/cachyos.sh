@@ -17,6 +17,16 @@ yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownl
 
 ################################### CONFIG ###################################
 
+# root label
+partition="$(lsblk --raw -o name,mountpoint | grep '^[^/]*/[^/]*$' | cut -d' ' -f1)"
+sudo e2label /dev/${partition} "CachyOS"
+
+# lightdm
+echo -e "\n[Seat:*]
+autologin-user=${user}
+autologin-session=cinnamon" | sudo tee -a /etc/lightdm/lightdm.conf
+sudo groupadd -r autologin ; sudo gpasswd -a ${user} autologin
+
 ################################### THEMES ###################################
 
 # INSTALL: GTK, KDE, Icon, Cursors
