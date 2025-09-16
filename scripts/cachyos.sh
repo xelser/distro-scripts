@@ -13,7 +13,8 @@ if [[ ${wm_de} == "cinnamon" ]]; then sudo pacman -S --needed --noconfirm \
 fi
 
 # INSTALL: AUR/Others
-yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save
+yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
+	update-grub neovim-symlinks
 
 ################################### CONFIG ###################################
 
