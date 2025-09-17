@@ -18,6 +18,10 @@ yay -Syyu --needed --noconfirm --removemake --cleanafter --norebuild --noredownl
 
 ################################### CONFIG ###################################
 
+# cpu governor
+sudo cpupower frequency-set -g performance
+sudo systemctl enable cpupower --now
+
 # root label
 partition="$(lsblk --raw -o name,mountpoint | grep '^[^/]*/[^/]*$' | cut -d' ' -f1)"
 sudo e2label /dev/${partition} "CachyOS"
