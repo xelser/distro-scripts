@@ -1,7 +1,8 @@
 [:b1dcc9dd-5262-4d8d-a863-c897e6d979b9]
 background-transparency-percent=6
-default-size-columns=140
-default-size-rows=40
+cursor-shape='underline'
+default-size-columns=130
+default-size-rows=38
 font='Ubuntu Mono 10.5'
 palette=['rgb(40,40,40)', 'rgb(242,89,75)', 'rgb(176,184,70)', 'rgb(233,177,67)', 'rgb(128,170,158)', 'rgb(211,134,155)', 'rgb(139,186,127)', 'rgb(168,153,132)', 'rgb(124,111,100)', 'rgb(242,89,75)', 'rgb(176,184,70)', 'rgb(233,177,67)', 'rgb(128,170,158)', 'rgb(211,134,155)', 'rgb(139,186,127)', 'rgb(221,199,161)']
 scrollback-unlimited=false
