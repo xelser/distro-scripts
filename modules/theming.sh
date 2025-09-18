@@ -61,7 +61,7 @@ fi
 sudo rm -rf /usr/share/icons/default
 sudo ln -sf "/usr/share/icons/${cursor_theme}" /usr/share/icons/default
 
-#mkdir -p $HOME/.icons/default && echo -e "[Icon Theme]\nInherits=${cursor_theme}" > $HOME/.icons/default/index.theme
+mkdir -p $HOME/.icons/default && echo -e "[Icon Theme]\nInherits=${cursor_theme}" > $HOME/.icons/default/index.theme
 #echo -e "[Icon Theme]\nInherits=${cursor_theme}" | sudo tee -a /usr/share/icons/default/index.theme 1> /dev/null
 
 flatpak override --user --filesystem=/home/$USER/.icons/:ro
