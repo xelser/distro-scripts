@@ -64,7 +64,7 @@ usermod -aG sudo ${user}
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
 
 # greetd user autologin
-echo -e "\n[initial_session]\ncommand = \"sway\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
+echo -e "\n[initial_session]\ncommand = \"bash -l -c sway\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
 
 # disable sleep/suspend/hibernate
 systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
