@@ -1,17 +1,17 @@
 #!/bin/bash
 
-# Install: Wine Dependencies (Source: Lutris Docs)
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/lutris_wine_dep.sh)"
+# Install: Steam, Gamemode & MangoHud
+[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm steam mangohud gamemode vulkan-tools mesa-demos
+	# lutris gamescope libayatana-appindicator lib32-gamemode lib32-mangohud
 
-# Install: Steam, Lutris, Gamemode & MangoHud
-[ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm steam lutris {lib32-,}gamemode {lib32-,}mangohud \
-	gamescope libayatana-appindicator vulkan-tools mesa-demos
-		
-[ -f /usr/bin/apt ] && sudo apt install --yes steam lutris gamemode{,:i386} mangohud \
-	gamescope libayatana-appindicator3 vulkan-tools mesa-utils-bin
-	
-[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes steam lutris gamemode.{x86_64,i686} mangohud.{x86_64,i686} \
-	gamescope libayatana-appindicator-gtk3 vulkan-tools mesa-demos 
+[ -f /usr/bin/dnf ] && sudo dnf install --assumeyes steam mangohud gamemode vulkan-tools mesa-demos
+	# lutris gamescope libayatana-appindicator-gtk3 mangohud.i686 gamemode.i686
+
+[ -f /usr/bin/apt ] && sudo apt install --yes steam mangohud gamemode vulkan-tools mesa-utils-bin
+	# lutris gamescope libayatana-appindicator3 gamemode:i386
+
+# Install: Lutris Wine Deps
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/lutris_wine_dep.sh)"
 
 ################################### FLATPAK ##################################
 
