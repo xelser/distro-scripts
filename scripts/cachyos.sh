@@ -9,7 +9,7 @@ sudo pacman -Syyu --needed --noconfirm base-devel yay grub-hook numlockx \
 
 # INSTALL: CachyOS DE/WM
 if [[ ${wm_de} == "cinnamon" ]]; then sudo pacman -S --needed --noconfirm \
-	xreader xed celluloid eog transmission-gtk
+	xreader xed celluloid eog transmission-gtk lightdm-gtk-greeter-settings
 fi
 
 # INSTALL: AUR/Others
