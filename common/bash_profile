@@ -1,8 +1,8 @@
 
-export machine_type="$(sudo dmidecode -s chassis-type)"
-export machine="$(sudo dmidecode -s system-product-name | cut -d' ' -f2)"
-export distro_id="$(grep '^ID=' /etc/os-release | cut -d'=' -f2 | cut -d'"' -f2)"
-export wm_de="$(inxi -S | grep 'Desktop' | cut -d' ' -f4 | tr '[:upper:]' '[:lower:]')"
+# source .profile if it exists
+if [ -f "$HOME/.profile" ]; then
+	. "$HOME/.profile"
+fi
 
-# Update PATH
+# update $PATH
 export PATH=$PATH:/var/lib/flatpak/exports/bin:$HOME/.local/share/flatpak/exports/bin:$HOME/.local/bin

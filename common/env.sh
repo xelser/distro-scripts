@@ -10,3 +10,12 @@ if [ -f /usr/bin/qt5ct ]; then
 	export QT_QPA_PLATFORM="xcb"
 	export QT_QPA_PLATFORMTHEME="qt5ct"
 fi
+
+# Custom ID
+export distro_id="$(grep '^ID=' /etc/os-release | cut -d'=' -f2 | cut -d'"' -f2)"
+
+if [ -z ${XDG_CURRENT_DESKTOP} ]; then
+	export wm_de="$(echo $DESKTOP_SESSION | cut -d'-' -f2 | cut -d':' -f1 | tr '[:upper:]' '[:lower:]')"
+else
+	export wm_de="$(echo $XDG_CURRENT_DESKTOP | cut -d'-' -f2 | cut -d':' -f1 | tr '[:upper:]' '[:lower:]')"
+fi
