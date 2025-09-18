@@ -112,3 +112,10 @@ else
 	setup_wm
 fi
 
+################################### CONFIG ###################################
+
+# cpucpower
+sudo cpupower frequency-set -g performance
+sudo systemctl enable --now cpupower
+
+
