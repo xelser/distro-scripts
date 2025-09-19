@@ -59,7 +59,7 @@ setup_media_group_access() {
     done
 
     echo "[*] Setting ownership and permissions for $MEDIA_DIR..."
-    sudo chown -R root:"$GROUP_NAME" "$MEDIA_DIR"
+    sudo chown -R "$current_user":"$GROUP_NAME" "$MEDIA_DIR"
     sudo find "$MEDIA_DIR" -type d -exec chmod 775 {} +
     sudo find "$MEDIA_DIR" -type f -exec chmod 664 {} +
     sudo find "$MEDIA_DIR" -type d -exec chmod g+s {} +
