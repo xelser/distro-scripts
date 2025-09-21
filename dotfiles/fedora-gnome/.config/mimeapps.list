@@ -1,14 +1,14 @@
 [Default Applications]
-x-scheme-handler/http=org.gnome.Epiphany.desktop
-text/html=org.gnome.Epiphany.desktop
+x-scheme-handler/http=brave-browser.desktop
+text/html=brave-browser.desktop
 application/xhtml+xml=org.gnome.Epiphany.desktop
-x-scheme-handler/https=org.gnome.Epiphany.desktop
+x-scheme-handler/https=brave-browser.desktop
 application/x-shellscript=org.gnome.TextEditor.desktop
 text/css=org.gnome.TextEditor.desktop
 application/json=org.gnome.TextEditor.desktop
 application/x-desktop=org.gnome.TextEditor.desktop
-x-scheme-handler/about=google-chrome.desktop
-x-scheme-handler/unknown=google-chrome.desktop
+x-scheme-handler/about=brave-browser.desktop
+x-scheme-handler/unknown=brave-browser.desktop
 text/markdown=org.gnome.TextEditor.desktop
 
 [Added Associations]
