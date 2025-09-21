@@ -17,14 +17,6 @@ gsettings set org.cinnamon.desktop.interface cursor-theme 'Capitaine Cursors (Gr
 # Set Monospaced font
 gsettings set org.gnome.desktop.interface monospace-font-name "Ubuntu Mono 10"
 
-# Remove Duplicate Chrome .desktop file
-#sudo rm -rf /usr/share/applications/com.google.Chrome.desktop
-
 # Remove Warpinator Folder
 rm -rf $HOME/Warpinator/
 
-################################### FLATPAK ##################################
-
-# INSTALL: Linux Mint
-flatpak install --assumeyes --noninteractive flathub \
-  com.bitwarden.desktop io.missioncenter.MissionCenter

@@ -10,12 +10,7 @@ sudo sed -i 's/archive.ubuntu.com/mirror.rise.ph/g' \
   /etc/apt/sources.list.d/official-package-repositories.list
 
 # DEBLOAT
-sudo apt autoremove --purge rhythmbox hypnotix papirus-icon-theme libreoffice-*
-
-# ADD REPO: Google Chrome
-#wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
-#echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" | \
-#sudo tee /etc/apt/sources.list.d/google-chrome.list
+sudo apt autoremove --purge --yes rhythmbox hypnotix papirus-icon-theme libreoffice-*
 
 # UPDATE
 sudo apt update && sudo apt upgrade --yes
