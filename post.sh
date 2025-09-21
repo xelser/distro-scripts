@@ -32,7 +32,7 @@ elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
 	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines github-cli openssh intel-media-driver
 elif [ -f /usr/bin/dnf5 ]; then sudo dnf5 install --assumeyes --best --allowerasing \
 	flatpak fastfetch htop inxi zip un{zip,rar} tar ffmpeg ffmpegthumbnailer gvfs xdg-user-dirs dconf-editor wget curl git sassc \
-	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines gh openssh libva-intel-media-driver
+	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines gh openssh {libva-,}intel-media-driver
 fi
 
 # Update User Dirs
