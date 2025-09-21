@@ -10,7 +10,7 @@ sudo sed -i 's/archive.ubuntu.com/mirror.rise.ph/g' \
   /etc/apt/sources.list.d/official-package-repositories.list
 
 # DEBLOAT
-sudo apt autoremove --purge --yes rhythmbox hypnotix papirus-icon-theme libreoffice-*
+sudo apt autoremove --purge --yes rhythmbox hypnotix papirus-icon-theme libreoffice-* firefox
 
 # UPDATE
 sudo apt update && sudo apt upgrade --yes

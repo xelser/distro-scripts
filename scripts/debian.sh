@@ -74,6 +74,11 @@ for service in greetd seatd htpdate; do
   systemctl enable $service
 done
 
+# secureboot
+echo -e "#!/bin/sh
+grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=debian --removable" > /etc/kernel/postinst.d/zz-update-grub-removable
+chmod +x /etc/kernel/postinst.d/zz-update-grub-removable
+
 # grub
 sed -i 's/quiet/quiet splash/g' /etc/default/grub
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/g' /etc/default/grub

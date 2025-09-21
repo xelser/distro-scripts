@@ -357,13 +357,10 @@
             "org.gnome.Terminal.desktop"
         ],
         "value": [
-            "com.bitwarden.desktop.desktop:flatpak",
-            "firefox.desktop",
             "brave-browser.desktop",
             "org.gnome.Terminal.desktop",
             "nemo.desktop",
-            "transmission-gtk.desktop",
-            "nl.jknaapen.fladder.desktop:flatpak"
+            "transmission-gtk.desktop"
         ]
     },
     "__md5__": "b7d0a7558cf87c22c50195c9d408485f"
