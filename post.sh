@@ -162,7 +162,7 @@ elif [[ ${wm_de} == "gnome" ]]; then
 elif [[ ${wm_de} == "kde" ]]; then
 	systemsettings kcm_users >&/dev/null
 	cp -rf /var/lib/AccountsService/icons/$USER $HOME/.face
-else
+elif [ -f /usr/bin/mugshot ]; then
 	mugshot >&/dev/null
 fi
 
@@ -178,6 +178,8 @@ elif [[ ${wm_de} == "kde" ]]; then
 	qdbus org.kde.ksmserver /KSMServer logout 0 0 2
 elif [[ ${wm_de} == "i3" ]]; then
 	i3-msg exit
+else
+	loginctl terminate-session $(loginctl session-status | head -n 1 | awk '{print $1}')
 fi
 
 }
@@ -189,7 +191,7 @@ if [ $? -eq 0 ]; then
 	   *)	echo "Logging out... "
 	   	rm $HOME/.config/${distro_id}-post.sh
 	   	rm $HOME/.config/post.sh
-	   	logout;;
+	   	loginctl terminate-session $(loginctl session-status | head -n 1 | awk '{print $1}');;
 	esac
 else echo "Error Detected. Logout Cancelled"
 fi
