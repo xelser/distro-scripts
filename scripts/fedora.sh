@@ -10,43 +10,48 @@ append_file () {
 echo -e "[main]\nkeepcache=True\ndefaultyes=True\ninstall_weak_deps=False\nmax_parallel_downloads=5
 color=always" | sudo tee /etc/dnf/libdnf5.conf.d/20-user-settings.conf 1> /dev/null
 
+# DEBLOAT
+sudo dnf remove --assumeyes @guest-desktop-agents @container-management @libreoffice \
+  gnome-{contacts,characters,connections,font-viewer,tour,clocks,weather,maps} \
+  rhythmbox mediawriter simple-scan fedora-bookmarks totem ptyxis firefox \
+  gnome-shell-extension-\* libreoffice-\*
+
 # ADD REPO: RPMFUSION
 sudo dnf list --installed | grep -q "rpmfusion" || sudo dnf install --assumeyes --skip-broken \
   https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
   https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
-# Fedora Workstation
+# UPDATE
+sudo dnf upgrade @core @sound-and-video @multimedia --assumeyes --best --allowerasing \
+  --skip-unavailable --exclude=PackageKit-gstreamer-plugin
+
+# INSTALL: Fedora Base
+sudo dnf install --assumeyes --skip-broken --allowerasing easyeffects lsp-plugins-lv2 nvim wl-clipboard 
+
+# INSTALL: Fedora Variants
 if [ $(grep VARIANT_ID /etc/os-release | cut -d '=' -f2) = "workstation" ]; then
   
   # DISABLE SUSPEND ON AC
   gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "nothing"
-  
-  # DEBLOAT
-  sudo dnf remove --assumeyes @guest-desktop-agents @container-management @libreoffice \
-    rhythmbox mediawriter simple-scan fedora-bookmarks totem ptyxis libreoffice-\* \
-    gnome-{contacts,characters,connections,font-viewer,tour,clocks,weather,maps} \
-    gnome-shell-extension-\*
 
   # INSTALL: Fedora Workstation
-  sudo dnf install --assumeyes --skip-broken --allowerasing easyeffects lsp-plugins-lv2 \
-    gnome-{builder,console,extensions-app,tweaks} file-roller fragments celluloid drawing \
-    nvim wl-clipboard libheif-tools
+  sudo dnf install --assumeyes --skip-broken --allowerasing \
+    gnome-{builder,console,extensions-app,tweaks} libheif-tools \
+    file-roller fragments celluloid
   
   # inkscape telegram discord video-downloader syncthing touchegg
-  # gnome-shell-extension-{light-style,user-theme} google-roboto-{fonts,mono-fonts,slab-fonts}
+  # gnome-shell-extension-{light-style,user-theme}
 else
+
   # INSTALL: Fedora Sway
-  sudo dnf install --assumeyes --skip-broken --allowerasing xdg-desktop-portal-{wlr,gtk} \
-    sway{,bg,idle} greetd seatd waybar wofi mako grimshot imv mpv alacritty brightnessctl \
-    transmission-gtk pavucontrol easyeffects lsp-plugins-lv2 nvim wl-clipboard \
+  sudo dnf install --assumeyes --skip-broken --allowerasing greetd seatd \
+    xdg-desktop-portal-{wlr,gtk} sway{,bg,idle} waybar wofi mako grimshot \
+    brightnessctl imv mpv alacritty transmission-gtk pavucontrol \
+    google-roboto-{fonts,mono-fonts,slab-fonts} \
     mate-polkit atril pluma engrampa caja
 
   # swayfx nwg-look waypaper autotiling mugshot 
 fi
-
-# UPDATE
-sudo dnf upgrade @core @sound-and-video @multimedia --assumeyes --best --allowerasing \
-  --skip-unavailable --exclude=PackageKit-gstreamer-plugin
 
 # INSTALL: Brave Browser
 curl -fsS https://dl.brave.com/install.sh | sh
