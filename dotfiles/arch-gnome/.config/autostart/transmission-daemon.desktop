@@ -1,8 +1,0 @@
-[Desktop Entry]
-Name=Transmission Daemon
-Comment=Starts Transmission Service
-Exec=transmission-daemon
-Icon=transmission
-StartupNotify=false
-Terminal=false
-Type=Application
