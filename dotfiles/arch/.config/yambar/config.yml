@@ -1,0 +1,14 @@
+bar:
+  height: 40
+  location: top
+  background: 000000ff
+  font: JetBrainsMono Nerd Font:style=ExtraBold:pixelsize=12
+
+  right:
+    - clock:
+        content:
+          - string: {text:  }
+          - string: {text: "{date}", right-margin: 5}
+          - string: {text:   } 
+          - string: {text: "{time}"}
+

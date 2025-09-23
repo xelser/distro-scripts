@@ -1,0 +1,103 @@
+# =========================================================================
+# GENERAL
+# =========================================================================
+# The maximum number of notifications to keep in the history buffer.
+max-history=20
+
+# Sort notifications by time (+time) or priority (+priority).
+# Corresponds to `dunst`'s `sort` setting.
+sort=+time
+
+# Position of the notification window.
+#output=DP-1
+anchor=top-center
+outer-margin=20
+margin=10
+
+# The width and height of the notification window.
+width=300
+height=300
+
+# The padding inside the notification window.
+padding=8
+
+# The size of the border around each notification.
+border-size=3
+
+# Notifications can have rounded corners.
+border-radius=10
+
+# The font used for the notification text.
+font=RobotoMono Nerd Font 10
+
+# Markup parsing.
+# Both configs have this enabled implicitly or explicitly.
+markup=1
+
+# Format for the notification text.
+# Both configs have the same format string.
+#format=<b>%s</b>\n──────────\n%b
+format=<b>%s</b>\n%b
+
+# Text alignment.
+text-alignment=center
+
+# The default duration a notification is shown (in milliseconds).
+default-timeout=10000
+
+# Ignore the timeout.
+ignore-timeout=1
+
+# Maximum number of visible notifications.
+max-visible=20
+
+# Show notifications over fullscreen applications.
+layer=overlay
+
+# =========================================================================
+# ICONS
+# =========================================================================
+# Mako handles icon theming by default, as long as `icons` is enabled.
+icons=1
+icon-path=/usr/share/icons/Papirus-Dark
+icon-location=left
+max-icon-size=32
+
+# =========================================================================
+# ACTIONS AND HISTORY
+# ============================================:=============================
+
+on-button-left=invoke-default-action
+on-button-middle=dismiss-group
+on-button-right=dismiss
+on-touch=invoke-default-action
+
+on-notify=exec mpv /usr/share/sounds/freedesktop/stereo/message.oga
+history=1
+actions=1
+
+# =========================================================================
+# COLORS
+# =========================================================================
+
+background-color=#141617
+text-color=#d4be98
+border-color=#1d2021
+progress-color=over #3c3836
+
+# =========================================================================
+# URGENCY LEVELS
+# =========================================================================
+
+[urgency=low]
+border-color=#1d2021
+default-timeout=5000
+
+[urgency=normal]
+border-color=#504945
+
+[urgency=high]
+background-color=#3c1f1e
+border-color=#ea6962
+default-timeout=0
+
