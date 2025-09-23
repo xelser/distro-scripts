@@ -45,7 +45,7 @@ else
 
   # INSTALL: Fedora Sway
   sudo dnf install --assumeyes --skip-broken --allowerasing greetd seatd \
-    xdg-desktop-portal-{wlr,gtk} sway{,bg,idle} waybar wofi mako grimshot \
+    xdg-desktop-portal-{wlr,gtk} sway{fx,bg,idle} waybar wofi mako grimshot \
     brightnessctl imv mpv alacritty transmission-gtk pavucontrol \
     google-roboto-{fonts,mono-fonts,slab-fonts} \
     mate-polkit atril pluma engrampa caja
