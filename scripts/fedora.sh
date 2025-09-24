@@ -26,7 +26,8 @@ sudo dnf upgrade @core @sound-and-video @multimedia --assumeyes --best --allower
   --skip-unavailable --exclude=PackageKit-gstreamer-plugin
 
 # INSTALL: Fedora Base
-sudo dnf install --assumeyes --skip-broken --allowerasing easyeffects lsp-plugins-lv2 nvim wl-clipboard 
+sudo dnf install --assumeyes --skip-broken --allowerasing \
+  power-profiles-daemon easyeffects lsp-plugins-lv2 nvim wl-clipboard 
 
 # INSTALL: Fedora Variants
 if [ $(grep VARIANT_ID /etc/os-release | cut -d '=' -f2) = "workstation" ]; then
