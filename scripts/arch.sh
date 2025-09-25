@@ -8,10 +8,6 @@ set -euo pipefail
 ## ROOT PASSWORD ##
 read -p "Password: " -s psswrd
 
-## USER ##
-printf "\n"
-read -p "Enter a username for the new user: " user
-
 ## PARTITIONING ##
 clear
 printf "Partitioning:\n"
