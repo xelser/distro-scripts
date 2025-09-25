@@ -51,12 +51,12 @@ else
   
   # INSTALL: Fedora Sway
   sudo dnf install --assumeyes --skip-broken --allowerasing \
-    swayfx wofi mako nwg-look waypaper \
+    swayfx wofi mako nwg-look waypaper mate-polkit \
     google-roboto-{fonts,mono-fonts,slab-fonts} 
 
   #xdg-desktop-portal-{wlr,gtk} \
     #sway{fx,bg,idle} seatd foot waybar grimshot brightnessctl imv mpv \
-    #mate-polkit atril pluma engrampa caja pavucontrol blueman \
+    # atril pluma engrampa caja pavucontrol blueman \
     #transmission-gtk
 
   # autotiling mugshot wofi mako
