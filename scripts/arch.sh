@@ -70,7 +70,6 @@ btrfs_setup () {
     
   # reset and remount
   cd / && umount -R /mnt
-  # NOTE: Removed 'commit=120' from your original btrfs options as it is non-standard
   mount -o defaults,noatime,compress=zstd,subvol=@ /dev/${device}${root} /mnt
   
   # mount the subvolumes
@@ -162,10 +161,10 @@ echo "arch" > /etc/hostname
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 pacman -Sy --needed --noconfirm linux linux-{headers,firmware} base-devel reflector \
-  xfsprogs {intel,amd}-ucode grub os-prober efibootmgr dosfstools networkmanager gvfs \
+  xfsprogs {intel,amd}-ucode grub os-prober efibootmgr dosfstools snapper networkmanager gvfs \
   pipewire-{alsa,audio,jack,pulse} wireplumber easyeffects lsp-plugins-lv2 ecasound \
   bluez{,-utils} xdg-desktop-portal cpupower zram-generator inetutils dmidecode inxi \
-  neovim{,-plugins} plymouth
+  neovim{,-plugins} plymouth sbctl # sbctl added for secureboot setup
 
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
@@ -193,6 +192,42 @@ mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=${grub_target}
 
 EOF
+}
+
+secure_boot_setup() {
+# This function checks for EFI/Secure Boot and configures it using sbctl
+
+# Check if the system booted with EFI (which is required for Secure Boot)
+if [ -d "/sys/firmware/efi" ]; then
+    echo "EFI detected. Checking for Secure Boot status..."
+    
+    # Check if Secure Boot is already enabled (a simple heuristic check)
+    if dmesg | grep -q "Secure Boot is enabled"; then
+        echo "Secure Boot is ENABLED. Proceeding with sbctl configuration."
+        
+        arch-chroot /mnt /bin/bash <<EOF
+        printf "Creating Secure Boot keys...\n"
+        sbctl create-keys
+        printf "Generating and signing Unified Kernel Image...\n"
+        sbctl generate-bundles --sign
+        
+        # Create a new boot entry that points to the signed UKI
+        # NOTE: This assumes an EFI system where the EFI partition is mounted at /boot/efi
+        efibootmgr --create --disk "/dev/${device}" --part "${efi}" --label "Arch Linux SB" --loader /EFI/Linux/arch-linux.efi
+EOF
+
+        # Enroll keys on the host system (requires user interaction)
+        printf "\n--- Secure Boot Key Enrollment ---\n"
+        printf "You will now be prompted to enroll the Secure Boot keys. This is an essential step that requires user input.\n"
+        read -rp "Press Enter to continue with key enrollment..."
+        arch-chroot /mnt sbctl enroll-keys --microsoft
+        printf "Secure Boot setup is complete!\n"
+    else
+        echo "EFI detected, but Secure Boot is currently DISABLED or Unknown. Skipping sbctl setup."
+    fi
+else
+    echo "Non-EFI system detected. Skipping Secure Boot configuration."
+fi
 }
 
 arch_sway () { arch-chroot /mnt /bin/bash << EOF
@@ -297,7 +332,7 @@ echo "---------------------"
 read -p "Proceed? (Y/n): " confirm
 case $confirm in
   n)  ;;
-  *|Y) partitioning && arch_base
+  *|Y) partitioning && arch_base && secure_boot_setup
       case $selected_gui in
         1) arch_i3;;
         2) arch_sway;;
