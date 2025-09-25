@@ -31,7 +31,7 @@ sudo dnf install --assumeyes --skip-broken --allowerasing \
   power-profiles-daemon nvim wl-clipboard 
 
 # INSTALL: Fedora Variants
-if [ $(grep VARIANT_ID /etc/os-release | cut -d '=' -f2) = "workstation" ]; then
+if [ "$(grep VARIANT_ID /etc/os-release | cut -d '=' -f2)" = "workstation" ]; then
   
   # DISABLE SUSPEND ON AC
   gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "nothing"
@@ -50,13 +50,13 @@ else
   sudo dnf copr enable swayfx/swayfx --assumeyes
   
   # INSTALL: Fedora Sway
-  sudo dnf install --assumeyes --skip-broken --allowerasing \
-    google-roboto-{fonts,mono-fonts,slab-fonts} xdg-desktop-portal-{wlr,gtk} \
-    sway{fx,bg,idle} gdm seatd foot waybar wofi mako grimshot brightnessctl imv mpv \
-    mate-polkit atril pluma engrampa caja nwg-look waypaper pavucontrol blueman \
-    transmission-gtk
+  sudo dnf install --assumeyes --skip-broken --allowerasing swayfx
+    #google-roboto-{fonts,mono-fonts,slab-fonts} xdg-desktop-portal-{wlr,gtk} \
+    #sway{fx,bg,idle} seatd foot waybar grimshot brightnessctl imv mpv \
+    #mate-polkit atril pluma engrampa caja nwg-look waypaper pavucontrol blueman \
+    #transmission-gtk
 
-  # autotiling mugshot 
+  # autotiling mugshot wofi mako
 fi
 
 # INSTALL: Brave Browser
@@ -88,17 +88,10 @@ sudo systemctl enable htpdate --now
 # Set Hostname
 sudo hostnamectl set-hostname --static "fedora"
 
-# GDM
-append_file "[daemon]
-AutomaticLogin=${user}
-AutomaticLoginEnable=True" /etc/gdm/custom.conf
-sudo systemctl enable gdm
-
-################################### THEMES ###################################
-
-# INSTALL: GTK, KDE, Icon, Cursors
-if [ ! -f /.flag ]; then
-	${source_dir}/themes/pack-libadwaita.sh
-	${source_dir}/themes/icon-tela-circle.sh
-	${source_dir}/themes/cursor-bibata.sh
+# Login/Display Manager
+if [ -d /etc/sddm.conf.d/ ];then
+  echo -e "[General]\nNumlock=on" > /etc/sddm.conf.d/numlock.conf
+  echo -e "[Autologin]\nUser=${user}\nSession=sway.desktop" > /etc/sddm.conf.d/autologin.conf
+else
+  echo -e "[daemon]\nAutomaticLogin=${user}\nAutomaticLoginEnable=True" | sudo tee -a /etc/gdm/custom.conf
 fi
