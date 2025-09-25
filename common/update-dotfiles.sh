@@ -108,8 +108,6 @@ elif [[ ${wm_de} == "kde" ]]; then
 
 else
 
-	dest_dir="$HOME/Documents/distro-scripts/dotfiles/${distro_id}"
-	
 	# Alacritty
 	save_file /.config/alacritty/ alacritty.yml
 	save_file /.config/alacritty/ alacritty.toml
