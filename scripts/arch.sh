@@ -5,6 +5,19 @@
 ## ROOT PASSWORD ##
 read -p "Password: " -s psswrd
 
+## FILESYSTEM ##
+clear && echo "FILESYSTEM SELECTION:"
+echo "---------------------"
+echo "1. ext4 (Standard, simple)"
+echo "2. btrfs (Advanced, with subvolumes for @, @home, @var)"
+echo "---------------------"
+read -p "Select filesystem (#): " selected_fs
+case $selected_fs in
+	1) fs_name="ext4";;
+	2) fs_name="btrfs";;
+	*) echo "Invalid selection. Defaulting to ext4." && fs_name="ext4";;
+esac
+
 ## PARTITIONING ##
 if [[ ${machine} == "E5-476G" ]]; then
   device="sda"
@@ -57,6 +70,7 @@ btrfs_setup () {
     
   # reset and remount
   cd / && umount -R /mnt
+  # NOTE: Removed 'commit=120' from your original btrfs options as it is non-standard
   mount -o defaults,noatime,compress=zstd,subvol=@ /dev/${device}${root} /mnt
   
   # mount the subvolumes
@@ -85,8 +99,16 @@ format_swap () {
 
 partitioning () {
 umount -R /mnt >&/dev/null ; swapoff -a
+
+# Determine which setup function to use based on selection
+if [[ "$fs_name" == "btrfs" ]]; then
+    root_setup="btrfs_setup"
+else
+    root_setup="ext4_setup"
+fi
+
 if [[ ${machine} == "E5-476G" ]]; then
-  ext4_setup && swapon /dev/${device}${swap} ; dmesg | grep -q "EFI v" && format_efi
+  ${root_setup} && swapon /dev/${device}${swap} ; dmesg | grep -q "EFI v" && format_efi
 elif [[ ${machine_type} == "Other" ]]; then # GNOME BOXES
   create_gpt () {
       sgdisk /dev/${device} -n 1::1GiB -t 1:ef00
@@ -103,7 +125,7 @@ elif [[ ${machine_type} == "Other" ]]; then # GNOME BOXES
   dmesg | grep -q "EFI v" && create_gpt || create_mbr
       
   # Format Root
-  ext4_setup
+  ${root_setup}
   
   # Format EFI
   dmesg | grep -q "EFI v" && format_efi
@@ -258,6 +280,7 @@ esac
 ## CONFIRMATION ##
 clear && echo "INSTALLATION SUMMARY:"
 echo "---------------------"
+echo "Filesystem: ${fs_name}" # Added FS to summary
 echo "Machine: ${machine}"
 echo "Type: ${machine_type}"
 echo "User: ${user}"
