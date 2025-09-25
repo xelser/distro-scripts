@@ -131,7 +131,13 @@ else
 	save_file /.config/i3/ config
 	
 	# Sway settings
-	save_file /.config/sway/ config
+	save_folder /.config/sway/
+
+	# Niri settings
+	save_file /.config/niri/ config.kdl
+
+	# Hyprland settings
+	save_file /.config/hypr/ hyprland.conf
 
 	# Swhkd
 	save_file /.config/swhkd/ swhkdrc
