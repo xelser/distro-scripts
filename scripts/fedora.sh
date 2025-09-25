@@ -43,7 +43,9 @@ if [ $(grep VARIANT_ID /etc/os-release | cut -d '=' -f2) = "workstation" ]; then
   # inkscape telegram discord video-downloader syncthing touchegg
   # gnome-shell-extension-{light-style,user-theme}
 else
-
+  sudo dnf copr enable swayfx/swayfx --assumeyes
+  sudo dnf copr enable solopasha/hyprland --assumeyes
+  
   # INSTALL: Fedora Sway
   sudo dnf install --assumeyes --skip-broken --allowerasing greetd seatd \
     xdg-desktop-portal-{wlr,gtk} sway{fx,bg,idle} waybar wofi mako grimshot \
