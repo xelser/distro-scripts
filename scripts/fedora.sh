@@ -51,7 +51,7 @@ else
   
   # INSTALL: Fedora Sway
   sudo dnf install --assumeyes --skip-broken --allowerasing \
-    swayfx wofi mako nwg-look waypaper mate-polkit \
+    swayfx wofi wlogout mako nwg-look waypaper mate-polkit \
     google-roboto-{fonts,mono-fonts,slab-fonts} 
 
   #xdg-desktop-portal-{wlr,gtk} \
