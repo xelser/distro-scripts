@@ -26,9 +26,8 @@ sudo dnf upgrade @core @sound-and-video @multimedia --assumeyes --best --allower
   --skip-unavailable --exclude=PackageKit-gstreamer-plugin
 
 # INSTALL: Fedora Base
-sudo dnf install --assumeyes --skip-broken --allowerasing \
-  pipewire-pulse wireplumber easyeffects lsp-plugins-lv2 bluez \
-  power-profiles-daemon nvim wl-clipboard 
+sudo dnf install --assumeyes --allowerasing pipewire-pulse wireplumber \
+  easyeffects lsp-plugins-lv2 bluez power-profiles-daemon nvim wl-clipboard 
 
 # INSTALL: Fedora Variants
 if [ "$(grep VARIANT_ID /etc/os-release | cut -d '=' -f2)" = "workstation" ]; then
@@ -37,9 +36,8 @@ if [ "$(grep VARIANT_ID /etc/os-release | cut -d '=' -f2)" = "workstation" ]; th
   gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type "nothing"
 
   # INSTALL: Fedora Workstation
-  sudo dnf install --assumeyes --skip-broken --allowerasing \
-    gnome-{builder,console,extensions-app,tweaks} libheif-tools \
-    file-roller fragments celluloid
+  sudo dnf install --assumeyes --allowerasing file-roller fragments celluloid \
+    gnome-{builder,console,extensions-app,tweaks} libheif-tools
   
   # inkscape telegram discord video-downloader syncthing touchegg
   # gnome-shell-extension-{light-style,user-theme}
@@ -50,16 +48,11 @@ else
   sudo dnf copr enable swayfx/swayfx --assumeyes
   
   # INSTALL: Fedora Sway
-  sudo dnf install --assumeyes --skip-broken --allowerasing \
-    swayfx wofi wlogout mako nwg-look waypaper mate-polkit \
-    google-roboto-{fonts,mono-fonts,slab-fonts} 
-
-  #xdg-desktop-portal-{wlr,gtk} \
-    #sway{fx,bg,idle} seatd foot waybar grimshot brightnessctl imv mpv \
-    # atril pluma engrampa caja pavucontrol blueman \
-    #transmission-gtk
-
-  # autotiling mugshot wofi mako
+  sudo dnf install --assumeyes --allowerasing google-roboto-{fonts,mono-fonts,slab-fonts} \
+    sway{fx,bg,idle} wofi wlogout mako brightnessctl grimshot pavucontrol blueman imv mpv \
+    waypaper nwg-look transmission-gtk mate-polkit atril pluma engrampa caja
+   
+  # autotiling mugshot seatd
 fi
 
 # INSTALL: Brave Browser
