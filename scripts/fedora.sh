@@ -50,8 +50,8 @@ else
   sudo dnf copr enable swayfx/swayfx --assumeyes
   
   # INSTALL: Fedora Sway
-  sudo dnf install --assumeyes --skip-broken --allowerasing swayfx
-    #google-roboto-{fonts,mono-fonts,slab-fonts} xdg-desktop-portal-{wlr,gtk} \
+  sudo dnf install --assumeyes --skip-broken --allowerasing swayfx \
+    google-roboto-{fonts,mono-fonts,slab-fonts} #xdg-desktop-portal-{wlr,gtk} \
     #sway{fx,bg,idle} seatd foot waybar grimshot brightnessctl imv mpv \
     #mate-polkit atril pluma engrampa caja nwg-look waypaper pavucontrol blueman \
     #transmission-gtk
