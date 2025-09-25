@@ -26,7 +26,7 @@ sudo dnf upgrade @core @sound-and-video @multimedia --assumeyes --best --allower
   --skip-unavailable --exclude=PackageKit-gstreamer-plugin
 
 # INSTALL: Fedora Base
-sudo dnf install --assumeyes --allowerasing pipewire-pulse wireplumber \
+sudo dnf install --assumeyes --allowerasing xdg-user-dirs pipewire-pulse wireplumber \
   easyeffects lsp-plugins-lv2 bluez power-profiles-daemon nvim wl-clipboard 
 
 # INSTALL: Fedora Variants
@@ -51,7 +51,7 @@ else
   sudo dnf install --assumeyes --allowerasing google-roboto-{fonts,mono-fonts,slab-fonts} \
     sway{fx,bg,idle} wofi wlogout mako brightnessctl grimshot pavucontrol blueman imv mpv \
     sddm-wayland-sway mate-polkit atril pluma engrampa caja transmission-gtk \
-    waypaper nwg-look
+    waypaper nwg-look xdg-desktop-portal-gtk
     
     # autotiling mugshot seatd
   

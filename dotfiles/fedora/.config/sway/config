@@ -14,20 +14,16 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
+# Recommends: foot
 set $term foot
 # Your preferred application launcher
-#set $menu wmenu-run
 set $menu wofi --no-actions --cache-file /tmp/wofi-drun-cache
-
-include /etc/sway/config-vars.d/*
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-# This is commented in Debian, because the Sway wallpaper files are in a separate
-# package `sway-backgrounds`. Installing this package drops a config file to
-# /etc/sway/config.d/
-# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# Requires: desktop-backgrounds-compat, swaybg, jxl-pixbuf-loader
+#output * bg /usr/share/backgrounds/default.jxl fill
 #
 # Example configuration:
 #
@@ -43,13 +39,6 @@ include /etc/sway/config-vars.d/*
 #          timeout 300 'swaylock -f -c 000000' \
 #          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
 #          before-sleep 'swaylock -f -c 000000'
-#
-
-# Start swayidle for screen blanking
-exec swayidle -w \
-    timeout 600 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"'
-
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
@@ -174,9 +163,9 @@ exec swayidle -w \
 #
 # Scratchpad:
 #
-# Sway has a "scratchpad", which is a bag of holding for windows.
-# You can send windows there and get them back later.
-    
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
     # Move the currently focused window to the scratchpad
     bindsym $mod+Shift+minus move scratchpad
 
@@ -208,97 +197,25 @@ mode "resize" {
 }
 bindsym $mod+r mode "resize"
 
+# Include configs from 3 locations:
+#  - /usr/share/sway/config.d
+#  - /etc/sway/config.d
+#  - $XDG_CONFIG_HOME/sway/config.d ($HOME/.config/sway/config.d)
 #
-# Utilities:
+# If multiple directories contain the files with the same name, the later
+# directory takes precedence; `$XDG_CONFIG_HOME/sway/config.d/20-swayidle.conf`
+# will always be loaded instead of `/usr/share/sway/config.d/20-swayidle.conf`
+# or `/etc/sway/config.d/20-swayidle.conf`
 #
-    # Special keys to adjust volume via PulseAudio
-    bindsym --locked XF86AudioMute exec pactl set-sink-mute \@DEFAULT_SINK@ toggle
-    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
-    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
-    bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
-    # Special keys to adjust brightness via brightnessctl
-    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
-    bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
-    # Special key to take a screenshot with grim, slurp and grimshot
-    bindsym $mod+Shift+s exec grimshot savecopy anything --notify
-    bindsym Print exec grim
-
+# This mechanism permits overriding our default configuration per-system
+# (/etc) or per-user ($XDG_CONFIG_HOME) basis. Just create the file you
+# want to modify/override in the higher-level directory.
 #
-# Status Bar:
+# For example, to disable the default bar from Fedora configs, you'll need to
+#     $ echo -n > "$HOME/.config/sway/config.d/90-bar.conf"
 #
-
-# Read `man 5 sway-bar` for more information about this section.
-#bar {
-#    position top
+# Note the quoting, the $() and the arguments quoting. All the parts are equally
+# important to make the magic work. And if you want to learn the secret behind
+# the trick, it's all in the `wordexp(3)`.
 #
-#    # When the status_command prints a new line to stdout, swaybar updates.
-#    # The default just shows the current date and time.
-#    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
-#
-#    colors {
-#        statusline #ffffff
-#        background #323232
-#        inactive_workspace #32323200 #32323200 #5c5c5c
-#    }
-#}
-
-#
-# User Configs:
-#
-
-# NumLock
-input type:keyboard xkb_numlock enabled
-
-# TouchPad
-input type:touchpad {
-    tap enabled
-    natural_scroll enabled
-}
-
-# Custom Keybinds
-bindsym $mod+Shift+f exec thunar
-bindsym $mod+Shift+w exec brave
-
-# XWayland
-xwayland disable
-
-# Windows
-default_floating_border none
-default_border none
-gaps inner 10
-
-# Floating Windows
-for_window [title="Compress"] floating enable
-for_window [title="Picture in picture"] floating enable
-for_window [title="File Operation Progress"] floating enable
-
-# Sway Bar: Waybar
-bar swaybar_command waybar
-
-# SwayFX
-corner_radius 10
-shadows enable
-blur enable
-
-layer_effects "logout_dialog" blur enable
-layer_effects "waybar" blur enable; blur_xray enable; shadows enable
-layer_effects "wofi" corner_radius 10; shadows enable
-
-# Autostart (Global)
-#exec --no-startup-id bash $HOME/.config/autostart/autostart-script.sh
-exec --no-startup-id easyeffects --gapplication-service
-#exec --no-startup-id /usr/bin/lxpolkit
-
-# Autostart (for sway)
-exec --no-startup-id waypaper --restore
-#exec --no-startup-id autotiling
-
-# Night light (gammastep)
-#exec --no-startup-id bash $HOME/.config/gammastep/launch.sh
-#bindsym $mod+o exec bash $HOME/.config/gammastep/toggle.sh
-
-# Apps
-#exec --no-startup-id transmission-gtk --minimized
-#exec --no-startup-id thunar --daemon
-
-include /etc/sway/config.d/*
+include '$(/usr/libexec/sway/layered-include "/usr/share/sway/config.d/*.conf" "/etc/sway/config.d/*.conf" "${XDG_CONFIG_HOME:-$HOME/.config}/sway/config.d/*.conf")'
