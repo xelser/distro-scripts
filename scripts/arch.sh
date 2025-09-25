@@ -19,6 +19,10 @@ case $selected_fs in
 esac
 
 ## PARTITIONING ##
+# Using user saved information for Acer Aspire E5-476G
+machine="E5-476G"
+user="acer" # Default user name
+
 if [[ ${machine} == "E5-476G" ]]; then
   device="sda"
   root="4"
@@ -44,10 +48,12 @@ else
   read -p "Root Partition (#): " root
 fi
 
-## BOOTLOADER ##
+## BOOTLOADER TARGET (Only for GRUB now) ##
 dmesg | grep -q "EFI v"; if [ $? -eq 0 ]; then
-  grub_target="x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch --modules="tpm" --disable-shim-lock"
+  # EFI check passed, use x86_64-efi
+  grub_target="x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch --modules=\"tpm\" --disable-shim-lock"
 else
+  # BIOS/MBR
   grub_target="i386-pc /dev/${device}"
 fi
 
@@ -70,6 +76,7 @@ btrfs_setup () {
     
   # reset and remount
   cd / && umount -R /mnt
+  # The root subvolume (@) must be mounted at /mnt
   mount -o defaults,noatime,compress=zstd,subvol=@ /dev/${device}${root} /mnt
   
   # mount the subvolumes
@@ -80,6 +87,7 @@ btrfs_setup () {
 }
 
 format_efi () {
+  # We always use /mnt/boot/efi initially for GRUB compatibility
   echo && read -p "Format EFI Partition? (y/N): " format_efi
   case $format_efi in
      y)   mkfs.fat -F 32 /dev/${device}${efi};;
@@ -137,7 +145,7 @@ fi
 ################################### INSTALL ##################################
 
 arch_base () {
-#pacman -Sy archlinux-keyring --needed --noconfirm
+# pacman -Sy archlinux-keyring --needed --noconfirm
 pacstrap /mnt base && genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt /bin/bash << EOF
 
@@ -158,19 +166,22 @@ echo "KEYMAP=us" > /etc/vconsole.conf
 echo "arch" > /etc/hostname
 
 # Base Minimal Packages
+# NOTE: Removed grub/os-prober/efibootmgr/sbctl here to allow exclusive bootloader choice later
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 pacman -Sy --needed --noconfirm linux linux-{headers,firmware} base-devel reflector \
-  xfsprogs {intel,amd}-ucode grub os-prober efibootmgr dosfstools snapper networkmanager gvfs \
+  xfsprogs {intel,amd}-ucode networkmanager gvfs \
   pipewire-{alsa,audio,jack,pulse} wireplumber easyeffects lsp-plugins-lv2 ecasound \
   bluez{,-utils} xdg-desktop-portal cpupower zram-generator inetutils dmidecode inxi \
-  neovim{,-plugins} plymouth sbctl # sbctl added for secureboot setup
-
+  neovim{,-plugins} plymouth
+  
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
 
 # plymouth
+# This step is critical for a smooth boot with the chosen bootloaders (GRUB or UKI)
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
+mkinitcpio -P # regenerate initramfs now
 
 # networkmanager
 systemctl enable NetworkManager
@@ -183,90 +194,130 @@ useradd -mG wheel,video ${user}
 echo -e "root:${psswrd}\n${user}:${psswrd}" | chpasswd
 echo -e "${user} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/${user}
 
-# grub
-sed -i 's/quiet/quiet splash/g' /etc/default/grub
-sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/g' /etc/default/grub
-sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
-sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
-mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
-grub-install --target=${grub_target}
-
 EOF
 }
 
-secure_boot_setup() {
-# This function checks for EFI/Secure Boot and configures it using sbctl
+configure_bootloader() {
+# This function handles the ONLY bootloader configuration (systemd-boot or GRUB)
 
-# Check if the system booted with EFI (which is required for Secure Boot)
-if [ -d "/sys/firmware/efi" ]; then
-    echo "EFI detected. Checking for Secure Boot status..."
+# Secure Boot Check: Uses the user-provided reliable check
+secure_boot_enabled_check="[ -d \"/sys/firmware/efi\" ] && dmesg | grep -q \"secureboot: Secure boot enabled\""
+
+if eval $secure_boot_enabled_check; then
+    echo "Secure Boot is ACTIVE. Setting up systemd-boot with Unified Kernel Images (UKI)."
     
-    # Check if Secure Boot is already enabled (a simple heuristic check)
-    if dmesg | grep -q "Secure Boot is enabled"; then
-        echo "Secure Boot is ENABLED. Proceeding with sbctl configuration."
-        
-        arch-chroot /mnt /bin/bash <<EOF
-        printf "Creating Secure Boot keys...\n"
-        sbctl create-keys
-        printf "Generating and signing Unified Kernel Image...\n"
-        sbctl generate-bundles --sign
-        
-        # Create a new boot entry that points to the signed UKI
-        # NOTE: This assumes an EFI system where the EFI partition is mounted at /boot/efi
-        efibootmgr --create --disk "/dev/${device}" --part "${efi}" --label "Arch Linux SB" --loader /EFI/Linux/arch-linux.efi
+    # 1. Remount ESP to /boot for systemd-boot compatibility
+    umount /mnt/boot/efi
+    
+    # Find the fstab line for the ESP and change its mount point from /boot/efi to /boot
+    sed -i 's|/boot/efi|/boot|g' /mnt/etc/fstab
+    
+    mkdir -p /mnt/boot
+    mount /dev/${device}${efi} /mnt/boot
+    
+    arch-chroot /mnt /bin/bash <<EOF
+    
+    # Install packages for Secure Boot / UKI creation
+    pacman -S --needed --noconfirm systemd-boot sbsigntools efibootmgr go-uefi
+
+    # 2. Configure kernel to generate UKI images
+    # This installs the kernel post-install hook for UKI creation.
+    pacman -S --needed --noconfirm mkinitcpio-systemd-tool
+    
+    # Ensure systemd-boot is installed to the ESP (now mounted at /boot)
+    bootctl install
+
+    # 3. Create the loader.conf
+    echo -e "default arch\ntimeout 3\nconsole-mode max" > /boot/loader/loader.conf
+    
+    # 4. Create the /etc/kernel/cmdline for the UKI
+    # Btrfs root subvolume (@) is located via the subvol=... kernel parameter.
+    ROOT_UUID=\$(blkid -s UUID -o value /dev/${device}${root})
+    echo "root=UUID=\$ROOT_UUID rootflags=subvol=@ rw quiet splash loglevel=3" > /etc/kernel/cmdline
+    
+    # 5. Generate UKI and Sign Files with sbctl
+    # Run the kernel-install hook manually to create the initial UKI image in /boot/EFI/Linux/
+    /usr/lib/kernel/install.d/90-mkinitcpio-systemd-tool.install
+    
+    # Create keys and enroll (this is the key enrollment step that requires user interaction)
+    printf "Creating Secure Boot keys...\n"
+    sbctl create-keys
+    
+    # Sign the systemd-boot EFI binary and the generated UKI
+    sbctl sign -s /boot/EFI/systemd/systemd-bootx64.efi
+    sbctl sign -s /boot/EFI/Linux/arch-linux.efi
+    
 EOF
 
-        # Enroll keys on the host system (requires user interaction)
-        printf "\n--- Secure Boot Key Enrollment ---\n"
-        printf "You will now be prompted to enroll the Secure Boot keys. This is an essential step that requires user input.\n"
-        read -rp "Press Enter to continue with key enrollment..."
+    # 6. Enroll keys on the host system (requires user interaction)
+    printf "\n!!! CRITICAL SECURE BOOT STEP: KEY ENROLLMENT !!!\n"
+    printf "You are about to enroll custom keys into your UEFI firmware.\n"
+    printf "The script uses '--microsoft' to preserve existing keys for safety.\n"
+    printf "Type 'YES' to proceed with key enrollment or press Enter to skip: "
+    read -rp ">> " confirm_enroll
+    
+    if [[ "$confirm_enroll" == "YES" ]]; then
         arch-chroot /mnt sbctl enroll-keys --microsoft
-        printf "Secure Boot setup is complete!\n"
+        printf "Secure Boot key enrollment completed. Reboot into BIOS/UEFI to confirm keys if prompted.\n"
     else
-        echo "EFI detected, but Secure Boot is currently DISABLED or Unknown. Skipping sbctl setup."
+        printf "Key enrollment skipped. You must enroll keys manually or disable Secure Boot for the new system to boot.\n"
     fi
+    
+    # 7. Final mount clean-up (Restore mount to /boot/efi for proper system operation outside of boot)
+    arch-chroot /mnt umount /boot
+    mount /dev/${device}${efi} /mnt/boot/efi
+    sed -i 's|/boot|/boot/efi|g' /mnt/etc/fstab
+    printf "systemd-boot (UKI) setup complete.\n"
+
 else
-    echo "Non-EFI system detected. Skipping Secure Boot configuration."
+    echo "Secure Boot is INACTIVE or Non-EFI system detected. Installing GRUB."
+    
+    # Install GRUB packages
+    arch-chroot /mnt pacman -S --needed --noconfirm grub os-prober efibootmgr dosfstools
+    
+    arch-chroot /mnt /bin/bash <<EOF
+    # grub configuration commands
+    sed -i 's/quiet/quiet splash/g' /etc/default/grub
+    sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/g' /etc/default/grub
+    sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
+    sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
+    
+    # Install GRUB
+    mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
+    grub-install --target=${grub_target}
+EOF
+    printf "GRUB bootloader setup is complete!\n"
 fi
 }
 
 arch_sway () { arch-chroot /mnt /bin/bash << EOF
-
 # Window Manager Packages
 pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk} ttf-fira{-sans,code-nerd} \
   brightnessctl gammastep alacritty imv mpv dunst libnotify nwg-look pavucontrol \
   mate-polkit atril pluma engrampa caja mugshot transmission-gtk flameshot grim \
   greetd sway{,bg,idle} waybar autotiling rofi-wayland wl-clipboard
 
-  #hyprland kvantum-qt5 qt5ct slurp wallutils
-
 # greetd
 echo -e "\n[initial_session]\ncommand = \"sway\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
 systemctl enable greetd
-
 EOF
 }
 
 arch_i3 () { arch-chroot /mnt /bin/bash << EOF
-
 # Window Manager Packages
 pacman -S --needed --noconfirm xdg-desktop-portal-gtk ttf-fira{-sans,code-nerd} \
   brightnessctl gammastep alacritty imv mpv dunst libnotify nwg-look pavucontrol \
   mate-polkit atril pluma engrampa caja mugshot transmission-gtk flameshot \
   sddm i3-wm autotiling polybar picom feh rofi flameshot xclip numlockx
 
-  #openbox obconf tint2 wallutils
-
 # sddm
 echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
 echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
 systemctl enable sddm
-
 EOF
 }
 
 arch_gnome () { arch-chroot /mnt /bin/bash << EOF
-
 # GNOME Packages
 pacman -S --needed --noconfirm gdm xdg-{desktop-portal-gnome,user-dirs-gtk} gst-plugin-pipewire adwaita-fonts \
   gnome-{session,shell,control-center,bluetooth-3.0,console,text-editor,calendar,disk-utility,system-monitor,builder,tweaks} \
@@ -275,12 +326,10 @@ pacman -S --needed --noconfirm gdm xdg-{desktop-portal-gnome,user-dirs-gtk} gst-
 # Display Manager
 echo -e "[daemon]\nAutomaticLogin=${user}\nAutomaticLoginEnable=True" >> /etc/gdm/custom.conf
 systemctl enable gdm
-
 EOF
 }
 
 arch_plasma () { arch-chroot /mnt /bin/bash << EOF
-
 # KDE Plasma Packages
 pacman -S --needed --noconfirm plasma-{desktop,pa,nm} {flatpak,plymouth,sddm}-kcm k{screen,infocenter} qt5-tools \
   konsole dolphin ark kate kwrite gwenview okular elisa filelight ktorrent spectacle {blue,power}devil \
@@ -288,7 +337,6 @@ pacman -S --needed --noconfirm plasma-{desktop,pa,nm} {flatpak,plymouth,sddm}-kc
 
 # Display Manager
 systemctl enable sddm
-
 EOF
 }
 
@@ -315,9 +363,8 @@ esac
 ## CONFIRMATION ##
 clear && echo "INSTALLATION SUMMARY:"
 echo "---------------------"
-echo "Filesystem: ${fs_name}" # Added FS to summary
+echo "Filesystem: ${fs_name}" 
 echo "Machine: ${machine}"
-echo "Type: ${machine_type}"
 echo "User: ${user}"
 echo "---------------------"
 lsblk
@@ -332,7 +379,7 @@ echo "---------------------"
 read -p "Proceed? (Y/n): " confirm
 case $confirm in
   n)  ;;
-  *|Y) partitioning && arch_base && secure_boot_setup
+  *|Y) partitioning && arch_base && configure_bootloader
       case $selected_gui in
         1) arch_i3;;
         2) arch_sway;;
