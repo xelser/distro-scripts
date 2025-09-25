@@ -6,116 +6,110 @@
 read -p "Password: " -s psswrd
 
 ## PARTITIONING ##
-if [[ ${machine} == "G41T-R3" ]]; then
-	device="sda"
-  root="1"
-  swap="6"
-elif [[ ${machine} == "E5-476G" ]]; then
+if [[ ${machine} == "E5-476G" ]]; then
   device="sda"
-  root="3"
+  root="4"
   swap="2"
   efi="1"
 elif [[ ${machine_type} == "Other" ]]; then # GNOME BOXES
- 	device="vda"
-	dmesg | grep -q "EFI v"; if [ $? -eq 0 ]; then
-		root="3"
-		swap="2"
-		efi="1"
-	else
-		root="2"
-  	swap="1"
-	fi
+  device="vda"
+  dmesg | grep -q "EFI v"; if [ $? -eq 0 ]; then
+    root="3"
+    swap="2"
+    efi="1"
+  else
+    root="2"
+    swap="1"
+  fi
 else
-	clear && cfdisk && clear && lsblk && echo
+  clear && cfdisk && clear && lsblk && echo
 
-	# Set Partition Variables
-	read -p "Device (ex. sda): " device
-	dmesg | grep -q "EFI v" && read -p "EFI Partition (#): " efi
-	read -p "Swap Partition (#): " swap
-	read -p "Root Partition (#): " root
+  # Set Partition Variables
+  read -p "Device (ex. sda): " device
+  dmesg | grep -q "EFI v" && read -p "EFI Partition (#): " efi
+  read -p "Swap Partition (#): " swap
+  read -p "Root Partition (#): " root
 fi
 
 ## BOOTLOADER ##
 dmesg | grep -q "EFI v"; if [ $? -eq 0 ]; then
-	grub_target="x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch --modules="tpm" --disable-shim-lock"
+  grub_target="x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch --modules="tpm" --disable-shim-lock"
 else
-	grub_target="i386-pc /dev/${device}"
+  grub_target="i386-pc /dev/${device}"
 fi
 
 ################################# FORMATTING #################################
 
 ext4_setup () {
-	mkfs.ext4 -L "Arch" /dev/${device}${root} -F
-	mount /dev/${device}${root} /mnt
+  mkfs.ext4 -L "Arch" /dev/${device}${root} -F
+  mount /dev/${device}${root} /mnt
 }
 
-btrfs_setup () { 
-	mkfs.btrfs -L "Arch" /dev/${device}${root} --force
-	mount /dev/${device}${root} /mnt
-	
-	# create subvolumes first
-	subvol_name=('' 'home' 'var')
-	for subvol in "${subvol_name[@]}"; do 
-		btrfs su cr /mnt/@${subvol}
-	done
-		
-	# reset and remount
-	cd / && umount -R /mnt
-	mount -o defaults,noatime,compress=zstd,commit=120,subvol=@ /dev/${device}${root} /mnt
-	
-	# mount the subvolumes
-	mount_name=('home' 'var')
-	for subvol in "${mount_name[@]}"; do mkdir -p /mnt/${subvol}
-		mount -o defaults,noatime,compress=zstd,commit=120,subvol=@${subvol} /dev/${device}${root} /mnt/${subvol}
-	done
+btrfs_setup () {
+  mkfs.btrfs -L "Arch" /dev/${device}${root} --force
+  mount /dev/${device}${root} /mnt
+  
+  # create subvolumes first
+  subvol_name=('' 'home' 'var')
+  for subvol in "${subvol_name[@]}"; do
+    btrfs su cr /mnt/@${subvol}
+  done
+    
+  # reset and remount
+  cd / && umount -R /mnt
+  mount -o defaults,noatime,compress=zstd,subvol=@ /dev/${device}${root} /mnt
+  
+  # mount the subvolumes
+  mount_name=('home' 'var')
+  for subvol in "${mount_name[@]}"; do mkdir -p /mnt/${subvol}
+    mount -o defaults,noatime,compress=zstd,subvol=@${subvol} /dev/${device}${root} /mnt/${subvol}
+  done
 }
 
 format_efi () {
-	echo && read -p "Format EFI Partition? (y/N): " format_efi
-	case $format_efi in
-	   y)   mkfs.fat -F 32 /dev/${device}${efi};;
-	 *|N)   ;;
-	esac
-	mkdir -p /mnt/boot/efi && mount /dev/${device}${efi} /mnt/boot/efi
+  echo && read -p "Format EFI Partition? (y/N): " format_efi
+  case $format_efi in
+     y)   mkfs.fat -F 32 /dev/${device}${efi};;
+     *|N)   ;;
+  esac
+  mkdir -p /mnt/boot/efi && mount /dev/${device}${efi} /mnt/boot/efi
 }
 
 format_swap () {
-	echo && read -p "Make Swap Partition? (Y/n): " make_swap
-	case $make_swap in
-	   n)   ;;
-	 *|Y)   mkswap -f /dev/${device}${swap} -L "Swap";;
-	esac
+  echo && read -p "Make Swap Partition? (Y/n): " make_swap
+  case $make_swap in
+     n)   ;;
+     *|Y)   mkswap -f /dev/${device}${swap} -L "Swap";;
+  esac
 }
 
 partitioning () {
 umount -R /mnt >&/dev/null ; swapoff -a
-if [[ ${machine} == "G41T-R3" ]]; then
-	ext4_setup && swapon /dev/${device}${swap}
-elif [[ ${machine} == "E5-476G" ]]; then
+if [[ ${machine} == "E5-476G" ]]; then
   ext4_setup && swapon /dev/${device}${swap} ; dmesg | grep -q "EFI v" && format_efi
 elif [[ ${machine_type} == "Other" ]]; then # GNOME BOXES
-	create_gpt () {
-	        sgdisk /dev/${device} -n 1::1GiB -t 1:ef00
-        	sgdisk /dev/${device} -n 2::3GiB -t 1:8200
-	        sgdisk /dev/${device} -n 3:: -t 1:8300
-	}
-		
-	create_mbr () {
-		# swap, root, then mark as bootable
-		echo -e ",3G,82\n,,,*" | sfdisk /dev/${device} --force
-	}
-	
-	# Create Partitions
-	dmesg | grep -q "EFI v" && create_gpt || create_mbr
-        
-	# Format Root
-	ext4_setup
-	
-	# Format EFI
-	dmesg | grep -q "EFI v" && format_efi
+  create_gpt () {
+      sgdisk /dev/${device} -n 1::1GiB -t 1:ef00
+      sgdisk /dev/${device} -n 2::3GiB -t 1:8200
+      sgdisk /dev/${device} -n 3:: -t 1:8300
+  }
+    
+  create_mbr () {
+    # swap, root, then mark as bootable
+    echo -e ",3G,82\n,,,*" | sfdisk /dev/${device} --force
+  }
+  
+  # Create Partitions
+  dmesg | grep -q "EFI v" && create_gpt || create_mbr
+      
+  # Format Root
+  ext4_setup
+  
+  # Format EFI
+  dmesg | grep -q "EFI v" && format_efi
 
-	# Format Swap
-	mkswap -f /dev/${device}${swap} -L "Swap" && swapon /dev/${device}${swap}
+  # Format Swap
+  mkswap -f /dev/${device}${swap} -L "Swap" && swapon /dev/${device}${swap}
 fi
 }
 
@@ -146,10 +140,12 @@ echo "arch" > /etc/hostname
 echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 pacman -Sy --needed --noconfirm linux linux-{headers,firmware} base-devel reflector \
-	xfsprogs {intel,amd}-ucode grub os-prober efibootmgr dosfstools networkmanager gvfs \
-	pipewire-{alsa,audio,jack,pulse} wireplumber easyeffects lsp-plugins-lv2 ecasound \
-	bluez{,-utils} xdg-desktop-portal cpupower zram-generator inetutils dmidecode inxi \
-	neovim{,-plugins} plymouth 
+  xfsprogs {intel,amd}-ucode grub os-prober efibootmgr dosfstools networkmanager gvfs \
+  pipewire-{alsa,audio,jack,pulse} wireplumber easyeffects lsp-plugins-lv2 ecasound \
+  bluez{,-utils} xdg-desktop-portal cpupower zram-generator inetutils dmidecode inxi \
+  neovim{,-plugins} plymouth
+# sbctl is needed for secureboot, but not grub
+# I'll add sbctl on the secureboot section
 
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
@@ -168,26 +164,58 @@ useradd -mG wheel,video ${user}
 echo -e "root:${psswrd}\n${user}:${psswrd}" | chpasswd
 echo -e "${user} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/${user}
 
-# grub
-sed -i 's/quiet/quiet splash/g' /etc/default/grub
-sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/g' /etc/default/grub
-sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
-sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
-mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
-grub-install --target=${grub_target}
-
 EOF
+}
+
+set_bootloader() {
+# This is a new function for the bootloader setup
+# It correctly handles both Secure Boot with sbctl and non-Secure Boot with grub
+if [ -f "/sys/firmware/efi/efivars/dbx-d719b2cb-3d30-4596-a3ec-877206696b00" ]; then
+  printf "\nSecure Boot is enabled. Using sbctl for bootloader setup.\n"
+  pacman -S --needed --noconfirm sbctl # Install sbctl here since it's only needed for this path
+  
+  arch-chroot /mnt /bin/bash <<EOF
+  printf "Creating Secure Boot keys...\n"
+  sbctl create-keys
+  printf "Generating and signing Unified Kernel Image...\n"
+  sbctl generate-bundles --sign
+  printf "Creating UEFI boot entry...\n"
+  efibootmgr --create --disk "/dev/${device}" --part "${efi}" --label "Arch Linux" --loader /EFI/Linux/arch-linux.efi
+EOF
+
+  printf "\n--- Secure Boot Key Enrollment ---\n"
+  printf "You will now be prompted to enroll the Secure Boot keys. This is an essential step that requires user input.\n"
+  read -rp "Press Enter to continue with key enrollment..."
+  arch-chroot /mnt sbctl enroll-keys --microsoft
+  printf "Secure Boot setup is complete!\n"
+else
+  printf "\nSecure Boot is not enabled. Using GRUB for bootloader setup.\n"
+  # I moved the grub install from the arch_base function here
+  # to make the logic separate and correct
+  pacman -S --needed --noconfirm grub os-prober
+  arch-chroot /mnt /bin/bash <<EOF
+  sed -i 's/quiet/quiet splash/g' /etc/default/grub
+  sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/g' /etc/default/grub
+  sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
+  sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
+  
+  grub-install --target="${grub_target}" --recheck
+  
+  grub-mkconfig -o /boot/grub/grub.cfg
+EOF
+  printf "GRUB bootloader setup is complete!\n"
+fi
 }
 
 arch_sway () { arch-chroot /mnt /bin/bash << EOF
 
 # Window Manager Packages
 pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk} ttf-fira{-sans,code-nerd} \
-	brightnessctl gammastep alacritty imv mpv dunst libnotify nwg-look pavucontrol \
-	mate-polkit atril pluma engrampa caja mugshot transmission-gtk flameshot grim \
-	greetd sway{,bg,idle} waybar autotiling rofi-wayland wl-clipboard
+  brightnessctl gammastep alacritty imv mpv dunst libnotify nwg-look pavucontrol \
+  mate-polkit atril pluma engrampa caja mugshot transmission-gtk flameshot grim \
+  greetd sway{,bg,idle} waybar autotiling rofi-wayland wl-clipboard
 
-	#hyprland kvantum-qt5 qt5ct slurp wallutils 
+  #hyprland kvantum-qt5 qt5ct slurp wallutils
 
 # greetd
 echo -e "\n[initial_session]\ncommand = \"sway\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
@@ -200,11 +228,11 @@ arch_i3 () { arch-chroot /mnt /bin/bash << EOF
 
 # Window Manager Packages
 pacman -S --needed --noconfirm xdg-desktop-portal-gtk ttf-fira{-sans,code-nerd} \
-	brightnessctl gammastep alacritty imv mpv dunst libnotify nwg-look pavucontrol \
-	mate-polkit atril pluma engrampa caja mugshot transmission-gtk flameshot \
-	sddm i3-wm autotiling polybar picom feh rofi flameshot xclip numlockx
+  brightnessctl gammastep alacritty imv mpv dunst libnotify nwg-look pavucontrol \
+  mate-polkit atril pluma engrampa caja mugshot transmission-gtk flameshot \
+  sddm i3-wm autotiling polybar picom feh rofi flameshot xclip numlockx
 
-	#openbox obconf tint2 wallutils 
+  #openbox obconf tint2 wallutils
 
 # sddm
 echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
@@ -218,8 +246,8 @@ arch_gnome () { arch-chroot /mnt /bin/bash << EOF
 
 # GNOME Packages
 pacman -S --needed --noconfirm gdm xdg-{desktop-portal-gnome,user-dirs-gtk} gst-plugin-pipewire adwaita-fonts \
-	gnome-{session,shell,control-center,bluetooth-3.0,console,text-editor,calendar,disk-utility,system-monitor,builder,tweaks} \
-	evince nautilus sushi file-roller loupe celluloid baobab fragments power-profiles-daemon
+  gnome-{session,shell,control-center,bluetooth-3.0,console,text-editor,calendar,disk-utility,system-monitor,builder,tweaks} \
+  evince nautilus sushi file-roller loupe celluloid baobab fragments power-profiles-daemon
 
 # Display Manager
 echo -e "[daemon]\nAutomaticLogin=${user}\nAutomaticLoginEnable=True" >> /etc/gdm/custom.conf
@@ -232,8 +260,8 @@ arch_plasma () { arch-chroot /mnt /bin/bash << EOF
 
 # KDE Plasma Packages
 pacman -S --needed --noconfirm plasma-{desktop,pa,nm} {flatpak,plymouth,sddm}-kcm k{screen,infocenter} qt5-tools \
-	konsole dolphin ark kate kwrite gwenview okular elisa filelight ktorrent spectacle {blue,power}devil \
-	power-profiles-daemon kde-gtk-config kvantum-qt5
+  konsole dolphin ark kate kwrite gwenview okular elisa filelight ktorrent spectacle {blue,power}devil \
+  power-profiles-daemon kde-gtk-config kvantum-qt5
 
 # Display Manager
 systemctl enable sddm
@@ -254,11 +282,11 @@ echo
 echo "----------------------------------------------"
 read -p "Select which DE or WM you want to install (#): " selected_gui
 case $selected_gui in
-	1) gui="i3";;
-	2) gui="Sway";;
-	3) gui="GNOME";;
-	4) gui="KDE Plasma";;
-	*) gui="TTY (Base)";;
+  1) gui="i3";;
+  2) gui="Sway";;
+  3) gui="GNOME";;
+  4) gui="KDE Plasma";;
+  *) gui="TTY (Base)";;
 esac
 
 ## CONFIRMATION ##
@@ -279,14 +307,14 @@ echo "DE/WM: ${gui}"
 echo "---------------------"
 read -p "Proceed? (Y/n): " confirm
 case $confirm in
-   n)	;;
- *|Y) partitioning && arch_base
-			case $selected_gui in
-				1) arch_i3;;
-				2) arch_sway;;
-				3) arch_gnome;;
-				4) arch_plasma;;
-				*) ;;
-			esac
-			;;
+  n)  ;;
+  *|Y) partitioning && arch_base && set_bootloader
+      case $selected_gui in
+        1) arch_i3;;
+        2) arch_sway;;
+        3) arch_gnome;;
+        4) arch_plasma;;
+        *) ;;
+      esac
+      ;;
 esac
