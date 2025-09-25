@@ -9,7 +9,7 @@ fi
 
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-  brave-bin ventoy-bin htpdate grub-hook update-grub neovim-symlinks
+  shim-signed secureboot-grub grub-hook update-grub snap-pac-grub snapper-support neovim-symlinks htpdate brave-bin ventoy-bin
 
 	# teamviewer zoom obs-studio gnome-boxes syncthing-{gtk,desktop-entries}
 
