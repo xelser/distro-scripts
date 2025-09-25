@@ -11,10 +11,10 @@ echo -e "[main]\nkeepcache=True\ndefaultyes=True\ninstall_weak_deps=False\nmax_p
 color=always" | sudo tee /etc/dnf/libdnf5.conf.d/20-user-settings.conf 1> /dev/null
 
 # DEBLOAT
-sudo dnf remove --assumeyes @guest-desktop-agents @container-management @libreoffice \
-  gnome-{contacts,characters,connections,font-viewer,tour,clocks,weather,maps} \
-  rhythmbox mediawriter simple-scan fedora-bookmarks totem ptyxis firefox \
-  gnome-shell-extension-\* libreoffice-\* Thunar rofi-wayland dunst
+sudo dnf remove --assumeyes @guest-desktop-agents @container-management @libreoffice @admin-tools \
+  gnome-{contacts,characters,connections,font-viewer,tour,clocks,weather,maps} rhythmbox mediawriter \
+  simple-scan fedora-bookmarks totem ptyxis firefox gnome-shell-extension-\* libreoffice-\* \
+  firewalld Thunar rofi-wayland dunst
 
 # ADD REPO: RPMFUSION
 sudo dnf list --installed | grep -q "rpmfusion" || sudo dnf install --assumeyes --skip-broken \
@@ -50,9 +50,14 @@ else
   # INSTALL: Fedora Sway
   sudo dnf install --assumeyes --allowerasing google-roboto-{fonts,mono-fonts,slab-fonts} \
     sway{fx,bg,idle} wofi wlogout mako brightnessctl grimshot pavucontrol blueman imv mpv \
-    waypaper nwg-look transmission-gtk mate-polkit atril pluma engrampa caja
-   
-  # autotiling mugshot seatd
+    sddm-wayland-sway mate-polkit atril pluma engrampa caja transmission-gtk \
+    waypaper nwg-look
+    
+    # autotiling mugshot seatd
+  
+  # CONFIG: sddm
+  sudo systemctl enable sddm
+
 fi
 
 # INSTALL: Brave Browser
