@@ -27,7 +27,8 @@ sudo dnf upgrade @core @sound-and-video @multimedia --assumeyes --best --allower
 
 # INSTALL: Fedora Base
 sudo dnf install --assumeyes --skip-broken --allowerasing \
-  power-profiles-daemon easyeffects lsp-plugins-lv2 nvim wl-clipboard 
+  pipewire-pulse wireplumber easyeffects lsp-plugins-lv2 bluez \
+  power-profiles-daemon nvim wl-clipboard 
 
 # INSTALL: Fedora Variants
 if [ $(grep VARIANT_ID /etc/os-release | cut -d '=' -f2) = "workstation" ]; then
@@ -44,23 +45,27 @@ if [ $(grep VARIANT_ID /etc/os-release | cut -d '=' -f2) = "workstation" ]; then
   # gnome-shell-extension-{light-style,user-theme}
 else
 
+  # ADD REPO: COPR
+  sudo dnf copr enable solopasha/hyprland --assumeyes
+  sudo dnf copr enable swayfx/swayfx --assumeyes
+  
   # INSTALL: Fedora Sway
-  sudo dnf install --assumeyes --skip-broken --allowerasing greetd seatd \
-    xdg-desktop-portal-{wlr,gtk} sway{fx,bg,idle} waybar wofi mako grimshot \
-    brightnessctl imv mpv alacritty transmission-gtk pavucontrol \
-    google-roboto-{fonts,mono-fonts,slab-fonts} \
-    mate-polkit atril pluma engrampa caja
+  sudo dnf install --assumeyes --skip-broken --allowerasing \
+    google-roboto-{fonts,mono-fonts,slab-fonts} xdg-desktop-portal-{wlr,gtk} \
+    sway{fx,bg,idle} gdm seatd foot waybar wofi mako grimshot brightnessctl imv mpv \
+    mate-polkit atril pluma engrampa caja nwg-look waypaper pavucontrol blueman \
+    transmission-gtk
 
-  # swayfx nwg-look waypaper autotiling mugshot 
+  # autotiling mugshot 
 fi
 
 # INSTALL: Brave Browser
 curl -fsS https://dl.brave.com/install.sh | sh
 
 # INSTALL: htpdate (COPR)
-#sudo dnf copr enable whitehara/htpdate --assumeyes
-#sudo dnf install htpdate --assumeyes
-#sudo systemctl enable htpdate --now
+sudo dnf copr enable whitehara/htpdate --assumeyes
+sudo dnf install htpdate --assumeyes
+sudo systemctl enable htpdate --now
 
 # INSTALL: Fedora Multimedia Codecs (from RPM Fusion https://rpmfusion.org/Howto/Multimedia)
 #sudo dnf swap ffmpeg-free ffmpeg --assumeyes --allowerasing
@@ -87,6 +92,7 @@ sudo hostnamectl set-hostname --static "fedora"
 append_file "[daemon]
 AutomaticLogin=${user}
 AutomaticLoginEnable=True" /etc/gdm/custom.conf
+sudo systemctl enable gdm
 
 ################################### THEMES ###################################
 
