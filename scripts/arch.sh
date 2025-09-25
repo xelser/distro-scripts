@@ -144,8 +144,6 @@ pacman -Sy --needed --noconfirm linux linux-{headers,firmware} base-devel reflec
   pipewire-{alsa,audio,jack,pulse} wireplumber easyeffects lsp-plugins-lv2 ecasound \
   bluez{,-utils} xdg-desktop-portal cpupower zram-generator inetutils dmidecode inxi \
   neovim{,-plugins} plymouth
-# sbctl is needed for secureboot, but not grub
-# I'll add sbctl on the secureboot section
 
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
@@ -164,47 +162,15 @@ useradd -mG wheel,video ${user}
 echo -e "root:${psswrd}\n${user}:${psswrd}" | chpasswd
 echo -e "${user} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/${user}
 
-EOF
-}
+# grub
+sed -i 's/quiet/quiet splash/g' /etc/default/grub
+sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/g' /etc/default/grub
+sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
+sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
+mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
+grub-install --target=${grub_target}
 
-set_bootloader() {
-# This is a new function for the bootloader setup
-# It correctly handles both Secure Boot with sbctl and non-Secure Boot with grub
-if [ -f "/sys/firmware/efi/efivars/dbx-d719b2cb-3d30-4596-a3ec-877206696b00" ]; then
-  printf "\nSecure Boot is enabled. Using sbctl for bootloader setup.\n"
-  pacman -S --needed --noconfirm sbctl # Install sbctl here since it's only needed for this path
-  
-  arch-chroot /mnt /bin/bash <<EOF
-  printf "Creating Secure Boot keys...\n"
-  sbctl create-keys
-  printf "Generating and signing Unified Kernel Image...\n"
-  sbctl generate-bundles --sign
-  printf "Creating UEFI boot entry...\n"
-  efibootmgr --create --disk "/dev/${device}" --part "${efi}" --label "Arch Linux" --loader /EFI/Linux/arch-linux.efi
 EOF
-
-  printf "\n--- Secure Boot Key Enrollment ---\n"
-  printf "You will now be prompted to enroll the Secure Boot keys. This is an essential step that requires user input.\n"
-  read -rp "Press Enter to continue with key enrollment..."
-  arch-chroot /mnt sbctl enroll-keys --microsoft
-  printf "Secure Boot setup is complete!\n"
-else
-  printf "\nSecure Boot is not enabled. Using GRUB for bootloader setup.\n"
-  # I moved the grub install from the arch_base function here
-  # to make the logic separate and correct
-  pacman -S --needed --noconfirm grub os-prober
-  arch-chroot /mnt /bin/bash <<EOF
-  sed -i 's/quiet/quiet splash/g' /etc/default/grub
-  sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/g' /etc/default/grub
-  sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
-  sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
-  
-  grub-install --target="${grub_target}" --recheck
-  
-  grub-mkconfig -o /boot/grub/grub.cfg
-EOF
-  printf "GRUB bootloader setup is complete!\n"
-fi
 }
 
 arch_sway () { arch-chroot /mnt /bin/bash << EOF
@@ -308,7 +274,7 @@ echo "---------------------"
 read -p "Proceed? (Y/n): " confirm
 case $confirm in
   n)  ;;
-  *|Y) partitioning && arch_base && set_bootloader
+  *|Y) partitioning && arch_base
       case $selected_gui in
         1) arch_i3;;
         2) arch_sway;;
