@@ -14,7 +14,7 @@ color=always" | sudo tee /etc/dnf/libdnf5.conf.d/20-user-settings.conf 1> /dev/n
 sudo dnf remove --assumeyes @guest-desktop-agents @container-management @libreoffice \
   gnome-{contacts,characters,connections,font-viewer,tour,clocks,weather,maps} \
   rhythmbox mediawriter simple-scan fedora-bookmarks totem ptyxis firefox \
-  gnome-shell-extension-\* libreoffice-\*
+  gnome-shell-extension-\* libreoffice-\* Thunar rofi-wayland dunst
 
 # ADD REPO: RPMFUSION
 sudo dnf list --installed | grep -q "rpmfusion" || sudo dnf install --assumeyes --skip-broken \
@@ -50,10 +50,13 @@ else
   sudo dnf copr enable swayfx/swayfx --assumeyes
   
   # INSTALL: Fedora Sway
-  sudo dnf install --assumeyes --skip-broken --allowerasing swayfx \
-    google-roboto-{fonts,mono-fonts,slab-fonts} #xdg-desktop-portal-{wlr,gtk} \
+  sudo dnf install --assumeyes --skip-broken --allowerasing \
+    swayfx wofi mako nwg-look waypaper \
+    google-roboto-{fonts,mono-fonts,slab-fonts} 
+
+  #xdg-desktop-portal-{wlr,gtk} \
     #sway{fx,bg,idle} seatd foot waybar grimshot brightnessctl imv mpv \
-    #mate-polkit atril pluma engrampa caja nwg-look waypaper pavucontrol blueman \
+    #mate-polkit atril pluma engrampa caja pavucontrol blueman \
     #transmission-gtk
 
   # autotiling mugshot wofi mako
@@ -90,8 +93,8 @@ sudo hostnamectl set-hostname --static "fedora"
 
 # Login/Display Manager
 if [ -d /etc/sddm.conf.d/ ];then
-  echo -e "[General]\nNumlock=on" > /etc/sddm.conf.d/numlock.conf
-  echo -e "[Autologin]\nUser=${user}\nSession=sway.desktop" > /etc/sddm.conf.d/autologin.conf
+  echo -e "[General]\nNumlock=on" | sudo tee /etc/sddm.conf.d/numlock.conf
+  echo -e "[Autologin]\nUser=${user}\nSession=sway.desktop" | sudo tee /etc/sddm.conf.d/autologin.conf
 else
   echo -e "[daemon]\nAutomaticLogin=${user}\nAutomaticLoginEnable=True" | sudo tee -a /etc/gdm/custom.conf
 fi
