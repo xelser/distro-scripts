@@ -246,6 +246,9 @@ bindsym $mod+r mode "resize"
 # User Configs:
 #
 
+# XWayland
+xwayland disable
+
 # NumLock
 input type:keyboard xkb_numlock enabled
 
@@ -254,13 +257,6 @@ input type:touchpad {
     tap enabled
     natural_scroll enabled
 }
-
-# Custom Keybinds
-bindsym $mod+Shift+f exec thunar
-bindsym $mod+Shift+w exec brave
-
-# XWayland
-xwayland disable
 
 # Windows
 default_floating_border none
@@ -272,7 +268,7 @@ for_window [title="Compress"] floating enable
 for_window [title="Picture in picture"] floating enable
 for_window [title="File Operation Progress"] floating enable
 
-# Sway Bar: Waybar
+# Bar
 bar swaybar_command waybar
 
 # SwayFX
@@ -284,9 +280,13 @@ layer_effects "logout_dialog" blur enable
 layer_effects "waybar" blur enable; blur_xray enable; shadows enable
 layer_effects "wofi" corner_radius 10; shadows enable
 
+# Custom Keybinds
+bindsym $mod+Shift+f exec thunar
+bindsym $mod+Shift+w exec brave
+
 # Autostart (Global)
 exec --no-startup-id bash $HOME/.config/autostart/autostart-script.sh
-exec --no-startup-id easyeffects --gapplication-service
+#exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id /usr/bin/lxpolkit
 
 # Autostart (for sway)
