@@ -31,4 +31,5 @@ x = 5
 y = 5
 
 [general]
+ipc_socket = true
 import = ["~/.config/alacritty/themes/themes/gruvbox_material_hard_dark.toml"]
