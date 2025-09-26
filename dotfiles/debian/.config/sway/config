@@ -286,7 +286,7 @@ bindsym $mod+Shift+w exec brave
 
 # Autostart (Global)
 exec --no-startup-id bash $HOME/.config/autostart/autostart-script.sh
-#exec --no-startup-id easyeffects --gapplication-service
+exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id /usr/bin/lxpolkit
 
 # Autostart (for sway)
