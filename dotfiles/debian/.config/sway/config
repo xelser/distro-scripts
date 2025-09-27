@@ -299,6 +299,6 @@ exec --no-startup-id autotiling
 
 # Apps
 exec --no-startup-id transmission-gtk --minimized
-exec --no-startup-id thunar --daemon
+exec --no-startup-id thunar --daemon-mode
 
 include /etc/sway/config.d/*
