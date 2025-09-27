@@ -221,6 +221,9 @@ save_file /.config/ mimeapps.list
 save_file / .gtk-bookmarks
 save_file /.config/gtk-3.0/ bookmarks
 
+# Font Config
+save_file /.config/fontconfig/ fonts.conf
+
 # Libfm
 #save_file /.config/libfm/ libfm.conf
 
