@@ -2,7 +2,7 @@
 # Any customization should be done in ~/.gtkrc-2.0.mine instead.
 
 include "/home/xelser/.gtkrc-2.0.mine"
-gtk-theme-name="Colloid-Teal-Gruvbox"
+gtk-theme-name="Colloid-Teal-Dark-Gruvbox"
 gtk-icon-theme-name="Papirus-Dark"
 gtk-font-name="Roboto Medium 10"
 gtk-cursor-theme-name="Capitaine Cursors (Gruvbox)"
