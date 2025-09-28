@@ -14,7 +14,7 @@ set $down j
 set $up k
 set $right l
 # Your preferred terminal emulator
-set $term sh -c 'alacritty msg create-window || alacritty'
+set $term sh -c 'alacritty msg create-window'
 # Your preferred application launcher
 #set $menu wmenu-run
 set $menu wofi --no-actions --cache-file /tmp/wofi-drun-cache
@@ -301,6 +301,7 @@ exec --no-startup-id autotiling
 
 # Apps
 exec --no-startup-id transmission-gtk --minimized
+exec --no-startup-id alacritty --daemon
 exec --no-startup-id thunar --daemon
 
 include /etc/sway/config.d/*
