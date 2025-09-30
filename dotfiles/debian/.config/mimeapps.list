@@ -12,6 +12,7 @@ x-scheme-handler/unknown=brave-browser.desktop
 x-scheme-handler/mailto=brave-browser.desktop
 application/x-zerosize=pluma.desktop
 inode/directory=thunar.desktop
+x-scheme-handler/webcal=brave-browser.desktop
 
 [Added Associations]
 text/plain=pluma.desktop;
