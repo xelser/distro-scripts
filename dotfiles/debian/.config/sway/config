@@ -17,7 +17,8 @@ set $right l
 set $term sh -c 'alacritty msg create-window'
 # Your preferred application launcher
 #set $menu wmenu-run
-set $menu wofi --no-actions --cache-file /tmp/wofi-drun-cache
+set $menu fuzzel
+#set $menu wofi --no-actions --cache-file /tmp/wofi-drun-cache
 
 include /etc/sway/config-vars.d/*
 

@@ -170,6 +170,9 @@ else
 
 	# Wofi
 	save_folder /.config/wofi/
+
+	# Fuzzel
+	save_file /.config/fuzzel/ fuzzel.ini
 	
 	# Wlogout
 	save_folder /.config/wlogout/

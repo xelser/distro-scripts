@@ -20,7 +20,7 @@ apt install --yes xdg-desktop-portal-gtk alacritty mpv imv brightnessctl \
   # gammastep
 
 # INSTALL: Sway
-apt install --yes greetd seatd sway{bg,idle} waybar wofi wlogout mako-notifier \
+apt install --yes greetd seatd sway{bg,idle} waybar wlogout fuzzel mako-notifier \
   autotiling grimshot wl-clipboard xdg-desktop-portal-wlr
 
 ################################### BUILD ####################################
