@@ -10,7 +10,7 @@ sort=+time
 
 # Position of the notification window.
 #output=DP-1
-anchor=top-center
+anchor=bottom-right
 outer-margin=20
 margin=10
 
