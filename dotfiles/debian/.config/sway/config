@@ -281,7 +281,7 @@ blur enable
 
 layer_effects "logout_dialog" blur enable
 layer_effects "waybar" blur enable; blur_xray enable; shadows enable
-layer_effects "launcher" corner_radius 10; shadows enable
+layer_effects "launcher" corner_radius 10; blur enable; shadows enable
 
 # Custom Keybinds
 bindsym $mod+Shift+f exec thunar
