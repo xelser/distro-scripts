@@ -11,12 +11,13 @@ fi
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm --save --removemake --cleanafter --norebuild \
 	--noredownload --batchinstall --combinedupgrade	neovim-symlinks htpdate \
-  shim-signed secureboot-grub grub-hook update-grub alacritty-theme-git \
-	waypaper brave-bin ventoy-bin polybar-scripts-git
+	grub-hook update-grub alacritty-theme-git polybar-scripts-git \
+	waypaper brave-bin ventoy-bin
 
 	# teamviewer zoom obs-studio gnome-boxes syncthing-{gtk,desktop-entries}
 	# swayfx ulauncher zscroll-git overskride
 	# snap-pac-grub snapper-support
+	# shim-signed secureboot-grub 
 
 	if [[ ${wm_de} == "i3" ]]; then
 		yay -S --needed --noconfirm xidlehook betterlockscreen
@@ -65,10 +66,10 @@ mkdir -p $HOME/Pictures/Screenshots
 rm $HOME/.config/brave-flags.conf
 
 # shim secure boot
-sudo mv /boot/efi/EFI/BOOT/BOOTx64.EFI /boot/efiEFI/BOOT/grubx64.efi
-sudo cp /usr/share/shim-signed/shimx64.efi /boot/efiEFI/BOOT/BOOTx64.EFI
-sudo cp /usr/share/shim-signed/mmx64.efi /boot/efiEFI/BOOT/
-sudo efibootmgr --unicode --disk /dev/sda --part 1 --create --label "Arch" --loader /EFI/BOOT/BOOTx64.EFI
+#sudo mv /boot/efi/EFI/BOOT/BOOTx64.EFI /boot/efiEFI/BOOT/grubx64.efi
+#sudo cp /usr/share/shim-signed/shimx64.efi /boot/efiEFI/BOOT/BOOTx64.EFI
+#sudo cp /usr/share/shim-signed/mmx64.efi /boot/efiEFI/BOOT/
+#sudo efibootmgr --unicode --disk /dev/sda --part 1 --create --label "Arch" --loader /EFI/BOOT/BOOTx64.EFI
 
 # cpucpower
 sudo cpupower frequency-set -g performance
