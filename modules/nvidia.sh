@@ -42,8 +42,6 @@ nvidia_prime () {
 			sudo systemctl enable nvidia-hibernate
 			sudo ln -s /dev/null /etc/udev/rules.d/61-gdm.rules
 		fi
-	elif [ -f /usr/bin/optimus-manager ]; then
-		sudo optimus-manager --set-startup hybrid
 	fi
 }
 

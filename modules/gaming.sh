@@ -34,5 +34,5 @@
 #sed -i s"/\/usr\/bin\/steam-runtime/mangohud \/usr\/bin\/steam-runtime/"g $HOME/.local/share/applications/steam.desktop
 
 # Gamemode
-sudo usermod -aG gamemode $(whoami)
+#sudo usermod -aG gamemode $(whoami)
 
