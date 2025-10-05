@@ -168,7 +168,7 @@ pacman -Sy --needed --noconfirm linux linux-{headers,firmware} base-devel reflec
   grub os-prober efibootmgr dosfstools {xfs,btrfs-}progs {intel,amd}-ucode plymouth \
   pipewire-{alsa,audio,jack,pulse} wireplumber easyeffects lsp-plugins-lv2 ecasound \
   cpupower zram-generator inetutils dmidecode inxi bluez{,-utils} networkmanager \
-  neovim{,-plugins} gvfs xdg-desktop-portal
+  neovim{,-plugins} gvfs xdg-desktop-portal inter-font ttf-jetbrains-mono-nerd
   
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
