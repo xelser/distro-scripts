@@ -146,7 +146,7 @@ arch_base () {
 pacstrap /mnt base{,-devel} linux{,-headers,-firmware} man-{db,pages} texinfo
 
 # boot
-pacstrap /mnt grub os-prober efibootmgr dosfstools {xfs,btrfs-}progs {intel,amd}-ucode plymouth
+pacstrap /mnt grub sbctl os-prober efibootmgr dosfstools {xfs,btrfs-}progs {intel,amd}-ucode plymouth
 
 # audio
 pacstrap /mnt pipewire-{alsa,audio,jack,pulse} wireplumber easyeffects lsp-plugins-lv2 ecasound
@@ -233,6 +233,11 @@ sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
 sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
 mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=${grub_target}
+
+# sbctl
+sbctl create-keys
+sbctl enroll-keys -m
+sbctl sign-all
 
 EOF
 }
