@@ -202,7 +202,7 @@ bindsym $mod+r mode "resize"
 default_floating_border none
 default_border none
 gaps inner 10
-gaps top 32
+#gaps top 32
 
 # Autostart (Global)
 exec --no-startup-id bash $HOME/.config/autostart/autostart.sh

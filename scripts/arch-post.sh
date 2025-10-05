@@ -4,15 +4,15 @@
 
 # PACKAGE MANAGER: YAY
 if [ ! -f /usr/bin/yay ]; then
-	cd /tmp/ && git clone https://aur.archlinux.org/yay && cd yay
-	makepkg -sirc --noconfirm
+	cd /tmp/ && git clone https://aur.archlinux.org/yay
+	cd yay && makepkg -sirc --noconfirm
 fi
 
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm --save --removemake --cleanafter --norebuild \
 	--noredownload --batchinstall --combinedupgrade	neovim-symlinks htpdate \
   shim-signed secureboot-grub grub-hook update-grub alacritty-theme-git \
-	waypaper brave-bin ventoy-bin swayfx 
+	waypaper brave-bin ventoy-bin swayfx polybar-scripts-git
 
 	# teamviewer zoom obs-studio gnome-boxes syncthing-{gtk,desktop-entries}
 	# ulauncher {zscroll,polybar-scripts}-git overskride
@@ -37,12 +37,12 @@ dconf write /org/gnome/desktop/interface/font-name "'Inter Medium 10'"
 dconf write /org/gnome/desktop/interface/monospace-font-name "'JetBrainsMono Nerd Font 9'"
 
 # rofi (launcher and powermenu)
-cd /tmp/ && git clone --depth=1 https://github.com/xelser/rofi.git && cd rofi && chmod +x setup.sh && ./setup.sh && cd
+#cd /tmp/ && git clone --depth=1 https://github.com/xelser/rofi.git && cd rofi && chmod +x setup.sh && ./setup.sh && cd
 
-sed -i 's/style-1/style-3/g' $HOME/.config/rofi/launchers/type-4/launcher.sh
-sed -i 's/Iosevka/Inter/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.rasi
+#sed -i 's/style-1/style-3/g' $HOME/.config/rofi/launchers/type-4/launcher.sh
+#sed -i 's/Iosevka/Inter/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.rasi
 
-sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
+#sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
 
 # dunst
 sed -i 's/font = Monospace 8/font = JetBrainsMono Nerd Font 10/g' $HOME/.config/dunst/dunstrc

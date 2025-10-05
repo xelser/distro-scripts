@@ -5,7 +5,7 @@ Plug 'ap/vim-css-color'
 " Themes
 Plug 'sainnhe/gruvbox-material'
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'vim-airline/vim-airline'
+"Plug 'vim-airline/vim-airline'
 
 " Settings
 Plug 'tpope/vim-repeat'
