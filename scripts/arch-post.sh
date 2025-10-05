@@ -64,6 +64,9 @@ mkdir -p $HOME/Pictures/Screenshots
 
 ################################### CONFIG ###################################
 
+# shim secure boot
+sudo cp /usr/share/shim-signed/shimx64.efi /boot/efi/EFI/arch/
+
 # cpucpower
 sudo cpupower frequency-set -g performance
 sudo systemctl enable --now cpupower
