@@ -47,7 +47,7 @@ fi
 ## BOOTLOADER TARGET (GRUB Only) ##
 dmesg | grep -q "EFI v"; if [ $? -eq 0 ]; then
   # EFI check passed, use x86_64-efi
-  grub_target="x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch --modules=\"tpm\" --disable-shim-lock --removable"
+  grub_target="x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch --modules=\"tpm\" --disable-shim-lock"
 else
   # BIOS/MBR
   grub_target="i386-pc /dev/${device}"
@@ -141,8 +141,47 @@ fi
 ################################### INSTALL ##################################
 
 arch_base () {
-# pacman -Sy archlinux-keyring --needed --noconfirm
-pacstrap /mnt base && genfstab -U /mnt >> /mnt/etc/fstab
+
+# base
+pacstrap /mnt base{,-devel} linux{,-headers,-firmware} man-{db,pages} texinfo
+
+# boot
+pacstrap /mnt grub os-prober efibootmgr dosfstools {xfs,btrfs-}progs {intel,amd}-ucode plymouth
+
+# audio
+pacstrap /mnt pipewire-{alsa,audio,jack,pulse} wireplumber easyeffects lsp-plugins-lv2 ecasound
+
+# networking
+pacstrap /mnt networkmanager openssh reflector git curl wget
+
+# hardware
+pacstrap /mnt cpupower zram-generator dmidecode inxi bluez{,-utils}
+
+# x11
+pacstrap /mnt xclip feh rofi polybar lxrandr flameshot picom numlockx nitrogen
+
+# wayland
+pacstrap /mnt wl-clipboard sway{bg,-contrib} fuzzel waybar
+
+# common utils
+pacstrap /mnt alacritty imv mpv dunst libnotify nwg-look pavucontrol blueman transmission-gtk mugshot
+
+# wm/de
+pacstrap /mnt sddm sway{,idle} i3-wm autotiling brightnessctl gammastep
+
+# cli
+pacstrap /mnt htop fastfetch neovim{,-plugins}
+
+# gui
+pacstrap /mnt mate-polkit caja engrampa atril pluma
+
+# utilities
+pacstrap /mnt pacman-contrib bash-completion gvfs udisks2 xdg-desktop-portal{,-gtk,-wlr}
+
+# misc
+pacstrap /mnt inter-font ttf-jetbrains-mono-nerd ttf-fira{-sans,code-nerd}
+
+genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt /bin/bash << EOF
 
 # Time
@@ -161,36 +200,35 @@ echo "KEYMAP=us" > /etc/vconsole.conf
 # Hostname
 echo "arch" > /etc/hostname
 
-# Base Minimal Packages
-echo -e "\n[options]\nParallelDownloads = 5\nDisableDownloadTimeout\nColor\nILoveCandy\n
-[multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
-pacman -Sy --needed --noconfirm linux linux-{headers,firmware} base-devel reflector \
-  grub os-prober efibootmgr dosfstools {xfs,btrfs-}progs {intel,amd}-ucode plymouth \
-  pipewire-{alsa,audio,jack,pulse} wireplumber easyeffects lsp-plugins-lv2 ecasound \
-  cpupower zram-generator inetutils dmidecode inxi bluez{,-utils} networkmanager \
-  neovim{,-plugins} gvfs xdg-desktop-portal inter-font ttf-jetbrains-mono-nerd
+# pacman
+echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\n[multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
   
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
 
+# services
+systemctl enable NetworkManager bluetooth
+
 # plymouth
-sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
-mkinitcpio -P
-
-# networkmanager
-systemctl enable NetworkManager
-
-# bluetooth
-systemctl enable bluetooth
+sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf && mkinitcpio -P
 
 # users
 useradd -mG wheel,video ${user}
 echo -e "root:${psswrd}\n${user}:${psswrd}" | chpasswd
 echo -e "${user} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/${user}
 
+# greetd
+#echo -e "\n[initial_session]\ncommand = \"sway\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
+#systemctl enable greetd
+
+# sddm
+echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
+echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
+systemctl enable sddm
+
 # grub
 sed -i 's/quiet/quiet splash/g' /etc/default/grub
-sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=20/g' /etc/default/grub
+sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/g' /etc/default/grub
 sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
 sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
 mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
@@ -198,76 +236,6 @@ grub-install --target=${grub_target}
 
 EOF
 }
-
-arch_sway () { arch-chroot /mnt /bin/bash << EOF
-# Window Manager Packages
-pacman -S --needed --noconfirm xdg-desktop-portal-{wlr,gtk} ttf-fira{-sans,code-nerd} \
-  brightnessctl gammastep alacritty imv mpv dunst libnotify nwg-look pavucontrol \
-  mate-polkit atril pluma engrampa caja mugshot transmission-gtk flameshot grim \
-  greetd sway{,bg,idle} waybar autotiling rofi-wayland wl-clipboard
-
-# greetd
-echo -e "\n[initial_session]\ncommand = \"sway\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
-systemctl enable greetd
-EOF
-}
-
-arch_i3 () { arch-chroot /mnt /bin/bash << EOF
-# Window Manager Packages
-pacman -S --needed --noconfirm xdg-desktop-portal-gtk ttf-fira{-sans,code-nerd} \
-  brightnessctl gammastep alacritty imv mpv dunst libnotify nwg-look pavucontrol \
-  mate-polkit atril pluma engrampa caja mugshot transmission-gtk flameshot \
-  sddm i3-wm autotiling polybar picom feh rofi flameshot xclip numlockx
-
-# sddm
-echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
-echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
-systemctl enable sddm
-EOF
-}
-
-arch_gnome () { arch-chroot /mnt /bin/bash << EOF
-# GNOME Packages
-pacman -S --needed --noconfirm gdm xdg-{desktop-portal-gnome,user-dirs-gtk} gst-plugin-pipewire adwaita-fonts \
-  gnome-{session,shell,control-center,bluetooth-3.0,console,text-editor,calendar,disk-utility,system-monitor,builder,tweaks} \
-  evince nautilus sushi file-roller loupe celluloid baobab fragments power-profiles-daemon
-
-# Display Manager
-echo -e "[daemon]\nAutomaticLogin=${user}\nAutomaticLoginEnable=True" >> /etc/gdm/custom.conf
-systemctl enable gdm
-EOF
-}
-
-arch_plasma () { arch-chroot /mnt /bin/bash << EOF
-# KDE Plasma Packages
-pacman -S --needed --noconfirm plasma-{desktop,pa,nm} {flatpak,plymouth,sddm}-kcm k{screen,infocenter} qt5-tools \
-  konsole dolphin ark kate kwrite gwenview okular elisa filelight ktorrent spectacle {blue,power}devil \
-  power-profiles-daemon kde-gtk-config kvantum-qt5
-
-# Display Manager
-systemctl enable sddm
-EOF
-}
-
-## GUI ##
-clear && echo "INSTALL GUI (DE/WM):"
-echo "---------------------"
-echo "Available Desktop Environment and Window Managers:"
-echo
-echo "1. i3"
-echo "2. Sway"
-echo "3. GNOME"
-echo "4. KDE Plasma"
-echo
-echo "----------------------------------------------"
-read -p "Select which DE or WM you want to install (#): " selected_gui
-case $selected_gui in
-  1) gui="i3";;
-  2) gui="Sway";;
-  3) gui="GNOME";;
-  4) gui="KDE Plasma";;
-  *) gui="TTY (Base)";;
-esac
 
 ## CONFIRMATION ##
 clear && echo "INSTALLATION SUMMARY:"
@@ -283,19 +251,9 @@ echo "Device: /dev/${device}"
 echo "Root: ${device}${root}"
 echo "Swap: ${device}${swap}"
 echo "---------------------"
-echo "DE/WM: ${gui}"
-echo "---------------------"
 printf "\n!!! ACTION REQUIRED: DISABLE SECURE BOOT BEFORE RUNNING !!!\n"
 read -p "Proceed? (Y/n): " confirm
 case $confirm in
   n)  ;;
   *|Y) partitioning && arch_base
-      case $selected_gui in
-        1) arch_i3;;
-        2) arch_sway;;
-        3) arch_gnome;;
-        4) arch_plasma;;
-        *) ;;
-      esac
-      ;;
 esac

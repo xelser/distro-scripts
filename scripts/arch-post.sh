@@ -9,19 +9,20 @@ fi
 
 # INSTALL: AUR PACKAGES
 yay -S --needed --noconfirm --removemake --cleanafter --norebuild --noredownload --batchinstall --combinedupgrade --save \
-  shim-signed secureboot-grub grub-hook update-grub snap-pac-grub snapper-support neovim-symlinks htpdate brave-bin ventoy-bin
+  shim-signed secureboot-grub grub-hook update-grub neovim-symlinks htpdate brave-bin ventoy-bin
 
 	# teamviewer zoom obs-studio gnome-boxes syncthing-{gtk,desktop-entries}
+	# snap-pac-grub snapper-support
 
 ################################### WM/DE ####################################
 
 setup_wm () {
 # INSTALL: AUR PACKAGES
-yay -S --needed --noconfirm waypaper overskride alacritty-theme-git
-  # ulauncher {zscroll,polybar-scripts}-git
+yay -S --needed --noconfirm alacritty-theme-git
+  # ulauncher {zscroll,polybar-scripts}-git overskride
 
 	if [[ ${wm_de} == "sway" ]]; then
-		yay -R --noconfirm sway && yay -S --noconfirm swayfx
+		yay -R --noconfirm sway && yay -S --noconfirm swayfx waypaper
 		yay -S --needed --noconfirm wlogout
 	elif [[ ${wm_de} == "i3" ]]; then
 		yay -S --needed --noconfirm xidlehook betterlockscreen
