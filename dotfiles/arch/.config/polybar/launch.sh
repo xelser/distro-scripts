@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/env bash
 
 # Terminate already running bar instances
 killall -q polybar
@@ -7,4 +7,4 @@ killall -q polybar
 
 # Launch Polybar, using default config location ~/.config/polybar/config.ini
 
-polybar default-${USER} || polybar default 2>&1 | tee -a /tmp/polybar.log & disown
+polybar default-${XDG_CURRENT_DESKTOP} || polybar default 2>&1 | tee -a /tmp/polybar.log & disown

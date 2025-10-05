@@ -27,7 +27,7 @@ sudo timedatectl set-ntp true
 if [ -f /usr/bin/apt ]; then sudo apt install --yes \
 	flatpak fastfetch htop inxi zip un{zip,rar} tar ffmpeg ffmpegthumbnailer gvfs xdg-user-dirs dconf-editor wget curl git sassc \
 	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf gh openssh-client intel-media-va-driver-non-free
-elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \
+elif [ -f /usr/bin/pacman ]; then sudo pacman -Syyu --needed --noconfirm \
 	flatpak fastfetch htop inxi zip un{zip,rar} tar ffmpeg ffmpegthumbnailer gvfs xdg-user-dirs dconf-editor wget curl git sassc \
 	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines github-cli openssh intel-media-driver
 elif [ -f /usr/bin/dnf5 ]; then sudo dnf5 install --assumeyes --best --allowerasing \
@@ -191,7 +191,7 @@ if [ $? -eq 0 ]; then
 	   *)	echo "Logging out... "
 	   	rm $HOME/.config/${distro_id}-post.sh
 	   	rm $HOME/.config/post.sh
-	   	loginctl terminate-session $(loginctl session-status | head -n 1 | awk '{print $1}');;
+			logout
 	esac
 else echo "Error Detected. Logout Cancelled"
 fi

@@ -158,28 +158,28 @@ pacstrap /mnt networkmanager openssh reflector git curl wget
 pacstrap /mnt cpupower zram-generator dmidecode inxi bluez{,-utils}
 
 # x11
-pacstrap /mnt xclip feh rofi polybar lxrandr flameshot picom numlockx nitrogen
+pacstrap /mnt xclip feh rofi polybar lxrandr flameshot picom numlockx
 
 # wayland
-pacstrap /mnt wl-clipboard sway{bg,-contrib} fuzzel waybar
+pacstrap /mnt wl-clipboard sway{bg,-contrib} fuzzel waybar swayidle
 
 # common utils
 pacstrap /mnt alacritty imv mpv dunst libnotify nwg-look pavucontrol blueman transmission-gtk mugshot
 
 # wm/de
-pacstrap /mnt sddm sway{,idle} i3-wm autotiling brightnessctl gammastep
+pacstrap /mnt sddm i3-wm autotiling wallutils brightnessctl gammastep
 
 # cli
 pacstrap /mnt htop fastfetch neovim{,-plugins}
 
 # gui
-pacstrap /mnt mate-polkit caja engrampa atril pluma
+pacstrap /mnt mate-polkit engrampa atril pluma pcmanfm-gtk3
 
 # utilities
 pacstrap /mnt pacman-contrib bash-completion gvfs udisks2 xdg-desktop-portal{,-gtk,-wlr}
 
 # misc
-pacstrap /mnt inter-font ttf-jetbrains-mono-nerd ttf-fira{-sans,code-nerd}
+pacstrap /mnt inter-font ttf-jetbrains-mono-nerd
 
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt /bin/bash << EOF

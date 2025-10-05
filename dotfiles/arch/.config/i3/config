@@ -209,7 +209,6 @@ exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
 exec --no-startup-id setwallpaper $(cat ~/.config/waypaper/config.ini | grep "wallpaper" | cut -d'=' -f2)
 exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 exec --no-startup-id easyeffects --gapplication-service
-exec --no-startup-id pcmanfm --daemon-mode
 exec --no-startup-id dunst
 
 # Autostart (for X11)
@@ -246,3 +245,10 @@ exec --no-startup-id xset s 3600 3600 -dpms && xidlehook --not-when-fullscreen -
 # Inhibit (caffeinate)
 #bindsym $mod+i exec caffeinate & disown && notify-send "Inhibit: caffeinate 󰅶 enable"
 #bindsym $mod+shift+i exec killall caffeinate && notify-send "Inhibit: caffeinate 󰛊 disbled" || notify-send "caffeinate 󰾫 is not running"
+
+# Apps
+exec --no-startup-id brave --no-startup-window --gapplication-service
+exec --no-startup-id transmission-gtk --minimized
+exec --no-startup-id alacritty --daemon
+exec --no-startup-id pcmanfm --daemon-mode
+#exec --no-startup-id thunar --daemon
