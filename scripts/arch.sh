@@ -152,10 +152,10 @@ pacstrap /mnt grub os-prober efibootmgr dosfstools {xfs,btrfs-}progs {intel,amd}
 pacstrap /mnt pipewire-{alsa,audio,jack,pulse} wireplumber easyeffects lsp-plugins-lv2 ecasound
 
 # networking
-pacstrap /mnt networkmanager openssh reflector git curl wget
+pacstrap /mnt networkmanager openssh reflector git wget
 
 # hardware
-pacstrap /mnt cpupower zram-generator dmidecode inxi bluez{,-utils}
+pacstrap /mnt cpupower zram-generator dmidecode inxi inetutils bluez{,-utils}
 
 # x11
 pacstrap /mnt xclip feh rofi polybar lxrandr flameshot picom numlockx
@@ -164,7 +164,7 @@ pacstrap /mnt xclip feh rofi polybar lxrandr flameshot picom numlockx
 pacstrap /mnt wl-clipboard sway{bg,-contrib} fuzzel waybar swayidle
 
 # common utils
-pacstrap /mnt alacritty imv mpv dunst libnotify nwg-look pavucontrol blueman transmission-gtk mugshot
+pacstrap /mnt alacritty imv mpv dunst nwg-look pavucontrol blueman transmission-gtk mugshot
 
 # wm/de
 pacstrap /mnt sddm i3-wm autotiling wallutils brightnessctl gammastep
@@ -262,7 +262,6 @@ echo "Device: /dev/${device}"
 echo "Root: ${device}${root}"
 echo "Swap: ${device}${swap}"
 echo "---------------------"
-printf "\n!!! ACTION REQUIRED: DISABLE SECURE BOOT BEFORE RUNNING !!!\n"
 read -p "Proceed? (Y/n): " confirm
 case $confirm in
   n)  ;;

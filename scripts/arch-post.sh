@@ -12,10 +12,10 @@ fi
 yay -S --needed --noconfirm --save --removemake --cleanafter --norebuild \
 	--noredownload --batchinstall --combinedupgrade	neovim-symlinks htpdate \
   shim-signed secureboot-grub grub-hook update-grub alacritty-theme-git \
-	waypaper brave-bin ventoy-bin swayfx polybar-scripts-git
+	waypaper brave-bin ventoy-bin polybar-scripts-git
 
 	# teamviewer zoom obs-studio gnome-boxes syncthing-{gtk,desktop-entries}
-	# ulauncher {zscroll,polybar-scripts}-git overskride
+	# swayfx ulauncher zscroll-git overskride
 	# snap-pac-grub snapper-support
 
 	if [[ ${wm_de} == "i3" ]]; then
@@ -37,12 +37,11 @@ dconf write /org/gnome/desktop/interface/font-name "'Inter Medium 10'"
 dconf write /org/gnome/desktop/interface/monospace-font-name "'JetBrainsMono Nerd Font 9'"
 
 # rofi (launcher and powermenu)
-#cd /tmp/ && git clone --depth=1 https://github.com/xelser/rofi.git && cd rofi && chmod +x setup.sh && ./setup.sh && cd
+cd /tmp/ && git clone --depth=1 https://github.com/xelser/rofi.git && cd rofi && chmod +x setup.sh && ./setup.sh && cd
 
-#sed -i 's/style-1/style-3/g' $HOME/.config/rofi/launchers/type-4/launcher.sh
-#sed -i 's/Iosevka/Inter/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.rasi
-
-#sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
+sed -i 's/style-1/style-3/g' $HOME/.config/rofi/launchers/type-4/launcher.sh
+sed -i 's/Iosevka/JetBrainsMono/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.rasi
+sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
 
 # dunst
 sed -i 's/font = Monospace 8/font = JetBrainsMono Nerd Font 10/g' $HOME/.config/dunst/dunstrc
@@ -56,16 +55,20 @@ gsettings set org.mate.pluma toolbar-visible false
 gsettings set org.mate.pluma use-default-font false
 
 # file manager (caja)
-gsettings set org.mate.caja.icon-view default-use-tighter-layout 'true'
-gsettings set org.mate.caja.preferences enable-delete 'true'
+#gsettings set org.mate.caja.icon-view default-use-tighter-layout 'true'
+#gsettings set org.mate.caja.preferences enable-delete 'true'
 
 # screenshot directory (flameshot)
 mkdir -p $HOME/Pictures/Screenshots
 
-################################### CONFIG ###################################
+# web browser
+rm $HOME/.config/brave-flags.conf
 
 # shim secure boot
-sudo cp /usr/share/shim-signed/shimx64.efi /boot/efi/EFI/arch/
+sudo mv /boot/efi/EFI/BOOT/BOOTx64.EFI /boot/efiEFI/BOOT/grubx64.efi
+sudo cp /usr/share/shim-signed/shimx64.efi /boot/efiEFI/BOOT/BOOTx64.EFI
+sudo cp /usr/share/shim-signed/mmx64.efi /boot/efiEFI/BOOT/
+sudo efibootmgr --unicode --disk /dev/sda --part 1 --create --label "Arch" --loader /EFI/BOOT/BOOTx64.EFI
 
 # cpucpower
 sudo cpupower frequency-set -g performance
