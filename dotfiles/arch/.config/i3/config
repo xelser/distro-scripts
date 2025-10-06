@@ -41,7 +41,7 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-# Use light to adjust brightness
+# Use brightnessctl to adjust brightness
 bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5%+ 
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 
@@ -53,15 +53,15 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec alacritty msg create-window
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
-# bindsym $mod+d exec --no-startup-id rofi -show drun
-bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-4/launcher.sh
+bindsym $mod+d exec --no-startup-id rofi -show drun
+
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -162,8 +162,8 @@ bindsym $mod+Shift+r restart
 # lock
 bindsym $mod+Shift+l exec betterlockscreen -l dimblur
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec ~/.config/rofi/powermenu/type-1/powermenu.sh
-#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec ~/.config/rofi/powermenu/type-1/powermenu.sh
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
