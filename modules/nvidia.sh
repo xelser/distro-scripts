@@ -16,7 +16,7 @@ nvidia_prime () {
 	elif [[ ${distro_id} == "manjaro" ]]; then
 		sudo pacman -S --needed --noconfirm envycontrol
 	elif [[ ${distro_id} == "arch" ]] || [[ ${distro_id} == "endeavouros" ]]; then
-		yay -S --needed --noconfirm optimus-manager-git
+		sudo pacman -S --needed --noconfirm nvidia-prime
 	elif [[ ${distro_id} == "ubuntu" ]] || [[ ${distro_id} == "linuxmint" ]]; then
 		# Remove nvidia-prime to avoid conflicts
 		sudo nala remove --purge --assume-yes nvidia-prime
