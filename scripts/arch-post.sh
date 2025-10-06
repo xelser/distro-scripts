@@ -7,7 +7,7 @@ if [ ! -f /usr/bin/yay ]; then
 	cd /tmp/ && git clone https://aur.archlinux.org/yay
 	cd yay && makepkg -sirc --noconfirm
 
-	yay -S --needed --noconfirm --save --removemake --cleanafter --norebuild \
+	yay -Syu --needed --noconfirm --save --removemake --cleanafter --norebuild \
 		--noredownload --batchinstall --combinedupgrade	grub-hook update-grub \
 		htpdate neovim-symlinks alacritty-theme-git polybar-scripts-git \
 		waypaper brave-bin ventoy-bin

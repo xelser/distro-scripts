@@ -164,7 +164,7 @@ pacstrap /mnt picom polybar rofi flameshot lxrandr feh xclip numlockx
 pacstrap /mnt alacritty imv mpv dunst nwg-look pavucontrol blueman transmission-gtk mugshot
 
 # wm/de
-pacstrap /mnt sddm i3-wm autotiling wallutils brightnessctl gammastep
+pacstrap /mnt sddm i3-wm autotiling wallutils libnotify brightnessctl gammastep
 
 # cli
 pacstrap /mnt htop fastfetch neovim{,-plugins}
