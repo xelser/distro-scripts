@@ -21,7 +21,7 @@ esac
 ## PARTITIONING ##
 if [[ ${machine} == "E5-476G" ]]; then
   device="sda"
-  root="4"
+  root="3"
   swap="2"
   efi="1"
 elif [[ ${machine_type} == "Other" ]]; then # GNOME BOXES

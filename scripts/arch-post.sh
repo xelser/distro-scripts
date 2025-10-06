@@ -9,7 +9,7 @@ if [ ! -f /usr/bin/yay ]; then
 
 	yay -Syu --needed --noconfirm --save --removemake --cleanafter --norebuild \
 		--noredownload --batchinstall --combinedupgrade	grub-hook update-grub \
-		htpdate neovim-symlinks alacritty-theme-git polybar-scripts-git \
+		htpdate neovim-symlinks polybar-scripts-git xidlehook betterlockscreen \
 		waypaper brave-bin ventoy-bin
 	
 	# snap-pac-grub snapper-support shim-signed secureboot-grub
@@ -18,9 +18,7 @@ if [ ! -f /usr/bin/yay ]; then
 	
 	# sway{fx,bg,idle,-contrib} waybar fuzzel wl-clipboard xdg-desktop-portal-wlr
 
-	if [[ ${wm_de} == "i3" ]]; then
-		yay -S --needed --noconfirm xidlehook betterlockscreen
-	elif [[ ${wm_de} == "openbox" ]]; then
+	if [[ ${wm_de} == "openbox" ]]; then
 		yay -S --needed --noconfirm obmenu-generator
 	fi
 fi
