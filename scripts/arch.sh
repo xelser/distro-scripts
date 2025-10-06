@@ -163,7 +163,7 @@ echo "arch" > /etc/hostname
 # pacman
 echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
-reflector && sleep 10 && pacman -Syy \
+reflector && sleep 10 && pacman -Syy --noconfirm --needed \
   base-devel linux{,-headers,-firmware} man-{db,pages} texinfo pacman-contrib bash-completion \
   grub os-prober efibootmgr dosfstools {xfs,btrfs-}progs {intel,amd}-ucode plymouth \
   pipewire-{alsa,audio,jack,pulse} wireplumber easyeffects lsp-plugins-lv2 ecasound \
