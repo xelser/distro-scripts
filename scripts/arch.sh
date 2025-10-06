@@ -164,15 +164,15 @@ echo "arch" > /etc/hostname
 echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 reflector && sleep 10 && pacman -Syy \
-  base-devel linux{,-headers,-firmware} man-{db,pages} texinfo \
+  base-devel linux{,-headers,-firmware} man-{db,pages} texinfo pacman-contrib bash-completion \
   grub os-prober efibootmgr dosfstools {xfs,btrfs-}progs {intel,amd}-ucode plymouth \
   pipewire-{alsa,audio,jack,pulse} wireplumber easyeffects lsp-plugins-lv2 ecasound \
   cpupower zram-generator dmidecode inxi inetutils bluez{,-utils} networkmanager openssh git \
-  sddm wallutils libnotify brightnessctl gammastep htop fastfetch neovim{,-plugins} \
-  flatpak pacman-contrib bash-completion gvfs udisks2 xdg-desktop-portal{,-gtk} \
+  sddm wallutils libnotify brightnessctl gammastep htop intel-gpu-tools fastfetch neovim{,-plugins} \
+  flatpak gvfs udisks2 xdg-desktop-portal{,-gtk} xdg-user-dirs{,-gtk} \
   i3-wm dex autotiling picom polybar rofi flameshot {lx,auto}randr feh xclip numlockx \
   alacritty imv mpv dunst mate-polkit engrampa atril pluma pcmanfm-gtk3 \
-  nwg-look pavucontrol blueman transmission-gtk mugshot \
+  nwg-look pavucontrol blueman transmission-gtk mugshot dconf-editor \
   jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt \
   nvidia nvidia-utils lib32-nvidia-utils nvidia-prime \
   steam mangohud mesa-utils vulkan-tools nvtop \
