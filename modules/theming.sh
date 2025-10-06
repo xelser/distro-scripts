@@ -25,6 +25,10 @@ elif [ -d $HOME/.themes/${gtk_theme} ]; then
 	theme_dir="$HOME/.themes/${gtk_theme}"
 fi
 
+# Apply themes to root
+sudo ln -s $HOME/.gtkrc-2.0 /etc/gtk-2.0/gtkrc
+sudo ln -s $HOME/.config/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini
+
 # GTK 4
 if [[ ! ${wm_de} == "gnome" ]]; then
 	rm -rf                                     "$HOME/.config/gtk-4.0/{assets,gtk.css,gtk-dark.css}"
