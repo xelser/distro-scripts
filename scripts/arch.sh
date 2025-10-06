@@ -163,7 +163,7 @@ echo "arch" > /etc/hostname
 # pacman
 echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
-reflector && sleep 5 && pacman -Syy \
+reflector && sleep 10 && pacman -Syy \
   base-devel linux{,-headers,-firmware} man-{db,pages} texinfo \
   grub os-prober efibootmgr dosfstools {xfs,btrfs-}progs {intel,amd}-ucode plymouth \
   pipewire-{alsa,audio,jack,pulse} wireplumber easyeffects lsp-plugins-lv2 ecasound \
@@ -175,13 +175,14 @@ reflector && sleep 5 && pacman -Syy \
   nwg-look pavucontrol blueman transmission-gtk mugshot \
   jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt \
   nvidia nvidia-utils lib32-nvidia-utils nvidia-prime \
+  steam mangohud mesa-utils vulkan-tools nvtop \
   inter-font ttf-jetbrains-mono-nerd
 
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
 
 # services
-systemctl enable NetworkManager bluetooth
+systemctl enable NetworkManager bluetooth jellyfin
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf && mkinitcpio -P
