@@ -216,7 +216,7 @@ exec --no-startup-id easyeffects --gapplication-service
 
 # Autostart (for X11)
 exec --no-startup-id numlockx
-exec --no-startup-id picom --config $HOME/.config/picom/picom.conf --blur-method dual_kawase --daemon
+exec --no-startup-id picom --blur-method dual_kawase --backend egl --daemon
 #exec_always --no-startup-id xset led on
 #exec --no-startup-id xfsettingsd
 #exec --no-startup-id xsettingsd
