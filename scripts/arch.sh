@@ -199,7 +199,8 @@ echo "arch" > /etc/hostname
 
 # pacman
 echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\n[multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
-  
+reflector && sleep 5 && pacman -Syyu
+
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
 
