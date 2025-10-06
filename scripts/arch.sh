@@ -47,7 +47,7 @@ fi
 ## BOOTLOADER TARGET (GRUB Only) ##
 dmesg | grep -q "EFI v"; if [ $? -eq 0 ]; then
   # EFI check passed, use x86_64-efi
-  grub_target="x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch --recheck --removable"
+  grub_target="x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch"
 else
   # BIOS/MBR
   grub_target="i386-pc /dev/${device}"
