@@ -170,7 +170,7 @@ reflector && sleep 10 && pacman -Syy \
   cpupower zram-generator dmidecode inxi inetutils bluez{,-utils} networkmanager openssh git \
   sddm wallutils libnotify brightnessctl gammastep htop fastfetch neovim{,-plugins} \
   flatpak pacman-contrib bash-completion gvfs udisks2 xdg-desktop-portal{,-gtk} \
-  i3-wm autotiling picom polybar rofi flameshot lxrandr feh xclip numlockx \
+  i3-wm dex autotiling picom polybar rofi flameshot lxrandr feh xclip numlockx \
   alacritty imv mpv dunst mate-polkit engrampa atril pluma pcmanfm-gtk3 \
   nwg-look pavucontrol blueman transmission-gtk mugshot \
   jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt \
