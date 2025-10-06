@@ -141,7 +141,31 @@ fi
 ################################### INSTALL ##################################
 
 arch_base () {
-pacstrap /mnt base reflector && genfstab -U /mnt >> /mnt/etc/fstab
+  # Base
+  pacstrap /mnt base{,-devel} linux{,-headers,-firmware} \
+    reflector man-{db,pages} texinfo pacman-contrib bash-completion
+
+  # Boot
+  pacstrap /mnt grub os-prober efibootmgr dosfstools \
+    xfsprogs {intel,amd}-ucode plymouth
+
+  # Audio
+  pacstrap /mnt pipewire-{alsa,audio,jack,pulse} wireplumber \
+    easyeffects lsp-plugins-lv2 ecasound
+
+  # System Utils
+  pacstrap /mnt cpupower zram-generator dmidecode inxi inetutils \
+    bluez{,-utils} networkmanager openssh
+
+  # CLI Tools
+  pacstrap /mnt neovim{,-plugins} fastfetch htop nvtop intel-gpu-tools \
+    git wget zip unzip sassc
+
+  # Misc
+  pacstrap /mnt flatpak xdg-desktop-portal{,-gtk} xdg-user-dirs{,-gtk} \
+    ffmpeg gvfs udisks2 inter-font ttf-jetbrains-mono-nerd
+    
+genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt /bin/bash << EOF
 
 # Time
@@ -163,21 +187,16 @@ echo "arch" > /etc/hostname
 # pacman
 echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
-reflector && sleep 10 && pacman -Syy --noconfirm --needed \
-  base-devel linux{,-headers,-firmware} man-{db,pages} texinfo pacman-contrib bash-completion \
-  grub os-prober efibootmgr dosfstools {xfs,btrfs-}progs {intel,amd}-ucode plymouth \
-  pipewire-{alsa,audio,jack,pulse} wireplumber easyeffects lsp-plugins-lv2 ecasound \
-  cpupower zram-generator dmidecode inxi inetutils bluez{,-utils} networkmanager openssh git \
-  sddm wallutils libnotify brightnessctl gammastep htop intel-gpu-tools fastfetch neovim{,-plugins} \
-  flatpak gvfs udisks2 xdg-desktop-portal{,-gtk} xdg-user-dirs{,-gtk} \
-  i3-wm dex autotiling picom polybar rofi flameshot {lx,auto}randr feh xclip numlockx \
+
+pacman -Syy --noconfirm --needed sddm wallutils libnotify brightnessctl gammastep dex \
+  i3-wm autotiling picom polybar rofi flameshot {lx,auto}randr feh xclip numlockx \
   alacritty imv mpv dunst mate-polkit engrampa atril pluma pcmanfm-gtk3 \
-  nwg-look pavucontrol blueman transmission-gtk mugshot dconf-editor \
+  nwg-look pavucontrol blueman transmission-gtk mugshot firefox \
   jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt \
   nvidia nvidia-utils lib32-nvidia-utils nvidia-prime \
-  steam mangohud mesa-utils vulkan-tools nvtop \
-  inter-font ttf-jetbrains-mono-nerd
-
+  steam mangohud mesa-utils vulkan-tools \
+  gparted timeshift
+  
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
 
@@ -203,9 +222,9 @@ systemctl enable sddm
 
 # grub
 sed -i 's/quiet/quiet splash/g' /etc/default/grub
-sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/g' /etc/default/grub
-sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
-sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
+#sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/g' /etc/default/grub
+#sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
+#sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
 mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=${grub_target}
 
