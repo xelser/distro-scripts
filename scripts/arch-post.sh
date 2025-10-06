@@ -16,7 +16,7 @@ if [ ! -f /usr/bin/yay ]; then
 	# teamviewer zoom obs-studio gnome-boxes syncthing-{gtk,desktop-entries}
 	# ulauncher zscroll-git
 	
-	# sway{fx,bg,idle,-contrib} waybar fuzzel wl-clipboard
+	# sway{fx,bg,idle,-contrib} waybar fuzzel wl-clipboard xdg-desktop-portal-wlr
 
 	if [[ ${wm_de} == "i3" ]]; then
 		yay -S --needed --noconfirm xidlehook betterlockscreen

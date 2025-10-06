@@ -141,44 +141,7 @@ fi
 ################################### INSTALL ##################################
 
 arch_base () {
-
-# base
-pacstrap /mnt base{,-devel} linux{,-headers,-firmware} man-{db,pages} texinfo
-
-# boot
-pacstrap /mnt grub os-prober efibootmgr dosfstools {xfs,btrfs-}progs {intel,amd}-ucode plymouth
-
-# audio
-pacstrap /mnt pipewire-{alsa,audio,jack,pulse} wireplumber easyeffects lsp-plugins-lv2 ecasound
-
-# networking
-pacstrap /mnt networkmanager openssh reflector git wget
-
-# hardware
-pacstrap /mnt cpupower zram-generator dmidecode inxi inetutils bluez{,-utils}
-
-# x11
-pacstrap /mnt picom polybar rofi flameshot lxrandr feh xclip numlockx
-
-# common utils
-pacstrap /mnt alacritty imv mpv dunst nwg-look pavucontrol blueman transmission-gtk mugshot
-
-# wm/de
-pacstrap /mnt sddm i3-wm autotiling wallutils libnotify brightnessctl gammastep
-
-# cli
-pacstrap /mnt htop fastfetch neovim{,-plugins}
-
-# gui
-pacstrap /mnt mate-polkit engrampa atril pluma pcmanfm-gtk3
-
-# utilities
-pacstrap /mnt pacman-contrib bash-completion gvfs udisks2 xdg-desktop-portal{,-gtk,-wlr}
-
-# misc
-pacstrap /mnt inter-font ttf-jetbrains-mono-nerd
-
-genfstab -U /mnt >> /mnt/etc/fstab
+pacstrap /mnt base reflector && genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt /bin/bash << EOF
 
 # Time
@@ -198,8 +161,21 @@ echo "KEYMAP=us" > /etc/vconsole.conf
 echo "arch" > /etc/hostname
 
 # pacman
-echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\n[multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
-reflector && sleep 5 && pacman -Syyu
+echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\n
+[multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
+reflector && sleep 5 && pacman -Syy \
+  base-devel linux{,-headers,-firmware} man-{db,pages} texinfo \
+  grub os-prober efibootmgr dosfstools {xfs,btrfs-}progs {intel,amd}-ucode plymouth \
+  pipewire-{alsa,audio,jack,pulse} wireplumber easyeffects lsp-plugins-lv2 ecasound \
+  cpupower zram-generator dmidecode inxi inetutils bluez{,-utils} networkmanager openssh git \
+  sddm wallutils libnotify brightnessctl gammastep htop fastfetch neovim{,-plugins} \
+  flatpak pacman-contrib bash-completion gvfs udisks2 xdg-desktop-portal{,-gtk} \
+  i3-wm autotiling picom polybar rofi flameshot lxrandr feh xclip numlockx \
+  alacritty imv mpv dunst mate-polkit engrampa atril pluma pcmanfm-gtk3 \
+  nwg-look pavucontrol blueman transmission-gtk mugshot \
+  jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt \
+  nvidia nvidia-utils lib32-nvidia-utils nvidia-prime \
+  inter-font ttf-jetbrains-mono-nerd
 
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
