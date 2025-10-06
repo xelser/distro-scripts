@@ -2,28 +2,28 @@
 
 ################################## PACKAGES ##################################
 
-# PACKAGE MANAGER: YAY
+# INSTALL: AUR PACKAGES
 if [ ! -f /usr/bin/yay ]; then
 	cd /tmp/ && git clone https://aur.archlinux.org/yay
 	cd yay && makepkg -sirc --noconfirm
-fi
 
-# INSTALL: AUR PACKAGES
-yay -S --needed --noconfirm --save --removemake --cleanafter --norebuild \
-	--noredownload --batchinstall --combinedupgrade	neovim-symlinks htpdate \
-	grub-hook update-grub alacritty-theme-git polybar-scripts-git \
-	waypaper brave-bin ventoy-bin
-
+	yay -S --needed --noconfirm --save --removemake --cleanafter --norebuild \
+		--noredownload --batchinstall --combinedupgrade	grub-hook update-grub \
+		htpdate neovim-symlinks alacritty-theme-git polybar-scripts-git \
+		waypaper brave-bin ventoy-bin
+	
+	# snap-pac-grub snapper-support shim-signed secureboot-grub
 	# teamviewer zoom obs-studio gnome-boxes syncthing-{gtk,desktop-entries}
-	# swayfx ulauncher zscroll-git overskride
-	# snap-pac-grub snapper-support
-	# shim-signed secureboot-grub 
+	# ulauncher zscroll-git
+	
+	# sway{fx,bg,idle,-contrib} waybar fuzzel wl-clipboard
 
 	if [[ ${wm_de} == "i3" ]]; then
 		yay -S --needed --noconfirm xidlehook betterlockscreen
 	elif [[ ${wm_de} == "openbox" ]]; then
 		yay -S --needed --noconfirm obmenu-generator
 	fi
+fi
 
 # BUILD: caffeinate
 #sudo pacman -S --needed --noconfirm rustup && rustup default stable
@@ -63,7 +63,9 @@ gsettings set org.mate.pluma use-default-font false
 mkdir -p $HOME/Pictures/Screenshots
 
 # web browser
-rm $HOME/.config/brave-flags.conf
+if [ -f $HOME/.config/brave-flags.conf ]; then
+	rm $HOME/.config/brave-flags.conf
+fi
 
 # shim secure boot
 #sudo mv /boot/efi/EFI/BOOT/BOOTx64.EFI /boot/efiEFI/BOOT/grubx64.efi

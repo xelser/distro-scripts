@@ -158,10 +158,7 @@ pacstrap /mnt networkmanager openssh reflector git wget
 pacstrap /mnt cpupower zram-generator dmidecode inxi inetutils bluez{,-utils}
 
 # x11
-pacstrap /mnt xclip feh rofi polybar lxrandr flameshot picom numlockx
-
-# wayland
-pacstrap /mnt wl-clipboard sway{bg,-contrib} fuzzel waybar swayidle
+pacstrap /mnt picom polybar rofi flameshot lxrandr feh xclip numlockx
 
 # common utils
 pacstrap /mnt alacritty imv mpv dunst nwg-look pavucontrol blueman transmission-gtk mugshot
