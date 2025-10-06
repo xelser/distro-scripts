@@ -192,11 +192,10 @@ pacman -Syy --noconfirm --needed sddm wallutils libnotify brightnessctl gammaste
   i3-wm autotiling picom polybar rofi flameshot {lx,auto}randr feh xclip numlockx \
   alacritty imv mpv dunst mate-polkit engrampa atril pluma pcmanfm-gtk3 \
   nwg-look pavucontrol blueman transmission-gtk mugshot firefox \
-  intel-media-driver vulkan-intel intel-media-sdk vpl-gpu-rt \
+  jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt \
   nvidia nvidia-utils lib32-nvidia-utils nvidia-prime \
   steam mangohud mesa-utils vulkan-tools \
-  jellyfin-{server,web,ffmpeg} \
-  gparted timeshift
+  gparted timeshift intel-media-driver
   
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
