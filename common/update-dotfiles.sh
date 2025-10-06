@@ -143,6 +143,9 @@ else
 
 	# Swhkd
 	save_file /.config/swhkd/ swhkdrc
+	
+	# Autorandr
+	save_folder /.config/autorandr/
 
 	# Picom
 	save_folder /.config/picom/
