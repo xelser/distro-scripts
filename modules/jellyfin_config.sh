@@ -93,7 +93,7 @@ main() {
 
     echo
     echo "🎉 Jellyfin configuration complete!"
-    echo "🔗 Access the web UI at: http://$(hostname -I | awk '{print $1'}):8096"
+    echo "🔗 Access the web UI at: http://$(hostname -i | awk '{print $1'}):8096"
     echo "📁 Media directory is configured at: $MEDIA_DIR"
     echo "🔐 Remember to open port 8096 in your firewall for remote access."
 }
