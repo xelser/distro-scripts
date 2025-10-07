@@ -216,7 +216,7 @@ exec --no-startup-id waypaper --restore
 
 # Autostart (for X11)
 #exec --no-startup-id numlockx
-exec --no-startup-id picom --backend glx --daemon
+exec --no-startup-id picom
 #exec_always --no-startup-id xset led on
 #exec --no-startup-id xfsettingsd
 #exec --no-startup-id xsettingsd
