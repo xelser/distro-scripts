@@ -9,16 +9,14 @@ if [ ! -f /usr/bin/yay ]; then
 
 	yay -Syu --needed --noconfirm --save --removemake --cleanafter --norebuild \
 		--noredownload --batchinstall --combinedupgrade	grub-hook update-grub \
-		htpdate neovim-symlinks polybar-scripts-git xidlehook betterlockscreen \
-		waypaper brave-bin ventoy-bin
+		htpdate neovim-symlinks xidlehook betterlockscreen polybar-scripts-git \
+		swayfx waypaper brave-bin ventoy-bin
 	
 	# snap-pac-grub snapper-support shim-signed secureboot-grub
 	# teamviewer zoom obs-studio gnome-boxes syncthing-{gtk,desktop-entries}
 	# ulauncher zscroll-git
 	
-	# sway{fx,bg,idle,-contrib} waybar fuzzel wl-clipboard xdg-desktop-portal-wlr
-
-	if [[ ${wm_de} == "openbox" ]]; then
+	if [ -f /usr/bin/openbox ]; then
 		yay -S --needed --noconfirm obmenu-generator
 	fi
 fi
@@ -43,7 +41,7 @@ dconf write /org/gnome/desktop/interface/monospace-font-name "'JetBrainsMono Ner
 #sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
 
 # dunst
-sed -i 's/font = Monospace 8/font = JetBrainsMono Nerd Font 10/g' $HOME/.config/dunst/dunstrc
+#sed -i 's/font = Monospace 8/font = JetBrainsMono Nerd Font 10/g' $HOME/.config/dunst/dunstrc
 
 # text editor (pluma)
 gsettings set org.mate.pluma color-scheme 'gruvbox-material-medium-dark'
@@ -59,11 +57,6 @@ gsettings set org.mate.pluma use-default-font false
 
 # screenshot directory (flameshot)
 mkdir -p $HOME/Pictures/Screenshots
-
-# web browser (brave_
-if [ -f $HOME/.config/brave-flags.conf ]; then
-	rm $HOME/.config/brave-flags.conf
-fi
 
 # shim secure boot
 #sudo mv /boot/efi/EFI/BOOT/BOOTx64.EFI /boot/efiEFI/BOOT/grubx64.efi

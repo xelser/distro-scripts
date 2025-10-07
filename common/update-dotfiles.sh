@@ -153,6 +153,9 @@ else
 	# Betterlockscreen
 	save_file /.config/betterlockscreen/ betterlockscreenrc
 	
+	# Dunst
+	save_file /.config/dunst/ dunstrc
+	
 	# Mako
 	save_file /.config/mako/ config
 

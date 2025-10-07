@@ -42,12 +42,12 @@ if [ -f /usr/bin/waybar ]; then
 	cp -rf /tmp/gruvbox-material-waybar/*.css $HOME/.config/waybar/
 fi
 
-if [ -f /usr/bin/dunst ] && [ ! -f $HOME/.config/dunst/dunstrc ]; then
-	cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-dunst && mkdir -p $HOME/.config/dunst
-	cat $(find /etc/ -name "dunstrc" 2> /dev/null) > $HOME/.config/dunst/dunstrc
-	cat /tmp/gruvbox-dunst/gruvbox-material-hard-dark.conf >> $HOME/.config/dunst/dunstrc
-	sed -i 's/icon_theme = Adwaita/icon_theme = Papirus-Dark/g' $HOME/.config/dunst/dunstrc
-fi
+#if [ -f /usr/bin/dunst ] && [ ! -f $HOME/.config/dunst/dunstrc ]; then
+#	cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-dunst && mkdir -p $HOME/.config/dunst
+#	cat $(find /etc/ -name "dunstrc" 2> /dev/null) > $HOME/.config/dunst/dunstrc
+#	cat /tmp/gruvbox-dunst/gruvbox-material-hard-dark.conf >> $HOME/.config/dunst/dunstrc
+#	sed -i 's/icon_theme = Adwaita/icon_theme = Papirus-Dark/g' $HOME/.config/dunst/dunstrc
+#fi
 
 if [ -f /usr/bin/kvantummanager ]; then
 	cd /tmp/ && git clone --depth 1 https://github.com/sachnr/gruvbox-kvantum-themes.git

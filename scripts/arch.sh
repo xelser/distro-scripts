@@ -162,7 +162,7 @@ arch_base () {
     git wget zip unzip sassc
 
   # Misc
-  pacstrap /mnt flatpak xdg-desktop-portal{,-gtk} xdg-user-dirs{,-gtk} \
+  pacstrap /mnt flatpak xdg-desktop-portal{,-gtk} xdg-user-dirs{,-gtk,-wlr} \
     ffmpeg gvfs udisks2 inter-font ttf-jetbrains-mono-nerd
     
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -190,6 +190,7 @@ echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\n
 
 pacman -Syy --noconfirm --needed sddm wallutils libnotify brightnessctl gammastep dex \
   i3-wm autotiling picom polybar rofi flameshot {lx,auto}randr feh xclip numlockx \
+  sway{bg,idle,-contrib} foot waybar fuzzel wl-clipboard \
   alacritty imv mpv dunst mate-polkit engrampa atril pluma pcmanfm-gtk3 \
   nwg-look pavucontrol blueman transmission-gtk mugshot firefox \
   jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt \
