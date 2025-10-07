@@ -189,6 +189,7 @@ echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 
 pacman -Syy --noconfirm --needed sddm wallutils libnotify brightnessctl gammastep dex \
+  qt5{ct,-wayland} kvantum-qt5 gtk-engine{-murrine,s} noto-fonts{,-cjk,-emoji,-extra} \
   i3-wm autotiling picom polybar rofi flameshot {lx,auto}randr feh xclip numlockx \
   sway{bg,idle} foot waybar fuzzel wl-clipboard \
   alacritty imv mpv dunst mate-polkit engrampa atril pluma pcmanfm-gtk3 \
