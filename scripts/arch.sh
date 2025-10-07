@@ -205,7 +205,7 @@ pacman -Syy --noconfirm --needed \
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
 
 # services
-systemctl enable NetworkManager bluetooth jellyfin
+systemctl enable NetworkManager bluetooth cronie jellyfin
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf && mkinitcpio -P

@@ -47,7 +47,7 @@
 =cut
 
 our $CONFIG = {
-  "editor"              => "leafpad",
+  "editor"              => "nvim",
   "force_icon_size"     => 0,
   "generic_fallback"    => 0,
   "gtk_rc_filename"     => "$ENV{HOME}/.config/gtk-3.0/settings.ini",

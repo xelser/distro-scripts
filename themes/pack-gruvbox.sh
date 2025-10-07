@@ -4,7 +4,7 @@
 #cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-backgrounds
 #sudo cp -rf gruvbox-backgrounds/backgrounds /usr/share/
 
-# gtk
+# gtk/libadwaita
 cd /tmp/ && git clone https://github.com/vinceliuice/Colloid-gtk-theme.git
 cd /tmp/Colloid-gtk-theme/ && sudo ./install.sh -t all --tweaks gruvbox rimless
 
