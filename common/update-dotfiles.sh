@@ -317,9 +317,9 @@ save_file /.config/qt5ct/ qt5ct.conf
 save_file /.config/tint2/ tint2rc
 
 # Plank
-if [ -f /usr/bin/plank ]; then save_folder /.config/plank/dock2/
-	dconf dump /net/launchpad/plank/ > ${dest_dir}/.config/plank/plank.ini
-fi
+#if [ -f /usr/bin/plank ]; then save_folder /.config/plank/dock2/
+#	dconf dump /net/launchpad/plank/ > ${dest_dir}/.config/plank/plank.ini
+#fi
 
 ################################### GAMING ###################################
 
