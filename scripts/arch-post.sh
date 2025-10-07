@@ -9,16 +9,13 @@ if [ ! -f /usr/bin/yay ]; then
 
 	yay -Syu --needed --noconfirm --save --removemake --cleanafter --norebuild \
 		--noredownload --batchinstall --combinedupgrade	grub-hook update-grub \
-		htpdate neovim-symlinks xidlehook betterlockscreen polybar-scripts-git \
-		swayfx waypaper brave-bin ventoy-bin
+		xidlehook betterlockscreen obmenu-generator polybar-scripts-git \
+		swayfx waypaper overskride brave-bin ventoy-bin	\
+		htpdate neovim-symlinks
 	
 	# snap-pac-grub snapper-support shim-signed secureboot-grub
 	# teamviewer zoom obs-studio gnome-boxes syncthing-{gtk,desktop-entries}
 	# ulauncher zscroll-git
-	
-	if [ -f /usr/bin/openbox ]; then
-		yay -S --needed --noconfirm obmenu-generator
-	fi
 fi
 
 # BUILD: caffeinate

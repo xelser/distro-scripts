@@ -163,7 +163,8 @@ arch_base () {
 
   # Misc
   pacstrap /mnt flatpak xdg-desktop-portal{,-gtk} xdg-user-dirs{,-gtk,-wlr} \
-    ffmpeg gvfs udisks2 inter-font ttf-jetbrains-mono-nerd
+    ffmpeg gvfs udisks2 gtk-engine{-murrine,s} qt5{ct,-wayland} kvantum-qt5 \
+    noto-fonts{,-cjk,-emoji,-extra} inter-font ttf-jetbrains-mono-nerd
     
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt /bin/bash << EOF
@@ -188,16 +189,17 @@ echo "arch" > /etc/hostname
 echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 
-pacman -Syy --noconfirm --needed sddm wallutils libnotify brightnessctl gammastep dex \
-  qt5{ct,-wayland} kvantum-qt5 gtk-engine{-murrine,s} noto-fonts{,-cjk,-emoji,-extra} \
-  i3-wm autotiling picom polybar rofi flameshot {lx,auto}randr feh xclip numlockx \
-  sway{bg,idle} foot waybar fuzzel wl-clipboard \
-  alacritty imv mpv dunst mate-polkit engrampa atril pluma pcmanfm-gtk3 \
-  nwg-look pavucontrol blueman transmission-gtk mugshot firefox \
+pacman -Syy --noconfirm --needed \
+  sddm wallutils dunst libnotify brightnessctl gammastep dex \
+  nwg-look pavucontrol transmission-gtk mugshot firefox \
+  mate-polkit engrampa atril pluma pcmanfm-gtk3 mpv imv \
+  sway{bg,idle} foot waybar fuzzel wl-clipboard grim \
+  picom polybar rofi flameshot {lx,auto}randr feh xclip numlockx \
+  i3-wm autotiling alacritty openbox tint2 niri kitty \
   jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt \
   nvidia nvidia-utils lib32-nvidia-utils nvidia-prime \
   steam mangohud mesa-utils vulkan-tools \
-  gparted timeshift intel-media-driver
+  gparted timeshift
   
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
