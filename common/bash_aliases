@@ -1,21 +1,21 @@
 
 # package managers
 if [ -f /usr/bin/apt ]; then
-	alias pkgupdate="sudo apt update && sudo apt upgrade --yes"
+	alias update="sudo apt update && sudo apt upgrade --yes"
 	alias install="sudo apt install $1"
 	alias uninstall="sudo apt autoremove --purge $1"
 	alias clean="sudo apt autoremove --purge --yes && sudo apt autoclean"
 	alias search="sudo apt search $1"
 	alias list="sudo apt list --installed | cut -d '/' -f1 | grep $1"
 elif [ -f /usr/bin/pacman ]; then
-	alias pkgupdate="sudo pacman -Syyu --noconfirm"
+	alias update="sudo pacman -Syyu --noconfirm"
 	alias install="sudo pacman -S $1 --needed"
 	alias uninstall="sudo pacman -Rnsu $1"
 	alias clean="sudo pacman -Qtdq | sudo pacman -Rnsu - --noconfirm 1> /dev/null; sudo pacman -Sc --noconfirm"
 	alias search="sudo pacman -Ss $1"
 	alias list="sudo pacman -Qq $1"
 elif [ -f /usr/bin/dnf ]; then
-	alias pkgupdate="sudo dnf upgrade --assumeyes --allowerasing"
+	alias update="sudo dnf upgrade --assumeyes --allowerasing"
 	alias install="sudo dnf install $1"
 	alias uninstall="sudo dnf remove $1"
 	alias clean="sudo dnf autoremove --assumeyes && sudo dnf clean all"
@@ -23,12 +23,21 @@ elif [ -f /usr/bin/dnf ]; then
 	alias list="sudo dnf list --installed $1"
 fi
 
+if [ -f /usr/bin/yay ]; then
+	alias updateaur="yay -Syyu --noconfirm"
+	alias installaur="yay -S $1 --needed"
+	alias uninstallaur="yay -Rnsu $1"
+	alias cleanaur="yay -Qtdq | yay -Rnsu - --noconfirm 1> /dev/null; sudo pacman -Sc --noconfirm"
+	alias searchaur="yay -Ss $1"
+	alias listaur="yay -Qq $1"
+fi
+
 if [ -f /usr/bin/flatpak ]; then
-	alias flatupdate="flatpak update --assumeyes"
-	alias flatinstall="flatpak install flathub $1"
-	alias flatuninstall="flatpak uninstall $1"
-	alias flatclean="flatpak uninstall --unused --delete-data --assumeyes"
-	alias flatsearch="flatpak search --columns=name,application,version,branch $1"
+	alias updateflat="flatpak update --assumeyes"
+	alias installflat="flatpak install flathub $1"
+	alias uninstallflat="flatpak uninstall $1"
+	alias cleanflat="flatpak uninstall --unused --delete-data --assumeyes"
+	alias searchflat="flatpak search --columns=name,application,version,branch $1"
 fi
 
 # GNOME Shell Extensions
@@ -49,7 +58,7 @@ if [ -d $HOME/Documents/distro-scripts/ ] ; then
 fi
 
 # others
-alias update="pkgupdate ; flatupdate ; [ -d $HOME/Documents/distro-scripts/ ] && gitupdate"
+alias updateall="update ; flatupdate ; [ -d $HOME/Documents/distro-scripts/ ] && gitupdate"
 alias fetch="[ -f /bin/fastfetch ] && fastfetch || neofetch"
 alias lock="[ -f /usr/bin/betterlockscreen ] && betterlockscreen -l dimblur >1 /dev/null"
 alias post="bash $HOME/.config/post.sh"
