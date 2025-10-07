@@ -3,7 +3,7 @@
 waypaper --restore & 
 
 # Autostart (X11)
-picom --backend glx --daemon &
+picom &
 
 # Autostart (for openbox)
 #tint2 &
