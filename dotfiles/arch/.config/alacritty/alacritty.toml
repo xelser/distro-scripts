@@ -23,7 +23,7 @@ style = "Medium"
 
 [window]
 dynamic_padding = true
-opacity = 0.4
+opacity = 0.85
 
 [window.padding]
 x = 5

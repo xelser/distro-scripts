@@ -3,7 +3,7 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: FiraCode Nerd Font;
+    font-family: JetBrainsMono Nerd Font;
     /* font-size: 14px; */
     font-weight: bold;
     min-height: 0;
@@ -11,16 +11,17 @@
 }
 
 window {
-    background-color: rgba(80, 80, 80, 0.1); /* semi-transparent */
+    background-color: rgba(29, 32, 33, 0.4); /* bg0 semi-transparent */
     color: @fg0;
 }
 
 tooltip {
-    background: @bg0;
+    background: @bg1;
 }
 
 tooltip label {
     color: @fg1;
+    padding: 5px 5px;
 }
 
 /*

@@ -12,7 +12,6 @@
         "sway/workspaces",
         "sway/window",
         "sway/mode",
-        "sway/scratchpad"
     ],
     "modules-center": [
     ],
@@ -30,23 +29,10 @@
     // "custom/power", 
 
     // Modules configuration
-    // "sway/workspaces": {
-    //     "disable-scroll": true,
-    //     "all-outputs": true,
-    //     "warp-on-scroll": false,
-    //     "format": "{name}: {icon}",
-    //     "format-icons": {
-    //         "1": "",
-    //         "2": "",
-    //         "3": "",
-    //         "4": "",
-    //         "5": "",
-    //         "urgent": "",
-    //         "focused": "",
-    //         "default": ""
-    //     }
-    // },
-
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "format": "{name}"
+    },
     "sway/window": {
         "format": "{title}"
     },
@@ -83,7 +69,7 @@
         "format": " {status}",
         "format-connected": " {device_alias}",
         "format-connected-battery": " {device_alias} 󰁹 {device_battery_percentage}%",
-        "on-click": "overskride"
+        "on-click": "blueman-manager"
     },
     "network": {
 
@@ -98,9 +84,9 @@
 
     "clock": {
         // "timezone": "America/New_York",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "tooltip-format": "<big>{:%a, %b %d}</big>\n─────────────────\n<tt><small>{calendar}</small></tt>",
         "format": "󰥔 {:%I:%M %p}",
-        "format-alt": "󰃭 {:%Y-%m-%d}"
+        "format-alt": "󰃭 {:%m-%d-%Y}"
     },
     "cpu": {
         "format": "  {usage}%",

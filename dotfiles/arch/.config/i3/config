@@ -209,14 +209,14 @@ gaps inner 10
 #gaps top 32
 
 # Autostart (Global)
-exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
-exec --no-startup-id setwallpaper $(cat ~/.config/waypaper/config.ini | grep "wallpaper" | cut -d'=' -f2)
 exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
+exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
 exec --no-startup-id easyeffects --gapplication-service
+exec --no-startup-id waypaper --restore
 
 # Autostart (for X11)
 exec --no-startup-id numlockx
-exec --no-startup-id picom --blur-method dual_kawase --backend glx --daemon
+exec --no-startup-id picom --backend glx --daemon
 #exec_always --no-startup-id xset led on
 #exec --no-startup-id xfsettingsd
 #exec --no-startup-id xsettingsd
