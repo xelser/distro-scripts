@@ -58,7 +58,7 @@ if [ -d $HOME/Documents/distro-scripts/ ] ; then
 fi
 
 # others
-alias updateall="update ; flatupdate ; [ -d $HOME/Documents/distro-scripts/ ] && gitupdate"
+alias updateall="update ; updateflat ; [ -d $HOME/Documents/distro-scripts/ ] && gitupdate"
 alias fetch="[ -f /bin/fastfetch ] && fastfetch || neofetch"
 alias lock="[ -f /usr/bin/betterlockscreen ] && betterlockscreen -l dimblur >1 /dev/null"
 alias post="bash $HOME/.config/post.sh"
