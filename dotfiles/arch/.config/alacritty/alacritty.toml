@@ -1,34 +1,34 @@
-[cursor.style]
-blinking = "On"
-shape = "Underline"
+[general]
+ipc_socket = true
+live_config_reload = true
+import = ["~/.config/alacritty/themes/themes/gruvbox_material_hard_dark.toml"]
+
+[cursor]
+style = { shape = "Underline", blinking = "On" }
+
+[colors]
+draw_bold_text_with_bright_colors = true
 
 [font]
 size = 9
-
-[font.bold]
-family = "JetBrainsMono Nerd Font"
-style = "Bold"
-
-[font.bold_italic]
-family = "JetBrainsMono Nerd Font"
-style = "Bold Italic"
-
-[font.italic]
-family = "JetBrainsMono Nerd Font"
-style = "Italic"
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
 style = "Medium"
 
+[font.bold]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+[font.italic]
+family = "JetBrainsMono Nerd Font"
+style = "Italic"
+
+[font.bold_italic]
+family = "JetBrainsMono Nerd Font"
+style = "Bold Italic"
+
 [window]
+padding = { x = 5, y = 5 }
 dynamic_padding = true
 opacity = 0.85
-
-[window.padding]
-x = 5
-y = 5
-
-[general]
-ipc_socket = true
-import = ["~/.config/alacritty/themes/themes/gruvbox_material_hard_dark.toml"]

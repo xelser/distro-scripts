@@ -212,11 +212,11 @@ gaps inner 10
 exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
 exec --no-startup-id easyeffects --gapplication-service
-exec --no-startup-id waypaper --restore
 
 # Autostart (for X11)
 exec --no-startup-id autorandr -c --default default
 exec --no-startup-id picom --backend glx --daemon
+exec --no-startup-id bash .fehbg
 exec --no-startup-id numlockx on
 #exec --no-startup-id xfsettingsd
 #exec --no-startup-id xsettingsd
@@ -248,6 +248,6 @@ exec --no-startup-id xset s 3600 3600 -dpms && xidlehook --not-when-fullscreen -
 # Apps
 exec --no-startup-id brave --no-startup-window --gapplication-service
 exec --no-startup-id transmission-gtk --minimized
-exec --no-startup-id alacritty --daemon
 exec --no-startup-id pcmanfm --daemon-mode
+exec --no-startup-id alacritty --daemon
 #exec --no-startup-id thunar --daemon
