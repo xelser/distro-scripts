@@ -146,8 +146,8 @@ arch_base () {
     reflector man-{db,pages} texinfo pacman-contrib bash-completion
 
   # Boot
-  pacstrap /mnt grub os-prober efibootmgr dosfstools \
-    xfsprogs {intel,amd}-ucode plymouth
+  pacstrap /mnt grub os-prober efibootmgr dosfstools {intel,amd}-ucode \
+    xfsprogs plymouth
 
   # Audio
   pacstrap /mnt pipewire-{alsa,audio,jack,pulse} wireplumber \
