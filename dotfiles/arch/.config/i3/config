@@ -217,13 +217,13 @@ exec --no-startup-id easyeffects --gapplication-service
 #exec --no-startup-id autorandr -c --default default
 exec --no-startup-id autorandr -c --default nvidia
 exec --no-startup-id picom --backend glx --daemon
-exec --no-startup-id bash $HOME/.fehbg
 exec --no-startup-id numlockx on
 #exec --no-startup-id xfsettingsd
 #exec --no-startup-id xsettingsd
 
 # Autostart (for i3)
 exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id bash $HOME/.fehbg
 exec_always --no-startup-id autotiling
 
 # Screenshot (flameshot)
