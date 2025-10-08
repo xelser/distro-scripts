@@ -67,4 +67,3 @@ sudo systemctl enable --now cpupower
 
 # nvidia dgpu as main renderer
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/nvidia_dgpu.sh)"
-
