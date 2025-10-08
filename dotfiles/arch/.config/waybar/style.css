@@ -11,7 +11,7 @@
 }
 
 window {
-    background-color: rgba(29, 32, 33, 0.4); /* bg0 semi-transparent */
+    background-color: rgba(29, 32, 33, 0.5); /* #1d2021 semi-transparent */
     color: @fg0;
 }
 
