@@ -208,7 +208,7 @@ echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priori
 systemctl enable NetworkManager bluetooth cronie jellyfin
 
 # plymouth
-sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf && mkinitcpio -P
+#sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf && mkinitcpio -P
 
 # users
 useradd -mG wheel,video ${user}
