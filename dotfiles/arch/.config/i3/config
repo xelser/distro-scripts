@@ -216,7 +216,7 @@ exec --no-startup-id easyeffects --gapplication-service
 # Autostart (for X11)
 #exec --no-startup-id autorandr -c --default default
 exec --no-startup-id autorandr -c --default nvidia
-exec --no-startup-id picom --blur-method dual_kawase --backend glx --daemon
+exec --no-startup-id picom --backend glx --daemon
 exec --no-startup-id bash $HOME/.fehbg
 exec --no-startup-id numlockx on
 #exec --no-startup-id xfsettingsd
