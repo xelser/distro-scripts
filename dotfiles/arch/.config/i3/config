@@ -199,8 +199,8 @@ bindsym $mod+r mode "resize"
 #}
 
 # Assign workspaces upon startup
-workspace 1 output DP-1
-workspace 2 output eDP-1
+workspace 1 output DP-1-1 # hybrid mode: DP-1
+workspace 2 output eDP-1-1 # hybrid mode: eDP-1
 
 # i3 Windows Config
 default_floating_border none
@@ -210,13 +210,14 @@ gaps inner 10
 
 # Autostart (Global)
 exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
-exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
+#exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
 exec --no-startup-id easyeffects --gapplication-service
 
 # Autostart (for X11)
-exec --no-startup-id autorandr -c --default default
+#exec --no-startup-id autorandr -c --default default
+exec --no-startup-id autorandr -c --default nvidia
 exec --no-startup-id picom --backend glx --daemon
-exec --no-startup-id bash .fehbg
+exec --no-startup-id bash $HOME/.fehbg
 exec --no-startup-id numlockx on
 #exec --no-startup-id xfsettingsd
 #exec --no-startup-id xsettingsd

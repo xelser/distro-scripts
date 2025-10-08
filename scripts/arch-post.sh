@@ -65,3 +65,6 @@ mkdir -p $HOME/Pictures/Screenshots
 sudo cpupower frequency-set -g performance
 sudo systemctl enable --now cpupower
 
+# nvidia dgpu as main renderer
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/nvidia_dgpu.sh)"
+
