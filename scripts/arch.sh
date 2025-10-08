@@ -142,12 +142,13 @@ fi
 
 arch_base () {
   # Base
-  pacstrap /mnt base{,-devel} linux{,-headers,-firmware} \
-    reflector man-{db,pages} texinfo pacman-contrib bash-completion
+  pacstrap /mnt} linux{,-headers} linux-lts{,-headers} linux-firmware \
+    base{,-devel} man-{db,pages} texinfo \
+    pacman-contrib bash-completion
 
   # Boot
   pacstrap /mnt grub os-prober efibootmgr dosfstools {intel,amd}-ucode \
-    xfsprogs plymouth
+    xfsprogs btrfs-progs ntfs-3g plymouth
 
   # Audio
   pacstrap /mnt pipewire-{alsa,audio,jack,pulse} wireplumber \
@@ -155,7 +156,7 @@ arch_base () {
 
   # System Utils
   pacstrap /mnt cpupower zram-generator dmidecode inxi inetutils \
-    bluez{,-utils} networkmanager openssh
+    bluez{,-utils} networkmanager openssh reflector
 
   # CLI Tools
   pacstrap /mnt neovim{,-plugins} fastfetch htop nvtop intel-gpu-tools \
@@ -197,7 +198,7 @@ pacman -Syy --noconfirm --needed \
   picom polybar rofi flameshot {lx,auto}randr feh xclip numlockx \
   i3-wm autotiling alacritty openbox tint2 niri kitty \
   jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt \
-  nvidia nvidia-utils lib32-nvidia-utils nvidia-prime \
+  nvidia{-dkms,-utils} lib32-nvidia-utils nvidia-prime \
   steam mangohud mesa-utils vulkan-tools \
   gparted timeshift
   
@@ -205,7 +206,7 @@ pacman -Syy --noconfirm --needed \
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
 
 # services
-systemctl enable NetworkManager bluetooth cronie jellyfin
+systemctl enable NetworkManager bluetooth cronie nvidia-persistenced jellyfin
 
 # plymouth
 #sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf && mkinitcpio -P
