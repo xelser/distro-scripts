@@ -191,8 +191,8 @@ echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 
 pacman -Syy --noconfirm --needed \
-  xorg sddm wallutils dunst libnotify brightnessctl gammastep dex \
-  nwg-look pavucontrol transmission-gtk mugshot firefox \
+  xorg sddm wallutils dunst libnotify brightnessctl gammastep \
+  nwg-look pavucontrol blueman transmission-gtk mugshot firefox \
   mate-polkit engrampa atril pluma pcmanfm-gtk3 mpv imv \
   sway{bg,idle} foot waybar fuzzel wl-clipboard grim shikane \
   polybar rofi flameshot {lx,auto}randr feh xclip numlockx \

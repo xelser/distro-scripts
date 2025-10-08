@@ -10,7 +10,7 @@ if [ ! -f /usr/bin/yay ]; then
 	yay -Syu --needed --noconfirm --save --removemake --cleanafter --norebuild \
 		--noredownload --batchinstall --combinedupgrade	grub-hook update-grub \
 		xidlehook betterlockscreen obmenu-generator polybar-scripts-git \
-		sway{fx,-contrib} picom-git waypaper overskride {brave,ventoy}-bin \
+		sway{fx,-contrib} {brave,ventoy}-bin picom-git waypaper \
 		htpdate neovim-symlinks
 	
 	# snap-pac-grub snapper-support shim-signed secureboot-grub
