@@ -8,7 +8,7 @@ if [ -f /usr/bin/apt ]; then
 	alias search="sudo apt search $1"
 	alias list="sudo apt list --installed | cut -d '/' -f1 | grep $1"
 elif [ -f /usr/bin/pacman ]; then
-	alias update="sudo pacman -Syu --noconfirm"
+	alias update="sudo pacman -Syyu --noconfirm"
 	alias install="sudo pacman -S $1 --needed"
 	alias uninstall="sudo pacman -Rnsu $1"
 	alias clean="sudo pacman -Qtdq | sudo pacman -Rnsu - --noconfirm 1> /dev/null; sudo pacman -Sc --noconfirm"
@@ -24,7 +24,7 @@ elif [ -f /usr/bin/dnf ]; then
 fi
 
 if [ -f /usr/bin/yay ]; then
-	alias updateaur="yay -Syu --noconfirm"
+	alias updateaur="yay -Syyu --noconfirm"
 	alias installaur="yay -S $1 --needed"
 	alias uninstallaur="yay -Rnsu $1"
 	alias cleanaur="yay -Qtdq | yay -Rnsu - --noconfirm 1> /dev/null; sudo pacman -Sc --noconfirm"
@@ -64,3 +64,5 @@ alias lock="[ -f /usr/bin/betterlockscreen ] && betterlockscreen -l dimblur >1 /
 alias post="bash $HOME/.config/post.sh"
 alias refresh="source $HOME/.bashrc"
 alias clear="clear && history -c"
+
+

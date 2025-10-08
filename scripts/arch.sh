@@ -199,7 +199,7 @@ pacman -Syy --noconfirm --needed \
   i3-wm autotiling alacritty openbox tint2 niri kitty \
   jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt \
   nvidia{-dkms,-utils} lib32-nvidia-utils nvidia-prime \
-  steam mangohud mesa-utils vulkan-tools \
+  steam mangohud mesa-utils vulkan-tools libva-utils \
   gparted timeshift
   
 # swap/zram
