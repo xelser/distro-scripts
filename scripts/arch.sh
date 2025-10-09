@@ -193,12 +193,12 @@ echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\n
 pacman -Syy --noconfirm --needed \
   xorg sddm wallutils dunst libnotify brightnessctl gammastep \
   nwg-look pavucontrol blueman transmission-gtk mugshot firefox \
-  mate-polkit engrampa atril pluma pcmanfm-gtk3 mpv imv \
-  sway{bg,idle} foot waybar fuzzel wl-clipboard grim shikane \
-  polybar rofi flameshot {lx,auto}randr feh xclip numlockx \
-  i3-wm autotiling alacritty openbox tint2 niri kitty \
+  mate-polkit engrampa atril pluma pcmanfm-gtk3 alacritty mpv imv \
+  polybar rofi xclip {lx,auto}randr feh flameshot numlockx \
+  waybar fuzzel wl-clipboard shikane sway{bg,idle} foot \
+  i3-wm autotiling openbox tint2 niri kitty \
   jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt \
-  nvidia{-dkms,-utils} lib32-nvidia-utils nvidia-prime \
+  nvidia-{dkms,utils} lib32-nvidia-utils nvidia-prime \
   steam mangohud mesa-utils vulkan-tools libva-utils \
   gparted timeshift
   
