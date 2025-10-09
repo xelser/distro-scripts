@@ -9,9 +9,11 @@ if [ ! -f /usr/bin/yay ]; then
 
 	yay -Syu --needed --noconfirm --save --removemake --cleanafter --norebuild \
 		--noredownload --batchinstall --combinedupgrade	grub-hook update-grub \
-		xidlehook betterlockscreen obmenu-generator polybar-scripts-git \
-		sway{fx,-contrib} {brave,ventoy}-bin waypaper \
-		htpdate neovim-symlinks
+		xidlehook betterlockscreen polybar-scripts-git neovim-symlinks \
+		sway{fx,-contrib} {brave,ventoy}-bin waypaper htpdate
+
+	# Openbox: openbox obconf-qt obmenu-generator tint2 plank
+	# niri: niri kitty
 	
 	# snap-pac-grub snapper-support shim-signed secureboot-grub
 	# teamviewer zoom obs-studio gnome-boxes syncthing-{gtk,desktop-entries}

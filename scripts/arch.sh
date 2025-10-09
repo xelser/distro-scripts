@@ -195,12 +195,11 @@ pacman -Syy --noconfirm --needed \
   nwg-look pavucontrol blueman transmission-gtk mugshot firefox \
   mate-polkit engrampa atril pluma pcmanfm-gtk3 alacritty mpv imv \
   polybar rofi xclip {lx,auto}randr feh flameshot picom numlockx \
-  waybar fuzzel wl-clipboard shikane sway{bg,idle} foot \
-  i3-wm autotiling openbox tint2 niri kitty \
+  waybar fuzzel wl-clipboard shikane nwg-displays sway{bg,idle} foot \
+  i3-wm autotiling gparted timeshift resources gnome-boxes \
   jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt \
   nvidia-{dkms,utils} lib32-nvidia-utils nvidia-prime \
-  steam mangohud mesa-utils vulkan-tools libva-utils \
-  gparted timeshift resources
+  mesa-utils vulkan-tools libva-utils
   
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
