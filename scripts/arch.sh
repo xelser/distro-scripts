@@ -194,7 +194,7 @@ pacman -Syy --noconfirm --needed \
   xorg sddm wallutils dunst libnotify brightnessctl gammastep \
   nwg-look pavucontrol blueman transmission-gtk mugshot firefox \
   mate-polkit engrampa atril pluma pcmanfm-gtk3 alacritty mpv imv \
-  polybar rofi xclip {lx,auto}randr feh flameshot numlockx \
+  polybar rofi xclip {lx,auto}randr feh flameshot picom numlockx \
   waybar fuzzel wl-clipboard shikane sway{bg,idle} foot \
   i3-wm autotiling openbox tint2 niri kitty \
   jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt \
