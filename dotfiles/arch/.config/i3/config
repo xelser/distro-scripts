@@ -247,6 +247,7 @@ exec --no-startup-id xset s 3600 3600 -dpms && xidlehook --not-when-fullscreen -
 #bindsym $mod+shift+i exec killall caffeinate && notify-send "Inhibit: caffeinate 󰛊 disbled" || notify-send "caffeinate 󰾫 is not running"
 
 # Apps
+exec --no-startup-id steam -silent -no-browser -nochatui -noreactlogin
 exec --no-startup-id brave --no-startup-window --gapplication-service
 exec --no-startup-id transmission-gtk --minimized
 exec --no-startup-id pcmanfm --daemon-mode

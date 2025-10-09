@@ -200,7 +200,7 @@ pacman -Syy --noconfirm --needed \
   jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt \
   nvidia-{dkms,utils} lib32-nvidia-utils nvidia-prime \
   steam mangohud mesa-utils vulkan-tools libva-utils \
-  gparted timeshift
+  gparted timeshift resources
   
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
