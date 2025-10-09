@@ -214,7 +214,7 @@ exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 exec --no-startup-id easyeffects --gapplication-service
 
 # Autostart (for X11)
-exec --no-startup-id picom --blur-method dual_kawase --backend glx --daemon
+exec_always --no-startup-id picom --blur-method dual_kawase --daemon
 #exec --no-startup-id autorandr -c --default default
 exec --no-startup-id autorandr -c --default nvidia
 exec --no-startup-id numlockx on
