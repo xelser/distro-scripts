@@ -227,7 +227,7 @@ exec_always --no-startup-id bash $HOME/.fehbg
 exec_always --no-startup-id autotiling
 
 # Screenshot (maim)
-bindsym $mod+Shift+s exec filename=~/Pictures/screenshot-$(date +%F_%T).png; maim -u -s "$filename" && xclip -selection clipboard -t image/png -i "$filename" && notify-send -i "$filename" -u low "Screenshot (maim + xclip + notify-send)" "Saved and copied to clipboard" || notify-send -u low "Screenshot aborted"
+bindsym $mod+Shift+s exec --no-startup-id bash -c "filename=\"$HOME/Pictures/$(date +%F_%T).png\" && maim -u -s \"\$filename\" && xclip -selection clipboard -t image/png -i \"\$filename\" && notify-send -i \"\$filename\" -u low 'Screenshot (maim + xclip + notify-send)' 'Saved and copied to clipboard' || notify-send -u low 'Screenshot aborted'"
 
 # Night light (gammastep)
 #exec --no-startup-id sh $HOME/.config/gammastep/launch.sh
@@ -245,7 +245,7 @@ exec --no-startup-id xset s 3600 3600 -dpms && xidlehook --not-when-fullscreen -
 #bindsym $mod+shift+i exec killall caffeinate && notify-send "Inhibit: caffeinate 󰛊 disbled" || notify-send "caffeinate 󰾫 is not running"
 
 # Apps
-exec --no-startup-id steam -silent -no-browser -nochatui -noreactlogin
+#exec --no-startup-id steam -silent -no-browser -nochatui -noreactlogin
 exec --no-startup-id brave --no-startup-window --gapplication-service
 exec --no-startup-id transmission-gtk --minimized
 exec --no-startup-id pcmanfm --daemon-mode
