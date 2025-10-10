@@ -193,7 +193,8 @@ echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\n
 pacman -Syy --noconfirm --needed \
   xorg sddm wallutils dunst libnotify brightnessctl gammastep \
   nwg-look pavucontrol blueman transmission-gtk mugshot firefox \
-  mate-polkit engrampa atril pluma pcmanfm-gtk3 alacritty mpv imv \
+  mate-polkit engrampa atril pluma alacritty mpv imv \
+  thunar-{volman,archive-plugin,media-tags-plugin} tumbler \
   polybar rofi xclip {lx,auto}randr feh maim picom numlockx \
   waybar fuzzel wl-clipboard shikane nwg-displays sway{bg,idle} foot \
   i3-wm autotiling gparted timeshift resources gnome-boxes \
