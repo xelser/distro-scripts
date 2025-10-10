@@ -61,7 +61,7 @@
     "rename-partial-files": true,
     "rpc-authentication-required": false,
     "rpc-bind-address": "0.0.0.0",
-    "rpc-enabled": true,
+    "rpc-enabled": false,
     "rpc-host-whitelist": "",
     "rpc-host-whitelist-enabled": true,
     "rpc-password": "{febd2f31723b3a3126ab2e063f6950c72c5f5876trTNlyS3",
