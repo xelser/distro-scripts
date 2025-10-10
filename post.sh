@@ -37,7 +37,7 @@ fi
 
 # Update User Dirs
 [ -f /usr/bin/xdg-user-dirs-update ] && xdg-user-dirs-update
- 
+
 # Create Symlinks
 if [[ $USER == "xelser" ]]; then
 	[ ! -d $HOME/Documents/"xelser's Documents" ] && ln -sf /mnt/Home/Documents $HOME/Documents/"xelser's Documents"
@@ -168,12 +168,12 @@ fi
 
 # Logout
 logout () {
-if [[ ${wm_de} == "gnome" ]]; then	
+if [[ ${wm_de} == "gnome" ]]; then
 	gnome-session-quit --force
 elif [[ ${wm_de} == "cinnamon" ]]; then
 	cinnamon-session-quit --logout --force
 elif [[ ${wm_de} == "xfce" ]]; then
-	xfce4-session-logout --logout --fast 
+	xfce4-session-logout --logout --fast
 elif [[ ${wm_de} == "kde" ]]; then
 	qdbus org.kde.ksmserver /KSMServer logout 0 0 2
 elif [[ ${wm_de} == "i3" ]]; then
@@ -191,7 +191,7 @@ if [ $? -eq 0 ]; then
 	   *)	echo "Logging out... "
 	   	rm $HOME/.config/${distro_id}-post.sh
 	   	rm $HOME/.config/post.sh
-			logout
+			sudo reboot
 	esac
 else echo "Error Detected. Logout Cancelled"
 fi

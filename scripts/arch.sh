@@ -63,18 +63,18 @@ ext4_setup () {
 btrfs_setup () {
   mkfs.btrfs -L "Arch" /dev/${device}${root} --force
   mount /dev/${device}${root} /mnt
-  
+
   # create subvolumes first
   subvol_name=('' 'home' 'var')
   for subvol in "${subvol_name[@]}"; do
     btrfs su cr /mnt/@${subvol}
   done
-    
+
   # reset and remount
   cd / && umount -R /mnt
   # The root subvolume (@) must be mounted at /mnt
   mount -o defaults,noatime,compress=zstd,subvol=@ /dev/${device}${root} /mnt
-  
+
   # mount the subvolumes
   mount_name=('home' 'var')
   for subvol in "${mount_name[@]}"; do mkdir -p /mnt/${subvol}
@@ -118,18 +118,18 @@ elif [[ ${machine_type} == "Other" ]]; then # GNOME BOXES
       sgdisk /dev/${device} -n 2::3GiB -t 1:8200
       sgdisk /dev/${device} -n 3:: -t 1:8300
   }
-    
+
   create_mbr () {
     # swap, root, then mark as bootable
     echo -e ",3G,82\n,,,*" | sfdisk /dev/${device} --force
   }
-  
+
   # Create Partitions
   dmesg | grep -q "EFI v" && create_gpt || create_mbr
-      
+
   # Format Root
   ${root_setup}
-  
+
   # Format EFI
   dmesg | grep -q "EFI v" && format_efi
 
@@ -167,7 +167,7 @@ arch_base () {
     noto-fonts{,-cjk,-emoji,-extra} inter-font ttf-jetbrains-mono-nerd \
     gtk-engine{-murrine,s} qt5{ct,-wayland} kvantum-qt5 \
     gvfs-{google,mtp} ffmpeg{,thumbnailer}
-     
+
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt /bin/bash << EOF
 
@@ -202,7 +202,7 @@ pacman -Syy --noconfirm --needed \
   jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt \
   nvidia-{dkms,utils} lib32-nvidia-utils nvidia-prime \
   mesa-utils vulkan-tools libva-utils
-  
+
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
 
@@ -252,7 +252,7 @@ EOF
 ## CONFIRMATION ##
 clear && echo "INSTALLATION SUMMARY:"
 echo "---------------------"
-echo "Filesystem: ${fs_name}" 
+echo "Filesystem: ${fs_name}"
 echo "Machine: ${machine}"
 echo "User: ${user}"
 echo "---------------------"

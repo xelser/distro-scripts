@@ -14,7 +14,7 @@ if [ ! -f /usr/bin/yay ]; then
 
 	# Openbox: openbox obconf-qt obmenu-generator tint2 plank
 	# niri: niri kitty
-	
+
 	# snap-pac-grub snapper-support shim-signed secureboot-grub
 	# teamviewer zoom obs-studio gnome-boxes syncthing-{gtk,desktop-entries}
 	# ulauncher zscroll-git
@@ -24,7 +24,7 @@ fi
 #sudo pacman -S --needed --noconfirm rustup && rustup default stable
 #cargo install --git https://github.com/rschmukler/caffeinate
 
-# theme 
+# theme
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-gruvbox.sh)"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/cursor-sainnhe-capitaine.sh)"
 
