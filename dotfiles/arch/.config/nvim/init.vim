@@ -24,12 +24,12 @@ call plug#end()
 source $HOME/.config/nvim/theme.vim
 
 " common
-set showmatch               " show matching
-set ignorecase              " case insensitive
-set hlsearch                " highlight search
-set incsearch               " incremental search
 set number                  " add line numbers
 set mouse=a                 " enable mouse click
+set hlsearch                " highlight search
+set incsearch               " incremental search
+set showmatch               " show matching
+set ignorecase              " case insensitive
 set clipboard=unnamedplus   " using system clipboard
 
 " transparency
