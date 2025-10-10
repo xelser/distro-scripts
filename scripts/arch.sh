@@ -187,7 +187,7 @@ echo "KEYMAP=us" > /etc/vconsole.conf
 echo "arch" > /etc/hostname
 
 # pacman
-echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\n
+echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\nColor\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 
 pacman -Syy --noconfirm --needed \
