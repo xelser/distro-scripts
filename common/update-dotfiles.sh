@@ -39,7 +39,7 @@ if [[ ${wm_de} == "xfce" ]]; then
 	# QT day/night cycle (remove clutter)
 	#rm -rf ${dest_dir}/.config/Kvantum/
 	#rm -rf ${dest_dir}/.config/qt5ct/
-	
+
 elif [[ ${wm_de} == "cinnamon" ]]; then
 
 	# Cinnamon Panel
@@ -70,7 +70,7 @@ elif [[ ${wm_de} == "cinnamon" ]]; then
 	# QT day/night cycle (remove clutter)
 	rm -rf ${dest_dir}/.config/Kvantum/
 	rm -rf ${dest_dir}/.config/qt5ct/
-	
+
 	# GTK3 Settings and Bookmarks (remove clutter)
 	rm -rf ${dest_dir}/.config/gtk-3.0/
 
@@ -82,7 +82,7 @@ elif [[ ${wm_de} == "gnome" ]]; then
 	grep "favorite-apps" /tmp/shell_beta.ini >> 	${dest_dir}/.config/fav_apps.ini
 	dconf dump /org/gnome/desktop/app-folders/ > 	${dest_dir}/.config/app_folders.ini
 	#dconf dump /org/gnome/shell/extensions/ > 		${dest_dir}/.config/extensions.ini
-	
+
 	# Pop-Shell Exceptions
 	save_file /.config/pop-shell/ config.json
 
@@ -91,13 +91,13 @@ elif [[ ${wm_de} == "gnome" ]]; then
 
 	# GDM Settings
 	save_file /.config/ gdm-settings.ini
-	
+
 	# QT day/night cycle (remove clutter)
 	rm -rf ${dest_dir}/.config/Kvantum/
 	rm -rf ${dest_dir}/.config/qt5ct/
-	
+
 elif [[ ${wm_de} == "kde" ]]; then
-	
+
 	# Konsave
 	if [ -f /usr/bin/konsave ]; then
 		konsave -r defaults 2>/dev/null
@@ -109,14 +109,14 @@ elif [[ ${wm_de} == "kde" ]]; then
 else
 
 	dest_dir="$HOME/Documents/distro-scripts/dotfiles/${distro_id}"
-	
+
 	# Alacritty
 	save_file /.config/alacritty/ alacritty.yml
 	save_file /.config/alacritty/ alacritty.toml
 
-	# Foot 
+	# Foot
 	save_file /.config/foot/ foot.ini
-	
+
 	# Awesome settings
 	save_file /.config/awesome/ rc.lua
 
@@ -128,10 +128,10 @@ else
 	# Obmenu Generator
 	save_file /.config/obmenu-generator/ config.pl
 	save_file /.config/obmenu-generator/ schema.pl
-	
+
 	# i3 settings
 	save_file /.config/i3/ config
-	
+
 	# Sway settings
 	save_folder /.config/sway/
 
@@ -143,32 +143,32 @@ else
 
 	# Swhkd
 	save_file /.config/swhkd/ swhkdrc
-	
+
 	# Autorandr
 	save_folder /.config/autorandr/
 
 	# Picom
 	save_folder /.config/picom/
-	
+
 	# Betterlockscreen
 	save_file /.config/betterlockscreen/ betterlockscreenrc
-	
+
 	# Dunst
 	save_file /.config/dunst/ dunstrc
-	
+
 	# Mako
 	save_file /.config/mako/ config
 
 	# Nitrogen
 	save_folder /.config/nitrogen/
-	
+
 	# Waytrogen
 	save_file /.config/waytrogen/ config.json
-	
+
 	# Waypaper
 	save_file /.config/waypaper/ config.ini
 
-	# Ranger 
+	# Ranger
 	save_file /.config/ranger/ rc.conf
 
 	# Ulauncher
@@ -179,13 +179,13 @@ else
 
 	# Fuzzel
 	save_file /.config/fuzzel/ fuzzel.ini
-	
+
 	# Wlogout
 	save_folder /.config/wlogout/
 
 	# Flameshot
 	save_file /.config/flameshot/ flameshot.ini
-	
+
 	# EWW
 	save_folder /.config/eww/
 
@@ -249,7 +249,7 @@ save_file /.config/leafpad/ leafpadrc
 save_file / .vimrc
 
 # NeoVim
-save_file /.config/nvim/ init.vim
+save_folder /.config/nvim/
 
 # mpv
 save_file /.config/mpv/ mpv.conf
@@ -261,7 +261,7 @@ save_file /.config/celluloid/ mpv.conf
 save_file /.config/ redshift.conf
 save_folder /.config/redshift/
 
-# Gammastep 
+# Gammastep
 save_folder /.config/gammastep/
 
 # Transmission
@@ -369,7 +369,7 @@ elif [[ ${wm_de} == "cinnamon" ]]; then
 	# QT day/night cycle (remove clutter)
 	rm -rf ${dest_dir}/.config/Kvantum/
 	rm -rf ${dest_dir}/.config/qt5ct/
-	
+
 	# GTK3 Settings and Bookmarks (remove clutter)
 	rm -rf ${dest_dir}/.config/gtk-3.0/
 fi

@@ -261,7 +261,7 @@ input type:touchpad {
 # Windows
 default_floating_border none
 default_border none
-gaps inner 10
+gaps inner 5
 
 # Floating Windows
 for_window [title="Compress"] floating enable
