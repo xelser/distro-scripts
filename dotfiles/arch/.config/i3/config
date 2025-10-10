@@ -248,6 +248,6 @@ exec --no-startup-id xset s 3600 3600 -dpms && xidlehook --not-when-fullscreen -
 #exec --no-startup-id steam -silent -no-browser -nochatui -noreactlogin
 exec --no-startup-id brave --no-startup-window --gapplication-service
 exec --no-startup-id transmission-gtk --minimized
-exec --no-startup-id pcmanfm --daemon-mode
+#exec --no-startup-id pcmanfm --daemon-mode
 exec --no-startup-id alacritty --daemon
-#exec --no-startup-id thunar --daemon
+exec --no-startup-id thunar --daemon

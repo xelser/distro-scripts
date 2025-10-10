@@ -163,10 +163,11 @@ arch_base () {
     git wget zip unzip sassc
 
   # Misc
-  pacstrap /mnt flatpak xdg-desktop-portal{,-gtk} xdg-user-dirs{,-gtk,-wlr} \
-    ffmpeg gvfs udisks2 gtk-engine{-murrine,s} qt5{ct,-wayland} kvantum-qt5 \
-    noto-fonts{,-cjk,-emoji,-extra} inter-font ttf-jetbrains-mono-nerd
-    
+  pacstrap /mnt flatpak xdg-desktop-portal{,-gtk,-wlr} xdg-user-dirs{,-gtk} \
+    noto-fonts{,-cjk,-emoji,-extra} inter-font ttf-jetbrains-mono-nerd \
+    gtk-engine{-murrine,s} qt5{ct,-wayland} kvantum-qt5 \
+    gvfs-{google,mtp} ffmpeg{,thumbnailer}
+     
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt /bin/bash << EOF
 
@@ -193,8 +194,8 @@ echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\nColor\n
 pacman -Syy --noconfirm --needed \
   xorg sddm wallutils dunst libnotify brightnessctl gammastep \
   nwg-look pavucontrol blueman transmission-gtk mugshot firefox \
-  mate-polkit engrampa atril pluma alacritty mpv imv \
   thunar-{volman,archive-plugin,media-tags-plugin} tumbler \
+  mate-polkit engrampa atril pluma alacritty mpv imv \
   polybar rofi xclip {lx,auto}randr feh maim picom numlockx \
   waybar fuzzel wl-clipboard shikane nwg-displays sway{bg,idle} foot \
   i3-wm autotiling gparted timeshift resources gnome-boxes \
