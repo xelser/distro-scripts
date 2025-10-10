@@ -177,7 +177,7 @@ exec swayidle -w \
 #
 # Sway has a "scratchpad", which is a bag of holding for windows.
 # You can send windows there and get them back later.
-    
+
     # Move the currently focused window to the scratchpad
     bindsym $mod+Shift+minus move scratchpad
 
@@ -217,7 +217,7 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
     bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
     bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
-    
+
     # Special keys to adjust brightness via brightnessctl
     bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
@@ -290,7 +290,7 @@ exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 exec --no-startup-id easyeffects --gapplication-service
 
 # Autostart (for sway)
-exec --no-startup-id waypaper --restore
+exec_always --no-startup-id waypaper --restore
 exec --no-startup-id autotiling
 
 # Night light (gammastep)
@@ -302,6 +302,6 @@ exec --no-startup-id brave --no-startup-window --gapplication-service
 exec --no-startup-id transmission-gtk --minimized
 exec --no-startup-id thunar --daemon
 #exec --no-startup-id pcmanfm --daemon-mode
-exec --no-startup-id foot --server
+exec_always --no-startup-id foot --server
 
 include /etc/sway/config.d/*
