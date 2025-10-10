@@ -13,6 +13,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'sheerun/vim-polyglot'
+Plug 'nvimdev/lspsaga.nvim'
 Plug 'windwp/nvim-autopairs'
 Plug 'nvim-tree/nvim-web-devicons'
 "Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -22,20 +23,14 @@ call plug#end()
 
 source $HOME/.config/nvim/theme.vim
 
-" filetype plugin indent on " allow auto-indenting depending on file type
-filetype plugin on
-" syntax on                 " syntax highlighting
-
-" set nocompatible          " disable compatibility to old-time vi
+" common
 set showmatch               " show matching
 set ignorecase              " case insensitive
-set mouse=v                 " middle-click paste with
 set hlsearch                " highlight search
 set incsearch               " incremental search
 set number                  " add line numbers
 set mouse=a                 " enable mouse click
 set clipboard=unnamedplus   " using system clipboard
-set ttyfast                 " Speed up scrolling in Vim
 
 " transparency
 highlight Normal ctermbg=none guibg=none
@@ -45,12 +40,17 @@ highlight NonText ctermbg=none guibg=none
 autocmd BufWritePre * :%s/\s\+$//e
 
 " visual feedback for yanks
-au TextYankPost * silent! lua vim.highlight.on_yank()
+autocmd TextYankPost * silent! lua vim.highlight.on_yank()
 
 " plugin: autopairs
 lua << END
-	require("nvim-autopairs").setup {}
+	require("nvim-autopairs").setup({})
 END
+
+" plugin: lspsaga
+lua << EOF
+	require("lspsaga").setup({})
+EOF
 
 " autoformat
 "autocmd BufWritePre *.js,*.ts,*.py,*.lua :call CocAction('format')
