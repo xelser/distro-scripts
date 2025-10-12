@@ -6,9 +6,6 @@ import = ["~/.config/alacritty/themes/themes/gruvbox_material_hard_dark.toml"]
 [cursor]
 style = { shape = "Underline", blinking = "On" }
 
-[colors]
-draw_bold_text_with_bright_colors = true
-
 [font]
 size = 9
 

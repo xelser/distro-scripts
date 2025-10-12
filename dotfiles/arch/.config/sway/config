@@ -8,13 +8,17 @@
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
+
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
+
 # Your preferred terminal emulator
-set $term footclient
+set $term alacritty msg create-window
+#set $term footclient
+
 # Your preferred application launcher
 #set $menu wmenu-run
 set $menu fuzzel
@@ -249,6 +253,9 @@ bindsym $mod+r mode "resize"
 # User Configs:
 #
 
+# Xwayland
+xwayland disable
+
 # NumLock
 input type:keyboard xkb_numlock enabled
 
@@ -300,8 +307,9 @@ exec --no-startup-id autotiling
 # Apps
 exec --no-startup-id brave --no-startup-window --gapplication-service
 exec --no-startup-id transmission-gtk --minimized
+exec --no-startup-id alacritty --daemon
 exec --no-startup-id thunar --daemon
 #exec --no-startup-id pcmanfm --daemon-mode
-exec_always --no-startup-id foot --server
+#exec --no-startup-id foot --server
 
 include /etc/sway/config.d/*
