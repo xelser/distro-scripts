@@ -7,7 +7,7 @@ import = ["~/.config/alacritty/themes/themes/gruvbox_material_hard_dark.toml"]
 style = { shape = "Underline", blinking = "On" }
 
 [font]
-size = 9
+size = 10
 
 [font.normal]
 family = "JetBrainsMono Nerd Font"
