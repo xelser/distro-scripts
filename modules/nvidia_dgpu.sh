@@ -18,9 +18,9 @@ Section "OutputClass"
 EndSection
 EOF
 
-tee -a $HOME/.xprofile > /dev/null << 'EOF'
-
-# Initialize PRIME offloading (NVIDIA + modesetting)
+sudo tee -a /usr/share/sddm/scripts/Xsetup > /dev/null << 'EOF'
 xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
 EOF
+
+sudo /usr/share/sddm/scripts/Xsetup

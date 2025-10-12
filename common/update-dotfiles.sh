@@ -174,6 +174,9 @@ else
 	# Ulauncher
 	save_file /.config/ulauncher/ settings.json
 
+	# Rofi
+	save_folder /.config/rofi/
+
 	# Wofi
 	save_folder /.config/wofi/
 
