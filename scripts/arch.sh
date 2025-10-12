@@ -164,7 +164,7 @@ arch_base () {
 
   # Misc
   pacstrap /mnt flatpak xdg-desktop-portal{,-gtk,-wlr} xdg-user-dirs{,-gtk} \
-    noto-fonts{,-cjk,-emoji,-extra} inter-font ttf-jetbrains-mono-nerd \
+    noto-fonts{,-cjk,-emoji} inter-font ttf-jetbrains-mono-nerd \
     gtk-engine{-murrine,s} qt5{ct,-wayland} kvantum-qt5 \
     gvfs-{google,mtp} ffmpeg{,thumbnailer}
 
