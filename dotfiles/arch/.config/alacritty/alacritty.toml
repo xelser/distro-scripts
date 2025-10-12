@@ -1,7 +1,7 @@
 [general]
 ipc_socket = true
 live_config_reload = true
-import = ["~/.config/alacritty/themes/themes/gruvbox_material_hard_dark.toml"]
+import = ["~/.config/alacritty/gruvbox-material-hard-dark.toml"]
 
 [cursor]
 style = { shape = "Underline", blinking = "On" }

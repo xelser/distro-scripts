@@ -24,7 +24,8 @@ cp -rf /tmp/gruvbox-gtksourceview/*.xml $HOME/.local/share/gtksourceview-3.0/sty
 ln -sf $HOME/.local/share/gtksourceview-3.0/styles/gruvbox*.xml $HOME/.local/share/gtksourceview-4/styles/
 
 if [ -f /usr/bin/alacritty ]; then
-	mkdir -p $HOME/.config/alacritty/themes && git clone https://github.com/alacritty/alacritty-theme $HOME/.config/alacritty/themes
+	cd /tmp/ && git clone --depth 1 https://github.com/xelser/gruvbox-material-alacritty
+	cp -rf /tmp/gruvbox-material-alacritty/*.toml $HOME/.config/alacritty/
 fi
 
 if [ -f /usr/bin/xfce4-terminal ]; then
