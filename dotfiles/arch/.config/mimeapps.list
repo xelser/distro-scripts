@@ -18,6 +18,7 @@ x-scheme-handler/webcal=userapp-Thunderbird-FVG4A3.desktop
 text/calendar=userapp-Thunderbird-FVG4A3.desktop
 application/x-extension-ics=userapp-Thunderbird-FVG4A3.desktop
 x-scheme-handler/webcals=userapp-Thunderbird-FVG4A3.desktop
+application/xml=pluma.desktop
 
 [Added Associations]
 application/x-shellscript=geany.desktop;org.xfce.mousepad.desktop;nvim.desktop;leafpad.desktop;pluma.desktop;
@@ -32,3 +33,4 @@ x-scheme-handler/mid=userapp-Thunderbird-MJ37A3.desktop;
 x-scheme-handler/webcal=userapp-Thunderbird-FVG4A3.desktop;
 x-scheme-handler/webcals=userapp-Thunderbird-FVG4A3.desktop;
 image/heif=imv-dir.desktop;
+application/xml=pluma.desktop;
