@@ -142,7 +142,7 @@ fi
 
 arch_base () {
   # Base
-  pacstrap /mnt} linux{,-headers} linux-lts{,-headers} linux-firmware \
+  pacstrap /mnt linux{,-headers} linux-lts{,-headers} linux-firmware \
     base{,-devel} man-{db,pages} texinfo \
     pacman-contrib bash-completion
 
