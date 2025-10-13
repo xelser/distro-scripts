@@ -26,13 +26,13 @@ sudo timedatectl set-ntp true
 # Essential Packages
 if [ -f /usr/bin/apt ]; then sudo apt install --yes \
 	flatpak fastfetch htop inxi zip un{zip,rar} tar ffmpeg ffmpegthumbnailer gvfs xdg-user-dirs dconf-editor wget curl git sassc \
-	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf gh openssh-client intel-media-va-driver-non-free
+	fonts-noto gtk2-engines-murrine gtk2-engines-pixbuf openssh-client intel-media-va-driver-non-free
 elif [ -f /usr/bin/pacman ]; then sudo pacman -Syyu --needed --noconfirm \
 	flatpak fastfetch htop inxi zip un{zip,rar} tar ffmpeg ffmpegthumbnailer gvfs xdg-user-dirs dconf-editor wget curl git sassc \
-	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines github-cli openssh intel-media-driver
+	noto-fonts-{cjk,emoji} gtk-engine-murrine gtk-engines openssh intel-media-driver
 elif [ -f /usr/bin/dnf5 ]; then sudo dnf5 install --assumeyes --best --allowerasing \
 	flatpak fastfetch htop inxi zip un{zip,rar} tar ffmpeg ffmpegthumbnailer gvfs xdg-user-dirs dconf-editor wget curl git sassc \
-	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines gh openssh {libva-,}intel-media-driver
+	google-noto-{cjk,emoji-color}-fonts gtk-murrine-engine gtk2-engines openssh {libva-,}intel-media-driver
 fi
 
 # Update User Dirs

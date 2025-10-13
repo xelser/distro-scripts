@@ -1,9 +1,19 @@
 #!/bin/bash
 
+
+# === GitHub CLI ===
+if [ -f /usr/bin/apt ]; then
+    sudo apt install --yes gh
+elif [ -f /usr/bin/dnf5 ]; then
+    sudo dnf install --assumeyes gh
+elif [ -f /usr/bin/pacman ]; then
+    sudo pacman -S --needed --noconfirm github-cli
+fi
+
+# === CONFIGURATION ===
 git config --global user.email "dkzenzuri@gmail.com"
 git config --global user.name "${USER}"
 
-# === CONFIGURATION ===
 GITHUB_DIR="/mnt/Home/Documents/Github"
 SSH_DIR="$HOME/.ssh"
 PRIVATE_KEY="$GITHUB_DIR/id_ed25519"
