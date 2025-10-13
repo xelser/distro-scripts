@@ -148,7 +148,7 @@ arch_base () {
 
   # Boot
   pacstrap /mnt grub os-prober efibootmgr dosfstools {intel,amd}-ucode \
-    xfsprogs btrfs-progs ntfs-3g # plymouth
+    ntfs-3g xfsprogs btrfs-progs grub-btrfs inotify-tools # plymouth
 
   # Audio
   pacstrap /mnt pipewire-{alsa,audio,jack,pulse} wireplumber \
@@ -192,25 +192,22 @@ echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\nColor\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 
 pacman -Syy --noconfirm --needed \
-  xorg sddm wallutils dunst libnotify brightnessctl gammastep \
-  nwg-look pavucontrol blueman transmission-gtk mugshot firefox \
-  mate-polkit engrampa atril pluma mpv imv ranger nemo resources \
-  i3-wm polybar xclip {lx,auto}randr feh maim picom numlockx \
-  autotiling alacritty rofi
+  xorg sddm timeshift wallutils dunst libnotify brightnessctl gammastep \
+  pavucontrol blueman transmission-gtk mugshot nwg-look firefox mpv imv \
+  mate-polkit engrampa atril pluma thunar-{volman,archive-plugin} tumbler \
+  i3-wm autotiling polybar xclip {lx,auto}randr feh maim picom numlockx \
+  alacritty rofi resources gparted gnome-boxes obs-studio
 
 pacman -S --noconfirm --needed \
   jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt \
   nvidia-{dkms,utils} lib32-nvidia-utils nvidia-prime \
-  mesa-utils vulkan-tools libva-utils \
-  gparted gnome-boxes obs-studio
-
-  # timeshift
+  mesa-utils vulkan-tools libva-utils
 
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
 
 # services
-systemctl enable NetworkManager bluetooth nvidia-persistenced jellyfin
+systemctl enable NetworkManager bluetooth cronie nvidia-persistenced jellyfin
 
 # plymouth
 #sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf && mkinitcpio -P
@@ -232,9 +229,9 @@ systemctl enable sddm
 # grub
 sed -i 's/quiet/quiet splash/g' /etc/default/grub
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/g' /etc/default/grub
-sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
-sed -i 's/#GRUB_SAVEDEFAULT=true/GRUB_SAVEDEFAULT=true/g' /etc/default/grub
-sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
+#sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
+#sed -i 's/#GRUB_SAVEDEFAULT=true/GRUB_SAVEDEFAULT=true/g' /etc/default/grub
+#sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
 mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=${grub_target}
 

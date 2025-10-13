@@ -9,7 +9,7 @@ if [ ! -f /usr/bin/yay ]; then
 
 	yay -Syu --needed --noconfirm --save --removemake --cleanafter --norebuild \
 		--noredownload --batchinstall --combinedupgrade htpdate neovim-symlinks	\
-		grub-hook update-grub snapper-support	xidlehook betterlockscreen \
+		grub-hook update-grub timeshift-autosnap xidlehook betterlockscreen \
 		waypaper brave-bin ventoy-bin polybar-scripts-git swayfx
 
 	# sway
@@ -19,7 +19,7 @@ if [ ! -f /usr/bin/yay ]; then
 	# Openbox: openbox obconf-qt obmenu-generator tint2 plank
 	# niri: niri kitty shikane nwg-displays
 
-	# snap-pac-grub shim-signed secureboot-grub
+	# snap-pac-grub snapper-support shim-signed secureboot-grub
 	# teamviewer zoom obs-studio gnome-boxes syncthing-{gtk,desktop-entries}
 	# ulauncher zscroll-git
 fi

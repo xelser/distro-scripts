@@ -17,7 +17,7 @@ configuration {
   drun-match-fields: "name,generic,exec";
   drun-show-actions: false;
   drun-use-desktop-cache: true;
-  drun-reload-desktop-cache: false;
+  drun-reload-desktop-cache: true;
 
   threads: 4;
   refilter-timeout-limit: 100;
