@@ -191,6 +191,8 @@ echo "arch" > /etc/hostname
 echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\nColor\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
 
+reflector && sleep 10
+
 pacman -Syy --noconfirm --needed \
   xorg sddm timeshift wallutils dunst libnotify brightnessctl gammastep \
   pavucontrol blueman transmission-gtk mugshot nwg-look firefox mpv imv \
@@ -199,15 +201,20 @@ pacman -Syy --noconfirm --needed \
   resources gparted gnome-boxes obs-studio
 
 pacman -S --noconfirm --needed \
-  jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt \
-  nvidia-{dkms,utils} lib32-nvidia-utils nvidia-prime \
-  mesa-utils vulkan-tools libva-utils
+  jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt libva-utils \
+  nvidia-{dkms,utils,prime} lib32-nvidia-utils mesa-utils vulkan-tools
 
-# swap/zram
+# swap/zram-generator
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
 
+# grub-btrfsd
+mkdir -p /etc/systemd/system/grub-btrfsd.service.d
+echo "[Service]" > /etc/systemd/system/grub-btrfsd.service.d/override.conf
+echo "ExecStart=" >> /etc/systemd/system/grub-btrfsd.service.d/override.conf
+echo "ExecStart=/usr/bin/grub-btrfsd --syslog --timeshift-auto" >> /etc/systemd/system/grub-btrfsd.service.d/override.conf
+
 # services
-systemctl enable NetworkManager bluetooth cronie nvidia-persistenced jellyfin
+systemctl enable NetworkManager bluetooth cronie grub-btrfsd nvidia-persistenced jellyfin
 
 # plymouth
 #sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf && mkinitcpio -P

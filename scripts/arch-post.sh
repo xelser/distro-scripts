@@ -9,7 +9,7 @@ if [ ! -f /usr/bin/yay ]; then
 
 	yay -Syu --needed --noconfirm --save --removemake --cleanafter --norebuild \
 		--noredownload --batchinstall --combinedupgrade htpdate neovim-symlinks	\
-		update-grub grub-hook timeshift-autosnap shim-signed secureboot-grub \
+		shim-signed secureboot-grub grub-hook update-grub timeshift-autosnap \
 		xidlehook betterlockscreen waypaper brave-bin ventoy-bin swayfx
 
 	# sway
@@ -23,7 +23,7 @@ if [ ! -f /usr/bin/yay ]; then
 
 	# snap-pac-grub snapper-support
 	# teamviewer zoom obs-studio gnome-boxes syncthing-{gtk,desktop-entries}
-	# ulauncher zscroll-git  polybar-scripts-git
+	# ulauncher zscroll-git polybar-scripts-git
 fi
 
 # BUILD: caffeinate

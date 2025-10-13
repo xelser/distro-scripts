@@ -23,4 +23,4 @@ xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
 EOF
 
-sudo /usr/share/sddm/scripts/Xsetup
+#sudo /usr/share/sddm/scripts/Xsetup
