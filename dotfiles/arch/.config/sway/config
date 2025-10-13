@@ -308,8 +308,8 @@ exec --no-startup-id autotiling
 exec --no-startup-id brave --no-startup-window --gapplication-service
 exec --no-startup-id transmission-gtk --minimized
 #exec --no-startup-id alacritty --daemon
-exec --no-startup-id thunar --daemon
-#exec --no-startup-id pcmanfm --daemon-mode
+#exec --no-startup-id thunar --daemon
+exec --no-startup-id pcmanfm --daemon-mode
 exec --no-startup-id foot --server
 
 include /etc/sway/config.d/*

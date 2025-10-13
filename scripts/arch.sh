@@ -166,7 +166,7 @@ arch_base () {
   pacstrap /mnt flatpak xdg-desktop-portal{,-gtk,-wlr} xdg-user-dirs{,-gtk} \
     noto-fonts{,-cjk,-emoji} inter-font ttf-jetbrains-mono-nerd \
     gtk-engine{-murrine,s} qt5{ct,-wayland} kvantum-qt5 \
-    gvfs-{google,mtp} ffmpeg{,thumbnailer}
+    gvfs-{google,mtp} ffmpeg{,thumbnailer} tumbler
 
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt /bin/bash << EOF
@@ -194,9 +194,9 @@ echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\nColor\n
 pacman -Syy --noconfirm --needed \
   xorg sddm timeshift wallutils dunst libnotify brightnessctl gammastep \
   pavucontrol blueman transmission-gtk mugshot nwg-look firefox mpv imv \
-  mate-polkit engrampa atril pluma thunar-{volman,archive-plugin} tumbler \
   i3-wm autotiling polybar xclip {lx,auto}randr feh maim picom numlockx \
-  alacritty rofi resources gparted gnome-boxes obs-studio
+  mate-polkit engrampa atril pluma pcmanfm-gtk3 alacritty rofi \
+  resources gparted gnome-boxes obs-studio
 
 pacman -S --noconfirm --needed \
   jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt \
