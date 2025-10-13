@@ -237,10 +237,10 @@ save_file /.config/gtk-3.0/ bookmarks
 save_file /.config/fontconfig/ fonts.conf
 
 # Libfm
-#save_file /.config/libfm/ libfm.conf
+save_file /.config/libfm/ libfm.conf
 
 # PCmanFm
-#save_file /.config/pcmanfm/default/ pcmanfm.conf
+save_file /.config/pcmanfm/default/ pcmanfm.conf
 
 # Thunar
 save_file /.config/xfce4/ helpers.rc

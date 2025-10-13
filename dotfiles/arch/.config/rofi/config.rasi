@@ -12,7 +12,7 @@ configuration {
   sort: true;
   sorting-method: "levenshtein";
   case-smart: true;
-  disable-history: true;
+  disable-history: false;
 
   drun-match-fields: "name,generic,exec";
   drun-show-actions: false;
