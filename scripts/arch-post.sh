@@ -9,8 +9,8 @@ if [ ! -f /usr/bin/yay ]; then
 
 	yay -Syu --needed --noconfirm --save --removemake --cleanafter --norebuild \
 		--noredownload --batchinstall --combinedupgrade htpdate neovim-symlinks	\
-		grub-hook update-grub timeshift-autosnap xidlehook betterlockscreen \
-		waypaper brave-bin ventoy-bin swayfx
+		update-grub grub-hook timeshift-autosnap shim-signed secureboot-grub \
+		xidlehook betterlockscreen waypaper brave-bin ventoy-bin swayfx
 
 	# sway
 	if [ -f /usr/bin/sway ]; then
@@ -21,7 +21,7 @@ if [ ! -f /usr/bin/yay ]; then
 	# Openbox: openbox obconf-qt obmenu-generator tint2 plank
 	# niri: niri kitty shikane nwg-displays
 
-	# snap-pac-grub snapper-support shim-signed secureboot-grub
+	# snap-pac-grub snapper-support
 	# teamviewer zoom obs-studio gnome-boxes syncthing-{gtk,desktop-entries}
 	# ulauncher zscroll-git  polybar-scripts-git
 fi
@@ -46,11 +46,9 @@ gsettings set org.mate.pluma highlight-current-line true
 gsettings set org.mate.pluma toolbar-visible false
 gsettings set org.mate.pluma use-default-font false
 
-# shim secure boot
-#sudo mv /boot/efi/EFI/BOOT/BOOTx64.EFI /boot/efiEFI/BOOT/grubx64.efi
-#sudo cp /usr/share/shim-signed/shimx64.efi /boot/efiEFI/BOOT/BOOTx64.EFI
-#sudo cp /usr/share/shim-signed/mmx64.efi /boot/efiEFI/BOOT/
-#sudo efibootmgr --unicode --disk /dev/sda --part 1 --create --label "Arch" --loader /EFI/BOOT/BOOTx64.EFI
+# secure boot
+sudo sed -i 's|esp="/efi"|esp="/boot/efi"|g; s|bootloader_id="Arch"|bootloader_id="arch"|g' /etc/secureboot.conf
+sudo secure-grub-install
 
 # cpucpower
 sudo cpupower frequency-set -g performance
