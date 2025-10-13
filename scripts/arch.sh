@@ -142,13 +142,13 @@ fi
 
 arch_base () {
   # Base
-  pacstrap /mnt linux{,-headers} linux-lts{,-headers} linux-firmware \
-    base{,-devel} man-{db,pages} texinfo \
-    pacman-contrib bash-completion
+  pacstrap /mnt base{,-devel} linux{,-headers} linux-firmware \
+    man-{db,pages} texinfo pacman-contrib bash-completion
+    # linux-lts{,-headers}
 
   # Boot
   pacstrap /mnt grub os-prober efibootmgr dosfstools {intel,amd}-ucode \
-    xfsprogs btrfs-progs ntfs-3g plymouth
+    xfsprogs btrfs-progs ntfs-3g # plymouth
 
   # Audio
   pacstrap /mnt pipewire-{alsa,audio,jack,pulse} wireplumber \
@@ -194,20 +194,23 @@ echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\nColor\n
 pacman -Syy --noconfirm --needed \
   xorg sddm wallutils dunst libnotify brightnessctl gammastep \
   nwg-look pavucontrol blueman transmission-gtk mugshot firefox \
-  thunar-{volman,archive-plugin,media-tags-plugin} tumbler \
-  mate-polkit engrampa atril pluma alacritty mpv imv \
-  polybar rofi xclip {lx,auto}randr feh maim picom numlockx \
-  waybar fuzzel wl-clipboard shikane nwg-displays sway{bg,idle} foot \
-  i3-wm autotiling gparted timeshift resources gnome-boxes \
+  mate-polkit engrampa atril pluma mpv imv ranger nemo resources \
+  i3-wm polybar xclip {lx,auto}randr feh maim picom numlockx \
+  autotiling alacritty rofi
+
+pacman -S --noconfirm --needed \
   jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt \
   nvidia-{dkms,utils} lib32-nvidia-utils nvidia-prime \
-  mesa-utils vulkan-tools libva-utils
+  mesa-utils vulkan-tools libva-utils \
+  gparted gnome-boxes obs-studio
+
+  # timeshift
 
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
 
 # services
-systemctl enable NetworkManager bluetooth cronie nvidia-persistenced jellyfin
+systemctl enable NetworkManager bluetooth nvidia-persistenced jellyfin
 
 # plymouth
 #sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf && mkinitcpio -P
@@ -234,17 +237,6 @@ sed -i 's/#GRUB_SAVEDEFAULT=true/GRUB_SAVEDEFAULT=true/g' /etc/default/grub
 sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
 mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 grub-install --target=${grub_target}
-
-# systemd-boot
-#bootctl --esp-path=/boot/efi install
-
-# sbctl
-#sbctl create-keys
-#sbctl enroll-keys -m
-
-#sbctl sign -s /boot/vmlinuz-linux
-#sbctl sign -s /boot/efi/EFI/BOOT/BOOTX64.EFI
-#sbctl sign -s /boot/efi/EFI/systemd/systemd-bootx64.efi
 
 EOF
 }

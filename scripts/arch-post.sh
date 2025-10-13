@@ -8,14 +8,18 @@ if [ ! -f /usr/bin/yay ]; then
 	cd yay-bin && makepkg -sirc --noconfirm
 
 	yay -Syu --needed --noconfirm --save --removemake --cleanafter --norebuild \
-		--noredownload --batchinstall --combinedupgrade	grub-hook update-grub \
-		xidlehook betterlockscreen polybar-scripts-git neovim-symlinks \
-		sway{fx,-contrib} {brave,ventoy}-bin waypaper htpdate
+		--noredownload --batchinstall --combinedupgrade htpdate neovim-symlinks	\
+		grub-hook update-grub snapper-support	xidlehook betterlockscreen \
+		waypaper brave-bin ventoy-bin polybar-scripts-git swayfx
+
+	# sway
+	sudo pacman -S --needed --noconfirm sway{bg,idle,-contrib} foot waybar \
+		fuzzel wl-clipboard
 
 	# Openbox: openbox obconf-qt obmenu-generator tint2 plank
-	# niri: niri kitty
+	# niri: niri kitty shikane nwg-displays
 
-	# snap-pac-grub snapper-support shim-signed secureboot-grub
+	# snap-pac-grub shim-signed secureboot-grub
 	# teamviewer zoom obs-studio gnome-boxes syncthing-{gtk,desktop-entries}
 	# ulauncher zscroll-git
 fi
