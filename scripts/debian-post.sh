@@ -6,12 +6,12 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 
 # set fonts
 dconf write /org/gnome/desktop/interface/font-name "'Roboto Medium 10'"
-dconf write /org/gnome/desktop/interface/monospace-font-name "'RobotoMono Nerd Font 9'"
+dconf write /org/gnome/desktop/interface/monospace-font-name "'JetBrainsMono Nerd Font 9'"
 
 # text editor (pluma)
 gsettings set org.mate.pluma color-scheme 'gruvbox-material-medium-dark'
 gsettings set org.mate.pluma display-line-numbers true
-gsettings set org.mate.pluma editor-font 'RobotoMono Nerd Font 10'
+gsettings set org.mate.pluma editor-font 'JetBrainsMono Nerd Font 10'
 gsettings set org.mate.pluma highlight-current-line true
 gsettings set org.mate.pluma toolbar-visible false
 gsettings set org.mate.pluma use-default-font false

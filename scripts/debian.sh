@@ -11,7 +11,8 @@ apt update && apt full-upgrade --yes
 apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
   pipewire pipewire-audio pulseaudio-utils easyeffects lsp-plugins-lv2 \
   bluez systemd-zram-generator {xfs,btrfs-}progs xdg-desktop-portal \
-  firefox-esr timeshift power-profiles-daemon neovim fonts-roboto{,-slab}
+  firefox-esr timeshift power-profiles-daemon neovim \
+  fonts-roboto{,-slab} fonts-jetbrains-mono
 
 # INSTALL: Display Manager
 sudo apt install --no-install-recommends --yes sddm
@@ -109,5 +110,5 @@ done
 
 # INSTALL: GTK, KDE, Icon, Cursors
 if [ ! -f /.flag ]; then
-	${source_dir}/themes/fonts-nerd.sh RobotoMono
+	${source_dir}/themes/fonts-nerd.sh JetBrainsMono
 fi
