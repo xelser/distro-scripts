@@ -292,9 +292,9 @@ bindsym $mod+Shift+f exec thunar
 bindsym $mod+Shift+w exec brave
 
 # Autostart (Global)
-exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 #exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
 exec --no-startup-id easyeffects --gapplication-service
+exec --no-startup-id /usr/bin/lxpolkit
 
 # Autostart (for sway)
 exec --no-startup-id waytrogen --restore

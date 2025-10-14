@@ -209,9 +209,9 @@ gaps inner 10
 #gaps top 32
 
 # Autostart (Global)
-exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 #exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
 exec --no-startup-id easyeffects --gapplication-service
+exec --no-startup-id /usr/bin/lxpolkit
 
 # Autostart (for X11)
 #exec --no-startup-id autorandr -c --default default
