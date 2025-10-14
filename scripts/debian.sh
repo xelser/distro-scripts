@@ -91,6 +91,10 @@ echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priori
 # greetd user autologin sway
 #echo -e "\n[initial_session]\ncommand = \"bash -l -c 'export DESKTOP_SESSION=sway XDG_CURRENT_DESKTOP=sway; exec sway'\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
 
+# sddm
+echo -e "[Autologin]\nUser=${user}\nSession=" >> /etc/sddm.conf
+echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
+
 # disable sleep/suspend/hibernate
 systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
