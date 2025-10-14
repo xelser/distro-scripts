@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-sudo tee /etc/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf > /dev/null << 'EOF'
+sudo tee /etc/X11/xorg.conf.d/10-nvidia-primary-dgpu.conf > /dev/null << 'EOF'
 Section "OutputClass"
     Identifier "intel"
     MatchDriver "i915"
@@ -13,8 +13,6 @@ Section "OutputClass"
     Driver "nvidia"
     Option "AllowEmptyInitialConfiguration"
     Option "PrimaryGPU" "yes"
-    ModulePath "/usr/lib/nvidia/xorg"
-    ModulePath "/usr/lib/xorg/modules"
 EndSection
 EOF
 
@@ -23,4 +21,4 @@ xrandr --setprovideroutputsource modesetting NVIDIA-0
 xrandr --auto
 EOF
 
-#sudo /usr/share/sddm/scripts/Xsetup
+sudo chmod +x /usr/share/sddm/scripts/Xsetup
