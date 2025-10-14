@@ -10,28 +10,26 @@ apt update && apt full-upgrade --yes
 # INSTALL: Base
 apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
   pipewire pipewire-audio pulseaudio-utils easyeffects lsp-plugins-lv2 \
-  bluez systemd-zram-generator xfsprogs xdg-desktop-portal libnotify-bin \
-  firefox-esr power-profiles-daemon neovim fonts-inter
+  bluez systemd-zram-generator {xfs,btrfs-}progs xdg-desktop-portal \
+  firefox-esr timeshift power-profiles-daemon neovim fonts-inter
   # fonts-roboto{,-slab}
 
 # INSTALL: Display Manager
 sudo apt install --no-install-recommends --yes sddm
 
 # INSTALL: WM (X11/Wayland)
-apt install --yes xdg-desktop-portal-{gtk,wlr} mpv imv brightnessctl dunst \
-  mugshot at-spi2-core transmission-gtk nwg-look pavucontrol blueman \
-  lxpolkit engrampa pluma atril thunar{,-archive-plugin} gvfs-{backends,fuse}
+apt install --yes xdg-desktop-portal-{gtk,wlr} mpv imv brightnessctl \
+  dunst libnotify-bin mugshot at-spi2-core transmission-gtk nwg-look \
+  pavucontrol blueman lxpolkit engrampa pluma atril \
+  thunar{,-archive-plugin} gvfs-{backends,fuse}
   # gammastep
 
 # INSTALL: i3
-apt install --yes i3-wm xss-lock alacritty autotiling polybar rofi xclip \
-  {lx,auto}randr nitrogen maim slop picom numlockx
-
-# xidlehook betterlockscreen
+apt install --yes i3-wm picom alacritty autotiling polybar rofi xclip \
+  {lx,auto}randr nitrogen maim slop numlockx # xidlehook
 
 # INSTALL: Sway
 apt install --yes sway{bg,idle} waybar wlogout fuzzel grimshot wl-clipboard
-
 # mako-notifier greetd seatd
 
 ################################### BUILD ####################################
@@ -41,15 +39,15 @@ apt install --yes sway{bg,idle} waybar wlogout fuzzel grimshot wl-clipboard
 # xidlehook
 
 # betterlockscreen
-apt install --yes autoconf gcc make pkg-config libpam0g-dev libcairo2-dev \
-  libfontconfig1-dev libxcb-composite0-dev libev-dev libx11-xcb-dev \
-  libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev libxcb-image0-dev \
-  libxcb-util0-dev libxcb-xrm-dev libxkbcommon-dev libxkbcommon-x11-dev \
-  libjpeg-dev libgif-dev imagemagick
+#apt install --yes autoconf gcc make pkg-config libpam0g-dev libcairo2-dev \
+#  libfontconfig1-dev libxcb-composite0-dev libev-dev libx11-xcb-dev \
+#  libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev libxcb-image0-dev \
+#  libxcb-util0-dev libxcb-xrm-dev libxkbcommon-dev libxkbcommon-x11-dev \
+#  libjpeg-dev libgif-dev imagemagick
 
-cd /tmp && git clone https://github.com/Raymo111/i3lock-color
-cd i3lock-color && ./install-i3lock-color.sh
-wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | bash -s system
+#cd /tmp && git clone https://github.com/Raymo111/i3lock-color
+#cd i3lock-color && ./install-i3lock-color.sh
+#wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | bash -s system
 
 # wallutils
 #apt install --yes golang imagemagick libx11-dev libxcursor-dev libxmu-dev \
@@ -70,11 +68,17 @@ apt install --yes meson wayland-protocols wayland-utils libpcre2-dev \
   libjson-c-dev libpango-1.0-0 libcairo2-dev libdrm-dev libwlroots-0.18-dev \
   cmake && cd /tmp && mkdir -p swayfx-build
 
-cd /tmp/swayfx-build/ && scenefx_ver="0.3" # based on wlroots 0.18
-wget -q "https://github.com/wlrfx/scenefx/archive/refs/tags/${scenefx_ver}.tar.gz" && tar -xf "${scenefx_ver}.tar.gz" && cd scenefx-${scenefx_ver} && meson build/ && ninja -C build/ && ninja -C build/ install
+scenefx_ver="0.3" # based on wlroots 0.18
+cd /tmp/swayfx-build/ && wget -q \
+  "https://github.com/wlrfx/scenefx/archive/refs/tags/${scenefx_ver}.tar.gz" \
+  && tar -xf "${scenefx_ver}.tar.gz" && cd scenefx-${scenefx_ver} && \
+  meson build/ && ninja -C build/ && ninja -C build/ install
 
-cd /tmp/swayfx-build/ && swayfx_ver="0.5.1" # based on sway 1.10.1 and scenefx 0.3
-wget -q "https://github.com/WillPower3309/swayfx/archive/refs/tags/${swayfx_ver}.tar.gz" && tar -xf "${swayfx_ver}.tar.gz" && cd swayfx-${swayfx_ver} && meson build/ && ninja -C build/ && ninja -C build/ install
+swayfx_ver="0.5.1" # based on sway 1.10.1 and scenefx 0.3
+cd /tmp/swayfx-build/ && wget -q \
+  "https://github.com/WillPower3309/swayfx/archive/refs/tags/${swayfx_ver}.tar.gz" \
+  && tar -xf "${swayfx_ver}.tar.gz" && cd swayfx-${swayfx_ver} && \
+  meson build/ && ninja -C build/ && ninja -C build/ install
 
 ################################### CONFIG ###################################
 
