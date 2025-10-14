@@ -11,8 +11,7 @@ apt update && apt full-upgrade --yes
 apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
   pipewire pipewire-audio pulseaudio-utils easyeffects lsp-plugins-lv2 \
   bluez systemd-zram-generator {xfs,btrfs-}progs xdg-desktop-portal \
-  firefox-esr timeshift power-profiles-daemon neovim fonts-inter
-  # fonts-roboto{,-slab}
+  firefox-esr timeshift power-profiles-daemon neovim fonts-roboto{,-slab}
 
 # INSTALL: Display Manager
 sudo apt install --no-install-recommends --yes sddm
@@ -29,7 +28,8 @@ apt install --yes i3-wm picom alacritty autotiling polybar rofi xclip \
   {lx,auto}randr nitrogen maim slop numlockx # xidlehook
 
 # INSTALL: Sway
-apt install --yes sway{bg,idle} waybar wlogout fuzzel grimshot wl-clipboard
+apt install --yes sway{bg,idle} waybar wlogout fuzzel grimshot wl-clipboard \
+  seatd
 # mako-notifier greetd seatd
 
 ################################### BUILD ####################################
@@ -99,15 +99,15 @@ echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
 systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
 # enable systemd daemons
-for service in htpdate sddm; do
+for service in htpdate seatd sddm; do
   systemctl enable $service
 done
 
-# greetd seatd
+# greetd
 
 ################################### THEMES ###################################
 
 # INSTALL: GTK, KDE, Icon, Cursors
 if [ ! -f /.flag ]; then
-	${source_dir}/themes/fonts-nerd.sh JetBrainsMono
+	${source_dir}/themes/fonts-nerd.sh RobotoMono
 fi

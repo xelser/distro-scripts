@@ -1,6 +1,6 @@
 configuration {
   modes: "drun";
-  font: "JetBrainsMono Nerd Font 12";
+  font: "RobotoMono Nerd Font 12";
   display-drun: "Launch";
   show-icons: true;
   icon-theme: "Papirus-Dark";
