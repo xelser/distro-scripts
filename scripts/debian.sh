@@ -11,7 +11,8 @@ apt update && apt full-upgrade --yes
 apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
   pipewire pipewire-audio pulseaudio-utils easyeffects lsp-plugins-lv2 \
   bluez systemd-zram-generator xfsprogs xdg-desktop-portal libnotify-bin \
-  firefox-esr power-profiles-daemon neovim fonts-roboto{,-slab}
+  firefox-esr power-profiles-daemon neovim fonts-inter
+  # fonts-roboto{,-slab}
 
 # INSTALL: Display Manager
 sudo apt install --no-install-recommends --yes sddm
@@ -80,13 +81,15 @@ echo -e "\n[initial_session]\ncommand = \"bash -l -c 'export DESKTOP_SESSION=swa
 systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
 # enable systemd daemons
-for service in greetd seatd htpdate; do
+for service in htpdate sddm; do
   systemctl enable $service
 done
+
+# greetd seatd
 
 ################################### THEMES ###################################
 
 # INSTALL: GTK, KDE, Icon, Cursors
 if [ ! -f /.flag ]; then
-	${source_dir}/themes/fonts-nerd.sh RobotoMono
+	${source_dir}/themes/fonts-nerd.sh JetBrainsMono
 fi
