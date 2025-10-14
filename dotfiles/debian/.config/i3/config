@@ -13,7 +13,7 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:RobotoMono Nerd Font 10
+font pango:JetBrainsMono Nerd Font 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -41,8 +41,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-# Use light to adjust brightness
-bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5%+ 
+# Use brightnessctl to adjust brightness
+bindsym XF86MonBrightnessUp exec --no-startup-id brightnessctl set 5%+
 bindsym XF86MonBrightnessDown exec --no-startup-id brightnessctl set 5%-
 
 # Use Mouse+$mod to drag floating windows to their wanted position
@@ -53,15 +53,15 @@ floating_modifier $mod
 tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec alacritty msg create-window
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
-# bindsym $mod+d exec --no-startup-id rofi -show drun
-bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-4/launcher.sh
+bindsym $mod+d exec --no-startup-id rofi -show drun
+
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -69,10 +69,10 @@ bindsym $mod+d exec --no-startup-id ~/.config/rofi/launchers/type-4/launcher.sh
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+semicolon focus right
+#bindsym $mod+j focus left
+#bindsym $mod+k focus down
+#bindsym $mod+l focus up
+#bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -81,10 +81,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+j move left
-bindsym $mod+Shift+k move down
-bindsym $mod+Shift+l move up
-bindsym $mod+Shift+semicolon move right
+#bindsym $mod+Shift+j move left
+#bindsym $mod+Shift+k move down
+#bindsym $mod+Shift+l move up
+#bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -159,9 +159,11 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+# lock
+bindsym $mod+Shift+l exec betterlockscreen -l dimblur
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec ~/.config/rofi/powermenu/type-1/powermenu.sh
-#bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+#bindsym $mod+Shift+e exec ~/.config/rofi/powermenu/type-1/powermenu.sh
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -196,44 +198,56 @@ bindsym $mod+r mode "resize"
 #        status_command i3status
 #}
 
+# Assign workspaces upon startup
+workspace 1 output DP-1-1 # hybrid mode: DP-1
+workspace 2 output eDP-1-1 # hybrid mode: eDP-1
+
 # i3 Windows Config
 default_floating_border none
 default_border none
-gaps inner 5
-gaps top 37
+gaps inner 10
+#gaps top 32
 
-# Autostart (Once)
-exec --no-startup-id /usr/libexec/polkit-mate-authentication-agent-1
-exec --no-startup-id pulseeffects --gapplication-service
-exec --no-startup-id transmission-gtk --minimized
-exec --no-startup-id xset s off -dpms
-exec --no-startup-id thunar --daemon
+# Autostart (Global)
+exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
+#exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
+exec --no-startup-id easyeffects --gapplication-service
+
+# Autostart (for X11)
+#exec --no-startup-id autorandr -c --default default
+exec --no-startup-id autorandr -c --default nvidia
+exec --no-startup-id numlockx on
+exec --no-startup-id picom
 #exec --no-startup-id xfsettingsd
 #exec --no-startup-id xsettingsd
-exec --no-startup-id numlockx
-exec --no-startup-id dunst 
 
-# Autostart (Always)
-exec_always --no-startup-id nitrogen --set-zoom-fill --random /run/media/xelser/Media/Pictures/Gruvbox/
-exec_always --no-startup-id $HOME/.config/autostart/autostart-script.sh
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec_always --no-startup-id xset led on
+# Autostart (for i3)
+exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id bash $HOME/.fehbg
 exec_always --no-startup-id autotiling
 
-# Compositor (picom)
-exec --no-startup-id picom --daemon
-bindsym $mod+Shift+p exec killall picom
-bindsym $mod+p exec picom & disown 2>&1/dev/null
-
-# Screenshot (flameshot)
-exec --no-startup-id flameshot
-bindsym Print exec flameshot full --path /home/xelser/Pictures/Screenshots/
-bindsym Shift+Print exec flameshot gui --path /home/xelser/Pictures/Screenshots/
+# Screenshot (maim)
+bindsym $mod+Shift+s exec --no-startup-id bash -c "filename=\"$HOME/Pictures/$(date +%F_%T).png\" && maim -u -s \"\$filename\" && xclip -selection clipboard -t image/png -i \"\$filename\" && notify-send -i \"\$filename\" -u low 'Screenshot (maim + xclip + notify-send)' 'Saved and copied to clipboard' || notify-send -u low 'Screenshot aborted'"
 
 # Night light (gammastep)
-exec --no-startup-id sh $HOME/.config/gammastep/launch.sh
-bindsym $mod+o exec sh $HOME/.config/gammastep/toggle.sh
+#exec --no-startup-id sh $HOME/.config/gammastep/launch.sh
+#bindsym $mod+o exec sh $HOME/.config/gammastep/toggle.sh
 
 # Screensaver (betterlockscreen)
-#exec --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f2)" --fx dimblur
+exec --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f2)" --fx dimblur
 
+# Power Management (xidlehook)
+exec --no-startup-id xset s 3600 3600 -dpms && xidlehook --not-when-fullscreen --not-when-audio --socket "/tmp/xidlehook.sock" \
+  --timer "$(xset q | grep timeout | cut -d' ' -f5)" "betterlockscreen -l dimblur" "xset led on"
+
+# Inhibit (caffeinate)
+#bindsym $mod+i exec caffeinate & disown && notify-send "Inhibit: caffeinate 󰅶 enable"
+#bindsym $mod+shift+i exec killall caffeinate && notify-send "Inhibit: caffeinate 󰛊 disbled" || notify-send "caffeinate 󰾫 is not running"
+
+# Apps
+#exec --no-startup-id steam -silent -no-browser -nochatui -noreactlogin
+exec --no-startup-id brave --no-startup-window --gapplication-service
+exec --no-startup-id transmission-gtk --minimized
+#exec --no-startup-id pcmanfm --daemon-mode
+exec --no-startup-id alacritty --daemon
+exec --no-startup-id thunar --daemon

@@ -13,15 +13,25 @@ apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
   bluez systemd-zram-generator xfsprogs xdg-desktop-portal libnotify-bin \
   firefox-esr power-profiles-daemon neovim fonts-roboto{,-slab}
 
+# INSTALL: Display Manager
+sudo apt install --no-install-recommends --yes sddm
+
 # INSTALL: WM (X11/Wayland)
-apt install --yes xdg-desktop-portal-gtk alacritty mpv imv brightnessctl \
+apt install --yes xdg-desktop-portal-{gtk,wlr} mpv imv brightnessctl dunst \
   mugshot at-spi2-core transmission-gtk nwg-look pavucontrol blueman lxpolkit \
   engrampa pluma atril thunar{,-archive-plugin} gvfs-{backends,fuse}
   # gammastep
 
+# INSTALL: i3
+apt install --yes i3-wm alacritty autotiling polybar rofi xclip \
+  {lx,auto}randr feh maim slop picom numlockx
+
+# xidlehook betterlockscreen
+
 # INSTALL: Sway
-apt install --yes greetd seatd sway{bg,idle} waybar wlogout fuzzel mako-notifier \
-  autotiling grimshot wl-clipboard xdg-desktop-portal-wlr
+apt install --yes sway{bg,idle} waybar wlogout fuzzel grimshot wl-clipboard
+
+# mako-notifier greetd seatd
 
 ################################### BUILD ####################################
 
@@ -36,7 +46,7 @@ apt install --yes greetd seatd sway{bg,idle} waybar wlogout fuzzel mako-notifier
 # waytrogen
 apt install --yes libgtk-4-1 openssl libsqlite3-0 libsqlite3-dev libglib2.0-dev \
   sqlite3 libgtk-4-dev meson ninja-build cargo
-cd /tmp && git clone https://github.com/nikolaizombie1/waytrogen 
+cd /tmp && git clone https://github.com/nikolaizombie1/waytrogen
 cd waytrogen && meson setup builddir --prefix=/usr && meson compile -C builddir && \
   meson install -C builddir
 
@@ -56,7 +66,7 @@ wget -q "https://github.com/WillPower3309/swayfx/archive/refs/tags/${swayfx_ver}
   ninja -C build/ && ninja -C build/ install
 
 ################################### CONFIG ###################################
- 
+
 # sudo
 usermod -aG sudo ${user}
 

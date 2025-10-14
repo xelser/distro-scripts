@@ -3,15 +3,15 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: RobotoMono Nerd Font;
-    /* font-size: 14px; */
+    font-family: JetBrainsMono Nerd Font;
+    font-size: 13px;
     font-weight: bold;
     min-height: 0;
     padding: 0 5px;
 }
 
 window {
-    background-color: rgba(70, 70, 70, 0.2); /* bg0 semi-transparent */
+    background-color: rgba(29, 32, 33, 0.5); /* #1d2021 semi-transparent */
     color: @fg0;
 }
 
