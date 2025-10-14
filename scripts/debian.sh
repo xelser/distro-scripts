@@ -19,8 +19,8 @@ sudo apt install --no-install-recommends --yes sddm
 
 # INSTALL: WM (X11/Wayland)
 apt install --yes xdg-desktop-portal-{gtk,wlr} mpv imv brightnessctl \
-  dunst libnotify-bin mugshot at-spi2-core transmission-gtk nwg-look \
-  pavucontrol blueman lxpolkit engrampa pluma atril \
+  dunst libnotify-bin mugshot at-spi2-core pavucontrol blueman nwg-look \
+  transmission-gtk lxpolkit engrampa pluma atril \
   thunar{,-archive-plugin} gvfs-{backends,fuse}
   # gammastep
 
@@ -30,8 +30,10 @@ apt install --yes i3-wm picom alacritty autotiling polybar rofi xclip \
 
 # INSTALL: Sway
 apt install --yes sway{bg,idle} waybar wlogout fuzzel grimshot wl-clipboard \
-  seatd
-# mako-notifier greetd seatd
+  seatd # mako-notifier greetd
+
+# INSTALL: for Jellyfin
+apt install --yes intel-media-va-driver-non-free libvpl2 libvpl-tools vainfo
 
 ################################### BUILD ####################################
 

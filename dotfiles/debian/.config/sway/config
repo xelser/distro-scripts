@@ -305,7 +305,7 @@ exec --no-startup-id autotiling
 #bindsym $mod+o exec bash $HOME/.config/gammastep/toggle.sh
 
 # Apps
-exec --no-startup-id brave --no-startup-window --gapplication-service
+exec --no-startup-id brave-browser --no-startup-window --gapplication-service
 exec --no-startup-id transmission-gtk --minimized
 #exec --no-startup-id alacritty --daemon
 exec --no-startup-id thunar --daemon
