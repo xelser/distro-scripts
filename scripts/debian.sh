@@ -15,7 +15,7 @@ apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
   fonts-roboto{,-slab} fonts-jetbrains-mono
 
 # INSTALL: Display Manager
-sudo apt install --no-install-recommends --yes sddm
+sudo apt install --no-install-recommends --yes sddm libqt5quickcontrols2-5
 
 # INSTALL: WM (X11/Wayland)
 apt install --yes xdg-desktop-portal-{gtk,wlr} mpv imv brightnessctl \
