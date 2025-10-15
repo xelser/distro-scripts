@@ -209,7 +209,7 @@ gaps inner 10
 #gaps top 32
 
 # Autostart (Global)
-#exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
+exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
 exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id /usr/bin/lxpolkit
 
