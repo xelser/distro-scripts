@@ -31,3 +31,7 @@ gsettings set org.mate.pluma use-default-font false
 
 # debloat
 sudo apt autoremove --purge --yes zutty
+
+# optional
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/blacklist_nouveau.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/debian_nvidia.sh)"
