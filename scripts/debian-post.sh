@@ -16,7 +16,8 @@ curl -fsS https://dl.brave.com/install.sh | sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/brave_flags.sh)"
 
 # nvidia and envycontrol
-#bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/debian_nvidia.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/debian_nvidia.sh)"
+ln -sf $HOME/.config/.xinitrc-i3 $HOME/.xinitrc
 
 # theme
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/grub.sh)"
