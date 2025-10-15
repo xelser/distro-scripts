@@ -96,7 +96,7 @@ update-grub
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
 
 # greetd
-fi [ -f /etc/greetd/config.toml ]; then
+if [ -f /etc/greetd/config.toml ]; then
   echo -e "\n[initial_session]\ncommand = \"bash -l -c 'export DESKTOP_SESSION=sway XDG_CURRENT_DESKTOP=sway; exec sway'\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
 fi
 
