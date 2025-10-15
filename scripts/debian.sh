@@ -92,7 +92,7 @@ usermod -aG sudo ${user}
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
 
 # greetd user autologin sway
-#echo -e "\n[initial_session]\ncommand = \"bash -l -c 'export DESKTOP_SESSION=sway XDG_CURRENT_DESKTOP=sway; exec sway'\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
+echo -e "\n[initial_session]\ncommand = \"bash -l -c 'export DESKTOP_SESSION=sway XDG_CURRENT_DESKTOP=sway; exec sway'\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
 
 # sddm
 echo -e "[Autologin]\nUser=${user}\nSession=" >> /etc/sddm.conf
@@ -101,12 +101,14 @@ echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
 # disable sleep/suspend/hibernate
 # systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
+# grub
+sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=30/g' /etc/default/grub
+update-grub
+
 # enable systemd daemons
-for service in htpdate seatd sddm; do
+for service in htpdate seatd greetd; do
   systemctl enable $service
 done
-
-# greetd
 
 ################################### THEMES ###################################
 

@@ -254,7 +254,7 @@ bindsym $mod+r mode "resize"
 #
 
 # Xwayland
-# xwayland disable
+xwayland disable
 
 # NumLock
 input type:keyboard xkb_numlock enabled
