@@ -106,10 +106,10 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 [ -f /usr/bin/konsave ] && konsave -a defaults 2>/dev/null
 
 # Nitrogen
-[ -f /bin/nitrogen ] && nitrogen --restore
+#[ -f /bin/nitrogen ] && nitrogen --restore
 
 # Waypaper
-[ -f /bin/waypaper ] && waypaper --restore
+#[ -f /bin/waypaper ] && waypaper --restore
 
 # Plank
 if [ -f /usr/bin/plank ] && [ -f $HOME/.config/plank/plank.ini ]; then
@@ -154,17 +154,17 @@ fi
 [ -f /usr/bin/flatpak ] && flatpak uninstall --unused --delete-data --assumeyes
 
 # Profile
-if [[ ${wm_de} == "cinnamon" ]]; then
-	cinnamon-settings user >&/dev/null
-elif [[ ${wm_de} == "gnome" ]]; then
-	gnome-control-center system >&/dev/null
-	cp -rf /var/lib/AccountsService/icons/$USER $HOME/.face
-elif [[ ${wm_de} == "kde" ]]; then
-	systemsettings kcm_users >&/dev/null
-	cp -rf /var/lib/AccountsService/icons/$USER $HOME/.face
-elif [ -f /usr/bin/mugshot ]; then
-	mugshot >&/dev/null
-fi
+#if [[ ${wm_de} == "cinnamon" ]]; then
+#	cinnamon-settings user >&/dev/null
+#elif [[ ${wm_de} == "gnome" ]]; then
+#	gnome-control-center system >&/dev/null
+#	cp -rf /var/lib/AccountsService/icons/$USER $HOME/.face
+#elif [[ ${wm_de} == "kde" ]]; then
+#	systemsettings kcm_users >&/dev/null
+#	cp -rf /var/lib/AccountsService/icons/$USER $HOME/.face
+#elif [ -f /usr/bin/mugshot ]; then
+#	mugshot >&/dev/null
+#fi
 
 # Logout
 logout () {
@@ -176,6 +176,8 @@ elif [[ ${wm_de} == "xfce" ]]; then
 	xfce4-session-logout --logout --fast
 elif [[ ${wm_de} == "kde" ]]; then
 	qdbus org.kde.ksmserver /KSMServer logout 0 0 2
+elif [[ ${wm_de} == "sway" ]]; then
+	swaymsg exit
 elif [[ ${wm_de} == "i3" ]]; then
 	i3-msg exit
 else

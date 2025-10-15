@@ -99,7 +99,7 @@ echo -e "[Autologin]\nUser=${user}\nSession=" >> /etc/sddm.conf
 echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
 
 # disable sleep/suspend/hibernate
-systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
+# systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
 # enable systemd daemons
 for service in htpdate seatd sddm; do
