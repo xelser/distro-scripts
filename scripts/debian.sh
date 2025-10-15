@@ -11,7 +11,7 @@ apt update && apt full-upgrade --yes
 apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
   pipewire pipewire-audio pulseaudio-utils easyeffects lsp-plugins-lv2 \
   bluez systemd-zram-generator {xfs,btrfs-}progs xdg-desktop-portal \
-  firefox-esr timeshift power-profiles-daemon neovim \
+  firefox-esr timeshift power-profiles-daemon neovim htop nvtop \
   fonts-roboto{,-slab} fonts-jetbrains-mono
 
 # INSTALL: Display Manager

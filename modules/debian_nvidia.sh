@@ -4,9 +4,10 @@
 sudo apt install --yes nvidia-detect dkms && sudo dkms generate_mok
 
 # Install recommended NVIDIA packages
-sudo apt install --yes linux-headers-$(dpkg --print-architecture) \
+sudo apt install --yes nvidia-kernel-dkms firmware-misc-nonfree \
     $(nvidia-detect | tail -2 | head -1 | cut -d' ' -f5) \
-    nvidia-kernel-dkms firmware-misc-nonfree
+    linux-headers-$(dpkg --print-architecture) \
+    linux-headers-$(uname -r)
 
 # Fetch latest EnvyControl .deb release
 latest_deb_url=$(curl -s "https://api.github.com/repos/bayasdev/envycontrol/releases" \

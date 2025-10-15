@@ -1,8 +1,28 @@
 #!/bin/bash
 
+################################## PACKAGES ##################################
+
+# debloat
+sudo apt autoremove --purge --yes zutty
+
+# jellyfin
+#curl -s https://repo.jellyfin.org/install-debuntu.sh | sudo bash
+
+# tailscale
+curl -fsSL https://tailscale.com/install.sh | sh
+
+# brave browser
+curl -fsS https://dl.brave.com/install.sh | sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/brave_flags.sh)"
+
+# nvidia and envycontrol
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/debian_nvidia.sh)"
+
 # theme
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-gruvbox.sh)"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/cursor-sainnhe-capitaine.sh)"
+
+################################### CONFIG ###################################
 
 # set fonts
 dconf write /org/gnome/desktop/interface/font-name "'Roboto Medium 10'"
@@ -28,10 +48,3 @@ gsettings set org.mate.pluma use-default-font false
 #	sed -i 's/onedark/gruvbox-material-hard-dark/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
 #	sed -i 's/JetBrains Mono Nerd Font 10/RobotoMono Nerd Font 10/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
 #fi
-
-# debloat
-sudo apt autoremove --purge --yes zutty
-
-# optional
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/blacklist_nouveau.sh)"
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/debian_nvidia.sh)"

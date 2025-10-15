@@ -4,6 +4,7 @@
 WRAPPER="$HOME/.local/bin/brave"
 DESKTOP_SRC="/usr/share/applications/brave-browser.desktop"
 DESKTOP_DEST="$HOME/.local/share/applications/brave-browser.desktop"
+FLAGS_CONF="$HOME/.config/brave-flags.conf"
 
 # === Flags to apply globally ===
 FLAGS="--enable-features=UseOzonePlatform,VaapiVideoDecoder \
@@ -12,6 +13,12 @@ FLAGS="--enable-features=UseOzonePlatform,VaapiVideoDecoder \
 --ignore-gpu-blocklist \
 --password-store=basic"
 # --ozone-platform=wayland \
+
+# === Remove redundant flags file ===
+if [[ -f "$FLAGS_CONF" ]]; then
+  rm -f "$FLAGS_CONF"
+  echo "🧹 Removed redundant $FLAGS_CONF"
+fi
 
 # === Create wrapper ===
 mkdir -p "$(dirname "$WRAPPER")"
