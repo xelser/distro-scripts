@@ -7,11 +7,11 @@ DESKTOP_DEST="$HOME/.local/share/applications/brave-browser.desktop"
 
 # === Flags to apply globally ===
 FLAGS="--enable-features=UseOzonePlatform,VaapiVideoDecoder \
---ozone-platform=wayland \
 --enable-gpu-rasterization \
 --enable-zero-copy \
 --ignore-gpu-blocklist \
 --password-store=basic"
+# --ozone-platform=wayland \
 
 # === Create wrapper ===
 mkdir -p "$(dirname "$WRAPPER")"

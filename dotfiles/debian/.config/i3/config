@@ -246,7 +246,7 @@ bindsym $mod+Shift+s exec --no-startup-id bash -c "filename=\"$HOME/Pictures/$(d
 
 # Apps
 #exec --no-startup-id steam -silent -no-browser -nochatui -noreactlogin
-exec --no-startup-id brave-browser --no-startup-window --gapplication-service
+exec --no-startup-id brave --no-startup-window --gapplication-service
 exec --no-startup-id transmission-gtk --minimized
 #exec --no-startup-id pcmanfm --daemon-mode
 exec --no-startup-id alacritty --daemon
