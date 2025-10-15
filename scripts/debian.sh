@@ -15,10 +15,10 @@ apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
   fonts-roboto{,-slab} fonts-jetbrains-mono
 
 # INSTALL: Display Manager
-sudo apt install --no-install-recommends --yes sddm libqt5quickcontrols2-5
+sudo apt install --no-install-recommends --yes sddm
 
 # INSTALL: WM (X11/Wayland)
-apt install --yes xdg-desktop-portal-{gtk,wlr} mpv imv brightnessctl \
+apt install --yes xinit xdg-desktop-portal-{gtk,wlr} mpv imv brightnessctl \
   dunst libnotify-bin mugshot at-spi2-core pavucontrol blueman nwg-look \
   transmission-gtk lxpolkit engrampa pluma atril \
   thunar{,-archive-plugin} gvfs-{backends,fuse}
@@ -88,22 +88,26 @@ cd /tmp/swayfx-build/ && wget -q \
 # sudo
 usermod -aG sudo ${user}
 
-# swap/zram
-echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
-
-# greetd user autologin sway
-echo -e "\n[initial_session]\ncommand = \"bash -l -c 'export DESKTOP_SESSION=sway XDG_CURRENT_DESKTOP=sway; exec sway'\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
-
-# sddm
-echo -e "[Autologin]\nUser=${user}\nSession=" >> /etc/sddm.conf
-echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
-
-# disable sleep/suspend/hibernate
-# systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
-
 # grub
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=30/g' /etc/default/grub
 update-grub
+
+# swap/zram
+echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
+
+# greetd
+fi [ -f /etc/greetd/config.toml ]; then
+  echo -e "\n[initial_session]\ncommand = \"bash -l -c 'export DESKTOP_SESSION=sway XDG_CURRENT_DESKTOP=sway; exec sway'\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
+fi
+
+# sddm
+if [ -f /etc/sddm.conf ]; then
+  echo -e "[Autologin]\nUser=${user}\nSession=" >> /etc/sddm.conf
+  echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
+fi
+
+# disable sleep/suspend/hibernate
+# systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
 # enable systemd daemons
 for service in htpdate seatd greetd; do

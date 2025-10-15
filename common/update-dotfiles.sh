@@ -110,6 +110,9 @@ else
 
 	dest_dir="$HOME/Documents/distro-scripts/dotfiles/${distro_id}"
 
+	# xinit/startx
+	save_file /.config/ .xinitrc
+
 	# Alacritty
 	save_file /.config/alacritty/ alacritty.yml
 	save_file /.config/alacritty/ alacritty.toml
