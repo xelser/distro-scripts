@@ -52,8 +52,10 @@ include /etc/sway/config-vars.d/*
 
 # Start swayidle for screen blanking
 exec swayidle -w \
+    timeout 300 'gtklock -d' \
     timeout 600 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"'
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep 'gtklock -d'
 
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -118,10 +120,10 @@ exec swayidle -w \
     bindsym $mod+Right focus right
 
     # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
+    #bindsym $mod+Shift+$left move left
+    #bindsym $mod+Shift+$down move down
+    #bindsym $mod+Shift+$up move up
+    #bindsym $mod+Shift+$right move right
     # Ditto, with arrow keys
     bindsym $mod+Shift+Left move left
     bindsym $mod+Shift+Down move down
@@ -306,6 +308,10 @@ exec --no-startup-id autotiling
 # Night light (gammastep)
 #exec --no-startup-id bash $HOME/.config/gammastep/launch.sh
 #bindsym $mod+o exec bash $HOME/.config/gammastep/toggle.sh
+
+# lock screen
+exec_always --no-startup-id magick $(cat $HOME/.config/waypaper/config.ini | grep 'wallpaper' | cut -d'=' -f2) -blur 0x5 -evaluate Multiply 0.45 ~/.output.png
+bindsym $mod+Shift+l exec --no-startup-id gtklock
 
 # Apps
 exec --no-startup-id brave --no-startup-window --gapplication-service

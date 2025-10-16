@@ -166,6 +166,9 @@ else
 	# Betterlockscreen
 	save_file /.config/betterlockscreen/ betterlockscreenrc
 
+	# Gtklock
+	save_folder /.config/gtklock/
+
 	# Dunst
 	save_file /.config/dunst/ dunstrc
 
