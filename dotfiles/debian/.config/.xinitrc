@@ -21,7 +21,7 @@ else
 fi
 
 # Optional logging
-echo "$(date): Starting i3 via startx" >> ~/.xsession-log
+echo "$(date): Starting i3 via startx" > ~/.xsession-log
 
 if command -v autorandr >/dev/null; then
   echo "$(date): autorandr profile: $(autorandr --current 2>/dev/null)" >> ~/.xsession-log

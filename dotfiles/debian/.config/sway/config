@@ -99,7 +99,10 @@ exec swayidle -w \
 
     # Exit sway (logs you out of your Wayland session)
     #bindsym $mod+Shift+e exec wlogout
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' \
+    -B 'Shutdown' 'systemctl poweroff' \
+    -B 'Reboot' 'systemctl reboot' \
+    -B 'Exit sway' 'swaymsg exit'
 #
 # Moving around:
 #
@@ -297,7 +300,7 @@ exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id /usr/bin/lxpolkit
 
 # Autostart (for sway)
-exec --no-startup-id waytrogen --restore
+exec_always --no-startup-id waypaper --restore
 exec --no-startup-id autotiling
 
 # Night light (gammastep)

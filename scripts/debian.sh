@@ -14,23 +14,20 @@ apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
   firefox-esr timeshift power-profiles-daemon neovim htop nvtop \
   fonts-roboto{,-slab} fonts-jetbrains-mono
 
-# INSTALL: Display Manager
-sudo apt install --no-install-recommends --yes sddm
-
 # INSTALL: WM (X11/Wayland)
-apt install --yes xinit xdg-desktop-portal-{gtk,wlr} mpv imv brightnessctl \
-  dunst libnotify-bin mugshot at-spi2-core pavucontrol blueman nwg-look \
-  transmission-gtk lxpolkit engrampa pluma atril \
+apt install --yes greetd gtkgreet seatd xinit xdg-desktop-portal-{gtk,wlr} \
+  brightnessctl dunst libnotify-bin mugshot at-spi2-core nwg-look mpv imv \
+  transmission-gtk pavucontrol blueman lxpolkit engrampa pluma atril \
   thunar{,-archive-plugin} gvfs-{backends,fuse}
   # gammastep
 
 # INSTALL: i3
 apt install --yes i3-wm picom alacritty autotiling polybar rofi xclip \
-  {lx,auto}randr nitrogen maim slop numlockx # xidlehook
+  {lx,auto}randr feh maim slop numlockx # xidlehook
 
 # INSTALL: Sway
-apt install --yes sway{bg,idle} waybar wlogout fuzzel grimshot wl-clipboard \
-  seatd # mako-notifier greetd
+apt install --yes sway{bg,idle} waybar wlogout fuzzel grimshot wl-clipboard
+  # mako-notifier greetd
 
 # INSTALL: for Jellyfin
 apt install --yes intel-media-va-driver-non-free libvpl2 libvpl-tools vainfo
@@ -41,17 +38,6 @@ apt install --yes intel-media-va-driver-non-free libvpl2 libvpl-tools vainfo
 
 # xidlehook
 
-# betterlockscreen
-#apt install --yes autoconf gcc make pkg-config libpam0g-dev libcairo2-dev \
-#  libfontconfig1-dev libxcb-composite0-dev libev-dev libx11-xcb-dev \
-#  libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev libxcb-image0-dev \
-#  libxcb-util0-dev libxcb-xrm-dev libxkbcommon-dev libxkbcommon-x11-dev \
-#  libjpeg-dev libgif-dev imagemagick
-
-#cd /tmp && git clone https://github.com/Raymo111/i3lock-color
-#cd i3lock-color && ./install-i3lock-color.sh
-#wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | bash -s system
-
 # wallutils
 #apt install --yes golang imagemagick libx11-dev libxcursor-dev libxmu-dev \
 #  libwayland-dev libxpm-dev xbitmaps libxmu-headers libheif-dev make
@@ -59,12 +45,33 @@ apt install --yes intel-media-va-driver-non-free libvpl2 libvpl-tools vainfo
 #cd wallutils && make && sudo make PREFIX=/usr/local install
 
 # waytrogen
-apt install --yes libgtk-4-1 openssl libsqlite3-0 libsqlite3-dev \
-  libglib2.0-dev sqlite3 libgtk-4-dev meson ninja-build cargo
+#apt install --yes libgtk-4-1 openssl libsqlite3-0 libsqlite3-dev \
+#  libglib2.0-dev sqlite3 libgtk-4-dev meson ninja-build cargo
 
-cd /tmp && git clone https://github.com/nikolaizombie1/waytrogen
-cd waytrogen && meson setup builddir --prefix=/usr
-meson compile -C builddir && meson install -C builddir
+#cd /tmp && git clone https://github.com/nikolaizombie1/waytrogen
+#cd waytrogen && meson setup builddir --prefix=/usr
+#meson compile -C builddir && meson install -C builddir
+
+# betterlockscreen
+apt install --yes autoconf gcc make pkg-config libpam0g-dev libcairo2-dev \
+  libfontconfig1-dev libxcb-composite0-dev libev-dev libx11-xcb-dev \
+  libxcb-xkb-dev libxcb-xinerama0-dev libxcb-randr0-dev libxcb-image0-dev \
+  libxcb-util0-dev libxcb-xrm-dev libxkbcommon-dev libxkbcommon-x11-dev \
+  libjpeg-dev libgif-dev imagemagick bc
+
+cd /tmp && git clone https://github.com/Raymo111/i3lock-color
+cd i3lock-color && ./install-i3lock-color.sh
+wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | bash -s system
+
+# waypaper
+apt install --yes git libgirepository1.0-dev libgtk-3-dev \
+  libgdk-pixbuf-2.0-dev python3-pip python3-venv python3-setuptools \
+  python3-wheel python3-build python3-installer python3-gi python3-imageio \
+  python3-imageio-ffmpeg python3-pil python3-platformdirs python3-screeninfo
+
+cd /tmp && git clone https://github.com/anufrievroman/waypaper && cd waypaper
+python3 -m build --wheel --skip-dependency-check --no-isolation && \
+  python3 -m installer dist/*.whl
 
 # swayfx
 apt install --yes meson wayland-protocols wayland-utils libpcre2-dev \
@@ -83,6 +90,57 @@ cd /tmp/swayfx-build/ && wget -q \
   && tar -xf "${swayfx_ver}.tar.gz" && cd swayfx-${swayfx_ver} && \
   meson build/ && ninja -C build/ && ninja -C build/ install
 
+################################### GREETD ###################################
+
+# main config
+cat > /etc/greetd/config.toml << EOF
+[terminal]
+vt = 7
+
+[default_session]
+command = "sway --config /etc/greetd/sway-config"
+user = "_greetd"
+
+[initial_session]
+command = "bash -l -c 'export DESKTOP_SESSION=sway XDG_CURRENT_DESKTOP=sway; exec sway'"
+user = "xelser"
+EOF
+
+# gtkgreet config
+cat > /etc/greetd/gtkgreet.css << EOF
+window {
+   background-image: url("file:///mnt/Home/Pictures/Wallpapers/Gruvbox/gruvbox_astro.jpg");
+   background-size: cover;
+   background-position: center;
+}
+
+box#body {
+   background-color: rgba(29, 32, 33, 0.5);
+   border-radius: 10px;
+   padding: 50px;
+}
+EOF
+
+# use sway for multi-monitor support
+cat > /etc/greetd/sway-config << EOF
+exec "gtkgreet -l -s /etc/greetd/gtkgreet.css; swaymsg exit"
+
+bindsym Mod4+shift+e exec swaynag \
+	-t warning \
+	-m 'What do you want to do?' \
+	-b 'Poweroff' 'systemctl poweroff' \
+	-b 'Reboot' 'systemctl reboot'
+
+include /etc/sway/config.d/*
+EOF
+
+# list of environments to login
+cat > /etc/greetd/environments << EOF
+startx
+bash
+sway
+EOF
+
 ################################### CONFIG ###################################
 
 # sudo
@@ -94,11 +152,6 @@ update-grub
 
 # swap/zram
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
-
-# greetd
-if [ -f /etc/greetd/config.toml ]; then
-  echo -e "\n[initial_session]\ncommand = \"bash -l -c 'export DESKTOP_SESSION=sway XDG_CURRENT_DESKTOP=sway; exec sway'\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
-fi
 
 # sddm
 if [ -f /etc/sddm.conf ]; then
@@ -116,7 +169,9 @@ done
 
 ################################### THEMES ###################################
 
-# INSTALL: GTK, KDE, Icon, Cursors
-if [ ! -f /.flag ]; then
-	${source_dir}/themes/fonts-nerd.sh JetBrainsMono
-fi
+# Fonts
+${source_dir}/themes/fonts-nerd.sh JetBrainsMono
+
+# Wallpaper
+mkdir -p /usr/share/backgrounds
+ln -sf /mnt/Home/Pictures/Wallpapers/Gruvbox/ /usr/share/backgrounds/

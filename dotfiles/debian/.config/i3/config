@@ -157,13 +157,20 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 
 # reload the configuration file
 bindsym $mod+Shift+c reload
+
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
+
 # lock
+exec --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f2)" --fx dimblur
 bindsym $mod+Shift+l exec betterlockscreen -l dimblur
+
 # exit i3 (logs you out of your X session)
 #bindsym $mod+Shift+e exec ~/.config/rofi/powermenu/type-1/powermenu.sh
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' \
+        -B 'Shutdown' 'systemctl poweroff' \
+        -B 'Reboot' 'systemctl reboot' \
+        -B 'Exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -222,8 +229,8 @@ exec --no-startup-id picom
 #exec --no-startup-id xsettingsd
 
 # Autostart (for i3)
+exec_always --no-startup-id bash -c "$HOME/.fehbg || waypaper --restore"
 exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
-exec_always --no-startup-id nitrogen --restore
 exec_always --no-startup-id autotiling
 
 # Screenshot (maim)
@@ -233,8 +240,7 @@ bindsym $mod+Shift+s exec --no-startup-id bash -c "filename=\"$HOME/Pictures/$(d
 #exec --no-startup-id sh $HOME/.config/gammastep/launch.sh
 #bindsym $mod+o exec sh $HOME/.config/gammastep/toggle.sh
 
-# Screensaver (betterlockscreen)
-#exec --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f2)" --fx dimblur
+
 
 # Power Management (xidlehook)
 #exec --no-startup-id xset s 3600 3600 -dpms && xidlehook --not-when-fullscreen --not-when-audio --socket "/tmp/xidlehook.sock" \
