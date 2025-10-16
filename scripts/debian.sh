@@ -105,9 +105,6 @@ done
 ${source_dir}/themes/fonts-nerd.sh JetBrainsMono
 
 ################################### OMITTED ##################################
-# overskride
-
-# xidlehook
 
 # wallutils
 #apt install --yes golang imagemagick libx11-dev libxcursor-dev libxmu-dev \

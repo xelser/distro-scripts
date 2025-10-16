@@ -1,5 +1,14 @@
 #!/bin/bash
 
-export DESKTOP_SESSION=sway
+# Environment
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+export QT_QPA_PLATFORM=wayland
+export QT6CT_PLATFORM=wayland
+export MOZ_ENABLE_WAYLAND=1
+export OBS_USE_EGL=1
+
 export XDG_CURRENT_DESKTOP=sway
+export DESKTOP_SESSION=sway
+
+# Start Sway
 exec dbus-run-session sway

@@ -1,5 +1,13 @@
 #!/bin/bash
 
+distro_id="$(grep '^ID=' /etc/os-release | cut -d'=' -f2 | cut -d'"' -f2)"
+
+if [ -z ${XDG_CURRENT_DESKTOP} ]; then
+	wm_de="$(echo $DESKTOP_SESSION | cut -d'-' -f2 | cut -d':' -f1 | tr '[:upper:]' '[:lower:]')"
+else
+	wm_de="$(echo $XDG_CURRENT_DESKTOP | cut -d'-' -f2 | cut -d':' -f1 | tr '[:upper:]' '[:lower:]')"
+fi
+
 gaming_dir="$HOME/Documents/distro-scripts/gaming"
 common_dir="$HOME/Documents/distro-scripts/common"
 
