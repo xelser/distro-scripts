@@ -22,12 +22,11 @@ apt install --yes xinit seatd xdg-desktop-portal-{gtk,wlr} \
   # gammastep
 
 # INSTALL: i3
-apt install --yes i3-wm picom xss-lock alacritty autotiling polybar rofi \
-  xclip {lx,auto}randr feh maim slop numlockx
+apt install --yes feh xss-lock alacritty polybar rofi maim slop xclip \
+  i3-wm autotiling picom {lx,auto}randr numlockx
 
 # INSTALL: Sway
-apt install --yes sway{bg,idle} waybar wlogout fuzzel grimshot wl-clipboard
-  # mako-notifier greetd
+apt install --yes sway{bg,idle} foot waybar fuzzel grimshot wl-clipboard
 
 # INSTALL: for Jellyfin
 apt install --yes intel-media-va-driver-non-free libvpl2 libvpl-tools vainfo
@@ -43,6 +42,7 @@ apt install --yes autoconf gcc make pkg-config libpam0g-dev libcairo2-dev \
 
 cd /tmp && git clone https://github.com/Raymo111/i3lock-color
 cd i3lock-color && ./install-i3lock-color.sh
+
 wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | bash -s system
 
 # waypaper
