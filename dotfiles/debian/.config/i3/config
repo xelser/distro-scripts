@@ -166,7 +166,6 @@ exec --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | c
 bindsym $mod+Shift+l exec betterlockscreen -l dimblur
 
 # exit i3 (logs you out of your X session)
-#bindsym $mod+Shift+e exec ~/.config/rofi/powermenu/type-1/powermenu.sh
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' \
         -B 'Shutdown' 'systemctl poweroff' \
         -B 'Reboot' 'systemctl reboot' \
@@ -239,8 +238,6 @@ bindsym $mod+Shift+s exec --no-startup-id bash -c "filename=\"$HOME/Pictures/$(d
 # Night light (gammastep)
 #exec --no-startup-id sh $HOME/.config/gammastep/launch.sh
 #bindsym $mod+o exec sh $HOME/.config/gammastep/toggle.sh
-
-
 
 # Power Management (xidlehook)
 #exec --no-startup-id xset s 3600 3600 -dpms && xidlehook --not-when-fullscreen --not-when-audio --socket "/tmp/xidlehook.sock" \

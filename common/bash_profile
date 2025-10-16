@@ -1,8 +1,16 @@
+# update $PATH
+export PATH=$PATH:/var/lib/flatpak/exports/bin:$HOME/.local/share/flatpak/exports/bin:$HOME/.local/bin
 
 # source .profile if it exists
 if [ -f "$HOME/.profile" ]; then
 	. "$HOME/.profile"
 fi
 
-# update $PATH
-export PATH=$PATH:/var/lib/flatpak/exports/bin:$HOME/.local/share/flatpak/exports/bin:$HOME/.local/bin
+# autostart sway
+if [ "$(tty)" = "/dev/tty1" ]; then
+	export DESKTOP_SESSION=sway
+	export XDG_CURRENT_DESKTOP=sway
+	exec dbus-run-session sway
+else
+	startx
+fi
