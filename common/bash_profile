@@ -5,12 +5,3 @@ export PATH=$PATH:/var/lib/flatpak/exports/bin:$HOME/.local/share/flatpak/export
 if [ -f "$HOME/.profile" ]; then
 	. "$HOME/.profile"
 fi
-
-# autostart sway
-if [ "$(tty)" = "/dev/tty1" ]; then
-	export DESKTOP_SESSION=sway
-	export XDG_CURRENT_DESKTOP=sway
-	exec dbus-run-session sway
-else
-	startx
-fi
