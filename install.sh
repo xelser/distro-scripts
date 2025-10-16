@@ -47,9 +47,6 @@ fi
 [ -f ${dotfiles_dir}/.gtk-bookmarks ] && cp -rf ${dotfiles_dir}/.gtk-bookmarks ${root_mnt}/home/${user}/
 [ -f ${dotfiles_dir}/.gtkrc-2.0 ]     && cp -rf ${dotfiles_dir}/.gtkrc-2.0     ${root_mnt}/home/${user}/
 
-## Environment Variables ##
-sudo cp -rf ${source_dir}/common/env.sh ${root_mnt}/etc/profile.d/
-
 ## Bash Configs ##
 cat ${source_dir}/bashrc/bashrc > ${root_mnt}/home/${user}/.bashrc
 
