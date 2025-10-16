@@ -22,8 +22,8 @@ apt install --yes xinit seatd xdg-desktop-portal-{gtk,wlr} \
   # gammastep
 
 # INSTALL: i3
-apt install --yes i3-wm picom alacritty autotiling polybar rofi xclip \
-  {lx,auto}randr feh maim slop numlockx # xidlehook
+apt install --yes i3-wm picom xss-lock alacritty autotiling polybar rofi \
+  xclip {lx,auto}randr feh maim slop numlockx
 
 # INSTALL: Sway
 apt install --yes sway{bg,idle} waybar wlogout fuzzel grimshot wl-clipboard

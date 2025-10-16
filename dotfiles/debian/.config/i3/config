@@ -28,7 +28,9 @@ font pango:JetBrains Mono 10
 
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
-# exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
+exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l dimblur
+exec --no-startup-id xset s 600 5
+exec --no-startup-id xset dpms 0 0 660
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -162,8 +164,7 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # lock
-exec --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f2)" --fx dimblur
-bindsym $mod+Shift+l exec betterlockscreen -l dimblur
+bindsym $mod+Shift+l exec --no-startup-id xset s activate
 
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' \
@@ -220,6 +221,7 @@ exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id /usr/bin/lxpolkit
 
 # Autostart (for X11)
+exec --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f2)" --fx dimblur
 #exec --no-startup-id autorandr -c --default default
 exec --no-startup-id autorandr -c --default nvidia
 exec --no-startup-id numlockx on
