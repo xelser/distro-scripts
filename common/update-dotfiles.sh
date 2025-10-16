@@ -112,8 +112,8 @@ else
 
 	# xinit/startx/startw
 	save_file /.config/ .xinitrc
-	save_file /.config/wayinitrc
-	save_file /.local/bin/startw
+	save_file /.config/ wayinitrc
+	save_file /.local/bin/ startw
 
 	# Alacritty
 	save_file /.config/alacritty/ alacritty.yml
