@@ -28,4 +28,4 @@ if command -v autorandr >/dev/null; then
 fi
 
 # Launch i3 with fallback
-exec i3 || exec bash --login
+exec dbus-run-session -- i3 || exec bash --login

@@ -48,8 +48,8 @@ alias edit="nvim"
 
 # dotfiles
 if [ -d $HOME/Documents/distro-scripts/ ] ; then
-	alias bashaliasesup="cat $HOME/Documents/distro-scripts/common/bash_aliases > $HOME/.bash_aliases && source $HOME/.bash_aliases"
-	alias bashprofileup="cat $HOME/Documents/distro-scripts/common/bash_profile > $HOME/.bash_profile && source $HOME/.bash_profile"
+	alias bashaliasesup="cat $HOME/Documents/distro-scripts/common/bash_aliases > $HOME/.bash_aliases"
+	alias bashprofileup="cat $HOME/Documents/distro-scripts/common/bash_profile > $HOME/.bash_profile"
 	alias bashup="bashaliasesup && bashprofileup"
 	alias dotup="bash $HOME/Documents/distro-scripts/common/update-dotfiles.sh"
 	alias gitpull="git fetch && git pull"
@@ -64,5 +64,3 @@ alias lock="[ -f /usr/bin/betterlockscreen ] && betterlockscreen -l dimblur >1 /
 alias post="bash $HOME/.config/post.sh"
 alias refresh="source $HOME/.bashrc"
 alias clear="clear && history -c"
-
-

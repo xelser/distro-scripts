@@ -95,7 +95,7 @@ echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priori
 # systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
 # enable systemd daemons
-for service in htpdate seatd greetd; do
+for service in htpdate seatd; do
   systemctl enable $service
 done
 
