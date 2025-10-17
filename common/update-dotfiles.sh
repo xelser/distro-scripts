@@ -175,6 +175,9 @@ else
 	# Mako
 	save_file /.config/mako/ config
 
+	# Feh
+	save_file / .fehbg
+
 	# Nitrogen
 	save_folder /.config/nitrogen/
 

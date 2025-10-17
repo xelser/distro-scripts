@@ -1,0 +1,2 @@
+#!/bin/sh
+feh --no-fehbg --bg-fill --image-bg '#ffffff' '/mnt/Home/Pictures/Wallpapers/Gruvbox/Rainy-Night-Artistic-Painting-Rain-City-Wallpaper-Hd-.jpg' 
