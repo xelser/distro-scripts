@@ -78,6 +78,9 @@ cd /tmp/swayfx-build/ && wget -q \
 # sudo
 usermod -aG sudo ${user}
 
+# blacklist nouveau
+${source_dir}/modules/blacklist_nouveau.sh
+
 # autologin user at tty1
 mkdir -p /etc/systemd/system/getty@tty1.service.d
 echo "[Service]" > /etc/systemd/system/getty@tty1.service.d/override.conf
