@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # Environment
+export XDG_SESSION_TYPE=x11
+
 export DESKTOP_SESSION=i3
 export XDG_CURRENT_DESKTOP=i3
 
