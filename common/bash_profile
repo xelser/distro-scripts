@@ -5,3 +5,9 @@ export PATH=$PATH:/var/lib/flatpak/exports/bin:$HOME/.local/share/flatpak/export
 if [ -f "$HOME/.profile" ]; then
 	. "$HOME/.profile"
 fi
+
+# autostart i3/x11 in tty
+if [ $(tty) = "/dev/tty1" ]; then
+	killall sway i3
+	startx
+fi
