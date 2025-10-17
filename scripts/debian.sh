@@ -46,6 +46,13 @@ cd i3lock-color && ./install-i3lock-color.sh
 
 wget https://raw.githubusercontent.com/betterlockscreen/betterlockscreen/main/install.sh -O - -q | bash -s system
 
+# wallutils
+apt install --yes golang imagemagick libx11-dev libxcursor-dev libxmu-dev \
+  libwayland-dev libxpm-dev xbitmaps libxmu-headers libheif-dev make
+
+cd /tmp && git clone https://github.com/xyproto/wallutils
+cd wallutils && make && sudo make PREFIX=/usr/local install
+
 # waypaper
 apt install --yes git libgirepository1.0-dev libgtk-3-dev \
   libgdk-pixbuf-2.0-dev python3-pip python3-venv python3-setuptools \
@@ -107,19 +114,3 @@ done
 
 # Fonts
 ${source_dir}/themes/fonts-nerd.sh JetBrainsMono
-
-################################### OMITTED ##################################
-
-# wallutils
-#apt install --yes golang imagemagick libx11-dev libxcursor-dev libxmu-dev \
-#  libwayland-dev libxpm-dev xbitmaps libxmu-headers libheif-dev make
-#cd /tmp && git clone https://github.com/xyproto/wallutils
-#cd wallutils && make && sudo make PREFIX=/usr/local install
-
-# waytrogen
-#apt install --yes libgtk-4-1 openssl libsqlite3-0 libsqlite3-dev \
-#  libglib2.0-dev sqlite3 libgtk-4-dev meson ninja-build cargo
-
-#cd /tmp && git clone https://github.com/nikolaizombie1/waytrogen
-#cd waytrogen && meson setup builddir --prefix=/usr
-#meson compile -C builddir && meson install -C builddir
