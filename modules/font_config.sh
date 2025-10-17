@@ -39,3 +39,4 @@ wget -q https://raw.githubusercontent.com/xelser/distro-scripts/main/common/Xres
 
 # Refresh
 sudo fc-cache -fv
+fc-cache -fv
