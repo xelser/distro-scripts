@@ -40,11 +40,11 @@ fi
 
 # Create Symlinks
 if [[ $USER == "xelser" ]]; then
-	[ ! -d $HOME/Documents/"xelser's Documents" ] && ln -sf /mnt/Home/Documents $HOME/Documents/"xelser's Documents"
-	[ ! -d $HOME/Downloads/"xelser's Downloads" ] && ln -sf /mnt/Home/Downloads $HOME/Downloads/"xelser's Downloads"
-	[ ! -d $HOME/Music/"xelser's Music" ]         && ln -sf /mnt/Home/Music     $HOME/Music/"xelser's Music"
-	[ ! -d $HOME/Pictures/"xelser's Pictures" ]   && ln -sf /mnt/Home/Pictures  $HOME/Pictures/"xelser's Pictures"
-	[ ! -d $HOME/Videos/"xelser's Videos" ]       && ln -sf /mnt/Home/Videos    $HOME/Videos/"xelser's Videos"
+	[ ! -d $HOME/Documents/"xelser_Documents" ] && ln -sf /mnt/Home/Documents $HOME/Documents/"xelser_Documents"
+	[ ! -d $HOME/Downloads/"xelser_Downloads" ] && ln -sf /mnt/Home/Downloads $HOME/Downloads/"xelser_Downloads"
+	[ ! -d $HOME/Music/"xelser_Music" ]         && ln -sf /mnt/Home/Music     $HOME/Music/"xelser_Music"
+	[ ! -d $HOME/Pictures/"xelser_Pictures" ]   && ln -sf /mnt/Home/Pictures  $HOME/Pictures/"xelser_Pictures"
+	[ ! -d $HOME/Videos/"xelser_Videos" ]       && ln -sf /mnt/Home/Videos    $HOME/Videos/"xelser_Videos"
 fi
 
 # Audio
