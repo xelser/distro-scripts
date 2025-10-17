@@ -230,8 +230,8 @@ exec --no-startup-id picom
 #exec --no-startup-id xsettingsd
 
 # Autostart (for i3)
-exec_always --no-startup-id bash -c "$HOME/.fehbg || waypaper --restore"
 exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.fehbg || waypaper --restore
 exec_always --no-startup-id autotiling
 
 # Screenshot (maim)
