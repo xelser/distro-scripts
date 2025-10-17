@@ -41,7 +41,7 @@ fi
 ################################ POST INSTALL ################################
 
 ## Dotfiles ##
-[ -d ${dotfiles_dir} ] && cp -rf ${dotfiles_dir}/* ${root_mnt}/home/${user}/
+[ -d ${dotfiles_dir} ] && cp -a ${dotfiles_dir}/. ${root_mnt}/home/${user}/
 
 ## Bash Configs ##
 cat ${source_dir}/bashrc/bashrc > ${root_mnt}/home/${user}/.bashrc
