@@ -119,12 +119,12 @@ else
 	dest_dir="$HOME/Documents/distro-scripts/dotfiles/${distro_id}"
 
 	# xinit/startx/startw
-	save_file /.config/ .xinitrc
+	save_file / .xinitrc
 	save_file /.config/ wayinitrc
 	save_file /.local/bin/ startw
 
 	# Alacritty
-	save_file /.config/alacritty/ alacritty.yml
+	#save_file /.config/alacritty/ alacritty.yml
 	save_file /.config/alacritty/ alacritty.toml
 
 	# Foot
@@ -146,7 +146,7 @@ else
 	save_file /.config/i3/ config
 
 	# Sway settings
-	save_folder /.config/sway/
+	save_file /.config/sway/ config
 
 	# Niri settings
 	save_file /.config/niri/ config.kdl
