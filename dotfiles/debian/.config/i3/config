@@ -235,7 +235,7 @@ exec_always --no-startup-id $HOME/.fehbg || waypaper --restore
 exec_always --no-startup-id autotiling
 
 # Screenshot (maim)
-bindsym $mod+Shift+s exec --no-startup-id bash -c "filename=\"$HOME/Pictures/$(date +%F_%T).png\" && maim -u -s \"\$filename\" && xclip -selection clipboard -t image/png -i \"\$filename\" && notify-send -i \"\$filename\" -u low 'Screenshot (maim + xclip + notify-send)' 'Saved and copied to clipboard' || notify-send -u low 'Screenshot aborted'"
+bindsym $mod+Shift+s exec --no-startup-id bash -c "filename=\"$HOME/Pictures/$(date +%F_%T).png\" && maim -B -u -s \"\$filename\" && xclip -selection clipboard -t image/png -i \"\$filename\" && notify-send -i \"\$filename\" -u low 'Screenshot (maim + xclip + notify-send)' 'Saved and copied to clipboard' || notify-send -u low 'Screenshot aborted'"
 
 # Night light (gammastep)
 #exec --no-startup-id sh $HOME/.config/gammastep/launch.sh

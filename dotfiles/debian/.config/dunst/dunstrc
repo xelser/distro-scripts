@@ -178,13 +178,11 @@
     #   %a  appname
     #   %s  summary
     #   %b  body
-    #   %c  category
-    #   %S  stack_tag
     #   %i  iconname (including its path)
     #   %I  iconname (without its path)
     #   %p  progress value if set ([  0%] to [100%]) or nothing
     #   %n  progress value if set without any extra characters
-    #   %%  literal %
+    #   %%  Literal %
     # Markup is allowed
     format = "<b>%s</b>\n%b"
 
@@ -320,7 +318,6 @@
     # * open_url: If the notification has exactly one url, open it. If there are multiple
     #             ones, open the context menu.
     # * close_current: Close current notification.
-    # * remove_current: Remove current notification from history.
     # * close_all: Close all notifications.
     # * context: Open context menu for the notification.
     # * context_all: Open context menu for all notifications.
@@ -338,7 +335,8 @@
     # dunst will attempt to calculate an appropriate dpi value for each monitor
     # using the resolution and physical size. This might be useful in setups
     # where there are multiple screens with very different dpi values.
-    per_monitor_dpi = true
+    per_monitor_dpi = false
+
 
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.
@@ -494,4 +492,3 @@
 #    set_stack_tag = "volume"
 #
 # vim: ft=cfg
-
