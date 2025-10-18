@@ -6,7 +6,7 @@ export XDG_CURRENT_DESKTOP=i3
 export XDG_SESSION_TYPE=x11
 
 # Merge font rendering and DPI settings
-if -f ~/.Xresources; then
+if [ -f ~/.Xresources ]; then
   xrdb -merge ~/.Xresources
 fi
 
@@ -34,5 +34,6 @@ if command -v autorandr >/dev/null; then
 fi
 
 # Launch i3 with fallback
+exec picom &
 exec xsettingsd &
 exec dbus-run-session -- i3 || exec bash --login
