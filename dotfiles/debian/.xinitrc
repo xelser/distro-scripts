@@ -37,4 +37,4 @@ fi
 exec picom &
 exec numlockx &
 exec xsettingsd &
-exec dbus-run-session -- i3 || exec bash --login
+exec dbus-run-session i3 || exec bash --login

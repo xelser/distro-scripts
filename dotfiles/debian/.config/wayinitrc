@@ -11,4 +11,4 @@ export XDG_CURRENT_DESKTOP=sway
 export DESKTOP_SESSION=sway
 
 # Start Sway
-exec dbus-run-session -- sway
+exec dbus-run-session sway
