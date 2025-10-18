@@ -330,7 +330,8 @@ save_file / .gtkrc-2.0
 save_file /.config/gtk-3.0/ settings.ini
 
 # Xsettings
-save_file /.config/xsettingsd/ xsettingsd.conf
+save_file /.config/xsettingsd.conf
+#save_file /.config/xsettingsd/ xsettingsd.conf
 
 # Darkman
 save_folder /.local/share/dark-mode.d/
