@@ -331,6 +331,9 @@ save_file / .gtkrc-2.0
 # GTK3
 save_file /.config/gtk-3.0/ settings.ini
 
+# Xsettings
+save_file /.config/xsettingsd/ xsettingsd.conf
+
 # Darkman
 save_folder /.local/share/dark-mode.d/
 save_folder /.local/share/light-mode.d/

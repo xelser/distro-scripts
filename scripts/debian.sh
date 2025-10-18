@@ -15,7 +15,7 @@ apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
   fonts-roboto{,-slab} fonts-jetbrains-mono
 
 # INSTALL: WM (X11/Wayland)
-apt install --yes xinit seatd xdg-desktop-portal-{gtk,wlr} \
+apt install --yes xinit xsettingsd seatd xdg-desktop-portal-{gtk,wlr} \
   brightnessctl dunst libnotify-bin mugshot at-spi2-core nwg-look mpv imv \
   transmission-gtk pavucontrol blueman lxpolkit engrampa pluma atril \
   thunar{,-archive-plugin} gvfs-{backends,fuse}
