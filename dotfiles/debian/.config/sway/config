@@ -302,7 +302,7 @@ exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id /usr/bin/lxpolkit
 
 # Autostart (for sway)
-exec_always --no-startup-id waypaper --restore
+exec --no-startup-id swaybg --mode fill --image $(cat $HOME/.config/waypaper/config.ini | grep 'wallpaper' | cut -d'=' -f2)
 exec --no-startup-id autotiling
 
 # Night light (gammastep)

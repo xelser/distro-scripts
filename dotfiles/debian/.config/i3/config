@@ -224,8 +224,8 @@ exec --no-startup-id /usr/bin/lxpolkit
 exec --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f4)" --fx dimblur
 #exec --no-startup-id autorandr -c --default default
 exec --no-startup-id autorandr -c --default nvidia
-exec --no-startup-id numlockx on
-exec --no-startup-id picom
+#exec --no-startup-id numlockx on
+#exec --no-startup-id picom
 #exec --no-startup-id xfsettingsd
 #exec --no-startup-id xsettingsd
 

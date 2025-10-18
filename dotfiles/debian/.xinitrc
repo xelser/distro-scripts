@@ -35,5 +35,6 @@ fi
 
 # Launch i3 with fallback
 exec picom &
+exec numlockx &
 exec xsettingsd &
 exec dbus-run-session -- i3 || exec bash --login

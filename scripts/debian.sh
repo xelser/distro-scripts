@@ -29,9 +29,6 @@ apt install --yes feh xss-lock alacritty polybar rofi maim slop xclip \
 apt install --yes sway{bg,idle} foot waybar fuzzel grimshot wl-clipboard \
   gtklock
 
-# INSTALL: for Jellyfin
-apt install --yes intel-media-va-driver-non-free libvpl2 libvpl-tools vainfo
-
 ################################### BUILD ####################################
 
 # betterlockscreen

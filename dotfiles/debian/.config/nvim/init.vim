@@ -42,15 +42,11 @@ autocmd BufWritePre * :%s/\s\+$//e
 " visual feedback for yanks
 autocmd TextYankPost * silent! lua vim.highlight.on_yank()
 
-" plugin: autopairs
-lua << END
-	require("nvim-autopairs").setup({})
-END
+" autoformat
+autocmd BufWritePre *.js,*.ts,*.py,*.lua :call CocAction('format')
 
-" plugin: lspsaga
+" plugin: autopairs and lspsaga
 lua << EOF
+	require("nvim-autopairs").setup({})
 	require("lspsaga").setup({})
 EOF
-
-" autoformat
-"autocmd BufWritePre *.js,*.ts,*.py,*.lua :call CocAction('format')

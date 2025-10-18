@@ -42,9 +42,9 @@ fi
 
 ## Dotfiles ##
 for item in .local .config .var .fehbg .xinitrc .gtkrc-2.0; do
-    if [[ -e "${dotfiles_dir}/${item}" ]]; then
-        cp -a "${dotfiles_dir}/${item}" "${root_mnt}/home/${user}/"
-    fi
+	if [[ -e "${dotfiles_dir}/${item}" ]]; then
+		cp -a "${dotfiles_dir}/${item}" "${root_mnt}/home/${user}/"
+	fi
 done
 
 ## Bash Configs ##

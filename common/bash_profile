@@ -1,16 +1,27 @@
 # update $PATH
 export PATH=$PATH:/var/lib/flatpak/exports/bin:$HOME/.local/share/flatpak/exports/bin:$HOME/.local/bin
 
+# get distro
+export distro_id="$(grep '^ID=' /etc/os-release | cut -d'=' -f2 | cut -d'"' -f2)"
+
 # source .profile if it exists
 if [ -f "$HOME/.profile" ]; then
 	. "$HOME/.profile"
 fi
 
 # autostart in tty
-if [ $(tty) = "/dev/tty1" ]; then
-	if [ "$(mokutil --sb-state)" == "SecureBoot enabled" ]; then
-		startw # start swayfx
-	else
-		startx # start i3
-	fi
+if [ "$(tty)" = "/dev/tty1" ]; then
+  if mokutil --sb-state | grep -q "SecureBoot enabled"; then
+    # Secure Boot is ON
+    if nvidia-smi >/dev/null 2>&1; then
+      # Proprietary NVIDIA driver is working
+      startx  # Use i3
+    else
+      # Driver exists but isn't working
+      startw  # Use swayfx
+    fi
+  else
+    # Secure Boot is OFF
+    startx  # Use i3 regardless of NVIDIA status
+  fi
 fi

@@ -1,12 +1,13 @@
 #!/bin/bash
 
-################################## PACKAGES ##################################
+################################ POST INSTALL ################################
 
 # debloat
 sudo apt autoremove --purge --yes zutty
 
 # jellyfin
 #curl -s https://repo.jellyfin.org/install-debuntu.sh | sudo bash
+sudo apt install --yes intel-media-va-driver-non-free libvpl2 libvpl-tools vainfo
 
 # tailscale
 curl -fsSL https://tailscale.com/install.sh | sh
@@ -16,14 +17,14 @@ curl -fsS https://dl.brave.com/install.sh | sh
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/brave_flags.sh)"
 
 # nvidia and envycontrol
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/debian_nvidia.sh)"
+# bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/debian_nvidia.sh)"
 
-# theme
+################################### THEMES ###################################
+
+# install themes
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/grub.sh)"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-gruvbox.sh)"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/cursor-sainnhe-capitaine.sh)"
-
-################################### CONFIG ###################################
 
 # set fonts
 dconf write /org/gnome/desktop/interface/font-name "'Roboto Medium 10'"
