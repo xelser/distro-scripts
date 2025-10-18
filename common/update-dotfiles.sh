@@ -16,9 +16,9 @@ else
 fi
 
 rm -rf ${dest_dir}
-mkdir -p ${dest_dir}/.config/
-mkdir -p ${dest_dir}/.local/
-mkdir -p ${dest_dir}/.var/
+#mkdir -p ${dest_dir}/.config/
+#mkdir -p ${dest_dir}/.local/
+#mkdir -p ${dest_dir}/.var/
 
 save_folder () {
 	[[ -d $HOME$1 ]] && mkdir -p ${dest_dir}$1 && \
@@ -329,8 +329,8 @@ save_file / .gtkrc-2.0
 # GTK3
 save_file /.config/gtk-3.0/ settings.ini
 
-# Xsettings
-save_file /.config/xsettingsd.conf
+# Xsettingsd
+save_file /.config/ xsettingsd.conf
 #save_file /.config/xsettingsd/ xsettingsd.conf
 
 # Darkman
