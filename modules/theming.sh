@@ -51,12 +51,12 @@ if [[ ! ${wm_de} == "gnome" ]]; then
 	flatpak override --user --filesystem=xdg-config/gtk-3.0
 	flatpak override --user --filesystem=xdg-config/gtk-4.0
 	flatpak override --user --filesystem=xdg-data/themes:ro
-	flatpak override --user --filesystem=$HOME/.themes:ro
+	flatpak override --user --filesystem=home/.themes:ro
 	flatpak override --user --env=GTK_THEME=${gtk_theme}
 fi
 
 if [ -f /usr/bin/kvantummanager ]; then
-	flatpak install --assumeyes --noninteractive flathub org.kde.KStyle.Kvantum/x86_64/5.15-22.08 2> /dev/null 
+	flatpak install --assumeyes --noninteractive flathub org.kde.KStyle.Kvantum/x86_64/5.15-22.08 2> /dev/null
 	flatpak override --user --filesystem=xdg-config/Kvantum:ro
 	flatpak override --user --env=QT_STYLE_OVERRIDE=kvantum-dark
 fi
@@ -70,5 +70,5 @@ fi
 mkdir -p $HOME/.icons/default && echo -e "[Icon Theme]\nInherits=${cursor_theme}" > $HOME/.icons/default/index.theme
 #echo -e "[Icon Theme]\nInherits=${cursor_theme}" | sudo tee -a /usr/share/icons/default/index.theme 1> /dev/null
 
-flatpak override --user --filesystem=/home/$USER/.icons/:ro
-flatpak override --user --filesystem=/usr/share/icons/:ro
+flatpak override --user --filesystem=home/.icons:ro
+#flatpak override --user --filesystem=/usr/share/icons/:ro

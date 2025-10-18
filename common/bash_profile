@@ -8,6 +8,5 @@ fi
 
 # autostart i3/x11 in tty
 if [ $(tty) = "/dev/tty1" ]; then
-	killall sway i3
 	startx
 fi

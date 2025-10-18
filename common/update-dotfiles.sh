@@ -32,6 +32,12 @@ save_file () {
 		cp -rf $HOME$1$2 ${dest_dir}$1
 }
 
+################################### SHELL ####################################
+
+# Bash
+cat $HOME/.bash_aliases > ${common_dir}/bash_aliases
+cat $HOME/.bash_profile > ${common_dir}/bash_profile
+
 ############################ DESKTOP ENVIRONMENTS ############################
 
 if [[ ${wm_de} == "xfce" ]]; then

@@ -41,11 +41,11 @@ fi
 ################################ POST INSTALL ################################
 
 ## Dotfiles ##
-if [ -d "${dotfiles_dir}" ]; then
-	for item in .local .config .var .fehbg .xinitrc .gtkrc-2.0; do
+for item in .local .config .var .fehbg .xinitrc .gtkrc-2.0; do
+	if [ -d "${dotfiles_dir}/${item}" ]; then
 		cp -rfa "${dotfiles_dir}/${item}" "${root_mnt}/home/${user}/"
-	done
-fi
+	fi
+done
 
 ## Bash Configs ##
 cat ${source_dir}/bashrc/bashrc > ${root_mnt}/home/${user}/.bashrc
