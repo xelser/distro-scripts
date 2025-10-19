@@ -207,7 +207,7 @@ case "$WM_DE" in
             ".config/autorandr/"
             ".config/picom/"
             ".config/gtklock/"
-            ".config/nitrogen/"
+            #".config/nitrogen/"
             ".config/rofi/"
             ".config/wofi/"
             ".config/wlogout/"
