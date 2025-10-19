@@ -44,11 +44,8 @@ else
   echo "$(date): numlockx failed" >> ~/.xsession-log
 fi
 
-if picom --backend glx --daemon; then
-  echo "$(date): picom started" >> ~/.xsession-log
-else
-  echo "$(date): picom failed to start" >> ~/.xsession-log
-fi
+picom --backend glx &
+echo "$(date): picom started" >> ~/.xsession-log
 
 xsettingsd -c ~/.config/xsettingsd.conf &
 echo "$(date): xsettingsd launched" >> ~/.xsession-log
