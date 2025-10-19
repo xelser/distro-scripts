@@ -26,8 +26,11 @@ font pango:JetBrains Mono 10
 # The combination of xss-lock, nm-applet and pactl is a popular choice, so
 # they are included here as an example. Modify as you see fit.
 
-# xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
-# screen before suspend. Use loginctl lock-session to lock your screen.
+# xss-lock grabs a logind suspend inhibit lock and will use betterlockscreen
+# to lock the screen before suspend. Use loginctl lock-session to lock your
+# screen.
+
+exec --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f4)" --fx dimblur
 exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l dimblur
 exec --no-startup-id xset s 600 5
 exec --no-startup-id xset dpms 0 0 660
@@ -220,15 +223,6 @@ exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
 exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id /usr/bin/lxpolkit
 
-# Autostart (for X11)
-exec --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f4)" --fx dimblur
-#exec --no-startup-id autorandr -c --default default
-exec --no-startup-id autorandr -c --default nvidia
-#exec --no-startup-id numlockx on
-#exec --no-startup-id picom
-#exec --no-startup-id xfsettingsd
-#exec --no-startup-id xsettingsd
-
 # Autostart (for i3)
 exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id $HOME/.fehbg || waypaper --restore
@@ -240,14 +234,6 @@ bindsym $mod+Shift+s exec --no-startup-id bash -c "filename=\"$HOME/Pictures/$(d
 # Night light (gammastep)
 #exec --no-startup-id sh $HOME/.config/gammastep/launch.sh
 #bindsym $mod+o exec sh $HOME/.config/gammastep/toggle.sh
-
-# Power Management (xidlehook)
-#exec --no-startup-id xset s 3600 3600 -dpms && xidlehook --not-when-fullscreen --not-when-audio --socket "/tmp/xidlehook.sock" \
-#  --timer "$(xset q | grep timeout | cut -d' ' -f5)" "betterlockscreen -l dimblur" "xset led on"
-
-# Inhibit (caffeinate)
-#bindsym $mod+i exec caffeinate & disown && notify-send "Inhibit: caffeinate 󰅶 enable"
-#bindsym $mod+shift+i exec killall caffeinate && notify-send "Inhibit: caffeinate 󰛊 disbled" || notify-send "caffeinate 󰾫 is not running"
 
 # Apps
 #exec --no-startup-id steam -silent -no-browser -nochatui -noreactlogin

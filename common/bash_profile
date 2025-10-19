@@ -10,18 +10,22 @@ if [ -f "$HOME/.profile" ]; then
 fi
 
 # autostart in tty
-if [ "$(tty)" = "/dev/tty1" ]; then
-  if mokutil --sb-state | grep -q "SecureBoot enabled"; then
-    # Secure Boot is ON
-    if nvidia-smi >/dev/null 2>&1; then
-      # Proprietary NVIDIA driver is working
-      startx  # Use i3
+if [ "${distro_id}" = "debian" ]; then
+  if [ "$(tty)" = "/dev/tty1" ]; then
+    if mokutil --sb-state | grep -q "SecureBoot enabled"; then
+      # Secure Boot is ON
+      if nvidia-smi >/dev/null 2>&1; then
+        # Proprietary NVIDIA driver is working
+        startx  # Use i3
+      else
+        # Driver exists but isn't working
+        startw  # Use swayfx
+      fi
     else
-      # Driver exists but isn't working
-      startw  # Use swayfx
+      # Secure Boot is OFF
+      startx  # Use i3 regardless of NVIDIA status
     fi
-  else
-    # Secure Boot is OFF
-    startx  # Use i3 regardless of NVIDIA status
   fi
+else
+  return 0
 fi

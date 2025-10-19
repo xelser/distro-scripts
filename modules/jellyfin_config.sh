@@ -87,7 +87,7 @@ main() {
     echo "[*] Starting Jellyfin configuration..."
 
     check_jellyfin_installed
-    add_jellyfin_to_hw_groups
+    #add_jellyfin_to_hw_groups
     start_and_check_service jellyfin
     setup_media_group_access jellyfin
 
