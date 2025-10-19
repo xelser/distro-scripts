@@ -182,18 +182,21 @@ case "$WM_DE" in
             ".config/dunst/dunstrc"
             ".config/mako/config"
             ".fehbg"
-            ".config/waytrogen/config.json"
+            #".config/waytrogen/config.json"
             ".config/waypaper/config.ini"
             ".config/ranger/rc.conf"
-            ".config/ulauncher/settings.json"
+            #".config/ulauncher/settings.json"
             ".config/fuzzel/fuzzel.ini"
-            ".config/flameshot/flameshot.ini"
+            #".config/flameshot/flameshot.ini"
             ".config/polybar/launch.sh"
             ".config/polybar/config.ini"
             ".config/waybar/config"
             ".config/waybar/style.css"
             ".config/waybar/launch.sh"
-            ".config/yambar/config.yml"
+            #".config/yambar/config.yml"
+            ".config/tint2/tint2rc"
+            ".config/xsettingsd.conf"
+            #".config/xsettingsd/xsettingsd.conf" # Commented out in original
         )
         for config in "${WM_CONFIGS[@]}"; do
             save_file "$(dirname "$config")/" "$(basename "$config")"
@@ -227,21 +230,21 @@ esac
 # 5. COMMON
 COMMON_FILES=(
     ".config/mimeapps.list"
-    ".gtk-bookmarks"
+    #".gtk-bookmarks"
     ".config/gtk-3.0/bookmarks"
     ".config/fontconfig/fonts.conf"
-    ".config/libfm/libfm.conf"
-    ".config/pcmanfm/default/pcmanfm.conf"
+    #".config/libfm/libfm.conf"
+    #".config/pcmanfm/default/pcmanfm.conf"
     ".config/xfce4/helpers.rc"
-    ".config/leafpad/leafpadrc"
+    #".config/leafpad/leafpadrc"
     ".vimrc"
     ".config/mpv/mpv.conf"
     ".config/celluloid/mpv.conf"
-    ".config/redshift.conf"
+    #".config/redshift.conf"
     ".config/transmission/settings.json"
     ".config/qBittorrent/qBittorrent.conf"
     ".config/inkscape/preferences.xml"
-    ".config/ brave-flags.conf"
+    #".config/ brave-flags.conf"
     ".config/libreoffice/4/user/registrymodifications.xcu"
     ".var/app/org.x.Warpinator/config/glib-2.0/settings/keyfile"
     ".config/syncthing-gtk/config.json"
@@ -249,11 +252,8 @@ COMMON_FILES=(
     #".var/app/us.zoom.Zoom/config/zoomus.conf" # Commented out in original
     ".gtkrc-2.0"
     ".config/gtk-3.0/settings.ini"
-    ".config/xsettingsd.conf"
-    #".config/xsettingsd/xsettingsd.conf" # Commented out in original
     ".config/Kvantum/kvantum.kvconfig"
     ".config/qt5ct/qt5ct.conf"
-    ".config/tint2/tint2rc"
 )
 for config in "${COMMON_FILES[@]}"; do
     save_file "$(dirname "$config")/" "$(basename "$config")"
@@ -262,7 +262,7 @@ done
 COMMON_FOLDERS=(
     ".config/autostart/"
     ".config/nvim/" # Retaining for nvim preference
-    ".config/redshift/"
+    #".config/redshift/"
     ".config/gammastep/"
     ".local/share/dark-mode.d/"
     ".local/share/light-mode.d/"
@@ -272,13 +272,13 @@ for folder in "${COMMON_FOLDERS[@]}"; do
 done
 
 # Geany (specific logic retained)
-GEANY_CONFIG="$HOME/.config/geany/geany.conf"
-if [ -f "$GEANY_CONFIG" ]; then
-    killall geany 2>/dev/null
-    mkdir -p "$DEST_DIR/.config/geany/"
-    # The original script truncates the geany.conf file from line 223 onwards
-    sed '223,$d' "$GEANY_CONFIG" > "$DEST_DIR/.config/geany/geany.conf"
-fi
+#GEANY_CONFIG="$HOME/.config/geany/geany.conf"
+#if [ -f "$GEANY_CONFIG" ]; then
+#    killall geany 2>/dev/null
+#    mkdir -p "$DEST_DIR/.config/geany/"
+#    # The original script truncates the geany.conf file from line 223 onwards
+#    sed '223,$d' "$GEANY_CONFIG" > "$DEST_DIR/.config/geany/geany.conf"
+#fi
 
 # 6. GAMING
 GAMING_FOLDERS=(
@@ -295,14 +295,14 @@ save_file /.config/'Optimus Manager'/ 'Optimus Manager Qt'.conf
 save_file /.config/goverlay/ MangoHud.conf
 
 # 7. AUDIO
-if command -v pulseaudio-equalizer-gtk &>/dev/null && [ -d "$HOME/.config/pulse/presets/" ]; then
-    mkdir -p "$DEST_DIR/.config/pulse/"
-    cp -rf "$HOME/.config/pulse/presets/" "$DEST_DIR/.config/pulse/"
-    cp -rf "$HOME/.config/pulse/equalizerrc" "$DEST_DIR/.config/pulse/"
-    cp -rf "$HOME/.config/pulse/equalizerrc.availablepresets" "$DEST_DIR/.config/pulse/"
-fi
+#if command -v pulseaudio-equalizer-gtk &>/dev/null && [ -d "$HOME/.config/pulse/presets/" ]; then
+#    mkdir -p "$DEST_DIR/.config/pulse/"
+#    cp -rf "$HOME/.config/pulse/presets/" "$DEST_DIR/.config/pulse/"
+#    cp -rf "$HOME/.config/pulse/equalizerrc" "$DEST_DIR/.config/pulse/"
+#    cp -rf "$HOME/.config/pulse/equalizerrc.availablepresets" "$DEST_DIR/.config/pulse/"
+#fi
 
-if command -v pulseeffects &>/dev/null; then save_folder /.config/PulseEffects/ ; fi
+#if command -v pulseeffects &>/dev/null; then save_folder /.config/PulseEffects/ ; fi
 if command -v easyeffects &>/dev/null; then save_folder /.config/easyeffects/ ; fi
 
 # 8. THEMES (Plank - specific logic retained)
