@@ -9,11 +9,7 @@ fi
 gaming_dir="$HOME/Documents/distro-scripts/gaming"
 common_dir="$HOME/Documents/distro-scripts/common"
 
-if [ -z ${wm_de} ]; then
-	dest_dir="$HOME/Documents/distro-scripts/dotfiles/${distro_id}"
-else
-	dest_dir="$HOME/Documents/distro-scripts/dotfiles/${distro_id}-${wm_de}"
-fi
+dest_dir="$HOME/Documents/distro-scripts/dotfiles/${distro_id}-${wm_de}"
 
 rm -rf ${dest_dir}
 #mkdir -p ${dest_dir}/.config/
