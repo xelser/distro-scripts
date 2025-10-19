@@ -3,6 +3,7 @@
 * {
     color: @fg0;
     border-radius: 10px;
+    font-family: JetBrains Mono;
 }
 
 window {
@@ -22,7 +23,7 @@ window {
     padding: 6px;
     margin-left: 10px;
     margin-right: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 #entry:selected {
