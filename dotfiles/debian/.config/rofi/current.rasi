@@ -46,7 +46,7 @@ listview {
 }
 
 element {
-  padding: 1px;
+  padding: 0px;
   cursor: pointer;
   spacing: 5px;
   border: 0;
@@ -55,10 +55,12 @@ element {
 element-text {
   text-color: inherit;
   vertical-align: 0.5;
-  padding: 0px 0px 0px 5px;
+  padding: 0;
 }
 
 element-icon {
+  background-color: var(background);
+  padding: 0px 10px 0px 0px;
   vertical-align: 0.5;
   size: 1.5em;
 }
