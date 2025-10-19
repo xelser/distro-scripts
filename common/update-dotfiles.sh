@@ -1,398 +1,317 @@
 #!/bin/bash
 
-if [ -z ${XDG_CURRENT_DESKTOP} ]; then
-	wm_de="$(echo $DESKTOP_SESSION | cut -d'-' -f2 | cut -d':' -f1 | tr '[:upper:]' '[:lower:]')"
-else
-	wm_de="$(echo $XDG_CURRENT_DESKTOP | cut -d'-' -f2 | cut -d':' -f1 | tr '[:upper:]' '[:lower:]')"
+# --- Configuration ---
+
+# Base directories
+GAMING_DIR="$HOME/Documents/distro-scripts/gaming"
+COMMON_DIR="$HOME/Documents/distro-scripts/common"
+
+# The script relies on the 'distro_id' variable being set,
+# for example: export distro_id="arch"
+if [ -z "$distro_id" ]; then
+    echo "Error: 'distro_id' environment variable is not set." >&2
+    exit 1
 fi
 
-gaming_dir="$HOME/Documents/distro-scripts/gaming"
-common_dir="$HOME/Documents/distro-scripts/common"
+# Determine Window Manager/Desktop Environment
+get_wm_de() {
+    local wm_de=""
+    if [ -n "$XDG_CURRENT_DESKTOP" ]; then
+        wm_de="$(echo "$XDG_CURRENT_DESKTOP" | cut -d'-' -f2 | cut -d':' -f1 | tr '[:upper:]' '[:lower:]')"
+    elif [ -n "$DESKTOP_SESSION" ]; then
+        wm_de="$(echo "$DESKTOP_SESSION" | cut -d'-' -f2 | cut -d':' -f1 | tr '[:upper:]' '[:lower:]')"
+    fi
+    echo "$wm_de"
+}
 
-dest_dir="$HOME/Documents/distro-scripts/dotfiles/${distro_id}-${wm_de}"
-rm -rf ${dest_dir}
+WM_DE=$(get_wm_de)
 
+# Set the destination directory
+if [ -n "$WM_DE" ] && [ "$WM_DE" != "gnome" ] && [ "$WM_DE" != "cinnamon" ] && [ "$WM_DE" != "xfce" ] && [ "$WM_DE" != "kde" ]; then
+    # For window managers, use only distro_id (as per your original script's fallback logic)
+    DEST_DIR="$HOME/Documents/distro-scripts/dotfiles/${distro_id}"
+else
+    # For DEs, use the distro_id-wm_de naming convention
+    DEST_DIR="$HOME/Documents/distro-scripts/dotfiles/${distro_id}-${WM_DE}"
+fi
+
+# Clean destination directory
+rm -rf "$DEST_DIR"
+
+# --- Helper Functions ---
+
+# Save a folder (recursively copy contents)
 save_folder () {
-	[[ -d $HOME$1 ]] && mkdir -p ${dest_dir}$1 && \
-		cp -rf $HOME$1* ${dest_dir}$1
+    local source_dir="$HOME/$1"
+    local dest_dir="$DEST_DIR/$1"
+    if [[ -d "$source_dir" ]]; then
+        mkdir -p "$dest_dir" && cp -rf "$source_dir"* "$dest_dir"
+    fi
 }
 
+# Save a single file
 save_file () {
-	[[ -f $HOME$1$2 ]] && mkdir -p ${dest_dir}$1 && \
-		cp -rf $HOME$1$2 ${dest_dir}$1
+    local dir="$1"
+    local filename="$2"
+    local source_file="$HOME/$dir/$filename"
+    local dest_dir="$DEST_DIR/$dir"
+    if [[ -f "$source_file" ]]; then
+        mkdir -p "$dest_dir" && cp -f "$source_file" "$dest_dir"
+    fi
 }
 
-################################### SHELL ####################################
+# Custom Dconf dump function
+dconf_dump_to_file() {
+    local path="$1"
+    local dest_file="$DEST_DIR/$2"
+    dconf dump "$path" > "$dest_file" 2>/dev/null
+}
 
-# Bash
-cat $HOME/.bash_aliases > ${common_dir}/bash_aliases
-cat $HOME/.bash_profile > ${common_dir}/bash_profile
+# Remove clutter for DEs
+remove_clutter() {
+    rm -rf "$DEST_DIR"/.config/Kvantum/
+    rm -rf "$DEST_DIR"/.config/qt5ct/
+    if [[ "$WM_DE" == "cinnamon" ]]; then
+        rm -rf "$DEST_DIR"/.config/gtk-3.0/
+    fi
+}
 
-############################ DESKTOP ENVIRONMENTS ############################
+# --- Main Logic ---
 
-if [[ ${wm_de} == "xfce" ]]; then
+# 1. SHELL
+cp -f "$HOME/.bash_aliases" "$COMMON_DIR/bash_aliases"
+cp -f "$HOME/.bash_profile" "$COMMON_DIR/bash_profile"
 
-	# Menu Entries
-	save_file /.config/menus/ xfce-applications.menu
+# 2. DESKTOP ENVIRONMENTS
+mkdir -p "$DEST_DIR"
 
-	# Panel Settings
-	mkdir -p "$HOME/.config/xfce4-panel-backups"
-	xfce4-panel-profiles save "$HOME/.config/xfce4-panel-backups/my-panel.tar.bz2"
-	save_file /.config/xfce4-panel-backups/ /my-panel.tar.bz2
+case "$WM_DE" in
+    xfce)
+        # Menu Entries
+        save_file /.config/menus/ xfce-applications.menu
 
-	# QT day/night cycle (remove clutter)
-	#rm -rf ${dest_dir}/.config/Kvantum/
-	#rm -rf ${dest_dir}/.config/qt5ct/
+        # Panel Settings
+        xfce4-panel-profiles save "$HOME/.config/xfce4-panel-backups/my-panel.tar.bz2" 2>/dev/null
+        save_file /.config/xfce4-panel-backups/ my-panel.tar.bz2
 
-elif [[ ${wm_de} == "cinnamon" ]]; then
+        remove_clutter
+        ;;
 
-	# Cinnamon Panel
-	dconf dump /org/cinnamon/ > 																					/tmp/cinnamon_panel_beta.ini
-	sed 1q /tmp/cinnamon_panel_beta.ini >																	${dest_dir}/.config/panel.ini
-	grep "enabled-applets" /tmp/cinnamon_panel_beta.ini >> 								${dest_dir}/.config/panel.ini
-	grep "panels-autohide" /tmp/cinnamon_panel_beta.ini >> 								${dest_dir}/.config/panel.ini
-	grep "enabled-extensions" /tmp/cinnamon_panel_beta.ini >>							${dest_dir}/.config/panel.ini
-	grep "panels-enabled" /tmp/cinnamon_panel_beta.ini >>									${dest_dir}/.config/panel.ini
-	grep "panels-height" /tmp/cinnamon_panel_beta.ini >>									${dest_dir}/.config/panel.ini
-	grep "panels-hide-delay" /tmp/cinnamon_panel_beta.ini >>							${dest_dir}/.config/panel.ini
-	grep "panels-show-delay" /tmp/cinnamon_panel_beta.ini >>							${dest_dir}/.config/panel.ini
-	grep "panel-zone-icon-sizes" /tmp/cinnamon_panel_beta.ini >>					${dest_dir}/.config/panel.ini
-	grep "panel-zone-symbolic-icon-sizes" /tmp/cinnamon_panel_beta.ini >> ${dest_dir}/.config/panel.ini
-	grep "panel-zone-text-sizes" /tmp/cinnamon_panel_beta.ini >> 					${dest_dir}/.config/panel.ini
+    cinnamon)
+        # Panel & Applet settings (The original used a specific grep list, retaining that logic)
+        local temp_cinnamon_ini="/tmp/cinnamon_panel_beta.ini"
+        dconf dump /org/cinnamon/ > "$temp_cinnamon_ini"
 
-	# GNOME Terminal
-	dconf dump /org/gnome/terminal/legacy/profiles:/ > $HOME/.config/gnome-terminal-profile
-	save_file /.config/ gnome-terminal-profile
+        local panel_ini="${DEST_DIR}/.config/panel.ini"
+        mkdir -p "$(dirname "$panel_ini")"
+        {
+            sed 1q "$temp_cinnamon_ini"
+            grep "enabled-applets" "$temp_cinnamon_ini"
+            grep "panels-autohide" "$temp_cinnamon_ini"
+            grep "enabled-extensions" "$temp_cinnamon_ini"
+            grep "panels-enabled" "$temp_cinnamon_ini"
+            grep "panels-height" "$temp_cinnamon_ini"
+            grep "panels-hide-delay" "$temp_cinnamon_ini"
+            grep "panels-show-delay" "$temp_cinnamon_ini"
+            grep "panel-zone-icon-sizes" "$temp_cinnamon_ini"
+            grep "panel-zone-symbolic-icon-sizes" "$temp_cinnamon_ini"
+            grep "panel-zone-text-sizes" "$temp_cinnamon_ini"
+        } >> "$panel_ini"
 
-	# Applets, Desklets, Extensions
-	save_folder /.config/cinnamon/
-	#save_folder /.local/share/cinnamon/
+        # GNOME Terminal (used in Cinnamon)
+        dconf_dump_to_file /org/gnome/terminal/legacy/profiles:/ .config/gnome-terminal-profile
 
-	# Nemo Scripts
-	save_folder /.local/share/nemo/scripts/
+        # Applets, Desklets, Extensions, Nemo Scripts
+        save_folder /.config/cinnamon/
+        #save_folder /.local/share/cinnamon/ # Commented out in original
+        save_folder /.local/share/nemo/scripts/
 
-	# QT day/night cycle (remove clutter)
-	rm -rf ${dest_dir}/.config/Kvantum/
-	rm -rf ${dest_dir}/.config/qt5ct/
+        remove_clutter
+        ;;
 
-	# GTK3 Settings and Bookmarks (remove clutter)
-	rm -rf ${dest_dir}/.config/gtk-3.0/
+    gnome)
+        # GNOME Shell (Favorite Apps, App Folders)
+        local temp_shell_ini="/tmp/shell_beta.ini"
+        dconf dump /org/gnome/shell/ > "$temp_shell_ini"
+        local fav_apps_ini="${DEST_DIR}/.config/fav_apps.ini"
+        mkdir -p "$(dirname "$fav_apps_ini")"
+        sed 1q "$temp_shell_ini" > "$fav_apps_ini"
+        grep "favorite-apps" "$temp_shell_ini" >> "$fav_apps_ini"
 
-elif [[ ${wm_de} == "gnome" ]]; then
+        dconf_dump_to_file /org/gnome/desktop/app-folders/ .config/app_folders.ini
+        #dconf_dump_to_file /org/gnome/shell/extensions/ .config/extensions.ini # Commented out in original
 
-	# GNOME Shell
-	dconf dump /org/gnome/shell/ > 								/tmp/shell_beta.ini
-	sed 1q /tmp/shell_beta.ini >									${dest_dir}/.config/fav_apps.ini
-	grep "favorite-apps" /tmp/shell_beta.ini >> 	${dest_dir}/.config/fav_apps.ini
-	dconf dump /org/gnome/desktop/app-folders/ > 	${dest_dir}/.config/app_folders.ini
-	#dconf dump /org/gnome/shell/extensions/ > 		${dest_dir}/.config/extensions.ini
+        # Pop-Shell, Forge, GDM
+        save_file /.config/pop-shell/ config.json
+        save_folder /.config/forge/config/
+        save_file /.config/ gdm-settings.ini
 
-	# Pop-Shell Exceptions
-	save_file /.config/pop-shell/ config.json
+        remove_clutter
+        ;;
 
-	# Forge Exceptions
-	save_folder /.config/forge/config/
+    kde)
+        # Konsave
+        if command -v konsave &>/dev/null; then
+            konsave -r defaults 2>/dev/null
+            konsave -s defaults 2>/dev/null
+            save_folder /.config/konsave/
+            remove_clutter
+        fi
+        ;;
 
-	# GDM Settings
-	save_file /.config/ gdm-settings.ini
+    *)
+        # 3. WINDOW MANAGERS & OTHER
+        WM_CONFIGS=(
+            ".xinitrc"
+            ".config/wayinitrc"
+            ".local/bin/startw"
+            ".config/alacritty/alacritty.toml"
+            ".config/foot/foot.ini"
+            ".config/awesome/rc.lua"
+            ".config/openbox/autostart"
+            ".config/openbox/environment"
+            ".config/openbox/rc.xml"
+            ".config/obmenu-generator/config.pl"
+            ".config/obmenu-generator/schema.pl"
+            ".config/i3/config"
+            ".config/sway/config"
+            ".config/niri/config.kdl"
+            ".config/hypr/hyprland.conf"
+            ".config/swhkd/swhkdrc"
+            ".config/betterlockscreen/betterlockscreenrc"
+            ".config/dunst/dunstrc"
+            ".config/mako/config"
+            ".fehbg"
+            ".config/waytrogen/config.json"
+            ".config/waypaper/config.ini"
+            ".config/ranger/rc.conf"
+            ".config/ulauncher/settings.json"
+            ".config/fuzzel/fuzzel.ini"
+            ".config/flameshot/flameshot.ini"
+            ".config/polybar/launch.sh"
+            ".config/polybar/config.ini"
+            ".config/waybar/config"
+            ".config/waybar/style.css"
+            ".config/waybar/launch.sh"
+            ".config/yambar/config.yml"
+        )
+        for config in "${WM_CONFIGS[@]}"; do
+            save_file "$(dirname "$config")/" "$(basename "$config")"
+        done
 
-	# QT day/night cycle (remove clutter)
-	rm -rf ${dest_dir}/.config/Kvantum/
-	rm -rf ${dest_dir}/.config/qt5ct/
+        # Folders
+        WM_FOLDERS=(
+            ".config/autorandr/"
+            ".config/picom/"
+            ".config/gtklock/"
+            ".config/nitrogen/"
+            ".config/rofi/"
+            ".config/wofi/"
+            ".config/wlogout/"
+            ".config/eww/"
+            ".config/polybar/modules/"
+            ".config/polybar/scripts/"
+        )
+        for folder in "${WM_FOLDERS[@]}"; do
+            save_folder "$folder"
+        done
+        ;;
+esac
 
-elif [[ ${wm_de} == "kde" ]]; then
+# 4. DISTROBUTION SPECIFICS
+case "$distro_id" in
+    linuxmint) save_folder /.linuxmint/ ;;
+    manjaro) save_folder /.config/manjaro/ ;;
+esac
 
-	# Konsave
-	if [ -f /usr/bin/konsave ]; then
-		konsave -r defaults 2>/dev/null
-		konsave -s defaults 2>/dev/null
-		save_folder /.config/konsave/
-		rm -rf ${dest_dir}/.config/Kvantum/
-	fi
+# 5. COMMON
+COMMON_FILES=(
+    ".config/mimeapps.list"
+    ".gtk-bookmarks"
+    ".config/gtk-3.0/bookmarks"
+    ".config/fontconfig/fonts.conf"
+    ".config/libfm/libfm.conf"
+    ".config/pcmanfm/default/pcmanfm.conf"
+    ".config/xfce4/helpers.rc"
+    ".config/leafpad/leafpadrc"
+    ".vimrc"
+    ".config/mpv/mpv.conf"
+    ".config/celluloid/mpv.conf"
+    ".config/redshift.conf"
+    ".config/transmission/settings.json"
+    ".config/qBittorrent/qBittorrent.conf"
+    ".config/inkscape/preferences.xml"
+    ".config/ brave-flags.conf"
+    ".config/libreoffice/4/user/registrymodifications.xcu"
+    ".var/app/org.x.Warpinator/config/glib-2.0/settings/keyfile"
+    ".config/syncthing-gtk/config.json"
+    ".var/app/me.kozec.syncthingtk/config/syncthing-gtk/config.json"
+    #".var/app/us.zoom.Zoom/config/zoomus.conf" # Commented out in original
+    ".gtkrc-2.0"
+    ".config/gtk-3.0/settings.ini"
+    ".config/xsettingsd.conf"
+    #".config/xsettingsd/xsettingsd.conf" # Commented out in original
+    ".config/Kvantum/kvantum.kvconfig"
+    ".config/qt5ct/qt5ct.conf"
+    ".config/tint2/tint2rc"
+)
+for config in "${COMMON_FILES[@]}"; do
+    save_file "$(dirname "$config")/" "$(basename "$config")"
+done
 
-else
+COMMON_FOLDERS=(
+    ".config/autostart/"
+    ".config/nvim/" # Retaining for nvim preference
+    ".config/redshift/"
+    ".config/gammastep/"
+    ".local/share/dark-mode.d/"
+    ".local/share/light-mode.d/"
+)
+for folder in "${COMMON_FOLDERS[@]}"; do
+    save_folder "$folder"
+done
 
-	dest_dir="$HOME/Documents/distro-scripts/dotfiles/${distro_id}"
-	rm -rf ${dest_dir}
-
-	# xinit/startx/startw
-	save_file / .xinitrc
-	save_file /.config/ wayinitrc
-	save_file /.local/bin/ startw
-
-	# Alacritty
-	#save_file /.config/alacritty/ alacritty.yml
-	save_file /.config/alacritty/ alacritty.toml
-
-	# Foot
-	save_file /.config/foot/ foot.ini
-
-	# Awesome settings
-	save_file /.config/awesome/ rc.lua
-
-	# Openbox settings
-	save_file /.config/openbox/ autostart
-	save_file /.config/openbox/ environment
-	save_file /.config/openbox/ rc.xml
-
-	# Obmenu Generator
-	save_file /.config/obmenu-generator/ config.pl
-	save_file /.config/obmenu-generator/ schema.pl
-
-	# i3 settings
-	save_file /.config/i3/ config
-
-	# Sway settings
-	save_file /.config/sway/ config
-
-	# Niri settings
-	save_file /.config/niri/ config.kdl
-
-	# Hyprland settings
-	save_file /.config/hypr/ hyprland.conf
-
-	# Swhkd
-	save_file /.config/swhkd/ swhkdrc
-
-	# Autorandr
-	save_folder /.config/autorandr/
-
-	# Picom
-	save_folder /.config/picom/
-
-	# Betterlockscreen
-	save_file /.config/betterlockscreen/ betterlockscreenrc
-
-	# Gtklock
-	save_folder /.config/gtklock/
-
-	# Dunst
-	save_file /.config/dunst/ dunstrc
-
-	# Mako
-	save_file /.config/mako/ config
-
-	# Feh
-	save_file / .fehbg
-
-	# Nitrogen
-	save_folder /.config/nitrogen/
-
-	# Waytrogen
-	save_file /.config/waytrogen/ config.json
-
-	# Waypaper
-	save_file /.config/waypaper/ config.ini
-
-	# Ranger
-	save_file /.config/ranger/ rc.conf
-
-	# Ulauncher
-	save_file /.config/ulauncher/ settings.json
-
-	# Rofi
-	save_folder /.config/rofi/
-
-	# Wofi
-	save_folder /.config/wofi/
-
-	# Fuzzel
-	save_file /.config/fuzzel/ fuzzel.ini
-
-	# Wlogout
-	save_folder /.config/wlogout/
-
-	# Flameshot
-	save_file /.config/flameshot/ flameshot.ini
-
-	# EWW
-	save_folder /.config/eww/
-
-	# Polybar
-	save_folder /.config/polybar/modules/
-	save_folder /.config/polybar/scripts/
-	save_file /.config/polybar/ launch.sh
-	save_file /.config/polybar/ config.ini
-
-	# Waybar
-	save_file /.config/waybar/ config
-	save_file /.config/waybar/ style.css
-	save_file /.config/waybar/ launch.sh
-
-	# Yambar
-	save_file /.config/yambar/ config.yml
+# Geany (specific logic retained)
+GEANY_CONFIG="$HOME/.config/geany/geany.conf"
+if [ -f "$GEANY_CONFIG" ]; then
+    killall geany 2>/dev/null
+    mkdir -p "$DEST_DIR/.config/geany/"
+    # The original script truncates the geany.conf file from line 223 onwards
+    sed '223,$d' "$GEANY_CONFIG" > "$DEST_DIR/.config/geany/geany.conf"
 fi
 
-########################### DISTROBUTION SPECIFICS ###########################
+# 6. GAMING
+GAMING_FOLDERS=(
+    ".config/lutris/"
+    ".var/app/net.lutris.Lutris/config/lutris/"
+    ".config/MangoHud/"
+)
+for folder in "${GAMING_FOLDERS[@]}"; do
+    save_folder "$folder"
+done
 
-if [[ ${distro_id} == "linuxmint" ]]; then
+# GAMING Files
+save_file /.config/'Optimus Manager'/ 'Optimus Manager Qt'.conf
+save_file /.config/goverlay/ MangoHud.conf
 
-	# Linux Mint Apps Settings
-	save_folder /.linuxmint/
-
-elif [[ ${distro_id} == "manjaro" ]]; then
-
-	# Manjaro Apps Settings
-	save_folder /.config/manjaro/
-
+# 7. AUDIO
+if command -v pulseaudio-equalizer-gtk &>/dev/null && [ -d "$HOME/.config/pulse/presets/" ]; then
+    mkdir -p "$DEST_DIR/.config/pulse/"
+    cp -rf "$HOME/.config/pulse/presets/" "$DEST_DIR/.config/pulse/"
+    cp -rf "$HOME/.config/pulse/equalizerrc" "$DEST_DIR/.config/pulse/"
+    cp -rf "$HOME/.config/pulse/equalizerrc.availablepresets" "$DEST_DIR/.config/pulse/"
 fi
 
-################################### COMMON ###################################
+if command -v pulseeffects &>/dev/null; then save_folder /.config/PulseEffects/ ; fi
+if command -v easyeffects &>/dev/null; then save_folder /.config/easyeffects/ ; fi
 
-# Autostart
-save_folder /.config/autostart/
+# 8. THEMES (Plank - specific logic retained)
+# if command -v plank &>/dev/null; then
+#     save_folder /.config/plank/dock2/
+#     dconf_dump_to_file /net/launchpad/plank/ .config/plank/plank.ini
+# fi
 
-# Default Apps (MIMEAPPS)
-save_file /.config/ mimeapps.list
-
-# Bookmarks
-save_file / .gtk-bookmarks
-save_file /.config/gtk-3.0/ bookmarks
-
-# Font Config
-save_file /.config/fontconfig/ fonts.conf
-
-# Libfm
-save_file /.config/libfm/ libfm.conf
-
-# PCmanFm
-save_file /.config/pcmanfm/default/ pcmanfm.conf
-
-# Thunar
-save_file /.config/xfce4/ helpers.rc
-
-# Leafpad
-save_file /.config/leafpad/ leafpadrc
-
-# Vim
-save_file / .vimrc
-
-# NeoVim
-save_folder /.config/nvim/
-
-# mpv
-save_file /.config/mpv/ mpv.conf
-
-# Celluloid
-save_file /.config/celluloid/ mpv.conf
-
-# Redshift
-save_file /.config/ redshift.conf
-save_folder /.config/redshift/
-
-# Gammastep
-save_folder /.config/gammastep/
-
-# Transmission
-save_file /.config/transmission/ settings.json
-
-# qBittorrent
-save_file /.config/qBittorrent/ qBittorrent.conf
-
-# Inkscape
-save_file /.config/inkscape/ preferences.xml
-
-# Brave Browser
-save_file /.config/ brave-flags.conf
-
-# LibreOffice
-save_file /.config/libreoffice/4/user/ registrymodifications.xcu
-
-# Warpinator
-save_file /.var/app/org.x.Warpinator/config/glib-2.0/settings/ keyfile
-
-# Syncthing
-save_file /.config/syncthing-gtk/ config.json
-save_file /.var/app/me.kozec.syncthingtk/config/syncthing-gtk/ config.json
-
-# Zoom
-#save_file /.var/app/us.zoom.Zoom/config/ zoomus.conf
-
-# Geany
-if [ -f $HOME/.config/geany/geany.conf ]; then
-	killall geany 2>/dev/null ; mkdir -p ${dest_dir}/.config/geany/
-	sed '223,$d' $HOME/.config/geany/geany.conf > ${dest_dir}/.config/geany/geany.conf
-fi
-
-################################### THEMING ##################################
-
-# GTK2
-save_file / .gtkrc-2.0
-
-# GTK3
-save_file /.config/gtk-3.0/ settings.ini
-
-# Xsettingsd
-save_file /.config/ xsettingsd.conf
-#save_file /.config/xsettingsd/ xsettingsd.conf
-
-# Darkman
-save_folder /.local/share/dark-mode.d/
-save_folder /.local/share/light-mode.d/
-
-# Kvantum
-save_file /.config/Kvantum/ kvantum.kvconfig
-
-# Qt5ct
-save_file /.config/qt5ct/ qt5ct.conf
-
-# Tint2
-save_file /.config/tint2/ tint2rc
-
-# Plank
-#if [ -f /usr/bin/plank ]; then save_folder /.config/plank/dock2/
-#	dconf dump /net/launchpad/plank/ > ${dest_dir}/.config/plank/plank.ini
-#fi
-
-################################### GAMING ###################################
-
-# Lutris
-save_folder /.config/lutris/
-save_folder /.var/app/net.lutris.Lutris/config/lutris/
-
-# MangoHUD
-save_folder /.config/MangoHud/
-
-# Optimus Manager
-#save_file /.config/'Optimus Manager'/ 'Optimus Manager Qt'.conf
-
-# GOverlay
-#save_file /.config/goverlay/ MangoHud.conf
-
-################################### AUDIO ####################################
-
-# Pulseaudio Equalizer Ladspa
-if [ -f /usr/bin/pulseaudio-equalizer-gtk ] && [ -d $HOME/.config/pulse/presets/ ]; then
-	mkdir -p ${dest_dir}/.config/pulse/
-	cp -rf $HOME/.config/pulse/presets/					${dest_dir}/.config/pulse/
-	cp -rf $HOME/.config/pulse/equalizerrc					${dest_dir}/.config/pulse/
-	cp -rf $HOME/.config/pulse/equalizerrc.availablepresets			${dest_dir}/.config/pulse/
-fi
-
-# PulseEffects
-if [ -f /usr/bin/pulseeffects ]; then
-	save_folder /.config/PulseEffects/
-fi
-
-# EasyEffects
-if [ -f /usr/bin/easyeffects ]; then
-	save_folder /.config/easyeffects/
-fi
-
-################################## CUSTOM ####################################
-
-if [[ ${wm_de} == "gnome" ]]; then
-
-	# QT day/night cycle (remove clutter)
-	rm -rf ${dest_dir}/.config/Kvantum/
-	rm -rf ${dest_dir}/.config/qt5ct/
-
-elif [[ ${wm_de} == "cinnamon" ]]; then
-
-	# QT day/night cycle (remove clutter)
-	rm -rf ${dest_dir}/.config/Kvantum/
-	rm -rf ${dest_dir}/.config/qt5ct/
-
-	# GTK3 Settings and Bookmarks (remove clutter)
-	rm -rf ${dest_dir}/.config/gtk-3.0/
+# 9. FINAL CLUTTER REMOVAL (redundant now, but included for completeness from original)
+if [[ "$WM_DE" == "gnome" ]] || [[ "$WM_DE" == "cinnamon" ]]; then
+    remove_clutter
 fi
