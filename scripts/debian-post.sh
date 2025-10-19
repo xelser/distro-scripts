@@ -50,3 +50,26 @@ gsettings set org.mate.pluma use-default-font false
 #	sed -i 's/onedark/gruvbox-material-hard-dark/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
 #	sed -i 's/JetBrains Mono Nerd Font 10/RobotoMono Nerd Font 10/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
 #fi
+
+# separate apps
+wayapp=(footclient foot foot-server)
+
+for app in "${wayapp[@]}"; do
+	if [ -f /usr/share/applications/${app}.desktop ]; then
+		mkdir -p $HOME/.local/share/applications/
+		cp -rf /usr/share/applications/${app}.desktop \
+			$HOME/.local/share/applications/${app}.desktop
+		echo "OnlyShowIn=Sway;" >> $HOME/.local/share/applications/${app}.desktop
+	fi
+done
+
+x11app=(picom lxrandr timeshift-gtk gparted)
+
+for app in "${x11app[@]}"; do
+	if [ -f /usr/share/applications/${app}.desktop ]; then
+		mkdir -p $HOME/.local/share/applications/
+		cp -rf /usr/share/applications/${app}.desktop \
+			$HOME/.local/share/applications/${app}.desktop
+		echo "OnlyShowIn=i3;" >> $HOME/.local/share/applications/${app}.desktop
+	fi
+done

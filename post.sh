@@ -85,12 +85,15 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 [ -f /bin/obmenu-generator ] && obmenu-generator -p -i -u -d -c
 
 # Hide Apps
-name=(calf org.gnome.dspy org.gnome.Devhelp org.gnome.Sysprof lstopo avahi-discover bssh bvnc
-	stoken-gui stoken-gui-small qv4l2 qvidcap pcmanfm-desktop-pref)
+name=(calf org.gnome.dspy org.gnome.Devhelp org.gnome.Sysprof lstopo bssh
+	avahi-discover bvnc stoken-gui stoken-gui-small qv4l2 qvidcap yelp rofi
+	rofi-theme-selector display-im7.q16)
 
 for app in "${name[@]}"; do
-	if [ -f /usr/share/applications/${app}.desktop ]; then mkdir -p $HOME/.local/share/applications/
-		cp -rf /usr/share/applications/${app}.desktop $HOME/.local/share/applications/${app}.desktop
+	if [ -f /usr/share/applications/${app}.desktop ]; then
+		mkdir -p $HOME/.local/share/applications/
+		cp -rf /usr/share/applications/${app}.desktop \
+			$HOME/.local/share/applications/${app}.desktop
 		echo "NoDisplay=true" >> $HOME/.local/share/applications/${app}.desktop
 	fi
 done
