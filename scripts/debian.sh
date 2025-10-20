@@ -27,8 +27,8 @@ apt install --yes feh xss-lock alacritty polybar rofi maim slop xclip \
   i3-wm autotiling picom {lx,auto}randr numlockx
 
 # INSTALL: Sway
-apt install --yes sway{bg,idle} foot waybar wofi grimshot wl-clipboard \
-  gtklock fuzzel
+apt install --yes sway{bg,idle} foot waybar fuzzel grimshot wl-clipboard \
+  gtklock imagemagick wofi
 
 ################################### BUILD ####################################
 

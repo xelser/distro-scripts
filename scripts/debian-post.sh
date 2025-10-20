@@ -3,7 +3,7 @@
 ################################ POST INSTALL ################################
 
 # debloat
-sudo apt autoremove --purge --yes zutty
+sudo apt autoremove --purge --yes zutty xterm
 
 # jellyfin
 #curl -s https://repo.jellyfin.org/install-debuntu.sh | sudo bash
@@ -37,19 +37,6 @@ gsettings set org.mate.pluma editor-font 'JetBrainsMono Nerd Font 10'
 gsettings set org.mate.pluma highlight-current-line true
 gsettings set org.mate.pluma toolbar-visible false
 gsettings set org.mate.pluma use-default-font false
-
-# rofi (launcher and powermenu)
-#if [ -f /usr/bin/rofi ]; then
-#	cd /tmp/ && git clone --depth 1 https://github.com/xelser/rofi.git && cd rofi && chmod +x setup.sh && ./setup.sh && cd
-
-#	sed -i 's/style-1/style-3/g' $HOME/.config/rofi/launchers/type-4/launcher.sh
-#	sed -i 's/onedark/gruvbox-material-hard-dark/g' $HOME/.config/rofi/launchers/type-4/shared/colors.rasi
-#	sed -i 's/Iosevka Nerd Font 10/RobotoMono Nerd Font 10/g' $HOME/.config/rofi/launchers/type-4/shared/fonts.rasi
-
-#	sed -i 's/style-1/style-5/g' $HOME/.config/rofi/powermenu/type-1/powermenu.sh
-#	sed -i 's/onedark/gruvbox-material-hard-dark/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
-#	sed -i 's/JetBrains Mono Nerd Font 10/RobotoMono Nerd Font 10/g' $HOME/.config/rofi/powermenu/type-1/shared/fonts.rasi
-#fi
 
 # separate apps
 wayapp=(footclient foot foot-server)
