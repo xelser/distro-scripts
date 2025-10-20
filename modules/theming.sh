@@ -35,6 +35,7 @@ echo "Detected Environment/Mode: ${wm_de}"
 gtk_theme=""
 icon_theme=""
 cursor_theme=""
+cursor_size="" # Initialize cursor size variable
 
 # Function to safely get gsettings value
 get_gsetting() {
@@ -47,14 +48,23 @@ if [[ "${wm_de}" == "xfce" ]]; then
     gtk_theme="$(xfconf-query -c xsettings -p /Net/ThemeName -v 2>/dev/null)"
     icon_theme="$(xfconf-query -c xsettings -p /Net/IconThemeName -v 2>/dev/null)"
     cursor_theme="$(xfconf-query -c xsettings -p /Gtk/CursorThemeName -v 2>/dev/null)"
+    # Get cursor size from xfconf
+    cursor_size="$(xfconf-query -c xsettings -p /Gtk/CursorThemeSize -v 2>/dev/null)"
+
 elif [[ "${wm_de}" == "cinnamon" ]]; then
     gtk_theme="$(get_gsetting org.cinnamon.desktop.interface gtk-theme)"
     icon_theme="$(get_gsetting org.cinnamon.desktop.interface icon-theme)"
     cursor_theme="$(get_gsetting org.cinnamon.desktop.interface cursor-theme)"
+    # Get cursor size from GSettings
+    cursor_size="$(get_gsetting org.gnome.desktop.interface cursor-size)" # Cinnamon often uses GNOME's schema for size
+
 elif [[ "${wm_de}" == "gnome" ]]; then
     gtk_theme="$(get_gsetting org.gnome.desktop.interface gtk-theme)"
     icon_theme="$(get_gsetting org.gnome.desktop.interface icon-theme)"
     cursor_theme="$(get_gsetting org.gnome.desktop.interface cursor-theme)"
+    # Get cursor size from GSettings
+    cursor_size="$(get_gsetting org.gnome.desktop.interface cursor-size)"
+
 elif [[ -f $HOME/.config/gtk-3.0/settings.ini ]]; then
     # General fallback for WMs or unknown DEs (matches 'config' mode)
     config_file="$HOME/.config/gtk-3.0/settings.ini"
@@ -64,6 +74,12 @@ elif [[ -f $HOME/.config/gtk-3.0/settings.ini ]]; then
     cursor_theme="$(grep 'gtk-cursor-theme-name' "${config_file}" | cut -d'=' -f2 | sed 's/^[[:space:]]*//')"
 fi
 
+# Set a default cursor size if detection failed or returned empty/zero
+if [[ -z "${cursor_size}" || "${cursor_size}" == "0" ]]; then
+    cursor_size="24" # Default to 32px for modern desktop environments
+fi
+
+
 if [[ -z "${gtk_theme}" ]]; then
     echo "Error: Could not determine current GTK theme. Exiting." >&2
     exit 1
@@ -72,6 +88,7 @@ fi
 echo "GTK Theme: ${gtk_theme}"
 echo "Icon Theme: ${icon_theme}"
 echo "Cursor Theme: ${cursor_theme}"
+echo "Cursor Size: ${cursor_size}px" # Display detected/default size
 
 # --- 2. Find Absolute Theme Paths ---
 
@@ -149,7 +166,7 @@ if command -v flatpak &> /dev/null; then
     fi
 
     # 4b. Expose necessary directories for Flatpak theming
-    # This ensures maximum visibility for themes placed in standard/hidden locations.
+    # This ensures maximum visibility for themes placed in standard/hidden/system locations.
     flatpak override --user --filesystem=xdg-config/gtk-3.0:ro
     flatpak override --user --filesystem=xdg-config/gtk-4.0:ro
     flatpak override --user --filesystem=home/.themes:ro
@@ -161,6 +178,8 @@ if command -v flatpak &> /dev/null; then
     # 4c. Set theme environment variables for apps that don't auto-detect
     flatpak override --user --env=GTK_THEME="${gtk_theme}"
     flatpak override --user --env=XCURSOR_THEME="${cursor_theme}"
+    flatpak override --user --env=XCURSOR_PATH="$HOME/.local/share/icons"
+    flatpak override --user --env=XCURSOR_SIZE="${cursor_size}" # Added cursor size override
 
     # 4d. Kvantum (Qt) Theming for Flatpak
     if [ -f /usr/bin/kvantummanager ]; then
@@ -197,6 +216,9 @@ if [[ -n "${gtk_theme}" ]] && command -v gsettings &> /dev/null; then
     gsettings set org.gnome.desktop.interface icon-theme "'${icon_theme}'" 2>/dev/null
     # Apply Cursor theme
     gsettings set org.gnome.desktop.interface cursor-theme "'${cursor_theme}'" 2>/dev/null
+    # Apply Cursor size
+    gsettings set org.gnome.desktop.interface cursor-size "${cursor_size}" 2>/dev/null
 fi
 
 echo "Theming synchronization complete."
+
