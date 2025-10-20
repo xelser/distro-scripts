@@ -11,10 +11,6 @@ fi
 
 # autostart in tty
 if [ "${distro_id}" = "debian" ]; then
-
-  # set CPU governance to performance
-  [ -f /usr/bin/cpupower ] && sudo cpupower frequency-set -g performance
-
   if [ "$(tty)" = "/dev/tty1" ]; then
     if mokutil --sb-state | grep -q "SecureBoot enabled"; then
       # Secure Boot is ON

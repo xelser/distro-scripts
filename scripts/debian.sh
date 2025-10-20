@@ -11,8 +11,8 @@ dpkg --add-architecture i386 && apt update && apt full-upgrade --yes
 # INSTALL: Base
 apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
   pipewire pipewire-audio pulseaudio-utils easyeffects lsp-plugins-lv2 \
-  linux-cpupower power-profiles-daemon systemd-zram-generator bluez \
-  xfsprogs xdg-desktop-portal timeshift firefox-esr neovim htop nvtop \
+  linux-cpupower systemd-zram-generator bluez xfsprogs xdg-desktop-portal \
+  timeshift firefox-esr neovim htop nvtop fastfetch wget curl git \
   fonts-roboto{,-slab} fonts-jetbrains-mono
 
 # INSTALL: WM (X11/Wayland)
