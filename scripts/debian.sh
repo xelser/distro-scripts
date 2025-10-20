@@ -4,14 +4,15 @@
 
 # PACKAGE MANAGER: Debian Repos
 cp /etc/apt/sources.list /etc/apt/sources.list.bak
-sed -i -E 's/non-free-firmware/non-free-firmware non-free contrib/g' /etc/apt/sources.list
-apt update && apt full-upgrade --yes
+sed -i -E 's/non-free-firmware/non-free-firmware non-free contrib/g' \
+  /etc/apt/sources.list
+dpkg --add-architecture i386 && apt update && apt full-upgrade --yes
 
 # INSTALL: Base
 apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
   pipewire pipewire-audio pulseaudio-utils easyeffects lsp-plugins-lv2 \
-  bluez systemd-zram-generator {xfs,btrfs-}progs xdg-desktop-portal \
-  firefox-esr timeshift power-profiles-daemon neovim htop nvtop \
+  linux-cpupower power-profiles-daemon systemd-zram-generator bluez \
+  xfsprogs xdg-desktop-portal timeshift firefox-esr neovim htop nvtop \
   fonts-roboto{,-slab} fonts-jetbrains-mono
 
 # INSTALL: WM (X11/Wayland)

@@ -2,16 +2,18 @@
 
 # Install: Steam, Gamemode & MangoHud
 [ -f /usr/bin/pacman ] && sudo pacman -S --needed --noconfirm \
-	steam lutris gamescope {lib32-,}gamemode {lib32-,}mangohud
+	steam {lib32-,}mangohud {lib32-,}gamemode lutris gamescope
 
 [ -f /usr/bin/dnf ] && sudo dnf install --assumeyes \
-	steam lutris gamescope gamemode{,.i686} mangohud{,.i686}
+	steam mangohud{,.i686} gamemode{,.i686} lutris gamescope
 
 [ -f /usr/bin/apt ] && sudo apt install --yes \
-	steam lutris gamescope gamemode{,:i386} mangohud
+	steam-installer mangohud gamemode lutris gamescope
 
 # Install: Lutris Wine Deps
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/lutris_wine_dep.sh)"
+if [ -f /usr/bin/lutris ]; then
+	bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/lutris_wine_dep.sh)"
+fi
 
 ################################### FLATPAK ##################################
 
@@ -34,5 +36,4 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 #sed -i s"/\/usr\/bin\/steam-runtime/mangohud \/usr\/bin\/steam-runtime/"g $HOME/.local/share/applications/steam.desktop
 
 # Gamemode
-sudo usermod -aG gamemode $(whoami)
-
+#sudo usermod -aG gamemode $(whoami)
