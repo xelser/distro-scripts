@@ -13,6 +13,7 @@ x-scheme-handler/mailto=brave-browser.desktop
 application/x-zerosize=pluma.desktop
 inode/directory=thunar.desktop
 x-scheme-handler/webcal=brave-browser.desktop
+video/mp4=mpv.desktop
 
 [Added Associations]
 text/plain=pluma.desktop;
@@ -24,3 +25,4 @@ application/xml=pluma.desktop;
 application/x-zerosize=pluma.desktop;
 application/pdf=atril.desktop;
 inode/directory=thunar.desktop;
+video/mp4=mpv.desktop;

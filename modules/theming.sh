@@ -1,74 +1,202 @@
 #!/bin/bash
+#
+# Cohesive Desktop Theme Synchronizer
+# This script reads the current GTK, Icon, and Cursor themes from common
+# desktop environments and ensures they are consistently applied to:
+# 1. GTK 4 applications (via ~/.config/gtk-4.0 symlinks).
+# 2. Flatpak applications (via copying themes to standard user data directories and applying overrides).
+# 3. Qt applications using Kvantum (via Flatpak overrides).
+#
+# Note: The script avoids 'sudo' and focuses only on user-level configuration.
 
-# GTK 3, Icon, Cursor
-if [[ ${wm_de} == "xfce" ]]; then
-	gtk_theme="$(xfconf-query -c xsettings -p /Net/ThemeName -v)"
-	icon_theme="$(xfconf-query -c xsettings -p /Net/IconThemeName -v)"
-	cursor_theme="$(xfconf-query -c xsettings -p /Gtk/CursorThemeName -v)"
-elif [[ ${wm_de} == "cinnamon" ]]; then
-	gtk_theme="$(gsettings get org.cinnamon.desktop.interface gtk-theme | cut -d"'" -f2)"
-	icon_theme="$(gsettings get org.cinnamon.desktop.interface icon-theme | cut -d"'" -f2)"
-	cursor_theme="$(gsettings get org.cinnamon.desktop.interface cursor-theme | cut -d"'" -f2)"
-elif [[ ${wm_de} == "gnome" ]]; then
-	gtk_theme="$(gsettings get org.gnome.desktop.interface gtk-theme | cut -d"'" -f2)"
-	icon_theme="$(gsettings get org.gnome.desktop.interface icon-theme | cut -d"'" -f2)"
-	cursor_theme="$(gsettings get org.gnome.desktop.interface cursor-theme | cut -d"'" -f2)"
-elif [[ -f $HOME/.config/gtk-3.0/settings.ini ]]; then
-	gtk_theme="$(cat $HOME/.config/gtk-3.0/settings.ini | grep 'gtk-theme-name' | cut -d'=' -f2)"
-	icon_theme="$(cat $HOME/.config/gtk-3.0/settings.ini | grep 'gtk-icon-theme-name' | cut -d'=' -f2)"
-	cursor_theme="$(cat $HOME/.config/gtk-3.0/settings.ini | grep 'gtk-cursor-theme-name' | cut -d'=' -f2)"
+# --- 1. Environment Detection and Theme Reading ---
+
+# wm_de should ideally be set by the calling environment. If not, we determine it
+# using standard desktop environment variables.
+if [[ -z "${wm_de}" ]]; then
+	if [ -z "${XDG_CURRENT_DESKTOP}" ]; then
+		# Use DESKTOP_SESSION as fallback
+		# Note: The specific cuts are used to normalize complex session strings.
+		wm_de="$(echo "${DESKTOP_SESSION}" | cut -d'-' -f2 | cut -d':' -f1 | tr '[:upper:]' '[:lower:]')"
+	else
+		# Use XDG_CURRENT_DESKTOP (preferred source)
+		wm_de="$(echo "${XDG_CURRENT_DESKTOP}" | cut -d'-' -f2 | cut -d':' -f1 | tr '[:upper:]' '[:lower:]')"
+	fi
+
+	# Final check: If the parsing resulted in an empty string, fall back to generic 'config' mode.
+	if [[ -z "${wm_de}" ]]; then
+		wm_de="config"
+	fi
 fi
 
-if [ -d /usr/share/themes/${gtk_theme} ]; then
+echo "Detected Environment/Mode: ${wm_de}"
+
+# Initialize theme variables
+gtk_theme=""
+icon_theme=""
+cursor_theme=""
+
+# Function to safely get gsettings value
+get_gsetting() {
+    local schema=$1
+    local key=$2
+    gsettings get "$schema" "$key" 2>/dev/null | sed "s/^'//;s/'$//"
+}
+
+if [[ "${wm_de}" == "xfce" ]]; then
+    gtk_theme="$(xfconf-query -c xsettings -p /Net/ThemeName -v 2>/dev/null)"
+    icon_theme="$(xfconf-query -c xsettings -p /Net/IconThemeName -v 2>/dev/null)"
+    cursor_theme="$(xfconf-query -c xsettings -p /Gtk/CursorThemeName -v 2>/dev/null)"
+elif [[ "${wm_de}" == "cinnamon" ]]; then
+    gtk_theme="$(get_gsetting org.cinnamon.desktop.interface gtk-theme)"
+    icon_theme="$(get_gsetting org.cinnamon.desktop.interface icon-theme)"
+    cursor_theme="$(get_gsetting org.cinnamon.desktop.interface cursor-theme)"
+elif [[ "${wm_de}" == "gnome" ]]; then
+    gtk_theme="$(get_gsetting org.gnome.desktop.interface gtk-theme)"
+    icon_theme="$(get_gsetting org.gnome.desktop.interface icon-theme)"
+    cursor_theme="$(get_gsetting org.gnome.desktop.interface cursor-theme)"
+elif [[ -f $HOME/.config/gtk-3.0/settings.ini ]]; then
+    # General fallback for WMs or unknown DEs (matches 'config' mode)
+    config_file="$HOME/.config/gtk-3.0/settings.ini"
+    # NOTE: Using 'sed' to strip only leading space, preserving spaces in theme names.
+    gtk_theme="$(grep 'gtk-theme-name' "${config_file}" | cut -d'=' -f2 | sed 's/^[[:space:]]*//')"
+    icon_theme="$(grep 'gtk-icon-theme-name' "${config_file}" | cut -d'=' -f2 | sed 's/^[[:space:]]*//')"
+    cursor_theme="$(grep 'gtk-cursor-theme-name' "${config_file}" | cut -d'=' -f2 | sed 's/^[[:space:]]*//')"
+fi
+
+if [[ -z "${gtk_theme}" ]]; then
+    echo "Error: Could not determine current GTK theme. Exiting." >&2
+    exit 1
+fi
+
+echo "GTK Theme: ${gtk_theme}"
+echo "Icon Theme: ${icon_theme}"
+echo "Cursor Theme: ${cursor_theme}"
+
+# --- 2. Find Absolute Theme Paths ---
+
+# Find the absolute directory for the GTK theme (GTK 4 symlinking needs this)
+theme_dir=""
+if [ -d /usr/share/themes/"${gtk_theme}" ]; then
 	theme_dir="/usr/share/themes/${gtk_theme}"
-elif [ -d $HOME/.themes/${gtk_theme} ]; then
+elif [ -d "$HOME/.themes/${gtk_theme}" ]; then
 	theme_dir="$HOME/.themes/${gtk_theme}"
 fi
 
-# Apply themes to root
-sudo ln -sf $HOME/.gtkrc-2.0 /etc/gtk-2.0/gtkrc
-sudo ln -sf $HOME/.config/gtk-3.0/settings.ini /etc/gtk-3.0/settings.ini
-
-# GTK 4
-if [[ ! ${wm_de} == "gnome" ]]; then
-	rm -rf                                     "$HOME/.config/gtk-4.0/{assets,gtk.css,gtk-dark.css}"
-	mkdir -p                                   "$HOME/.config/gtk-4.0"
-	ln -sf "${theme_dir}/gtk-4.0/assets"       "$HOME/.config/gtk-4.0/"
-	ln -sf "${theme_dir}/gtk-4.0/gtk.css"      "$HOME/.config/gtk-4.0/gtk.css"
-	ln -sf "${theme_dir}/gtk-4.0/gtk-dark.css" "$HOME/.config/gtk-4.0/gtk-dark.css"
+# Find the absolute directory for the Cursor theme (for Flatpak overrides)
+cursor_dir=""
+if [ -d /usr/share/icons/"${cursor_theme}" ]; then
+	cursor_dir="/usr/share/icons/${cursor_theme}"
+elif [ -d "$HOME/.icons/${cursor_theme}" ]; then
+	cursor_dir="$HOME/.icons/${cursor_theme}"
 fi
 
-# Flatpak
-if [ ! -d $HOME/.local/share/themes/${gtk_theme} ] && [ ! -z ${theme_dir} ]; then
-	mkdir -p $HOME/.local/share/themes/ && cp -rf ${theme_dir} $HOME/.local/share/themes/
+if [[ -z "${theme_dir}" ]]; then
+    echo "Warning: Could not find GTK theme directory for '${gtk_theme}'. Skipping GTK4/Flatpak theming."
 fi
 
-if [[ ! ${wm_de} == "gnome" ]]; then
-	dconf write /org/gnome/desktop/interface/gtk-theme "'${gtk_theme}'"
-	dconf write /org/gnome/desktop/interface/icon-theme "'${icon_theme}'"
-	dconf write /org/gnome/desktop/interface/cursor-theme "'${cursor_theme}'"
 
-	flatpak override --user --filesystem=xdg-config/gtk-3.0
-	flatpak override --user --filesystem=xdg-config/gtk-4.0
-	flatpak override --user --filesystem=xdg-data/themes:ro
-	flatpak override --user --filesystem=home/.themes:ro
-	flatpak override --user --env=GTK_THEME=${gtk_theme}
+# --- 3. Apply GTK 4 Theme Cohesion ---
+
+if [[ -n "${theme_dir}" ]] && [[ -d "${theme_dir}/gtk-4.0" ]]; then
+    echo "Applying GTK 4 symlinks..."
+    gtk4_config="$HOME/.config/gtk-4.0"
+    mkdir -p "${gtk4_config}"
+
+    # Remove existing links/files to prevent conflicts
+    rm -f "${gtk4_config}/assets" "${gtk4_config}/gtk.css" "${gtk4_config}/gtk-dark.css"
+
+    # Create new symlinks
+    ln -sf "${theme_dir}/gtk-4.0/assets" "${gtk4_config}/assets"
+    ln -sf "${theme_dir}/gtk-4.0/gtk.css" "${gtk4_config}/gtk.css"
+    # gtk-dark.css might not exist, so link it only if present
+    if [ -f "${theme_dir}/gtk-4.0/gtk-dark.css" ]; then
+        ln -sf "${theme_dir}/gtk-4.0/gtk-dark.css" "${gtk4_config}/gtk-dark.css"
+    fi
+else
+    echo "Skipping GTK 4 theming (theme directory or gtk-4.0 subdirectory not found)."
 fi
 
-if [ -f /usr/bin/kvantummanager ]; then
-	flatpak install --assumeyes --noninteractive flathub org.kde.KStyle.Kvantum/x86_64/5.15-22.08 2> /dev/null
-	flatpak override --user --filesystem=xdg-config/Kvantum:ro
-	flatpak override --user --env=QT_STYLE_OVERRIDE=kvantum-dark
+
+# --- 4. Apply Flatpak Overrides (Theme Access) ---
+
+if command -v flatpak &> /dev/null; then
+    echo "Applying Flatpak overrides..."
+
+    # 4a. Copy themes to user's local share directory for reliable Flatpak access
+    if [[ -n "${theme_dir}" ]]; then
+        theme_dest="$HOME/.local/share/themes/${gtk_theme}"
+        if [ ! -d "${theme_dest}" ]; then
+            echo "Copying GTK theme to ${theme_dest} for Flatpak compatibility..."
+            mkdir -p "$HOME/.local/share/themes"
+            # Use 'cp -r' to copy the directory recursively
+            cp -r "${theme_dir}" "$HOME/.local/share/themes/"
+        else
+            echo "GTK theme already present in local share directory."
+        fi
+    fi
+
+    if [[ -n "${cursor_dir}" ]]; then
+        icon_dest="$HOME/.local/share/icons/${cursor_theme}"
+        if [ ! -d "${icon_dest}" ]; then
+            echo "Copying Cursor theme to ${icon_dest} for Flatpak compatibility..."
+            mkdir -p "$HOME/.local/share/icons"
+            # Use 'cp -r' to copy the directory recursively
+            cp -r "${cursor_dir}" "$HOME/.local/share/icons/"
+        else
+            echo "Cursor theme already present in local share directory."
+        fi
+    fi
+
+    # 4b. Expose necessary directories for Flatpak theming
+    # This ensures maximum visibility for themes placed in standard/hidden locations.
+    flatpak override --user --filesystem=xdg-config/gtk-3.0:ro
+    flatpak override --user --filesystem=xdg-config/gtk-4.0:ro
+    flatpak override --user --filesystem=home/.themes:ro
+    flatpak override --user --filesystem=home/.icons:ro
+    flatpak override --user --filesystem=xdg-data/themes:ro
+    flatpak override --user --filesystem=xdg-data/icons:ro
+
+
+    # 4c. Set theme environment variables for apps that don't auto-detect
+    flatpak override --user --env=GTK_THEME="${gtk_theme}"
+    flatpak override --user --env=XCURSOR_THEME="${cursor_theme}"
+
+    # 4d. Kvantum (Qt) Theming for Flatpak
+    if [ -f /usr/bin/kvantummanager ]; then
+        echo "Configuring Kvantum for Flatpak apps..."
+        # Expose the user's Kvantum configuration directory
+        flatpak override --user --filesystem="$HOME/.config/Kvantum:ro"
+        # Force Qt apps to use the Kvantum style engine
+        flatpak override --user --env=QT_STYLE_OVERRIDE=kvantum
+        # Optionally, set a Kvantum theme environment variable
+        flatpak override --user --env=KVANTUM_THEME="${gtk_theme}"
+    fi
+
+    # 4e. Icon cache update for the copied theme
+    # We update the cache on the copied version to ensure Flatpak sees it instantly.
+    if [[ "${icon_theme}" != "" ]] && [[ -d "$HOME/.local/share/icons/${icon_theme}" ]]; then
+        echo "Updating icon cache for local share theme '${icon_theme}'..."
+        gtk-update-icon-cache -f "$HOME/.local/share/icons/${icon_theme}" 2> /dev/null
+    fi
+
+else
+    echo "Flatpak command not found. Skipping Flatpak overrides."
 fi
 
-# Cursor
-if [[ ! ${wm_de} == "gnome" ]]; then
-	sudo rm -rf /usr/share/icons/default
-	sudo ln -sf "/usr/share/icons/${cursor_theme}" /usr/share/icons/default
+
+# --- 5. Apply Theme to GNOME Settings (If not already GNOME) ---
+
+# This section writes the determined theme back to dconf, which manages
+# themes for many DEs (Cinnamon, GNOME, etc.) and is often read by apps.
+if [[ -n "${gtk_theme}" ]] && command -v gsettings &> /dev/null; then
+    echo "Synchronizing themes via GSettings/dconf..."
+    # Apply GTK theme
+    gsettings set org.gnome.desktop.interface gtk-theme "'${gtk_theme}'" 2>/dev/null
+    # Apply Icon theme
+    gsettings set org.gnome.desktop.interface icon-theme "'${icon_theme}'" 2>/dev/null
+    # Apply Cursor theme
+    gsettings set org.gnome.desktop.interface cursor-theme "'${cursor_theme}'" 2>/dev/null
 fi
 
-#mkdir -p $HOME/.icons/default && echo -e "[Icon Theme]\nInherits=${cursor_theme}" > $HOME/.icons/default/index.theme
-#echo -e "[Icon Theme]\nInherits=${cursor_theme}" | sudo tee -a /usr/share/icons/default/index.theme 1> /dev/null
-
-flatpak override --user --filesystem=home/.icons:ro
-#flatpak override --user --filesystem=/usr/share/icons/:ro
+echo "Theming synchronization complete."
