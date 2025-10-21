@@ -33,7 +33,7 @@ font pango:JetBrains Mono 10
 exec --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f4)" --fx dimblur
 exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l dimblur
 exec --no-startup-id xset s 600 5
-exec --no-startup-id xset dpms 0 0 660
+exec --no-startup-id xset dpms 0 0 1800
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
