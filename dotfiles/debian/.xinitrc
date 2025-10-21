@@ -44,7 +44,7 @@ else
   echo "$(date): numlockx failed" >> ~/.xsession-log
 fi
 
-picom &
+picom --glx-no-stencil --glx-no-rebind-pixmap &
 echo "$(date): picom started" >> ~/.xsession-log
 
 xsettingsd -c ~/.config/xsettingsd.conf &
