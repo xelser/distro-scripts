@@ -1,6 +1,6 @@
 configuration {
   modes: "drun";
-  font: "JetBrainsMono Nerd Font Medium 12";
+  font: "JetBrainsMono Nerd Font Medium 10.5";
   display-drun: "Search  ";
   show-icons: true;
   icon-theme: "Papirus-Dark";
