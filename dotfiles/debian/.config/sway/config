@@ -21,8 +21,8 @@ set $term footclient
 
 # Your preferred application launcher
 #set $menu wmenu-run
-set $menu fuzzel
-#set $menu wofi
+#set $menu fuzzel
+set $menu wofi
 
 include /etc/sway/config-vars.d/*
 
