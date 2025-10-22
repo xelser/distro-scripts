@@ -33,8 +33,8 @@ if [ -f ~/.Xresources ]; then
   echo "$(date): .Xresources merged" >> ~/.xsession-log
 fi
 
-xrandr --dpi 96
-echo "$(date): DPI set to 96" >> ~/.xsession-log
+xrandr --output DP-1-1 --dpi 101 --output eDP-1-1 --dpi 112
+echo "$(date): DPI set to 101 for DP-1 and 112 for eDP-1" >> ~/.xsession-log
 
 ### 🧩 Launch X11 Utilities
 
