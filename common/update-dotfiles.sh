@@ -190,7 +190,7 @@ case "$WM_DE" in
             #".config/flameshot/flameshot.ini"
             ".config/polybar/launch.sh"
             ".config/polybar/config.ini"
-            ".config/waybar/config"
+            ".config/waybar/config.jsonc"
             ".config/waybar/style.css"
             ".config/waybar/launch.sh"
             #".config/yambar/config.yml"

@@ -26,15 +26,15 @@ tooltip label {
 
 /*
 window#waybar.empty {
-    background-color: transparent;
+background-color: transparent;
 }
 window#waybar.solo {
-    background-color: #FFFFFF;
+background-color: #FFFFFF;
 }
 window#waybar.hidden {
-    opacity: 0.2;
+opacity: 0.2;
 }
-*/
+ */
 
 button {
     /* Use box-shadow instead of border so the text isn't offset */
@@ -250,6 +250,6 @@ label:focus {
 }
 
 #scratchpad.empty {
-	background-color: transparent;
+    background-color: transparent;
 }
 
