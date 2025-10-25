@@ -225,12 +225,12 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
 
     # Special keys to adjust brightness via brightnessctl
-    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
 
     # Special key to take a screenshot with grim, slurp and grimshot
     bindsym $mod+Shift+s exec grimshot savecopy anything --notify
-    bindsym Print exec grim
+    bindsym Print exec grim && notify-send -u low "Screenshot via grim"
 
 #
 # Status Bar:
@@ -285,14 +285,14 @@ bar swaybar_command waybar
 # SwayFX
 blur enable
 shadows enable
-corner_radius 6
+corner_radius 8
 
 # use command: swaymsg -r -t get_outputs | jq '.[0].layer_shell_surfaces | .[] | .namespace'
+layer_effects "wofi" shadows enable
 layer_effects "logout_dialog" blur enable
 layer_effects "waybar" corner_radius 4; shadows enable
-layer_effects "notifications" corner_radius 6; shadows enable
-layer_effects "wofi" corner_radius 6; blur enable; shadows enable
-layer_effects "launcher" corner_radius 6; blur enable; shadows enable
+layer_effects "notifications" corner_radius 8; shadows enable
+layer_effects "launcher" corner_radius 8; blur enable; shadows enable
 
 # Custom Keybinds
 bindsym $mod+Shift+f exec thunar

@@ -13,7 +13,7 @@
 
 window {
     color: @fg0;
-    background-color: @bg_dim; /* 3c3836 */
+    background-color: @bg_dim;
 }
 
 tooltip {
@@ -27,12 +27,13 @@ tooltip label {
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
-    background: @bg1;
+    background: @bg2;
 }
 
 button.focused {
     color: @bg_dim;
-    background-color: #a96b2c;
+    background-color: @orange;
+    /*background-color: #a96b2c;*/
 }
 
 button.urgent {
@@ -56,6 +57,11 @@ button.urgent {
     margin-right: 0;
 }
 
+#custom-launch{
+    color: @bg_dim;
+    background-color: #6f8352;
+}
+
 #cpu {
     color: @red;
 }
@@ -66,6 +72,10 @@ button.urgent {
 
 #network {
     color: @purple;
+}
+
+#network.disconnected {
+    color: @red;
 }
 
 #backlight {
@@ -80,6 +90,10 @@ button.urgent {
     color: @blue;
 }
 
+#bluetooth.disabled {
+    color: @bg3;
+}
+
 #clock {
     color: @aqua;
 }
@@ -88,11 +102,7 @@ button.urgent {
     color: @orange;
 }
 
-#custom-launch{
-    color: @bg_dim;
-    background-color: #6f8352;
-}
-
+/* Power */
 #power {
     color: @red;
 }
