@@ -2,18 +2,18 @@
 
 * {
     color: @fg0;
-    border-radius: 10px;
+    border-radius: 12px;
     font-family: JetBrains Mono Medium;
 }
 
 window {
-    background-color: rgba(20, 22, 23, 0.5); /* #141617 semi-transparent */;
+    background-color: @bg_dim;
     border: 2px solid @bg1;
     padding: 10px;
 }
 
 #input {
-    background-color: rgba(40, 40, 40, 0.5); /* #282828 semi-transparent */;
+    background-color: @bg0;
     border: 1px solid @bg1;
     padding: 5px;
     margin: 10px;
@@ -27,7 +27,7 @@ window {
 }
 
 #entry:selected {
-    background-color: rgba(60, 56, 54, 0.5); /* #3c3836 semi-transparent */;
+    background-color: @bg2;
     border: transparent;
 }
 

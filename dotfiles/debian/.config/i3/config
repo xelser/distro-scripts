@@ -30,7 +30,6 @@ font pango:JetBrains Mono 10
 # to lock the screen before suspend. Use loginctl lock-session to lock your
 # screen.
 
-exec --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f4)" --fx dimblur
 exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l dimblur
 exec --no-startup-id xset s 600 5
 exec --no-startup-id xset dpms 0 0 1800
@@ -219,26 +218,20 @@ gaps inner 10
 #gaps top 32
 
 # Autostart (Global)
+#exec --no-startup-id steam -silent -no-browser -nochatui -noreactlogin
+exec --no-startup-id brave --no-startup-window --gapplication-service
 exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
 exec --no-startup-id easyeffects --gapplication-service
+exec --no-startup-id transmission-gtk --minimized
+exec --no-startup-id alacritty --daemon
 exec --no-startup-id /usr/bin/lxpolkit
+exec --no-startup-id thunar --daemon
 
 # Autostart (for i3)
+exec_always --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f4)" --fx dimblur
 exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id $HOME/.fehbg || waypaper --restore
 exec_always --no-startup-id autotiling
 
 # Screenshot (maim)
 bindsym $mod+Shift+s exec --no-startup-id bash -c "filename=\"$HOME/Pictures/$(date +%F_%T).png\" && maim -B -u -s \"\$filename\" && xclip -selection clipboard -t image/png -i \"\$filename\" && notify-send -i \"\$filename\" -u low 'Screenshot (maim + xclip + notify-send)' 'Saved and copied to clipboard' || notify-send -u low 'Screenshot aborted'"
-
-# Night light (gammastep)
-#exec --no-startup-id sh $HOME/.config/gammastep/launch.sh
-#bindsym $mod+o exec sh $HOME/.config/gammastep/toggle.sh
-
-# Apps
-#exec --no-startup-id steam -silent -no-browser -nochatui -noreactlogin
-exec --no-startup-id brave --no-startup-window --gapplication-service
-exec --no-startup-id transmission-gtk --minimized
-#exec --no-startup-id pcmanfm --daemon-mode
-exec --no-startup-id alacritty --daemon
-exec --no-startup-id thunar --daemon

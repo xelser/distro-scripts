@@ -1,22 +1,34 @@
 {
     // "layer": "top", // Waybar at top layer
-    // "position": "bottom", // Waybar position (top|bottom|left|right)
+    // "position": "top", // Waybar position (top|bottom|left|right)
     "output": ["eDP-1"],
+    "height": 30, // Waybar height (remove for auto height)
+    // "width": 1366, // Waybar width (remove for auto width)
+    "spacing": 8, // Gaps between modules (4px)
     "reload_style_on_change": true,
-    "height": 30, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
-    "spacing": 2, // Gaps between modules (4px)
+    // "margin-top": 10,
+    // "margin-left": 10,
+    // "margin-right": 10,
 
     // Choose the order of the modules
     "modules-left": [ "cpu", "memory", "sway/workspaces", "sway/mode" ],
-    "modules-center": [ "clock" ],
-    "modules-right": [ "network", "bluetooth", "pulseaudio", "backlight" ],
+    "modules-center": [ "clock",
+                        "clock#calendar" ],
+    "modules-right": [ "network",
+                       "bluetooth",
+                       "pulseaudio",
+                       "backlight",
+                       "group/power" ],
 
     // Modules configuration
 
     "clock": {
         "format": "󰥔 {:%I:%M %p}",
-        "format-alt": "󰃭 {:%m-%d-%Y}",
+        "tooltip": false,
+    },
+
+    "clock#calendar": {
+        "format": "󰃭 {:%a %b %d}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
             "mode"          : "year",
@@ -31,8 +43,8 @@
                 "today":      "<span color='#ea6962'><b><u>{}</u></b></span>"
               }
             },
-        "actions":  {
-            "on-click-right": "mode",
+        "actions": {
+            "on-click": "mode",
             "on-scroll-up": "tz_up",
             "on-scroll-down": "tz_down",
             "on-scroll-up": "shift_up",
@@ -47,7 +59,8 @@
     },
 
     "sway/window": {
-        "format": "{title}"
+        "all-outputs": true,
+        "format": "{app_id}"
     },
 
     "sway/mode": {
@@ -71,11 +84,14 @@
     "pulseaudio": {
         "scroll-step": 5, // %, can be a float
         "format": "{icon} {volume}%",
-        "format-bluetooth": "{icon} {volume}%",
-        "format-bluetooth-muted": " {icon}",
-        "format-muted": " {format_source}",
         "format-source": "  {volume}%",
-        "format-source-muted": "",
+        "format-bluetooth": "{icon} {volume}%",
+
+        "format-muted": "󰝟 MUTED",
+        "format-source-muted": " MUTED",
+        "format-bluetooth-muted": "󰝟 {icon}",
+
+        "format-bluetooth": "{icon} {volume}%",
         "format-icons": {
             "headphone": " ",
             "hands-free": "󱡏 ",
@@ -89,25 +105,27 @@
     },
 
     "bluetooth": {
-        "format": " ",
+        "format": "",
         "format-connected": " {device_alias}",
         "format-connected-battery": " {device_alias} 󰁹 {device_battery_percentage}%",
         "on-click": "blueman-manager"
     },
 
     "network": {
-        "format-wifi": "  ",
-        "format-ethernet": "  ",
-        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+        "format-ethernet": "",
         "format-disconnected": "󱘖 Disconnected",
-        "tooltip-format-disconnected": "󰇧 Please connect to available networks!",
-        "format-alt": " Down: {bandwidthDownBytes} |  Up: {bandwidthUpBytes}"
+        "format-alt": " Down: {bandwidthDownBytes} |  Up: {bandwidthUpBytes}",
+
+        "format-wifi": "{icon}",
+        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+
+        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+        "tooltip-format-disconnected": "󰇧 Please connect to available networks!"
     },
 
     "cpu": {
         "format": "  {usage}%",
         "tooltip-format": "{avg_frequency}"
-
     },
 
     "memory": {
@@ -120,4 +138,38 @@
         "format": "{icon} {percent}%",
         "format-icons": ["󰃚", "󰃛", "󰃜", "󰃝", "󰃞", "󰃟", "󰃠"]
     },
+
+    "custom/power": {
+        "format": "power",
+    },
+
+    "custom/exit": {
+        "format": "exit",
+        "on-click": "swaymsg exit",
+    },
+
+    "custom/reboot": {
+        "format": "reboot",
+        "on-click": "sudo systemctl reboot",
+    },
+
+    "custom/shutdown": {
+        "format": "shutdown",
+        "on-click": "sudo systemctl poweroff",
+    },
+
+    "group/power": {
+        "orientation": "inherit",
+        "drawer": {
+            "transition-duration": 500,
+            "children-class": "not-power",
+            "transition-left-to-right": false,
+       },
+       "modules": [
+           "custom/power",
+           "custom/shutdown",
+           "custom/reboot",
+           "custom/exit",
+       ]
+   },
 }

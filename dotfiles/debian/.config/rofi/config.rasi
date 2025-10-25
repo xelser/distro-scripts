@@ -33,7 +33,7 @@ configuration {
   }
 }
 
-@theme "current.rasi"
+@theme "style.rasi"
 
 /*	location: 0;*/
 /*	yoffset: 0;*/

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ -f /usr/bin/nala ]; then sudo nala install --assume-yes \
+if [ -f /usr/bin/apt ]; then sudo apt install --yes \
 	gtk-3-examples gtk-4-examples libadwaita-1-examples \
 	sassc optipng inkscape meld gpick rename
 elif [ -f /usr/bin/pacman ]; then sudo pacman -S --needed --noconfirm \

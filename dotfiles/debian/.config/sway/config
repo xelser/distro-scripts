@@ -16,12 +16,9 @@ set $up k
 set $right l
 
 # Your preferred terminal emulator
-#set $term alacritty msg create-window
-set $term footclient
+set $term alacritty msg create-window
 
 # Your preferred application launcher
-#set $menu wmenu-run
-#set $menu fuzzel
 set $menu wofi
 
 include /etc/sway/config-vars.d/*
@@ -271,9 +268,11 @@ input type:touchpad {
 }
 
 # Windows
-default_floating_border none
-default_border none
 gaps inner 10
+default_border none
+default_floating_border none
+
+focus_follows_mouse always
 
 # Floating Windows
 for_window [title="Compress"] floating enable
@@ -284,42 +283,37 @@ for_window [title="File Operation Progress"] floating enable
 bar swaybar_command waybar
 
 # SwayFX
-corner_radius 10
-shadows enable
 blur enable
+blur_passes 2
+shadows enable
+corner_radius 12
 
+# use command: swaymsg -r -t get_outputs | jq '.[0].layer_shell_surfaces | .[] | .namespace'
 layer_effects "logout_dialog" blur enable
-layer_effects "wofi" corner_radius 10; blur enable; shadows enable
-layer_effects "waybar" blur enable; blur_xray enable; shadows enable
-layer_effects "launcher" corner_radius 10; blur enable; shadows enable
+layer_effects "notifications" corner_radius 12; shadows enable
+layer_effects "wofi" corner_radius 12; blur enable; shadows enable
+#layer_effects "waybar" blur enable; blur_xray enable; shadows enable
+layer_effects "launcher" corner_radius 12; blur enable; shadows enable
 
 # Custom Keybinds
 bindsym $mod+Shift+f exec thunar
 bindsym $mod+Shift+w exec brave
 
 # Autostart (Global)
+exec --no-startup-id brave --no-startup-window --gapplication-service
 exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
 exec --no-startup-id easyeffects --gapplication-service
+exec --no-startup-id transmission-gtk --minimized
+exec --no-startup-id alacritty --daemon
 exec --no-startup-id /usr/bin/lxpolkit
+exec --no-startup-id thunar --daemon
 
 # Autostart (for sway)
 exec --no-startup-id swaybg --mode fill --image $(cat $HOME/.config/waypaper/config.ini | grep 'wallpaper' | cut -d'=' -f2)
 exec --no-startup-id autotiling
 
-# Night light (gammastep)
-#exec --no-startup-id bash $HOME/.config/gammastep/launch.sh
-#bindsym $mod+o exec bash $HOME/.config/gammastep/toggle.sh
-
-# lock screen
+# Lockscreen (gtklock)
 exec_always --no-startup-id magick $(cat $HOME/.config/waypaper/config.ini | grep 'wallpaper' | cut -d'=' -f2) -blur 0x5 -evaluate Multiply 0.45 ~/.output.png
 bindsym $mod+Shift+l exec --no-startup-id gtklock
-
-# Apps
-exec --no-startup-id brave --no-startup-window --gapplication-service
-exec --no-startup-id transmission-gtk --minimized
-#exec --no-startup-id alacritty --daemon
-exec --no-startup-id thunar --daemon
-#exec --no-startup-id pcmanfm --daemon-mode
-exec --no-startup-id foot --server
 
 include /etc/sway/config.d/*

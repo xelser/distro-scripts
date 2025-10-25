@@ -11,24 +11,25 @@ dpkg --add-architecture i386 && apt update && apt full-upgrade --yes
 # INSTALL: Base
 apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
   pipewire pipewire-audio pulseaudio-utils easyeffects lsp-plugins-lv2 \
-  linux-cpupower systemd-zram-generator bluez xfsprogs xdg-desktop-portal \
-  timeshift firefox-esr neovim htop nvtop fastfetch wget curl git \
+  linux-cpupower systemd-zram-generator network-manager bluez \
+  xfsprogs at-spi2-core xdg-desktop-portal htop nvtop neovim \
+  timeshift firefox-esr gparted meld ranger \
   fonts-roboto{,-slab} fonts-jetbrains-mono
 
 # INSTALL: WM (X11/Wayland)
 apt install --yes xinit xsettingsd seatd xdg-desktop-portal-{gtk,wlr} \
-  brightnessctl dunst libnotify-bin mugshot at-spi2-core nwg-look mpv imv \
   transmission-gtk pavucontrol blueman lxpolkit engrampa pluma atril \
+  brightnessctl alacritty dunst libnotify-bin nwg-look mpv imv \
   thunar{,-archive-plugin} gvfs-{backends,fuse}
-  # gammastep
+  # gammastep mugshot
 
 # INSTALL: i3
-apt install --yes feh xss-lock alacritty polybar rofi maim slop xclip \
+apt install --yes feh xss-lock polybar rofi maim slop xclip \
   i3-wm autotiling picom {lx,auto}randr numlockx
 
 # INSTALL: Sway
-apt install --yes sway{bg,idle} foot waybar fuzzel grimshot wl-clipboard \
-  gtklock imagemagick wofi
+apt install --yes sway{bg,idle} waybar wofi grimshot wl-clipboard \
+  gtklock imagemagick fuzzel
 
 ################################### BUILD ####################################
 
@@ -80,11 +81,14 @@ cd /tmp/swayfx-build/ && wget -q \
 
 ################################### CONFIG ###################################
 
-# sudo
+# add user to sudo
 usermod -aG sudo ${user}
 
 # blacklist nouveau
 ${source_dir}/modules/blacklist_nouveau.sh
+
+# use network-manager
+mv /etc/network/interfaces /etc/network/interfaces.bak
 
 # autologin user at tty1
 mkdir -p /etc/systemd/system/getty@tty1.service.d
@@ -104,7 +108,7 @@ echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priori
 # systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
 # enable systemd daemons
-for service in htpdate seatd; do
+for service in NetworkManager htpdate seatd; do
   systemctl enable $service
 done
 

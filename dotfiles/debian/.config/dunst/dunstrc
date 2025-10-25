@@ -95,7 +95,7 @@
     # notifications.
     # Set to 0 to disable.
     # If gap_size is greater than 0, this setting will be ignored.
-    separator_height = 2
+    separator_height = 10
 
     # Padding between text and separator.
     padding = 8
@@ -140,7 +140,7 @@
     # Set to 0 to disable.
     # A client can set the 'transient' hint to bypass this. See the rules
     # section for how to disable this if necessary
-    # idle_threshold = 120
+    idle_threshold = 120
 
     ### Text ###
 
@@ -264,7 +264,7 @@
     title = Dunst
 
     # Define the class of the windows spawned by dunst (X11 only)
-    class = Dunst
+    class = dunst
 
     # Define the corner radius of the notification window
     # in pixel size. If the radius is 0, you have no rounded
@@ -336,7 +336,6 @@
     # using the resolution and physical size. This might be useful in setups
     # where there are multiple screens with very different dpi values.
     per_monitor_dpi = true
-
 
 [urgency_low]
     # IMPORTANT: colors have to be defined in quotation marks.

@@ -3,7 +3,7 @@
 ################################ POST INSTALL ################################
 
 # debloat
-sudo apt autoremove --purge --yes zutty xterm
+sudo apt autoremove --purge --yes zutty xterm foot
 
 # jellyfin
 #curl -s https://repo.jellyfin.org/install-debuntu.sh | sudo bash
@@ -39,17 +39,6 @@ gsettings set org.mate.pluma toolbar-visible false
 gsettings set org.mate.pluma use-default-font false
 
 # separate apps
-wayapp=(footclient foot foot-server)
-
-for app in "${wayapp[@]}"; do
-	if [ -f /usr/share/applications/${app}.desktop ]; then
-		mkdir -p $HOME/.local/share/applications/
-		cp -rf /usr/share/applications/${app}.desktop \
-			$HOME/.local/share/applications/${app}.desktop
-		echo "OnlyShowIn=Sway;" >> $HOME/.local/share/applications/${app}.desktop
-	fi
-done
-
 x11app=(picom lxrandr timeshift-gtk gparted)
 
 for app in "${x11app[@]}"; do
