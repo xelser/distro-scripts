@@ -165,6 +165,8 @@ case "$WM_DE" in
             ".xinitrc"
             ".config/wayinitrc"
             ".local/bin/startw"
+            ".local/bin/i3-printscreen"
+            ".local/bin/maim-select"
             ".config/alacritty/alacritty.toml"
             ".config/foot/foot.ini"
             ".config/awesome/rc.lua"

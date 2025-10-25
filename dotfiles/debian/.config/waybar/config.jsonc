@@ -2,33 +2,35 @@
     // "layer": "top", // Waybar at top layer
     // "position": "top", // Waybar position (top|bottom|left|right)
     "output": ["eDP-1"],
-    "height": 30, // Waybar height (remove for auto height)
+    "height": 5, // Waybar height (remove for auto height)
     // "width": 1366, // Waybar width (remove for auto width)
     "spacing": 8, // Gaps between modules (4px)
     "reload_style_on_change": true,
-    // "margin-top": 10,
-    // "margin-left": 10,
-    // "margin-right": 10,
+    "margin-top": 10,
+    "margin-left": 10,
+    "margin-right": 10,
 
     // Choose the order of the modules
-    "modules-left": [ "cpu", "memory", "sway/workspaces", "sway/mode" ],
+    "modules-left": [   "cpu",
+                        "memory",
+                        "sway/workspaces",
+                        "sway/mode"
+    ],
+
     "modules-center": [ "clock",
-                        "clock#calendar" ],
-    "modules-right": [ "network",
-                       "bluetooth",
-                       "pulseaudio",
-                       "backlight",
-                       "group/power" ],
+    ],
+
+    "modules-right": [  "network",
+                        "bluetooth",
+                        "pulseaudio",
+                        "backlight"
+    ],
 
     // Modules configuration
 
     "clock": {
         "format": "󰥔 {:%I:%M %p}",
-        "tooltip": false,
-    },
-
-    "clock#calendar": {
-        "format": "󰃭 {:%a %b %d}",
+        "format-alt": "󰃭 {:%a %b %d}",
         "tooltip-format": "<tt><small>{calendar}</small></tt>",
         "calendar": {
             "mode"          : "year",
@@ -44,7 +46,7 @@
               }
             },
         "actions": {
-            "on-click": "mode",
+            "on-click-right": "mode",
             "on-scroll-up": "tz_up",
             "on-scroll-down": "tz_down",
             "on-scroll-up": "shift_up",
@@ -137,6 +139,11 @@
         // "device": "acpi_video1",
         "format": "{icon} {percent}%",
         "format-icons": ["󰃚", "󰃛", "󰃜", "󰃝", "󰃞", "󰃟", "󰃠"]
+    },
+
+    "custom/launch": {
+        "format": " Apps",
+        "on-click": "wofi -show drun",
     },
 
     "custom/power": {

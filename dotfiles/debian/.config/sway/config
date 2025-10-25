@@ -284,16 +284,15 @@ bar swaybar_command waybar
 
 # SwayFX
 blur enable
-blur_passes 2
 shadows enable
-corner_radius 12
+corner_radius 6
 
 # use command: swaymsg -r -t get_outputs | jq '.[0].layer_shell_surfaces | .[] | .namespace'
 layer_effects "logout_dialog" blur enable
-layer_effects "notifications" corner_radius 12; shadows enable
-layer_effects "wofi" corner_radius 12; blur enable; shadows enable
-#layer_effects "waybar" blur enable; blur_xray enable; shadows enable
-layer_effects "launcher" corner_radius 12; blur enable; shadows enable
+layer_effects "waybar" corner_radius 4; shadows enable
+layer_effects "notifications" corner_radius 6; shadows enable
+layer_effects "wofi" corner_radius 6; blur enable; shadows enable
+layer_effects "launcher" corner_radius 6; blur enable; shadows enable
 
 # Custom Keybinds
 bindsym $mod+Shift+f exec thunar

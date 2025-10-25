@@ -1,0 +1,12 @@
+#!/bin/bash
+
+# Deps: maim + slop + notify-send + xclip
+
+# Set filename with timestamp
+filename="$HOME/Pictures/maim_$(date +%F_%T).png"
+
+# Capture selected region, copy to clipboard, and notify
+maim -B -u -s "$filename" \
+  && xclip -selection clipboard -t image/png -i "$filename" \
+  && notify-send -i "$filename" -u low 'Screenshot via maim' 'Saved and copied to clipboard' \
+  || notify-send -u low 'Screenshot aborted'

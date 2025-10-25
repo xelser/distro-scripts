@@ -1,36 +1,28 @@
 @import "gruvbox-material.css";
 
 * {
+    border: none;
+    border-radius: 6px;
+    padding: 1px 4px;
+    box-shadow: inset 0 -2px transparent;
+
     font-family: JetBrainsMono Nerd Font;
     font-size: 13px;
     font-weight: bold;
-    padding: 2px 3px;
 }
 
 window {
     color: @fg0;
-    background-color: transparent;
-    border-radius: 0px;
+    background-color: @bg_dim; /* 3c3836 */
 }
 
 tooltip {
     background: @bg1;
+    padding: 5px 5px;
 }
 
 tooltip label {
     color: @fg1;
-    padding: 5px 5px;
-}
-
-label:focus {
-    background-color: @bg_dim;
-}
-
-button {
-    /* Use box-shadow instead of border so the text isn't offset */
-    box-shadow: inset 0 -2px transparent;
-    /* Avoid rounded borders under each button name */
-    border: none;
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
@@ -39,9 +31,8 @@ button:hover {
 }
 
 button.focused {
-    color: @yellow;
-    box-shadow: inset 0px -3px @yellow;
-    background-color: @bg0;
+    color: @bg_dim;
+    background-color: #a96b2c;
 }
 
 button.urgent {
@@ -65,69 +56,41 @@ button.urgent {
     margin-right: 0;
 }
 
-#cpu,
-#memory,
-#workspaces,
-#window,
-#mode,
-#clock,
-#bluetooth,
-#network,
-#pulseaudio,
-#backlight,
-#power {
-    background-color: @bg0;
-    border-radius: 6px;
-    padding-top: 2px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 2px;
-    min-width: 22px;
-}
-
-#workspaces {
-    background-color: transparent;
-    box-shadow: inset 0px -3px transparent;
-}
-
 #cpu {
     color: @red;
-    box-shadow: inset 0px -3px @red;
 }
 
 #memory {
     color: @blue;
-    box-shadow: inset 0px -3px @blue;
 }
 
 #network {
     color: @purple;
-    box-shadow: inset 0px -3px @purple;
 }
 
 #backlight {
     color: @yellow;
-    box-shadow: inset 0px -3px @yellow;
 }
 
 #pulseaudio {
     color: @green;
-    box-shadow: inset 0px -3px @green;
 }
 
 #bluetooth {
     color: @blue;
-    box-shadow: inset 0px -3px @blue;
 }
 
 #clock {
     color: @aqua;
-    box-shadow: inset 0px -3px @aqua;
 }
 
 #clock.calendar {
     color: @orange;
-    box-shadow: inset 0px -3px @orange;
+}
+
+#custom-launch{
+    color: @bg_dim;
+    background-color: #6f8352;
 }
 
 #power {
@@ -145,33 +108,3 @@ button.urgent {
 #custom-exit {
     color: @blue;
 }
-
-#battery {
-    background-color: @blue;
-}
-
-#battery.charging, #battery.plugged {
-    background-color: @green;
-}
-
-
-#battery.critical:not(.charging) {
-    background-color: @red;
-    animation-name: blink;
-    animation-duration: 0.5s;
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
-/*
-window#waybar.empty {
-background-color: transparent;
-}
-window#waybar.solo {
-background-color: #FFFFFF;
-}
-window#waybar.hidden {
-opacity: 0.2;
-}
- */

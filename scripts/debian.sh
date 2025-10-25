@@ -24,7 +24,7 @@ apt install --yes xinit xsettingsd seatd xdg-desktop-portal-{gtk,wlr} \
   # gammastep mugshot
 
 # INSTALL: i3
-apt install --yes feh xss-lock polybar rofi maim slop xclip \
+apt install --yes feh xss-lock polybar rofi maim slop scrot jq xclip \
   i3-wm autotiling picom {lx,auto}randr numlockx
 
 # INSTALL: Sway
