@@ -11,13 +11,13 @@ dpkg --add-architecture i386 && apt update && apt full-upgrade --yes
 # INSTALL: Base
 apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
   pipewire pipewire-audio pulseaudio-utils easyeffects lsp-plugins-lv2 \
-  linux-cpupower systemd-zram-generator network-manager bluez \
+  linux-cpupower systemd-zram-generator network-manager bluez seatd \
   xfsprogs at-spi2-core xdg-desktop-portal htop nvtop neovim \
   timeshift firefox-esr gparted meld ranger \
   fonts-roboto{,-slab} fonts-jetbrains-mono
 
 # INSTALL: WM (X11/Wayland)
-apt install --yes xinit xsettingsd seatd xdg-desktop-portal-{gtk,wlr} \
+apt install --yes xinit xsettingsd numlockx xdg-desktop-portal-{gtk,wlr} \
   transmission-gtk pavucontrol blueman lxpolkit engrampa pluma atril \
   brightnessctl alacritty dunst libnotify-bin nwg-look mpv imv \
   thunar{,-archive-plugin} gvfs-{backends,fuse}
@@ -25,7 +25,7 @@ apt install --yes xinit xsettingsd seatd xdg-desktop-portal-{gtk,wlr} \
 
 # INSTALL: i3
 apt install --yes feh xss-lock polybar rofi maim slop scrot jq xclip \
-  i3-wm autotiling picom {lx,auto}randr numlockx
+  i3-wm autotiling picom {lx,auto}randr
 
 # INSTALL: Sway
 apt install --yes sway{bg,idle} waybar wofi grimshot wl-clipboard \
@@ -108,7 +108,7 @@ echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priori
 # systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
 # enable systemd daemons
-for service in NetworkManager htpdate seatd; do
+for service in NetworkManager bluetooth seatd htpdate; do
   systemctl enable $service
 done
 
