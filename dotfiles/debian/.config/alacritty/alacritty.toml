@@ -30,5 +30,5 @@ style = "Bold Italic"
 
 [window]
 padding = { x = 5, y = 5 }
-dynamic_padding = true
+dynamic_padding = false
 opacity = 0.8

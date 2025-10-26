@@ -29,7 +29,7 @@ apt install --yes feh xss-lock polybar rofi maim slop scrot jq xclip \
 
 # INSTALL: Sway
 apt install --yes sway{bg,idle} waybar wofi grimshot wl-clipboard \
-  gtklock imagemagick fuzzel
+  gtklock imagemagick wlogout fuzzel
 
 ################################### BUILD ####################################
 

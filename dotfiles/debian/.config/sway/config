@@ -19,7 +19,7 @@ set $right l
 set $term alacritty msg create-window
 
 # Your preferred application launcher
-set $menu wofi
+set $menu bash -c "pgrep -x wofi > /dev/null || wofi"
 
 include /etc/sway/config-vars.d/*
 
@@ -98,10 +98,11 @@ exec swayidle -w \
 
     # Exit sway (logs you out of your Wayland session)
     #bindsym $mod+Shift+e exec wlogout
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' \
-    -B 'Shutdown' 'systemctl poweroff' \
-    -B 'Reboot' 'systemctl reboot' \
-    -B 'Exit sway' 'swaymsg exit'
+    bindsym $mod+Shift+e exec pgrep -x wlogout > /dev/null || wlogout
+    #bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' \
+    #-B 'Shutdown' 'systemctl poweroff' \
+    #-B 'Reboot' 'systemctl reboot' \
+    #-B 'Exit sway' 'swaymsg exit'
 #
 # Moving around:
 #
@@ -272,8 +273,6 @@ gaps inner 10
 default_border none
 default_floating_border none
 
-focus_follows_mouse always
-
 # Floating Windows
 for_window [title="Compress"] floating enable
 for_window [title="Picture in picture"] floating enable
@@ -285,14 +284,14 @@ bar swaybar_command waybar
 # SwayFX
 blur enable
 shadows enable
-corner_radius 8
+corner_radius 10
 
 # use command: swaymsg -r -t get_outputs | jq '.[0].layer_shell_surfaces | .[] | .namespace'
-layer_effects "wofi" shadows enable
 layer_effects "logout_dialog" blur enable
-layer_effects "waybar" corner_radius 4; shadows enable
-layer_effects "notifications" corner_radius 8; shadows enable
-layer_effects "launcher" corner_radius 8; blur enable; shadows enable
+layer_effects "wofi" corner_radius 10; shadows enable
+layer_effects "waybar" corner_radius 6; shadows enable
+layer_effects "notifications" corner_radius 10; shadows enable
+layer_effects "launcher" corner_radius 10; blur enable; shadows enable
 
 # Custom Keybinds
 bindsym $mod+Shift+f exec thunar
@@ -308,7 +307,7 @@ exec --no-startup-id /usr/bin/lxpolkit
 exec --no-startup-id thunar --daemon
 
 # Autostart (for sway)
-exec --no-startup-id swaybg --mode fill --image $(cat $HOME/.config/waypaper/config.ini | grep 'wallpaper' | cut -d'=' -f2)
+exec --no-startup-id swaybg --mode fill --image $(cat $HOME/.config/waypaper/config.ini | grep 'wallpaper' | cut -d'=' -f2) || waypaper --restore
 exec --no-startup-id autotiling
 
 # Lockscreen (gtklock)
