@@ -208,8 +208,8 @@ bindsym $mod+r mode "resize"
 #}
 
 # Assign workspaces upon startup
-workspace 1 output DP-1-1 # hybrid mode: DP-1
-workspace 2 output eDP-1-1 # hybrid mode: eDP-1
+workspace 1 output DP-1
+workspace 2 output eDP-1
 
 # i3 Windows Config
 default_floating_border none

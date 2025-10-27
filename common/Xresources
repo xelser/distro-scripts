@@ -1,6 +1,3 @@
-! DPI scaling (adjust if needed)
-Xft.dpi: 96
-
 ! Font smoothing and anti-aliasing
 Xft.antialias: true
 Xft.rgba: rgb

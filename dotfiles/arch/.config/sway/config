@@ -4,6 +4,8 @@
 #
 # Read `man 5 sway` for a complete reference.
 
+#seat seat0 xcursor_theme "Capitaine Cursors (Gruvbox)" 24
+
 ### Variables
 #
 # Logo key. Use Mod1 for Alt.
@@ -298,12 +300,12 @@ bindsym $mod+Shift+f exec thunar
 bindsym $mod+Shift+w exec brave
 
 # Autostart (Global)
+exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 exec --no-startup-id brave --no-startup-window --gapplication-service
 exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
 exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id transmission-gtk --minimized
 exec --no-startup-id alacritty --daemon
-exec --no-startup-id /usr/bin/lxpolkit
 exec --no-startup-id thunar --daemon
 
 # Autostart (for sway)

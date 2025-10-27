@@ -8,17 +8,18 @@ if [ ! -f /usr/bin/yay ]; then
 	cd yay-bin && makepkg -sirc --noconfirm
 
 	yay -Syu --needed --noconfirm --save --removemake --cleanafter --norebuild \
-		--noredownload --batchinstall --combinedupgrade htpdate neovim-symlinks	\
-		shim-signed secureboot-grub grub-hook update-grub timeshift-autosnap \
-		betterlockscreen waypaper brave-bin ventoy-bin swayfx
+		--noredownload --batchinstall --combinedupgrade	grub-hook update-grub \
+		htpdate neovim-symlinks	timeshift-autosnap brave-bin ventoy-bin \
+		betterlockscreen waypaper swayfx
 
 	# sway
 	yay -S --needed --noconfirm sway{bg,idle,-contrib} waybar wofi \
-		wl-clipboard wlogout xdg-desktop-portal-wlr
+		wl-clipboard gtklock wlogout xdg-desktop-portal-wlr
 
 	# Openbox: openbox obconf-qt obmenu-generator tint2 plank
 	# niri: niri kitty shikane nwg-displays
 
+	#	shim-signed secureboot-grub
 	# snap-pac-grub snapper-support
 	# teamviewer zoom obs-studio gnome-boxes syncthing-{gtk,desktop-entries}
 	# ulauncher zscroll-git polybar-scripts-git
@@ -45,8 +46,8 @@ gsettings set org.mate.pluma toolbar-visible false
 gsettings set org.mate.pluma use-default-font false
 
 # secure boot
-sudo sed -i 's|esp="/efi"|esp="/boot/efi"|g; s|bootloader_id="Arch"|bootloader_id="BOOT"|g' /etc/secureboot.conf
-sudo secure-grub-install
+#sudo sed -i 's|esp="/efi"|esp="/boot/efi"|g; s|bootloader_id="Arch"|bootloader_id="BOOT"|g' /etc/secureboot.conf
+#sudo secure-grub-install
 
 # cpucpower
 sudo cpupower frequency-set -g performance

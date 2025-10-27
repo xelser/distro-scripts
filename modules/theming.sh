@@ -169,8 +169,8 @@ if command -v flatpak &> /dev/null; then
     # This ensures maximum visibility for themes placed in standard/hidden/system locations.
     flatpak override --user --filesystem=xdg-config/gtk-3.0:ro
     flatpak override --user --filesystem=xdg-config/gtk-4.0:ro
-    flatpak override --user --filesystem=home/.themes:ro
-    flatpak override --user --filesystem=home/.icons:ro
+    #flatpak override --user --filesystem=home/.themes:ro
+    #flatpak override --user --filesystem=home/.icons:ro
     flatpak override --user --filesystem=xdg-data/themes:ro
     flatpak override --user --filesystem=xdg-data/icons:ro
 
