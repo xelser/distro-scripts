@@ -1,0 +1,20 @@
+#!/bin/bash
+
+### Desktop
+export XDG_CURRENT_DESKTOP=sway
+export DESKTOP_SESSION=sway
+
+### Wayland
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+export QT_QPA_PLATFORM=wayland
+export QT6CT_PLATFORM=wayland
+export MOZ_ENABLE_WAYLAND=1
+export OBS_USE_EGL=1
+
+### Nvidia
+#export __GLX_VENDOR_LIBRARY_NAME=nvidia
+#export GBM_BACKEND=nvidia-drm
+
+#--- Start Sway ---#
+#exec dbus-run-session sway --unsupported-gpu
+exec dbus-run-session sway

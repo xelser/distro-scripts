@@ -16,13 +16,10 @@ set $up k
 set $right l
 
 # Your preferred terminal emulator
-#set $term alacritty msg create-window
-set $term footclient
+set $term alacritty msg create-window
 
 # Your preferred application launcher
-#set $menu wmenu-run
-set $menu fuzzel
-#set $menu wofi --no-actions --cache-file /tmp/wofi-drun-cache
+set $menu bash -c "pgrep -x wofi > /dev/null || wofi"
 
 include /etc/sway/config-vars.d/*
 
@@ -52,8 +49,10 @@ include /etc/sway/config-vars.d/*
 
 # Start swayidle for screen blanking
 exec swayidle -w \
-    timeout 600 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"'
+    timeout 600 'gtklock -d' \
+    timeout 1800 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep 'gtklock -d'
 
 #
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -99,7 +98,11 @@ exec swayidle -w \
 
     # Exit sway (logs you out of your Wayland session)
     #bindsym $mod+Shift+e exec wlogout
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    bindsym $mod+Shift+e exec pgrep -x wlogout > /dev/null || wlogout
+    #bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' \
+    #-B 'Shutdown' 'systemctl poweroff' \
+    #-B 'Reboot' 'systemctl reboot' \
+    #-B 'Exit sway' 'swaymsg exit'
 #
 # Moving around:
 #
@@ -115,10 +118,10 @@ exec swayidle -w \
     bindsym $mod+Right focus right
 
     # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
+    #bindsym $mod+Shift+$left move left
+    #bindsym $mod+Shift+$down move down
+    #bindsym $mod+Shift+$up move up
+    #bindsym $mod+Shift+$right move right
     # Ditto, with arrow keys
     bindsym $mod+Shift+Left move left
     bindsym $mod+Shift+Down move down
@@ -223,12 +226,12 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
 
     # Special keys to adjust brightness via brightnessctl
-    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
+    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
 
     # Special key to take a screenshot with grim, slurp and grimshot
     bindsym $mod+Shift+s exec grimshot savecopy anything --notify
-    bindsym Print exec grim
+    bindsym Print exec grim && notify-send -u low "Screenshot of all displays via grim"
 
 #
 # Status Bar:
@@ -254,7 +257,7 @@ bindsym $mod+r mode "resize"
 #
 
 # Xwayland
-# xwayland disable
+xwayland disable
 
 # NumLock
 input type:keyboard xkb_numlock enabled
@@ -266,9 +269,9 @@ input type:touchpad {
 }
 
 # Windows
-default_floating_border none
-default_border none
 gaps inner 10
+default_border none
+default_floating_border none
 
 # Floating Windows
 for_window [title="Compress"] floating enable
@@ -279,12 +282,15 @@ for_window [title="File Operation Progress"] floating enable
 bar swaybar_command waybar
 
 # SwayFX
-corner_radius 10
-shadows enable
 blur enable
+shadows enable
+corner_radius 10
 
+# use command: swaymsg -r -t get_outputs | jq '.[0].layer_shell_surfaces | .[] | .namespace'
 layer_effects "logout_dialog" blur enable
-layer_effects "waybar" blur enable; blur_xray enable; shadows enable
+layer_effects "wofi" corner_radius 8; shadows enable
+layer_effects "waybar" corner_radius 6; shadows enable
+layer_effects "notifications" corner_radius 10; shadows enable
 layer_effects "launcher" corner_radius 10; blur enable; shadows enable
 
 # Custom Keybinds
@@ -292,24 +298,20 @@ bindsym $mod+Shift+f exec thunar
 bindsym $mod+Shift+w exec brave
 
 # Autostart (Global)
-exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
-#exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
+exec --no-startup-id brave --no-startup-window --gapplication-service
+exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
 exec --no-startup-id easyeffects --gapplication-service
+exec --no-startup-id transmission-gtk --minimized
+exec --no-startup-id alacritty --daemon
+exec --no-startup-id /usr/bin/lxpolkit
+exec --no-startup-id thunar --daemon
 
 # Autostart (for sway)
-exec_always --no-startup-id waypaper --restore
-exec --no-startup-id autotiling
+exec --no-startup-id swaybg --mode fill --image $(cat $HOME/.config/waypaper/config.ini | grep 'wallpaper' | cut -d'=' -f2) || waypaper --restore
+#exec --no-startup-id autotiling
 
-# Night light (gammastep)
-#exec --no-startup-id bash $HOME/.config/gammastep/launch.sh
-#bindsym $mod+o exec bash $HOME/.config/gammastep/toggle.sh
-
-# Apps
-exec --no-startup-id brave --no-startup-window --gapplication-service
-exec --no-startup-id transmission-gtk --minimized
-#exec --no-startup-id alacritty --daemon
-#exec --no-startup-id thunar --daemon
-exec --no-startup-id pcmanfm --daemon-mode
-exec --no-startup-id foot --server
+# Lockscreen (gtklock)
+exec_always --no-startup-id magick $(cat $HOME/.config/waypaper/config.ini | grep 'wallpaper' | cut -d'=' -f2) -blur 0x5 -evaluate Multiply 0.45 ~/.output.png
+bindsym $mod+Shift+l exec --no-startup-id gtklock
 
 include /etc/sway/config.d/*

@@ -18,7 +18,7 @@ button {
 }
 
 button:focus, button:active, button:hover {
-	background-color: rgba(60, 56, 54, 0.6);
+	background-color: rgba(60, 56, 54, 0.9);
 	outline-style: none;
 }
 

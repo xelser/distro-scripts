@@ -45,13 +45,7 @@ else
 fi
 
 ## BOOTLOADER TARGET (GRUB Only) ##
-dmesg | grep -q "EFI v"; if [ $? -eq 0 ]; then
-  # EFI check passed, use x86_64-efi
-  grub_target="x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch"
-else
-  # BIOS/MBR
-  grub_target="i386-pc /dev/${device}"
-fi
+
 
 ################################# FORMATTING #################################
 
@@ -147,12 +141,11 @@ arch_base () {
     # linux-lts{,-headers}
 
   # Boot
-  pacstrap /mnt grub os-prober efibootmgr dosfstools {intel,amd}-ucode \
-    ntfs-3g xfsprogs btrfs-progs grub-btrfs inotify-tools # plymouth
+  pacstrap /mnt grub os-prober efibootmgr dosfstools intel-ucode \
+    xfsprogs btrfs-progs grub-btrfs inotify-tools # plymouth
 
   # Audio
-  pacstrap /mnt pipewire-{alsa,audio,jack,pulse} wireplumber \
-    easyeffects lsp-plugins-lv2 ecasound
+  pacstrap /mnt pipewire-{alsa,audio,jack,pulse} wireplumber
 
   # System Utils
   pacstrap /mnt cpupower zram-generator dmidecode inxi inetutils \
@@ -163,8 +156,8 @@ arch_base () {
     git wget zip unzip sassc
 
   # Misc
-  pacstrap /mnt flatpak xdg-desktop-portal{,-gtk,-wlr} xdg-user-dirs{,-gtk} \
-    noto-fonts{,-cjk,-emoji} inter-font ttf-jetbrains-mono-nerd \
+  pacstrap /mnt flatpak xdg-user-dirs{,-gtk} \
+    noto-fonts{,-cjk,-emoji} ttf-roboto ttf-jetbrains-mono-nerd \
     gtk-engine{-murrine,s} qt5{ct,-wayland} kvantum-qt5 \
     gvfs-{google,mtp} ffmpeg{,thumbnailer} tumbler
 
@@ -189,29 +182,39 @@ echo "arch" > /etc/hostname
 
 # pacman
 echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\nColor\n
-[multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null
+[multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null && reflector && sleep 10
 
-reflector && sleep 10
+# packages: common
+pacman -Syy --noconfirm --needed xorg \
+  brightnessctl gammastep wallutils dunst libnotify alacritty \
+  pavucontrol blueman transmission-gtk nwg-look firefox mpv imv \
+  mate-polkit engrampa atril pluma thunar-{volman,archive-plugin} \
+  easyeffects lsp-plugins-lv2 ecasound resources timeshift gparted
 
-pacman -Syy --noconfirm --needed \
-  xorg sddm timeshift wallutils dunst libnotify brightnessctl gammastep \
-  pavucontrol blueman transmission-gtk mugshot nwg-look firefox mpv imv \
-  i3-wm autotiling polybar xclip {lx,auto}randr feh maim picom numlockx \
-  mate-polkit engrampa atril pluma pcmanfm-gtk3 alacritty rofi \
-  resources gparted gnome-boxes obs-studio
+# packages: i3
+pacman -S --noconfirm --needed xinit xsettingsd numlockx picom \
+  i3-wm feh xss-lock polybar rofi maim slop scrot jq xclip {lx,auto}randr \
+  autotiling xdg-desktop-portal-gtk
 
+# packages: e5-476g
 pacman -S --noconfirm --needed \
   jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt libva-utils \
   nvidia-{dkms,utils,prime} lib32-nvidia-utils mesa-utils vulkan-tools
 
-# swap/zram-generator
-echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
+# autologin
+mkdir -p /etc/systemd/system/getty@tty1.service.d
+echo "[Service]" > /etc/systemd/system/getty@tty1.service.d/override.conf
+echo "ExecStart=" >> /etc/systemd/system/getty@tty1.service.d/override.conf
+echo "ExecStart=-/sbin/agetty --autologin ${user} --noclear %I $TERM" >> /etc/systemd/system/getty@tty1.service.d/override.conf
 
 # grub-btrfsd
 mkdir -p /etc/systemd/system/grub-btrfsd.service.d
 echo "[Service]" > /etc/systemd/system/grub-btrfsd.service.d/override.conf
 echo "ExecStart=" >> /etc/systemd/system/grub-btrfsd.service.d/override.conf
 echo "ExecStart=/usr/bin/grub-btrfsd --syslog --timeshift-auto" >> /etc/systemd/system/grub-btrfsd.service.d/override.conf
+
+# swap/zram-generator
+echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
 
 # services
 systemctl enable NetworkManager bluetooth cronie grub-btrfsd nvidia-persistenced jellyfin
@@ -224,23 +227,17 @@ useradd -mG wheel,video ${user}
 echo -e "root:${psswrd}\n${user}:${psswrd}" | chpasswd
 echo -e "${user} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/${user}
 
-# greetd
-#echo -e "\n[initial_session]\ncommand = \"sway\"\nuser = \"${user}\"" >> /etc/greetd/config.toml
-#systemctl enable greetd
-
-# sddm
-echo -e "[Autologin]\nUser=${user}\nSession=i3" >> /etc/sddm.conf
-echo -e "\n[General]\nNumlock=on" >> /etc/sddm.conf
-systemctl enable sddm
-
 # grub
-sed -i 's/quiet/quiet splash/g' /etc/default/grub
-sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=10/g' /etc/default/grub
-#sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
-#sed -i 's/#GRUB_SAVEDEFAULT=true/GRUB_SAVEDEFAULT=true/g' /etc/default/grub
-#sed -i 's/#GRUB_DISABLE_OS_PROBER=false/GRUB_DISABLE_OS_PROBER=false/g' /etc/default/grub
+#sed -i 's/quiet/quiet splash/g' /etc/default/grub
+sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=30/g' /etc/default/grub
 mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
-grub-install --target=${grub_target}
+
+dmesg | grep -q "EFI v"; if [ $? -eq 0 ]; then
+  grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch
+  grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable
+else
+  grub-install --target=i386-pc /dev/${device}
+fi
 
 EOF
 }

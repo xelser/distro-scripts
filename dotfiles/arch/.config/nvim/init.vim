@@ -23,6 +23,10 @@ call plug#end()
 
 source $HOME/.config/nvim/theme.vim
 
+" transparency
+highlight Normal ctermbg=none guibg=none
+highlight NonText ctermbg=none guibg=none
+
 " common
 set number                  " add line numbers
 set mouse=a                 " enable mouse click
@@ -32,25 +36,32 @@ set showmatch               " show matching
 set ignorecase              " case insensitive
 set clipboard=unnamedplus   " using system clipboard
 
-" transparency
-highlight Normal ctermbg=none guibg=none
-highlight NonText ctermbg=none guibg=none
+" indent
+set autoindent
+set smartindent
+set noexpandtab     " Use tabs, not spaces
+set tabstop=2       " A tab character is 2 columns wide
+set shiftwidth=2    " Indent by 2 columns when using >> or <<
+set softtabstop=2   " Makes <Tab> and <Backspace> feel like 2-space steps
 
-" whitespace cleanup
-autocmd BufWritePre * :%s/\s\+$//e
+augroup MyAutoCmds
+	autocmd!
+	" autoindent
+	autocmd FileType * setlocal noexpandtab tabstop=2 shiftwidth=2 softtabstop=2
+	autocmd BufWritePre *.c,*.cpp,*.lua silent! normal gg=G
 
-" visual feedback for yanks
-autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+	" whitespace cleanup
+	autocmd BufWritePre * :%s/\s\+$//e
 
-" plugin: autopairs
-lua << END
-	require("nvim-autopairs").setup({})
-END
-
-" plugin: lspsaga
-lua << EOF
-	require("lspsaga").setup({})
-EOF
+	" visual feedback for yanks
+	autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+augroup END
 
 " autoformat
-"autocmd BufWritePre *.js,*.ts,*.py,*.lua :call CocAction('format')
+" autocmd BufWritePre *.js,*.ts,*.py,*.lua :call CocAction('format')
+
+" plugin: autopairs and lspsaga
+lua << EOF
+require("nvim-autopairs").setup({})
+require("lspsaga").setup({})
+EOF

@@ -1,9 +1,0 @@
-[Desktop Entry]
-Type=Application
-Exec=numlockx on
-Hidden=false
-NoDisplay=false
-X-GNOME-Autostart-enabled=true
-Name=Enable NumLock
-Comment=Turns on NumLock at startup using numlockx
-

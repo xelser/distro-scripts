@@ -1,27 +1,19 @@
 #!/bin/bash
 
-# Themes
-gsettings set org.cinnamon.theme name 'vimix-jade'
-gsettings set org.cinnamon.desktop.wm.preferences theme 'vimix-compact-jade'
-gsettings set org.cinnamon.desktop.interface gtk-theme 'vimix-compact-jade'
-gsettings set org.cinnamon.desktop.interface icon-theme 'Vimix-jade'
-gsettings set org.cinnamon.desktop.interface cursor-theme 'Vimix-cursors'
-#cp -rf $HOME/.local/share/light-mode.d/settings.ini	$HOME/.config/gtk-3.0/
+# rofi
+sed -i 's/dark/light/g' $HOME/.config/rofi/launchers/type-4/shared/colors.rasi
+sed -i 's/dark/light/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
 
-# Apps
-gsettings set org.x.editor.preferences.editor scheme 'Adwaita'
-gsettings set org.gnome.builder style-variant 'light'
-gsettings set org.gnome.builder.editor style-scheme-name 'Adwaita'
-gsettings set org.gnome.Terminal.Legacy.Settings theme-variant 'light'
-gsettings set org.gnome.Terminal.Legacy.Profile:/org/gnome/terminal/legacy/profiles:/:b1dcc9dd-5262-4d8d-a863-c897e6d979b9/ bold-is-bright 'false'
+# gtksourceview
+dconf write /org/xfce/mousepad/preferences/view/color-scheme "'gruvbox-material-hard-light'"
 
-# QT/Kvantum
-cp -rf $HOME/.local/share/light-mode.d/kvantum.kvconfig	$HOME/.config/Kvantum/
-cp -rf $HOME/.local/share/light-mode.d/qt5ct.conf	$HOME/.config/qt5ct/
+# xsettingsd
+cat $HOME/.local/share/light-mode.d/xsettingsd > $HOME/.xsettingsd
+killall -HUP xsettingsd
 
-# Flatpak
-flatpak override --user --env=QT_STYLE_OVERRIDE=kvantum
-flatpak override --user --env=GTK_THEME=vimix-compact-jade
+# nitrogen
+#nitrogen --set-zoom-fill /usr/share/backgrounds/gruvbox/cyber-girl-light.png --save
 
-# Desktop Background
-#gsettings set org.cinnamon.desktop.background picture-uri 'file:///home/xelser/.local/share/backgrounds/Cyberpunk%20Girl/Cyberpunk%20Girl-l.jpg'
+# polybar
+cat $HOME/.config/polybar/themes/gruvbox-material-hard-light.ini > $HOME/.config/polybar/current_theme.ini
+pkill -USR1 polybar

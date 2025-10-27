@@ -6,6 +6,9 @@ import = ["~/.config/alacritty/gruvbox-material-hard-dark.toml"]
 [cursor]
 style = { shape = "Underline", blinking = "On" }
 
+[env]
+WINIT_X11_SCALE_FACTOR = "1.0"
+
 [font]
 size = 10
 
@@ -27,5 +30,5 @@ style = "Bold Italic"
 
 [window]
 padding = { x = 5, y = 5 }
-dynamic_padding = true
-opacity = 0.9
+dynamic_padding = false
+opacity = 0.8

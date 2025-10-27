@@ -1,12 +1,12 @@
 configuration {
   modes: "drun";
-  font: "JetBrainsMono Nerd Font 12";
-  display-drun: "Launch";
+  font: "JetBrainsMono Nerd Font Medium 12";
+  display-drun: "Search  ";
   show-icons: true;
   icon-theme: "Papirus-Dark";
   application-fallback-icon: "application-x-executable";
 
-  matching: "fuzzy";
+  matching: "normal";
   tokenize: true;
   normalize-match: true;
   sort: true;
@@ -32,6 +32,8 @@ configuration {
     sorting-method: "name";
   }
 }
+
+@theme "style.rasi"
 
 /*	location: 0;*/
 /*	yoffset: 0;*/

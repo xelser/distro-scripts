@@ -2,7 +2,8 @@
 
 * {
     color: @fg0;
-    border-radius: 10px;
+    border-radius: 8px;
+    font-family: JetBrains Mono Medium;
 }
 
 window {
@@ -22,11 +23,12 @@ window {
     padding: 6px;
     margin-left: 10px;
     margin-right: 10px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 #entry:selected {
     background-color: @bg2;
+    border: transparent;
 }
 
 #text {
@@ -34,6 +36,9 @@ window {
 }
 
 #text:selected {
-    color: @fg1;
+    color: @yellow;
 }
 
+:selected.focus {
+    box-shadow: none;
+}

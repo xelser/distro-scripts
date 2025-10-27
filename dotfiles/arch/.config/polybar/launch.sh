@@ -8,5 +8,3 @@ killall -q polybar
 
 # Launch Polybar on each connected monitor
 polybar default-${XDG_CURRENT_DESKTOP} || polybar default 2>&1 | tee -a /tmp/polybar.log & disown
-
-

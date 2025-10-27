@@ -1,18 +1,19 @@
 #!/bin/bash
 
-color_folder="cat-mocha-lavender"; papirus_folders=(Papirus Papirus-Dark Papirus-Light ePapirus ePapirus-Dark)
-for icon_theme in "${papirus_folders[@]}"; do ./papirus-folders -u -C ${color_folder} -t ${icon_theme}; done
+# rofi
+sed -i 's/light/dark/g' $HOME/.config/rofi/launchers/type-4/shared/colors.rasi
+sed -i 's/light/dark/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
 
-# GTK, Icon, Cursor
-sed -i 's/Catppuccin-Latte-Compact-Sky-Light/Catppuccin-Mocha-Compact-Sky-Dark/g' $HOME/.config/gtk-3.0/settings.ini
-sed -i 's/Papirus/Papirus-Dark/g' 						  $HOME/.config/gtk-3.0/settings.ini
-sed -i 's/Catppuccin-Latte-Sky-Cursors/Catppuccin-Mocha-Sky-Cursors/g'		  $HOME/.config/gtk-3.0/settings.ini
-flatpak override --user --env=GTK_THEME=Catppuccin-Mocha-Compact-Sky-Dark
+# gtksourceview
+dconf write /org/xfce/mousepad/preferences/view/color-scheme "'gruvbox-material-hard-dark'"
 
-# QT/kvantum 
-if [ -f /usr/bin/kvantummanager ]; then
-	cp -rf $HOME/.local/share/dark-mode.d/kvantum.kvconfig	$HOME/.config/Kvantum/
-	cp -rf $HOME/.local/share/dark-mode.d/qt5ct.conf	$HOME/.config/qt5ct/
-	flatpak override --user --env=QT_STYLE_OVERRIDE=kvantum-dark
-fi
+# xsettingsd
+cat $HOME/.local/share/dark-mode.d/xsettingsd > $HOME/.xsettingsd
+killall -HUP xsettingsd
 
+# nitrogen
+#nitrogen --set-zoom-fill /usr/share/backgrounds/gruvbox/cyber-girl-dark.png --save
+
+# polybar
+cat $HOME/.config/polybar/themes/gruvbox-material-hard-dark.ini > $HOME/.config/polybar/current_theme.ini
+pkill -USR1 polybar

@@ -10,12 +10,12 @@ if [ ! -f /usr/bin/yay ]; then
 	yay -Syu --needed --noconfirm --save --removemake --cleanafter --norebuild \
 		--noredownload --batchinstall --combinedupgrade htpdate neovim-symlinks	\
 		shim-signed secureboot-grub grub-hook update-grub timeshift-autosnap \
-		xidlehook betterlockscreen waypaper brave-bin ventoy-bin swayfx
+		betterlockscreen waypaper brave-bin ventoy-bin swayfx
 
 	# sway
 	if [ -f /usr/bin/sway ]; then
-		sudo pacman -S --needed --noconfirm sway{bg,idle,-contrib} foot waybar \
-		fuzzel wl-clipboard
+		sudo pacman -S --needed --noconfirm sway{bg,idle,-contrib} waybar wofi \
+		wl-clipboard wlogout xdg-desktop-portal-wlr
 	fi
 
 	# Openbox: openbox obconf-qt obmenu-generator tint2 plank
@@ -35,7 +35,7 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/cursor-sainnhe-capitaine.sh)"
 
 # set fonts
-dconf write /org/gnome/desktop/interface/font-name "'Inter Medium 10'"
+dconf write /org/gnome/desktop/interface/font-name "'Roboto Medium 10'"
 dconf write /org/gnome/desktop/interface/monospace-font-name "'JetBrainsMono Nerd Font 9'"
 
 # text editor (pluma)
@@ -55,4 +55,4 @@ sudo cpupower frequency-set -g performance
 sudo systemctl enable --now cpupower
 
 # nvidia dgpu as main renderer
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/nvidia_dgpu.sh)"
+#bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/nvidia_dgpu.sh)"
