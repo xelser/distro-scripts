@@ -138,7 +138,7 @@ arch_base () {
     # linux-lts{,-headers}
 
   # Boot
-  pacstrap /mnt grub os-prober efibootmgr dosfstools intel-ucode \
+  pacstrap /mnt grub os-prober mokutil efibootmgr dosfstools intel-ucode \
     xfsprogs btrfs-progs grub-btrfs inotify-tools # plymouth
 
   # Audio
@@ -189,7 +189,7 @@ pacman -Syy --noconfirm --needed xorg \
   easyeffects lsp-plugins-lv2 ecasound resources timeshift gparted
 
 # packages: i3
-pacman -S --noconfirm --needed xinit xsettingsd numlockx picom \
+pacman -S --noconfirm --needed xorg-xinit xsettingsd numlockx picom \
   i3-wm feh xss-lock polybar rofi maim slop scrot jq xclip {lx,auto}randr \
   autotiling xdg-desktop-portal-gtk
 

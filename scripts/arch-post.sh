@@ -10,13 +10,11 @@ if [ ! -f /usr/bin/yay ]; then
 	yay -Syu --needed --noconfirm --save --removemake --cleanafter --norebuild \
 		--noredownload --batchinstall --combinedupgrade htpdate neovim-symlinks	\
 		shim-signed secureboot-grub grub-hook update-grub timeshift-autosnap \
-		betterlockscreen waypaper brave-bin ventoy-bin swayfx
+		betterlockscreen waypaper brave-bin ventoy-bin
 
 	# sway
-	if [ -f /usr/bin/sway ]; then
-		sudo pacman -S --needed --noconfirm sway{bg,idle,-contrib} waybar wofi \
+	yay -S --needed --noconfirm sway{fx,bg,idle,-contrib} waybar wofi \
 		wl-clipboard wlogout xdg-desktop-portal-wlr
-	fi
 
 	# Openbox: openbox obconf-qt obmenu-generator tint2 plank
 	# niri: niri kitty shikane nwg-displays
