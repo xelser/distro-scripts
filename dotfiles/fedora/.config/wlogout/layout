@@ -1,7 +1,7 @@
 {
     "label" : "logout",
-    "action" : "loginctl terminate-user $USER",
-    "text" : "Logout",
+    "action" : "swaymsg exit",
+    "text" : "Exit Sway",
     "keybind" : "e"
 }
 {
@@ -16,4 +16,3 @@
     "text" : "Reboot",
     "keybind" : "r"
 }
-

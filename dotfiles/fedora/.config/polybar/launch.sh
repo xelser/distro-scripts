@@ -1,10 +1,10 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# Terminate already running bar instances
-pkill polybar
+# Kill existing Polybar instances
+killall -q polybar
+
 # If all your bars have ipc enabled, you can also use
 # polybar-msg cmd quit
 
-# Launch Polybar, using default config location ~/.config/polybar/config.ini
-
-polybar default 2>&1 | tee -a /tmp/polybar.log
+# Launch Polybar on each connected monitor
+polybar default-${XDG_CURRENT_DESKTOP} || polybar default 2>&1 | tee -a /tmp/polybar.log & disown

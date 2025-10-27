@@ -8,20 +8,28 @@
 #
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
+
 # Home row direction keys, like vim
 set $left h
 set $down j
 set $up k
 set $right l
+
 # Your preferred terminal emulator
-set $term foot
+set $term alacritty msg create-window
+
 # Your preferred application launcher
-set $menu wofi --no-actions --cache-file /tmp/wofi-drun-cache
+set $menu bash -c "pgrep -x wofi > /dev/null || wofi"
+
+include /etc/sway/config-vars.d/*
 
 ### Output configuration
 #
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-#output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# This is commented in Debian, because the Sway wallpaper files are in a separate
+# package `sway-backgrounds`. Installing this package drops a config file to
+# /etc/sway/config.d/
+# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
 #
 # Example configuration:
 #
@@ -38,6 +46,15 @@ set $menu wofi --no-actions --cache-file /tmp/wofi-drun-cache
 #          timeout 600 'swaymsg "output * power off"' resume 'swaymsg "output * power on"' \
 #          before-sleep 'swaylock -f -c 000000'
 #
+
+# Start swayidle for screen blanking
+exec swayidle -w \
+    timeout 600 'gtklock -d' \
+    timeout 1800 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep 'gtklock -d'
+
+#
 # This will lock your screen after 300 seconds of inactivity, then turn off
 # your displays after another 300 seconds, and turn your screens back on when
 # resumed. It will also lock your screen before your computer goes to sleep.
@@ -46,18 +63,14 @@ set $menu wofi --no-actions --cache-file /tmp/wofi-drun-cache
 #
 # Example configuration:
 #
-#   input type:touchpad {
+#   input "2:14:SynPS/2_Synaptics_TouchPad" {
 #       dwt enabled
 #       tap enabled
 #       natural_scroll enabled
 #       middle_emulation enabled
 #   }
 #
-#   input type:keyboard {
-#       xkb_layout "eu"
-#   }
-#
-# You can also configure each device individually.
+# You can get the names of your inputs by running: swaymsg -t get_inputs
 # Read `man 5 sway-input` for more information about this section.
 
 ### Key bindings
@@ -84,8 +97,12 @@ set $menu wofi --no-actions --cache-file /tmp/wofi-drun-cache
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec wlogout
-    #bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+    #bindsym $mod+Shift+e exec wlogout
+    bindsym $mod+Shift+e exec pgrep -x wlogout > /dev/null || wlogout
+    #bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' \
+    #-B 'Shutdown' 'systemctl poweroff' \
+    #-B 'Reboot' 'systemctl reboot' \
+    #-B 'Exit sway' 'swaymsg exit'
 #
 # Moving around:
 #
@@ -101,10 +118,10 @@ set $menu wofi --no-actions --cache-file /tmp/wofi-drun-cache
     bindsym $mod+Right focus right
 
     # Move the focused window with the same, but add Shift
-    bindsym $mod+Shift+$left move left
-    bindsym $mod+Shift+$down move down
-    bindsym $mod+Shift+$up move up
-    bindsym $mod+Shift+$right move right
+    #bindsym $mod+Shift+$left move left
+    #bindsym $mod+Shift+$down move down
+    #bindsym $mod+Shift+$up move up
+    #bindsym $mod+Shift+$right move right
     # Ditto, with arrow keys
     bindsym $mod+Shift+Left move left
     bindsym $mod+Shift+Down move down
@@ -165,8 +182,8 @@ set $menu wofi --no-actions --cache-file /tmp/wofi-drun-cache
 #
 # Scratchpad:
 #
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
+# Sway has a "scratchpad", which is a bag of holding for windows.
+# You can send windows there and get them back later.
 
     # Move the currently focused window to the scratchpad
     bindsym $mod+Shift+minus move scratchpad
@@ -198,6 +215,7 @@ mode "resize" {
     bindsym Escape mode "default"
 }
 bindsym $mod+r mode "resize"
+
 #
 # Utilities:
 #
@@ -206,16 +224,94 @@ bindsym $mod+r mode "resize"
     bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume \@DEFAULT_SINK@ -5%
     bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume \@DEFAULT_SINK@ +5%
     bindsym --locked XF86AudioMicMute exec pactl set-source-mute \@DEFAULT_SOURCE@ toggle
+
     # Special keys to adjust brightness via brightnessctl
-    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
     bindsym --locked XF86MonBrightnessUp exec brightnessctl set 5%+
-    # Special key to take a screenshot with grim
-    bindsym Print exec grim
+    bindsym --locked XF86MonBrightnessDown exec brightnessctl set 5%-
+
+    # Special key to take a screenshot with grim, slurp and grimshot
+    bindsym $mod+Shift+s exec grimshot savecopy anything --notify
+    bindsym Print exec grim && notify-send -u low "Screenshot via grim"
 
 #
 # Status Bar:
 #
+
 # Read `man 5 sway-bar` for more information about this section.
+#bar {
+#    position top
+#
+#    # When the status_command prints a new line to stdout, swaybar updates.
+#    # The default just shows the current date and time.
+#    status_command while date +'%Y-%m-%d %X'; do sleep 1; done
+#
+#    colors {
+#        statusline #ffffff
+#        background #323232
+#        inactive_workspace #32323200 #32323200 #5c5c5c
+#    }
+#}
+
+#
+# User Configs:
+#
+
+# Xwayland
+xwayland disable
+
+# NumLock
+input type:keyboard xkb_numlock enabled
+
+# TouchPad
+input type:touchpad {
+    tap enabled
+    natural_scroll enabled
+}
+
+# Windows
+gaps inner 10
+default_border none
+default_floating_border none
+
+# Floating Windows
+for_window [title="Compress"] floating enable
+for_window [title="Picture in picture"] floating enable
+for_window [title="File Operation Progress"] floating enable
+
+# Bar
 bar swaybar_command waybar
 
-include $HOME/.config/sway/config.d/*
+# SwayFX
+blur enable
+shadows enable
+corner_radius 10
+
+# use command: swaymsg -r -t get_outputs | jq '.[0].layer_shell_surfaces | .[] | .namespace'
+layer_effects "logout_dialog" blur enable
+layer_effects "wofi" corner_radius 10; shadows enable
+layer_effects "waybar" corner_radius 6; shadows enable
+layer_effects "notifications" corner_radius 10; shadows enable
+layer_effects "launcher" corner_radius 10; blur enable; shadows enable
+
+# Custom Keybinds
+bindsym $mod+Shift+f exec thunar
+bindsym $mod+Shift+w exec brave
+
+# Autostart (Global)
+exec --no-startup-id brave --no-startup-window --gapplication-service
+exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
+exec --no-startup-id easyeffects --gapplication-service
+exec --no-startup-id transmission-gtk --minimized
+exec --no-startup-id alacritty --daemon
+exec --no-startup-id /usr/bin/lxpolkit
+exec --no-startup-id thunar --daemon
+
+# Autostart (for sway)
+exec --no-startup-id swaybg --mode fill --image $(cat $HOME/.config/waypaper/config.ini | grep 'wallpaper' | cut -d'=' -f2) || waypaper --restore
+exec --no-startup-id autotiling
+
+# Lockscreen (gtklock)
+exec_always --no-startup-id magick $(cat $HOME/.config/waypaper/config.ini | grep 'wallpaper' | cut -d'=' -f2) -blur 0x5 -evaluate Multiply 0.45 ~/.output.png
+bindsym $mod+Shift+l exec --no-startup-id gtklock
+
+include /etc/sway/config.d/*

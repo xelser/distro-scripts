@@ -1,18 +1,41 @@
 #!/bin/bash
 
-# GNOME Shell Extensions
-gsettings set org.gnome.shell enabled-extensions []
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/gnome_extensions.sh)"
-ext_list=($(gnome-extensions list)); for ext in "${ext_list[@]}"; do gnome-extensions enable ${ext}; done
+################################ POST INSTALL ################################
 
-# Set Fonts
-gsettings set org.gnome.desktop.interface font-name "Adwaita Sans 10"
-gsettings set org.gnome.desktop.interface monospace-font-name "Adwaita Mono 10"
+# tailscale
+curl -fsSL https://tailscale.com/install.sh | sh
 
-################################### FLATPAK ##################################
+# brave browser
+curl -fsS https://dl.brave.com/install.sh | sh
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/brave_flags.sh)"
 
-# INSTALL: Fedora Workstation
-flatpak install --assumeyes --noninteractive flathub net.nokyan.Resources
+################################### THEMES ###################################
 
-  # org.mozilla.firefox com.spotify.Client us.zoom.Zoom org.telegram.desktop com.discordapp.Discord
-  # com.rafaelmardojai.Blanket org.gnome.gitlab.YaLTeR.VideoTrimmer org.nickvision.tubeconverter io.missioncenter.MissionCenter
+# install themes
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/grub.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-gruvbox.sh)"
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/cursor-sainnhe-capitaine.sh)"
+
+# set fonts
+dconf write /org/gnome/desktop/interface/font-name "'Roboto Medium 10'"
+dconf write /org/gnome/desktop/interface/monospace-font-name "'JetBrainsMono Nerd Font 9'"
+
+# text editor (pluma)
+gsettings set org.mate.pluma color-scheme 'gruvbox-material-medium-dark'
+gsettings set org.mate.pluma display-line-numbers true
+gsettings set org.mate.pluma editor-font 'JetBrainsMono Nerd Font 10'
+gsettings set org.mate.pluma highlight-current-line true
+gsettings set org.mate.pluma toolbar-visible false
+gsettings set org.mate.pluma use-default-font false
+
+# separate apps
+#x11app=(picom lxrandr timeshift-gtk gparted)
+
+#for app in "${x11app[@]}"; do
+#	if [ -f /usr/share/applications/${app}.desktop ]; then
+#		mkdir -p $HOME/.local/share/applications/
+#		cp -rf /usr/share/applications/${app}.desktop \
+#			$HOME/.local/share/applications/${app}.desktop
+#		echo "OnlyShowIn=i3;" >> $HOME/.local/share/applications/${app}.desktop
+#	fi
+#done

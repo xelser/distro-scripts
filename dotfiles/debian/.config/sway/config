@@ -231,7 +231,7 @@ bindsym $mod+r mode "resize"
 
     # Special key to take a screenshot with grim, slurp and grimshot
     bindsym $mod+Shift+s exec grimshot savecopy anything --notify
-    bindsym Print exec grim && notify-send -u low "Screenshot via grim"
+    bindsym Print exec grim && notify-send -u low "Screenshot of all displays via grim"
 
 #
 # Status Bar:
@@ -288,7 +288,7 @@ corner_radius 10
 
 # use command: swaymsg -r -t get_outputs | jq '.[0].layer_shell_surfaces | .[] | .namespace'
 layer_effects "logout_dialog" blur enable
-layer_effects "wofi" corner_radius 10; shadows enable
+layer_effects "wofi" corner_radius 8; shadows enable
 layer_effects "waybar" corner_radius 6; shadows enable
 layer_effects "notifications" corner_radius 10; shadows enable
 layer_effects "launcher" corner_radius 10; blur enable; shadows enable
@@ -308,7 +308,7 @@ exec --no-startup-id thunar --daemon
 
 # Autostart (for sway)
 exec --no-startup-id swaybg --mode fill --image $(cat $HOME/.config/waypaper/config.ini | grep 'wallpaper' | cut -d'=' -f2) || waypaper --restore
-exec --no-startup-id autotiling
+#exec --no-startup-id autotiling
 
 # Lockscreen (gtklock)
 exec_always --no-startup-id magick $(cat $HOME/.config/waypaper/config.ini | grep 'wallpaper' | cut -d'=' -f2) -blur 0x5 -evaluate Multiply 0.45 ~/.output.png

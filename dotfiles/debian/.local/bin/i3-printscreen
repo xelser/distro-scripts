@@ -11,10 +11,10 @@ mapfile -t outputs < <(xrandr --listmonitors | tail -n +2 | awk '{print $NF}')
 # Find index of focused monitor
 for i in "${!outputs[@]}"; do
   if [[ "${outputs[$i]}" == "$focused_output" ]]; then
-    filename="$HOME/Pictures/scrot_$(date +%F_%T).png"
+    filename="$HOME/Pictures/scrot_${focused_output}_$(date +%F_%T).png"
     scrot -M "$i" "$filename" \
       && xclip -selection clipboard -t image/png -i "$filename" \
-      && notify-send -i "$filename" -u low "Screenshot via scrot" "Saved and copied to clipboard" \
+      && notify-send -i "$filename" -u low "Screenshot of ${focused_output} via scrot" "Saved and copied to clipboard" \
       || notify-send -u low "Screenshot aborted"
     exit
   fi

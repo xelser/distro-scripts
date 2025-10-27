@@ -71,7 +71,11 @@ bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/ma
 	--create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 
 # Distro Post Install Script
-[ -f $HOME/.config/${distro_id}-post.sh ] && bash $HOME/.config/${distro_id}-post.sh
+if [ -f $HOME/.config/${distro_id}-${wm_de}-post.sh ]; then
+	bash $HOME/.config/${distro_id}-${wm_de}-post.sh
+elif [ -f $HOME/.config/${distro_id}-post.sh ]; then
+	bash $HOME/.config/${distro_id}-post.sh
+fi
 
 # DE Post Install Script
 [[ ${wm_de} == "gnome" ]] || [[ ${wm_de} == "cinnamon" ]] || [[ ${wm_de} == "xfce" ]] && \

@@ -1,2 +1,2 @@
 #!/bin/sh
-feh --no-fehbg --bg-fill --image-bg '#ffffff' '/mnt/Home/Pictures/Wallpapers/Gruvbox/herb-notebook.png' 
+feh --no-fehbg --bg-fill --image-bg '#ffffff' '/mnt/Home/Pictures/Wallpapers/Gruvbox/cabin.png' 

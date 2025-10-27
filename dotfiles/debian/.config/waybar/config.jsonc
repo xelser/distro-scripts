@@ -115,14 +115,13 @@
 
     "network": {
         "format-ethernet": "",
-        "format-disconnected": "󱘖 Disconnected",
-        "format-alt": " Down: {bandwidthDownBytes} |  Up: {bandwidthUpBytes}",
-
         "format-wifi": "{icon}",
         "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "format-disconnected": "󱘖 Disconnected",
 
+        "format-alt": " {bandwidthDownBytes} |  {bandwidthUpBytes}",
         "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
-        "tooltip-format-disconnected": "󰇧 Please connect to available networks!"
+        "tooltip-format-disconnected": "󰇧 Could not establish a connection"
     },
 
     "cpu": {

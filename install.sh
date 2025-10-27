@@ -35,8 +35,14 @@ if [[ ! ${distro_id} == "arch" ]]; then
 fi
 
 ## Install ##
+if [ -f ${source_dir}/scripts/${distro_id}-${wm_de}.sh ]; then
+	export install_script="${source_dir}/scripts/${distro_id}-${wm_de}"
+elif [ -f ${source_dir}/scripts/${distro_id}.sh ]; then
+	export install_script="${source_dir}/scripts/${distro_id}"
+fi
+
 [ -f /usr/bin/powerprofilesctl ] && powerprofilesctl list | grep -q performance && powerprofilesctl set performance
-[ -f /usr/bin/systemd-inhibit ] && [ -f ${source_dir}/scripts/${distro_id}.sh ] && systemd-inhibit ${source_dir}/scripts/${distro_id}.sh
+[ -f /usr/bin/systemd-inhibit ] && [ -f ${install_script}.sh ] && systemd-inhibit ${install_script}.sh
 
 ################################ POST INSTALL ################################
 
@@ -61,9 +67,8 @@ cat ${source_dir}/common/bash_aliases > ${root_mnt}/home/${user}/.bash_aliases
 mkdir -p ${root_mnt}/home/${user}/.config
 cp -rf ${source_dir}/post.sh ${root_mnt}/home/${user}/.config/post.sh
 
-if [ -f ${source_dir}/scripts/${distro_id}-post.sh ]; then
-	cp -rf ${source_dir}/scripts/${distro_id}-post.sh \
-	${root_mnt}/home/${user}/.config/${distro_id}-post.sh
+if [ -f ${install_script}-post.sh ]; then
+	cp -rf ${install_script}-post.sh ${root_mnt}/home/${user}/.config/
 fi
 
 ## Fstab ##

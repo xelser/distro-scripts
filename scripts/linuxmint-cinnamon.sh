@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-################################### PACKAGES ###################################
+################################## PACKAGES ##################################
 
 # PACKAGE MANAGER: APT
 sudo sed -i 's/packages.linuxmint.com/mirror.rackspace.com\/linuxmint\/packages/g' \
@@ -16,14 +16,15 @@ sudo apt autoremove --purge --yes rhythmbox hypnotix papirus-icon-theme libreoff
 sudo apt update && sudo apt upgrade --yes
 
 # INSTALL: Linux Mint Cinnamon
-sudo apt install --yes build-essential mint-meta-codecs power-profiles-daemon \
-  numlockx syncthing easyeffects transmission-daemon dconf-editor neovim \
-  gnome-disk-utility gparted
-  
+sudo apt install --yes build-essential mint-meta-codecs \
+  power-profiles-daemon numlockx syncthing easyeffects transmission-daemon \
+  dconf-editor neovim gnome-disk-utility gparted
+
   # plank grub-customizer gpaste gir1.2-gpaste-4.0 openoffice.org-hyphenation google-chrome-stable
 
 # INSTALL: Fastfetch (PPA)
-sudo add-apt-repository ppa:zhangsongcui3371/fastfetch --yes && sudo apt update
+sudo add-apt-repository ppa:zhangsongcui3371/fastfetch --yes && \
+  sudo apt update
 
 # INSTALL: Brave Browser
 curl -fsS https://dl.brave.com/install.sh | sh
@@ -35,7 +36,14 @@ curl -fsS https://dl.brave.com/install.sh | sh
 # Install: darkman
 #bash ${source_dir}/modules/darkman.sh
 
-#################################### CONFIG ####################################
+################################### CONFIG ###################################
+
+# Linux Mint Apps
+gsettings set com.linuxmint.updates hide-systray 'true'
+gsettings set com.linuxmint.updates hide-window-after-update 'true'
+gsettings set com.linuxmint.updates autorefresh-hours '2'
+gsettings set com.linuxmint.updates auto-update-cinnamon-spices 'true'
+gsettings set com.linuxmint.updates auto-update-flatpaks 'true'
 
 # lightdm slick greeter
 #echo "[Greeter]
@@ -52,7 +60,10 @@ curl -fsS https://dl.brave.com/install.sh | sh
 partition="$(lsblk --raw -o name,mountpoint | grep '^[^/]*/[^/]*$' | cut -d' ' -f1)"
 sudo e2label /dev/${partition} "Mint"
 
-#################################### THEMES ####################################
+# Remove Warpinator Folder
+rm -rf $HOME/Warpinator/
+
+################################### THEMES ###################################
 
 # INSTALL: GTK, KDE, Icon, Cursors
 if [ ! -f /.flag ]; then
@@ -62,3 +73,13 @@ if [ ! -f /.flag ]; then
 	${source_dir}/themes/cursor-sainnhe-capitaine.sh
 	${source_dir}/themes/fonts-nerd.sh UbuntuMono
 fi
+
+# Set Cinnamon Desktop Themes
+gsettings set org.cinnamon.theme name 'Colloid-Green-Dark-Gruvbox'
+gsettings set org.cinnamon.desktop.wm.preferences theme 'Colloid-Green-Dark-Gruvbox'
+gsettings set org.cinnamon.desktop.interface gtk-theme 'Colloid-Green-Dark-Gruvbox'
+gsettings set org.cinnamon.desktop.interface icon-theme 'Papirus-Dark'
+gsettings set org.cinnamon.desktop.interface cursor-theme 'Capitaine Cursors (Gruvbox)'
+
+# Set Monospaced font
+gsettings set org.gnome.desktop.interface monospace-font-name "Ubuntu Mono 10"

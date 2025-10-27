@@ -1,58 +1,67 @@
 call plug#begin()
 
-Plug 'ap/vim-css-color'
-
-" Themes
+" Theme
 Plug 'sainnhe/gruvbox-material'
+
+" Bar
 Plug 'nvim-lualine/lualine.nvim'
+"Plug 'vim-airline/vim-airline'
 
 " Settings
+Plug 'ap/vim-css-color'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
 Plug 'sheerun/vim-polyglot'
+Plug 'nvimdev/lspsaga.nvim'
+Plug 'windwp/nvim-autopairs'
+Plug 'nvim-tree/nvim-web-devicons'
+"Plug 'neoclide/coc.nvim', {'branch': 'release'}
+"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 
-"filetype plugin indent on   "allow auto-indenting depending on file type
-filetype plugin on
-"syntax on                   " syntax highlighting
+source $HOME/.config/nvim/theme.vim
 
-"set nocompatible            " disable compatibility to old-time vi
-set showmatch               " show matching 
-set ignorecase              " case insensitive 
-set mouse=v                 " middle-click paste with 
-set hlsearch                " highlight search 
-"set incsearch               " incremental search
+" transparency
+highlight Normal ctermbg=none guibg=none
+highlight NonText ctermbg=none guibg=none
+
+" common
 set number                  " add line numbers
 set mouse=a                 " enable mouse click
+set hlsearch                " highlight search
+set incsearch               " incremental search
+set showmatch               " show matching
+set ignorecase              " case insensitive
 set clipboard=unnamedplus   " using system clipboard
-set ttyfast                 " Speed up scrolling in Vim
 
-" Important!!
-if has('termguicolors')
-	set termguicolors
-endif
+" indent
+set autoindent
+set smartindent
+set noexpandtab     " Use tabs, not spaces
+set tabstop=2       " A tab character is 2 columns wide
+set shiftwidth=2    " Indent by 2 columns when using >> or <<
+set softtabstop=2   " Makes <Tab> and <Backspace> feel like 2-space steps
 
-" For dark version.
-set background=dark
-" For light version.
-"set background=light
+augroup MyAutoCmds
+	autocmd!
+	" autoindent
+	autocmd FileType * setlocal noexpandtab tabstop=2 shiftwidth=2 softtabstop=2
+	autocmd BufWritePre *.c,*.cpp,*.lua silent! normal gg=G
 
-" Set contrast.
-" This configuration option should be placed before `colorscheme gruvbox-material`.
-" Available values: 'hard', 'medium'(default), 'soft'
-let g:gruvbox_material_background = 'hard'
+	" whitespace cleanup
+	autocmd BufWritePre * :%s/\s\+$//e
 
-" For better performance
-let g:gruvbox_material_better_performance = 1
+	" visual feedback for yanks
+	autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+augroup END
 
-lua << END
-	require("lualine").setup({
-		options = {
-			theme = 'gruvbox-material'
-		},
-	})
-END
+" autoformat
+" autocmd BufWritePre *.js,*.ts,*.py,*.lua :call CocAction('format')
 
-colorscheme gruvbox-material
+" plugin: autopairs and lspsaga
+lua << EOF
+require("nvim-autopairs").setup({})
+require("lspsaga").setup({})
+EOF

@@ -1,13 +1,19 @@
 #!/bin/bash
 
-#mkdir -p $HOME/.config/Kvantum/
-#mkdir -p $HOME/.config/qt5ct/
+# rofi
+sed -i 's/light/dark/g' $HOME/.config/rofi/launchers/type-4/shared/colors.rasi
+sed -i 's/light/dark/g' $HOME/.config/rofi/powermenu/type-1/shared/colors.rasi
 
-#cp -rf $HOME/.local/share/dark-mode.d/kvantum.kvconfig	$HOME/.config/Kvantum/
-#cp -rf $HOME/.local/share/dark-mode.d/qt5ct.conf	$HOME/.config/qt5ct/
+# gtksourceview
+dconf write /org/xfce/mousepad/preferences/view/color-scheme "'gruvbox-material-hard-dark'"
 
-# Main
-gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3-dark'
-gsettings set org.gnome.desktop.interface icon-theme 'Tela-circle-dark'
-gsettings set org.gnome.desktop.interface cursor-theme 'Bibata-Modern-Ice'
+# xsettingsd
+cat $HOME/.local/share/dark-mode.d/xsettingsd > $HOME/.xsettingsd
+killall -HUP xsettingsd
+
+# nitrogen
+#nitrogen --set-zoom-fill /usr/share/backgrounds/gruvbox/cyber-girl-dark.png --save
+
+# polybar
+cat $HOME/.config/polybar/themes/gruvbox-material-hard-dark.ini > $HOME/.config/polybar/current_theme.ini
+pkill -USR1 polybar
