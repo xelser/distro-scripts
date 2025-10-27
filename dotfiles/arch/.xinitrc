@@ -1,12 +1,14 @@
 #!/bin/bash
 
+wm=i3
+
 ### 🧠 Environment Setup
-export DESKTOP_SESSION=i3
-export XDG_CURRENT_DESKTOP=i3
+export DESKTOP_SESSION=${wm}
+export XDG_CURRENT_DESKTOP=${wm}
 export XDG_SESSION_TYPE=x11
 
 ### 📜 Start fresh session log
-echo "$(date): Starting i3 via startx" > ~/.xsession-log
+echo "$(date): Starting ${wm} via startx" > ~/.xsession-log
 
 ### 🖥️ NVIDIA Offload (guarded)
 if xrandr --listproviders | grep -q "NVIDIA"; then
@@ -38,14 +40,12 @@ if [ -f ~/.Xresources ]; then
 fi
 
 ### 🎯 DPI Settings
-if [ "$NVIDIA_ACTIVE" = true ]; then
-  # When NVIDIA offload is active
+if [ "$(autorandr --current 2>/dev/null)" = "nvidia" ]; then
   xrandr --output DP-1-1 --dpi 101 --output eDP-1-1 --dpi 112
-  echo "$(date): NVIDIA DPI set (DP-1-1: 101, eDP-1-1: 112)" >> ~/.xsession-log
+  echo "$(date): DPI set (DP-1-1: 101, eDP-1-1: 112)" >> ~/.xsession-log
 else
-  # Default (modesetting / integrated)
   xrandr --output DP-1 --dpi 101 --output eDP-1 --dpi 112
-  echo "$(date): Default DPI set (DP-1: 101, eDP-1: 112)" >> ~/.xsession-log
+  echo "$(date): DPI set (DP-1: 101, eDP-1: 112)" >> ~/.xsession-log
 fi
 
 ### 🧩 Launch X11 Utilities
@@ -61,8 +61,8 @@ echo "$(date): picom started" >> ~/.xsession-log
 xsettingsd -c ~/.config/xsettingsd.conf &
 echo "$(date): xsettingsd launched" >> ~/.xsession-log
 
-### 🚀 Start i3 with fallback
-exec dbus-run-session i3 || {
-  echo "$(date): i3 failed, falling back to bash" >> ~/.xsession-log
+### 🚀 Start ${wm} with fallback
+exec dbus-run-session -- ${wm} || {
+  echo "$(date): ${wm} failed, falling back to bash" >> ~/.xsession-log
   exec bash --login
 }

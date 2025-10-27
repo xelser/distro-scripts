@@ -10,10 +10,10 @@ if [ ! -f /usr/bin/yay ]; then
 	yay -Syu --needed --noconfirm --save --removemake --cleanafter --norebuild \
 		--noredownload --batchinstall --combinedupgrade htpdate neovim-symlinks	\
 		shim-signed secureboot-grub grub-hook update-grub timeshift-autosnap \
-		betterlockscreen waypaper brave-bin ventoy-bin
+		betterlockscreen waypaper brave-bin ventoy-bin swayfx
 
 	# sway
-	yay -S --needed --noconfirm sway{fx,bg,idle,-contrib} waybar wofi \
+	yay -S --needed --noconfirm sway{bg,idle,-contrib} waybar wofi \
 		wl-clipboard wlogout xdg-desktop-portal-wlr
 
 	# Openbox: openbox obconf-qt obmenu-generator tint2 plank
@@ -51,6 +51,9 @@ sudo secure-grub-install
 # cpucpower
 sudo cpupower frequency-set -g performance
 sudo systemctl enable --now cpupower
+
+# brave
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/brave_flags.sh)"
 
 # nvidia dgpu as main renderer
 #bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/nvidia_dgpu.sh)"

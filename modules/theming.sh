@@ -221,4 +221,3 @@ if [[ -n "${gtk_theme}" ]] && command -v gsettings &> /dev/null; then
 fi
 
 echo "Theming synchronization complete."
-
