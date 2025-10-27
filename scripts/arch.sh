@@ -230,8 +230,8 @@ sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=30/g' /etc/default/grub
 mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 
 if dmesg | grep -q "EFI v"; then
-  grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch
   grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable
+  grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=BOOT
 else
   grub-install --target=i386-pc /dev/${device}
 fi

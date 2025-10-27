@@ -11,17 +11,16 @@ fi
 
 # autostart in tty
 if [ "$(tty)" = "/dev/tty1" ]; then
-  if mokutil --sb-state | grep -q "SecureBoot enabled"; then
+  # Detect Secure Boot and NVIDIA driver state
+  if mokutil --sb-state 2>/dev/null | grep -q "SecureBoot enabled"; then
     # Secure Boot is ON
-    if nvidia-smi >/dev/null 2>&1; then
-      # Proprietary NVIDIA driver is working
-      startx  # Use i3
+    if nvidia-smi &>/dev/null; then
+      startx                     # Use i3
     else
-      # Driver exists but isn't working
-      startw  # Use swayfx
+      startw || startx            # Fallback to swayfx, then i3
     fi
   else
     # Secure Boot is OFF
-    startx  # Use i3 regardless of NVIDIA status
+    startx                         # Always use i3
   fi
 fi

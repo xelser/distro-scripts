@@ -12,32 +12,43 @@ echo "$(date): Starting i3 via startx" > ~/.xsession-log
 if xrandr --listproviders | grep -q "NVIDIA"; then
   xrandr --setprovideroutputsource modesetting NVIDIA-0
   echo "$(date): NVIDIA offload enabled" >> ~/.xsession-log
+  NVIDIA_ACTIVE=true
+else
+  echo "$(date): NVIDIA provider not detected" >> ~/.xsession-log
+  NVIDIA_ACTIVE=false
 fi
 
 ### 🖼️ Monitor Configuration
 if command -v autorandr >/dev/null; then
-  autorandr --change && {
+  if autorandr --change; then
     echo "$(date): autorandr profile: $(autorandr --current 2>/dev/null)" >> ~/.xsession-log
-  } || {
+  else
     echo "$(date): autorandr failed, falling back to xrandr --auto" >> ~/.xsession-log
     xrandr --auto
-  }
+  fi
 else
   echo "$(date): autorandr not found, using xrandr --auto" >> ~/.xsession-log
   xrandr --auto
 fi
 
-### 🔤 Font Rendering and DPI
+### 🔤 Font Rendering
 if [ -f ~/.Xresources ]; then
   xrdb -merge ~/.Xresources
   echo "$(date): .Xresources merged" >> ~/.xsession-log
 fi
 
-xrandr --output DP-1-1 --dpi 101 --output eDP-1-1 --dpi 112
-echo "$(date): DPI set to 101 for DP-1 and 112 for eDP-1" >> ~/.xsession-log
+### 🎯 DPI Settings
+if [ "$NVIDIA_ACTIVE" = true ]; then
+  # When NVIDIA offload is active
+  xrandr --output DP-1-1 --dpi 101 --output eDP-1-1 --dpi 112
+  echo "$(date): NVIDIA DPI set (DP-1-1: 101, eDP-1-1: 112)" >> ~/.xsession-log
+else
+  # Default (modesetting / integrated)
+  xrandr --output DP-1 --dpi 101 --output eDP-1 --dpi 112
+  echo "$(date): Default DPI set (DP-1: 101, eDP-1: 112)" >> ~/.xsession-log
+fi
 
 ### 🧩 Launch X11 Utilities
-
 if numlockx on; then
   echo "$(date): numlockx activated" >> ~/.xsession-log
 else
