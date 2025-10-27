@@ -44,9 +44,6 @@ else
   read -p "Root Partition (#): " root
 fi
 
-## BOOTLOADER TARGET (GRUB Only) ##
-
-
 ################################# FORMATTING #################################
 
 ext4_setup () {
@@ -157,7 +154,7 @@ arch_base () {
 
   # Misc
   pacstrap /mnt flatpak xdg-user-dirs{,-gtk} \
-    noto-fonts{,-cjk,-emoji} ttf-roboto ttf-jetbrains-mono-nerd \
+    noto-fonts{,-cjk,-emoji} ttf-roboto ttf-jetbrains-mono{,-nerd} \
     gtk-engine{-murrine,s} qt5{ct,-wayland} kvantum-qt5 \
     gvfs-{google,mtp} ffmpeg{,thumbnailer} tumbler
 
@@ -232,7 +229,7 @@ echo -e "${user} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/${user}
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=30/g' /etc/default/grub
 mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 
-dmesg | grep -q "EFI v"; if [ $? -eq 0 ]; then
+if dmesg | grep -q "EFI v"; then
   grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=arch
   grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable
 else
