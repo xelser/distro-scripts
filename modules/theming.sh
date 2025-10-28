@@ -151,7 +151,7 @@ echo "Cursor Size: **${cursor_size}px**"
 echo "Xft Antialias: **${xft_antialias}**"
 echo "Xft Hintstyle: **${xft_hintstyle}**"
 
-# --- 2. Find Absolute Theme Paths (No change) ---
+# --- 2. Find Absolute Theme Paths ---
 
 theme_dir=""
 if [ -d /usr/share/themes/"${gtk_theme}" ]; then
@@ -171,7 +171,7 @@ if [[ -z "${theme_dir}" ]]; then
 	echo "Warning: Could not find GTK theme directory for '${gtk_theme}'. Skipping GTK4/Flatpak theming."
 fi
 
-# --- 3. Apply GTK 4 Theme Cohesion (No change) ---
+# --- 3. Apply GTK 4 Theme Cohesion ---
 
 if [[ -n "${theme_dir}" ]] && [[ -d "${theme_dir}/gtk-4.0" ]]; then
 	echo "Applying GTK 4 symlinks..."
@@ -189,7 +189,7 @@ else
 	echo "Skipping GTK 4 theming (theme directory or gtk-4.0 subdirectory not found)."
 fi
 
-# --- 4. Apply Flatpak Overrides (No change) ---
+# --- 4. Apply Flatpak Overrides ---
 
 if command -v flatpak &> /dev/null; then
 	echo "Applying Flatpak overrides..."
@@ -248,7 +248,7 @@ else
 	echo "Flatpak command not found. Skipping Flatpak overrides."
 fi
 
-# --- 5. Apply Sway Cursor Theme (Wayland only) (No change) ---
+# --- 5. Apply Sway Cursor Theme (Wayland only) ---
 
 if [[ "${wm_de}" == "sway" ]]; then
 	echo "Applying cursor theme to Sway..."
@@ -278,7 +278,7 @@ else
 fi
 
 
-# --- 6. Apply X11 Cursor Theme (i3/X11 only) (No change) ---
+# --- 6. Apply X11 Cursor Theme (i3/X11 only) ---
 
 if [[ "${is_x11_session}" == true ]] && [[ -n "${cursor_theme}" ]]; then
     echo "Applying cursor theme via Xresources for X11/i3..."
@@ -312,7 +312,7 @@ if [[ "${is_x11_session}" == true ]] && [[ -n "${cursor_theme}" ]]; then
 fi
 
 
-# --- 7. Apply GTK Font Settings to Xresources (No change) ---
+# --- 7. Apply GTK Font Settings to Xresources ---
 
 if [[ "${is_x11_session}" == true ]]; then
     echo "Synchronizing GTK font settings to Xresources (Xft)..."
@@ -348,8 +348,74 @@ if [[ "${is_x11_session}" == true ]]; then
     echo "Xft settings updated in ${xresources_file}. Changes take effect on next session restart."
 fi
 
+# --- 8. Apply Xsettingsd Configuration for X11 Flatpak Apps ---
 
-# --- 8. Apply Theme to GNOME Settings (Fallback/Cohesion) (No change) ---
+if [[ "${is_x11_session}" == true ]]; then
+    echo "Configuring xsettingsd for X11 (to propagate themes and fonts to Flatpak apps)..."
+
+    xsettingsd_dir="$HOME/.config/xsettingsd"
+    xsettingsd_conf="${xsettingsd_dir}/xsettingsd.conf"
+    mkdir -p "${xsettingsd_dir}"
+
+    # Detect GTK font name
+    gtk_font_name=""
+    if command -v gsettings &> /dev/null; then
+        gtk_font_name="$(gsettings get org.gnome.desktop.interface font-name 2>/dev/null | sed "s/^'//;s/'$//")"
+    fi
+    if [[ -z "${gtk_font_name}" ]]; then
+        gtk_font_name="$(get_ini_setting 'gtk-font-name')"
+    fi
+    if [[ -z "${gtk_font_name}" ]]; then
+        gtk_font_name="Sans 10"
+    fi
+
+    echo "Detected GTK font name: ${gtk_font_name}"
+
+    # Convert boolean values for xsettingsd (expects 0/1)
+    xft_antialias_num=1
+    xft_hinting_num=1
+
+    if [[ "${xft_antialias}" == "false" ]]; then
+        xft_antialias_num=0
+    fi
+    if [[ "${xft_hinting}" == "false" ]]; then
+        xft_hinting_num=0
+    fi
+
+    # Default fallback values if missing
+    [[ -z "${xft_hintstyle}" ]] && xft_hintstyle="hintslight"
+    [[ -z "${xft_rgba}" ]] && xft_rgba="rgb"
+
+    # Write xsettingsd configuration file
+    cat > "${xsettingsd_conf}" <<EOF
+Net/ThemeName "${gtk_theme}"
+Net/IconThemeName "${icon_theme}"
+Gtk/CursorThemeName "${cursor_theme}"
+Gtk/CursorThemeSize ${cursor_size}
+Gtk/FontName "${gtk_font_name}"
+Xft/Antialias ${xft_antialias_num}
+Xft/Hinting ${xft_hinting_num}
+Xft/HintStyle "${xft_hintstyle}"
+Xft/RGBA "${xft_rgba}"
+EOF
+
+    echo "xsettingsd configuration written to ${xsettingsd_conf}"
+
+    # Restart or start xsettingsd service
+    if pgrep -x "xsettingsd" >/dev/null; then
+        echo "Restarting xsettingsd..."
+        pkill -HUP xsettingsd || pkill xsettingsd
+        sleep 0.5
+        nohup xsettingsd >/dev/null 2>&1 &
+    else
+        echo "Starting xsettingsd..."
+        nohup xsettingsd >/dev/null 2>&1 &
+    fi
+
+    echo "xsettingsd is now active. X11 Flatpak apps should inherit your theme, cursor, and font settings."
+fi
+
+# --- 9. Apply Theme to GNOME Settings (Fallback/Cohesion) ---
 
 # This section writes the determined theme back to dconf.
 if [[ -n "${gtk_theme}" ]] && command -v gsettings &> /dev/null; then
@@ -364,7 +430,7 @@ if [[ -n "${gtk_theme}" ]] && command -v gsettings &> /dev/null; then
 	gsettings set org.gnome.desktop.interface cursor-size "${cursor_size}" 2>/dev/null
 fi
 
-# --- 9. Apply Settings to Root User (Sudo) ---
+# --- 10. Apply Settings to Root User (Sudo) ---
 
 root_config_dir="/root/.config/gtk-3.0"
 user_settings_file="$HOME/.config/gtk-3.0/settings.ini"

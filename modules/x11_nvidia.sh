@@ -13,12 +13,7 @@ Section "OutputClass"
     Driver "nvidia"
     Option "AllowEmptyInitialConfiguration"
     Option "PrimaryGPU" "yes"
+    ModulePath "/usr/lib/nvidia/xorg"
+    ModulePath "/usr/lib/xorg/modules"
 EndSection
 EOF
-
-sudo tee -a /usr/share/sddm/scripts/Xsetup > /dev/null << 'EOF'
-xrandr --setprovideroutputsource modesetting NVIDIA-0
-xrandr --auto
-EOF
-
-sudo chmod +x /usr/share/sddm/scripts/Xsetup

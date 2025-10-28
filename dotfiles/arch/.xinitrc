@@ -58,7 +58,7 @@ fi
 picom --glx-no-stencil --glx-no-rebind-pixmap &
 echo "$(date): picom started" >> ~/.xsession-log
 
-#xsettingsd -c ~/.config/xsettingsd.conf &
+#xsettingsd &
 #echo "$(date): xsettingsd launched" >> ~/.xsession-log
 
 ### 🚀 Start ${wm} with fallback

@@ -5,7 +5,7 @@
     "height": 5, // Waybar height (remove for auto height)
     // "width": 1366, // Waybar width (remove for auto width)
     "spacing": 8, // Gaps between modules (4px)
-    "reload_style_on_change": true,
+    // "reload_style_on_change": true,
     "margin-top": 10,
     "margin-left": 10,
     "margin-right": 10,

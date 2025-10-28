@@ -58,7 +58,8 @@ gsettings set org.mate.pluma use-default-font false
 # cpucpower
 sudo cpupower frequency-set -g performance
 
-# brave
+# user configs
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/x11_nvidia.sh)"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/brave_flags.sh)"
 
 # services
@@ -67,6 +68,3 @@ sudo systemctl enable nvidia-persistenced jellyfin cpupower tailscaled
 # secure boot
 #sudo sed -i 's|esp="/efi"|esp="/boot/efi"|g; s|bootloader_id="Arch"|bootloader_id="BOOT"|g' /etc/secureboot.conf
 #sudo secure-grub-install
-
-# nvidia dgpu as main renderer
-#bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/nvidia_dgpu.sh)"

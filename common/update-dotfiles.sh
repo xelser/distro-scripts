@@ -197,7 +197,7 @@ case "$WM_DE" in
             #".config/yambar/config.yml"
             ".config/tint2/tint2rc"
             ".config/xsettingsd.conf"
-            #".config/xsettingsd/xsettingsd.conf" # Commented out in original
+            ".config/xsettingsd/xsettingsd.conf"
         )
         for config in "${WM_CONFIGS[@]}"; do
             save_file "$(dirname "$config")/" "$(basename "$config")"
