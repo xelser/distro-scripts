@@ -6,8 +6,10 @@
 # 1. GTK 4 applications (via ~/.config/gtk-4.0 symlinks).
 # 2. Flatpak applications (via copying themes to standard user data directories and applying overrides).
 # 3. Qt applications using Kvantum (via Flatpak overrides).
+# 4. Sway (via runtime configuration and dedicated config file ~/.config/sway/config.d/cursor).
+# 5. X11 environments (via ~/.Xresources for system-wide cursor setting and font synchronization).
 #
-# Note: The script avoids 'sudo' and focuses only on user-level configuration.
+# NOTE: This script assumes 'xrdb -merge ~/.Xresources' is run by your session startup file (e.g., .xinitrc).
 
 # --- 1. Environment Detection and Theme Reading ---
 
@@ -23,76 +25,154 @@ if [[ -z "${wm_de}" ]]; then
 		wm_de="$(echo "${XDG_CURRENT_DESKTOP}" | cut -d'-' -f2 | cut -d':' -f1 | tr '[:upper:]' '[:lower:]')"
 	fi
 
+	# Normalize for known environments
+	if [[ "${XDG_CURRENT_DESKTOP}" == *"Sway"* ]]; then
+		wm_de="sway"
+	elif [[ "${XDG_CURRENT_DESKTOP}" == *"i3"* ]]; then
+		wm_de="i3"
+	fi
+
 	# Final check: If the parsing resulted in an empty string, fall back to generic 'config' mode.
 	if [[ -z "${wm_de}" ]]; then
 		wm_de="config"
 	fi
 fi
 
+# Detect if we are in an X11 session
+if [ -n "$DISPLAY" ] && [ -z "$WAYLAND_DISPLAY" ]; then
+    is_x11_session=true
+else
+    is_x11_session=false
+fi
+
 echo "Detected Environment/Mode: ${wm_de}"
+echo "Is X11 Session: ${is_x11_session}"
 
 # Initialize theme variables
 gtk_theme=""
 icon_theme=""
 cursor_theme=""
-cursor_size="" # Initialize cursor size variable
+cursor_size=""
+
+# Initialize font variables
+gtk_font_antialias=""
+gtk_font_hinting=""
+gtk_font_hintstyle=""
+gtk_font_rgba=""
 
 # Function to safely get gsettings value
 get_gsetting() {
-    local schema=$1
-    local key=$2
-    gsettings get "$schema" "$key" 2>/dev/null | sed "s/^'//;s/'$//"
+	local schema=$1
+	local key=$2
+	gsettings get "$schema" "$key" 2>/dev/null | sed "s/^'//;s/'$//"
 }
 
+# Function to safely get value from settings.ini (IMPROVED)
+get_ini_setting() {
+    local key=$1
+    local config_file="$HOME/.config/gtk-3.0/settings.ini"
+
+    if [ -f "${config_file}" ]; then
+        # Use awk to find the key within the [Settings] block and extract the value
+        # This is more robust than grep/cut for ini files.
+        awk -F '=' '
+            $1 ~ /\[Settings\]/ { settings_block=1; next }
+            /^\[/ { settings_block=0 }
+            settings_block && $1 ~ /'"${key}"'/ {
+                gsub(/^ +| +$/, "", $2); # Trim leading/trailing spaces from value
+                gsub(/"/, "", $2);      # Remove quotes
+                print $2;
+                exit
+            }
+        ' "${config_file}"
+    fi
+}
+
+
 if [[ "${wm_de}" == "xfce" ]]; then
-    gtk_theme="$(xfconf-query -c xsettings -p /Net/ThemeName -v 2>/dev/null)"
-    icon_theme="$(xfconf-query -c xsettings -p /Net/IconThemeName -v 2>/dev/null)"
-    cursor_theme="$(xfconf-query -c xsettings -p /Gtk/CursorThemeName -v 2>/dev/null)"
-    # Get cursor size from xfconf
-    cursor_size="$(xfconf-query -c xsettings -p /Gtk/CursorThemeSize -v 2>/dev/null)"
+	gtk_theme="$(xfconf-query -c xsettings -p /Net/ThemeName -v 2>/dev/null)"
+	icon_theme="$(xfconf-query -c xsettings -p /Net/IconThemeName -v 2>/dev/null)"
+	cursor_theme="$(xfconf-query -c xsettings -p /Gtk/CursorThemeName -v 2>/dev/null)"
+	cursor_size="$(xfconf-query -c xsettings -p /Gtk/CursorThemeSize -v 2>/dev/null)"
 
-elif [[ "${wm_de}" == "cinnamon" ]]; then
-    gtk_theme="$(get_gsetting org.cinnamon.desktop.interface gtk-theme)"
-    icon_theme="$(get_gsetting org.cinnamon.desktop.interface icon-theme)"
-    cursor_theme="$(get_gsetting org.cinnamon.desktop.interface cursor-theme)"
-    # Get cursor size from GSettings
-    cursor_size="$(get_gsetting org.gnome.desktop.interface cursor-size)" # Cinnamon often uses GNOME's schema for size
+elif [[ "${wm_de}" == "cinnamon" ]] || [[ "${wm_de}" == "gnome" ]]; then
+	# GSettings for theme/cursor
+    schema_interface="org.gnome.desktop.interface"
+	gtk_theme="$(get_gsetting "${schema_interface}" gtk-theme)"
+	icon_theme="$(get_gsetting "${schema_interface}" icon-theme)"
+	cursor_theme="$(get_gsetting "${schema_interface}" cursor-theme)"
+	cursor_size="$(get_gsetting "${schema_interface}" cursor-size)"
 
-elif [[ "${wm_de}" == "gnome" ]]; then
-    gtk_theme="$(get_gsetting org.gnome.desktop.interface gtk-theme)"
-    icon_theme="$(get_gsetting org.gnome.desktop.interface icon-theme)"
-    cursor_theme="$(get_gsetting org.gnome.desktop.interface cursor-theme)"
-    # Get cursor size from GSettings
-    cursor_size="$(get_gsetting org.gnome.desktop.interface cursor-size)"
+    # GSettings for font settings
+    gtk_font_antialias="$(get_gsetting "${schema_interface}" font-antialiasing)"
+    gtk_font_hinting="$(get_gsetting "${schema_interface}" font-hinting)"
+    gtk_font_hintstyle="$(get_gsetting "${schema_interface}" font-hint-style)"
+    gtk_font_rgba="$(get_gsetting "${schema_interface}" subpixel-rendering)"
 
 elif [[ -f $HOME/.config/gtk-3.0/settings.ini ]]; then
-    # General fallback for WMs or unknown DEs (matches 'config' mode)
-    config_file="$HOME/.config/gtk-3.0/settings.ini"
-    # NOTE: Using 'sed' to strip only leading space, preserving spaces in theme names.
-    gtk_theme="$(grep 'gtk-theme-name' "${config_file}" | cut -d'=' -f2 | sed 's/^[[:space:]]*//')"
-    icon_theme="$(grep 'gtk-icon-theme-name' "${config_file}" | cut -d'=' -f2 | sed 's/^[[:space:]]*//')"
-    cursor_theme="$(grep 'gtk-cursor-theme-name' "${config_file}" | cut -d'=' -f2 | sed 's/^[[:space:]]*//')"
+	# General fallback for WMs (config, sway, i3)
+	gtk_theme="$(get_ini_setting 'gtk-theme-name')"
+	icon_theme="$(get_ini_setting 'gtk-icon-theme-name')"
+	cursor_theme="$(get_ini_setting 'gtk-cursor-theme-name')"
+
+    # GTK font settings from settings.ini
+    gtk_font_antialias="$(get_ini_setting 'gtk-enable-antialias')"
+    gtk_font_hintstyle="$(get_ini_setting 'gtk-hint-style')"
+    gtk_font_rgba="$(get_ini_setting 'gtk-xft-rgba')"
 fi
 
 # Set a default cursor size if detection failed or returned empty/zero
 if [[ -z "${cursor_size}" || "${cursor_size}" == "0" ]]; then
-    cursor_size="24" # Default to 32px for modern desktop environments
+	cursor_size="24"
+fi
+
+# Normalize GTK settings to Xft format
+# Antialias
+if [[ "${gtk_font_antialias}" == "1" || "${gtk_font_antialias}" == "true" ]]; then
+    xft_antialias="true"
+elif [[ "${gtk_font_antialias}" == "0" || "${gtk_font_antialias}" == "false" ]]; then
+    xft_antialias="false"
+# Fallback to true if no explicit setting was found
+elif [[ -z "${xft_antialias}" ]]; then
+    xft_antialias="true"
+fi
+
+# Hinting (Set to true if antialias is true, or if a hintstyle is specified)
+if [[ "${gtk_font_hinting}" == "1" || "${gtk_font_hinting}" == "true" ]]; then
+    xft_hinting="true"
+elif [[ "${gtk_font_hinting}" == "0" || "${gtk_font_hinting}" == "false" ]]; then
+    xft_hinting="false"
+elif [[ "${xft_antialias}" == "true" ]]; then
+    xft_hinting="true"
+fi
+
+xft_hintstyle="${gtk_font_hintstyle}"
+# Fallback for hintstyle if not found, but hinting is on
+if [[ -z "${xft_hintstyle}" && "${xft_hinting}" == "true" ]]; then
+    xft_hintstyle="hintslight"
+fi
+
+xft_rgba="${gtk_font_rgba}"
+# Fallback for rgba if not found, but antialias is on
+if [[ -z "${xft_rgba}" && "${xft_antialias}" == "true" ]]; then
+    xft_rgba="rgb"
 fi
 
 
 if [[ -z "${gtk_theme}" ]]; then
-    echo "Error: Could not determine current GTK theme. Exiting." >&2
-    exit 1
+	echo "Error: Could not determine current GTK theme. Exiting." >&2
+	exit 1
 fi
 
-echo "GTK Theme: ${gtk_theme}"
-echo "Icon Theme: ${icon_theme}"
-echo "Cursor Theme: ${cursor_theme}"
-echo "Cursor Size: ${cursor_size}px" # Display detected/default size
+echo "GTK Theme: **${gtk_theme}**"
+echo "Icon Theme: **${icon_theme}**"
+echo "Cursor Theme: **${cursor_theme}**"
+echo "Cursor Size: **${cursor_size}px**"
+echo "Xft Antialias: **${xft_antialias}**"
+echo "Xft Hintstyle: **${xft_hintstyle}**"
 
-# --- 2. Find Absolute Theme Paths ---
+# --- 2. Find Absolute Theme Paths (No change) ---
 
-# Find the absolute directory for the GTK theme (GTK 4 symlinking needs this)
 theme_dir=""
 if [ -d /usr/share/themes/"${gtk_theme}" ]; then
 	theme_dir="/usr/share/themes/${gtk_theme}"
@@ -100,7 +180,6 @@ elif [ -d "$HOME/.themes/${gtk_theme}" ]; then
 	theme_dir="$HOME/.themes/${gtk_theme}"
 fi
 
-# Find the absolute directory for the Cursor theme (for Flatpak overrides)
 cursor_dir=""
 if [ -d /usr/share/icons/"${cursor_theme}" ]; then
 	cursor_dir="/usr/share/icons/${cursor_theme}"
@@ -109,115 +188,200 @@ elif [ -d "$HOME/.icons/${cursor_theme}" ]; then
 fi
 
 if [[ -z "${theme_dir}" ]]; then
-    echo "Warning: Could not find GTK theme directory for '${gtk_theme}'. Skipping GTK4/Flatpak theming."
+	echo "Warning: Could not find GTK theme directory for '${gtk_theme}'. Skipping GTK4/Flatpak theming."
 fi
 
-
-# --- 3. Apply GTK 4 Theme Cohesion ---
+# --- 3. Apply GTK 4 Theme Cohesion (No change) ---
 
 if [[ -n "${theme_dir}" ]] && [[ -d "${theme_dir}/gtk-4.0" ]]; then
-    echo "Applying GTK 4 symlinks..."
-    gtk4_config="$HOME/.config/gtk-4.0"
-    mkdir -p "${gtk4_config}"
+	echo "Applying GTK 4 symlinks..."
+	gtk4_config="$HOME/.config/gtk-4.0"
+	mkdir -p "${gtk4_config}"
 
-    # Remove existing links/files to prevent conflicts
-    rm -f "${gtk4_config}/assets" "${gtk4_config}/gtk.css" "${gtk4_config}/gtk-dark.css"
+	rm -f "${gtk4_config}/assets" "${gtk4_config}/gtk.css" "${gtk4_config}/gtk-dark.css"
 
-    # Create new symlinks
-    ln -sf "${theme_dir}/gtk-4.0/assets" "${gtk4_config}/assets"
-    ln -sf "${theme_dir}/gtk-4.0/gtk.css" "${gtk4_config}/gtk.css"
-    # gtk-dark.css might not exist, so link it only if present
-    if [ -f "${theme_dir}/gtk-4.0/gtk-dark.css" ]; then
-        ln -sf "${theme_dir}/gtk-4.0/gtk-dark.css" "${gtk4_config}/gtk-dark.css"
-    fi
+	ln -sf "${theme_dir}/gtk-4.0/assets" "${gtk4_config}/assets"
+	ln -sf "${theme_dir}/gtk-4.0/gtk.css" "${gtk4_config}/gtk.css"
+	if [ -f "${theme_dir}/gtk-4.0/gtk-dark.css" ]; then
+		ln -sf "${theme_dir}/gtk-4.0/gtk-dark.css" "${gtk4_config}/gtk-dark.css"
+	fi
 else
-    echo "Skipping GTK 4 theming (theme directory or gtk-4.0 subdirectory not found)."
+	echo "Skipping GTK 4 theming (theme directory or gtk-4.0 subdirectory not found)."
 fi
 
-
-# --- 4. Apply Flatpak Overrides (Theme Access) ---
+# --- 4. Apply Flatpak Overrides (No change) ---
 
 if command -v flatpak &> /dev/null; then
-    echo "Applying Flatpak overrides..."
+	echo "Applying Flatpak overrides..."
 
-    # 4a. Copy themes to user's local share directory for reliable Flatpak access
-    if [[ -n "${theme_dir}" ]]; then
-        theme_dest="$HOME/.local/share/themes/${gtk_theme}"
-        if [ ! -d "${theme_dest}" ]; then
-            echo "Copying GTK theme to ${theme_dest} for Flatpak compatibility..."
-            mkdir -p "$HOME/.local/share/themes"
-            # Use 'cp -r' to copy the directory recursively
-            cp -r "${theme_dir}" "$HOME/.local/share/themes/"
-        else
-            echo "GTK theme already present in local share directory."
-        fi
-    fi
+	# 4a. Copy themes
+	if [[ -n "${theme_dir}" ]]; then
+		theme_dest="$HOME/.local/share/themes/${gtk_theme}"
+		if [ ! -d "${theme_dest}" ]; then
+			echo "Copying GTK theme to ${theme_dest} for Flatpak compatibility..."
+			mkdir -p "$HOME/.local/share/themes"
+			cp -r "${theme_dir}" "$HOME/.local/share/themes/"
+		else
+			echo "GTK theme already present in local share directory."
+		fi
+	fi
 
-    if [[ -n "${cursor_dir}" ]]; then
-        icon_dest="$HOME/.local/share/icons/${cursor_theme}"
-        if [ ! -d "${icon_dest}" ]; then
-            echo "Copying Cursor theme to ${icon_dest} for Flatpak compatibility..."
-            mkdir -p "$HOME/.local/share/icons"
-            # Use 'cp -r' to copy the directory recursively
-            cp -r "${cursor_dir}" "$HOME/.local/share/icons/"
-        else
-            echo "Cursor theme already present in local share directory."
-        fi
-    fi
+	if [[ -n "${cursor_dir}" ]]; then
+		icon_dest="$HOME/.local/share/icons/${cursor_theme}"
+		if [ ! -d "${icon_dest}" ]; then
+			echo "Copying Cursor theme to ${icon_dest} for Flatpak compatibility..."
+			mkdir -p "$HOME/.local/share/icons"
+			cp -r "${cursor_dir}" "$HOME/.local/share/icons/"
+		else
+			echo "Cursor theme already present in local share directory."
+		fi
+	fi
 
-    # 4b. Expose necessary directories for Flatpak theming
-    # This ensures maximum visibility for themes placed in standard/hidden/system locations.
-    flatpak override --user --filesystem=xdg-config/gtk-3.0:ro
-    flatpak override --user --filesystem=xdg-config/gtk-4.0:ro
-    #flatpak override --user --filesystem=home/.themes:ro
-    #flatpak override --user --filesystem=home/.icons:ro
-    flatpak override --user --filesystem=xdg-data/themes:ro
-    flatpak override --user --filesystem=xdg-data/icons:ro
+	# 4b. Expose necessary directories
+	flatpak override --user --filesystem=xdg-config/gtk-3.0:ro
+	flatpak override --user --filesystem=xdg-config/gtk-4.0:ro
+	flatpak override --user --filesystem=xdg-data/themes:ro
+	flatpak override --user --filesystem=xdg-data/icons:ro
 
 
-    # 4c. Set theme environment variables for apps that don't auto-detect
-    flatpak override --user --env=GTK_THEME="${gtk_theme}"
-    flatpak override --user --env=XCURSOR_THEME="${cursor_theme}"
-    flatpak override --user --env=XCURSOR_PATH="$HOME/.local/share/icons"
-    flatpak override --user --env=XCURSOR_SIZE="${cursor_size}" # Added cursor size override
+	# 4c. Set theme environment variables
+	flatpak override --user --env=GTK_THEME="${gtk_theme}"
+	flatpak override --user --env=XCURSOR_THEME="${cursor_theme}"
+	flatpak override --user --env=XCURSOR_PATH="$HOME/.local/share/icons"
+	flatpak override --user --env=XCURSOR_SIZE="${cursor_size}"
 
-    # 4d. Kvantum (Qt) Theming for Flatpak
-    if [ -f /usr/bin/kvantummanager ]; then
-        echo "Configuring Kvantum for Flatpak apps..."
-        # Expose the user's Kvantum configuration directory
-        flatpak override --user --filesystem="$HOME/.config/Kvantum:ro"
-        # Force Qt apps to use the Kvantum style engine
-        flatpak override --user --env=QT_STYLE_OVERRIDE=kvantum
-        # Optionally, set a Kvantum theme environment variable
-        flatpak override --user --env=KVANTUM_THEME="${gtk_theme}"
-    fi
+	# 4d. Kvantum (Qt) Theming for Flatpak
+	if [ -f /usr/bin/kvantummanager ]; then
+		echo "Configuring Kvantum for Flatpak apps..."
+		flatpak override --user --filesystem="$HOME/.config/Kvantum:ro"
+		flatpak override --user --env=QT_STYLE_OVERRIDE=kvantum
+		flatpak override --user --env=KVANTUM_THEME="${gtk_theme}"
+	fi
 
-    # 4e. Icon cache update for the copied theme
-    # We update the cache on the copied version to ensure Flatpak sees it instantly.
-    if [[ "${icon_theme}" != "" ]] && [[ -d "$HOME/.local/share/icons/${icon_theme}" ]]; then
-        echo "Updating icon cache for local share theme '${icon_theme}'..."
-        gtk-update-icon-cache -f "$HOME/.local/share/icons/${icon_theme}" 2> /dev/null
-    fi
+	# 4e. Icon cache update
+	if [[ "${icon_theme}" != "" ]] && [[ -d "$HOME/.local/share/icons/${icon_theme}" ]]; then
+		echo "Updating icon cache for local share theme '${icon_theme}'..."
+		gtk-update-icon-cache -f "$HOME/.local/share/icons/${icon_theme}" 2> /dev/null
+	fi
 
 else
-    echo "Flatpak command not found. Skipping Flatpak overrides."
+	echo "Flatpak command not found. Skipping Flatpak overrides."
+fi
+
+# --- 5. Apply Sway Cursor Theme (Wayland only) (No change) ---
+
+if [[ "${wm_de}" == "sway" ]]; then
+	echo "Applying cursor theme to Sway..."
+
+	sway_config_dir="$HOME/.config/sway/config.d"
+	sway_config_file="${sway_config_dir}/cursor"
+	sway_command="seat seat0 xcursor_theme \"${cursor_theme}\" ${cursor_size}"
+
+	mkdir -p "${sway_config_dir}"
+
+	if [ -f "${sway_config_file}" ] && grep -q "seat seat0 xcursor_theme" "${sway_config_file}"; then
+		echo "Updating existing Sway cursor config line in ${sway_config_file}..."
+		nvim -c "%s/^seat seat0 xcursor_theme .*/${sway_command}/g | wq" "${sway_config_file}" 2>/dev/null
+	else
+		echo "Writing new Sway cursor config to ${sway_config_file}..."
+		echo -e "# Set by theme-sync script\n${sway_command}" > "${sway_config_file}"
+	fi
+
+	if command -v swaymsg &> /dev/null; then
+		echo "Running swaymsg to apply immediately: ${sway_command}"
+		swaymsg "${sway_command}" 2>/dev/null || echo "Warning: swaymsg failed to apply cursor theme. Is Sway running?"
+	else
+		echo "Warning: swaymsg not found. Cursor theme will be applied on next Sway restart."
+	fi
+else
+	echo "Skipping Sway cursor theming (Not Sway environment)."
 fi
 
 
-# --- 5. Apply Theme to GNOME Settings (If not already GNOME) ---
+# --- 6. Apply X11 Cursor Theme (i3/X11 only) ---
 
-# This section writes the determined theme back to dconf, which manages
-# themes for many DEs (Cinnamon, GNOME, etc.) and is often read by apps.
+if [[ "${is_x11_session}" == true ]] && [[ -n "${cursor_theme}" ]]; then
+    echo "Applying cursor theme via Xresources for X11/i3..."
+    xresources_file="$HOME/.Xresources"
+
+    # Ensure the file exists
+    touch "${xresources_file}"
+
+    theme_line="Xcursor.theme: ${cursor_theme}"
+    size_line="Xcursor.size: ${cursor_size}"
+
+    # Update Xcursor.theme
+    if grep -q "Xcursor.theme:" "${xresources_file}"; then
+        echo "  - Updating Xcursor.theme..."
+        nvim -c "%s/^Xcursor.theme:.*/${theme_line}/g | wq" "${xresources_file}" 2>/dev/null
+    else
+        echo "  - Appending Xcursor.theme..."
+        echo "${theme_line}" >> "${xresources_file}"
+    fi
+
+    # Update Xcursor.size
+    if grep -q "Xcursor.size:" "${xresources_file}"; then
+        echo "  - Updating Xcursor.size..."
+        nvim -c "%s/^Xcursor.size:.*/${size_line}/g | wq" "${xresources_file}" 2>/dev/null
+    else
+        echo "  - Appending Xcursor.size..."
+        echo "${size_line}" >> "${xresources_file}"
+    fi
+
+    echo "X11 cursor settings updated in ${xresources_file}. Changes take effect on next session restart."
+fi
+
+
+# --- 7. Apply GTK Font Settings to Xresources ---
+
+if [[ "${is_x11_session}" == true ]]; then
+    echo "Synchronizing GTK font settings to Xresources (Xft)..."
+    xresources_file="$HOME/.Xresources"
+
+    # Ensure the file exists (redundant, but safe)
+    touch "${xresources_file}"
+
+    declare -A xft_settings=(
+        ["Xft.antialias"]="${xft_antialias}"
+        ["Xft.hinting"]="${xft_hinting}"
+        ["Xft.hintstyle"]="${xft_hintstyle}"
+        ["Xft.rgba"]="${xft_rgba}"
+    )
+
+    for key in "${!xft_settings[@]}"; do
+        value="${xft_settings[${key}]}"
+        new_line="${key}: ${value}"
+
+        if [[ -n "${value}" ]]; then
+            escaped_key=$(echo "${key}" | sed 's/\./\\./g')
+
+            if grep -q "^${key}:" "${xresources_file}"; then
+                echo "  - Updating ${key} to ${value}..."
+                nvim -c "%s/^${escaped_key}:.*/${new_line}/g | wq" "${xresources_file}" 2>/dev/null
+            else
+                echo "  - Appending ${key} with ${value}..."
+                echo "${new_line}" >> "${xresources_file}"
+            fi
+        fi
+    done
+
+    echo "Xft settings updated in ${xresources_file}. Changes take effect on next session restart."
+fi
+
+
+# --- 8. Apply Theme to GNOME Settings (Fallback/Cohesion) ---
+
+# This section writes the determined theme back to dconf.
 if [[ -n "${gtk_theme}" ]] && command -v gsettings &> /dev/null; then
-    echo "Synchronizing themes via GSettings/dconf..."
-    # Apply GTK theme
-    gsettings set org.gnome.desktop.interface gtk-theme "'${gtk_theme}'" 2>/dev/null
-    # Apply Icon theme
-    gsettings set org.gnome.desktop.interface icon-theme "'${icon_theme}'" 2>/dev/null
-    # Apply Cursor theme
-    gsettings set org.gnome.desktop.interface cursor-theme "'${cursor_theme}'" 2>/dev/null
-    # Apply Cursor size
-    gsettings set org.gnome.desktop.interface cursor-size "${cursor_size}" 2>/dev/null
+	echo "Synchronizing themes via GSettings/dconf..."
+	# Apply GTK theme
+	gsettings set org.gnome.desktop.interface gtk-theme "'${gtk_theme}'" 2>/dev/null
+	# Apply Icon theme
+	gsettings set org.gnome.desktop.interface icon-theme "'${icon_theme}'" 2>/dev/null
+	# Apply Cursor theme
+	gsettings set org.gnome.desktop.interface cursor-theme "'${cursor_theme}'" 2>/dev/null
+	# Apply Cursor size
+	gsettings set org.gnome.desktop.interface cursor-size "${cursor_size}" 2>/dev/null
 fi
 
 echo "Theming synchronization complete."

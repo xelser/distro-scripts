@@ -34,9 +34,9 @@ sudo ln -sf /usr/share/fontconfig/conf.avail/10-hinting-slight.conf /etc/fonts/c
 sudo ln -sf /usr/share/fontconfig/conf.avail/11-lcdfilter-default.conf /etc/fonts/conf.d/
 
 # Copy Font Configs
-#sudo wget -q https://raw.githubusercontent.com/xelser/distro-scripts/main/common/local.conf -O /etc/fonts/local.conf
-wget -q https://raw.githubusercontent.com/xelser/distro-scripts/main/common/Xresources -O $HOME/.Xresources
+# sudo wget -q https://raw.githubusercontent.com/xelser/distro-scripts/main/common/local.conf -O /etc/fonts/local.conf
+# wget -q https://raw.githubusercontent.com/xelser/distro-scripts/main/common/Xresources -O $HOME/.Xresources
 
 # Refresh
 sudo fc-cache -fv
-fc-cache -fv
+# fc-cache -fv

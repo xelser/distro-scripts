@@ -3,7 +3,7 @@
 ################################## PACKAGES ##################################
 
 # E5-476G
-sudo pacman -S --noconfirm --needed \
+sudo pacman -S --noconfirm --needed tailscale \
   jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt libva-utils \
   nvidia-{dkms,utils,prime} lib32-nvidia-utils mesa-utils vulkan-tools
 
@@ -55,19 +55,18 @@ gsettings set org.mate.pluma use-default-font false
 
 ################################### CONFIG ###################################
 
-# secure boot
-#sudo sed -i 's|esp="/efi"|esp="/boot/efi"|g; s|bootloader_id="Arch"|bootloader_id="BOOT"|g' /etc/secureboot.conf
-#sudo secure-grub-install
-
 # cpucpower
 sudo cpupower frequency-set -g performance
 
 # brave
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/brave_flags.sh)"
 
+# services
+sudo systemctl enable nvidia-persistenced jellyfin cpupower tailscaled
+
+# secure boot
+#sudo sed -i 's|esp="/efi"|esp="/boot/efi"|g; s|bootloader_id="Arch"|bootloader_id="BOOT"|g' /etc/secureboot.conf
+#sudo secure-grub-install
+
 # nvidia dgpu as main renderer
 #bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/nvidia_dgpu.sh)"
-
-# services
-sudo systemctl enable nvidia-persistenced jellyfin cpupower
-
