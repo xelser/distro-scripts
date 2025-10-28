@@ -182,7 +182,7 @@ echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\nColor\n
 
 # packages: common
 pacman -Syy --noconfirm --needed \
-  brightnessctl gammastep wallutils dunst libnotify alacritty rofi \
+  xorg brightnessctl gammastep wallutils dunst libnotify alacritty rofi \
   mate-polkit engrampa atril pluma thunar-{volman,archive-plugin} \
   pavucontrol blueman transmission-gtk nwg-look firefox mpv imv \
   timeshift gparted resources
