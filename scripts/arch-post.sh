@@ -58,12 +58,13 @@ gsettings set org.mate.pluma active-plugins "['time', 'docinfo', 'modelines', 'f
 # cpucpower
 sudo cpupower frequency-set -g performance
 
+# services
+sudo systemctl enable nvidia-persistenced jellyfin cpupower tailscaled --now
+
 # user configs
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/x11_nvidia.sh)"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/brave_flags.sh)"
-
-# services
-sudo systemctl enable nvidia-persistenced jellyfin cpupower tailscaled
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/jellyfin_config.sh)"
 
 # secure boot
 #sudo sed -i 's|esp="/efi"|esp="/boot/efi"|g; s|bootloader_id="Arch"|bootloader_id="BOOT"|g' /etc/secureboot.conf
