@@ -1,15 +1,4 @@
 #!/bin/bash
-#
-# Cohesive Desktop Theme Synchronizer
-# This script reads the current GTK, Icon, and Cursor themes from common
-# desktop environments and ensures they are consistently applied to:
-# 1. GTK 4 applications (via ~/.config/gtk-4.0 symlinks).
-# 2. Flatpak applications (via copying themes to standard user data directories and applying overrides).
-# 3. Qt applications using Kvantum (via Flatpak overrides).
-# 4. Sway (via runtime configuration and dedicated config file ~/.config/sway/config.d/cursor).
-# 5. X11 environments (via ~/.Xresources for system-wide cursor setting and font synchronization).
-#
-# NOTE: This script assumes 'xrdb -merge ~/.Xresources' is run by your session startup file (e.g., .xinitrc).
 
 # --- 1. Environment Detection and Theme Reading ---
 
@@ -17,22 +6,17 @@
 # using standard desktop environment variables.
 if [[ -z "${wm_de}" ]]; then
 	if [ -z "${XDG_CURRENT_DESKTOP}" ]; then
-		# Use DESKTOP_SESSION as fallback
-		# Note: The specific cuts are used to normalize complex session strings.
 		wm_de="$(echo "${DESKTOP_SESSION}" | cut -d'-' -f2 | cut -d':' -f1 | tr '[:upper:]' '[:lower:]')"
 	else
-		# Use XDG_CURRENT_DESKTOP (preferred source)
 		wm_de="$(echo "${XDG_CURRENT_DESKTOP}" | cut -d'-' -f2 | cut -d':' -f1 | tr '[:upper:]' '[:lower:]')"
 	fi
 
-	# Normalize for known environments
 	if [[ "${XDG_CURRENT_DESKTOP}" == *"Sway"* ]]; then
 		wm_de="sway"
 	elif [[ "${XDG_CURRENT_DESKTOP}" == *"i3"* ]]; then
 		wm_de="i3"
 	fi
 
-	# Final check: If the parsing resulted in an empty string, fall back to generic 'config' mode.
 	if [[ -z "${wm_de}" ]]; then
 		wm_de="config"
 	fi
@@ -67,20 +51,19 @@ get_gsetting() {
 	gsettings get "$schema" "$key" 2>/dev/null | sed "s/^'//;s/'$//"
 }
 
-# Function to safely get value from settings.ini (IMPROVED)
+# Function to safely get value from settings.ini
 get_ini_setting() {
     local key=$1
     local config_file="$HOME/.config/gtk-3.0/settings.ini"
 
     if [ -f "${config_file}" ]; then
         # Use awk to find the key within the [Settings] block and extract the value
-        # This is more robust than grep/cut for ini files.
         awk -F '=' '
             $1 ~ /\[Settings\]/ { settings_block=1; next }
             /^\[/ { settings_block=0 }
             settings_block && $1 ~ /'"${key}"'/ {
-                gsub(/^ +| +$/, "", $2); # Trim leading/trailing spaces from value
-                gsub(/"/, "", $2);      # Remove quotes
+                gsub(/^ +| +$/, "", $2);
+                gsub(/"/, "", $2);
                 print $2;
                 exit
             }
@@ -132,12 +115,11 @@ if [[ "${gtk_font_antialias}" == "1" || "${gtk_font_antialias}" == "true" ]]; th
     xft_antialias="true"
 elif [[ "${gtk_font_antialias}" == "0" || "${gtk_font_antialias}" == "false" ]]; then
     xft_antialias="false"
-# Fallback to true if no explicit setting was found
 elif [[ -z "${xft_antialias}" ]]; then
     xft_antialias="true"
 fi
 
-# Hinting (Set to true if antialias is true, or if a hintstyle is specified)
+# Hinting
 if [[ "${gtk_font_hinting}" == "1" || "${gtk_font_hinting}" == "true" ]]; then
     xft_hinting="true"
 elif [[ "${gtk_font_hinting}" == "0" || "${gtk_font_hinting}" == "false" ]]; then
@@ -147,13 +129,11 @@ elif [[ "${xft_antialias}" == "true" ]]; then
 fi
 
 xft_hintstyle="${gtk_font_hintstyle}"
-# Fallback for hintstyle if not found, but hinting is on
 if [[ -z "${xft_hintstyle}" && "${xft_hinting}" == "true" ]]; then
     xft_hintstyle="hintslight"
 fi
 
 xft_rgba="${gtk_font_rgba}"
-# Fallback for rgba if not found, but antialias is on
 if [[ -z "${xft_rgba}" && "${xft_antialias}" == "true" ]]; then
     xft_rgba="rgb"
 fi
@@ -298,7 +278,7 @@ else
 fi
 
 
-# --- 6. Apply X11 Cursor Theme (i3/X11 only) ---
+# --- 6. Apply X11 Cursor Theme (i3/X11 only) (No change) ---
 
 if [[ "${is_x11_session}" == true ]] && [[ -n "${cursor_theme}" ]]; then
     echo "Applying cursor theme via Xresources for X11/i3..."
@@ -332,7 +312,7 @@ if [[ "${is_x11_session}" == true ]] && [[ -n "${cursor_theme}" ]]; then
 fi
 
 
-# --- 7. Apply GTK Font Settings to Xresources ---
+# --- 7. Apply GTK Font Settings to Xresources (No change) ---
 
 if [[ "${is_x11_session}" == true ]]; then
     echo "Synchronizing GTK font settings to Xresources (Xft)..."
@@ -369,7 +349,7 @@ if [[ "${is_x11_session}" == true ]]; then
 fi
 
 
-# --- 8. Apply Theme to GNOME Settings (Fallback/Cohesion) ---
+# --- 8. Apply Theme to GNOME Settings (Fallback/Cohesion) (No change) ---
 
 # This section writes the determined theme back to dconf.
 if [[ -n "${gtk_theme}" ]] && command -v gsettings &> /dev/null; then
@@ -383,5 +363,33 @@ if [[ -n "${gtk_theme}" ]] && command -v gsettings &> /dev/null; then
 	# Apply Cursor size
 	gsettings set org.gnome.desktop.interface cursor-size "${cursor_size}" 2>/dev/null
 fi
+
+# --- 9. Apply Settings to Root User (Sudo) ---
+
+root_config_dir="/root/.config/gtk-3.0"
+user_settings_file="$HOME/.config/gtk-3.0/settings.ini"
+
+if [ -f "${user_settings_file}" ] && command -v sudo &> /dev/null; then
+    echo "---"
+    echo "Applying GTK settings for root applications (gparted, timeshift)..."
+
+    # Create the target directory if it doesn't exist (requires sudo)
+    sudo mkdir -p "${root_config_dir}" 2>/dev/null
+
+    if [ $? -eq 0 ]; then
+        echo "Copying ${user_settings_file} to ${root_config_dir}/..."
+        # Copy the user's settings.ini to the root directory
+        sudo cp "${user_settings_file}" "${root_config_dir}/settings.ini"
+
+        # NOTE: Symlinking themes is complex as the paths might not exist for root,
+        # but the settings.ini usually references themes in /usr/share/themes, which is visible.
+        echo "Root settings applied. GTK apps run with sudo should now use your theme/cursor."
+    else
+        echo "Warning: Could not create root GTK configuration directory. Skipping root theme sync."
+    fi
+else
+    echo "Skipping root GTK settings sync (settings.ini not found or sudo not available)."
+fi
+
 
 echo "Theming synchronization complete."
