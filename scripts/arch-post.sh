@@ -18,8 +18,8 @@ if [ ! -f /usr/bin/yay ]; then
 		betterlockscreen waypaper swayfx
 
 	# sway
-	yay -S --needed --noconfirm sway{bg,idle,-contrib} waybar wofi \
-		wl-clipboard gtklock wlogout xdg-desktop-portal-wlr
+	yay -S --needed --noconfirm sway{bg,idle,-contrib} waybar wl-clipboard \
+		gtklock wlogout xdg-desktop-portal-wlr # wofi fuzzel
 
 	# Openbox: openbox obconf-qt obmenu-generator tint2 plank
 	# niri: niri kitty shikane nwg-displays
@@ -47,11 +47,11 @@ dconf write /org/gnome/desktop/interface/monospace-font-name "'JetBrainsMono Ner
 
 # text editor (pluma)
 gsettings set org.mate.pluma color-scheme 'gruvbox-material-medium-dark'
-gsettings set org.mate.pluma display-line-numbers true
-gsettings set org.mate.pluma editor-font 'JetBrainsMono Nerd Font 10'
 gsettings set org.mate.pluma highlight-current-line true
-gsettings set org.mate.pluma toolbar-visible false
+gsettings set org.mate.pluma display-line-numbers true
 gsettings set org.mate.pluma use-default-font false
+gsettings set org.mate.pluma toolbar-visible false
+gsettings set org.mate.pluma active-plugins "['time', 'docinfo', 'modelines', 'filebrowser']"
 
 ################################### CONFIG ###################################
 

@@ -142,7 +142,8 @@ arch_base () {
     xfsprogs btrfs-progs grub-btrfs inotify-tools # plymouth
 
   # Audio
-  pacstrap /mnt pipewire-{alsa,audio,jack,pulse} wireplumber
+  pacstrap /mnt pipewire-{alsa,audio,jack,pulse} wireplumber \
+    easyeffects lsp-plugins-lv2 ecasound
 
   # System Utils
   pacstrap /mnt cpupower zram-generator dmidecode inxi inetutils \
@@ -153,10 +154,10 @@ arch_base () {
     git wget zip unzip sassc
 
   # Misc
-  pacstrap /mnt flatpak xdg-user-dirs{,-gtk} ffmpeg{,thumbnailer} tumbler \
-    noto-fonts{,-cjk,-emoji} ttf-roboto ttf-jetbrains-mono{,-nerd}
+  pacstrap /mnt gvfs xdg-user-dirs{,-gtk} ffmpeg{,thumbnailer} tumbler \
+    noto-fonts{,-cjk,-emoji} ttf-roboto ttf-jetbrains-mono{,-nerd} flatpak
 
-genfstab -U /mnt >> /mnt/etc/fstab
+  genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt /bin/bash << EOF
 
 # Time
@@ -180,11 +181,11 @@ echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\nColor\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null && reflector && sleep 10
 
 # packages: common
-pacman -Syy --noconfirm --needed xorg \
-  brightnessctl gammastep wallutils dunst libnotify alacritty \
-  pavucontrol blueman transmission-gtk nwg-look firefox mpv imv \
+pacman -Syy --noconfirm --needed \
+  brightnessctl gammastep wallutils dunst libnotify alacritty rofi \
   mate-polkit engrampa atril pluma thunar-{volman,archive-plugin} \
-  easyeffects lsp-plugins-lv2 ecasound resources timeshift gparted
+  pavucontrol blueman transmission-gtk nwg-look firefox mpv imv \
+  timeshift gparted resources
 
 # packages: i3
 pacman -S --noconfirm --needed xorg-xinit xsettingsd numlockx picom \

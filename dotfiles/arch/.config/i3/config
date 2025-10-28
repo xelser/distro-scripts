@@ -224,7 +224,6 @@ exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
 exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id transmission-gtk --minimized
 exec --no-startup-id alacritty --daemon
-#exec --no-startup-id thunar --daemon
 
 # Autostart (for i3)
 exec_always --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f4)" --fx dimblur
