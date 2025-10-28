@@ -2,6 +2,11 @@
 
 ################################## PACKAGES ##################################
 
+# E5-476G
+sudo pacman -S --noconfirm --needed \
+  jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt libva-utils \
+  nvidia-{dkms,utils,prime} lib32-nvidia-utils mesa-utils vulkan-tools
+
 # INSTALL: AUR PACKAGES
 if [ ! -f /usr/bin/yay ]; then
 	cd /tmp/ && git clone https://aur.archlinux.org/yay-bin
@@ -18,6 +23,7 @@ if [ ! -f /usr/bin/yay ]; then
 
 	# Openbox: openbox obconf-qt obmenu-generator tint2 plank
 	# niri: niri kitty shikane nwg-displays
+	# gtk2 and qt5: gtk-engine{-murrine,s} qt5{ct,-wayland} kvantum-qt5
 
 	#	shim-signed secureboot-grub
 	# snap-pac-grub snapper-support
@@ -28,6 +34,8 @@ fi
 # BUILD: caffeinate
 #sudo pacman -S --needed --noconfirm rustup && rustup default stable
 #cargo install --git https://github.com/rschmukler/caffeinate
+
+################################### THEMES ###################################
 
 # theme
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-gruvbox.sh)"
@@ -45,16 +53,21 @@ gsettings set org.mate.pluma highlight-current-line true
 gsettings set org.mate.pluma toolbar-visible false
 gsettings set org.mate.pluma use-default-font false
 
+################################### CONFIG ###################################
+
 # secure boot
 #sudo sed -i 's|esp="/efi"|esp="/boot/efi"|g; s|bootloader_id="Arch"|bootloader_id="BOOT"|g' /etc/secureboot.conf
 #sudo secure-grub-install
 
 # cpucpower
 sudo cpupower frequency-set -g performance
-sudo systemctl enable --now cpupower
 
 # brave
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/brave_flags.sh)"
 
 # nvidia dgpu as main renderer
 #bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/nvidia_dgpu.sh)"
+
+# services
+sudo systemctl enable nvidia-persistenced jellyfin cpupower
+

@@ -153,10 +153,8 @@ arch_base () {
     git wget zip unzip sassc
 
   # Misc
-  pacstrap /mnt flatpak xdg-user-dirs{,-gtk} \
-    noto-fonts{,-cjk,-emoji} ttf-roboto ttf-jetbrains-mono{,-nerd} \
-    gtk-engine{-murrine,s} qt5{ct,-wayland} kvantum-qt5 \
-    gvfs-{google,mtp} ffmpeg{,thumbnailer} tumbler
+  pacstrap /mnt flatpak xdg-user-dirs{,-gtk} ffmpeg{,thumbnailer} tumbler \
+    noto-fonts{,-cjk,-emoji} ttf-roboto ttf-jetbrains-mono{,-nerd}
 
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt /bin/bash << EOF
@@ -193,11 +191,6 @@ pacman -S --noconfirm --needed xorg-xinit xsettingsd numlockx picom \
   i3-wm feh xss-lock polybar rofi maim slop scrot jq xclip {lx,auto}randr \
   autotiling xdg-desktop-portal-gtk
 
-# packages: e5-476g
-pacman -S --noconfirm --needed \
-  jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt libva-utils \
-  nvidia-{dkms,utils,prime} lib32-nvidia-utils mesa-utils vulkan-tools
-
 # autologin
 mkdir -p /etc/systemd/system/getty@tty1.service.d
 echo "[Service]" > /etc/systemd/system/getty@tty1.service.d/override.conf
@@ -214,7 +207,7 @@ echo "ExecStart=/usr/bin/grub-btrfsd --syslog --timeshift-auto" >> /etc/systemd/
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
 
 # services
-systemctl enable NetworkManager bluetooth cronie grub-btrfsd nvidia-persistenced jellyfin
+systemctl enable NetworkManager bluetooth cronie grub-btrfsd
 
 # plymouth
 #sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf && mkinitcpio -P
@@ -231,7 +224,7 @@ mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 
 if dmesg | grep -q "EFI v"; then
   grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable
-  grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=BOOT
+  #grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=BOOT
 else
   grub-install --target=i386-pc /dev/${device}
 fi
