@@ -21,8 +21,10 @@ if [ ! -f /usr/bin/yay ]; then
 	yay -S --needed --noconfirm sway{bg,idle,-contrib} waybar wl-clipboard \
 		gtklock wlogout xdg-desktop-portal-wlr # wofi fuzzel
 
+	# niri
+	yay -S --needed --noconfirm niri kitty shikane nwg-displays
+
 	# Openbox: openbox obconf-qt obmenu-generator tint2 plank
-	# niri: niri kitty shikane nwg-displays
 	# gtk2 and qt5: gtk-engine{-murrine,s} qt5{ct,-wayland} kvantum-qt5
 
 	#	shim-signed secureboot-grub
@@ -49,7 +51,7 @@ dconf write /org/gnome/desktop/interface/monospace-font-name "'JetBrainsMono Ner
 gsettings set org.mate.pluma color-scheme 'gruvbox-material-medium-dark'
 gsettings set org.mate.pluma highlight-current-line true
 gsettings set org.mate.pluma display-line-numbers true
-gsettings set org.mate.pluma use-default-font false
+gsettings set org.mate.pluma use-default-font true
 gsettings set org.mate.pluma toolbar-visible false
 gsettings set org.mate.pluma active-plugins "['time', 'docinfo', 'modelines', 'filebrowser']"
 

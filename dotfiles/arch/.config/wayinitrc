@@ -16,5 +16,5 @@ export OBS_USE_EGL=1
 #export GBM_BACKEND=nvidia-drm
 
 #--- Start Sway ---#
-#exec dbus-run-session sway --unsupported-gpu
-exec dbus-run-session -- sway
+#exec sway --unsupported-gpu
+exec dbus-run-session sway

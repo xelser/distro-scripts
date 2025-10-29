@@ -11,14 +11,12 @@ export XDG_SESSION_TYPE=x11
 echo "$(date): Starting ${wm} via startx" > ~/.xsession-log
 
 ### 🖥️ NVIDIA Offload (guarded)
-if xrandr --listproviders | grep -q "NVIDIA"; then
-  xrandr --setprovideroutputsource modesetting NVIDIA-0
-  echo "$(date): NVIDIA offload enabled" >> ~/.xsession-log
-  NVIDIA_ACTIVE=true
-else
-  echo "$(date): NVIDIA provider not detected" >> ~/.xsession-log
-  NVIDIA_ACTIVE=false
-fi
+#if xrandr --listproviders | grep -q "NVIDIA"; then
+#  xrandr --setprovideroutputsource modesetting NVIDIA-0
+#  echo "$(date): NVIDIA offload enabled" >> ~/.xsession-log
+#else
+#  echo "$(date): NVIDIA provider not detected" >> ~/.xsession-log
+#fi
 
 ### 🖼️ Monitor Configuration
 if command -v autorandr >/dev/null; then

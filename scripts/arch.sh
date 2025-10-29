@@ -154,7 +154,7 @@ arch_base () {
     git wget zip unzip sassc
 
   # Misc
-  pacstrap /mnt gvfs xdg-user-dirs{,-gtk} ffmpeg{,thumbnailer} tumbler \
+  pacstrap /mnt gvfs xdg-user-dirs ffmpeg{,thumbnailer} tumbler \
     noto-fonts{,-cjk,-emoji} ttf-roboto ttf-jetbrains-mono{,-nerd} flatpak
 
   genfstab -U /mnt >> /mnt/etc/fstab
@@ -181,16 +181,15 @@ echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\nColor\n
 [multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null && reflector && sleep 10
 
 # packages: common
-pacman -Syy --noconfirm --needed \
-  xorg brightnessctl gammastep wallutils dunst libnotify alacritty rofi \
-  mate-polkit engrampa atril pluma thunar-{volman,archive-plugin} \
-  pavucontrol blueman transmission-gtk nwg-look firefox mpv imv \
-  timeshift gparted resources
+pacman -Syy --noconfirm --needed xorg-{server,xinit,apps} numlockx picom \
+  xsettingsd gammastep brightnessctl wallutils dunst libnotify alacritty \
+  lxsession engrampa atril pluma thunar-{volman,archive-plugin} mpv imv \
+  timeshift pavucontrol blueman transmission-gtk nwg-look rofi firefox \
+  gparted resources
 
 # packages: i3
-pacman -S --noconfirm --needed xorg-xinit xsettingsd numlockx picom \
-  i3-wm feh xss-lock polybar rofi maim slop scrot jq xclip {lx,auto}randr \
-  autotiling xdg-desktop-portal-gtk
+pacman -S --noconfirm --needed i3-wm autotiling feh xss-lock polybar \
+  maim slop scrot jq xclip {lx,auto}randr xdg-desktop-portal-gtk
 
 # autologin
 mkdir -p /etc/systemd/system/getty@tty1.service.d
