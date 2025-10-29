@@ -1,11 +1,14 @@
+# global effects
+
 blur enable
 shadows enable
-corner_radius 10
+corner_radius 12
 
 # use command: swaymsg -r -t get_outputs | jq '.[0].layer_shell_surfaces | .[] | .namespace'
+
 layer_effects "rofi" corner_radius 6; shadows enable
 layer_effects "waybar" corner_radius 6; shadows enable
-layer_effects "notifications" corner_radius 10; shadows enable
+layer_effects "notifications" corner_radius 6; shadows enable
 layer_effects "logout_dialog" blur enable
 
 layer_effects "wofi" corner_radius 8; shadows enable

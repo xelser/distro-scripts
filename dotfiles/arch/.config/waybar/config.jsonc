@@ -69,14 +69,6 @@
         "format": "<span style=\"italic\">{}</span>"
     },
 
-    "sway/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": ["", ""],
-        "tooltip": true,
-        "tooltip-format": "{app}: {title}"
-    },
-
     "pulseaudio/slider": {
         "min": 0,
         "max": 100,
@@ -125,17 +117,16 @@
     },
 
     "cpu": {
-        "format": "  {usage}%",
+        "format": "  CPU {usage}%",
         "tooltip-format": "{avg_frequency}"
     },
 
     "memory": {
-        "format": "  {}% {used:0.1f} GiB",
+        "format": "  RAM {}% {used:0.1f} GiB",
         "tooltip-format": "Swap: {swapPercentage}%"
     },
 
     "backlight": {
-        // "device": "acpi_video1",
         "format": "{icon} {percent}%",
         "format-icons": ["󰃚", "󰃛", "󰃜", "󰃝", "󰃞", "󰃟", "󰃠"]
     },
