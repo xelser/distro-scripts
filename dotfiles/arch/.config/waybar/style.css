@@ -12,7 +12,7 @@
 }
 
 window {
-    color: @fg0;
+    color: @fg1;
     background-color: @bg_dim;
 }
 
@@ -32,8 +32,7 @@ button:hover {
 
 button.focused {
     color: @bg_dim;
-    background-color: @orange;
-    /*background-color: #a96b2c;*/
+    background-color: @fg0;
 }
 
 button.urgent {
@@ -67,7 +66,7 @@ button.urgent {
 }
 
 #memory {
-    color: @blue;
+    color: @aqua;
 }
 
 #network {
@@ -95,7 +94,7 @@ button.urgent {
 }
 
 #clock {
-    color: @aqua;
+    color: @orange;
 }
 
 #clock.calendar {

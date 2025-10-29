@@ -106,9 +106,9 @@
     },
 
     "network": {
-        "format-ethernet": "",
-        "format-wifi": "{icon}",
-        "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+        "format-ethernet": "  {bandwidthTotalBytes}",
+        "format-wifi": "{icon} {bandwidthTotalBytes}",
+        "format-icons": ["󰤯 ", "󰤟 ", "󰤢 ", "󰤥 ", "󰤨 "],
         "format-disconnected": "󱘖 Disconnected",
 
         "format-alt": " {bandwidthDownBytes} |  {bandwidthUpBytes}",
