@@ -18,8 +18,8 @@ if [ ! -f /usr/bin/yay ]; then
 		betterlockscreen waypaper swayfx
 
 	# sway
-	yay -S --needed --noconfirm sway{bg,idle,-contrib} waybar wl-clipboard \
-		gtklock wlogout xdg-desktop-portal-wlr # wofi fuzzel
+	yay -S --needed --noconfirm xdg-desktop-portal-wlr sway{bg,idle,-contrib} \
+		waybar wl-clipboard foot gtklock wlogout # wofi fuzzel
 
 	# niri
 	yay -S --needed --noconfirm niri kitty shikane nwg-displays

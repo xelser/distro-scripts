@@ -14,9 +14,5 @@ fi
 
 # autostart in tty
 if [ "$(tty)" = "/dev/tty1" ]; then
-  if mokutil --sb-state 2>/dev/null | grep -q "SecureBoot enabled"; then
-    if [ -f /usr/bin/sway ]; then startw; fi
-  else
-    startx
-  fi
+  startw
 fi

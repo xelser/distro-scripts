@@ -18,7 +18,7 @@ set $up k
 set $right l
 
 # Your preferred terminal emulator
-set $term alacritty msg create-window
+set $term footclient
 
 # Your preferred application launcher
 #set $menu bash -c "pgrep -x wofi > /dev/null || wofi"
@@ -290,10 +290,10 @@ exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 exec --no-startup-id brave --no-startup-window --gapplication-service
 exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id transmission-gtk --minimized
-exec --no-startup-id alacritty --daemon
 
 # Autostart (for sway)
 exec --no-startup-id swaybg --mode fill --image $(cat $HOME/.config/waypaper/config.ini | grep 'wallpaper' | cut -d'=' -f2) || waypaper --restore
+exec --no-startup-id foot --server
 exec --no-startup-id autotiling
 
 # Lockscreen (gtklock)
