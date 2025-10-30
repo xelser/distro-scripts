@@ -256,6 +256,7 @@ COMMON_FILES=(
     ".config/gtk-3.0/settings.ini"
     ".config/Kvantum/kvantum.kvconfig"
     ".config/qt5ct/qt5ct.conf"
+    ".config/qt6ct/qt6ct.conf"
 )
 for config in "${COMMON_FILES[@]}"; do
     save_file "$(dirname "$config")/" "$(basename "$config")"
