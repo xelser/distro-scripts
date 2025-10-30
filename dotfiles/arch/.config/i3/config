@@ -207,7 +207,7 @@ bindsym $mod+r mode "resize"
 #        status_command i3status
 #}
 
-# Assign workspaces upon startup
+# Manually assign workspaces upon startup
 workspace 1 output DP-1-1
 workspace 2 output eDP-1-1
 
@@ -218,11 +218,11 @@ gaps inner 10
 #gaps top 32
 
 # Autostart (Global)
+exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 exec --no-startup-id brave --no-startup-window --gapplication-service
 exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id transmission-gtk --minimized
 exec --no-startup-id alacritty --daemon
-exec --no-startup-id /usr/bin/lxpolkit
 
 # Autostart (for i3)
 exec_always --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f4)" --fx dimblur

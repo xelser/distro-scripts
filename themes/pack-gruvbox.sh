@@ -51,8 +51,8 @@ fi
 #fi
 
 if [ -f /usr/bin/kvantummanager ]; then
-	cd /tmp/ && git clone --depth 1 https://github.com/sachnr/gruvbox-kvantum-themes.git
-	sudo cp -rf gruvbox-kvantum-themes/Gruvbox* /usr/share/Kvantum/
+	cd /tmp/ && git clone --depth 1 https://github.com/TheSerphh/Gruvbox-Kvantum.git
+	sudo cp -rf Gruvbox-Kvantum/gruvbox-kvantum /usr/share/Kvantum/
 fi
 
 if [ -f /usr/bin/openbox ]; then

@@ -1,16 +1,27 @@
-#!/bin/bash
+#!/bin/sh
 
+### Selected WM
 wm=i3
 
-### 🧠 Environment Setup
+### Autostart X11 Defaults
+xinitdir="/etc/X11/xinit"
+
+if [ -d "$xinitdir"/xinitrc.d ] ; then
+	for f in "$xinitdir/xinitrc.d"/?*.sh ; do
+		[ -x "$f" ] && . "$f"
+	done
+	unset f
+fi
+
+### Environment Setup
 export DESKTOP_SESSION=${wm}
 export XDG_CURRENT_DESKTOP=${wm}
 export XDG_SESSION_TYPE=x11
 
-### 📜 Start fresh session log
+### Start fresh session log
 echo "$(date): Starting ${wm} via startx" > ~/.xsession-log
 
-### 🖥️ NVIDIA Offload (guarded)
+### NVIDIA Offload
 if xrandr --listproviders | grep -q "NVIDIA"; then
   xrandr --setprovideroutputsource modesetting NVIDIA-0
   echo "$(date): NVIDIA offload enabled" >> ~/.xsession-log
@@ -18,7 +29,7 @@ else
   echo "$(date): NVIDIA provider not detected" >> ~/.xsession-log
 fi
 
-### 🖼️ Monitor Configuration
+### Monitor Configuration
 if command -v autorandr >/dev/null; then
   if autorandr --change; then
     echo "$(date): autorandr profile: $(autorandr --current 2>/dev/null)" >> ~/.xsession-log
@@ -31,13 +42,13 @@ else
   xrandr --auto
 fi
 
-### 🔤 Font Rendering
+### Font Rendering
 if [ -f ~/.Xresources ]; then
-  xrdb -merge ~/.Xresources
-  echo "$(date): .Xresources merged" >> ~/.xsession-log
+    xrdb -merge ~/.Xresources
+    echo "$(date): .Xresources merged" >> ~/.xsession-log
 fi
 
-### 🎯 DPI Settings
+### DPI Settings
 if [ "$(autorandr --current 2>/dev/null)" = "nvidia" ]; then
   xrandr --output DP-1-1 --dpi 101 --output eDP-1-1 --dpi 112
   echo "$(date): DPI set (DP-1-1: 101, eDP-1-1: 112)" >> ~/.xsession-log
@@ -46,7 +57,7 @@ else
   echo "$(date): DPI set (DP-1: 101, eDP-1: 112)" >> ~/.xsession-log
 fi
 
-### 🧩 Launch X11 Utilities
+### Launch X11 Utilities
 if numlockx on; then
   echo "$(date): numlockx activated" >> ~/.xsession-log
 else

@@ -133,9 +133,8 @@ fi
 
 arch_base () {
   # Base
-  pacstrap /mnt base{,-devel} linux{,-headers} linux-firmware \
-    man-{db,pages} texinfo pacman-contrib bash-completion
-    # linux-lts{,-headers}
+  pacstrap /mnt base{,-devel} linux{,-headers} linux-zen{,-headers} \
+    linux-firmware man-{db,pages} texinfo pacman-contrib bash-completion
 
   # Boot
   pacstrap /mnt grub os-prober mokutil efibootmgr dosfstools intel-ucode \
@@ -154,10 +153,11 @@ arch_base () {
     git wget zip unzip sassc
 
   # Misc
-  pacstrap /mnt gvfs xdg-user-dirs ffmpeg{,thumbnailer} tumbler \
-    noto-fonts{,-cjk,-emoji} ttf-roboto ttf-jetbrains-mono{,-nerd} flatpak
+  pacstrap /mnt flatpak gvfs xdg-user-dirs ffmpeg{,thumbnailer} tumbler \
+    noto-fonts{,-cjk,-emoji} ttf-roboto ttf-jetbrains-mono{,-nerd} \
+    qt6-wayland qt6ct kvantum
 
-  genfstab -U /mnt >> /mnt/etc/fstab
+genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt /bin/bash << EOF
 
 # Time
@@ -183,9 +183,9 @@ echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\nColor\n
 # packages: common
 pacman -Syy --noconfirm --needed xorg-{server,xinit,apps} numlockx picom \
   xsettingsd gammastep brightnessctl wallutils dunst libnotify alacritty \
-  lxsession engrampa atril pluma thunar-{volman,archive-plugin} mpv imv \
-  timeshift pavucontrol blueman transmission-gtk nwg-look rofi firefox \
-  gparted resources
+  timeshift pavucontrol blueman transmission-gtk nwg-look rofi mpv imv \
+  mate-polkit engrampa atril pluma thunar-{volman,archive-plugin} \
+  firefox gparted resources
 
 # packages: i3
 pacman -S --noconfirm --needed i3-wm autotiling feh xss-lock polybar \
