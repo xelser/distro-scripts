@@ -14,9 +14,9 @@ if [ -d "$xinitdir"/xinitrc.d ] ; then
 fi
 
 ### Environment Setup
-export DESKTOP_SESSION=${wm}
-export XDG_CURRENT_DESKTOP=${wm}
 export XDG_SESSION_TYPE=x11
+export XDG_CURRENT_DESKTOP=${wm}
+export DESKTOP_SESSION=${wm}
 
 ### Start fresh session log
 echo "$(date): Starting ${wm} via startx" > ~/.xsession-log
@@ -44,8 +44,8 @@ fi
 
 ### Font Rendering
 if [ -f ~/.Xresources ]; then
-    xrdb -merge ~/.Xresources
-    echo "$(date): .Xresources merged" >> ~/.xsession-log
+  xrdb -merge ~/.Xresources
+  echo "$(date): .Xresources merged" >> ~/.xsession-log
 fi
 
 ### DPI Settings
