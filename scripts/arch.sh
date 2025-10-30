@@ -153,9 +153,9 @@ arch_base () {
     git wget zip unzip sassc
 
   # Misc
-  pacstrap /mnt flatpak gvfs xdg-user-dirs ffmpeg{,thumbnailer} tumbler \
+  pacstrap /mnt gvfs xdg-user-dirs ffmpeg{,thumbnailer} tumbler \
     noto-fonts{,-cjk,-emoji} ttf-roboto ttf-jetbrains-mono{,-nerd} \
-    qt6-wayland qt6ct kvantum
+    flatpak qt6-wayland qt6ct kvantum
 
 genfstab -U /mnt >> /mnt/etc/fstab
 arch-chroot /mnt /bin/bash << EOF

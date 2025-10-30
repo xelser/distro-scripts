@@ -259,7 +259,7 @@ bindsym $mod+r mode "resize"
 # User Configs:
 #
 
-# Xwayland
+# XWayland
 xwayland disable
 
 # NumLock
@@ -278,8 +278,11 @@ default_floating_border none
 
 # Floating Windows
 for_window [title="Compress"] floating enable
-for_window [title="Picture in picture"] floating enable
 for_window [title="File Operation Progress"] floating enable
+
+for_window [title="Picture in picture"] floating enable
+for_window [title="Picture in picture"] resize set 854 480
+for_window [title="Picture in picture"] move position center
 
 # Custom Keybinds
 bindsym $mod+Shift+f exec thunar
