@@ -40,6 +40,7 @@ fi
 ################################### THEMES ###################################
 
 # theme
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/grub.sh)"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/pack-gruvbox.sh)"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/cursor-sainnhe-capitaine.sh)"
 
@@ -64,7 +65,7 @@ sudo cpupower frequency-set -g performance
 sudo systemctl enable nvidia-persistenced jellyfin cpupower tailscaled --now
 
 # user configs
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/x11_nvidia.sh)"
+#bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/x11_nvidia.sh)"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/brave_flags.sh)"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/jellyfin_config.sh)"
 
