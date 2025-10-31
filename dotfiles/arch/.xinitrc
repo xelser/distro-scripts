@@ -64,8 +64,8 @@ else
   echo "$(date): numlockx failed" >> ~/.xsession-log
 fi
 
-# picom --glx-no-stencil --glx-no-rebind-pixmap &
-# echo "$(date): picom started" >> ~/.xsession-log
+picom --glx-no-stencil --glx-no-rebind-pixmap &
+echo "$(date): picom started" >> ~/.xsession-log
 
 #xsettingsd &
 #echo "$(date): xsettingsd launched" >> ~/.xsession-log

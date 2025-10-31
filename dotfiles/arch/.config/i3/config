@@ -207,10 +207,6 @@ bindsym $mod+r mode "resize"
 #        status_command i3status
 #}
 
-# Manually assign workspaces upon startup
-workspace 1 output DP-1-1
-workspace 2 output eDP-1-1
-
 # i3 Windows Config
 default_floating_border none
 default_border none
@@ -226,6 +222,7 @@ exec --no-startup-id alacritty --daemon
 
 # Autostart (for i3)
 exec_always --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f4)" --fx dimblur
+exec_always --no-startup-id bash $HOME/.config/autostart/i3-workspace.sh
 exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id $HOME/.fehbg || waypaper --restore
 exec_always --no-startup-id autotiling
