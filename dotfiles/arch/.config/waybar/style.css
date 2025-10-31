@@ -85,6 +85,10 @@ button.urgent {
     color: @green;
 }
 
+#pulseaudio.muted {
+    color: @red;
+}
+
 #bluetooth {
     color: @blue;
 }

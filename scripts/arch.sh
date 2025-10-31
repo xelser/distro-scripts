@@ -5,20 +5,9 @@
 ## ROOT PASSWORD ##
 read -p "Password: " -s psswrd
 
-## FILESYSTEM ##
-clear && echo "FILESYSTEM SELECTION:"
-echo "---------------------"
-echo "1. ext4 (Standard, simple)"
-echo "2. btrfs (Advanced, with subvolumes for @, @home, @var)"
-echo "---------------------"
-read -p "Select filesystem (#): " selected_fs
-case $selected_fs in
-	1) fs_name="ext4";;
-	2) fs_name="btrfs";;
-	*) echo "Invalid selection. Defaulting to ext4." && fs_name="ext4";;
-esac
-
 ## PARTITIONING ##
+root_setup="ext4_setup"
+
 if [[ ${machine} == "E5-476G" ]]; then
   device="sda"
   root="3"
@@ -94,13 +83,6 @@ format_swap () {
 partitioning () {
 umount -R /mnt >&/dev/null ; swapoff -a
 
-# Determine which setup function to use based on selection
-if [[ "$fs_name" == "btrfs" ]]; then
-    root_setup="btrfs_setup"
-else
-    root_setup="ext4_setup"
-fi
-
 if [[ ${machine} == "E5-476G" ]]; then
   ${root_setup} && swapon /dev/${device}${swap} ; dmesg | grep -q "EFI v" && format_efi
 elif [[ ${machine_type} == "Other" ]]; then # GNOME BOXES
@@ -150,7 +132,7 @@ arch_base () {
 
   # CLI Tools
   pacstrap /mnt neovim{,-plugins} fastfetch htop nvtop intel-gpu-tools \
-    git wget zip unzip sassc
+    git wget zip unzip unrar sassc
 
   # Misc
   pacstrap /mnt gvfs xdg-user-dirs ffmpeg{,thumbnailer} tumbler \
@@ -182,10 +164,10 @@ echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\nColor\n
 
 # packages: common
 pacman -Syy --noconfirm --needed xorg-{server,xinit,apps} numlockx picom \
-  xsettingsd gammastep brightnessctl wallutils dunst libnotify alacritty \
-  timeshift pavucontrol blueman transmission-gtk nwg-look rofi mpv imv \
-  mate-polkit engrampa atril pluma thunar-{volman,archive-plugin} \
-  dconf-editor firefox gparted resources unrar
+  brightnessctl wallutils dunst libnotify alacritty rofi mpv imv nwg-look \
+  timeshift pavucontrol blueman transmission-gtk mate-polkit engrampa atril \
+  pluma thunar-{volman,archive-plugin} dconf-editor firefox gparted resources
+  # xsettingsd gammastep
 
 # packages: i3
 pacman -S --noconfirm --needed i3-wm autotiling feh xss-lock polybar \
@@ -214,6 +196,7 @@ echo -e "${user} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/${user}
 # grub
 sed -i 's/quiet/quiet splash/g' /etc/default/grub
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=30/g' /etc/default/grub
+sed -i 's/#GRUB_TERMINAL_OUTPUT=console/GRUB_TERMINAL_OUTPUT=console/g' /etc/default/grub
 mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 
 if dmesg | grep -q "EFI v"; then
