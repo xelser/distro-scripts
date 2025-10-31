@@ -133,12 +133,12 @@ fi
 
 arch_base () {
   # Base
-  pacstrap /mnt base{,-devel} linux{,-headers} linux-zen{,-headers} \
-    linux-firmware man-{db,pages} texinfo pacman-contrib bash-completion
+  pacstrap /mnt base{,-devel} linux{,-headers} linux-firmware \
+    man-{db,pages} texinfo pacman-contrib bash-completion
 
   # Boot
   pacstrap /mnt grub os-prober mokutil efibootmgr dosfstools intel-ucode \
-    xfsprogs btrfs-progs grub-btrfs inotify-tools # plymouth
+    xfsprogs plymouth
 
   # Audio
   pacstrap /mnt pipewire-{alsa,audio,jack,pulse} wireplumber \
@@ -197,12 +197,6 @@ echo "[Service]" > /etc/systemd/system/getty@tty1.service.d/override.conf
 echo "ExecStart=" >> /etc/systemd/system/getty@tty1.service.d/override.conf
 echo "ExecStart=-/sbin/agetty --autologin ${user} --noclear %I $TERM" >> /etc/systemd/system/getty@tty1.service.d/override.conf
 
-# grub-btrfsd
-mkdir -p /etc/systemd/system/grub-btrfsd.service.d
-echo "[Service]" > /etc/systemd/system/grub-btrfsd.service.d/override.conf
-echo "ExecStart=" >> /etc/systemd/system/grub-btrfsd.service.d/override.conf
-echo "ExecStart=/usr/bin/grub-btrfsd --syslog --timeshift-auto" >> /etc/systemd/system/grub-btrfsd.service.d/override.conf
-
 # swap/zram-generator
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
 
@@ -210,7 +204,7 @@ echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priori
 systemctl enable NetworkManager bluetooth cronie grub-btrfsd
 
 # plymouth
-#sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf && mkinitcpio -P
+sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf && mkinitcpio -P
 
 # users
 useradd -mG wheel,video ${user}
@@ -218,7 +212,7 @@ echo -e "root:${psswrd}\n${user}:${psswrd}" | chpasswd
 echo -e "${user} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers.d/${user}
 
 # grub
-#sed -i 's/quiet/quiet splash/g' /etc/default/grub
+sed -i 's/quiet/quiet splash/g' /etc/default/grub
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=30/g' /etc/default/grub
 mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 
