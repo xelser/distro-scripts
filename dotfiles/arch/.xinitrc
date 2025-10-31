@@ -22,12 +22,12 @@ export DESKTOP_SESSION=${wm}
 echo "$(date): Starting ${wm} via startx" > ~/.xsession-log
 
 ### NVIDIA Offload
-#if xrandr --listproviders | grep -q "NVIDIA"; then
-#  xrandr --setprovideroutputsource modesetting NVIDIA-0
-#  echo "$(date): NVIDIA offload enabled" >> ~/.xsession-log
-#else
-#  echo "$(date): NVIDIA provider not detected" >> ~/.xsession-log
-#fi
+if xrandr --listproviders | grep -q "NVIDIA"; then
+  xrandr --setprovideroutputsource modesetting NVIDIA-0
+  echo "$(date): NVIDIA offload enabled" >> ~/.xsession-log
+else
+  echo "$(date): NVIDIA provider not detected" >> ~/.xsession-log
+fi
 
 ### Monitor Configuration
 if command -v autorandr >/dev/null; then
@@ -64,8 +64,8 @@ else
   echo "$(date): numlockx failed" >> ~/.xsession-log
 fi
 
-picom --glx-no-stencil --glx-no-rebind-pixmap &
-echo "$(date): picom started" >> ~/.xsession-log
+# picom --glx-no-stencil --glx-no-rebind-pixmap &
+# echo "$(date): picom started" >> ~/.xsession-log
 
 #xsettingsd &
 #echo "$(date): xsettingsd launched" >> ~/.xsession-log
