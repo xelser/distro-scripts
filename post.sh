@@ -91,7 +91,7 @@ fi
 # Hide Apps
 name=(calf org.gnome.dspy org.gnome.Devhelp org.gnome.Sysprof lstopo bssh
 	avahi-discover bvnc stoken-gui stoken-gui-small qv4l2 qvidcap yelp rofi
-	rofi-theme-selector display-im7.q16)
+	rofi-theme-selector display-im7.q16 xgps xgpsspeed)
 
 for app in "${name[@]}"; do
 	if [ -f /usr/share/applications/${app}.desktop ]; then
