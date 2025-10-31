@@ -3,7 +3,7 @@
 ################################## PACKAGES ##################################
 
 # E5-476G
-sudo pacman -S --noconfirm --needed tailscale \
+sudo pacman -S --noconfirm --needed tailscale intel-media-driver \
   jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt libva-utils \
   nvidia-{dkms,utils,prime} lib32-nvidia-utils mesa-utils vulkan-tools
 

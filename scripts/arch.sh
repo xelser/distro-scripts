@@ -185,7 +185,7 @@ pacman -Syy --noconfirm --needed xorg-{server,xinit,apps} numlockx picom \
   xsettingsd gammastep brightnessctl wallutils dunst libnotify alacritty \
   timeshift pavucontrol blueman transmission-gtk nwg-look rofi mpv imv \
   mate-polkit engrampa atril pluma thunar-{volman,archive-plugin} \
-  firefox gparted resources
+  dconf-editor firefox gparted resources unrar
 
 # packages: i3
 pacman -S --noconfirm --needed i3-wm autotiling feh xss-lock polybar \
@@ -201,7 +201,7 @@ echo "ExecStart=-/sbin/agetty --autologin ${user} --noclear %I $TERM" >> /etc/sy
 echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priority = 100" > /etc/systemd/zram-generator.conf
 
 # services
-systemctl enable NetworkManager bluetooth cronie grub-btrfsd
+systemctl enable NetworkManager bluetooth cronie
 
 # plymouth
 sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf && mkinitcpio -P
