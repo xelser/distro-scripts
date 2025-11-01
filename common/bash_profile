@@ -14,5 +14,5 @@ fi
 
 # autostart in tty
 if [ "$(tty)" = "/dev/tty1" ]; then
-	startw || startx
+	startx || startw
 fi
