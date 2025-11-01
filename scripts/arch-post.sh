@@ -14,8 +14,8 @@ if [ ! -f /usr/bin/yay ]; then
 
 	yay -Syu --needed --noconfirm --save --removemake --cleanafter --norebuild \
 		--noredownload --batchinstall --combinedupgrade	grub-hook update-grub \
-		htpdate	timeshift-autosnap betterlockscreen waypaper swayfx \
-		{brave,ventoy,fladder}-bin neovim-symlinks
+		htpdate neovim-symlinks betterlockscreen waypaper swayfx \
+		{brave,ventoy,fladder}-bin
 
 	# sway
 	yay -S --needed --noconfirm sway{bg,idle,-contrib} waybar wl-clipboard \
