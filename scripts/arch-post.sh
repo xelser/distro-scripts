@@ -19,10 +19,11 @@ if [ ! -f /usr/bin/yay ]; then
 
 	# sway
 	yay -S --needed --noconfirm sway{bg,idle,-contrib} waybar wl-clipboard \
-		foot gtklock wlogout xdg-desktop-portal-wlr # wofi fuzzel
+		foot gtklock xorg-xwayland xdg-desktop-portal-wlr # wofi fuzzel wlogout
 
 	# niri
-	#yay -S --needed --noconfirm niri kitty shikane nwg-displays
+	yay -S --needed --noconfirm niri kitty shikane nwg-displays \
+		xwayland-satellite xdg-desktop-portal-gnome
 
 	# Openbox: openbox obconf-qt obmenu-generator tint2 plank
 	# gtk2 and qt5: gtk-engine{-murrine,s} qt5{ct,-wayland} kvantum-qt5

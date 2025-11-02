@@ -165,8 +165,9 @@ echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\nColor\n
 # packages: common
 pacman -Syy --noconfirm --needed xorg-{server,xinit,apps} numlockx picom \
   brightnessctl wallutils dunst libnotify alacritty rofi mpv imv nwg-look \
-  timeshift pavucontrol blueman transmission-gtk mate-polkit engrampa atril \
-  pluma thunar-{volman,archive-plugin} dconf-editor firefox gparted resources
+  timeshift pavucontrol blueman transmission-gtk mate-polkit dconf-editor \
+  engrampa atril pluma thunar-{volman,archive-plugin,media-tags-plugin} \
+  firefox gparted resources
   # xsettingsd gammastep
 
 # packages: i3
