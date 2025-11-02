@@ -115,8 +115,8 @@ fi
 
 arch_base () {
   # Base
-  pacstrap /mnt base{,-devel} linux{,-headers} linux-firmware \
-    man-{db,pages} texinfo pacman-contrib bash-completion
+  pacstrap /mnt base{,-devel} linux-{zen,lts} linux-{zen,lts}-headers \
+    linux-firmware man-{db,pages} texinfo pacman-contrib bash-completion
 
   # Boot
   pacstrap /mnt grub os-prober mokutil efibootmgr dosfstools intel-ucode \

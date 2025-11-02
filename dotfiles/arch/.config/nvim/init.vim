@@ -7,17 +7,16 @@ Plug 'sainnhe/gruvbox-material'
 Plug 'nvim-lualine/lualine.nvim'
 "Plug 'vim-airline/vim-airline'
 
-" Settings
+" Visuals
 Plug 'ap/vim-css-color'
+Plug 'sheerun/vim-polyglot'
+Plug 'nvim-tree/nvim-web-devicons'
+
+" Settings
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
-Plug 'sheerun/vim-polyglot'
-Plug 'nvimdev/lspsaga.nvim'
 Plug 'windwp/nvim-autopairs'
-Plug 'nvim-tree/nvim-web-devicons'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 
@@ -47,7 +46,6 @@ set softtabstop=2   " Makes <Tab> and <Backspace> feel like 2-space steps
 augroup MyAutoCmds
 	autocmd!
 	" autoindent
-	autocmd FileType * setlocal noexpandtab tabstop=2 shiftwidth=2 softtabstop=2
 	autocmd BufWritePre *.c,*.cpp,*.lua silent! normal gg=G
 
 	" whitespace cleanup
@@ -57,11 +55,7 @@ augroup MyAutoCmds
 	autocmd TextYankPost * silent! lua vim.highlight.on_yank()
 augroup END
 
-" autoformat
-" autocmd BufWritePre *.js,*.ts,*.py,*.lua :call CocAction('format')
-
-" plugin: autopairs and lspsaga
+" plugin: autopairs
 lua << EOF
 require("nvim-autopairs").setup({})
-require("lspsaga").setup({})
 EOF
