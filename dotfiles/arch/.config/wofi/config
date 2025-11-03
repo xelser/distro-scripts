@@ -3,6 +3,7 @@ location=center
 gtk-dark=true
 prompt=Search Applications...
 allow_images=true
+allow_markup=true
 no_actions=true
 columns=1
 width=400
