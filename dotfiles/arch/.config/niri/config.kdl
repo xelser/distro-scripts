@@ -3,6 +3,11 @@
 // Check the wiki for a full description of the configuration:
 // https://yalter.github.io/niri/Configuration:-Introduction
 
+cursor {
+    xcursor-theme "Capitaine Cursors (Gruvbox)"
+    xcursor-size 24
+}
+
 // Input device configuration.
 // Find the full list of options on the wiki:
 // https://yalter.github.io/niri/Configuration:-Input
@@ -82,6 +87,13 @@ layout {
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
+// Global
+spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
+spawn-at-startup "brave" "--no-startup-window" "--gapplication-service"
+spawn-at-startup "easyeffects" "--gapplication-service"
+spawn-at-startup "transmission-gtk" "--minimized"
+
+// For Niri
 spawn-at-startup "alacritty" "--daemon"
 spawn-at-startup "waypaper" "--restore"
 spawn-at-startup "waybar"
