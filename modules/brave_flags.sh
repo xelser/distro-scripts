@@ -1,10 +1,20 @@
 #!/bin/bash
+set -e
 
 # === Configurable Paths ===
 WRAPPER="$HOME/.local/bin/brave"
 DESKTOP_SRC="/usr/share/applications/brave-browser.desktop"
 DESKTOP_DEST="$HOME/.local/share/applications/brave-browser.desktop"
 FLAGS_CONF="$HOME/.config/brave-flags.conf"
+
+if [[ -f /usr/bin/brave-browser ]]; then
+  SRC_BIN="/usr/bin/brave-browser"
+elif [[ -f /usr/bin/brave ]]; then
+  SRC_BIN="/usr/bin/brave"
+else
+  exit 1
+  echo "could not find brave binary"
+fi
 
 # === Flags to apply globally ===
 FLAGS="--enable-features=UseOzonePlatform,VaapiVideoDecoder \
@@ -24,7 +34,7 @@ fi
 mkdir -p "$(dirname "$WRAPPER")"
 cat > "$WRAPPER" <<EOF
 #!/bin/bash
-exec /usr/bin/brave-browser $FLAGS "\$@"
+exec $SRC_BIN $FLAGS "\$@"
 EOF
 
 chmod +x "$WRAPPER"

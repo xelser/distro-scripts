@@ -22,7 +22,7 @@ if [ ! -f /usr/bin/yay ]; then
 		foot gtklock xorg-xwayland xdg-desktop-portal-wlr # wofi fuzzel wlogout
 
 	# niri
-	yay -S --needed --noconfirm niri kitty \
+	yay -S --needed --noconfirm niri fuzzel \
 		xwayland-satellite xdg-desktop-portal-gnome
 
 	# Openbox: openbox obconf-qt obmenu-generator tint2 plank

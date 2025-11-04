@@ -1,0 +1,44 @@
+@import "/home/xelser/.config/waybar/gruvbox-material.css";
+
+* {
+    color: @fg0;
+    border-radius: 8px;
+    font-family: JetBrains Mono Medium;
+}
+
+window {
+    background-color: @bg_dim;
+    border: 2px solid @bg1;
+    padding: 10px;
+}
+
+#input {
+    background-color: @bg0;
+    border: 1px solid @bg1;
+    padding: 5px;
+    margin: 10px;
+}
+
+#entry {
+    padding: 6px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+#entry:selected {
+    background-color: @bg2;
+    border: transparent;
+}
+
+#text {
+    margin-left: 8px;
+}
+
+#text:selected {
+    color: @yellow;
+}
+
+:selected.focus {
+    box-shadow: none;
+}
