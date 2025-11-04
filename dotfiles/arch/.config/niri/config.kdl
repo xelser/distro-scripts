@@ -3,6 +3,17 @@
 // Check the wiki for a full description of the configuration:
 // https://yalter.github.io/niri/Configuration:-Introduction
 
+environment {
+    XDG_CURRENT_DESKTOP "niri"
+    DESKTOP_SESSION "niri"
+
+    XDG_SESSION_TYPE "wayland"
+    QT_QPA_PLATFORM "wayland"
+    QT6CT_PLATFORM "wayland"
+    MOZ_ENABLE_WAYLAND "1"
+    OBS_USE_EGL "1"
+}
+
 cursor {
     xcursor-theme "Capitaine Cursors (Gruvbox)"
     xcursor-size 24
@@ -136,7 +147,7 @@ window-rule {
 
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
-/-window-rule {
+window-rule {
     geometry-corner-radius 12
     clip-to-geometry true
 }
@@ -183,7 +194,7 @@ binds {
     // Open/close the Overview: a zoomed-out view of workspaces and windows.
     // You can also move the mouse into the top-left hot corner,
     // or do a four-finger swipe up on a touchpad.
-    Mod+Shift+Return repeat=false { toggle-overview; }
+    Mod+Space repeat=false { toggle-overview; }
     Mod+Shift+Q repeat=false { close-window; }
 
     Mod+Left  { focus-column-left; }
