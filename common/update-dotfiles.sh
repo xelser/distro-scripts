@@ -27,7 +27,7 @@ get_wm_de() {
 WM_DE=$(get_wm_de)
 
 # Set the destination directory
-if [ -n "$WM_DE" ] && [ "$WM_DE" != "gnome" ] && [ "$WM_DE" != "cinnamon" ] && [ "$WM_DE" != "xfce" ] && [ "$WM_DE" != "kde" ]; then
+if [ "$WM_DE" != "gnome" ] && [ "$WM_DE" != "cinnamon" ] && [ "$WM_DE" != "xfce" ] && [ "$WM_DE" != "kde" ]; then
     # For window managers, use only distro_id (as per your original script's fallback logic)
     DEST_DIR="$HOME/Documents/distro-scripts/dotfiles/${distro_id}"
 else

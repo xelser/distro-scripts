@@ -1,2 +1,0 @@
-#!/bin/sh
-feh --no-fehbg --bg-fill --image-bg '#ffffff' '/mnt/Home/Pictures/Wallpapers/Gruvbox/camera-2.jpg' 
