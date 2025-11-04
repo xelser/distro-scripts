@@ -13,8 +13,6 @@ if [ -f "$HOME/.profile" ]; then
 fi
 
 # autostart in tty
-if [ "$(tty)" = "/dev/tty1" ]; then
-	startx
-else
+if $(tty) = "/dev/tty1" ]; then
 	startw
 fi
