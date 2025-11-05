@@ -167,7 +167,7 @@ pacman -Syy --noconfirm --needed xorg-{server,xinit,apps} numlockx picom \
   brightnessctl wallutils dunst libnotify alacritty rofi mpv imv nwg-look \
   timeshift pavucontrol blueman transmission-gtk mate-polkit dconf-editor \
   engrampa atril pluma thunar-{volman,archive-plugin,media-tags-plugin} \
-  firefox gparted resources
+  firefox gparted resources mugshot
   # xsettingsd gammastep
 
 # packages: i3

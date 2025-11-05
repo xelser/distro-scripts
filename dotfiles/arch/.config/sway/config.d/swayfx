@@ -1,5 +1,5 @@
 shadows enable
-corner_radius 12
+corner_radius 10
 
 # Blur
 blur enable

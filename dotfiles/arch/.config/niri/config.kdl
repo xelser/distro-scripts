@@ -16,6 +16,11 @@ environment {
     XDG_SESSION_TYPE "wayland"
     QT_QPA_PLATFORM "wayland"
     QT6CT_PLATFORM "wayland"
+
+    ELECTRON_OZONE_PLATFORM_HINT "auto"
+    QT_QPA_PLATFORMTHEME_QT6 "gtk3"
+    QT_QPA_PLATFORMTHEME "gtk3"
+
     MOZ_ENABLE_WAYLAND "1"
     OBS_USE_EGL "1"
 }
@@ -94,6 +99,16 @@ layout {
     }
 }
 
+layer-rule {
+    match namespace="^quickshell$"
+    place-within-backdrop true
+}
+
+layer-rule {
+    match namespace="dms:blurwallpaper"
+    place-within-backdrop true
+}
+
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
@@ -108,7 +123,7 @@ spawn-at-startup "transmission-gtk" "--minimized"
 // For Niri
 spawn-at-startup "alacritty" "--daemon"
 spawn-at-startup "waypaper" "--restore"
-spawn-at-startup "waybar"
+spawn-at-startup "dms" "run"
 
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
@@ -118,8 +133,10 @@ spawn-at-startup "waybar"
 // (This example rule is commented out with a "/-" in front.)
 
 window-rule {
-    geometry-corner-radius 10
+    geometry-corner-radius 12
     clip-to-geometry true
+    tiled-state true
+    draw-border-with-background false
 }
 
 window-rule {
