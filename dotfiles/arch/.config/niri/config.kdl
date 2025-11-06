@@ -17,10 +17,10 @@ environment {
 	QT_QPA_PLATFORM "wayland"
 	QT6CT_PLATFORM "wayland"
 
-	//ELECTRON_OZONE_PLATFORM_HINT "auto"
-	//QT_QPA_PLATFORMTHEME_QT6 "gtk3"
-	//QT_QPA_PLATFORMTHEME "gtk3"
-	//DMS_DISABLE_MATUGEN "1"
+	ELECTRON_OZONE_PLATFORM_HINT "auto"
+	QT_QPA_PLATFORMTHEME_QT6 "gtk3"
+	QT_QPA_PLATFORMTHEME "gtk3"
+	DMS_DISABLE_MATUGEN "1"
 
 	MOZ_ENABLE_WAYLAND "1"
 	OBS_USE_EGL "1"
@@ -102,7 +102,8 @@ layout {
 }
 
 layer-rule {
-	match namespace="^noctalia-overview*"
+	match namespace="^quickshell$"
+	match namespace="dms:blurwallpaper"
 	place-within-backdrop true
 }
 
@@ -118,13 +119,13 @@ spawn-at-startup "easyeffects" "--gapplication-service"
 spawn-at-startup "transmission-gtk" "--minimized"
 
 // For Niri
-//spawn-at-startup "waypaper" "--restore"
+spawn-at-startup "waypaper" "--restore"
 spawn-at-startup "alacritty" "--daemon"
 
 // Niri Shell
 spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
-spawn-at-startup "qs" "-c" "noctalia-shell"
-//spawn-at-startup "dms" "run"
+//spawn-at-startup "qs" "-c" "noctalia-shell"
+spawn-at-startup "dms" "run"
 
 // Window rules let you adjust behavior for individual windows.
 // Find more information on the wiki:
@@ -177,11 +178,14 @@ binds {
 	Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
 
 	// Audio Controls
-	XF86AudioRaiseVolume allow-when-locked=true {spawn "dms" "ipc" "call" "audio" "increment" "5";
+	XF86AudioRaiseVolume allow-when-locked=true {
+		spawn "dms" "ipc" "call" "audio" "increment" "5";
 	}
+
 	XF86AudioLowerVolume allow-when-locked=true {
 		spawn "dms" "ipc" "call" "audio" "decrement" "5";
 	}
+
 	XF86AudioMute allow-when-locked=true {
 		spawn "dms" "ipc" "call" "audio" "mute";
 	}
@@ -190,6 +194,7 @@ binds {
 	XF86MonBrightnessUp allow-when-locked=true {
 		spawn "dms" "ipc" "call" "brightness" "increment" "5" "";
 	}
+
 	XF86MonBrightnessDown allow-when-locked=true {
 		spawn "dms" "ipc" "call" "brightness" "decrement" "5" "";
 	}
