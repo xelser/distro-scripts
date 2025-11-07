@@ -1,8 +1,11 @@
+# General
 shadows enable
 corner_radius 10
 
 # Blur
 blur enable
+blur_passes 4
+blur_radius 2
 
 # use command: swaymsg -r -t get_outputs | jq '.[0].layer_shell_surfaces | .[] | .namespace'
 layer_effects "rofi" corner_radius 6; shadows enable
