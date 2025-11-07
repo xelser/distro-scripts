@@ -8,26 +8,26 @@ DESKTOP_DEST="$HOME/.local/share/applications/brave-browser.desktop"
 FLAGS_CONF="$HOME/.config/brave-flags.conf"
 
 if [[ -f /usr/bin/brave-browser ]]; then
-  SRC_BIN="/usr/bin/brave-browser"
+	SRC_BIN="/usr/bin/brave-browser"
 elif [[ -f /usr/bin/brave ]]; then
-  SRC_BIN="/usr/bin/brave"
+	SRC_BIN="/usr/bin/brave"
 else
-  exit 1
-  echo "could not find brave binary"
+	exit 1
+	echo "could not find brave binary"
 fi
 
 # === Flags to apply globally ===
 FLAGS="--enable-features=UseOzonePlatform,VaapiVideoDecoder \
---enable-gpu-rasterization \
---enable-zero-copy \
---ignore-gpu-blocklist \
---password-store=basic"
+	--enable-gpu-rasterization \
+	--enable-zero-copy \
+	--ignore-gpu-blocklist \
+	--password-store=basic"
 # --ozone-platform=wayland \
 
 # === Remove redundant flags file ===
 if [[ -f "$FLAGS_CONF" ]]; then
-  rm -f "$FLAGS_CONF"
-  echo "🧹 Removed redundant $FLAGS_CONF"
+	rm -f "$FLAGS_CONF"
+	echo "🧹 Removed redundant $FLAGS_CONF"
 fi
 
 # === Create wrapper ===
@@ -43,11 +43,11 @@ echo "✅ Wrapper created at $WRAPPER"
 # === Override desktop entry ===
 mkdir -p "$(dirname "$DESKTOP_DEST")"
 if [[ -f "$DESKTOP_SRC" ]]; then
-  cp "$DESKTOP_SRC" "$DESKTOP_DEST"
-  sed -i "s|Exec=.*|Exec=$WRAPPER %U|" "$DESKTOP_DEST"
-  echo "✅ Desktop entry overridden at $DESKTOP_DEST"
+	cp "$DESKTOP_SRC" "$DESKTOP_DEST"
+	sed -i "s|Exec=brave|Exec=$WRAPPER|" "$DESKTOP_DEST"
+	echo "✅ Desktop entry overridden at $DESKTOP_DEST"
 else
-  echo "⚠️ Could not find $DESKTOP_SRC. Skipping desktop override."
+	echo "⚠️ Could not find $DESKTOP_SRC. Skipping desktop override."
 fi
 
 # === Optional: Refresh launcher cache ===

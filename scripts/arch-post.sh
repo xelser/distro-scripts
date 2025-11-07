@@ -4,8 +4,8 @@
 
 # E5-476G
 sudo pacman -S --noconfirm --needed tailscale intel-media-driver \
-  jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt libva-utils \
-  nvidia-{dkms,utils,prime} lib32-nvidia-utils mesa-utils vulkan-tools
+	jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt libva-utils \
+	nvidia-{dkms,utils,prime} lib32-nvidia-utils mesa-utils vulkan-tools
 
 # INSTALL: AUR PACKAGES
 if [ ! -f /usr/bin/yay ]; then
@@ -19,7 +19,7 @@ if [ ! -f /usr/bin/yay ]; then
 
 	# sway
 	yay -S --needed --noconfirm sway{bg,idle,-contrib} waybar wl-clipboard \
-		foot gtklock xorg-xwayland xdg-desktop-portal-wlr # wofi fuzzel wlogout
+		foot wofi wlogout gtklock xorg-xwayland xdg-desktop-portal-wlr # fuzzel
 
 	# niri
 	yay -S --needed --noconfirm niri fuzzel noctalia-shell cliphist cava \
