@@ -23,11 +23,13 @@
     "bar": {
         "backgroundOpacity": 1,
         "density": "default",
+        "exclusive": true,
         "floating": false,
         "marginHorizontal": 0.25,
         "marginVertical": 0.25,
         "monitors": [
         ],
+        "outerCorners": true,
         "position": "top",
         "showCapsule": true,
         "widgets": {
@@ -50,6 +52,7 @@
                 },
                 {
                     "hideMode": "hidden",
+                    "hideWhenIdle": false,
                     "id": "MediaMini",
                     "maxWidth": 145,
                     "scrollingMode": "hover",
@@ -89,7 +92,8 @@
                     "showDiskUsage": false,
                     "showMemoryAsPercent": true,
                     "showMemoryUsage": true,
-                    "showNetworkStats": false
+                    "showNetworkStats": false,
+                    "usePrimaryColor": true
                 },
                 {
                     "customIconPath": "",
@@ -105,6 +109,7 @@
     },
     "brightness": {
         "brightnessStep": 5,
+        "enableDdcSupport": false,
         "enforceMinimum": true
     },
     "colorSchemes": {
@@ -190,12 +195,17 @@
         "animationSpeed": 1,
         "avatarImage": "/home/xelser/.face",
         "compactLockScreen": false,
+        "dimDesktop": true,
+        "enableShadows": true,
         "forceBlackScreenCorners": false,
         "language": "",
         "lockOnSuspend": true,
         "radiusRatio": 1,
         "scaleRatio": 1,
         "screenRadiusRatio": 0.75,
+        "shadowDirection": "bottom_right",
+        "shadowOffsetX": 2,
+        "shadowOffsetY": 3,
         "showScreenCorners": true
     },
     "hooks": {
@@ -230,6 +240,7 @@
         "backgroundOpacity": 1,
         "criticalUrgencyDuration": 15,
         "doNotDisturb": false,
+        "enabled": true,
         "location": "top_right",
         "lowUrgencyDuration": 3,
         "monitors": [
@@ -257,9 +268,10 @@
         "videoCodec": "h264",
         "videoSource": "portal"
     },
-    "settingsVersion": 16,
+    "settingsVersion": 19,
     "setupCompleted": true,
     "templates": {
+        "alacritty": false,
         "code": false,
         "discord": false,
         "discord_armcord": false,
@@ -278,7 +290,8 @@
         "pywalfox": false,
         "qt": false,
         "vicinae": false,
-        "walker": false
+        "walker": false,
+        "wezterm": false
     },
     "ui": {
         "fontDefault": "Roboto",
@@ -286,7 +299,6 @@
         "fontFixed": "JetBrains Mono",
         "fontFixedScale": 1,
         "panelsAttachedToBar": true,
-        "panelsOverlayLayer": true,
         "tooltipsEnabled": true
     },
     "wallpaper": {
@@ -300,14 +312,16 @@
             {
                 "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox",
                 "name": "eDP-1",
-                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox/18.jpg"
+                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox/stairs.jpg"
             },
             {
                 "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox",
                 "name": "DP-1",
-                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox/18.jpg"
+                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox/stairs.jpg"
             }
         ],
+        "overviewEnabled": false,
+        "panelPosition": "follow_bar",
         "randomEnabled": true,
         "randomIntervalSec": 3600,
         "recursiveSearch": false,

@@ -3,6 +3,8 @@
 // Check the wiki for a full description of the configuration:
 // https://yalter.github.io/niri/Configuration:-Introduction
 
+include "noctalia/binds.kdl"
+
 prefer-no-csd
 
 hotkey-overlay {
@@ -24,6 +26,10 @@ environment {
 
 	MOZ_ENABLE_WAYLAND "1"
 	OBS_USE_EGL "1"
+}
+
+debug {
+	honor-xdg-activation-with-invalid-serial
 }
 
 cursor {
@@ -104,7 +110,31 @@ layout {
 layer-rule {
 	match namespace="^quickshell$"
 	match namespace="dms:blurwallpaper"
+	match namespace="^noctalia-overview*"
 	place-within-backdrop true
+}
+
+// Window rules let you adjust behavior for individual windows.
+// Find more information on the wiki:
+// https://yalter.github.io/niri/Configuration:-Window-Rules
+
+// Example: enable rounded corners for all windows.
+// (This example rule is commented out with a "/-" in front.)
+
+window-rule { // rounded corners
+	geometry-corner-radius 12
+	clip-to-geometry true
+}
+
+window-rule { // for apps that prefers max windows
+	match app-id="brave"
+	default-column-width { proportion 1.0; }
+}
+
+window-rule { // for floating windows
+	match app-id=r#"firefox$"# title="^Picture-in-Picture$"
+	match title="^Picture in picture$"
+	open-floating true
 }
 
 // Add lines like this to spawn processes at startup.
@@ -119,38 +149,13 @@ spawn-at-startup "easyeffects" "--gapplication-service"
 spawn-at-startup "transmission-gtk" "--minimized"
 
 // For Niri
-spawn-at-startup "waypaper" "--restore"
 spawn-at-startup "alacritty" "--daemon"
+//spawn-at-startup "swww-daemon"
 
 // Niri Shell
 spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
-//spawn-at-startup "qs" "-c" "noctalia-shell"
-spawn-at-startup "dms" "run"
-
-// Window rules let you adjust behavior for individual windows.
-// Find more information on the wiki:
-// https://yalter.github.io/niri/Configuration:-Window-Rules
-
-// Example: enable rounded corners for all windows.
-// (This example rule is commented out with a "/-" in front.)
-
-window-rule {
-	geometry-corner-radius 12
-	clip-to-geometry true
-}
-
-window-rule {
-	match app-id="brave"
-	default-column-width { proportion 1.0; }
-}
-
-window-rule {
-	// This app-id regular expression will work for both:
-	// - host Firefox (app-id is "firefox")
-	// - Flatpak Firefox (app-id is "org.mozilla.firefox")
-	match app-id=r#"firefox$"# title="^Picture-in-Picture$"
-	open-floating true
-}
+spawn-at-startup "qs" "-c" "noctalia-shell"
+//spawn-at-startup "dms" "run"
 
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
@@ -171,38 +176,15 @@ binds {
 	Mod+Shift+Q repeat=false { close-window; }
 
 	Mod+Return { spawn "alacritty" "msg" "create-window"; }
-	Mod+D { spawn "fuzzel"; }
 
-	Super+Alt+L { spawn "gtklock"; }
+	//Mod+D { spawn "fuzzel"; }
+	//Mod+L { spawn "gtklock"; }
 
 	Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
-
-	// Audio Controls
-	XF86AudioRaiseVolume allow-when-locked=true {
-		spawn "dms" "ipc" "call" "audio" "increment" "5";
-	}
-
-	XF86AudioLowerVolume allow-when-locked=true {
-		spawn "dms" "ipc" "call" "audio" "decrement" "5";
-	}
-
-	XF86AudioMute allow-when-locked=true {
-		spawn "dms" "ipc" "call" "audio" "mute";
-	}
-
-	// Brightness Controls
-	XF86MonBrightnessUp allow-when-locked=true {
-		spawn "dms" "ipc" "call" "brightness" "increment" "5" "";
-	}
-
-	XF86MonBrightnessDown allow-when-locked=true {
-		spawn "dms" "ipc" "call" "brightness" "decrement" "5" "";
-	}
 
 	// Open/close the Overview: a zoomed-out view of workspaces and windows.
 	// You can also move the mouse into the top-left hot corner,
 	// or do a four-finger swipe up on a touchpad.
-
 
 	Mod+Left  { focus-column-left; }
 	Mod+Down  { focus-window-down; }

@@ -1,6 +1,8 @@
 {
     "mError": "#fb4934",
+    "mHover": "#83a598",
     "mOnError": "#282828",
+    "mOnHover": "#282828",
     "mOnPrimary": "#282828",
     "mOnSecondary": "#282828",
     "mOnSurface": "#fbf1c7",

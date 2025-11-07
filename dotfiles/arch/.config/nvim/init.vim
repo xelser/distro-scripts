@@ -56,7 +56,7 @@ augroup MyAutoCmds
 	autocmd TextYankPost * silent! lua vim.highlight.on_yank()
 augroup END
 
-" lua block
+" Lua Block
 lua << EOF
 require('nvim-autopairs').setup({})
 
@@ -71,12 +71,12 @@ require('colorizer').setup({
 }, {
 	RGB      = true, -- #RGB
 	RRGGBB   = true, -- #RRGGBB
-	names    = true, -- "red", "blue"
 	RRGGBBAA = true, -- #RRGGBBAA
 	rgb_fn   = true, -- rgb(0,0,0)
 	hsl_fn   = true, -- hsl(120,100%,50%)
 	css      = true, -- Enable all CSS features
 	css_fn   = true, -- Enable CSS functions
+	names    = true, -- "red", "blue"
 	mode     = 'background', -- Use background color (or 'foreground')
 })
 EOF
