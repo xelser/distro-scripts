@@ -1,172 +1,172 @@
 {
-    // "layer": "top", // Waybar at top layer
-    // "position": "top", // Waybar position (top|bottom|left|right)
-    "output": ["eDP-1"],
-    "height": 5, // Waybar height (remove for auto height)
-    // "width": 1366, // Waybar width (remove for auto width)
-    "spacing": 8, // Gaps between modules (4px)
-    // "reload_style_on_change": true,
-    "margin-top": 10,
-    "margin-left": 10,
-    "margin-right": 10,
+	// "layer": "top", // Waybar at top layer
+	// "position": "top", // Waybar position (top|bottom|left|right)
+	"output": ["eDP-1"],
+	"height": 5, // Waybar height (remove for auto height)
+	// "width": 1366, // Waybar width (remove for auto width)
+	"spacing": 8, // Gaps between modules (4px)
+	// "reload_style_on_change": true,
+	"margin-top": 10,
+	"margin-left": 10,
+	"margin-right": 10,
 
-    // Choose the order of the modules
-    "modules-left": [   "cpu",
-                        "memory",
-                        "sway/workspaces",
-                        "sway/mode"
-    ],
+	// Choose the order of the modules
+	"modules-left": [   "cpu",
+		"memory",
+		"sway/workspaces",
+		"sway/mode"
+	],
 
-    "modules-center": [ "clock",
-    ],
+	"modules-center": [ "clock",
+	],
 
-    "modules-right": [  "network",
-                        "bluetooth",
-                        "pulseaudio",
-                        "backlight"
-    ],
+	"modules-right": [  "network",
+		"bluetooth",
+		"pulseaudio",
+		"backlight"
+	],
 
-    // Modules configuration
+	// Modules configuration
 
-    "clock": {
-        "format": "󰥔 {:%I:%M %p}",
-        "format-alt": "󰃭 {:%a %b %d}",
-        "tooltip-format": "<tt><small>{calendar}</small></tt>",
-        "calendar": {
-            "mode"          : "year",
-            "mode-mon-col"  : 3,
-            "weeks-pos"     : "right",
-            "on-scroll"     : 1,
-            "format": {
-                "months":     "<span color='#a89984'><b>{}</b></span>",
-                "days":       "<span color='#d4be98'>{}</span>",
-                "weeks":      "<span color='#d3869b'><b>{}</b></span>",
-                "weekdays":   "<span color='#d8a657'><b>{}</b></span>",
-                "today":      "<span color='#ea6962'><b><u>{}</u></b></span>"
-              }
-            },
-        "actions": {
-            "on-click-right": "mode",
-            "on-scroll-up": "tz_up",
-            "on-scroll-down": "tz_down",
-            "on-scroll-up": "shift_up",
-            "on-scroll-down": "shift_down"
-        }
-    },
+	"clock": {
+		"format": "󰥔 {:%I:%M %p}",
+		"format-alt": "󰃭 {:%a %b %d}",
+		"tooltip-format": "<tt><small>{calendar}</small></tt>",
+		"calendar": {
+			"mode"          : "year",
+			"mode-mon-col"  : 3,
+			"weeks-pos"     : "right",
+			"on-scroll"     : 1,
+			"format": {
+				"months":     "<span color='#a89984'><b>{}</b></span>",
+				"days":       "<span color='#d4be98'>{}</span>",
+				"weeks":      "<span color='#d3869b'><b>{}</b></span>",
+				"weekdays":   "<span color='#d8a657'><b>{}</b></span>",
+				"today":      "<span color='#ea6962'><b><u>{}</u></b></span>"
+			}
+		},
+		"actions": {
+			"on-click-right": "mode",
+			"on-scroll-up": "tz_up",
+			"on-scroll-down": "tz_down",
+			"on-scroll-up": "shift_up",
+			"on-scroll-down": "shift_down"
+		}
+	},
 
-    "sway/workspaces": {
-        "disable-scroll": true,
-        "all-outputs": true,
-        "format": "{name}"
-    },
+	"sway/workspaces": {
+		"disable-scroll": true,
+		"all-outputs": true,
+		"format": "{name}"
+	},
 
-    "sway/window": {
-        "all-outputs": true,
-        "format": "{app_id}"
-    },
+	"sway/window": {
+		"all-outputs": true,
+		"format": "{app_id}"
+	},
 
-    "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
-    },
+	"sway/mode": {
+		"format": "<span style=\"italic\">{}</span>"
+	},
 
-    "pulseaudio/slider": {
-        "min": 0,
-        "max": 100,
-        "orientation": "horizontal"
-    },
+	"pulseaudio/slider": {
+		"min": 0,
+		"max": 100,
+		"orientation": "horizontal"
+	},
 
-    "pulseaudio": {
-        "scroll-step": 5, // %, can be a float
-        "format": "{icon} {volume}%",
-        "format-source": "  {volume}%",
-        "format-bluetooth": "{icon} {volume}%",
+	"pulseaudio": {
+		"scroll-step": 5, // %, can be a float
+		"format": "{icon} {volume}%",
+		"format-source": "  {volume}%",
+		"format-bluetooth": "{icon} {volume}%",
 
-        "format-muted": "󰝟 MUTED",
-        "format-source-muted": " MUTED",
-        "format-bluetooth-muted": "󰝟 {icon}",
+		"format-muted": "󰝟 MUTED",
+		"format-source-muted": " MUTED",
+		"format-bluetooth-muted": "󰝟 {icon}",
 
-        "format-bluetooth": "{icon} {volume}%",
-        "format-icons": {
-            "headphone": " ",
-            "hands-free": "󱡏 ",
-            "headset": " ",
-            "phone": " ",
-            "portable": " ",
-            "car": " ",
-            "default": ["󰕿", "󰖀", "󰕾"]
-        },
-        "on-click": "pavucontrol"
-    },
+		"format-bluetooth": "{icon} {volume}%",
+		"format-icons": {
+			"headphone": " ",
+			"hands-free": "󱡏 ",
+			"headset": " ",
+			"phone": " ",
+			"portable": " ",
+			"car": " ",
+			"default": ["󰕿", "󰖀", "󰕾"]
+		},
+		"on-click": "pavucontrol"
+	},
 
-    "bluetooth": {
-        "format": "",
-        "format-connected": " {device_alias}",
-        "format-connected-battery": " {device_alias} 󰁹 {device_battery_percentage}%",
-        "on-click": "blueman-manager"
-    },
+	"bluetooth": {
+		"format": "",
+		"format-connected": " {device_alias}",
+		"format-connected-battery": " {device_alias} 󰁹 {device_battery_percentage}%",
+		"on-click": "blueman-manager"
+	},
 
-    "network": {
-        "format-ethernet": "  {bandwidthTotalBytes}",
-        "format-wifi": "{icon} {bandwidthTotalBytes}",
-        "format-icons": ["󰤯 ", "󰤟 ", "󰤢 ", "󰤥 ", "󰤨 "],
-        "format-disconnected": "󱘖 Disconnected",
+	"network": {
+		"format-ethernet": "  {bandwidthTotalBytes}",
+		"format-wifi": "{icon} {bandwidthTotalBytes}",
+		"format-icons": ["󰤯 ", "󰤟 ", "󰤢 ", "󰤥 ", "󰤨 "],
+		"format-disconnected": "󱘖 Disconnected",
 
-        "format-alt": " {bandwidthDownBytes} |  {bandwidthUpBytes}",
-        "tooltip-format": "{ifname}: {ipaddr}/{cidr}",
-        "tooltip-format-disconnected": "󰇧 Could not establish a connection"
-    },
+		"format-alt": " {bandwidthDownBytes} |  {bandwidthUpBytes}",
+		"tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+		"tooltip-format-disconnected": "󰇧 Could not establish a connection"
+	},
 
-    "cpu": {
-        "format": "  CPU {usage}%",
-        "tooltip-format": "{avg_frequency}"
-    },
+	"cpu": {
+		"format": "  CPU {usage}%",
+		"tooltip-format": "{avg_frequency}"
+	},
 
-    "memory": {
-        "format": "  RAM {}% {used:0.1f} GiB",
-        "tooltip-format": "Swap: {swapPercentage}%"
-    },
+	"memory": {
+		"format": "  RAM {used:0.1f} GiB",
+		"tooltip-format": "Usage: {}%\nSwap: {swapPercentage}%"
+	},
 
-    "backlight": {
-        "format": "{icon} {percent}%",
-        "format-icons": ["󰃚", "󰃛", "󰃜", "󰃝", "󰃞", "󰃟", "󰃠"]
-    },
+	"backlight": {
+		"format": "{icon} {percent}%",
+		"format-icons": ["󰃚", "󰃛", "󰃜", "󰃝", "󰃞", "󰃟", "󰃠"]
+	},
 
-    "custom/launch": {
-        "format": " Apps",
-        "on-click": "wofi -show drun",
-    },
+	"custom/launch": {
+		"format": " Apps",
+		"on-click": "wofi -show drun",
+	},
 
-    "custom/power": {
-        "format": "power",
-    },
+	"custom/power": {
+		"format": "power",
+	},
 
-    "custom/exit": {
-        "format": "exit",
-        "on-click": "swaymsg exit",
-    },
+	"custom/exit": {
+		"format": "exit",
+		"on-click": "swaymsg exit",
+	},
 
-    "custom/reboot": {
-        "format": "reboot",
-        "on-click": "sudo systemctl reboot",
-    },
+	"custom/reboot": {
+		"format": "reboot",
+		"on-click": "sudo systemctl reboot",
+	},
 
-    "custom/shutdown": {
-        "format": "shutdown",
-        "on-click": "sudo systemctl poweroff",
-    },
+	"custom/shutdown": {
+		"format": "shutdown",
+		"on-click": "sudo systemctl poweroff",
+	},
 
-    "group/power": {
-        "orientation": "inherit",
-        "drawer": {
-            "transition-duration": 500,
-            "children-class": "not-power",
-            "transition-left-to-right": false,
-       },
-       "modules": [
-           "custom/power",
-           "custom/shutdown",
-           "custom/reboot",
-           "custom/exit",
-       ]
-   },
+	"group/power": {
+		"orientation": "inherit",
+		"drawer": {
+			"transition-duration": 500,
+			"children-class": "not-power",
+			"transition-left-to-right": false,
+		},
+		"modules": [
+			"custom/power",
+			"custom/shutdown",
+			"custom/reboot",
+			"custom/exit",
+		]
+	},
 }
