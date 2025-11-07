@@ -8,7 +8,8 @@ Plug 'nvim-lualine/lualine.nvim'
 "Plug 'vim-airline/vim-airline'
 
 " Visuals
-Plug 'ap/vim-css-color'
+"Plug 'ap/vim-css-color'
+Plug 'NvChad/nvim-colorizer.lua'
 Plug 'nvim-tree/nvim-web-devicons'
 
 " Settings
@@ -57,12 +58,25 @@ augroup END
 
 " lua block
 lua << EOF
-require('nvim-autopairs').setup {}
+require('nvim-autopairs').setup({})
 
-require('nvim-treesitter.configs').setup {
-	auto_install = true,
-	highlight = { enable = true },
-	indent = { enable = true },
-}
+require('nvim-treesitter.configs').setup({
+auto_install = true,
+highlight = { enable = true },
+indent = { enable = true },
+})
 
+require('colorizer').setup({
+'*',
+}, {
+	RGB      = true, -- #RGB
+	RRGGBB   = true, -- #RRGGBB
+	names    = true, -- "red", "blue"
+	RRGGBBAA = true, -- #RRGGBBAA
+	rgb_fn   = true, -- rgb(0,0,0)
+	hsl_fn   = true, -- hsl(120,100%,50%)
+	css      = true, -- Enable all CSS features
+	css_fn   = true, -- Enable CSS functions
+	mode     = 'background', -- Use background color (or 'foreground')
+})
 EOF

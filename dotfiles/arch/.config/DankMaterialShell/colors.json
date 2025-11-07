@@ -1,0 +1,28 @@
+{
+	"name": "Gruvbox Material",
+
+	"primary": "#89b482",
+	"primaryText": "#141617",
+	"primaryContainer": "#333e34",
+	"secondary": "#d8a657",
+
+	"surface": "#141617",
+	"surfaceText": "#d4be98",
+	"surfaceVariant": "#333e34",
+	"surfaceVariantText": "#a89984",
+	"surfaceTint": "#2e3b3b",
+
+	"background": "#1d2021",
+	"backgroundText": "#d4be98",
+
+	"surfaceContainer": "#1d2021",
+	"surfaceContainerHigh": "#282828",
+	"surfaceContainerHighest": "#3c3836",
+	"outline": "#928374",
+
+	"info": "#7daea3",
+	"error": "#ea6962",
+	"warning": "#e78a4e",
+
+	"matugen_type": "scheme-tonal-spot"
+}
