@@ -200,7 +200,7 @@
         "forceBlackScreenCorners": false,
         "language": "",
         "lockOnSuspend": true,
-        "radiusRatio": 0.9,
+        "radiusRatio": 0.7000000000000001,
         "scaleRatio": 1,
         "screenRadiusRatio": 0.75,
         "shadowDirection": "center",
@@ -312,15 +312,15 @@
             {
                 "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox",
                 "name": "eDP-1",
-                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox/149547.jpg"
+                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox/10.jpg"
             },
             {
                 "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox",
                 "name": "DP-1",
-                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox/149547.jpg"
+                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox/10.jpg"
             }
         ],
-        "overviewEnabled": false,
+        "overviewEnabled": true,
         "panelPosition": "follow_bar",
         "randomEnabled": true,
         "randomIntervalSec": 3600,
