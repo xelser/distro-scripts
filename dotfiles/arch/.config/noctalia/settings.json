@@ -268,7 +268,7 @@
         "videoCodec": "h264",
         "videoSource": "portal"
     },
-    "settingsVersion": 19,
+    "settingsVersion": 20,
     "setupCompleted": true,
     "templates": {
         "alacritty": false,
@@ -299,11 +299,12 @@
         "fontFixed": "JetBrains Mono",
         "fontFixedScale": 1,
         "panelsAttachedToBar": true,
+        "settingsPanelAttachToBar": false,
         "tooltipsEnabled": true
     },
     "wallpaper": {
         "defaultWallpaper": "/etc/xdg/quickshell/noctalia-shell/Assets/Wallpaper/noctalia.png",
-        "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox",
+        "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers",
         "enableMultiMonitorDirectories": false,
         "enabled": true,
         "fillColor": "#282828",
@@ -312,19 +313,19 @@
             {
                 "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox",
                 "name": "eDP-1",
-                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox/wheel-sky-land-vehicle-cloud-vehicle-tire-2070993-wallhere.com.jpg"
+                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Catppuccin/evening-sky.png"
             },
             {
                 "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox",
                 "name": "DP-1",
-                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox/wheel-sky-land-vehicle-cloud-vehicle-tire-2070993-wallhere.com.jpg"
+                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Catppuccin/evening-sky.png"
             }
         ],
         "overviewEnabled": true,
         "panelPosition": "follow_bar",
         "randomEnabled": true,
         "randomIntervalSec": 3600,
-        "recursiveSearch": false,
+        "recursiveSearch": true,
         "setWallpaperOnAllMonitors": true,
         "transitionDuration": 1500,
         "transitionEdgeSmoothness": 0.05,
