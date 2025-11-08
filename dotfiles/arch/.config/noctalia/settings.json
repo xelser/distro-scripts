@@ -3,12 +3,12 @@
         "backgroundOpacity": 1,
         "customLaunchPrefix": "",
         "customLaunchPrefixEnabled": false,
-        "enableClipboardHistory": false,
+        "enableClipboardHistory": true,
         "pinnedExecs": [
         ],
         "position": "center",
         "sortByMostUsed": true,
-        "terminalCommand": "xterm -e",
+        "terminalCommand": "",
         "useApp2Unit": false
     },
     "audio": {
@@ -252,7 +252,7 @@
     "osd": {
         "autoHideMs": 2000,
         "enabled": true,
-        "location": "top_right",
+        "location": "bottom_right",
         "monitors": [
         ],
         "overlayLayer": true
@@ -313,12 +313,12 @@
             {
                 "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox",
                 "name": "eDP-1",
-                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Catppuccin/evening-sky.png"
+                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/WallpapersCraft/waves_gradient_abstraction_1205385_3840x2160.jpg"
             },
             {
                 "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox",
                 "name": "DP-1",
-                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Catppuccin/evening-sky.png"
+                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/WallpapersCraft/waves_gradient_abstraction_1205385_3840x2160.jpg"
             }
         ],
         "overviewEnabled": true,
