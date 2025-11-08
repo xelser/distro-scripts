@@ -3,8 +3,6 @@
 // Check the wiki for a full description of the configuration:
 // https://yalter.github.io/niri/Configuration:-Introduction
 
-include "noctalia/binds.kdl"
-
 prefer-no-csd
 
 hotkey-overlay {
@@ -19,10 +17,10 @@ environment {
 	QT_QPA_PLATFORM "wayland"
 	QT6CT_PLATFORM "wayland"
 
-	ELECTRON_OZONE_PLATFORM_HINT "auto"
-	QT_QPA_PLATFORMTHEME_QT6 "gtk3"
-	QT_QPA_PLATFORMTHEME "gtk3"
-	DMS_DISABLE_MATUGEN "1"
+	//ELECTRON_OZONE_PLATFORM_HINT "auto"
+	//QT_QPA_PLATFORMTHEME_QT6 "gtk3"
+	//QT_QPA_PLATFORMTHEME "gtk3"
+	//DMS_DISABLE_MATUGEN "1"
 
 	MOZ_ENABLE_WAYLAND "1"
 	OBS_USE_EGL "1"
@@ -147,10 +145,7 @@ spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
 spawn-at-startup "brave" "--no-startup-window" "--gapplication-service"
 spawn-at-startup "easyeffects" "--gapplication-service"
 spawn-at-startup "transmission-gtk" "--minimized"
-
-// For Niri
 spawn-at-startup "alacritty" "--daemon"
-//spawn-at-startup "swww-daemon"
 
 // Niri Shell
 spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
@@ -176,9 +171,8 @@ binds {
 	Mod+Shift+Q repeat=false { close-window; }
 
 	Mod+Return { spawn "alacritty" "msg" "create-window"; }
-
-	//Mod+D { spawn "fuzzel"; }
-	//Mod+L { spawn "gtklock"; }
+	Mod+Alt+L { spawn "gtklock"; }
+	Mod+D { spawn "fuzzel"; }
 
 	Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
 
@@ -406,3 +400,5 @@ binds {
 	// moving the mouse or pressing any other key.
 	Mod+Shift+P { power-off-monitors; }
 }
+
+include "noctalia/binds.kdl"

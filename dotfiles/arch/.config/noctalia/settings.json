@@ -137,7 +137,7 @@
                 "id": "audio-card"
             },
             {
-                "enabled": true,
+                "enabled": false,
                 "id": "weather-card"
             },
             {
@@ -312,12 +312,12 @@
             {
                 "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox",
                 "name": "eDP-1",
-                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox/10.jpg"
+                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox/forest_castle.png"
             },
             {
                 "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox",
                 "name": "DP-1",
-                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox/10.jpg"
+                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox/forest_castle.png"
             }
         ],
         "overviewEnabled": true,
