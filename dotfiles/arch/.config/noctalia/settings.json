@@ -36,7 +36,7 @@
             "center": [
                 {
                     "customFont": "",
-                    "formatHorizontal": "HH:mm ddd, MMM dd",
+                    "formatHorizontal": "h:mm AP ddd, MMM dd",
                     "formatVertical": "HH mm - dd MM",
                     "id": "Clock",
                     "useCustomFont": false,
@@ -114,7 +114,7 @@
     },
     "colorSchemes": {
         "darkMode": true,
-        "generateTemplatesForPredefined": true,
+        "generateTemplatesForPredefined": false,
         "manualSunrise": "06:30",
         "manualSunset": "18:30",
         "matugenSchemeType": "scheme-fruit-salad",
@@ -200,13 +200,13 @@
         "forceBlackScreenCorners": false,
         "language": "",
         "lockOnSuspend": true,
-        "radiusRatio": 1,
+        "radiusRatio": 0.9,
         "scaleRatio": 1,
         "screenRadiusRatio": 0.75,
-        "shadowDirection": "bottom_right",
-        "shadowOffsetX": 2,
-        "shadowOffsetY": 3,
-        "showScreenCorners": true
+        "shadowDirection": "center",
+        "shadowOffsetX": 0,
+        "shadowOffsetY": 0,
+        "showScreenCorners": false
     },
     "hooks": {
         "darkModeChange": "",
@@ -282,7 +282,7 @@
         "discord_webcord": false,
         "enableUserTemplates": false,
         "foot": false,
-        "fuzzel": true,
+        "fuzzel": false,
         "ghostty": false,
         "gtk": false,
         "kcolorscheme": false,
@@ -312,12 +312,12 @@
             {
                 "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox",
                 "name": "eDP-1",
-                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox/platform.jpg"
+                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox/149547.jpg"
             },
             {
                 "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox",
                 "name": "DP-1",
-                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox/platform.jpg"
+                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox/149547.jpg"
             }
         ],
         "overviewEnabled": false,
