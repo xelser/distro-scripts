@@ -7,6 +7,9 @@ export distro_id="$(grep '^ID=' /etc/os-release | cut -d'=' -f2 | cut -d'"' -f2)
 # qt/kvantum
 export QT_QPA_PLATFORMTHEME=qt6ct
 
+# mangohud
+export MANGOHUD=1
+
 # source .profile if it exists
 if [ -f "$HOME/.profile" ]; then
 	. "$HOME/.profile"
@@ -14,5 +17,5 @@ fi
 
 # autostart in tty
 if [ "$(tty)" = "/dev/tty1" ]; then
-	niri --session
+	prime-run niri --session
 fi
