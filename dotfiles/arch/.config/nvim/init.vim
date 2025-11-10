@@ -21,6 +21,10 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 
+" Lua config file
+lua require('config')
+
+" theme
 source $HOME/.config/nvim/theme.vim
 
 " transparency
@@ -37,46 +41,19 @@ set ignorecase              " case insensitive
 set clipboard=unnamedplus   " using system clipboard
 
 " indent
-set autoindent
-set smartindent
-set noexpandtab     " Use tabs, not spaces
-set tabstop=2       " A tab character is 2 columns wide
-set shiftwidth=2    " Indent by 2 columns when using >> or <<
-set softtabstop=2   " Makes <Tab> and <Backspace> feel like 2-space steps
+set noexpandtab     " Use actual tab characters
+set tabstop=2       " Display tab characters as 2 columns wide
+set shiftwidth=2    " Indent by 2 columns with >>, <<, etc.
+set softtabstop=0   " No soft tab emulation; spacebar inserts spaces literally
 
 augroup MyAutoCmds
 	autocmd!
-	" autoindent
-	autocmd BufWritePre * silent! normal! gg=G
-
 	" whitespace cleanup
 	autocmd BufWritePre * :%s/\s\+$//e
 
 	" visual feedback for yanks
 	autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+
+	" autoindent
+	autocmd BufWritePre * if expand('%:t') !~# '\.conf$' | silent! normal! gg=G | endif
 augroup END
-
-" Lua Block
-lua << EOF
-require('nvim-autopairs').setup({})
-
-require('nvim-treesitter.configs').setup({
-auto_install = true,
-highlight = { enable = true },
-indent = { enable = true },
-})
-
-require('colorizer').setup({
-'*',
-}, {
-	RGB      = true, -- #RGB
-	RRGGBB   = true, -- #RRGGBB
-	RRGGBBAA = true, -- #RRGGBBAA
-	rgb_fn   = true, -- rgb(0,0,0)
-	hsl_fn   = true, -- hsl(120,100%,50%)
-	css      = true, -- Enable all CSS features
-	css_fn   = true, -- Enable CSS functions
-	names    = true, -- "red", "blue"
-	mode     = 'background', -- Use background color (or 'foreground')
-})
-EOF
