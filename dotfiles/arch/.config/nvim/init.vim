@@ -21,7 +21,7 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 
-" Lua config file
+" lua config file
 lua require('config')
 
 " theme
