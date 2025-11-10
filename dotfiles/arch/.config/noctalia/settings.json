@@ -16,6 +16,7 @@
         "mprisBlacklist": [
         ],
         "preferredPlayer": "",
+        "visualizerQuality": "high",
         "visualizerType": "linear",
         "volumeOverdrive": false,
         "volumeStep": 5
@@ -268,7 +269,7 @@
         "videoCodec": "h264",
         "videoSource": "portal"
     },
-    "settingsVersion": 20,
+    "settingsVersion": 21,
     "setupCompleted": true,
     "templates": {
         "alacritty": false,
@@ -313,12 +314,12 @@
             {
                 "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox",
                 "name": "eDP-1",
-                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/WallpapersCraft/man_city_fantasy_197375_1600x900.jpg"
+                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/WallpapersCraft/road_turn_grass_137709_3840x2400.jpg"
             },
             {
                 "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox",
                 "name": "DP-1",
-                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/WallpapersCraft/man_city_fantasy_197375_1600x900.jpg"
+                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/WallpapersCraft/road_turn_grass_137709_3840x2400.jpg"
             }
         ],
         "overviewEnabled": true,

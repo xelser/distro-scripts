@@ -11,9 +11,9 @@ elif [ -f /usr/bin/pacman ]; then
 	alias update="sudo pacman -Syyu --noconfirm"
 	alias install="sudo pacman -S $1 --needed"
 	alias uninstall="sudo pacman -Rnsu $1"
-	alias clean="sudo pacman -Qtdq | sudo pacman -Rnsu - --noconfirm 1> /dev/null; sudo pacman -Sc --noconfirm"
+	alias clean="sudo pacman -Qtdq | sudo pacman -Rnsu - --noconfirm; sudo pacman -Sc --noconfirm"
 	alias search="sudo pacman -Ss $1"
-	alias list="sudo pacman -Qq $1"
+	alias list="sudo pacman -Qq | grep $1"
 elif [ -f /usr/bin/dnf ]; then
 	alias update="sudo dnf upgrade --assumeyes --allowerasing"
 	alias install="sudo dnf install $1"
@@ -28,7 +28,7 @@ if [ -f /usr/bin/yay ]; then
 	alias updatepkg="sudo pacman -Syyu --noconfirm"
 	alias install="yay -S $1 --needed"
 	alias uninstall="yay -Rnsu $1"
-	alias clean="yay -Qtdq | yay -Rnsu - --noconfirm 1> /dev/null; sudo pacman -Sc --noconfirm"
+	alias clean="yay -Qtdq | yay -Rnsu - --noconfirm; yay -Sc --noconfirm"
 	alias search="yay -Ss $1"
 fi
 
