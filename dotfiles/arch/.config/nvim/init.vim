@@ -46,6 +46,7 @@ set tabstop=2       " Display tab characters as 2 columns wide
 set shiftwidth=2    " Indent by 2 columns with >>, <<, etc.
 set softtabstop=0   " No soft tab emulation; spacebar inserts spaces literally
 
+" au (autocommand)
 augroup MyAutoCmds
 	autocmd!
 	" whitespace cleanup
