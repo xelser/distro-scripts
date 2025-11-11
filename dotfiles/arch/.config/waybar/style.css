@@ -26,24 +26,18 @@ tooltip label {
 }
 
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
-button:hover {
+#workspaces button:hover {
 	background: @bg2;
 }
 
-button.focused {
+#workspaces button.focused {
 	color: @bg_dim;
 	background-color: @fg0;
 }
 
-button.urgent {
+#workspaces button.urgent {
 	color: @bg0;
 	background-color: @red;
-}
-
-@keyframes blink {
-to {
-	background-color: @fg1;
-}
 }
 
 /* If workspaces is the leftmost module, omit left margin */

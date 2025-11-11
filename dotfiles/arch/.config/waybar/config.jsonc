@@ -11,16 +11,20 @@
 	"margin-right": 10,
 
 	// Choose the order of the modules
-	"modules-left": [   "cpu",
+	"modules-left": [
+		"cpu",
 		"memory",
+		"hyprland/workspaces",
 		"sway/workspaces",
 		"sway/mode"
 	],
 
-	"modules-center": [ "clock",
+	"modules-center": [
+		"clock",
 	],
 
-	"modules-right": [  "network",
+	"modules-right": [
+		"network",
 		"bluetooth",
 		"pulseaudio",
 		"backlight"
@@ -52,6 +56,12 @@
 			"on-scroll-up": "shift_up",
 			"on-scroll-down": "shift_down"
 		}
+	},
+
+	"hyprland/workspaces": {
+		"disable-scroll": true,
+		"all-outputs": true,
+		"format": "{name}"
 	},
 
 	"sway/workspaces": {
