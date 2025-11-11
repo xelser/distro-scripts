@@ -1,6 +1,6 @@
 #!/bin/bash
 
-################################## VARIABLES #################################
+################################# VARIABLES #################################
 
 ## ROOT PASSWORD ##
 read -p "Password: " -s psswrd
@@ -9,137 +9,139 @@ read -p "Password: " -s psswrd
 root_setup="ext4_setup"
 
 if [[ ${machine} == "E5-476G" ]]; then
-  device="sda"
-  root="3"
-  swap="2"
-  efi="1"
+	device="sda"
+	root="3"
+	swap="2"
+	efi="1"
 elif [[ ${machine_type} == "Other" ]]; then # GNOME BOXES
-  device="vda"
-  dmesg | grep -q "EFI v"; if [ $? -eq 0 ]; then
-    root="3"
-    swap="2"
-    efi="1"
-  else
-    root="2"
-    swap="1"
-  fi
-else
-  clear && cfdisk && clear && lsblk && echo
+	device="vda"
 
-  # Set Partition Variables
-  read -p "Device (ex. sda): " device
-  dmesg | grep -q "EFI v" && read -p "EFI Partition (#): " efi
-  read -p "Swap Partition (#): " swap
-  read -p "Root Partition (#): " root
+	if dmesg | grep -q "EFI v"; then
+		root="3"
+		swap="2"
+		efi="1"
+	else
+		root="2"
+		swap="1"
+	fi
+else
+	clear && cfdisk && clear && lsblk && echo
+
+	# Set Partition Variables
+	read -p "Device (ex. sda): " device
+	read -p "Root Partition (#): " root
+		read -p "Swap Partition (#): " swap
+			dmesg | grep -q "EFI v" && read -p "EFI Partition (#): " efi
 fi
 
-################################# FORMATTING #################################
+################################ FORMATTING #################################
 
 ext4_setup () {
-  mkfs.ext4 -L "Arch" /dev/${device}${root} -F
-  mount /dev/${device}${root} /mnt
+	mkfs.ext4 -L "Arch" /dev/${device}${root} -F
+	mount /dev/${device}${root} /mnt
 }
 
 btrfs_setup () {
-  mkfs.btrfs -L "Arch" /dev/${device}${root} --force
-  mount /dev/${device}${root} /mnt
+	mkfs.btrfs -L "Arch" /dev/${device}${root} --force
+	mount /dev/${device}${root} /mnt
 
-  # create subvolumes first
-  subvol_name=('' 'home' 'var')
-  for subvol in "${subvol_name[@]}"; do
-    btrfs su cr /mnt/@${subvol}
-  done
+	# create subvolumes first
+	subvol_name=('' 'home' 'var')
+	for subvol in "${subvol_name[@]}"; do
+		btrfs su cr /mnt/@${subvol}
+	done
 
-  # reset and remount
-  cd / && umount -R /mnt
-  # The root subvolume (@) must be mounted at /mnt
-  mount -o defaults,noatime,compress=zstd,subvol=@ /dev/${device}${root} /mnt
+	# reset and remount
+	cd / && umount -R /mnt
+	# The root subvolume (@) must be mounted at /mnt
+	mount -o defaults,noatime,compress=zstd,subvol=@ /dev/${device}${root} /mnt
 
-  # mount the subvolumes
-  mount_name=('home' 'var')
-  for subvol in "${mount_name[@]}"; do mkdir -p /mnt/${subvol}
-    mount -o defaults,noatime,compress=zstd,subvol=@${subvol} /dev/${device}${root} /mnt/${subvol}
-  done
+	# mount the subvolumes
+	mount_name=('home' 'var')
+	for subvol in "${mount_name[@]}"; do mkdir -p /mnt/${subvol}
+		mount -o defaults,noatime,compress=zstd,subvol=@${subvol} /dev/${device}${root} /mnt/${subvol}
+	done
 }
 
 format_efi () {
-  # We always use /mnt/boot/efi for GRUB
-  echo && read -p "Format EFI Partition? (y/N): " format_efi
-  case $format_efi in
-     y)   mkfs.fat -F 32 /dev/${device}${efi};;
-     *|N)   ;;
-  esac
-  mkdir -p /mnt/boot/efi && mount /dev/${device}${efi} /mnt/boot/efi
+	# We always use /mnt/boot/efi for GRUB
+	echo && read -p "Format EFI Partition? (y/N): " format_efi
+	case $format_efi in
+		y)   mkfs.fat -F 32 /dev/${device}${efi};;
+		*|N)   ;;
+	esac
+	mkdir -p /mnt/boot/efi && mount /dev/${device}${efi} /mnt/boot/efi
 }
 
 format_swap () {
-  echo && read -p "Make Swap Partition? (Y/n): " make_swap
-  case $make_swap in
-     n)   ;;
-     *|Y)   mkswap -f /dev/${device}${swap} -L "Swap";;
-  esac
+	echo && read -p "Make Swap Partition? (Y/n): " make_swap
+	case $make_swap in
+		n)   ;;
+		*|Y)   mkswap -f /dev/${device}${swap} -L "Swap";;
+	esac
 }
 
 partitioning () {
-umount -R /mnt >&/dev/null ; swapoff -a
+	umount -R /mnt >&/dev/null ; swapoff -a
 
-if [[ ${machine} == "E5-476G" ]]; then
-  ${root_setup} && swapon /dev/${device}${swap} ; dmesg | grep -q "EFI v" && format_efi
-elif [[ ${machine_type} == "Other" ]]; then # GNOME BOXES
-  create_gpt () {
-      sgdisk /dev/${device} -n 1::1GiB -t 1:ef00
-      sgdisk /dev/${device} -n 2::3GiB -t 1:8200
-      sgdisk /dev/${device} -n 3:: -t 1:8300
-  }
+	if [[ ${machine} == "E5-476G" ]]; then
+		${root_setup} && swapon /dev/${device}${swap} ; dmesg | grep -q "EFI v" && format_efi
+	elif [[ ${machine_type} == "Other" ]]; then # GNOME BOXES
+		create_gpt () {
+			sgdisk /dev/${device} -n 1::1GiB -t 1:ef00
+			sgdisk /dev/${device} -n 2::3GiB -t 1:8200
+			sgdisk /dev/${device} -n 3:: -t 1:8300
+		}
 
-  create_mbr () {
-    # swap, root, then mark as bootable
-    echo -e ",3G,82\n,,,*" | sfdisk /dev/${device} --force
-  }
+	create_mbr () {
+		# swap, root, then mark as bootable
+		echo -e ",3G,82\n,,,*" | sfdisk /dev/${device} --force
+	}
 
-  # Create Partitions
-  dmesg | grep -q "EFI v" && create_gpt || create_mbr
+	# Create Partitions
+	dmesg | grep -q "EFI v" && create_gpt || create_mbr
 
-  # Format Root
-  ${root_setup}
+	# Format Root
+	${root_setup}
 
-  # Format EFI
-  dmesg | grep -q "EFI v" && format_efi
+	# Format EFI
+	dmesg | grep -q "EFI v" && format_efi
 
-  # Format Swap
-  mkswap -f /dev/${device}${swap} -L "Swap" && swapon /dev/${device}${swap}
-fi
+	# Format Swap
+	mkswap -f /dev/${device}${swap} -L "Swap" && swapon /dev/${device}${swap}
+	fi
 }
 
-################################### INSTALL ##################################
+################################ CONFIRMATION ###############################
 
-arch_base () {
-  # Base
-  pacstrap /mnt base{,-devel} linux-{zen,lts} linux-{zen,lts}-headers \
-    linux-firmware man-{db,pages} texinfo pacman-contrib bash-completion
+clear && echo "INSTALLATION SUMMARY:"
+echo "---------------------"
+echo "Filesystem: ${fs_name}"
+echo "Machine: ${machine}"
+echo "User: ${user}"
+echo "---------------------"
+lsblk
+echo
+echo "Device: /dev/${device}"
+[ -z ${efi} ] || echo "EFI: ${device}${efi}"
+echo "Root: ${device}${root}"
+echo "Swap: ${device}${swap}"
+echo "---------------------"
+read -p "Proceed? (Y/n): " confirm
 
-  # Boot
-  pacstrap /mnt grub os-prober mokutil efibootmgr dosfstools intel-ucode \
-    xfsprogs plymouth
+if [[ "$confirm" == "n" || "$confirm" == "N" ]]; then
+	echo "Operation cancelled. Exiting."
+	exit 0
+fi
 
-  # Audio
-  pacstrap /mnt pipewire-{alsa,audio,jack,pulse} wireplumber \
-    easyeffects lsp-plugins-lv2 ecasound
+echo "Proceeding with the installation/process..."
+partitioning
 
-  # System Utils
-  pacstrap /mnt cpupower zram-generator dmidecode inxi inetutils \
-    bluez{,-utils} networkmanager openssh reflector
+################################## INSTALL ##################################
 
-  # CLI Tools
-  pacstrap /mnt neovim{,-plugins} fastfetch htop nvtop intel-gpu-tools \
-    git wget zip unzip unrar sassc
-
-  # Misc
-  pacstrap /mnt gvfs xdg-user-dirs ffmpeg{,thumbnailer} tumbler \
-    noto-fonts{,-cjk,-emoji} ttf-roboto ttf-jetbrains-mono{,-nerd} \
-    flatpak qt6-wayland qt6ct kvantum
-
+pacstrap /mnt base base-devel
 genfstab -U /mnt >> /mnt/etc/fstab
+
 arch-chroot /mnt /bin/bash << EOF
 
 # Time
@@ -160,19 +162,47 @@ echo "arch" > /etc/hostname
 
 # pacman
 echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\nColor\n
-[multilib]\nInclude = /etc/pacman.d/mirrorlist" | tee -a /etc/pacman.conf 1>/dev/null && reflector && sleep 10
+[multilib]\nInclude = /etc/pacman.d/mirrorlist" | \
+	tee -a /etc/pacman.conf 1>/dev/null && reflector && sleep 10
+
+# packages: kernel/hardware
+pacman -Syy --noconfirm --needed linux-{zen,lts} linux-{zen,lts}-headers \
+	linux-firmware cpupower zram-generator dmidecode inxi nvtop htop \
+	intel-gpu-tools fastfetch	man-{db,pages} texinfo
+
+# packages: boot
+pacman -S --noconfirm --needed grub os-prober intel-ucode efibootmgr \
+	dosfstools mokutil xfsprogs plymouth
+
+# packages: audio
+pacman -S --noconfirm --needed pipewire-{alsa,audio,jack,pulse} wireplumber \
+	easyeffects lsp-plugins-lv2 ecasound
+
+# packages: networking/connectivity
+pacman -S --noconfirm --needed networkmanager inetutils openssh reflector \
+	bluez{,-utils} git wget curl
+
+# packages: misc
+pacman -S --noconfirm --needed flatpak pacman-contrib bash-completion \
+	gvfs xdg-user-dirs ffmpeg{,thumbnailer} tumbler zip unzip unrar sassc \
+	noto-fonts{,-cjk,-emoji} ttf-roboto ttf-jetbrains-mono{,-nerd} \
+	qt6-wayland qt6ct kvantum
 
 # packages: common
-pacman -Syy --noconfirm --needed xorg-{server,xinit,apps} numlockx picom \
-  brightnessctl wallutils dunst libnotify alacritty rofi mpv imv nwg-look \
-  timeshift pavucontrol blueman transmission-gtk mate-polkit dconf-editor \
-  engrampa atril pluma thunar-{volman,archive-plugin,media-tags-plugin} \
-  firefox gparted resources mugshot
-  # xsettingsd gammastep
+pacman -S --noconfirm --needed xorg-{server,xinit,apps} numlockx picom \
+	brightnessctl wallutils dunst libnotify alacritty rofi mpv imv nwg-look \
+	timeshift pavucontrol blueman transmission-gtk mate-polkit dconf-editor \
+	engrampa atril pluma thunar-{volman,archive-plugin,media-tags-plugin} \
+	firefox gparted resources mugshot neovim{,-plugins}
 
 # packages: i3
-pacman -S --noconfirm --needed i3-wm autotiling feh xss-lock polybar \
-  maim slop scrot jq xclip {lx,auto}randr xdg-desktop-portal-gtk
+pacman -S --noconfirm --needed xdg-desktop-portal-gtk	{lx,auto}randr \
+	i3-wm feh xss-lock maim slop scrot jq polybar xclip autotiling
+
+# packages: hyprland
+pacman -S --noconfirm --needed xdg-desktop-portal-hyprland \
+	hypr{land,paper,idle,lock,shot,cursor,polkitagent} \
+	waybar wl-clipboard wofi
 
 # autologin
 mkdir -p /etc/systemd/system/getty@tty1.service.d
@@ -187,7 +217,8 @@ echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priori
 systemctl enable NetworkManager bluetooth cronie
 
 # plymouth
-sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf && mkinitcpio -P
+sed -i 's/base udev/base udev plymouth/g' /etc/mkinitcpio.conf
+mkinitcpio -P
 
 # users
 useradd -mG wheel,video ${user}
@@ -199,35 +230,12 @@ sed -i 's/quiet/quiet splash/g' /etc/default/grub
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=30/g' /etc/default/grub
 sed -i 's/GRUB_DEFAULT=0/GRUB_DEFAULT=saved/g' /etc/default/grub
 sed -i 's/#GRUB_SAVEDEFAULT=true/GRUB_SAVEDEFAULT=true/g' /etc/default/grub
-
 mkdir -p /boot/grub && grub-mkconfig -o /boot/grub/grub.cfg
 
 if dmesg | grep -q "EFI v"; then
-  grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable
-  #grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=BOOT
+	grub-install --target=x86_64-efi --efi-directory=/boot/efi --removable
 else
-  grub-install --target=i386-pc /dev/${device}
+	grub-install --target=i386-pc /dev/${device}
 fi
 
 EOF
-}
-
-## CONFIRMATION ##
-clear && echo "INSTALLATION SUMMARY:"
-echo "---------------------"
-echo "Filesystem: ${fs_name}"
-echo "Machine: ${machine}"
-echo "User: ${user}"
-echo "---------------------"
-lsblk
-echo
-echo "Device: /dev/${device}"
-[ -z ${efi} ] || echo "EFI: ${device}${efi}"
-echo "Root: ${device}${root}"
-echo "Swap: ${device}${swap}"
-echo "---------------------"
-read -p "Proceed? (Y/n): " confirm
-case $confirm in
-  n)  ;;
-  *|Y) partitioning && arch_base
-esac

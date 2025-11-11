@@ -1,6 +1,6 @@
 #!/bin/bash
 
-################################## PACKAGES ##################################
+################################## PACKAGES #################################
 
 # E5-476G
 sudo pacman -S --noconfirm --needed tailscale intel-media-driver \
@@ -12,14 +12,14 @@ if [ ! -f /usr/bin/yay ]; then
 	cd /tmp/ && git clone https://aur.archlinux.org/yay-bin
 	cd yay-bin && makepkg -sirc --noconfirm
 
-	yay -Syu --needed --noconfirm --save --removemake --cleanafter --norebuild \
-		--noredownload --batchinstall --combinedupgrade	grub-hook update-grub \
-		htpdate neovim-symlinks betterlockscreen waypaper swayfx \
-		{brave,ventoy,fladder}-bin
+	yay -Syu --needed --noconfirm --save --removemake --cleanafter \
+		--norebuild --noredownload --batchinstall --combinedupgrade	\
+		grub-hook update-grub htpdate {brave,ventoy,fladder}-bin \
+		neovim-symlinks betterlockscreen waypaper swayfx
 
 	# sway
-	yay -S --needed --noconfirm sway{bg,idle,-contrib} waybar wl-clipboard \
-		foot wofi wlogout gtklock xorg-xwayland xdg-desktop-portal-wlr # fuzzel
+	yay -S --needed --noconfirm sway{bg,idle,-contrib} foot wlogout gtklock \
+		xorg-xwayland xdg-desktop-portal-wlr # fuzzel
 
 	# niri
 	yay -S --needed --noconfirm niri-git noctalia-shell cliphist cava \
@@ -38,7 +38,7 @@ fi
 #sudo pacman -S --needed --noconfirm rustup && rustup default stable
 #cargo install --git https://github.com/rschmukler/caffeinate
 
-################################### THEMES ###################################
+################################### THEMES ##################################
 
 # theme
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/grub.sh)"
@@ -57,7 +57,7 @@ gsettings set org.mate.pluma use-default-font true
 gsettings set org.mate.pluma toolbar-visible false
 gsettings set org.mate.pluma active-plugins "['time', 'docinfo', 'modelines', 'filebrowser']"
 
-################################### CONFIG ###################################
+################################### CONFIG ##################################
 
 # cpucpower
 sudo cpupower frequency-set -g performance
