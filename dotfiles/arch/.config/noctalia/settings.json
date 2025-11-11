@@ -97,6 +97,7 @@
                     "usePrimaryColor": true
                 },
                 {
+                    "colorizeDistroLogo": false,
                     "customIconPath": "",
                     "icon": "",
                     "id": "ControlCenter",
@@ -240,7 +241,6 @@
     "notifications": {
         "backgroundOpacity": 1,
         "criticalUrgencyDuration": 15,
-        "doNotDisturb": false,
         "enabled": true,
         "location": "top_right",
         "lowUrgencyDuration": 3,
@@ -290,6 +290,7 @@
         "kitty": false,
         "pywalfox": false,
         "qt": false,
+        "spicetify": false,
         "vicinae": false,
         "walker": false,
         "wezterm": false
@@ -314,12 +315,12 @@
             {
                 "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox",
                 "name": "eDP-1",
-                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/WallpapersCraft/road_turn_grass_137709_3840x2400.jpg"
+                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/HDQWalls/2am-train-station-ir-3840x2160.jpg"
             },
             {
                 "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox",
                 "name": "DP-1",
-                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/WallpapersCraft/road_turn_grass_137709_3840x2400.jpg"
+                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/HDQWalls/2am-train-station-ir-3840x2160.jpg"
             }
         ],
         "overviewEnabled": true,

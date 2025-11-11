@@ -176,7 +176,6 @@ case "$WM_DE" in
 					".config/obmenu-generator/config.pl"
 					".config/obmenu-generator/schema.pl"
 					".config/i3/config"
-					".config/hypr/hyprland.conf"
 					".config/swhkd/swhkdrc"
 					".config/betterlockscreen/betterlockscreenrc"
 					".config/dunst/dunstrc"
@@ -206,6 +205,7 @@ case "$WM_DE" in
 				WM_FOLDERS=(
 					".config/sway/"
 					".config/niri/"
+					".config/hypr/"
 					".config/autorandr/"
 					".config/picom/"
 					".config/gtklock/"

@@ -56,5 +56,5 @@ augroup MyAutoCmds
 	autocmd TextYankPost * silent! lua vim.highlight.on_yank()
 
 	" autoindent
-	autocmd BufWritePre * if expand('%:t') !~# '\.conf$' | silent! normal! gg=G | endif
+	autocmd BufWritePre * if expand('%:t') !~# 'picom.conf' | silent! normal! gg=G | endif
 augroup END
