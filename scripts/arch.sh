@@ -201,7 +201,7 @@ pacman -S --noconfirm --needed xdg-desktop-portal-gtk	{lx,auto}randr xclip \
 
 # packages: hyprland
 pacman -S --noconfirm --needed xdg-desktop-portal-hyprland wl-clipboard \
-	hypr{land,paper,idle,lock,shot,cursor,polkitagent} waybar wofi
+	hypr{land,paper,idle,lock,shot,cursor} waybar wofi
 
 # autologin
 mkdir -p /etc/systemd/system/getty@tty1.service.d
