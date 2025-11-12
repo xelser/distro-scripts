@@ -21,10 +21,10 @@ if [ ! -f /usr/bin/yay ]; then
 	yay -S --needed --noconfirm niri-git noctalia-shell cliphist cava \
 		xwayland-satellite xdg-desktop-portal-gnome
 
-	# sway
+	# sway (really doesn't like nvidia)
 	#yay -S --needed --noconfirm swayfx && yay -S --needed --noconfirm \
-	#	sway{bg,idle,-contrib} waybar wofi foot wl-clipboard wlogout gtklock \
-	#	xorg-xwayland xdg-desktop-portal-wlr # fuzzel
+	#	sway{bg,idle,-contrib} foot fuzzel wlogout gtklock \
+	#	xorg-xwayland xdg-desktop-portal-wlr
 
 	# Openbox: openbox obconf-qt obmenu-generator tint2 plank
 	# gtk2 and qt5: gtk-engine{-murrine,s} qt5{ct,-wayland} kvantum-qt5
