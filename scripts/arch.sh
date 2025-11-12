@@ -196,12 +196,12 @@ pacman -S --noconfirm --needed xorg-{server,xinit,apps} numlockx picom \
 	firefox gparted resources mugshot neovim{,-plugins}
 
 # packages: i3
-pacman -S --noconfirm --needed xdg-desktop-portal-gtk	{lx,auto}randr xclip \
-	i3-wm feh xss-lock maim slop scrot jq polybar autotiling
+pacman -S --noconfirm --needed i3-wm feh xss-lock maim slop scrot jq \
+	polybar xclip autotiling {lx,auto}randr xdg-desktop-portal-gtk
 
 # packages: hyprland
-pacman -S --noconfirm --needed xdg-desktop-portal-hyprland wl-clipboard \
-	hypr{land,paper,idle,lock,shot,cursor} waybar wofi
+pacman -S --noconfirm --needed hypr{land,paper,idle,lock,shot,cursor} \
+	waybar wl-clipboard wofi xdg-desktop-portal-hyprland
 
 # autologin
 mkdir -p /etc/systemd/system/getty@tty1.service.d
