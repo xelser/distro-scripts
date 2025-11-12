@@ -1,0 +1,17 @@
+[StreamInputs]
+inputDevice=bluez_input.F8:A3:A8:10:B2:79
+
+[StreamOutputs]
+mostUsedPresets=default
+outputDevice=bluez_output.F8_A3_A8_10_B2_79.1
+plugins=equalizer#0
+usedPresets=default:2
+visiblePage=pluginsPage
+visiblePlugin=equalizer#0
+
+[Window]
+height=716
+lastLoadedOutputPreset=default
+visiblePage=pwPage
+visiblePipeWirePage=clientsPage
+width=1346
