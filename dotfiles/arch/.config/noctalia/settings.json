@@ -241,6 +241,7 @@
     "notifications": {
         "backgroundOpacity": 1,
         "criticalUrgencyDuration": 15,
+        "enableKeyboardLayoutToast": true,
         "enabled": true,
         "location": "top_right",
         "lowUrgencyDuration": 3,
@@ -315,12 +316,12 @@
             {
                 "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox",
                 "name": "eDP-1",
-                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/HDQWalls/2am-train-station-ir-3840x2160.jpg"
+                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/WallpapersCraft/waterfall_stones_flow_137735_3840x2400.jpg"
             },
             {
                 "directory": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/Gruvbox",
                 "name": "DP-1",
-                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/HDQWalls/2am-train-station-ir-3840x2160.jpg"
+                "wallpaper": "/home/xelser/Pictures/xelser_Pictures/Wallpapers/WallpapersCraft/waterfall_stones_flow_137735_3840x2400.jpg"
             }
         ],
         "overviewEnabled": true,

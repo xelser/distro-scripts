@@ -64,7 +64,8 @@ gsettings set org.mate.pluma active-plugins "['time', 'docinfo', 'modelines', 'f
 sudo cpupower frequency-set -g performance
 
 # services
-sudo systemctl enable nvidia-persistenced jellyfin cpupower tailscaled --now
+sudo systemctl enable nvidia-{persistenced,suspend,hibernate,resume} \
+	jellyfin cpupower tailscaled
 
 # user configs
 #bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/x11_nvidia.sh)"

@@ -15,8 +15,6 @@
 		"cpu",
 		"memory",
 		"hyprland/workspaces",
-		"sway/workspaces",
-		"sway/mode"
 	],
 
 	"modules-center": [
@@ -27,7 +25,8 @@
 		"network",
 		"bluetooth",
 		"pulseaudio",
-		"backlight"
+		"backlight",
+		"group/power"
 	],
 
 	// Modules configuration
@@ -147,21 +146,21 @@
 	},
 
 	"custom/power": {
-		"format": "power",
+		"format": "",
 	},
 
 	"custom/exit": {
-		"format": "exit",
-		"on-click": "swaymsg exit",
+		"format": "󰍃",
+		"on-click": "exit",
 	},
 
 	"custom/reboot": {
-		"format": "reboot",
+		"format": "󰜉",
 		"on-click": "sudo systemctl reboot",
 	},
 
 	"custom/shutdown": {
-		"format": "shutdown",
+		"format": "󰐥",
 		"on-click": "sudo systemctl poweroff",
 	},
 

@@ -1,9 +1,9 @@
 [StreamInputs]
-inputDevice=bluez_input.F8:A3:A8:10:B2:79
+inputDevice=alsa_input.pci-0000_00_1f.3.analog-stereo
 
 [StreamOutputs]
 mostUsedPresets=default
-outputDevice=bluez_output.F8_A3_A8_10_B2_79.1
+outputDevice=alsa_output.pci-0000_00_1f.3.analog-stereo
 plugins=equalizer#0
 usedPresets=default:2
 visiblePage=pluginsPage
