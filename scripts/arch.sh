@@ -1,6 +1,6 @@
 #!/bin/bash
 
-################################# VARIABLES #################################
+################################# VARIABLES ##################################
 
 ## ROOT PASSWORD ##
 read -p "Password: " -s psswrd
@@ -34,7 +34,7 @@ else
 			dmesg | grep -q "EFI v" && read -p "EFI Partition (#): " efi
 fi
 
-################################ FORMATTING #################################
+################################ FORMATTING ##################################
 
 ext4_setup () {
 	mkfs.ext4 -L "Arch" /dev/${device}${root} -F
@@ -112,7 +112,7 @@ partitioning () {
 	fi
 }
 
-################################ CONFIRMATION ###############################
+################################ CONFIRMATION ################################
 
 clear && echo "INSTALLATION SUMMARY:"
 echo "---------------------"
@@ -137,7 +137,7 @@ fi
 echo "Proceeding with the installation/process..."
 partitioning
 
-################################## INSTALL ##################################
+################################## INSTALL ###################################
 
 pacstrap /mnt base base-devel
 genfstab -U /mnt >> /mnt/etc/fstab
@@ -200,7 +200,7 @@ pacman -S --noconfirm --needed i3-wm feh xss-lock maim slop scrot jq \
 	polybar xclip autotiling {lx,auto}randr xdg-desktop-portal-gtk
 
 # packages: hyprland
-pacman -S --noconfirm --needed hypr{land,paper,idle,lock,shot,cursor} \
+pacman -S --noconfirm --needed hypr{land,paper,idle,shot,lock,cursor} \
 	waybar wl-clipboard wofi xdg-desktop-portal-hyprland
 
 # autologin

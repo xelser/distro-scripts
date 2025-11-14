@@ -1,6 +1,6 @@
 #!/bin/bash
 
-################################## PACKAGES #################################
+################################## PACKAGES ##################################
 
 # E5-476G
 sudo pacman -S --noconfirm --needed tailscale intel-media-driver \
@@ -18,8 +18,9 @@ if [ ! -f /usr/bin/yay ]; then
 		neovim-symlinks betterlockscreen waypaper
 
 	# niri
-	yay -S --needed --noconfirm niri-git noctalia-shell cliphist cava \
-		xwayland-satellite xdg-desktop-portal-gnome
+	yay -S --needed --noconfirm niri-git noctalia-shell matugen-git \
+		cliphist cava evolution-data-server xwayland-satellite \
+		xdg-desktop-portal-gnome
 
 	# sway (really doesn't like nvidia)
 	#yay -S --needed --noconfirm swayfx && yay -S --needed --noconfirm \
@@ -39,7 +40,7 @@ fi
 #sudo pacman -S --needed --noconfirm rustup && rustup default stable
 #cargo install --git https://github.com/rschmukler/caffeinate
 
-################################### THEMES ##################################
+################################### THEMES ###################################
 
 # theme
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/themes/grub.sh)"
@@ -58,7 +59,7 @@ gsettings set org.mate.pluma use-default-font true
 gsettings set org.mate.pluma toolbar-visible false
 gsettings set org.mate.pluma active-plugins "['time', 'docinfo', 'modelines', 'filebrowser']"
 
-################################### CONFIG ##################################
+################################### CONFIG ###################################
 
 # cpucpower
 sudo cpupower frequency-set -g performance

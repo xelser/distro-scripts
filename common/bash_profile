@@ -17,5 +17,5 @@ fi
 
 # autostart in tty
 if [ "$(tty)" = "/dev/tty1" ]; then
-	prime-run niri --session
+	startx
 fi
