@@ -207,11 +207,14 @@ bindsym $mod+r mode "resize"
 #        status_command i3status
 #}
 
-# Windows Config
+# Global Windows Config
 default_floating_border none
 default_border none
 gaps inner 10
-#gaps top 32
+gaps top 42
+
+# Workspace gaps (fix for floating polybar)
+workspace 1 gaps top 0px
 
 # Floating Windows
 for_window [title="Picture in picture"] floating enable
@@ -226,11 +229,14 @@ exec --no-startup-id transmission-gtk --minimized
 exec --no-startup-id alacritty --daemon
 
 # Autostart (for i3)
+exec --no-startup-id bash $HOME/.config/autostart/i3-workspace.sh
 exec_always --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f4)" --fx dimblur
-exec_always --no-startup-id bash $HOME/.config/autostart/i3-workspace.sh
-exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id $HOME/.fehbg || waypaper --restore
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id autotiling
+
+# Steam
+exec --no-startup-id mangohud steam -silent -no-browser -nochatui -noreactlogin
 
 # Screenshot (maim)
 bindsym $mod+Shift+s exec --no-startup-id maim-select
