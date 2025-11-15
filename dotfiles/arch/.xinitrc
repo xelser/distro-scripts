@@ -58,7 +58,7 @@ else
 fi
 
 ### Launch X11 Utilities
-if [ ! -f /etc/X11/xorg.conf.d/10-nvidia-primary-dgpu.conf ]; then
+if [ -f /etc/X11/xorg.conf.d/10-nvidia-primary-dgpu.conf ]; then
 	picom --backend egl &
 	echo "$(date): picom (egl) started" >> ~/.xsession-log
 else
