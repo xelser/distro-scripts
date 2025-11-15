@@ -64,4 +64,3 @@ if [ -f /usr/bin/geany ]; then
 	cd /tmp/ && git clone --depth 1 https://github.com/kdnfgc/gruvbox-material-geany.git
 	sudo cp -rf gruvbox-material-geany/gruvbox-material-dark.conf /usr/share/geany/colorschemes/
 fi
-
