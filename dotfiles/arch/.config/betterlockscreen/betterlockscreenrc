@@ -1,6 +1,4 @@
-# ~/.config/betterlockscreenrc
-
-# default options
+# general
 display_on=0
 span_image=false
 lock_timeout=300
@@ -8,34 +6,46 @@ fx_list=(dim blur dimblur pixel dimpixel color)
 dim_level=40
 blur_level=1
 pixel_scale=10,1000
-solid_color=333333
+solid_color=111111
 wallpaper_cmd="feh --bg-fill"
 quiet=true
 
-# default theme
-loginbox=00000066
-loginshadow=00000000
-locktext="Type password to unlock..."
+# main
 font="Roboto"
-ringcolor=ffffffff
+locktext="Type password to unlock..."
+
+# colors
+keyhlcolor=c14a4aff
+modifcolor=c14a4aff
+bshlcolor=c14a4aff
+
+ringcolor=d4be98ff
+bgcolor=000000ff
+loginbox=000000ff
+loginshadow=000000ff
+
+greetercolor=f3eac7ff
+layoutcolor=f3eac7ff
+
+# time
+time_format="%I:%M %p"
+timecolor=f3eac7ff
+
+# verify
+veriftext="Verifying..."
+verifcolor=7daea3ff
+ringvercolor=7daea3ff
+insidevercolor=00000000
+
+# error
+wrongtext="Incorrect!"
+wrongcolor=ea6962ff
+ringwrongcolor=3c1f1eff
+insidewrongcolor=ea6962ff
+
+# transparent/remove
 insidecolor=00000000
 separatorcolor=00000000
-ringvercolor=ffffffff
-insidevercolor=00000000
-ringwrongcolor=ffffffff
-insidewrongcolor=d23c3dff
-timecolor=ffffffff
-time_format="%I:%M %p"
-greetercolor=ffffffff
-layoutcolor=ffffffff
-keyhlcolor=d23c3dff
-bshlcolor=d23c3dff
-veriftext="Verifying..."
-verifcolor=ffffffff
-wrongtext="Failure!"
-wrongcolor=d23c3dff
-modifcolor=d23c3dff
-bgcolor=000000ff
 
 #
 # expert options (change at own risk!)

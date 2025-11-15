@@ -213,7 +213,7 @@ default_border none
 gaps inner 10
 gaps top 42
 
-# Workspace gaps (fix for floating polybar)
+# Workspaces Config gaps
 workspace 1 gaps top 0px
 
 # Floating Windows
@@ -228,15 +228,14 @@ exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id transmission-gtk --minimized
 exec --no-startup-id alacritty --daemon
 
-# Autostart (for i3)
-exec --no-startup-id bash $HOME/.config/autostart/i3-workspace.sh
+# Autostart (x11)
 exec_always --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f4)" --fx dimblur
 exec_always --no-startup-id $HOME/.fehbg || waypaper --restore
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
-exec_always --no-startup-id autotiling
 
-# Steam
-exec --no-startup-id mangohud steam -silent -no-browser -nochatui -noreactlogin
+# Autostart (i3)
+exec --no-startup-id bash $HOME/.config/autostart/i3-workspace.sh
+exec_always --no-startup-id autotiling
 
 # Screenshot (maim)
 bindsym $mod+Shift+s exec --no-startup-id maim-select
