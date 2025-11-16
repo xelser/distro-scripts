@@ -28,7 +28,6 @@
         "marginHorizontal": 0.25,
         "marginVertical": 0.25,
         "monitors": [
-            "eDP-1"
         ],
         "outerCorners": true,
         "position": "top",
