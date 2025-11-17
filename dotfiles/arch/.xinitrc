@@ -66,12 +66,6 @@ else
 	echo "$(date): picom (glx) started" >> ~/.xsession-log
 fi
 
-if xset led on; then
-	echo "$(date): turn on keyboard led" >> ~/.xsession-log
-else
-	echo "$(date): xset led on failed" >> ~/.xsession-log
-fi
-
 if numlockx on; then
 	echo "$(date): numlockx activated" >> ~/.xsession-log
 else

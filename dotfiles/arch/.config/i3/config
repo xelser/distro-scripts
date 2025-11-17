@@ -232,6 +232,7 @@ exec --no-startup-id alacritty --daemon
 exec_always --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f4)" --fx dimblur
 exec_always --no-startup-id $HOME/.fehbg || waypaper --restore
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id xset led on
 
 # Autostart (i3)
 exec --no-startup-id bash $HOME/.config/autostart/i3-workspace.sh
