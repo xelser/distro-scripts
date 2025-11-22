@@ -15,25 +15,25 @@ color=always" | sudo tee /etc/dnf/libdnf5.conf.d/20-user-settings.conf 1> /dev/n
 
 # DEBLOAT
 sudo dnf remove --assumeyes @guest-desktop-agents @container-management @libreoffice \
-  rhythmbox mediawriter simple-scan fedora-bookmarks totem ptyxis libreoffice-\* \
-  gnome-{contacts,characters,connections,font-viewer,tour,clocks,weather,maps} \
-  gnome-shell-extension-\*
+	rhythmbox mediawriter simple-scan fedora-bookmarks totem ptyxis libreoffice-\* \
+	gnome-{contacts,characters,connections,font-viewer,tour,clocks,weather,maps} \
+	gnome-shell-extension-\*
 
 # ADD REPO: RPMFUSION
 sudo dnf list --installed | grep -q "rpmfusion" || sudo dnf install --assumeyes --skip-broken \
-  https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
-  https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+	https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
+	https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
 
 # UPDATE
 sudo dnf upgrade @core @sound-and-video @multimedia --exclude=PackageKit-gstreamer-plugin --assumeyes --best --allowerasing --skip-unavailable
 
 # INSTALL: Fedora Workstation
 sudo dnf install --assumeyes --allowerasing file-roller fragments celluloid \
-  gnome-{builder,console,extensions-app,tweaks} easyeffects lsp-plugins-lv2 \
-  nvim wl-clipboard libheif-tools
+	gnome-{builder,console,extensions-app,tweaks} easyeffects lsp-plugins-lv2 \
+	nvim wl-clipboard libheif-tools
 
-  # inkscape telegram discord video-downloader syncthing touchegg
-  # gnome-shell-extension-{light-style,user-theme} google-roboto-{fonts,mono-fonts,slab-fonts}
+	# inkscape telegram discord video-downloader syncthing touchegg
+	# gnome-shell-extension-{light-style,user-theme} google-roboto-{fonts,mono-fonts,slab-fonts}
 
 # INSTALL: htpdate (COPR)
 sudo dnf copr enable whitehara/htpdate --assumeyes
@@ -41,7 +41,7 @@ sudo dnf install htpdate --assumeyes
 sudo systemctl enable htpdate --now
 
 # INSTALL: Brave Browser
-curl -fsS https://dl.brave.com/install.sh | sh
+#curl -fsS https://dl.brave.com/install.sh | sh
 
 # INSTALL: GNOME Shell Extensions
 gsettings set org.gnome.shell enabled-extensions []
