@@ -15,8 +15,8 @@ color=always" | sudo tee /etc/dnf/libdnf5.conf.d/20-user-settings.conf 1> /dev/n
 
 # DEBLOAT
 sudo dnf remove --assumeyes @guest-desktop-agents @container-management @libreoffice \
+	gnome-{boxes,contacts,characters,connections,font-viewer,tour,clocks,weather,maps} \
 	rhythmbox mediawriter simple-scan fedora-bookmarks totem ptyxis libreoffice-\* \
-	gnome-{contacts,characters,connections,font-viewer,tour,clocks,weather,maps} \
 	gnome-shell-extension-\*
 
 # ADD REPO: RPMFUSION
@@ -28,8 +28,8 @@ sudo dnf list --installed | grep -q "rpmfusion" || sudo dnf install --assumeyes 
 sudo dnf upgrade @core @sound-and-video @multimedia --exclude=PackageKit-gstreamer-plugin --assumeyes --best --allowerasing --skip-unavailable
 
 # INSTALL: Fedora Workstation
-sudo dnf install --assumeyes --allowerasing file-roller fragments celluloid \
-	gnome-{builder,console,extensions-app,tweaks} easyeffects lsp-plugins-lv2 \
+sudo dnf install --assumeyes --allowerasing file-roller fragments \
+	gnome-{console,extensions-app,tweaks} easyeffects lsp-plugins-lv2 \
 	nvim wl-clipboard libheif-tools
 
 	# inkscape telegram discord video-downloader syncthing touchegg
@@ -70,9 +70,9 @@ sudo hostnamectl set-hostname --static "fedora"
 #sudo grubby --update-kernel=ALL --args=“plymouth.use-simpledrm”
 
 # GDM
-append_file "[daemon]
-AutomaticLogin=${user}
-AutomaticLoginEnable=True" /etc/gdm/custom.conf
+#append_file "[daemon]
+#AutomaticLogin=${user}
+#AutomaticLoginEnable=True" /etc/gdm/custom.conf
 
 ################################### THEMES ###################################
 
