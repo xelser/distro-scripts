@@ -155,6 +155,11 @@
         {
             "wmClass": "io.github.celluloid_player.Celluloid",
             "mode": "float"
+        },
+        {
+            "wmClass": "org.gnome.Console",
+            "wmId": 3673021391,
+            "mode": "float"
         }
     ]
 }
