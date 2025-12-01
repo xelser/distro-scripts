@@ -99,10 +99,10 @@ case "$WM_DE" in
 
 			cinnamon)
 				# Panel & Applet settings (The original used a specific grep list, retaining that logic)
-				local temp_cinnamon_ini="/tmp/cinnamon_panel_beta.ini"
+				temp_cinnamon_ini="/tmp/cinnamon_panel_beta.ini"
 				dconf dump /org/cinnamon/ > "$temp_cinnamon_ini"
 
-				local panel_ini="${DEST_DIR}/.config/panel.ini"
+				panel_ini="${DEST_DIR}/.config/panel.ini"
 				mkdir -p "$(dirname "$panel_ini")"
 				{
 					sed 1q "$temp_cinnamon_ini"
@@ -131,9 +131,9 @@ case "$WM_DE" in
 
 			gnome)
 				# GNOME Shell (Favorite Apps, App Folders)
-				local temp_shell_ini="/tmp/shell_beta.ini"
+				temp_shell_ini="/tmp/shell_beta.ini"
 				dconf dump /org/gnome/shell/ > "$temp_shell_ini"
-				local fav_apps_ini="${DEST_DIR}/.config/fav_apps.ini"
+				fav_apps_ini="${DEST_DIR}/.config/fav_apps.ini"
 				mkdir -p "$(dirname "$fav_apps_ini")"
 				sed 1q "$temp_shell_ini" > "$fav_apps_ini"
 				grep "favorite-apps" "$temp_shell_ini" >> "$fav_apps_ini"
