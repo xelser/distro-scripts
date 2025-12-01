@@ -1,9 +1,0 @@
-
-[Desktop Entry]
-Type=Application
-Name=io.github.swordpuffin.rewaita
-X-XDP-Autostart=io.github.swordpuffin.rewaita
-Exec=flatpak run io.github.swordpuffin.rewaita --background
-DBusActivatable=true
-X-Flatpak=io.github.swordpuffin.rewaita
-                
