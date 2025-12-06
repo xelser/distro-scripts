@@ -31,8 +31,8 @@ font pango:JetBrains Mono 10
 # screen.
 
 exec --no-startup-id xss-lock --transfer-sleep-lock -- betterlockscreen -l dimblur
-exec --no-startup-id xset s 600 5
-exec --no-startup-id xset dpms 0 0 1800
+exec --no-startup-id xset s 1800 5
+exec --no-startup-id xset dpms 0 0 2700
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -176,27 +176,27 @@ bindsym $mod+Shift+e exec $HOME/.config/rofi/powermenu.sh
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+# These bindings trigger as soon as you enter the resize mode
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+	# Pressing left will shrink the window’s width.
+	# Pressing right will grow the window’s width.
+	# Pressing up will shrink the window’s height.
+	# Pressing down will grow the window’s height.
+	bindsym j resize shrink width 10 px or 10 ppt
+	bindsym k resize grow height 10 px or 10 ppt
+	bindsym l resize shrink height 10 px or 10 ppt
+	bindsym semicolon resize grow width 10 px or 10 ppt
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+	# same bindings, but for the arrow keys
+	bindsym Left resize shrink width 10 px or 10 ppt
+	bindsym Down resize grow height 10 px or 10 ppt
+	bindsym Up resize shrink height 10 px or 10 ppt
+	bindsym Right resize grow width 10 px or 10 ppt
 
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
+	# back to normal: Enter or Escape or $mod+r
+	bindsym Return mode "default"
+	bindsym Escape mode "default"
+	bindsym $mod+r mode "default"
 }
 
 bindsym $mod+r mode "resize"
@@ -207,30 +207,35 @@ bindsym $mod+r mode "resize"
 #        status_command i3status
 #}
 
-# Assign workspaces upon startup
-workspace 1 output DP-1-1 # hybrid mode: DP-1
-workspace 2 output eDP-1-1 # hybrid mode: eDP-1
-
-# i3 Windows Config
+# Global Windows Config
 default_floating_border none
 default_border none
 gaps inner 10
-#gaps top 32
+gaps top 42
+
+# Workspaces Config gaps
+workspace 1 gaps top 0px
+
+# Floating Windows
+for_window [title="Picture in picture"] floating enable
+for_window [title="Picture in picture"] resize set 854 480
+for_window [title="Picture in picture"] move position center
 
 # Autostart (Global)
-#exec --no-startup-id steam -silent -no-browser -nochatui -noreactlogin
+exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 exec --no-startup-id brave --no-startup-window --gapplication-service
-exec --no-startup-id bash $HOME/.config/autostart/autostart.sh
 exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id transmission-gtk --minimized
 exec --no-startup-id alacritty --daemon
-exec --no-startup-id /usr/bin/lxpolkit
-exec --no-startup-id thunar --daemon
 
-# Autostart (for i3)
+# Autostart (x11)
 exec_always --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f4)" --fx dimblur
-exec_always --no-startup-id bash $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id $HOME/.fehbg || waypaper --restore
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id xset led on
+
+# Autostart (i3)
+exec --no-startup-id bash $HOME/.config/autostart/i3-workspace.sh
 exec_always --no-startup-id autotiling
 
 # Screenshot (maim)

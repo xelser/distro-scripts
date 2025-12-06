@@ -1,81 +1,81 @@
 * {
-    foreground:                  #d4be98;
-    background:                  #141617;
+	foreground:                  #d4be98;
+	background:                  #141617;
 
-    selected-normal-foreground:  #d8a657;
-    selected-normal-background:  #282828;
+	selected-normal-foreground:  #d8a657;
+	selected-normal-background:  #282828;
 
-    normal-foreground:           var(foreground);
-    normal-background:           var(background);
+	normal-foreground:           var(foreground);
+	normal-background:           var(background);
 
-    background-color:            transparent;
-    border-color:                var(background);
+	background-color:            transparent;
+	border-color:                var(background);
 }
 
 window {
-  background-color: var(background);
-  padding: 5px 5px 0px 5px;
-  border: 5px 5px 0px 5px;
-  width: 500px;
-  height: 555px;
+	background-color: var(background);
+	padding: 5px 5px 0px 5px;
+	border: 5px 5px 0px 5px;
+	width: 450px;
+	height: 550px;
 }
 
 mainbox {
-  padding: 2;
-  border: 5;
+	padding: 2;
+	border: 5;
 }
 
 prompt {
-  text-color: #7c6f64;
-  background-color: transparent;
+	text-color: #7c6f64;
+	background-color: transparent;
 }
 
 entry {
-  text-color: #ddc7a1;
-  background-color: transparent;
+	text-color: #ddc7a1;
+	background-color: transparent;
 }
 
 case-indicator {
-  text-color: transparent;
-  background-color: transparent;
+	text-color: transparent;
+	background-color: transparent;
 }
 
 listview {
-  padding: 10px 0px 0px;
-  spacing: 2px;
+	padding: 10px 0px 0px;
+	spacing: 5px;
 }
 
 element {
-  padding: 0px;
-  cursor: pointer;
-  spacing: 5px;
-  border: 0;
+	padding: 0px;
+	cursor: pointer;
+	spacing: 5px;
+	border: 0px;
 }
 
 element-text {
-  text-color: inherit;
-  vertical-align: 0.5;
-  padding: 0;
+	text-color: inherit;
+	vertical-align: 0.5;
+	padding: 0;
 }
 
 element-icon {
-  background-color: var(background);
-  padding: 0px 10px 0px 0px;
-  vertical-align: 0.5;
-  size: 1.5em;
+	background-color: var(background);
+	padding: 0px 10px 0px 0px;
+	vertical-align: 0.5;
+	size: 1.5em;
 }
 
 element normal.normal {
-  background-color: var(normal-background);
-  text-color: var(normal-foreground);
+	background-color: var(normal-background);
+	text-color: var(normal-foreground);
 }
 
 element alternate.normal {
-  background-color: var(normal-background);
-  text-color: var(normal-foreground);
+	background-color: var(normal-background);
+	text-color: var(normal-foreground);
 }
 
 element selected.normal {
-  background-color: var(selected-normal-background);
-  text-color: var(selected-normal-foreground);
+	background-color: var(selected-normal-background);
+	text-color: var(selected-normal-foreground);
 }

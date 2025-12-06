@@ -7,20 +7,24 @@ Plug 'sainnhe/gruvbox-material'
 Plug 'nvim-lualine/lualine.nvim'
 "Plug 'vim-airline/vim-airline'
 
+" Visuals
+"Plug 'ap/vim-css-color'
+Plug 'NvChad/nvim-colorizer.lua'
+Plug 'nvim-tree/nvim-web-devicons'
+
 " Settings
-Plug 'ap/vim-css-color'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-sensible'
 Plug 'tpope/vim-surround'
-Plug 'sheerun/vim-polyglot'
-Plug 'nvimdev/lspsaga.nvim'
 Plug 'windwp/nvim-autopairs'
-Plug 'nvim-tree/nvim-web-devicons'
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
-"Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 
+" lua config file
+lua require('config')
+
+" theme
 source $HOME/.config/nvim/theme.vim
 
 " transparency
@@ -37,31 +41,20 @@ set ignorecase              " case insensitive
 set clipboard=unnamedplus   " using system clipboard
 
 " indent
-set autoindent
-set smartindent
-set noexpandtab     " Use tabs, not spaces
-set tabstop=2       " A tab character is 2 columns wide
-set shiftwidth=2    " Indent by 2 columns when using >> or <<
-set softtabstop=2   " Makes <Tab> and <Backspace> feel like 2-space steps
+set noexpandtab     " Use actual tab characters
+set tabstop=2       " Display tab characters as 2 columns wide
+set shiftwidth=2    " Indent by 2 columns with >>, <<, etc.
+set softtabstop=0   " No soft tab emulation; spacebar inserts spaces literally
 
+" au (autocommand)
 augroup MyAutoCmds
 	autocmd!
-	" autoindent
-	autocmd FileType * setlocal noexpandtab tabstop=2 shiftwidth=2 softtabstop=2
-	autocmd BufWritePre *.c,*.cpp,*.lua silent! normal gg=G
-
 	" whitespace cleanup
 	autocmd BufWritePre * :%s/\s\+$//e
 
 	" visual feedback for yanks
 	autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+
+	" autoindent
+	autocmd BufWritePre * if &filetype !~# '\v^(conf|i3config|swayconfig)$' | silent! normal! gg=G | endif
 augroup END
-
-" autoformat
-" autocmd BufWritePre *.js,*.ts,*.py,*.lua :call CocAction('format')
-
-" plugin: autopairs and lspsaga
-lua << EOF
-require("nvim-autopairs").setup({})
-require("lspsaga").setup({})
-EOF

@@ -1,6 +1,11 @@
+@import "/home/xelser/.config/waybar/gruvbox-material.css";
+
 window {
+  font-family: Roboto Medium;
+
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
-  background-color: black;
+  background-color: @bg_dim;
+  color: @fg1;
 }
