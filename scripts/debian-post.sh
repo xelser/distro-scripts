@@ -39,13 +39,13 @@ gsettings set org.mate.pluma toolbar-visible false
 gsettings set org.mate.pluma use-default-font false
 
 # separate apps
-x11app=(picom lxrandr timeshift-gtk gparted)
+#x11app=(picom lxrandr timeshift-gtk gparted)
 
-for app in "${x11app[@]}"; do
-	if [ -f /usr/share/applications/${app}.desktop ]; then
-		mkdir -p $HOME/.local/share/applications/
-		cp -rf /usr/share/applications/${app}.desktop \
-			$HOME/.local/share/applications/${app}.desktop
-		echo "OnlyShowIn=i3;" >> $HOME/.local/share/applications/${app}.desktop
-	fi
-done
+#for app in "${x11app[@]}"; do
+#	if [ -f /usr/share/applications/${app}.desktop ]; then
+#		mkdir -p $HOME/.local/share/applications/
+#		cp -rf /usr/share/applications/${app}.desktop \
+#			$HOME/.local/share/applications/${app}.desktop
+#		echo "OnlyShowIn=i3;" >> $HOME/.local/share/applications/${app}.desktop
+#	fi
+#done

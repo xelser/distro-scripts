@@ -13,8 +13,8 @@ apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
   pipewire pipewire-audio pulseaudio-utils easyeffects lsp-plugins-lv2 \
   linux-cpupower systemd-zram-generator network-manager bluez seatd \
   xfsprogs at-spi2-core xdg-desktop-portal htop nvtop neovim \
-  timeshift firefox-esr gparted meld ranger \
-  fonts-roboto{,-slab} fonts-jetbrains-mono
+  fonts-roboto{,-slab} fonts-jetbrains-mono \
+  firefox-esr gparted meld
 
 # INSTALL: WM (X11/Wayland)
 apt install --yes xinit xsettingsd numlockx xdg-desktop-portal-{gtk,wlr} \
