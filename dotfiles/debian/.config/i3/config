@@ -214,7 +214,7 @@ gaps inner 10
 gaps top 42
 
 # Workspaces Config gaps
-workspace 1 gaps top 0px
+workspace 2 gaps top 0px
 
 # Floating Windows
 for_window [title="Picture in picture"] floating enable
@@ -235,7 +235,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id xset led on
 
 # Autostart (i3)
-exec --no-startup-id bash $HOME/.config/autostart/i3-workspace.sh
+#exec --no-startup-id bash $HOME/.config/autostart/i3-workspace.sh
 exec_always --no-startup-id autotiling
 
 # Screenshot (maim)

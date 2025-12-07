@@ -30,17 +30,17 @@ else
 fi
 
 ### Monitor Configuration
-if command -v autorandr >/dev/null; then
-	if autorandr --change; then
-		echo "$(date): autorandr profile: $(autorandr --current 2>/dev/null)" >> ~/.xsession-log
-	else
-		echo "$(date): autorandr failed, falling back to xrandr --auto" >> ~/.xsession-log
-		xrandr --auto
-	fi
-else
-	echo "$(date): autorandr not found, using xrandr --auto" >> ~/.xsession-log
-	xrandr --auto
-fi
+#if command -v autorandr >/dev/null; then
+#	if autorandr --change; then
+#		echo "$(date): autorandr profile: $(autorandr --current 2>/dev/null)" >> ~/.xsession-log
+#	else
+#		echo "$(date): autorandr failed, falling back to xrandr --auto" >> ~/.xsession-log
+#		xrandr --auto
+#	fi
+#else
+#	echo "$(date): autorandr not found, using xrandr --auto" >> ~/.xsession-log
+#	xrandr --auto
+#fi
 
 ### Font Rendering
 if [ -f ~/.Xresources ]; then
