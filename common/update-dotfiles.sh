@@ -7,11 +7,7 @@ GAMING_DIR="$HOME/Documents/distro-scripts/gaming"
 COMMON_DIR="$HOME/Documents/distro-scripts/common"
 
 # The script relies on the 'distro_id' variable being set,
-# for example: export distro_id="arch"
-if [ -z "$distro_id" ]; then
-	echo "Error: 'distro_id' environment variable is not set." >&2
-	exit 1
-fi
+distro_id="$(grep '^ID=' /etc/os-release | cut -d'=' -f2 | cut -d'"' -f2)"
 
 # Determine Window Manager/Desktop Environment
 get_wm_de() {

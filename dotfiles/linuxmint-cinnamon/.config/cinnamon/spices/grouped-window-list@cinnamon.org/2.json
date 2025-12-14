@@ -358,9 +358,9 @@
         ],
         "value": [
             "brave-browser.desktop",
-            "org.gnome.Terminal.desktop",
+            "transmission-gtk.desktop",
             "nemo.desktop",
-            "transmission-gtk.desktop"
+            "org.gnome.Terminal.desktop"
         ]
     },
     "__md5__": "b7d0a7558cf87c22c50195c9d408485f"

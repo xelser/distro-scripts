@@ -1,6 +1,17 @@
 {
-  "updates": {},
+  "updates": {
+    "mint-upgrade-info": {
+      "type": "package",
+      "since": "2025.12.14",
+      "days": 1
+    },
+    "mintupdate": {
+      "type": "package",
+      "since": "2025.12.14",
+      "days": 1
+    }
+  },
   "version": 1,
-  "checked": "2025.09.21",
-  "notified": "2025.09.21"
+  "checked": "2025.12.14",
+  "notified": "2025.12.14"
 }
