@@ -64,7 +64,7 @@
     "first-launch": {
         "type": "generic",
         "default": true,
-        "value": false
+        "value": true
     },
     "__md5__": "e316a2da77a1be6c20a802af8cd5a59f"
 }
