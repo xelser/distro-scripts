@@ -16,8 +16,8 @@ color=always" | sudo tee /etc/dnf/libdnf5.conf.d/20-user-settings.conf 1> /dev/n
 # DEBLOAT
 sudo dnf remove --assumeyes @guest-desktop-agents @container-management @libreoffice \
 	gnome-{boxes,contacts,characters,connections,font-viewer,tour,clocks,weather,maps} \
-	rhythmbox mediawriter simple-scan fedora-bookmarks totem ptyxis libreoffice-\* \
-	gnome-shell-extension-\*
+	rhythmbox mediawriter simple-scan fedora-bookmarks totem decibels papers showtime \
+	ptyxis libreoffice-\* gnome-shell-extension-\*
 
 # ADD REPO: RPMFUSION
 sudo dnf list --installed | grep -q "rpmfusion" || sudo dnf install --assumeyes --skip-broken \
@@ -28,7 +28,7 @@ sudo dnf list --installed | grep -q "rpmfusion" || sudo dnf install --assumeyes 
 sudo dnf upgrade @core @sound-and-video @multimedia --exclude=PackageKit-gstreamer-plugin --assumeyes --best --allowerasing --skip-unavailable
 
 # INSTALL: Fedora Workstation
-sudo dnf install --assumeyes --allowerasing file-roller fragments \
+sudo dnf install --assumeyes --allowerasing file-roller fragments celluloid \
 	gnome-{console,extensions-app,tweaks} easyeffects lsp-plugins-lv2 \
 	nvim wl-clipboard libheif-tools
 
