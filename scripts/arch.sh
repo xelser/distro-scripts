@@ -200,8 +200,8 @@ pacman -S --noconfirm --needed i3-wm feh xss-lock maim slop scrot jq \
 	polybar xclip autotiling {lx,auto}randr xdg-desktop-portal-gtk
 
 # packages: hyprland
-pacman -S --noconfirm --needed hypr{land,paper,idle,shot,lock,cursor} \
-	waybar wl-clipboard wofi xdg-desktop-portal-hyprland
+#pacman -S --noconfirm --needed hypr{land,paper,idle,shot,lock,cursor} \
+#	waybar wl-clipboard wofi xdg-desktop-portal-hyprland
 
 # autologin
 mkdir -p /etc/systemd/system/getty@tty1.service.d
