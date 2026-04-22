@@ -21,11 +21,11 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 call plug#end()
 
-" lua config file
-lua require('config')
-
 " theme
 source $HOME/.config/nvim/theme.vim
+
+" lua config file
+lua require('config')
 
 " transparency
 highlight Normal ctermbg=none guibg=none

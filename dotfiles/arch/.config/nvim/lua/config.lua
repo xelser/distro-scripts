@@ -1,15 +1,8 @@
 -- Autopairs
 require('nvim-autopairs').setup({})
 
--- Treesitter
-require('nvim-treesitter.configs').setup({
-	auto_install = true,
-	highlight = { enable = true },
-	indent = { enable = true },
-})
-
 -- Colorizer
-require('colorizer').setup({ '*', }, {
+require('colorizer').setup({ '*' }, {
 	RGB      = true,
 	RRGGBB   = true,
 	RRGGBBAA = true,
@@ -19,4 +12,25 @@ require('colorizer').setup({ '*', }, {
 	css_fn   = true,
 	names    = true,
 	mode     = 'background',
+})
+
+-- Treesitter
+require('nvim-treesitter').setup({
+	install_dir = vim.fn.stdpath('data') .. '/site',
+})
+
+-- Auto-enable highlighting for all filetypes
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = '*',
+	callback = function()
+		pcall(vim.treesitter.start)
+	end,
+})
+
+-- Auto-enable indentation for all filetypes
+vim.api.nvim_create_autocmd('FileType', {
+	pattern = '*',
+	callback = function()
+		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+	end,
 })

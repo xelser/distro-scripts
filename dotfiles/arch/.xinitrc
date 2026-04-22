@@ -62,7 +62,7 @@ if [ -f /etc/X11/xorg.conf.d/10-nvidia-primary-dgpu.conf ]; then
 	picom --backend egl &
 	echo "$(date): picom (egl) started" >> ~/.xsession-log
 else
-	picom --glx-no-stencil --glx-no-rebind-pixmap &
+	picom &
 	echo "$(date): picom (glx) started" >> ~/.xsession-log
 fi
 
