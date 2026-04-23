@@ -166,9 +166,9 @@ echo -e "\n[options]\nDisableDownloadTimeout\nILoveCandy\nColor\n
 	tee -a /etc/pacman.conf 1>/dev/null && reflector && sleep 10
 
 # packages: kernel/hardware
-pacman -Syy --noconfirm --needed linux-{zen,lts} linux-{zen,lts}-headers \
-	linux-firmware cpupower zram-generator dmidecode inxi nvtop htop \
-	intel-gpu-tools fastfetch	man-{db,pages} texinfo
+pacman -Syy --noconfirm --needed linux{,-headers,-firmware}	man-{db,pages} \
+	cpupower zram-generator dmidecode inxi nvtop htop intel-gpu-tools \
+	fastfetch texinfo
 
 # packages: boot
 pacman -S --noconfirm --needed grub os-prober intel-ucode efibootmgr \

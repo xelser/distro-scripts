@@ -2,11 +2,6 @@
 
 ################################## PACKAGES ##################################
 
-# E5-476G
-sudo pacman -S --noconfirm --needed tailscale intel-media-driver \
-	jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt libva-utils \
-	nvidia-{dkms,utils,prime} lib32-nvidia-utils mesa-utils vulkan-tools
-
 # INSTALL: AUR PACKAGES
 if [ ! -f /usr/bin/yay ]; then
 	cd /tmp/ && git clone https://aur.archlinux.org/yay-bin
@@ -35,6 +30,11 @@ if [ ! -f /usr/bin/yay ]; then
 	# teamviewer zoom obs-studio gnome-boxes syncthing-{gtk,desktop-entries}
 	# ulauncher zscroll-git polybar-scripts-git
 fi
+
+# E5-476G
+yay -S --noconfirm --needed tailscale intel-media-driver \
+	jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt libva-utils \
+	{lib32-,}nvidia-580xx-utils mesa-utils vulkan-tools
 
 # BUILD: caffeinate
 #sudo pacman -S --needed --noconfirm rustup && rustup default stable
