@@ -32,9 +32,10 @@ if [ ! -f /usr/bin/yay ]; then
 fi
 
 # E5-476G
-yay -S --noconfirm --needed tailscale intel-media-driver \
+yay -S --noconfirm --needed intel-media-driver mesa-utils vulkan-tools \
 	jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt libva-utils \
-	{lib32-,}nvidia-580xx-utils mesa-utils vulkan-tools
+	nvidia-580xx-dkms {lib32-,}nvidia-580xx-utils envycontrol \
+	tailscale
 
 # BUILD: caffeinate
 #sudo pacman -S --needed --noconfirm rustup && rustup default stable
@@ -63,6 +64,9 @@ gsettings set org.mate.pluma active-plugins "['time', 'docinfo', 'modelines', 'f
 
 # cpucpower
 sudo cpupower frequency-set -g performance
+
+# envycontrol
+sudo envycontrol -s hybrid --rtd3
 
 # services
 sudo systemctl enable nvidia-{persistenced,suspend,hibernate,resume} \
