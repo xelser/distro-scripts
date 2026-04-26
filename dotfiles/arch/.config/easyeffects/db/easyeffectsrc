@@ -1,14 +1,14 @@
-[Spectrum]
-state=false
+[Presets]
+lastLoadedOutputPreset=Default
 
 [StreamInputs]
 inputDevice=bluez_input.58:4E:6E:61:C5:FC
 
 [StreamOutputs]
-mostUsedPresets=default
+mostUsedPresets=Default
 outputDevice=bluez_output.58_4E_6E_61_C5_FC.1
 plugins=equalizer#0
-usedPresets=default:8
+usedPresets=Default:1
 visiblePage=pluginsPage
 visiblePlugin=equalizer#0
 
@@ -18,5 +18,5 @@ forceBreezeTheme=false
 [Window]
 height=706
 lastLoadedOutputPreset=default
-visiblePresetSheetPage=autoloadingPage
+visiblePresetSheetPage=communityPage
 width=1346
