@@ -12,16 +12,15 @@ if [ ! -f /usr/bin/yay ]; then
 		grub-hook update-grub htpdate {brave,ventoy,fladder}-bin \
 		neovim-symlinks betterlockscreen waypaper
 
-	# sway (really doesn't like nvidia)
-	yay -S --needed --noconfirm swayfx && yay -S --needed --noconfirm \
-		sway{bg,idle,-contrib} waybar wl-clipboard wofi wlogout gtklock \
-		xorg-xwayland xdg-desktop-portal-wlr
-		#foot fuzzel
-
 	# niri
-	# yay -S --needed --noconfirm niri xdg-desktop-portal-gnome \
-	#	cliphist cava evolution-data-server xwayland-satellite
-	#	noctalia-shell matugen-git
+	yay -S --needed --noconfirm niri waybar wl-clipboard wofi wlogout gtklock \
+		xdg-desktop-portal-gnome xwayland-satellite
+	# noctalia-shell matugen-git cliphist cava evolution-data-server
+
+	# sway (really doesn't like nvidia)
+	# yay -S --needed --noconfirm swayfx && yay -S --needed --noconfirm \
+	# sway{bg,idle,-contrib,fx} xorg-xwayland xdg-desktop-portal-wlr
+		#foot fuzzel
 
 	# hyprland
 	#	yay -S --noconfirm --needed hypr{land,paper,idle,shot,lock,cursor} \
