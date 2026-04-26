@@ -16,7 +16,8 @@ set $up k
 set $right l
 
 # Your preferred terminal emulator
-set $term footclient
+#set $term footclient
+set $term alacritty msg create-window || alacritty
 
 # Your preferred application launcher
 set $menu bash -c "pgrep -x wofi > /dev/null || wofi"
@@ -262,7 +263,7 @@ bindsym Print exec grim && notify-send -u low "Screenshot of all displays via gr
 # xwayland disable
 
 # NumLock
-input type:keyboard xkb_numlock enabled
+# input type:keyboard xkb_numlock enabled
 
 # TouchPad
 input type:touchpad { tap enabled natural_scroll enabled }
@@ -292,7 +293,8 @@ exec --no-startup-id transmission-gtk --minimized
 
 # Autostart (for sway)
 exec_always --no-startup-id killall swaybg && swaybg --mode fill --image $(cat $HOME/.config/waypaper/config.ini | grep 'wallpaper' | cut -d'=' -f2) || waypaper --restore
-exec --no-startup-id foot --server
+#exec --no-startup-id foot --server
+exec --no-startup-id alacritty --daemon
 exec --no-startup-id autotiling
 
 # Lockscreen (gtklock)
