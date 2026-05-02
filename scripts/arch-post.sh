@@ -81,6 +81,9 @@ sudo systemctl enable nvidia-{persistenced,suspend,hibernate,resume} \
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/brave_flags.sh)"
 bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/jellyfin_config.sh)"
 
+# timeshift
+sudo curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/common/timeshift.json -o /etc/timeshift/timeshift.json
+
 # secure boot
 #sudo sed -i 's|esp="/efi"|esp="/boot/efi"|g; s|bootloader_id="Arch"|bootloader_id="BOOT"|g' /etc/secureboot.conf
 #sudo secure-grub-install

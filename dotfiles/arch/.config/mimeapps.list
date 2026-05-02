@@ -28,3 +28,4 @@ application/pdf=atril.desktop;org.onlyoffice.desktopeditors.desktop;
 inode/directory=thunar.desktop;
 video/mp4=mpv.desktop;
 video/x-matroska=mpv.desktop;
+application/json=pluma.desktop;
