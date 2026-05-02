@@ -2,11 +2,11 @@
 lastLoadedOutputPreset=Default
 
 [StreamInputs]
-inputDevice=bluez_input.58:4E:6E:61:C5:FC
+inputDevice=bluez_input.F8:A3:A8:10:B2:79
 
 [StreamOutputs]
 mostUsedPresets=Default
-outputDevice=bluez_output.58_4E_6E_61_C5_FC.1
+outputDevice=bluez_output.F8_A3_A8_10_B2_79.1
 plugins=equalizer#0
 usedPresets=Default:1
 visiblePage=pluginsPage
