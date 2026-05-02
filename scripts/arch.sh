@@ -190,10 +190,10 @@ pacman -S --noconfirm --needed flatpak pacman-contrib bash-completion \
 
 # packages: common
 pacman -S --noconfirm --needed xorg-{server,xinit,apps} numlockx picom \
-	brightnessctl wallutils dunst libnotify alacritty rofi mpv imv nwg-look \
-	timeshift pavucontrol blueman transmission-gtk mate-polkit dconf-editor \
+	brightnessctl gammastep wallutils dunst libnotify alacritty rofi mpv imv \
+	timeshift pavucontrol blueman transmission-gtk nwg-look dconf-editor \
 	engrampa atril pluma thunar-{volman,archive-plugin,media-tags-plugin} \
-	firefox gparted resources mugshot neovim{,-plugins}
+	firefox gparted resources mugshot mate-polkit neovim{,-plugins}
 
 # packages: i3
 pacman -S --noconfirm --needed i3-wm feh xss-lock maim slop scrot jq \
