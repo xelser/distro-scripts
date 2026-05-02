@@ -231,6 +231,7 @@ exec --no-startup-id alacritty --daemon
 # Autostart (x11)
 exec_always --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f4)" --fx dimblur
 exec_always --no-startup-id $HOME/.fehbg || waypaper --restore
+exec_always --no-startup-id $HOME/.config/gammastep/launch.sh
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 exec_always --no-startup-id xset led on
 
