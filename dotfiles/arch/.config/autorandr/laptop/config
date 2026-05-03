@@ -1,0 +1,16 @@
+output HDMI-1
+off
+output DP-1
+off
+output eDP-1
+crtc 0
+gamma 1.0:0.909:0.833
+mode 1366x768
+pos 0x0
+primary
+rate 59.97
+x-prop-broadcast_rgb Automatic
+x-prop-colorspace Default
+x-prop-max_bpc 12
+x-prop-non_desktop 0
+x-prop-scaling_mode Full aspect

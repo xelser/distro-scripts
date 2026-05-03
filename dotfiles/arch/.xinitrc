@@ -52,9 +52,12 @@ fi
 if [ "$(autorandr --current 2>/dev/null)" = "nvidia" ]; then
 	xrandr --output DP-1-1 --dpi 101 --output eDP-1-1 --dpi 112
 	echo "$(date): DPI set (DP-1-1: 101, eDP-1-1: 112)" >> ~/.xsession-log
-else
+elif [ "$(autorandr --current 2>/dev/null)" = "default" ]; then
 	xrandr --output DP-1 --dpi 101 --output eDP-1 --dpi 112
 	echo "$(date): DPI set (DP-1: 101, eDP-1: 112)" >> ~/.xsession-log
+elif [ "$(autorandr --current 2>/dev/null)" = "laptop" ]; then
+	xrandr -output eDP-1 --dpi 112
+	echo "$(date): DPI set (eDP-1: 112)" >> ~/.xsession-log
 fi
 
 ### Launch X11 Utilities
