@@ -39,9 +39,9 @@ cursor {
 // Find the full list of options on the wiki:
 // https://yalter.github.io/niri/Configuration:-Input
 input {
-	keyboard {
-		numlock
-	}
+	//keyboard {
+	//	numlock
+	//}
 
 	touchpad {
 		tap
@@ -58,13 +58,13 @@ input {
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Outputs
 // Remember to uncomment the node by removing "/-"!
-output "DP-1" {
-	position x=0 y=0
-}
+//output "DP-1" {
+//	position x=0 y=0
+//}
 
-output "eDP-1" {
-	position x=1366 y=0
-}
+//output "eDP-1" {
+//	position x=1366 y=0
+//}
 
 switch-events {
 	lid-close { spawn "notify-send" "The laptop lid is closed!"; }
@@ -147,8 +147,8 @@ spawn-at-startup "transmission-gtk" "--minimized"
 spawn-at-startup "alacritty" "--daemon"
 
 // Niri Shell
-spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
-spawn-at-startup "qs" "-c" "noctalia-shell"
+//spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
+//spawn-at-startup "qs" "-c" "noctalia-shell"
 //spawn-at-startup "dms" "run"
 
 // Example: block out two password managers from screen capture.

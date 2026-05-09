@@ -30,17 +30,17 @@ else
 fi
 
 ### Monitor Configuration
-#if command -v autorandr >/dev/null; then
-#	if autorandr --change; then
-#		echo "$(date): autorandr profile: $(autorandr --current 2>/dev/null)" >> ~/.xsession-log
-#	else
-#		echo "$(date): autorandr failed, falling back to xrandr --auto" >> ~/.xsession-log
-#		xrandr --auto
-#	fi
-#else
-#	echo "$(date): autorandr not found, using xrandr --auto" >> ~/.xsession-log
-#	xrandr --auto
-#fi
+if command -v autorandr >/dev/null; then
+	if autorandr --change; then
+		echo "$(date): autorandr profile: $(autorandr --current 2>/dev/null)" >> ~/.xsession-log
+	else
+		echo "$(date): autorandr failed, falling back to xrandr --auto" >> ~/.xsession-log
+		xrandr --auto
+	fi
+else
+	echo "$(date): autorandr not found, using xrandr --auto" >> ~/.xsession-log
+	xrandr --auto
+fi
 
 ### Font Rendering
 if [ -f ~/.Xresources ]; then
@@ -52,9 +52,12 @@ fi
 if [ "$(autorandr --current 2>/dev/null)" = "nvidia" ]; then
 	xrandr --output DP-1-1 --dpi 101 --output eDP-1-1 --dpi 112
 	echo "$(date): DPI set (DP-1-1: 101, eDP-1-1: 112)" >> ~/.xsession-log
-else
+elif [ "$(autorandr --current 2>/dev/null)" = "default" ]; then
 	xrandr --output DP-1 --dpi 101 --output eDP-1 --dpi 112
 	echo "$(date): DPI set (DP-1: 101, eDP-1: 112)" >> ~/.xsession-log
+elif [ "$(autorandr --current 2>/dev/null)" = "laptop" ]; then
+	xrandr -output eDP-1 --dpi 112
+	echo "$(date): DPI set (eDP-1: 112)" >> ~/.xsession-log
 fi
 
 ### Launch X11 Utilities
@@ -62,7 +65,7 @@ if [ -f /etc/X11/xorg.conf.d/10-nvidia-primary-dgpu.conf ]; then
 	picom --backend egl &
 	echo "$(date): picom (egl) started" >> ~/.xsession-log
 else
-	picom --glx-no-stencil --glx-no-rebind-pixmap &
+	picom &
 	echo "$(date): picom (glx) started" >> ~/.xsession-log
 fi
 
