@@ -66,11 +66,11 @@ else
 	echo "$(date): picom (glx) started" >> ~/.xsession-log
 fi
 
-if numlockx on; then
-	echo "$(date): numlockx activated" >> ~/.xsession-log
-else
-	echo "$(date): numlockx failed" >> ~/.xsession-log
-fi
+#if numlockx on; then
+#	echo "$(date): numlockx activated" >> ~/.xsession-log
+#else
+#	echo "$(date): numlockx failed" >> ~/.xsession-log
+#fi
 
 #xsettingsd &
 #echo "$(date): xsettingsd launched" >> ~/.xsession-log
