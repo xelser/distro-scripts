@@ -6,7 +6,7 @@
 sudo apt autoremove --purge --yes zutty xterm foot
 
 # jellyfin
-#curl -s https://repo.jellyfin.org/install-debuntu.sh | sudo bash
+curl -s https://repo.jellyfin.org/install-debuntu.sh | sudo bash
 sudo apt install --yes intel-media-va-driver-non-free libvpl2 libvpl-tools vainfo
 
 # tailscale
