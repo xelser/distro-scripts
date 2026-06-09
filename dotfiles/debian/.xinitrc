@@ -5,7 +5,6 @@ wm="i3"
 
 ### Autostart X11 Defaults
 xinitdir="/etc/X11/xinit"
-
 if [ -d "$xinitdir"/xinitrc.d ] ; then
 	for f in "$xinitdir/xinitrc.d"/?*.sh ; do
 		[ -x "$f" ] && . "$f"
@@ -58,6 +57,16 @@ elif [ "$(autorandr --current 2>/dev/null)" = "default" ]; then
 elif [ "$(autorandr --current 2>/dev/null)" = "laptop" ]; then
 	xrandr -output eDP-1 --dpi 112
 	echo "$(date): DPI set (eDP-1: 112)" >> ~/.xsession-log
+fi
+
+### Touchpad Configuration
+TOUCHPAD_ID=$(xinput list | grep -i "touchpad\|synaptics\|trackpad" | grep -o 'id=[0-9]*' | grep -o '[0-9]*' | head -1)
+if [ -n "$TOUCHPAD_ID" ]; then
+	xinput set-prop "$TOUCHPAD_ID" "libinput Natural Scrolling Enabled" 1
+	xinput set-prop "$TOUCHPAD_ID" "libinput Tapping Enabled" 1
+	echo "$(date): Touchpad configured (id=$TOUCHPAD_ID): natural scrolling, tap to click" >> ~/.xsession-log
+else
+	echo "$(date): Touchpad not found, skipping configuration" >> ~/.xsession-log
 fi
 
 ### Launch X11 Utilities
