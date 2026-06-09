@@ -26,11 +26,3 @@ vim.api.nvim_create_autocmd('FileType', {
 		pcall(vim.treesitter.start)
 	end,
 })
-
--- Auto-enable indentation for all filetypes
-vim.api.nvim_create_autocmd('FileType', {
-	pattern = '*',
-	callback = function()
-		vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
-	end,
-})

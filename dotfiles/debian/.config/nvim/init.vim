@@ -41,6 +41,8 @@ set ignorecase              " case insensitive
 set clipboard=unnamedplus   " using system clipboard
 
 " indent
+set autoindent
+set smartindent
 set noexpandtab     " Use actual tab characters
 set tabstop=2       " Display tab characters as 2 columns wide
 set shiftwidth=2    " Indent by 2 columns with >>, <<, etc.
