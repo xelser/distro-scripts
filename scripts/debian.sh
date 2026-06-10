@@ -4,8 +4,7 @@
 
 # PACKAGE MANAGER: Debian Repos
 cp /etc/apt/sources.list /etc/apt/sources.list.bak
-sed -i -E 's/non-free-firmware/non-free-firmware non-free contrib/g' \
-	/etc/apt/sources.list
+sed -i -E 's/non-free-firmware/non-free-firmware non-free contrib/g' /etc/apt/sources.list
 dpkg --add-architecture i386 && apt update && apt full-upgrade --yes
 
 # INSTALL: Base
