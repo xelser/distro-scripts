@@ -223,8 +223,9 @@ for_window [title="Picture in picture"] move position center
 
 # Autostart (Global)
 exec --no-startup-id bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/theming.sh)"
-exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
-exec --no-startup-id brave --no-startup-window --gapplication-service
+#exec --no-startup-id brave --no-startup-window --gapplication-service
+#exec --no-startup-id /usr/libexec/polkit-mate-authentication-agent-1
+exec --no-startup-id /usr/bin/lxpolkit
 exec --no-startup-id easyeffects --gapplication-service
 #exec --no-startup-id $HOME/.config/gammastep/launch.sh
 exec --no-startup-id transmission-gtk --minimized
