@@ -241,7 +241,7 @@ exec_always --no-startup-id xset led on
 exec_always --no-startup-id autotiling
 
 # Autostart (filebrowser)
-exec --no-startup-id filebrowser --address 0.0.0.0 --port 8080 --root /
+#exec --no-startup-id filebrowser --address 0.0.0.0 --port 8080 --root /
 
 # Screenshot (maim)
 bindsym $mod+Shift+s exec --no-startup-id maim-select
