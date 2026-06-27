@@ -77,7 +77,7 @@ if [[ ${user} == "xelser" ]] && [[ ! ${machine} == "PC" ]]; then
 fi
 
 if [[ ${machine} == "E5-476G" ]]; then
-	echo -e "LABEL=Games /mnt/Games ext4 defaults,noatime 0 2" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
+	#echo -e "LABEL=Games /mnt/Games ext4 defaults,noatime 0 2" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
 	echo -e "LABEL=Media /mnt/Media xfs defaults,noatime,nodiratime,logbufs=8,logbsize=256k,allocsize=1m,inode64 0 0" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
 fi
 
@@ -95,9 +95,9 @@ fi
 echo "################################### FINISHED ###################################"
 echo && read -p "Reboot? (Y/n): " end
 case $end in
-   n)	echo "Reboot Cancelled";;
-   *)	echo "Rebooting... "
-	[[ ${distro_id} == "arch" ]] && umount -R /mnt >&/dev/null && swapoff -a
-	rm -rf $HOME/distro-scripts*
-	sudo reboot;;
+	n)	echo "Reboot Cancelled";;
+	*)	echo "Rebooting... "
+		[[ ${distro_id} == "arch" ]] && umount -R /mnt >&/dev/null && swapoff -a
+		rm -rf $HOME/distro-scripts*
+		sudo reboot;;
 esac
