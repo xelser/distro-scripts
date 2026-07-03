@@ -112,7 +112,7 @@ echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priori
 systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
 # enable systemd daemons
-for service in NetworkManager bluetooth seatd htpdate; do
+for service in NetworkManager bluetooth blueman-mechanism seatd htpdate; do
 	systemctl enable $service
 done
 
