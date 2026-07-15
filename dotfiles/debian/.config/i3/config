@@ -231,6 +231,7 @@ exec --no-startup-id easyeffects --gapplication-service
 exec --no-startup-id transmission-gtk --minimized
 exec --no-startup-id alacritty --daemon
 exec --no-startup-id blueman-applet
+exec --no-startup-id dunst
 
 # Autostart (x11)
 exec_always --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f2)" --fx dimblur
