@@ -12,14 +12,15 @@ apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
 	pipewire pipewire-audio pulseaudio-utils easyeffects lsp-plugins-lv2 \
 	linux-cpupower systemd-zram-generator network-manager bluez seatd \
 	xfsprogs at-spi2-core xdg-desktop-portal htop nvtop neovim \
-	fonts-roboto{,-slab} fonts-jetbrains-mono \
-	firefox-esr gparted meld
+	firefox-esr gparted meld transmission-daemon \
+	fonts-roboto{,-slab} fonts-jetbrains-mono
+
 
 # INSTALL: WM (X11/Wayland)
 apt install --yes xin{it,put} xsettingsd numlockx \
 	xdg-desktop-portal-{gtk,wlr} brightnessctl libnotify-bin \
-	alacritty dunst nwg-look mpv imv transmission-gtk pavucontrol blueman \
-	lxpolkit engrampa pluma atril pcmanfm
+	alacritty dunst nwg-look mpv imv pavucontrol blueman lxpolkit \
+	engrampa pluma atril pcmanfm
 	# gammastep mugshot thunar{,-archive-plugin} gvfs-{backends,fuse}
 
 # INSTALL: i3
