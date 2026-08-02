@@ -4,49 +4,55 @@
 
 # --- APT (Debian/Ubuntu) ---
 if [ -f /usr/bin/apt ]; then
-    update()      { sudo apt update && sudo apt upgrade --yes; }
-    install()     { sudo apt install "$@"; }
-    uninstall()   { sudo apt autoremove --purge "$@"; }
-    search()      { apt search "$@"; }
-    list()        { apt list --installed 2>/dev/null | cut -d'/' -f1 | grep "${1:-.}"; }
-    alias clean="sudo apt autoremove --purge --yes && sudo apt autoclean"
+	update()      { sudo apt update && sudo apt upgrade --yes; }
+	install()     { sudo apt install "$@"; }
+	uninstall()   { sudo apt autoremove --purge "$@"; }
+	search()      { apt search "$@"; }
+	list()        { apt list --installed 2>/dev/null | cut -d'/' -f1 | grep "${1:-.}"; }
+	alias clean="sudo apt autoremove --purge --yes && sudo apt autoclean"
 
 # --- Pacman (Arch) ---
 elif [ -f /usr/bin/pacman ]; then
-    update()      { sudo pacman -Syyu --noconfirm; }
-    install()     { sudo pacman -S --needed "$@"; }
-    uninstall()   { sudo pacman -Rnsu "$@"; }
-    search()      { pacman -Ss "$@"; }
-    list()        { pacman -Qq | grep "${1:-.}"; }
-    alias clean="pacman -Qtdq | sudo pacman -Rnsu - --noconfirm && sudo pacman -Sc --noconfirm"
+	update()      { sudo pacman -Syyu --noconfirm; }
+	install()     { sudo pacman -S --needed "$@"; }
+	uninstall()   { sudo pacman -Rnsu "$@"; }
+	search()      { pacman -Ss "$@"; }
+	list()        { pacman -Qq | grep "${1:-.}"; }
+	alias clean="pacman -Qtdq | sudo pacman -Rnsu - --noconfirm && sudo pacman -Sc --noconfirm"
 
 # --- DNF (Fedora/RHEL) ---
 elif [ -f /usr/bin/dnf ]; then
-    update()      { sudo dnf upgrade --assumeyes --allowerasing; }
-    install()     { sudo dnf install "$@"; }
-    uninstall()   { sudo dnf remove "$@"; }
-    search()      { dnf search "$@"; }
-    list()        { dnf list --installed "${@:-.}"; }
-    alias clean="sudo dnf autoremove --assumeyes && sudo dnf clean all"
+	update()      { sudo dnf upgrade --assumeyes --allowerasing; }
+	install()     { sudo dnf install "$@"; }
+	uninstall()   { sudo dnf remove "$@"; }
+	search()      { dnf search "$@"; }
+	list()        { dnf list --installed "${@:-.}"; }
+	alias clean="sudo dnf autoremove --assumeyes && sudo dnf clean all"
 fi
 
 # --- Yay (AUR helper — overrides pacman aliases if present) ---
 if [ -f /usr/bin/yay ]; then
-    update()      { yay -Syyu --noconfirm; }
-    install()     { yay -S --needed "$@"; }
-    uninstall()   { yay -Rnsu "$@"; }
-    search()      { yay -Ss "$@"; }
-    alias updatepkg="sudo pacman -Syyu --noconfirm"
-    alias clean="yay -Qtdq | yay -Rnsu - --noconfirm && yay -Sc --noconfirm"
+	update()      { yay -Syyu --noconfirm; }
+	install()     { yay -S --needed "$@"; }
+	uninstall()   { yay -Rnsu "$@"; }
+	search()      { yay -Ss "$@"; }
+	alias updatepkg="sudo pacman -Syyu --noconfirm"
+	alias clean="yay -Qtdq | yay -Rnsu - --noconfirm && yay -Sc --noconfirm"
 fi
 
 # --- Flatpak ---
 if [ -f /usr/bin/flatpak ]; then
-    installflat()   { flatpak install flathub "$@"; }
-    uninstallflat() { flatpak uninstall "$@"; }
-    searchflat()    { flatpak search --columns=name,application,version,branch "$@"; }
-    alias updateflat="flatpak update --assumeyes"
-    alias cleanflat="flatpak uninstall --unused --delete-data --assumeyes"
+	installflat()   { flatpak install flathub "$@"; }
+	uninstallflat() { flatpak uninstall "$@"; }
+	searchflat()    { flatpak search --columns=name,application,version,branch "$@"; }
+	alias updateflat="flatpak update --assumeyes"
+	alias cleanflat="flatpak uninstall --unused --delete-data --assumeyes"
+fi
+
+# --- Docker ---
+if [ -f /usr/bin/docker ]; then
+	alias dockercompose="docker compose up -d --remove-orphans"
+	alias dockerclean="docker system prune -af --volumes"
 fi
 
 # =============================================================================
@@ -54,10 +60,10 @@ fi
 # =============================================================================
 
 if [ -d "$HOME/Documents/distro-scripts/" ]; then
-    alias dotup="bash $HOME/Documents/distro-scripts/common/update-dotfiles.sh"
-    alias gitpull="git fetch && git pull"
-    alias gitcommit="git add . && git commit -m 'auto-update @ $(hostname)' && git push"
-    alias updategit="cd $HOME/Documents/distro-scripts && gitpull; dotup; gitcommit; cd $HOME"
+	alias dotup="bash $HOME/Documents/distro-scripts/common/update-dotfiles.sh"
+	alias gitpull="git fetch && git pull"
+	alias gitcommit="git add . && git commit -m 'auto-update @ $(hostname)' && git push"
+	alias updategit="cd $HOME/Documents/distro-scripts && gitpull; dotup; gitcommit; cd $HOME"
 fi
 
 # =============================================================================

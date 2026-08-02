@@ -18,7 +18,6 @@ fi
 
 # autostart in tty
 if [ "$(tty)" = "/dev/tty1" ]; then
-	transmission-daemon & disown
-	tailscale funnel 8096 & disown
-	setterm --blank 5 & disown
+	setterm --blank 5
+	transmission-daemon
 fi
