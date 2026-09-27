@@ -19,5 +19,5 @@ fi
 # autostart in tty
 if [ "$(tty)" = "/dev/tty1" ]; then
 	setterm --blank 5
-	#transmission-daemon -f --log-level=info -l 15 -L 50 > /dev/null
+	transmission-daemon -T -l 15 -L 50 -gsr 2 > /dev/null
 fi
