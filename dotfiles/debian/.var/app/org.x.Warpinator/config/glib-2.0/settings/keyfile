@@ -1,0 +1,6 @@
+[org/x/warpinator/preferences]
+connect-id='DEBIAN-764833617DC4C2BC5D0A'
+ask-for-send-permission=true
+autostart=false
+no-overwrite=true
+receiving-folder='file:///home/xelser/Downloads/Warpinator'
