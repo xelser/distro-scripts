@@ -95,6 +95,9 @@ ${source_dir}/modules/blacklist_nouveau.sh
 # use network-manager
 mv /etc/network/interfaces /etc/network/interfaces.bak
 
+# disable systemd transmission-daemon
+systemctl disable transmission-daemon
+
 # autologin user at tty1
 mkdir -p /etc/systemd/system/getty@tty1.service.d
 echo "[Service]" > /etc/systemd/system/getty@tty1.service.d/override.conf

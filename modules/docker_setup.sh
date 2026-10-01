@@ -13,10 +13,10 @@ echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.
 
 # Install Docker
 sudo apt-get update && sudo apt-get install -y \
-  docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+	docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
 # Add user to group permission
 sudo usermod -aG docker $USER
 
 # Reboot
-sudo systemctl reboot
+#sudo systemctl reboot
