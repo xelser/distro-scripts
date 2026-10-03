@@ -20,8 +20,8 @@ apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
 apt install --yes xin{it,put} xsettingsd numlockx \
 	xdg-desktop-portal-{gtk,wlr} brightnessctl libnotify-bin \
 	alacritty dunst nwg-look mpv imv pavucontrol blueman lxpolkit \
-	engrampa pluma atril pcmanfm
-	# gammastep mugshot thunar{,-archive-plugin} gvfs-{backends,fuse}
+	engrampa pluma atril thunar{,-archive-plugin} gvfs-{backends,fuse}
+	# gammastep mugshot pcmanfm
 
 # INSTALL: i3
 apt install --yes feh xss-lock polybar rofi maim slop scrot jq xclip \

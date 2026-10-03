@@ -1,5 +1,6 @@
 #!/bin/bash
 # Servarr host setup: mergerfs pool + fstab, Docker, Tailscale exit node.
+# Jellyfin and the rest of the stack run in Docker Compose.
 # Run as your normal user (not root). Uses sudo where needed.
 
 set -euo pipefail
@@ -110,19 +111,20 @@ EOF
 
 														configure_network_for_exit_node() {
 															info "Enabling IP forwarding..."
-															grep -qxF 'net.ipv4.ip_forward=1' /etc/sysctl.conf \
-																|| echo 'net.ipv4.ip_forward=1' | sudo tee -a /etc/sysctl.conf > /dev/null
-																															grep -qxF 'net.ipv6.conf.all.forwarding=1' /etc/sysctl.conf \
-																																|| echo 'net.ipv6.conf.all.forwarding=1' | sudo tee -a /etc/sysctl.conf > /dev/null
-																																																															sudo sysctl -p > /dev/null
+															# Written with tee (not tee -a) so re-running the script does not duplicate lines
+															printf '%s\n' \
+																'net.ipv4.ip_forward = 1' \
+																'net.ipv6.conf.all.forwarding = 1' \
+																| sudo tee /etc/sysctl.d/99-tailscale.conf > /dev/null
+																															sudo sysctl -p /etc/sysctl.d/99-tailscale.conf > /dev/null
 
-																																																															local iface
-																																																															iface=$(ip route | awk '/^default/ {print $5; exit}')
-																																																															[ -n "$iface" ] || fail "Could not detect primary network interface."
-																																																															info "Detected interface: $iface"
+																															local iface
+																															iface=$(ip route | awk '/^default/ {print $5; exit}')
+																															[ -n "$iface" ] || fail "Could not detect primary network interface."
+																															info "Detected interface: $iface"
 
-																																																															sudo ethtool -K "$iface" rx-udp-gro-forwarding on \
-																																																																|| warn "Could not enable UDP GRO forwarding on $iface (driver may not support it)."
+																															sudo ethtool -K "$iface" rx-udp-gro-forwarding on \
+																																|| warn "Could not enable UDP GRO forwarding on $iface (driver may not support it)."
 
 	# Persist UDP GRO via NetworkManager dispatcher (only if NetworkManager is in use)
 	if [ -d /etc/NetworkManager/dispatcher.d ]; then
