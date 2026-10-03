@@ -5,33 +5,9 @@
 # debloat
 sudo apt autoremove --purge --yes zutty xterm foot
 
-# jellyfin
-sudo apt install --yes curl gnupg intel-media-va-driver-non-free libvpl2 libvpl-tools vainfo
-
-sudo mkdir -p /etc/apt/keyrings
-curl -fsSL https://repo.jellyfin.org/jellyfin_team.gpg.key | sudo gpg --dearmor -o /etc/apt/keyrings/jellyfin.gpg
-
-export VERSION_OS="$( awk -F'=' '/^ID=/{ print $NF }' /etc/os-release )"
-export VERSION_CODENAME="$( awk -F'=' '/^VERSION_CODENAME=/{ print $NF }' /etc/os-release )"
-export DPKG_ARCHITECTURE="$( dpkg --print-architecture )"
-cat <<EOF | sudo tee /etc/apt/sources.list.d/jellyfin.sources
-Types: deb
-URIs: https://repo.jellyfin.org/${VERSION_OS}
-Suites: ${VERSION_CODENAME}
-Components: main
-Architectures: ${DPKG_ARCHITECTURE}
-Signed-By: /etc/apt/keyrings/jellyfin.gpg
-EOF
-
-sudo apt update && sudo apt install jellyfin --yes
-sudo systemctl enable --now jellyfin
-
-# tailscale
-curl -fsSL https://tailscale.com/install.sh | sh
-
 # brave browser
-curl -fsS https://dl.brave.com/install.sh | sh
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/brave_flags.sh)"
+#curl -fsS https://dl.brave.com/install.sh | sh
+#bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/brave_flags.sh)"
 
 # nvidia and envycontrol
 # bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/debian_nvidia.sh)"
