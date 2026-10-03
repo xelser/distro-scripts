@@ -270,7 +270,6 @@ backup_common() {
 	".config/mpv/mpv.conf"
 	".config/celluloid/mpv.conf"
 	#".config/redshift.conf"
-	".config/qBittorrent/qBittorrent.conf"
 	".config/inkscape/preferences.xml"
 	#".config/brave-flags.conf"
 	".config/libreoffice/4/user/registrymodifications.xcu"
@@ -292,6 +291,7 @@ local -a COMMON_FOLDERS=(
 ".config/gammastep"
 ".config/transmission"
 ".config/transmission-daemon"
+".config/qBittorrent"
 ".local/share/dark-mode.d"
 ".local/share/light-mode.d"
 )

@@ -20,8 +20,9 @@ apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
 apt install --yes xin{it,put} xsettingsd numlockx \
 	xdg-desktop-portal-{gtk,wlr} brightnessctl libnotify-bin \
 	alacritty dunst nwg-look mpv imv pavucontrol blueman lxpolkit \
-	engrampa pluma atril thunar{,-archive-plugin} gvfs-{backends,fuse}
-	# gammastep mugshot pcmanfm
+	engrampa pluma atril qbittorrent-nox \
+	thunar{,-archive-plugin} gvfs-{backends,fuse}
+	# gammastep mugshot pcmanfm transmission-daemon
 
 # INSTALL: i3
 apt install --yes feh xss-lock polybar rofi maim slop scrot jq xclip \
@@ -94,6 +95,9 @@ ${source_dir}/modules/blacklist_nouveau.sh
 
 # use network-manager
 mv /etc/network/interfaces /etc/network/interfaces.bak
+
+# disable transmission-daemon service file
+systemctl disable transmission-daemon
 
 # autologin user at tty1
 mkdir -p /etc/systemd/system/getty@tty1.service.d
