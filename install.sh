@@ -72,9 +72,9 @@ if [ -f ${install_script}-post.sh ]; then
 fi
 
 ## Fstab ##
-#if [[ ${user} == "xelser" ]] && [[ ! ${machine} == "PC" ]]; then
-#	echo -e "\nLABEL=Home /mnt/Home ext4 defaults,noatime 0 2" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
-#fi
+if [[ ${user} == "xelser" ]]; then
+	echo -e "\nLABEL=Home /mnt/Home ext4 defaults,noatime 0 2" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
+fi
 
 #if [[ ${machine} == "E5-476G" ]]; then
 #echo -e "LABEL=Games /mnt/Games ext4 defaults,noatime 0 2" | sudo tee -a ${root_mnt}/etc/fstab 1> /dev/null
