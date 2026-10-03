@@ -12,7 +12,7 @@ apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
 	pipewire pipewire-audio pulseaudio-utils easyeffects lsp-plugins-lv2 \
 	linux-cpupower systemd-zram-generator network-manager bluez seatd \
 	xfsprogs at-spi2-core xdg-desktop-portal htop nvtop neovim \
-	firefox-esr gparted meld transmission-daemon \
+	firefox-esr gparted gnome-disk-utility meld \
 	fonts-roboto{,-slab} fonts-jetbrains-mono
 
 
@@ -90,7 +90,7 @@ locale-gen
 update-locale LANG=en_US.UTF-8 LANGUAGE=en_US:en
 
 # blacklist nouveau
-# ${source_dir}/modules/blacklist_nouveau.sh
+${source_dir}/modules/blacklist_nouveau.sh
 
 # use network-manager
 mv /etc/network/interfaces /etc/network/interfaces.bak

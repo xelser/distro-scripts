@@ -19,5 +19,5 @@ fi
 # autostart in tty
 if [ "${distro_id}" = "debian" ] && [ "$(tty)" = "/dev/tty1" ]; then
 	setterm --blank 5
-	transmission-daemon -T -l 15 -L 50 -gsr 2 > /dev/null
+	#transmission-daemon -T -l 15 -L 50 -gsr 2 > /dev/null
 fi

@@ -45,13 +45,13 @@ fi
 [ -f /usr/bin/xdg-user-dirs-update ] && xdg-user-dirs-update
 
 # Create Symlinks
-if [[ $USER == "xelser" ]]; then
-	[ ! -d $HOME/Documents/"xelser_Documents" ] && ln -sf /mnt/Home/Documents $HOME/Documents/"xelser_Documents"
-	[ ! -d $HOME/Downloads/"xelser_Downloads" ] && ln -sf /mnt/Home/Downloads $HOME/Downloads/"xelser_Downloads"
-	[ ! -d $HOME/Music/"xelser_Music" ]         && ln -sf /mnt/Home/Music     $HOME/Music/"xelser_Music"
-	[ ! -d $HOME/Pictures/"xelser_Pictures" ]   && ln -sf /mnt/Home/Pictures  $HOME/Pictures/"xelser_Pictures"
-	[ ! -d $HOME/Videos/"xelser_Videos" ]       && ln -sf /mnt/Home/Videos    $HOME/Videos/"xelser_Videos"
-fi
+#if [[ $USER == "xelser" ]]; then
+#	[ ! -d $HOME/Documents/"xelser_Documents" ] && ln -sf /mnt/Home/Documents $HOME/Documents/"xelser_Documents"
+#	[ ! -d $HOME/Downloads/"xelser_Downloads" ] && ln -sf /mnt/Home/Downloads $HOME/Downloads/"xelser_Downloads"
+#	[ ! -d $HOME/Music/"xelser_Music" ]         && ln -sf /mnt/Home/Music     $HOME/Music/"xelser_Music"
+#	[ ! -d $HOME/Pictures/"xelser_Pictures" ]   && ln -sf /mnt/Home/Pictures  $HOME/Pictures/"xelser_Pictures"
+#	[ ! -d $HOME/Videos/"xelser_Videos" ]       && ln -sf /mnt/Home/Videos    $HOME/Videos/"xelser_Videos"
+#fi
 
 # Audio
 [ -f /usr/bin/easyeffects ] && [ -f $HOME/.config/easyeffects/output/default.json ] && easyeffects -l default
@@ -93,14 +93,14 @@ name=(calf org.gnome.dspy org.gnome.Devhelp org.gnome.Sysprof lstopo bssh
 	avahi-discover bvnc stoken-gui stoken-gui-small qv4l2 qvidcap yelp rofi
 	rofi-theme-selector display-im7.q16 xgps xgpsspeed)
 
-for app in "${name[@]}"; do
-	if [ -f /usr/share/applications/${app}.desktop ]; then
-		mkdir -p $HOME/.local/share/applications/
-		cp -rf /usr/share/applications/${app}.desktop \
-			$HOME/.local/share/applications/${app}.desktop
-		echo "NoDisplay=true" >> $HOME/.local/share/applications/${app}.desktop
-	fi
-done
+	for app in "${name[@]}"; do
+		if [ -f /usr/share/applications/${app}.desktop ]; then
+			mkdir -p $HOME/.local/share/applications/
+			cp -rf /usr/share/applications/${app}.desktop \
+				$HOME/.local/share/applications/${app}.desktop
+							echo "NoDisplay=true" >> $HOME/.local/share/applications/${app}.desktop
+		fi
+	done
 
 # daemons
 [ -f /usr/bin/ulauncher ] && systemctl enable --user ulauncher
@@ -180,31 +180,31 @@ fi
 
 # Logout
 logout () {
-if [[ ${wm_de} == "gnome" ]]; then
-	gnome-session-quit --force
-elif [[ ${wm_de} == "cinnamon" ]]; then
-	cinnamon-session-quit --logout --force
-elif [[ ${wm_de} == "xfce" ]]; then
-	xfce4-session-logout --logout --fast
-elif [[ ${wm_de} == "kde" ]]; then
-	qdbus org.kde.ksmserver /KSMServer logout 0 0 2
-elif [[ ${wm_de} == "sway" ]]; then
-	swaymsg exit
-elif [[ ${wm_de} == "i3" ]]; then
-	i3-msg exit
-else
-	loginctl terminate-session $(loginctl session-status | head -n 1 | awk '{print $1}')
-fi
+	if [[ ${wm_de} == "gnome" ]]; then
+		gnome-session-quit --force
+	elif [[ ${wm_de} == "cinnamon" ]]; then
+		cinnamon-session-quit --logout --force
+	elif [[ ${wm_de} == "xfce" ]]; then
+		xfce4-session-logout --logout --fast
+	elif [[ ${wm_de} == "kde" ]]; then
+		qdbus org.kde.ksmserver /KSMServer logout 0 0 2
+	elif [[ ${wm_de} == "sway" ]]; then
+		swaymsg exit
+	elif [[ ${wm_de} == "i3" ]]; then
+		i3-msg exit
+	else
+		loginctl terminate-session $(loginctl session-status | head -n 1 | awk '{print $1}')
+	fi
 
 }
 
 if [ $? -eq 0 ]; then
 	echo && read -p "Reboot? (Y/n): " end
 	case $end in
-	   n)	echo "Reboot Cancelled";;
-	   *)	echo "Restarting... "
-	   	rm $HOME/.config/${distro_id}-post.sh
-	   	rm $HOME/.config/post.sh
+		n)	echo "Reboot Cancelled";;
+		*)	echo "Restarting... "
+			rm $HOME/.config/${distro_id}-post.sh
+			rm $HOME/.config/post.sh
 			sudo reboot
 	esac
 else echo "Error Detected. Logout Cancelled"
