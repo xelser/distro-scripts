@@ -73,13 +73,14 @@ LABEL=Media3 /mnt/Media3 xfs defaults,noatime,logbsize=256k,allocsize=1m,nofail,
 LABEL=Media4 /mnt/Media4 xfs defaults,noatime,logbsize=256k,allocsize=1m,nofail,x-systemd.device-timeout=10s 0 0
 LABEL=Media5 /mnt/Media5 xfs defaults,noatime,logbsize=256k,allocsize=1m,nofail,x-systemd.device-timeout=10s 0 0
 
-# mergerfs
 /mnt/Media* /mnt/Orico fuse.mergerfs defaults,allow_other,use_ino,cache.files=partial,dropcacheonclose=true,category.create=mspmfs,moveonenospc=true,minfreespace=20G,fsname=mergerfs,x-systemd.requires-mounts-for=/mnt/Media1,x-systemd.requires-mounts-for=/mnt/Media2,x-systemd.requires-mounts-for=/mnt/Media3,x-systemd.requires-mounts-for=/mnt/Media4,x-systemd.requires-mounts-for=/mnt/Media5 0 0
 EOF
 			fi
 
 			info "Mounting drives..."
 			sudo systemctl daemon-reload
+			sudo chown 1000:1000 /mnt/Media1 /mnt/Media2 /mnt/Media3 /mnt/Media4 /mnt/Media5
+			sudo chmod 775 /mnt/Media1 /mnt/Media2 /mnt/Media3 /mnt/Media4 /mnt/Media5
 			sudo mount -a || warn "mount -a reported errors. Check your drives and /etc/fstab."
 			mountpoint -q "$MEDIA_DIR" \
 				|| fail "$MEDIA_DIR is not mounted. Check the drive labels, then run: sudo mount -a"
