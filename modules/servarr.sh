@@ -41,29 +41,51 @@ protect_mountpoint() {
 		|| warn "Could not set immutable flag on $dir."
 	}
 
-	setup_storage() {
-		info "Installing mergerfs..."
-		sudo apt-get install -y mergerfs
+# A fresh XFS root is owned by root, so containers running as your user cannot
+# write to it. This must run AFTER the drives are mounted: before that, the
+# paths are empty immutable folders on the root disk and chown would fail.
+fix_media_permissions() {
+	local uid gid n dir
+	uid="$(id -u)"
+	gid="$(id -g)"
 
-		info "Creating mount points..."
-		local n
-		for n in 1 2 3 4 5; do
-			sudo mkdir -p "/mnt/Media${n}"
-			protect_mountpoint "/mnt/Media${n}"
-			sudo blkid -L "Media${n}" &>/dev/null \
-				|| warn "No filesystem labeled Media${n} found. Is the drive connected?"
-			done
-			sudo mkdir -p "$MEDIA_DIR"
-			protect_mountpoint "$MEDIA_DIR"
+	info "Setting ownership and permissions on the XFS drives (owner ${uid}:${gid})..."
+	for n in 1 2 3 4 5; do
+		dir="/mnt/Media${n}"
+		if ! mountpoint -q "$dir"; then
+			warn "$dir is not mounted. Skipping permissions for it."
+			continue
+		fi
+		sudo chown -R "${uid}:${gid}" "$dir"
+		sudo find "$dir" -type d -exec chmod 775 {} +
+		sudo find "$dir" -type f -exec chmod 664 {} +
+	done
+	success "Drive permissions applied."
+}
 
-			if grep -qE "# servarr.sh: media drives|[[:space:]]${MEDIA_DIR}[[:space:]]" /etc/fstab; then
-				warn "fstab already has a $MEDIA_DIR or servarr.sh entry. Skipping. Edit /etc/fstab by hand if you want the new options."
-			else
-				info "Backing up /etc/fstab..."
-				sudo cp /etc/fstab "/etc/fstab.bak.$(date +%Y%m%d%H%M%S)"
+setup_storage() {
+	info "Installing mergerfs..."
+	sudo apt-get install -y mergerfs
 
-				info "Adding drives and mergerfs pool to /etc/fstab..."
-				cat <<'EOF' | sudo tee -a /etc/fstab > /dev/null
+	info "Creating mount points..."
+	local n
+	for n in 1 2 3 4 5; do
+		sudo mkdir -p "/mnt/Media${n}"
+		protect_mountpoint "/mnt/Media${n}"
+		sudo blkid -L "Media${n}" &>/dev/null \
+			|| warn "No filesystem labeled Media${n} found. Is the drive connected?"
+		done
+		sudo mkdir -p "$MEDIA_DIR"
+		protect_mountpoint "$MEDIA_DIR"
+
+		if grep -qE "# servarr.sh: media drives|[[:space:]]${MEDIA_DIR}[[:space:]]" /etc/fstab; then
+			warn "fstab already has a $MEDIA_DIR or servarr.sh entry. Skipping. Edit /etc/fstab by hand if you want the new options."
+		else
+			info "Backing up /etc/fstab..."
+			sudo cp /etc/fstab "/etc/fstab.bak.$(date +%Y%m%d%H%M%S)"
+
+			info "Adding drives and mergerfs pool to /etc/fstab..."
+			cat <<'EOF' | sudo tee -a /etc/fstab > /dev/null
 
 # servarr.sh: media drives
 # External HDDs
@@ -75,57 +97,57 @@ LABEL=Media5 /mnt/Media5 xfs defaults,noatime,logbsize=256k,allocsize=1m,nofail,
 
 /mnt/Media* /mnt/Orico fuse.mergerfs defaults,allow_other,use_ino,cache.files=partial,dropcacheonclose=true,category.create=mspmfs,moveonenospc=true,minfreespace=20G,fsname=mergerfs,x-systemd.requires-mounts-for=/mnt/Media1,x-systemd.requires-mounts-for=/mnt/Media2,x-systemd.requires-mounts-for=/mnt/Media3,x-systemd.requires-mounts-for=/mnt/Media4,x-systemd.requires-mounts-for=/mnt/Media5 0 0
 EOF
-			fi
+		fi
 
-			info "Mounting drives..."
-			sudo systemctl daemon-reload
-			sudo chown 1000:1000 /mnt/Media1 /mnt/Media2 /mnt/Media3 /mnt/Media4 /mnt/Media5
-			sudo chmod 775 /mnt/Media1 /mnt/Media2 /mnt/Media3 /mnt/Media4 /mnt/Media5
-			sudo mount -a || warn "mount -a reported errors. Check your drives and /etc/fstab."
-			mountpoint -q "$MEDIA_DIR" \
-				|| fail "$MEDIA_DIR is not mounted. Check the drive labels, then run: sudo mount -a"
-							success "mergerfs pool mounted at $MEDIA_DIR."
-						}
+		info "Mounting drives..."
+		sudo systemctl daemon-reload
+		sudo mount -a || warn "mount -a reported errors. Check your drives and /etc/fstab."
+		mountpoint -q "$MEDIA_DIR" \
+			|| fail "$MEDIA_DIR is not mounted. Check the drive labels, then run: sudo mount -a"
 
-						install_docker() {
-							info "Installing Docker..."
-							curl -fsSL https://download.docker.com/linux/debian/gpg \
-								| sudo gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg
-															sudo chmod a+r /etc/apt/keyrings/docker.gpg
+		fix_media_permissions
+		success "mergerfs pool mounted at $MEDIA_DIR."
+	}
 
-															echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
-																| sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+	install_docker() {
+		info "Installing Docker..."
+		curl -fsSL https://download.docker.com/linux/debian/gpg \
+			| sudo gpg --dearmor --yes -o /etc/apt/keyrings/docker.gpg
+					sudo chmod a+r /etc/apt/keyrings/docker.gpg
 
-															sudo apt-get update
-															sudo apt-get install -y docker-ce docker-ce-cli containerd.io \
-																docker-buildx-plugin docker-compose-plugin
+					echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" \
+						| sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
 
-															sudo usermod -aG docker "$USER"
-															success "Docker installed."
-														}
+					sudo apt-get update
+					sudo apt-get install -y docker-ce docker-ce-cli containerd.io \
+						docker-buildx-plugin docker-compose-plugin
 
-														install_tailscale() {
-															info "Installing Tailscale..."
-															curl -fsSL https://tailscale.com/install.sh | sh
-															success "Tailscale installed."
-														}
+					sudo usermod -aG docker "$USER"
+					success "Docker installed."
+				}
 
-														configure_network_for_exit_node() {
-															info "Enabling IP forwarding..."
-															# Written with tee (not tee -a) so re-running the script does not duplicate lines
-															printf '%s\n' \
-																'net.ipv4.ip_forward = 1' \
-																'net.ipv6.conf.all.forwarding = 1' \
-																| sudo tee /etc/sysctl.d/99-tailscale.conf > /dev/null
-																															sudo sysctl -p /etc/sysctl.d/99-tailscale.conf > /dev/null
+				install_tailscale() {
+					info "Installing Tailscale..."
+					curl -fsSL https://tailscale.com/install.sh | sh
+					success "Tailscale installed."
+				}
 
-																															local iface
-																															iface=$(ip route | awk '/^default/ {print $5; exit}')
-																															[ -n "$iface" ] || fail "Could not detect primary network interface."
-																															info "Detected interface: $iface"
+				configure_network_for_exit_node() {
+					info "Enabling IP forwarding..."
+					# Written with tee (not tee -a) so re-running the script does not duplicate lines
+					printf '%s\n' \
+						'net.ipv4.ip_forward = 1' \
+						'net.ipv6.conf.all.forwarding = 1' \
+						| sudo tee /etc/sysctl.d/99-tailscale.conf > /dev/null
+											sudo sysctl -p /etc/sysctl.d/99-tailscale.conf > /dev/null
 
-																															sudo ethtool -K "$iface" rx-udp-gro-forwarding on \
-																																|| warn "Could not enable UDP GRO forwarding on $iface (driver may not support it)."
+											local iface
+											iface=$(ip route | awk '/^default/ {print $5; exit}')
+											[ -n "$iface" ] || fail "Could not detect primary network interface."
+											info "Detected interface: $iface"
+
+											sudo ethtool -K "$iface" rx-udp-gro-forwarding on \
+												|| warn "Could not enable UDP GRO forwarding on $iface (driver may not support it)."
 
 	# Persist UDP GRO via NetworkManager dispatcher (only if NetworkManager is in use)
 	if [ -d /etc/NetworkManager/dispatcher.d ]; then
