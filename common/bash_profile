@@ -19,6 +19,6 @@ fi
 # autostart in tty
 if [ "${distro_id}" = "debian" ] && [ "$(tty)" = "/dev/tty1" ]; then
 	setterm --blank 5
-	qbittorrent-nox -d
+	#qbittorrent-nox -d
 	#transmission-daemon -T -l 15 -L 50 -gsr 2 > /dev/null
 fi
