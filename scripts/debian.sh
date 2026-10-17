@@ -8,21 +8,21 @@ sed -i -E 's/non-free-firmware/non-free-firmware non-free contrib/g' /etc/apt/so
 dpkg --add-architecture i386 && apt update && apt full-upgrade --yes
 
 # INSTALL: Base
-apt install --yes build-essential htpdate dconf-cli libglib2.0-bin \
+apt install --yes build-essential htpdate dconf-cli libglib2.0-bin seatd \
 	pipewire pipewire-audio pulseaudio-utils easyeffects lsp-plugins-lv2 \
-	linux-cpupower systemd-zram-generator network-manager bluez seatd \
-	xfsprogs at-spi2-core xdg-desktop-portal htop nvtop neovim \
+	xfsprogs at-spi2-core xdg-desktop-portal htop mediainfo neovim \
 	firefox-esr gparted gnome-disk-utility meld \
-	fonts-roboto{,-slab} fonts-jetbrains-mono
-
+	fonts-roboto{,-slab} fonts-jetbrains-mono \
+	linux-cpupower systemd-zram-generator
+	# network-manager bluez nvtop
 
 # INSTALL: WM (X11/Wayland)
 apt install --yes xin{it,put} xsettingsd numlockx \
 	xdg-desktop-portal-{gtk,wlr} brightnessctl libnotify-bin \
-	alacritty dunst nwg-look mpv imv pavucontrol blueman lxpolkit \
+	alacritty dunst nwg-look mpv imv pavucontrol lxpolkit \
 	engrampa pluma atril pcmanfm
 	# thunar{,-archive-plugin} gvfs-{backends,fuse}
-	# gammastep mugshot pcmanfm transmission-daemon
+	# gammastep mugshot pcmanfm transmission-daemon blueman
 
 # INSTALL: i3
 apt install --yes feh xss-lock polybar rofi maim slop scrot jq xclip \
@@ -91,10 +91,10 @@ locale-gen
 update-locale LANG=en_US.UTF-8 LANGUAGE=en_US:en
 
 # blacklist nouveau
-${source_dir}/modules/blacklist_nouveau.sh
+#${source_dir}/modules/blacklist_nouveau.sh
 
 # use network-manager
-mv /etc/network/interfaces /etc/network/interfaces.bak
+#mv /etc/network/interfaces /etc/network/interfaces.bak
 
 # autologin user at tty1
 mkdir -p /etc/systemd/system/getty@tty1.service.d
@@ -114,7 +114,7 @@ echo -e "[zram0]\nzram-size = ram / 2\ncompression-algorithm = zstd\nswap-priori
 systemctl mask sleep.target suspend.target hibernate.target hybrid-sleep.target
 
 # enable systemd daemons
-for service in NetworkManager bluetooth blueman-mechanism seatd htpdate; do
+for service in seatd htpdate; do #NetworkManager bluetooth blueman-mechanism
 	systemctl enable $service
 done
 
