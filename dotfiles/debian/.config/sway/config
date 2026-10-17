@@ -301,4 +301,24 @@ exec --no-startup-id autotiling
 exec_always --no-startup-id magick $(cat $HOME/.config/waypaper/config.ini | grep 'wallpaper' | cut -d'=' -f2) -blur 0x5 -evaluate Multiply 0.45 ~/.output.png
 bindsym $mod+Shift+l exec --no-startup-id gtklock
 
-include /etc/sway/config.d/* $HOME/.config/sway/config.d/*
+#include /etc/sway/config.d/* $HOME/.config/sway/config.d/*
+# swayfx
+# General
+shadows enable
+corner_radius 10
+
+# Blur
+blur enable
+blur_passes 4
+blur_radius 2
+
+# use command: while true; do swaymsg -r -t get_outputs | jq '.[0].layer_shell_surfaces | .[] | .namespace'; done
+layer_effects "wofi" corner_radius 8; shadows enable
+layer_effects "waybar" corner_radius 6; shadows enable
+layer_effects "notifications" corner_radius 6; shadows enable
+layer_effects "logout_dialog" blur enable
+
+layer_effects "launcher" corner_radius 10; blur enable; shadows enable
+
+bar swaybar_command waybar
+
