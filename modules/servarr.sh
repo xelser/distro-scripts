@@ -89,13 +89,13 @@ setup_storage() {
 
 # servarr.sh: media drives
 # External HDDs
-LABEL=Media1 /mnt/Media1 xfs defaults,noatime,logbsize=256k,allocsize=1m,nofail,x-systemd.device-timeout=10s 0 0
-LABEL=Media2 /mnt/Media2 xfs defaults,noatime,logbsize=256k,allocsize=1m,nofail,x-systemd.device-timeout=10s 0 0
-LABEL=Media3 /mnt/Media3 xfs defaults,noatime,logbsize=256k,allocsize=1m,nofail,x-systemd.device-timeout=10s 0 0
-LABEL=Media4 /mnt/Media4 xfs defaults,noatime,logbsize=256k,allocsize=1m,nofail,x-systemd.device-timeout=10s 0 0
-LABEL=Media5 /mnt/Media5 xfs defaults,noatime,logbsize=256k,allocsize=1m,nofail,x-systemd.device-timeout=10s 0 0
+LABEL=Media1 /mnt/Media1 xfs defaults,noatime,logbsize=256k,allocsize=1m,nofail,x-systemd.device-timeout=60s 0 0
+LABEL=Media2 /mnt/Media2 xfs defaults,noatime,logbsize=256k,allocsize=1m,nofail,x-systemd.device-timeout=60s 0 0
+LABEL=Media3 /mnt/Media3 xfs defaults,noatime,logbsize=256k,allocsize=1m,nofail,x-systemd.device-timeout=60s 0 0
+LABEL=Media4 /mnt/Media4 xfs defaults,noatime,logbsize=256k,allocsize=1m,nofail,x-systemd.device-timeout=60s 0 0
+LABEL=Media5 /mnt/Media5 xfs defaults,noatime,logbsize=256k,allocsize=1m,nofail,x-systemd.device-timeout=60s 0 0
 
-/mnt/Media* /mnt/Orico fuse.mergerfs defaults,allow_other,use_ino,cache.files=partial,dropcacheonclose=true,category.create=mfs,moveonenospc=true,minfreespace=20G,fsname=mergerfs,x-systemd.requires-mounts-for=/mnt/Media1,x-systemd.requires-mounts-for=/mnt/Media2,x-systemd.requires-mounts-for=/mnt/Media3,x-systemd.requires-mounts-for=/mnt/Media4,x-systemd.requires-mounts-for=/mnt/Media5 0 0
+/mnt/Media* /mnt/Orico fuse.mergerfs defaults,allow_other,use_ino,cache.files=partial,dropcacheonclose=true,category.create=ff,moveonenospc=true,minfreespace=20G,fsname=mergerfs,x-systemd.requires-mounts-for=/mnt/Media1,x-systemd.requires-mounts-for=/mnt/Media2,x-systemd.requires-mounts-for=/mnt/Media3,x-systemd.requires-mounts-for=/mnt/Media4,x-systemd.requires-mounts-for=/mnt/Media5 0 0
 EOF
 		fi
 
