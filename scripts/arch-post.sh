@@ -4,13 +4,14 @@
 
 # INSTALL: AUR PACKAGES
 if [ ! -f /usr/bin/yay ]; then
-	cd /tmp/ && git clone https://aur.archlinux.org/yay-bin
-	cd yay-bin && makepkg -sirc --noconfirm
+	cd /tmp/ && git clone https://aur.archlinux.org/yay
+	cd yay && makepkg -sirc --noconfirm
 
 	yay -Syu --needed --noconfirm --save --removemake --cleanafter \
 		--norebuild --noredownload --batchinstall --combinedupgrade	\
-		grub-hook update-grub htpdate {brave,ventoy,fladder}-bin \
-		neovim-symlinks betterlockscreen waypaper
+		htpdate ventoy-bin neovim-symlinks betterlockscreen waypaper
+
+		# grub-hook update-grub brave
 
 	# niri
 	yay -S --needed --noconfirm niri waybar wl-clipboard wofi wlogout gtklock \

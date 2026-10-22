@@ -24,15 +24,10 @@ elif [ -d ${source_dir}/dotfiles/${distro_id} ]; then
 	export dotfiles_dir="${source_dir}/dotfiles/${distro_id}"
 fi
 
-## For Arch Linux ##
-[[ ${distro_id} == "arch" ]] && export root_mnt="/mnt" || export root_mnt=""
-
 ################################ INSTALLATION ################################
 
 ## No password for user ##
-if [[ ! ${distro_id} == "arch" ]]; then
-	echo -e "${user} ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/${user} 1> /dev/null
-fi
+echo -e "${user} ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/${user} 1> /dev/null
 
 ## Install ##
 if [ -f ${source_dir}/scripts/${distro_id}-${wm_de}.sh ]; then
@@ -80,11 +75,7 @@ fi
 [[ ${user} == "xelser" ]] && cp -rf ${source_dir}/modules/distro_scripts.sh ${root_mnt}/home/${user}/
 
 ## Permissions ##
-if [[ ${distro_id} == "arch" ]]; then
-	arch-chroot /mnt /bin/bash -c "sudo chown -R ${user} /home/${user}"
-else
-	sudo chown -R ${user} /home/${user}
-fi
+sudo chown -R ${user} /home/${user}
 
 ## Reboot ##
 echo "################################### FINISHED ###################################"
@@ -92,7 +83,6 @@ echo && read -p "Reboot? (Y/n): " end
 case $end in
 	n)	echo "Reboot Cancelled";;
 	*)	echo "Rebooting... "
-		[[ ${distro_id} == "arch" ]] && umount -R /mnt >&/dev/null && swapoff -a
 		rm -rf $HOME/distro-scripts*
 		sudo reboot;;
 esac
