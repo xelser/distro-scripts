@@ -15,12 +15,12 @@ if [ ! -f /usr/bin/yay ]; then
 	# niri
 	yay -S --needed --noconfirm niri waybar wl-clipboard wofi wlogout gtklock \
 		xdg-desktop-portal-gnome xwayland-satellite
-	# noctalia-shell matugen-git cliphist cava evolution-data-server
+			# noctalia-shell matugen-git cliphist cava evolution-data-server
 
 	# sway (really doesn't like nvidia)
 	# yay -S --needed --noconfirm swayfx && yay -S --needed --noconfirm \
 	# sway{bg,idle,-contrib,fx} xorg-xwayland xdg-desktop-portal-wlr
-		#foot fuzzel
+	#foot fuzzel
 
 	# hyprland
 	#	yay -S --noconfirm --needed hypr{land,paper,idle,shot,lock,cursor} \
@@ -37,7 +37,6 @@ fi
 
 # E5-476G
 yay -S --noconfirm --needed intel-media-driver mesa-utils vulkan-tools \
-	jellyfin-{server,web,ffmpeg} intel-media-sdk vpl-gpu-rt libva-utils \
 	nvidia-580xx-dkms {lib32-,}nvidia-580xx-utils envycontrol \
 	tailscale
 
@@ -74,12 +73,11 @@ sudo envycontrol -s hybrid --rtd3
 
 # services
 sudo systemctl enable nvidia-{persistenced,suspend,hibernate,resume} \
-	jellyfin cpupower tailscaled
+	cpupower tailscaled
 
 # user configs
 #bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/x11_nvidia.sh)"
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/brave_flags.sh)"
-bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/jellyfin_config.sh)"
+#bash -c "$(curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/modules/brave_flags.sh)"
 
 # timeshift
 sudo curl -fsSL https://raw.githubusercontent.com/xelser/distro-scripts/main/common/timeshift.json -o /etc/timeshift/timeshift.json

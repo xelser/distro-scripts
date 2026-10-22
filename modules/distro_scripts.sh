@@ -3,18 +3,18 @@
 
 # === GitHub CLI ===
 if [ -f /usr/bin/apt ]; then
-    sudo apt install --yes gh
+	sudo apt install --yes gh
 elif [ -f /usr/bin/dnf5 ]; then
-    sudo dnf install --assumeyes gh
+	sudo dnf install --assumeyes gh
 elif [ -f /usr/bin/pacman ]; then
-    sudo pacman -S --needed --noconfirm github-cli
+	sudo pacman -S --needed --noconfirm github-cli
 fi
 
 # === CONFIGURATION ===
 git config --global user.email "dkzenzuri@gmail.com"
 git config --global user.name "${USER}"
 
-GITHUB_DIR="/mnt/Home/Documents/Github"
+GITHUB_DIR="$HOME/Documents/Github"
 SSH_DIR="$HOME/.ssh"
 PRIVATE_KEY="$GITHUB_DIR/id_ed25519"
 PUBLIC_KEY="$GITHUB_DIR/id_ed25519.pub"
@@ -37,14 +37,14 @@ ssh-add "$SSH_DIR/id_ed25519"
 # === STEP 3: Authenticate with GitHub CLI ===
 echo "🔐 Authenticating with GitHub CLI..."
 if ! gh auth status &>/dev/null; then
-    if [ -f "$TOKEN_FILE" ]; then
-        gh auth login --with-token < "$TOKEN_FILE"
-    else
-        echo "❌ Token file not found at $TOKEN_FILE"
-        exit 1
-    fi
+	if [ -f "$TOKEN_FILE" ]; then
+		gh auth login --with-token < "$TOKEN_FILE"
+	else
+		echo "❌ Token file not found at $TOKEN_FILE"
+		exit 1
+	fi
 else
-    echo "✅ GitHub CLI already authenticated."
+	echo "✅ GitHub CLI already authenticated."
 fi
 
 # === STEP 4: Test SSH Connection to GitHub ===
