@@ -16,6 +16,8 @@
   "count_daily" : "1",
   "count_hourly" : "6",
   "count_boot" : "1",
+  "snapshot_size" : "0",
+  "snapshot_count" : "0",
   "date_format" : "%Y-%m-%d %H:%M:%S",
   "exclude" : [
     "/home/xelser/**",
@@ -30,7 +32,8 @@
     "/var/log/***",
     "/root/.cache/***",
     "/mnt/***",
-    "/etc/***"
+    "/etc/***",
+    "/root/**"
   ],
   "exclude-apps" : []
 }
