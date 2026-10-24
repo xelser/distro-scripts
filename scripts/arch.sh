@@ -29,7 +29,8 @@ sudo pacman -S --noconfirm --needed xorg-{server,xinit,apps} picom \
 	brightnessctl gammastep wallutils dunst libnotify alacritty rofi mpv imv \
 	timeshift pavucontrol blueman transmission-gtk nwg-look dconf-editor \
 	engrampa atril pluma thunar-{volman,archive-plugin,media-tags-plugin} \
-	firefox gparted resources mugshot mate-polkit neovim{,-plugins}
+	firefox gparted gnome-disk-utility resources mugshot mate-polkit \
+	neovim{,-plugins}
 
 # 6. i3 Window Manager
 sudo pacman -S --noconfirm --needed i3-wm feh xss-lock maim slop scrot jq \
@@ -80,6 +81,9 @@ echo "==> Configuring autologin..."
 sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
 echo -e "[Service]\nExecStart=\nExecStart=-/sbin/agetty --autologin ${USER} --noclear %I \$TERM" | \
 	sudo tee /etc/systemd/system/getty@tty1.service.d/override.conf
+
+# intel_backlight permission
+echo 'ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness", RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"' | sudo tee /etc/udev/rules.d/90-backlight.rules > /dev/null
 
 # ============================================================================
 # THEMES & APPEARANCE
