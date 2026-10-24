@@ -105,9 +105,7 @@ layout {
 }
 
 layer-rule {
-	match namespace="^quickshell$"
-	match namespace="dms:blurwallpaper"
-	match namespace="^noctalia-overview*"
+	match namespace="^noctalia-backdrop"
 	place-within-backdrop true
 }
 
@@ -134,6 +132,13 @@ window-rule { // for floating windows
 	open-floating true
 }
 
+window-rule { // Floating Noctalia settings window
+	match app-id="dev.noctalia.Noctalia"
+	open-floating true
+	default-column-width { fixed 1080; }
+	default-window-height { fixed 920; }
+}
+
 // Add lines like this to spawn processes at startup.
 // Note that running niri as a session supports xdg-desktop-autostart,
 // which may be more convenient to use.
@@ -141,14 +146,13 @@ window-rule { // for floating windows
 
 // Global
 spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
-spawn-at-startup "brave" "--no-startup-window" "--gapplication-service"
 spawn-at-startup "easyeffects" "--gapplication-service"
-spawn-at-startup "transmission-gtk" "--minimized"
 spawn-at-startup "alacritty" "--daemon"
+spawn-at-startup "thunar" "--daemon"
+spawn-at-startup "noctalia"
 
 // Niri Shell
 //spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
-//spawn-at-startup "qs" "-c" "noctalia-shell"
 //spawn-at-startup "dms" "run"
 
 // Example: block out two password managers from screen capture.

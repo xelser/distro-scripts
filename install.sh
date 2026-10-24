@@ -27,6 +27,9 @@ fi
 ## No password for user ##
 echo -e "${user} ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/${user} 1> /dev/null
 
+## Timezone ##
+sudo timedatectl set-timezone Asia/Manila
+
 ## Install ##
 if [ -f ${source_dir}/scripts/${distro_id}-${wm_de}.sh ]; then
 	export install_script="${source_dir}/scripts/${distro_id}-${wm_de}"
