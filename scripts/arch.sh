@@ -53,8 +53,26 @@ yay -Syu --needed --noconfirm --save --removemake --cleanafter \
 	htpdate ventoy-bin neovim-symlinks betterlockscreen waypaper
 
 # Optional Wayland Compositor (Niri)
-yay -S --needed --noconfirm niri waybar wl-clipboard wofi wlogout gtklock \
-	xdg-desktop-portal-gnome xwayland-satellite
+yay -S --needed --noconfirm niri noctaila waybar wl-clipboard wofi \
+	wlogout gtklock xdg-desktop-portal-gnome xwayland-satellite
+	# matugen-git cliphist cava evolution-data-server
+
+# sway (really doesn't like nvidia)
+# yay -S --needed --noconfirm swayfx && yay -S --needed --noconfirm \
+# sway{bg,idle,-contrib,fx} xorg-xwayland xdg-desktop-portal-wlr
+#foot fuzzel
+
+# hyprland
+#	yay -S --noconfirm --needed hypr{land,paper,idle,shot,lock,cursor} \
+# xdg-desktop-portal-hyprland
+
+# Openbox: openbox obconf-qt obmenu-generator tint2 plank
+# gtk2 and qt5: gtk-engine{-murrine,s} qt5{ct,-wayland} kvantum-qt5
+
+#	shim-signed secureboot-grub
+# snap-pac-grub snapper-support
+# teamviewer zoom obs-studio gnome-boxes syncthing-{gtk,desktop-entries}
+# ulauncher zscroll-git polybar-scripts-git
 
 # Hardware-specific (E5-476G / NVIDIA)
 yay -S --noconfirm --needed intel-media-driver mesa-utils vulkan-tools \
@@ -83,7 +101,7 @@ echo -e "[Service]\nExecStart=\nExecStart=-/sbin/agetty --autologin ${USER} --no
 	sudo tee /etc/systemd/system/getty@tty1.service.d/override.conf
 
 # intel_backlight permission
-echo 'ACTION=="add", SUBSYSTEM=="backlight", KERNEL=="intel_backlight", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness", RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"' | sudo tee /etc/udev/rules.d/90-backlight.rules > /dev/null
+echo 'ACTION=="add", SUBSYSTEM=="backlight", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness", RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"' | sudo tee /etc/udev/rules.d/90-backlight.rules > /dev/null
 
 # ============================================================================
 # THEMES & APPEARANCE
