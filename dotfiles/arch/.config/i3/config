@@ -224,7 +224,7 @@ for_window [title="Picture in picture"] move position center
 # Autostart (Global)
 exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 exec --no-startup-id easyeffects --gapplication-service
-exec --no-startup-id $HOME/.config/gammastep/launch.sh
+#exec --no-startup-id $HOME/.config/gammastep/launch.sh
 exec --no-startup-id alacritty --daemon
 exec --no-startup-id thunar --daemon
 
