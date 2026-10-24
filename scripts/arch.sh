@@ -34,7 +34,11 @@ sudo pacman -S --noconfirm --needed xorg-{server,xinit,apps} picom \
 
 # 6. i3 Window Manager
 sudo pacman -S --noconfirm --needed i3-wm feh xss-lock maim slop scrot jq \
-	polybar xclip autotiling {lx,auto}randr xdg-desktop-portal-gtk
+	polybar xclip autotiling {lx,auto}randr xdg-desktop-portal-gtk# 6. i3 Window Manager
+
+# 7. Niri Window Manager
+sudo pacman -S --noconfirm --needed niri noctalia wl-clipboard \
+ xdg-desktop-portal-gnome xwayland-satellite
 
 # ============================================================================
 # AUR PACKAGES (YAY)
@@ -53,9 +57,8 @@ yay -Syu --needed --noconfirm --save --removemake --cleanafter \
 	htpdate ventoy-bin neovim-symlinks betterlockscreen waypaper
 
 # Optional Wayland Compositor (Niri)
-yay -S --needed --noconfirm niri noctaila waybar wl-clipboard wofi \
-	wlogout gtklock xdg-desktop-portal-gnome xwayland-satellite
-	# matugen-git cliphist cava evolution-data-server
+# yay -S --needed --noconfirm matugen-git cliphist cava \
+# evolution-data-server waybar wofi wlogout gtklock
 
 # sway (really doesn't like nvidia)
 # yay -S --needed --noconfirm swayfx && yay -S --needed --noconfirm \

@@ -1,5 +1,5 @@
 {
-  "backup_device_uuid" : "5aa9348f-61d7-4d26-81ad-e85e1468bdc6",
+  "backup_device_uuid" : "4527819c-b696-4f61-a660-9b0c2e683bcb",
   "parent_device_uuid" : "",
   "do_first_run" : "false",
   "btrfs_mode" : "false",
@@ -10,14 +10,12 @@
   "schedule_weekly" : "true",
   "schedule_daily" : "true",
   "schedule_hourly" : "false",
-  "schedule_boot" : "false",
+  "schedule_boot" : "true",
   "count_monthly" : "1",
   "count_weekly" : "1",
   "count_daily" : "1",
   "count_hourly" : "6",
   "count_boot" : "1",
-  "snapshot_size" : "14656705371",
-  "snapshot_count" : "419876",
   "date_format" : "%Y-%m-%d %H:%M:%S",
   "exclude" : [
     "/home/xelser/**",
