@@ -147,9 +147,12 @@ window-rule { // Floating Noctalia settings window
 // Global
 spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
 spawn-at-startup "easyeffects" "--gapplication-service"
+spawn-at-startup "waypaper" "--restore"
 spawn-at-startup "alacritty" "--daemon"
 spawn-at-startup "thunar" "--daemon"
-spawn-at-startup "noctalia"
+spawn-at-startup "waybar"
+spawn-at-startup "mako"
+//spawn-at-startup "noctalia"
 
 // Niri Shell
 //spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"

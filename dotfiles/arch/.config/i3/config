@@ -210,8 +210,8 @@ bindsym $mod+r mode "resize"
 # Global Windows Config
 default_floating_border none
 default_border none
-gaps inner 10
-gaps top 42
+gaps inner 5
+gaps top 38
 
 # Workspaces Config gaps
 # workspace 1 gaps top 0px

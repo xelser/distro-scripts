@@ -25,20 +25,16 @@ sudo pacman -S --noconfirm --needed flatpak pacman-contrib bash-completion \
 	qt6-wayland qt6ct kvantum base-devel
 
 # 5. Common Applications & Desktop Utilities
-sudo pacman -S --noconfirm --needed xorg-{server,xinit,apps} picom \
+sudo pacman -S --noconfirm --needed xorg-{server,xinit,apps,xwayland} picom \
 	brightnessctl gammastep wallutils dunst libnotify alacritty rofi mpv imv \
 	timeshift pavucontrol blueman transmission-gtk nwg-look dconf-editor \
 	engrampa atril pluma thunar-{volman,archive-plugin,media-tags-plugin} \
 	firefox gparted gnome-disk-utility resources mugshot mate-polkit \
-	neovim{,-plugins}
+	neovim{,-plugins} xclip wl-clipboard wallutils feh swaybg
 
 # 6. i3 Window Manager
-sudo pacman -S --noconfirm --needed i3-wm feh xss-lock maim slop scrot jq \
-	polybar xclip autotiling {lx,auto}randr xdg-desktop-portal-gtk# 6. i3 Window Manager
-
-# 7. Niri Window Manager
-sudo pacman -S --noconfirm --needed niri noctalia wl-clipboard \
- xdg-desktop-portal-gnome xwayland-satellite
+sudo pacman -S --noconfirm --needed i3-wm xss-lock maim slop scrot jq \
+	polybar autotiling {lx,auto}randr xdg-desktop-portal-gtk
 
 # ============================================================================
 # AUR PACKAGES (YAY)
@@ -56,14 +52,18 @@ yay -Syu --needed --noconfirm --save --removemake --cleanafter \
 	--norebuild --noredownload --batchinstall --combinedupgrade \
 	htpdate ventoy-bin neovim-symlinks betterlockscreen waypaper
 
+# sway (really doesn't like nvidia)
+# yay -S --needed --noconfirm swayfx && yay -S --needed --noconfirm \
+# sway{idle,-contrib,fx} xdg-desktop-portal-wlr
+#foot fuzzel
+
+# 7. Niri Window Manager
+sudo pacman -S --noconfirm --needed niri waybar wofi \
+ xdg-desktop-portal-gnome xwayland-satellite
+
 # Optional Wayland Compositor (Niri)
 # yay -S --needed --noconfirm matugen-git cliphist cava \
 # evolution-data-server waybar wofi wlogout gtklock
-
-# sway (really doesn't like nvidia)
-# yay -S --needed --noconfirm swayfx && yay -S --needed --noconfirm \
-# sway{bg,idle,-contrib,fx} xorg-xwayland xdg-desktop-portal-wlr
-#foot fuzzel
 
 # hyprland
 #	yay -S --noconfirm --needed hypr{land,paper,idle,shot,lock,cursor} \
