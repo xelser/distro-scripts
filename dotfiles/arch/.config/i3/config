@@ -229,14 +229,15 @@ exec --no-startup-id alacritty --daemon
 exec --no-startup-id thunar --daemon
 
 # Autostart (x11)
-exec_always --no-startup-id betterlockscreen --update "$(cat $HOME/.fehbg | tail -1 | cut -d"'" -f4)" --fx dimblur
-exec_always --no-startup-id $HOME/.fehbg || waypaper --restore
+exec --no-startup-id dunst
+exec_always --no-startup-id waypaper --random
 exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id betterlockscreen --update "$(cat $HOME/.config/waypaper/config.ini | grep "wallpaper =" | cut -d' ' -f3)" --fx dimblur
 #exec_always --no-startup-id xset led on
 
 # Autostart (i3)
-exec --no-startup-id bash $HOME/.config/autostart/i3-workspace.sh
 exec_always --no-startup-id autotiling
+exec --no-startup-id bash $HOME/.config/autostart/i3-workspace.sh
 
 # Screenshot (maim)
 bindsym $mod+Shift+s exec --no-startup-id maim-select
