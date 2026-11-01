@@ -72,7 +72,7 @@ on-button-middle=dismiss-group
 on-button-right=dismiss
 on-touch=invoke-default-action
 
-on-notify=exec mpv /usr/share/sounds/freedesktop/stereo/message.oga
+#on-notify=exec mpv /usr/share/sounds/freedesktop/stereo/message.oga
 history=1
 actions=1
 
@@ -80,7 +80,7 @@ actions=1
 # COLORS
 # =========================================================================
 
-background-color=#141617
+background-color=#1d2021
 text-color=#d4be98
 border-color=#1d2021
 progress-color=over #3c3836

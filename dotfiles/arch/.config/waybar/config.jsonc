@@ -1,24 +1,14 @@
 {
-	// "layer": "top", // Waybar at top layer
-	// "position": "top", // Waybar position (top|bottom|left|right)
+	"layer": "top", // Waybar at top layer
+	"position": "left", // Waybar position (top|bottom|left|right)
 	"output": ["eDP-1"],
-	"height": 5, // Waybar height (remove for auto height)
-	// "width": 1366, // Waybar width (remove for auto width)
 	"spacing": 8, // Gaps between modules (4px)
 	"reload_style_on_change": true,
-	"margin-top": 10,
-	"margin-left": 10,
-	"margin-right": 10,
 
 	// Choose the order of the modules
 	"modules-left": [
-		"cpu",
-		"memory",
-		"hyprland/workspaces",
-	],
-
-	"modules-center": [
 		"clock",
+		"niri/workspaces"
 	],
 
 	"modules-right": [
@@ -32,7 +22,7 @@
 	// Modules configuration
 
 	"clock": {
-		"format": "󰥔 {:%I:%M %p}",
+		"format": "{:%I\n%M\n%p}",
 		"format-alt": "󰃭 {:%a %b %d}",
 		"tooltip-format": "<tt><small>{calendar}</small></tt>",
 		"calendar": {
@@ -86,15 +76,15 @@
 
 	"pulseaudio": {
 		"scroll-step": 5, // %, can be a float
-		"format": "{icon} {volume}%",
-		"format-source": "  {volume}%",
-		"format-bluetooth": "{icon} {volume}%",
+		"format": "{icon}",
+		"format-source": " ",
+		"format-bluetooth": "{icon}",
 
 		"format-muted": "󰝟 MUTED",
 		"format-source-muted": " MUTED",
 		"format-bluetooth-muted": "󰝟 {icon}",
 
-		"format-bluetooth": "{icon} {volume}%",
+		"format-bluetooth": "{icon}",
 		"format-icons": {
 			"headphone": " ",
 			"hands-free": "󱡏 ",
@@ -115,13 +105,12 @@
 	},
 
 	"network": {
-		"format-ethernet": "  {bandwidthTotalBytes}",
-		"format-wifi": "{icon} {bandwidthTotalBytes}",
+		"format-ethernet": " ",
+		"format-wifi": "{icon}",
 		"format-icons": ["󰤯 ", "󰤟 ", "󰤢 ", "󰤥 ", "󰤨 "],
-		"format-disconnected": "󱘖 Disconnected",
+		"format-disconnected": "󱘖",
 
-		"format-alt": " {bandwidthDownBytes} |  {bandwidthUpBytes}",
-		"tooltip-format": "{ifname}: {ipaddr}/{cidr}",
+		"tooltip-format": " {bandwidthDownBytes} |  {bandwidthUpBytes}",
 		"tooltip-format-disconnected": "󰇧 Could not establish a connection"
 	},
 
@@ -136,7 +125,7 @@
 	},
 
 	"backlight": {
-		"format": "{icon} {percent}%",
+		"format": "{icon}",
 		"format-icons": ["󰃚", "󰃛", "󰃜", "󰃝", "󰃞", "󰃟", "󰃠"]
 	},
 

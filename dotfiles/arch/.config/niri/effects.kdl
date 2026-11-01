@@ -1,0 +1,49 @@
+// Effects Niri Config
+
+// Enable blur behind the Alacritty terminal.
+window-rule {
+		background-effect {
+				blur true
+				xray true
+		}
+
+		match app-id="^Alacritty$"
+}
+
+// Enable blur behind the fuzzel launcher.
+layer-rule {
+
+	background-effect {
+		blur true
+		xray true
+	}
+
+	match namespace="^launcher$"
+}
+
+window-rule { // rounded corners
+	geometry-corner-radius 12
+	clip-to-geometry true
+}
+
+layout {
+	gaps 5
+	center-focused-column "never"
+	background-color "transparent"
+
+	focus-ring {
+		off
+	}
+
+	border {
+		off
+	}
+
+	shadow {
+		on
+		softness 30
+		spread 5
+		offset x=0 y=5
+		color "#0007"
+	}
+}

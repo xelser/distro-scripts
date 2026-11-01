@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# ============================================================================
+# ==========================================================================
 # Arch Linux Setup & Provisioning Script
-# ============================================================================
+# ==========================================================================
 
 echo "==> Updating package database and installing core packages..."
 
@@ -25,20 +25,20 @@ sudo pacman -S --noconfirm --needed flatpak pacman-contrib bash-completion \
 	qt6-wayland qt6ct kvantum base-devel
 
 # 5. Common Applications & Desktop Utilities
-sudo pacman -S --noconfirm --needed xorg-{server,xinit,apps,xwayland} picom \
+sudo pacman -S --noconfirm --needed xorg-{server,xinit,apps,xwayland} \
 	brightnessctl gammastep wallutils dunst libnotify alacritty rofi mpv imv \
 	timeshift pavucontrol blueman transmission-gtk nwg-look dconf-editor \
 	engrampa atril pluma thunar-{volman,archive-plugin,media-tags-plugin} \
 	firefox gparted gnome-disk-utility resources mugshot mate-polkit \
-	neovim{,-plugins} xclip wl-clipboard wallutils feh swaybg
+	neovim{,-plugins} xclip wl-clipboard feh swaybg	picom
 
 # 6. i3 Window Manager
 sudo pacman -S --noconfirm --needed i3-wm xss-lock maim slop scrot jq \
 	polybar autotiling {lx,auto}randr xdg-desktop-portal-gtk
 
-# ============================================================================
+# ==========================================================================
 # AUR PACKAGES (YAY)
-# ============================================================================
+# ==========================================================================
 
 if [ ! -f /usr/bin/yay ]; then
 	echo "==> Installing yay AUR helper..."
@@ -81,9 +81,9 @@ sudo pacman -S --noconfirm --needed niri waybar wofi \
 yay -S --noconfirm --needed intel-media-driver mesa-utils vulkan-tools \
 	nvidia-580xx-dkms {lib32-,}nvidia-580xx-utils envycontrol tailscale
 
-# ============================================================================
+# ==========================================================================
 # SYSTEM CONFIGURATIONS
-# ============================================================================
+# ==========================================================================
 
 # CPU Governor & GPU Control
 sudo cpupower frequency-set -g performance
@@ -106,9 +106,9 @@ echo -e "[Service]\nExecStart=\nExecStart=-/sbin/agetty --autologin ${USER} --no
 # intel_backlight permission
 echo 'ACTION=="add", SUBSYSTEM=="backlight", RUN+="/bin/chgrp video /sys/class/backlight/%k/brightness", RUN+="/bin/chmod g+w /sys/class/backlight/%k/brightness"' | sudo tee /etc/udev/rules.d/90-backlight.rules > /dev/null
 
-# ============================================================================
+# ==========================================================================
 # THEMES & APPEARANCE
-# ============================================================================
+# ==========================================================================
 
 echo "==> Applying themes and configurations..."
 

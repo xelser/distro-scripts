@@ -75,9 +75,6 @@ switch-events {
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Layout
 layout {
-	gaps 5
-	center-focused-column "never"
-	background-color "transparent"
 
 	preset-column-widths {
 		proportion 0.5
@@ -86,27 +83,6 @@ layout {
 	}
 
 	default-column-width { proportion 0.5; }
-
-	focus-ring {
-		off
-	}
-
-	border {
-		off
-	}
-
-	shadow {
-		on
-		softness 30
-		spread 5
-		offset x=0 y=5
-		color "#0007"
-	}
-}
-
-layer-rule {
-	match namespace="^noctalia-backdrop"
-	place-within-backdrop true
 }
 
 // Window rules let you adjust behavior for individual windows.
@@ -116,13 +92,9 @@ layer-rule {
 // Example: enable rounded corners for all windows.
 // (This example rule is commented out with a "/-" in front.)
 
-window-rule { // rounded corners
-	geometry-corner-radius 12
-	clip-to-geometry true
-}
-
 window-rule { // for apps that prefers max windows
 	match app-id="brave"
+	match app-id="firefox"
 	default-column-width { proportion 1.0; }
 }
 
@@ -130,13 +102,6 @@ window-rule { // for floating windows
 	match app-id=r#"firefox$"# title="^Picture-in-Picture$"
 	match title="^Picture in picture$"
 	open-floating true
-}
-
-window-rule { // Floating Noctalia settings window
-	match app-id="dev.noctalia.Noctalia"
-	open-floating true
-	default-column-width { fixed 1080; }
-	default-window-height { fixed 920; }
 }
 
 // Add lines like this to spawn processes at startup.
@@ -147,16 +112,11 @@ window-rule { // Floating Noctalia settings window
 // Global
 spawn-at-startup "/usr/lib/mate-polkit/polkit-mate-authentication-agent-1"
 spawn-at-startup "easyeffects" "--gapplication-service"
-spawn-at-startup "waypaper" "--restore"
 spawn-at-startup "alacritty" "--daemon"
+spawn-at-startup "waypaper" "--random"
 spawn-at-startup "thunar" "--daemon"
 spawn-at-startup "waybar"
 spawn-at-startup "mako"
-//spawn-at-startup "noctalia"
-
-// Niri Shell
-//spawn-at-startup "bash" "-c" "wl-paste --watch cliphist store &"
-//spawn-at-startup "dms" "run"
 
 // Example: block out two password managers from screen capture.
 // (This example rule is commented out with a "/-" in front.)
@@ -178,7 +138,7 @@ binds {
 
 	Mod+Return { spawn "alacritty" "msg" "create-window"; }
 	Mod+Alt+L { spawn "gtklock"; }
-	Mod+D { spawn "fuzzel"; }
+	Mod+D { spawn "wofi"; }
 
 	Super+Alt+S allow-when-locked=true hotkey-overlay-title=null { spawn-sh "pkill orca || exec orca"; }
 
@@ -408,3 +368,7 @@ binds {
 }
 
 include "noctalia/binds.kdl"
+include "animations.kdl"
+include "effects.kdl"
+//include "waybar.kdl"
+

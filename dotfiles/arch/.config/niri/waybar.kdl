@@ -1,0 +1,42 @@
+layer-rule {
+		match namespace="waybar"
+		match at-startup=true
+		match layer="top"
+
+		// Properties that apply continuously.
+		block-out-from "screencast"
+		// block-out-from "screen-capture"
+
+		shadow {
+				on
+				// off
+				softness 40
+				spread 5
+				offset x=0 y=5
+				draw-behind-window true
+				color "#00000064"
+				// inactive-color "#00000064"
+		}
+
+		geometry-corner-radius 12
+		place-within-backdrop true
+
+		background-effect {
+				xray true
+				blur true
+				noise 0.05
+				saturation 3
+		}
+
+		popups {
+				opacity 0.5
+				geometry-corner-radius 6
+
+				background-effect {
+						xray true
+						blur true
+						noise 0.05
+						saturation 3
+				}
+		}
+}
