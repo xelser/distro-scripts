@@ -30,7 +30,7 @@ sudo pacman -S --noconfirm --needed xorg-{server,xinit,apps,xwayland} \
 	timeshift pavucontrol blueman transmission-gtk nwg-look dconf-editor \
 	engrampa atril pluma thunar-{volman,archive-plugin,media-tags-plugin} \
 	firefox gparted gnome-disk-utility resources mugshot mate-polkit \
-	neovim{,-plugins} xclip wl-clipboard feh swaybg	picom
+	neovim{,-plugins} tree-sitter-cli xclip wl-clipboard feh swaybg	picom
 
 # 6. i3 Window Manager
 sudo pacman -S --noconfirm --needed i3-wm xss-lock maim slop scrot jq \
