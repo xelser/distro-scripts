@@ -12,7 +12,6 @@ window-rule {
 
 // Enable blur behind the fuzzel launcher.
 layer-rule {
-
 	background-effect {
 		blur true
 		xray true

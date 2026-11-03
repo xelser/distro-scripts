@@ -2,7 +2,6 @@
 	"layer": "top", // Waybar at top layer
 	"position": "left", // Waybar position (top|bottom|left|right)
 	"output": ["eDP-1"],
-	"spacing": 8, // Gaps between modules (4px)
 	"reload_style_on_change": true,
 
 	// Choose the order of the modules
@@ -23,7 +22,6 @@
 
 	"clock": {
 		"format": "{:%I\n%M\n%p}",
-		"format-alt": "󰃭 {:%a %b %d}",
 		"tooltip-format": "<tt><small>{calendar}</small></tt>",
 		"calendar": {
 			"mode"          : "year",
@@ -47,27 +45,6 @@
 		}
 	},
 
-	"hyprland/workspaces": {
-		"disable-scroll": true,
-		"all-outputs": true,
-		"format": "{name}"
-	},
-
-	"sway/workspaces": {
-		"disable-scroll": true,
-		"all-outputs": true,
-		"format": "{name}"
-	},
-
-	"sway/window": {
-		"all-outputs": true,
-		"format": "{app_id}"
-	},
-
-	"sway/mode": {
-		"format": "<span style=\"italic\">{}</span>"
-	},
-
 	"pulseaudio/slider": {
 		"min": 0,
 		"max": 100,
@@ -86,12 +63,6 @@
 
 		"format-bluetooth": "{icon}",
 		"format-icons": {
-			"headphone": " ",
-			"hands-free": "󱡏 ",
-			"headset": " ",
-			"phone": " ",
-			"portable": " ",
-			"car": " ",
 			"default": ["󰕿", "󰖀", "󰕾"]
 		},
 		"on-click": "pavucontrol"
@@ -99,15 +70,15 @@
 
 	"bluetooth": {
 		"format": "",
-		"format-connected": " {device_alias}",
+		"format-connected": "",
 		"format-connected-battery": " {device_alias} 󰁹 {device_battery_percentage}%",
 		"on-click": "blueman-manager"
 	},
 
 	"network": {
 		"format-ethernet": " ",
-		"format-wifi": "{icon}",
-		"format-icons": ["󰤯 ", "󰤟 ", "󰤢 ", "󰤥 ", "󰤨 "],
+		"format-wifi": "{icon} ",
+		"format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
 		"format-disconnected": "󱘖",
 
 		"tooltip-format": " {bandwidthDownBytes} |  {bandwidthUpBytes}",
@@ -126,6 +97,7 @@
 
 	"backlight": {
 		"format": "{icon}",
+		"scroll-step": "5",
 		"format-icons": ["󰃚", "󰃛", "󰃜", "󰃝", "󰃞", "󰃟", "󰃠"]
 	},
 

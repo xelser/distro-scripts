@@ -48,13 +48,13 @@ set softtabstop=0   " No soft tab emulation; spacebar inserts spaces literally
 
 " au (autocommand)
 augroup MyAutoCmds
-	autocmd!
-	" whitespace cleanup
-	autocmd BufWritePre * :%s/\s\+$//e
+autocmd!
+" whitespace cleanup
+"autocmd BufWritePre * :%s/\s\+$//e
 
-	" visual feedback for yanks
-	autocmd TextYankPost * silent! lua vim.highlight.on_yank()
+" visual feedback for yanks
+autocmd TextYankPost * silent! lua vim.highlight.on_yank()
 
-	" autoindent
-	autocmd BufWritePre * if &filetype !~# '\v^(conf|i3config|swayconfig)$' | silent! normal! gg=G | endif
+" autoindent
+autocmd BufWritePre * if &filetype !~# '\v^(conf|i3config|swayconfig)$' | silent! normal! gg=G | endif
 augroup END
