@@ -58,5 +58,5 @@ augroup MyAutoCmds
 	autocmd TextYankPost * silent! lua vim.highlight.on_yank()
 
 	" autoindent
-	autocmd BufWritePre * if &filetype !~# '\v^(conf|i3config|swayconfig)$' | silent! normal! gg=G | endif
+	"autocmd BufWritePre * if &filetype !~# '\v^(conf|i3config|swayconfig)$' | silent! normal! gg=G | endif
 augroup END
