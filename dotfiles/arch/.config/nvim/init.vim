@@ -28,15 +28,21 @@ highlight Normal ctermbg=none guibg=none
 highlight NonText ctermbg=none guibg=none
 
 " common
-set number
-set mouse=a
-set showmatch
-set ignorecase
-set clipboard=unnamedplus
+set number                  " add line numbers
+set mouse=a                 " enable mouse click
+set hlsearch                " highlight search
+set incsearch               " incremental search
+set showmatch               " show matching
+set ignorecase              " case insensitive
+set clipboard=unnamedplus   " using system clipboard
 
 " indent
-set tabstop=2
-set shiftwidth=2
+set autoindent              " keep indent of previous line
+set smartindent             " fallback indent for filetypes without rules
+set noexpandtab             " default: real tab characters
+set tabstop=2               " display tabs as 2 columns wide
+set shiftwidth=2            " indent by 2 columns with >>, <<, etc.
+set softtabstop=0           " no soft tab emulation
 
 " au (autocommand)
 augroup MyAutoCmds

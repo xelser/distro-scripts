@@ -48,8 +48,8 @@ if [ ! -f /usr/bin/yay ]; then
 fi
 
 echo "==> Installing AUR packages..."
-yay -Syu --needed --noconfirm --save --removemake --cleanafter \
---norebuild --noredownload --batchinstall --combinedupgrade \
+yay -Syu --needed --noconfirm --save --removemake --cleanafter --norebuild \
+--noredownload --batchinstall --combinedupgrade \
 htpdate ventoy-bin neovim-symlinks betterlockscreen waypaper
 
 # sway (really doesn't like nvidia)
