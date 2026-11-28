@@ -51,7 +51,7 @@ fi
 
 # --- Docker ---
 if [ -f /usr/bin/docker ]; then
-	alias dockercompose="docker compose pull && docker compose up -d --remove-orphans"
+	alias dockerupdate="docker compose pull && docker compose up -d --remove-orphans"
 	alias dockerclean="docker system prune -af --volumes"
 fi
 
